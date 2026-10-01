@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>JobPath | Admin Console</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "glass-border": "rgba(255, 255, 255, 0.6)",
+                    "on-error-container": "#93000a",
+                    "surface-dim": "#d2daed",
+                    "inverse-surface": "#29313f",
+                    "inverse-primary": "#f0b0ff",
+                    "on-primary-fixed": "#330044",
+                    "secondary-fixed": "#d3e3ff",
+                    "surface-container": "#e7eeff",
+                    "on-secondary-container": "#003868",
+                    "on-background": "#471A70",
+                    "glass-fill": "rgba(255, 255, 255, 0.35)",
+                    "background": "#DCE4F7",
+                    "secondary": "#0060ab",
+                    "inverse-on-surface": "#ecf1ff",
+                    "secondary-fixed-dim": "#a3c9ff",
+                    "outline-variant": "#d2c1d2",
+                    "on-surface": "#141c29",
+                    "on-error": "#ffffff",
+                    "glass-thick": "rgba(255, 255, 255, 0.8)",
+                    "primary": "#8731a3",
+                    "on-primary": "#ffffff",
+                    "surface": "#f9f9ff",
+                    "secondary-container": "#54a3ff",
+                    "tertiary": "#006823",
+                    "on-primary-container": "#fff5fb",
+                    "surface-container-highest": "#dbe3f6",
+                    "primary-container": "#a34cbe",
+                    "surface-container-lowest": "#ffffff",
+                    "on-tertiary": "#ffffff",
+                    "tertiary-container": "#00842f",
+                    "surface-variant": "#dbe3f6",
+                    "error": "#FF453A",
+                    "on-tertiary-fixed": "#002106",
+                    "on-primary-fixed-variant": "#72188f",
+                    "on-surface-variant": "#4f4350",
+                    "primary-fixed": "#fbd7ff",
+                    "gold": "#FFD60A",
+                    "on-secondary-fixed": "#001c39",
+                    "error-container": "#ffdad6",
+                    "primary-fixed-dim": "#f0b0ff",
+                    "surface-tint": "#8d37a9",
+                    "tertiary-fixed": "#6cff82",
+                    "on-secondary": "#ffffff",
+                    "on-secondary-fixed-variant": "#004883",
+                    "surface-bright": "#f9f9ff",
+                    "on-tertiary-fixed-variant": "#00531a",
+                    "outline": "#817381",
+                    "orange": "#FF9F0A",
+                    "on-tertiary-container": "#e6ffe0",
+                    "surface-container-low": "#f0f3ff",
+                    "surface-container-high": "#e0e8fb",
+                    "tertiary-fixed-dim": "#47e266"
+            },
+            "spacing": {
+                    "desktop-gutter": "24px",
+                    "base": "8px",
+                    "max-width": "1280px",
+                    "desktop-margin": "64px",
+                    "mobile-margin": "20px",
+                    "mobile-gutter": "16px",
+                    "safe-bottom": "34px",
+                    "safe-top": "44px"
+            },
+            "fontFamily": {
+                    "display-xl": ["Inter", "sans-serif"],
+                    "headline-lg": ["Inter", "sans-serif"],
+                    "body-md": ["Inter", "sans-serif"],
+                    "label-caps": ["Inter", "sans-serif"]
+            },
+            "fontSize": {
+                    "display-xl": ["56px", {"lineHeight": "1.1", "letterSpacing": "-0.03em", "fontWeight": "700"}],
+                    "headline-lg": ["34px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                    "label-caps": ["13px", {"lineHeight": "1.0", "letterSpacing": "0.03em", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #DCE4F7;
+            overflow: hidden;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.35);
+            backdrop-filter: blur(28px);
+            -webkit-backdrop-filter: blur(28px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 24px 64px 0 rgba(71, 26, 112, 0.1);
+        }
+
+        .neon-glow {
+            filter: blur(60px);
+            background: radial-gradient(circle, #0A84FF 0%, rgba(10, 132, 255, 0) 70%);
+            animation: pulse-glow 4s ease-in-out infinite;
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% { opacity: 0.4; transform: scale(1); }
+            50% { opacity: 0.7; transform: scale(1.1); }
+        }
+
+        .spinner {
+            width: 32px;
+            height: 32px;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-top-color: rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            animation: spin 1s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .parallax-container {
+            transition: transform 0.1s ease-out;
+            perspective: 1000px;
+        }
+
+        .parallax-inner {
+            transform-style: preserve-3d;
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="h-screen w-screen flex items-center justify-center overflow-hidden">
+<!-- Full-page WebGL Shader Background -->
+<!-- STITCH_SHADER_START:ANIMATION_91 class="absolute inset-0 w-full h-full z-0" -->
+<div class="absolute inset-0 w-full h-full z-0" style="display:block;">
+<canvas id="shader-canvas-ANIMATION_91" style="display:block;width:100%;height:100%"></canvas>
+<script>
+(function() {
+  const canvas = document.getElementById('shader-canvas-ANIMATION_91');
+
+  // Sync the WebGL drawing-buffer size with the CSS-driven layout size.
+  // This fires on initial layout and whenever the element is resized.
+  function syncSize() {
+    const w = canvas.clientWidth  || 1280;
+    const h = canvas.clientHeight || 720;
+    if (canvas.width !== w || canvas.height !== h) {
+      canvas.width  = w;
+      canvas.height = h;
+    }
+  }
+  if (typeof ResizeObserver !== 'undefined') {
+    new ResizeObserver(syncSize).observe(canvas);
+  }
+  syncSize();
+
+  const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+  if (!gl) return;
+  const vs = `attribute vec2 a_position;
+varying vec2 v_texCoord;
+void main() {
+  v_texCoord = a_position * 0.5 + 0.5;
+  gl_Position = vec4(a_position, 0.0, 1.0);
+}`;
+  const fs = `precision highp float;
+varying vec2 v_texCoord;
+uniform float u_time;
+uniform vec2 u_resolution;
+uniform vec2 u_mouse;
+
+void main() {
+    vec2 uv = v_texCoord;
+    vec2 mouse = u_mouse / u_resolution;
+    
+    // Background base color (DCE4F7 - soft pastel lavender-blue)
+    vec3 baseColor = vec3(0.863, 0.894, 0.969);
+    
+    // Pulse logic for the neon blue glow (#0A84FF)
+    float pulse = 0.5 + 0.5 * sin(u_time * 1.5);
+    vec2 center = vec2(0.5, 0.5) + (mouse - 0.5) * 0.05; // Subtle parallax shift
+    float dist = distance(uv, center);
+    
+    // Main neon blue glow
+    vec3 glowColor = vec3(0.039, 0.518, 1.0); // #0A84FF
+    float glowMask = smoothstep(0.4, 0.0, dist);
+    vec3 color = mix(baseColor, glowColor, glowMask * (0.3 + 0.2 * pulse));
+    
+    // Subtle secondary purple accent to match design system
+    vec3 secondaryColor = vec3(0.639, 0.298, 0.745); // #A34CBE
+    float secondaryGlow = smoothstep(0.6, 0.1, distance(uv, vec2(0.5 + 0.2 * cos(u_time * 0.5), 0.5 + 0.2 * sin(u_time * 0.5))));
+    color = mix(color, secondaryColor, secondaryGlow * 0.1);
+
+    gl_FragColor = vec4(color, 1.0);
+}`;
+  function cs(type, src) {
+    const s = gl.createShader(type);
+    gl.shaderSource(s, src);
+    gl.compileShader(s);
+    return s;
+  }
+  const prog = gl.createProgram();
+  gl.attachShader(prog, cs(gl.VERTEX_SHADER, vs));
+  gl.attachShader(prog, cs(gl.FRAGMENT_SHADER, fs));
+  gl.linkProgram(prog);
+  gl.useProgram(prog);
+  const buf = gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 1,-1, -1,1, 1,1]), gl.STATIC_DRAW);
+  const pos = gl.getAttribLocation(prog, 'a_position');
+  gl.enableVertexAttribArray(pos);
+  gl.vertexAttribPointer(pos, 2, gl.FLOAT, false, 0, 0);
+  const uTime = gl.getUniformLocation(prog, 'u_time');
+  const uRes = gl.getUniformLocation(prog, 'u_resolution');
+  const uMouse = gl.getUniformLocation(prog, 'u_mouse');
+
+  // u_mouse is in pixel coordinates matching u_resolution (ShaderToy convention).
+  // Shaders that need normalized coords should use: u_mouse / u_resolution.
+  let mouse = { x: canvas.width / 2, y: canvas.height / 2 };
+  window.addEventListener('mousemove', (event) => {
+    const rect = canvas.getBoundingClientRect();
+    if (rect.width && rect.height) {
+      const nx = (event.clientX - rect.left) / rect.width;
+      const ny = 1.0 - (event.clientY - rect.top) / rect.height;
+      mouse.x = nx * canvas.width;
+      mouse.y = ny * canvas.height;
+    }
+  });
+
+  function render(t) {
+    if (typeof ResizeObserver === 'undefined') syncSize();
+    gl.viewport(0, 0, canvas.width, canvas.height);
+    if (uTime) gl.uniform1f(uTime, t * 0.001);
+    if (uRes) gl.uniform2f(uRes, canvas.width, canvas.height);
+    if (uMouse) gl.uniform2f(uMouse, mouse.x, mouse.y);
+    gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+    requestAnimationFrame(render);
+  }
+  render(0);
+})();
+</script>
+</div>
+<!-- STITCH_SHADER_END:ANIMATION_91 -->
+<!-- Splash Screen UI Canvas -->
+<main class="relative z-10 w-full max-w-lg px-mobile-margin">
+<!-- Parallax Wrapper Controlled by JS -->
+<div class="parallax-container w-full" id="parallax-target">
+<div class="glass-card rounded-[40px] p-12 flex flex-col items-center justify-between min-h-[520px] parallax-inner overflow-hidden">
+<!-- Background Ambient Glow -->
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 neon-glow -z-10 pointer-events-none"></div>
+<!-- Top Spacer -->
+<div class="w-full"></div>
+<!-- Logo Section -->
+<div class="flex flex-col items-center gap-base">
+<div class="relative w-64 h-64 flex items-center justify-center" style="transform: translateZ(50px);">
+<img alt="JobPath Brand Logo" class="w-full h-full object-contain drop-shadow-2xl" src="https://lh3.googleusercontent.com/aida/AP1WRLtHSlvHQm1XNZ4vaeue1GiJtF1j680ovYDsV1bz1IH37RWIQlHCDhIMbTh8QwjysUr_9axMNLFk7d5MtN1sRrdkCEgDdsjpU6S18_eICdCZ5ObBXpk8IMqmy52sfrJsOQaMvz7hk48gtvML_dmfwlaY-1QmOzz74jRWaBViW4SbLXgO-jIKC3LPueU0Wmini7A--bmI3LnC19bd8jueIoFhpwFhp4dCzG3gBDdCSwoekhL8nTJD3FWqr2Qs"/>
+</div>
+</div>
+<!-- Progress Spinner -->
+<div class="flex flex-col items-center gap-8 py-8" style="transform: translateZ(30px);">
+<div class="spinner"></div>
+</div>
+<!-- Footer Text -->
+<div class="mt-auto pt-8 border-t border-white/10 w-full text-center" style="transform: translateZ(15px);">
+<p class="font-body-md text-sm text-white/45 tracking-wide">
+                    Powered by AI-Based Verifications
+                </p>
+</div>
+</div>
+</div>
+</main>
+<!-- Micro-interactions Script -->
+<script>
+    const card = document.getElementById('parallax-target');
+    
+    // Parallax Effect
+    window.addEventListener('mousemove', (e) => {
+        const x = (window.innerWidth / 2 - e.clientX) / 25;
+        const y = (window.innerHeight / 2 - e.clientY) / 25;
+        
+        card.style.transform = `rotateY(${x}deg) rotateX(${-y}deg)`;
+    });
+
+    // Touch Parallax (Gyroscope Simulation)
+    window.addEventListener('touchmove', (e) => {
+        const touch = e.touches[0];
+        const x = (window.innerWidth / 2 - touch.clientX) / 15;
+        const y = (window.innerHeight / 2 - touch.clientY) / 15;
+        
+        card.style.transform = `rotateY(${x}deg) rotateX(${-y}deg)`;
+    });
+
+    // Reset on mouse leave
+    window.addEventListener('mouseleave', () => {
+        card.style.transform = `rotateY(0deg) rotateX(0deg)`;
+    });
+
+    // Soft entry animation
+    document.addEventListener('DOMContentLoaded', () => {
+        card.style.opacity = '0';
+        card.style.transform = 'scale(0.9) translateY(20px)';
+        
+        setTimeout(() => {
+            card.style.transition = 'opacity 1.2s cubic-bezier(0.2, 0.8, 0.2, 1), transform 1.2s cubic-bezier(0.2, 0.8, 0.2, 1)';
+            card.style.opacity = '1';
+            card.style.transform = 'scale(1) translateY(0)';
+        }, 100);
+    });
+</script>
+</body></html>

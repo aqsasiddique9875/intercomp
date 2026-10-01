@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<title>JobFlow Splash Screen</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container": "#e7eeff",
+                        "surface-container-high": "#e0e8fb",
+                        "on-secondary-fixed": "#001c39",
+                        "surface-tint": "#8d37a9",
+                        "on-tertiary-fixed-variant": "#00531a",
+                        "on-surface": "#141c29",
+                        "on-surface-variant": "#4f4350",
+                        "on-error-container": "#93000a",
+                        "on-error": "#ffffff",
+                        "surface-container-highest": "#dbe3f6",
+                        "inverse-surface": "#29313f",
+                        "on-primary": "#ffffff",
+                        "primary-container": "#a34cbe",
+                        "on-tertiary-container": "#e6ffe0",
+                        "on-primary-fixed": "#330044",
+                        "secondary-container": "#54a3ff",
+                        "tertiary-fixed": "#6cff82",
+                        "on-background": "#141c29",
+                        "orange": "#FF9F0A",
+                        "outline": "#817381",
+                        "surface": "#f9f9ff",
+                        "secondary-fixed": "#d3e3ff",
+                        "surface-variant": "#dbe3f6",
+                        "primary": "#8731a3",
+                        "on-primary-container": "#fff5fb",
+                        "tertiary-fixed-dim": "#47e266",
+                        "error": "#FF453A",
+                        "card-gradient": "linear-gradient(135deg, #4D9EFA 0%, #BF7DF5 100%)",
+                        "inverse-primary": "#f0b0ff",
+                        "surface-dim": "#d2daed",
+                        "secondary-fixed-dim": "#a3c9ff",
+                        "surface-container-low": "#f0f3ff",
+                        "on-secondary": "#ffffff",
+                        "gold": "#FFD60A",
+                        "surface-container-lowest": "#ffffff",
+                        "primary-fixed": "#fbd7ff",
+                        "background": "#f9f9ff",
+                        "on-tertiary": "#ffffff",
+                        "glass-thick": "rgba(255, 255, 255, 0.8)",
+                        "primary-fixed-dim": "#f0b0ff",
+                        "glass-border": "rgba(255, 255, 255, 0.6)",
+                        "tertiary": "#006823",
+                        "surface-bright": "#f9f9ff",
+                        "on-primary-fixed-variant": "#72188f",
+                        "on-secondary-container": "#003868",
+                        "on-tertiary-fixed": "#002106",
+                        "error-container": "#ffdad6",
+                        "inverse-on-surface": "#ecf1ff",
+                        "secondary": "#0060ab",
+                        "on-secondary-fixed-variant": "#004883",
+                        "outline-variant": "#d2c1d2",
+                        "tertiary-container": "#00842f",
+                        "glass-fill": "rgba(255, 255, 255, 0.35)"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "safe-top": "44px",
+                        "safe-bottom": "34px",
+                        "max-width": "1280px",
+                        "base": "8px",
+                        "desktop-margin": "64px",
+                        "desktop-gutter": "24px",
+                        "mobile-margin": "20px",
+                        "mobile-gutter": "16px"
+                    },
+                    "fontFamily": {
+                        "label-caps-mobile": ["Inter"],
+                        "body-md": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "display-xl": ["Inter"],
+                        "body-md-mobile": ["Inter"],
+                        "label-caps": ["Inter"],
+                        "display-xl-mobile": ["Inter"],
+                        "headline-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-caps-mobile": ["12px", {"lineHeight": "1.0", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                        "headline-lg-mobile": ["28px", {"lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "display-xl": ["56px", {"lineHeight": "1.1", "letterSpacing": "-0.03em", "fontWeight": "700"}],
+                        "body-md-mobile": ["15px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                        "label-caps": ["13px", {"lineHeight": "1.0", "letterSpacing": "0.03em", "fontWeight": "600"}],
+                        "display-xl-mobile": ["34px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "headline-lg": ["34px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "600"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            33% { transform: translateY(-8px) rotate(1deg); }
+            66% { transform: translateY(4px) rotate(-1deg); }
+        }
+
+        @keyframes glow-pulse {
+            0%, 100% { opacity: 0.4; transform: scale(1); filter: blur(40px); }
+            50% { opacity: 0.8; transform: scale(1.15); filter: blur(60px); }
+        }
+
+        @keyframes spin-custom {
+            to { transform: rotate(360deg); }
+        }
+
+        .logo-enter {
+            animation: logo-spring 1.2s cubic-bezier(0.25, 1, 0.5, 1) forwards, float 6s ease-in-out infinite 1.2s;
+            opacity: 0;
+        }
+
+        @keyframes logo-spring {
+            0% { transform: scale(0.85); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .glass-shell {
+            background: rgba(255, 255, 255, 0.35);
+            backdrop-filter: blur(28px);
+            -webkit-backdrop-filter: blur(28px);
+            border: 0.5px solid rgba(255, 255, 255, 0.6);
+        }
+
+        .glow-sphere {
+            background: radial-gradient(circle, #BF7DF5 0%, #4D9EFA 100%);
+            animation: glow-pulse 4s ease-in-out infinite;
+        }
+
+        .progress-spinner {
+            border: 3px solid rgba(135, 49, 163, 0.1);
+            border-top: 3px solid #8731a3;
+            border-radius: 50%;
+            width: 32px;
+            height: 32px;
+            animation: spin-custom 1s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+        }
+
+        body, html {
+            height: 100%;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #f9f9ff;
+        }
+    </style>
+</head>
+<body class="flex flex-col items-center justify-center font-body-md-mobile text-on-surface">
+<!-- Background WebGL Shader -->
+<!-- STITCH_SHADER_START:ANIMATION_3 class="absolute inset-0 w-full h-full z-0" -->
+<div class="absolute inset-0 w-full h-full z-0" style="display:block;">
+<canvas id="shader-canvas-ANIMATION_3" style="display:block;width:100%;height:100%"></canvas>
+<script>
+(function() {
+  const canvas = document.getElementById('shader-canvas-ANIMATION_3');
+
+  // Sync the WebGL drawing-buffer size with the CSS-driven layout size.
+  // This fires on initial layout and whenever the element is resized.
+  function syncSize() {
+    const w = canvas.clientWidth  || 1280;
+    const h = canvas.clientHeight || 720;
+    if (canvas.width !== w || canvas.height !== h) {
+      canvas.width  = w;
+      canvas.height = h;
+    }
+  }
+  if (typeof ResizeObserver !== 'undefined') {
+    new ResizeObserver(syncSize).observe(canvas);
+  }
+  syncSize();
+
+  const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+  if (!gl) return;
+  const vs = `attribute vec2 a_position;
+varying vec2 v_texCoord;
+void main() {
+  v_texCoord = a_position * 0.5 + 0.5;
+  gl_Position = vec4(a_position, 0.0, 1.0);
+}`;
+  const fs = `precision highp float;
+varying vec2 v_texCoord;
+uniform float u_time;
+uniform vec2 u_resolution;
+
+void main() {
+    vec2 uv = v_texCoord;
+    
+    // Base pastel lavender-blue background
+    vec3 color = vec3(0.863, 0.894, 0.969); // #DCE4F7
+    
+    // Rotating light orb logic
+    vec2 center = vec2(0.5 + 0.3 * cos(u_time * 0.5), 0.5 + 0.2 * sin(u_time * 0.7));
+    float dist = distance(uv, center);
+    
+    // Indigo/Purple light orb (#BF5AF2)
+    vec3 orbColor = vec3(0.749, 0.353, 0.949);
+    float glow = smoothstep(0.6, 0.0, dist);
+    color = mix(color, orbColor, glow * 0.4);
+    
+    // Secondary subtle purple shift
+    vec2 center2 = vec2(0.5 + 0.2 * sin(u_time * 0.4), 0.5 + 0.3 * cos(u_time * 0.6));
+    float dist2 = distance(uv, center2);
+    vec3 purpleGlow = vec3(0.639, 0.298, 0.745); // #A34CBE
+    float glow2 = smoothstep(0.5, 0.0, dist2);
+    color = mix(color, purpleGlow, glow2 * 0.2);
+
+    gl_FragColor = vec4(color, 1.0);
+}`;
+  function cs(type, src) {
+    const s = gl.createShader(type);
+    gl.shaderSource(s, src);
+    gl.compileShader(s);
+    return s;
+  }
+  const prog = gl.createProgram();
+  gl.attachShader(prog, cs(gl.VERTEX_SHADER, vs));
+  gl.attachShader(prog, cs(gl.FRAGMENT_SHADER, fs));
+  gl.linkProgram(prog);
+  gl.useProgram(prog);
+  const buf = gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 1,-1, -1,1, 1,1]), gl.STATIC_DRAW);
+  const pos = gl.getAttribLocation(prog, 'a_position');
+  gl.enableVertexAttribArray(pos);
+  gl.vertexAttribPointer(pos, 2, gl.FLOAT, false, 0, 0);
+  const uTime = gl.getUniformLocation(prog, 'u_time');
+  const uRes = gl.getUniformLocation(prog, 'u_resolution');
+  const uMouse = gl.getUniformLocation(prog, 'u_mouse');
+
+  // u_mouse is in pixel coordinates matching u_resolution (ShaderToy convention).
+  // Shaders that need normalized coords should use: u_mouse / u_resolution.
+  let mouse = { x: canvas.width / 2, y: canvas.height / 2 };
+  window.addEventListener('mousemove', (event) => {
+    const rect = canvas.getBoundingClientRect();
+    if (rect.width && rect.height) {
+      const nx = (event.clientX - rect.left) / rect.width;
+      const ny = 1.0 - (event.clientY - rect.top) / rect.height;
+      mouse.x = nx * canvas.width;
+      mouse.y = ny * canvas.height;
+    }
+  });
+
+  function render(t) {
+    if (typeof ResizeObserver === 'undefined') syncSize();
+    gl.viewport(0, 0, canvas.width, canvas.height);
+    if (uTime) gl.uniform1f(uTime, t * 0.001);
+    if (uRes) gl.uniform2f(uRes, canvas.width, canvas.height);
+    if (uMouse) gl.uniform2f(uMouse, mouse.x, mouse.y);
+    gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+    requestAnimationFrame(render);
+  }
+  render(0);
+})();
+</script>
+</div>
+<!-- STITCH_SHADER_END:ANIMATION_3 -->
+<!-- Content Canvas -->
+<main class="relative z-10 flex flex-col items-center justify-center w-full h-full max-w-[393px] mx-auto overflow-hidden">
+<!-- Logo Container -->
+<div class="relative flex flex-col items-center">
+<!-- Pulsing Glow Behind Logo -->
+<div class="glow-sphere absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 rounded-full z-0"></div>
+<!-- 3D Glassmorphic Logo -->
+<div class="logo-enter relative z-10 flex flex-col items-center transition-all">
+<img alt="JobFlow Logo" class="w-48 h-48 object-contain drop-shadow-[0_20px_50px_rgba(71,26,112,0.2)]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBxgp7i9gRev6ECoGB3uzpH69Vzx4y1NHg3jf6VFMjH5FLzxDo2gsAwhcHubAY9IEeTVy6zPu2TFY58YHdTmpbykoHwISddvlvFj6DSaP9cel-JA979JDhTrd-S_pK3OYK1Pf50yDi1rBPuv5JxZS_0ORom49Tcwq1c1kR4ignORed9jApuG9wCX2eGt0uKJu6mRJ2LZDIijV7hKlt4DmhCxjjM_AvQBJ_jC8XlH-UvfiJ1yVkbTdd9SWA21kV2ScxGS6jAly3kAEzx"/>
+<h1 class="mt-8 font-display-xl-mobile text-display-xl-mobile text-on-surface tracking-tighter">
+                    JOBPATH
+                </h1>
+</div>
+</div>
+<!-- Progress Indicator -->
+<div class="mt-20 flex flex-col items-center gap-4">
+<div class="progress-spinner"></div>
+<p class="font-label-caps-mobile text-label-caps-mobile text-on-surface-variant uppercase tracking-[0.2em] opacity-60">
+                Optimizing Career Flow
+            </p>
+</div>
+<!-- Footer -->
+<footer class="absolute bottom-safe-bottom w-full text-center px-mobile-margin pb-4">
+<div class="py-3 px-6 glass-shell rounded-full inline-block">
+<p class="text-[12px] font-medium tracking-tight text-[#471A70]/60">
+                    Powered by AI-Based Verifications
+                </p>
+</div>
+</footer>
+</main>
+<!-- Parallax Micro-interaction Script -->
+<script>
+        document.addEventListener('mousemove', (e) => {
+            const logo = document.querySelector('.logo-enter');
+            const glow = document.querySelector('.glow-sphere');
+            if (!logo || !glow) return;
+
+            const xAxis = (window.innerWidth / 2 - e.pageX) / 45;
+            const yAxis = (window.innerHeight / 2 - e.pageY) / 45;
+
+            logo.style.transform = `scale(1) translate(${xAxis}px, ${yAxis}px)`;
+            glow.style.transform = `translate(calc(-50% + ${xAxis * 1.5}px), calc(-50% + ${yAxis * 1.5}px))`;
+        });
+
+        // Simulating the splash transition
+        window.addEventListener('load', () => {
+            // Optional: Add logic to transition to home page after animation
+            console.log('Splash screen loaded');
+        });
+    </script>
+<!-- Material Icons class helper -->
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            line-height: 1;
+            text-transform: none;
+            letter-spacing: normal;
+            word-wrap: normal;
+            white-space: nowrap;
+            direction: ltr;
+        }
+    </style>
+</body></html>

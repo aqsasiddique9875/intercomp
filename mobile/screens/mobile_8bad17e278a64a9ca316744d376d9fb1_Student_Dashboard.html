@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/>
+  <title>Student Dashboard - SkillsBooster Academy</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            background: "#DCE4F7",
+            primary: "#8731a3",
+            "primary-container": "#a34cbe",
+            "on-surface": "#141c29",
+            "on-surface-variant": "#4f4350",
+            "outline": "#817381",
+            "glass-border": "rgba(255, 255, 255, 0.6)",
+            "glass-fill": "rgba(255, 255, 255, 0.35)",
+            "glass-thick": "rgba(255, 255, 255, 0.8)",
+            "tertiary": "#006823",
+            "error": "#FF453A"
+          }
+        }
+      }
+    };
+  </script>
+  <style>
+    body {
+      background-color: #DCE4F7;
+      font-family: 'Inter', sans-serif;
+      -webkit-tap-highlight-color: transparent;
+      overflow-x: hidden;
+    }
+    .glass-card {
+      background: rgba(255, 255, 255, 0.45);
+      backdrop-filter: blur(28px);
+      -webkit-backdrop-filter: blur(28px);
+      border: 1px solid rgba(255, 255, 255, 0.6);
+      box-shadow: 0 8px 32px 0 rgba(71, 26, 112, 0.08);
+    }
+    .liquid-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: -1;
+      filter: blur(80px);
+      opacity: 0.8;
+    }
+    .blob-1 {
+      position: absolute;
+      width: 500px;
+      height: 500px;
+      background: #BF7DF5;
+      border-radius: 50%;
+      top: -10%;
+      left: -10%;
+      opacity: 0.5;
+    }
+    .blob-2 {
+      position: absolute;
+      width: 500px;
+      height: 500px;
+      background: #4D9EFA;
+      border-radius: 50%;
+      bottom: -10%;
+      right: -10%;
+      opacity: 0.4;
+    }
+    .circular-progress {
+      background: conic-gradient(#8731a3 calc(85 * 1%), #e2e8f0 0);
+      position: relative;
+    }
+    .circular-progress::before {
+      content: "";
+      position: absolute;
+      inset: 8px;
+      background: #DCE4F7;
+      border-radius: 50%;
+      z-index: 1;
+    }
+    .hide-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .hide-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+</head>
+<body class="text-[#471A70] antialiased flex flex-col min-h-screen pb-32">
+
+  <!-- Atmospheric Liquid Background -->
+  <div class="liquid-bg">
+    <div class="blob-1"></div>
+    <div class="blob-2"></div>
+  </div>
+
+  <!-- Header -->
+  <header class="fixed top-0 w-full z-50 bg-glass-fill backdrop-blur-xl border-b border-glass-border shadow-sm flex items-center justify-center h-16 shrink-0">
+    <div class="max-w-6xl w-full flex items-center justify-between px-5">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-full overflow-hidden border-2 border-primary p-0.5">
+          <img alt="User Avatar" class="w-full h-full rounded-full object-cover" src="https://lh3.googleusercontent.com/aida/AP1WRLso_htihnJ33V7q5zYbt8u-NfoB3ZJISVs-vTicj-4qC5ECtS5f1-4w6YV4027sl6FECnMGNFL4Eze2hGxzE5ViYe1GBC8aDxIr22IBxwvOTBnY5DdP0lr1Mr2oLjdLDQEY0cdp3BV6_eqpLSJsYhE7rCzOhJ8HUy0EsOj0u-xBNtknhbc6cEOMP7n10QkRNTVn5eQUKTTbb4EwqYmkzCf2khW3fWkeIqVSOMA4d6uGGMlKakT_BMt5YDQ"/>
+        </div>
+        <h1 class="text-sm font-bold text-[#471A70]">Hello, Alex!</h1>
+      </div>
+      <div class="flex items-center gap-3">
+        <button class="w-10 h-10 rounded-full bg-white/40 border border-white/60 flex items-center justify-center shadow-sm">
+          <span class="material-symbols-outlined text-primary text-[22px]">notifications</span>
+        </button>
+        <button class="w-10 h-10 rounded-full bg-white/40 border border-white/60 flex items-center justify-center shadow-sm">
+          <span class="material-symbols-outlined text-primary text-[22px]">settings</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Scrollable Content -->
+  <main class="pt-20 px-5 space-y-6 flex-grow overflow-y-auto max-w-6xl w-full mx-auto md:px-8">
+
+    <!-- Search Bar -->
+    <section>
+      <div class="relative flex items-center glass-card rounded-full px-4 h-12">
+        <span class="material-symbols-outlined text-[#726580] mr-2">search</span>
+        <input id="dashboardSearchInput" class="bg-transparent border-none focus:ring-0 text-sm w-full placeholder:text-[#726580]/70 text-[#471A70]" placeholder="Search courses, tests, ranks..." type="text"/>
+      </div>
+    </section>
+
+    <!-- Two-Column Responsive Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
+      <!-- Left Column: Recommended Jobs and Courses -->
+      <div class="space-y-6">
+        <!-- AI-Recommended Jobs (1 Column, 3 Rows) -->
+        <section class="space-y-4">
+          <div class="flex justify-between items-center px-1">
+            <h2 class="text-base font-extrabold text-[#471A70]">AI-Recommended Jobs</h2>
+            <button onclick="parent.postMessage({ type: 'NAVIGATE', view: 'job-search' }, '*')" class="text-primary font-bold text-xs">View All</button>
+          </div>
+          <div id="jobsList" class="space-y-3">
+            <!-- Loader / Fallback items -->
+            <div class="glass-card rounded-3xl p-5 space-y-4">
+              <div class="flex justify-between items-start">
+                <div class="flex items-center gap-3">
+                  <div class="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary font-bold text-lg">K</div>
+                  <div>
+                    <h3 class="font-bold text-sm text-[#471A70]">Associate Software Engineer</h3>
+                    <p class="text-xs text-[#726580]">Kryptonites Limited • Lahore</p>
+                  </div>
+                </div>
+                <span class="text-[10px] font-bold uppercase tracking-wider text-primary bg-primary/10 px-2 py-0.5 rounded-full">88% Match</span>
+              </div>
+              <div class="flex justify-between items-center">
+                <span class="text-xs font-semibold text-[#726580]">Rs. 90,000 - 120,000 / mo</span>
+                <button onclick="alert('Application submitted successfully!')" class="bg-primary text-white text-xs font-bold px-4 py-2 rounded-full shadow-md active:scale-95 transition-transform">Apply</button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- AI-Recommended Courses (1 Column, 3 Rows) -->
+        <section class="space-y-4">
+          <div class="flex justify-between items-center px-1">
+            <h2 class="text-base font-extrabold text-[#471A70]">AI-Recommended Courses</h2>
+            <button onclick="parent.postMessage({ type: 'NAVIGATE', view: 'courses' }, '*')" class="text-primary font-bold text-xs">View All</button>
+          </div>
+          <div id="coursesList" class="space-y-3 md:grid md:grid-cols-2 md:gap-4 md:space-y-0">
+            <!-- Loader / Fallback items -->
+            <div class="glass-card rounded-3xl overflow-hidden flex flex-col">
+              <div class="h-28 w-full overflow-hidden relative">
+                <img class="w-full h-full object-cover" src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=600&auto=format&fit=crop"/>
+                <div class="absolute top-3 right-3 bg-primary/90 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">88% Match</div>
+              </div>
+              <div class="p-5 space-y-3">
+                <div>
+                  <h3 class="font-bold text-sm text-[#471A70]">Data Structures & Algorithms Mastery</h3>
+                  <p class="text-xs text-[#726580]">Software Engineering • 28 hours</p>
+                </div>
+                <div class="flex justify-between items-center">
+                  <span class="text-xs text-[#726580] font-semibold">Intermediate</span>
+                  <button onclick="enrollInCourse('ds_algo', 'Data Structures & Algorithms Mastery', 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=600&auto=format&fit=crop')" class="bg-primary text-white text-xs font-bold px-4 py-2 rounded-full shadow-md active:scale-95 transition-transform">Enroll</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- Right Column: Tests, Leaderboard, Trust Score & Streak -->
+      <div class="space-y-6">
+        <!-- Upcoming Tests -->
+        <section class="space-y-4">
+          <h2 class="text-base font-extrabold text-[#471A70] px-1">Upcoming Tests</h2>
+          <div class="glass-card rounded-3xl p-5 space-y-4">
+            <div class="relative pl-6 border-l-2 border-primary space-y-6">
+              <!-- Test 1 -->
+              <div class="relative">
+                <div class="absolute -left-[31px] top-1 w-4 h-4 rounded-full bg-primary border-4 border-[#DCE4F7]"></div>
+                <h3 class="font-bold text-sm text-[#471A70]">Technical Assessment</h3>
+                <p class="text-xs text-[#726580]">Tomorrow, 10:00 AM</p>
+                <p class="text-xs text-primary font-medium mt-0.5">Duration: 90 mins</p>
+              </div>
+              <!-- Test 2 -->
+              <div class="relative">
+                <div class="absolute -left-[31px] top-1 w-4 h-4 rounded-full bg-[#4D9EFA] border-4 border-[#DCE4F7]"></div>
+                <h3 class="font-bold text-sm text-[#471A70]">Cognitive Test</h3>
+                <p class="text-xs text-[#726580]">Friday, 12:00 PM</p>
+                <p class="text-xs text-primary font-medium mt-0.5">Duration: 45 mins</p>
+              </div>
+            </div>
+            <button onclick="alert('Scheduling feature coming soon!')" class="w-full py-3 rounded-full border border-primary text-primary font-bold text-xs active:scale-95 transition-transform">Schedule New</button>
+          </div>
+        </section>
+
+        <!-- Leaderboard -->
+        <section class="space-y-4">
+          <h2 class="text-base font-extrabold text-[#471A70] px-1">Leaderboard</h2>
+          <div class="glass-card rounded-3xl p-4 space-y-3">
+            <!-- Rank 1 -->
+            <div class="flex items-center justify-between bg-white/40 border border-white/60 p-3 rounded-2xl">
+              <div class="flex items-center gap-3">
+                <span class="text-sm font-bold text-primary w-4">1</span>
+                <div class="w-8 h-8 rounded-full overflow-hidden">
+                  <img class="w-full h-full object-cover" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=200"/>
+                </div>
+                <span class="text-sm font-bold text-[#471A70]">Sarah J.</span>
+              </div>
+              <div class="flex items-center gap-1">
+                <span class="text-xs font-bold text-primary">2,450 pts</span>
+                <span class="material-symbols-outlined text-amber-500 text-sm" style="font-variation-settings: 'FILL' 1;">award_star</span>
+              </div>
+            </div>
+            <!-- Rank 2 -->
+            <div class="flex items-center justify-between p-3">
+              <div class="flex items-center gap-3">
+                <span class="text-sm font-bold text-[#726580] w-4">2</span>
+                <div class="w-8 h-8 rounded-full overflow-hidden">
+                  <img class="w-full h-full object-cover" src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=200"/>
+                </div>
+                <span class="text-sm font-semibold text-[#471A70]">David K.</span>
+              </div>
+              <span class="text-xs font-bold text-[#726580]">2,190 pts</span>
+            </div>
+            <!-- Rank 3 -->
+            <div class="flex items-center justify-between p-3">
+              <div class="flex items-center gap-3">
+                <span class="text-sm font-bold text-[#726580] w-4">3</span>
+                <div class="w-8 h-8 rounded-full overflow-hidden">
+                  <img class="w-full h-full object-cover" src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?q=80&w=200"/>
+                </div>
+                <span class="text-sm font-semibold text-[#471A70]">Alex R.</span>
+              </div>
+              <span class="text-xs font-bold text-[#726580]">1,850 pts</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- Trust Score & Day Streak Grid -->
+        <section class="grid grid-cols-2 gap-4">
+          <!-- Trust Score -->
+          <div class="glass-card rounded-3xl p-5 flex flex-col items-center justify-center text-center">
+            <h3 class="text-xs font-bold text-[#726580] uppercase tracking-wider mb-3">Trust Score</h3>
+            <div class="circular-progress w-24 h-24 rounded-full flex items-center justify-center mb-1">
+              <div class="z-10 text-center">
+                <span class="font-extrabold text-lg text-primary">85</span>
+                <span class="text-[10px] text-[#726580] block -mt-1">/100</span>
+              </div>
+            </div>
+          </div>
+          <!-- Day Streak -->
+          <div class="glass-card rounded-3xl p-5 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center gap-1 mb-1">
+                <span class="text-lg font-extrabold text-primary">1</span>
+                <span class="material-symbols-outlined text-orange-500 text-lg" style="font-variation-settings: 'FILL' 1;">local_fire_department</span>
+              </div>
+              <h3 class="text-[10px] font-bold text-[#726580] uppercase tracking-wider">Day Streak</h3>
+            </div>
+            
+            <!-- Grid layout matching streak dots -->
+            <div class="grid grid-cols-5 gap-1.5 mt-4">
+              <div class="h-7 bg-primary rounded-md"></div>
+              <div class="h-7 bg-primary/25 rounded-md"></div>
+              <div class="h-7 bg-primary/25 rounded-md"></div>
+              <div class="h-7 bg-primary/25 rounded-md"></div>
+              <div class="h-7 bg-primary/25 rounded-md"></div>
+            </div>
+            <p class="text-[9px] text-[#726580] mt-2 text-center font-medium">Keep it up! 4 days to next milestone</p>
+          </div>
+        </section>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Bottom Navigation Bar Placeholder -->
+  <nav id="bottom-nav"></nav>
+
+  <script>
+    const backendHost = window.location.origin.includes('localhost:8080') ? '' : 'http://localhost:8080';
+
+    function enrollInCourse(id, title, image) {
+      try {
+        let enrolled = JSON.parse(localStorage.getItem('enrolledCourses')) || [];
+        if (!enrolled.some(c => c.id === id)) {
+          enrolled.push({ id, title, image });
+          localStorage.setItem('enrolledCourses', JSON.stringify(enrolled));
+        }
+        localStorage.setItem('selectedCourse', JSON.stringify({ id, title, image }));
+      } catch(e){}
+
+      if (parent && parent.App && typeof parent.App.showToast === 'function') {
+        parent.App.showToast(`Successfully enrolled in ${title}!`, "success");
+      }
+
+      if (parent && parent.App) {
+        parent.App.navigate('video');
+      } else {
+        window.location.hash = '#/student/courses/video';
+      }
+    }
+
+    function applyJob(id, title) {
+      const job = allJobs.find(j => j.id === id);
+      if (job) {
+        localStorage.setItem('selectedJob', JSON.stringify(job));
+        if (parent && parent.App && typeof parent.App.navigate === 'function') {
+          parent.App.navigate('job-details');
+        } else {
+          window.location.href = `mobile_1458ea7fb7a94fb29ef274a5d90a2b7f_Job_Details_-_Senior_UX_Designer.html`;
+        }
+      }
+    }
+
+    let allJobs = [];
+    let allCourses = [];
+
+    // Render Jobs List
+    function renderJobs(jobs) {
+      const container = document.getElementById('jobsList');
+      if (!container) return;
+      if (!jobs || jobs.length === 0) {
+        container.innerHTML = `<p class="text-xs text-[#726580] italic py-4 text-center">No matching jobs found.</p>`;
+        return;
+      }
+      
+      const applied = JSON.parse(localStorage.getItem('appliedJobs')) || [];
+
+      container.innerHTML = jobs.slice(0, 3).map(job => {
+        // Render active Apply button in all cases so the user can always trigger apply actions
+        const buttonHtml = `<button onclick="applyJob('${job.id}', '${job.title.replace(/'/g, "\\'")}')" class="bg-primary hover:bg-primary-container text-white text-xs font-bold px-6 py-2.5 rounded-full shadow-md active:scale-95 transition-all">Apply</button>`;
+        
+        const companyInitial = (job.company || 'J').charAt(0).toUpperCase();
+
+        return `
+          <div class="glass-card rounded-3xl p-5 space-y-4">
+            <div class="flex justify-between items-start">
+              <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-full bg-[#E5D5FA] flex items-center justify-center text-[#8731a3] font-bold text-lg">
+                  ${companyInitial}
+                </div>
+                <div>
+                  <h3 class="font-bold text-sm text-[#471A70] text-left">${job.title}</h3>
+                  <p class="text-xs text-[#726580] text-left">${job.company} • ${job.location || 'Remote'}</p>
+                </div>
+              </div>
+              <span class="text-[10px] font-extrabold uppercase tracking-wider text-[#8731a3] bg-[#E5D5FA]/70 px-3 py-1 rounded-full">88% MATCH</span>
+            </div>
+            <div class="flex justify-between items-center">
+              <span class="text-xs font-semibold text-[#726580]">${job.salary || 'Competitive'}</span>
+              ${buttonHtml}
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    // Render Courses List
+    function renderCourses(courses) {
+      const container = document.getElementById('coursesList');
+      if (!container) return;
+      if (!courses || courses.length === 0) {
+        container.innerHTML = `<p class="text-xs text-[#726580] italic py-4 text-center">No matching courses found.</p>`;
+        return;
+      }
+
+      container.innerHTML = courses.slice(0, 3).map(course => {
+        return `
+          <div onclick="enrollInCourse('${course.id}', '${course.title.replace(/'/g, "\\'")}', '${course.image || ''}')" class="glass-card rounded-3xl overflow-hidden flex flex-col cursor-pointer active:scale-[0.98] transition-transform">
+            <div class="h-28 w-full overflow-hidden relative">
+              <img class="w-full h-full object-cover" src="${course.image || 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=600&auto=format&fit=crop'}"/>
+              <div class="absolute top-3 right-3 bg-primary/90 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">88% Match</div>
+            </div>
+            <div class="p-5 space-y-3">
+              <div>
+                <h3 class="font-bold text-sm text-[#471A70] text-left">${course.title}</h3>
+                <p class="text-xs text-[#726580] text-left">${course.category || 'General'} • ${course.duration || '20 hours'}</p>
+              </div>
+              <div class="flex justify-between items-center">
+                <span class="text-xs text-[#726580] font-semibold">Intermediate</span>
+                <button onclick="event.stopPropagation(); enrollInCourse('${course.id}', '${course.title.replace(/'/g, "\\'")}', '${course.image || ''}')" class="bg-primary hover:bg-primary-container text-white text-xs font-bold px-6 py-2.5 rounded-full shadow-md active:scale-95 transition-all">Enroll</button>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    // Dynamic Loading from Shared APIs
+    function loadDashboardData() {
+      // Dynamic greeting based on current logged in user
+      const storedUser = localStorage.getItem('currentUser');
+      if (storedUser) {
+        try {
+          const userObj = JSON.parse(storedUser);
+          const userName = userObj.username || userObj.email || 'Alex';
+          const capitalized = userName.charAt(0).toUpperCase() + userName.slice(1);
+          const greetingEl = document.querySelector('header h1');
+          if (greetingEl) {
+            greetingEl.textContent = `Hello, ${capitalized}!`;
+          }
+        } catch (err) {}
+      }
+
+      // Fetch Jobs
+      fetch(`${backendHost}/api/jobs`)
+        .then(res => res.json())
+        .then(jobs => {
+          allJobs = jobs;
+          renderJobs(allJobs);
+        }).catch(e => console.warn("Job API fallback used", e));
+
+      // Fetch Courses
+      fetch(`${backendHost}/api/courses`)
+        .then(res => res.json())
+        .then(courses => {
+          allCourses = courses;
+          renderCourses(allCourses);
+        }).catch(e => console.warn("Course API fallback used", e));
+    }
+
+    // Search input listener
+    document.getElementById('dashboardSearchInput').addEventListener('input', (e) => {
+      const query = e.target.value.toLowerCase().trim();
+      
+      const filteredJobs = allJobs.filter(job => 
+        job.title.toLowerCase().includes(query) || 
+        job.company.toLowerCase().includes(query)
+      );
+      renderJobs(filteredJobs);
+
+      const filteredCourses = allCourses.filter(course => 
+        course.title.toLowerCase().includes(query) || 
+        (course.category || '').toLowerCase().includes(query)
+      );
+      renderCourses(filteredCourses);
+    });
+
+    document.addEventListener('DOMContentLoaded', loadDashboardData);
+  </script>
+</body>
+</html>

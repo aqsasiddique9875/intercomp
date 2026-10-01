@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
+<title>ADM-09 Course Management Portal</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        :root {
+            --glass-fill: rgba(255, 255, 255, 0.35);
+            --glass-thick: rgba(255, 255, 255, 0.8);
+            --glass-border: rgba(255, 255, 255, 0.6);
+            --purple-shadow: rgba(71, 26, 112, 0.15);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f9f9ff;
+            color: #141c29;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .glass-card {
+            background: var(--glass-fill);
+            backdrop-filter: blur(28px);
+            -webkit-backdrop-filter: blur(28px);
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 12px 40px 0 var(--purple-shadow);
+        }
+
+        .liquid-gradient {
+            background: linear-gradient(135deg, #4D9EFA 0%, #BF7DF5 100%);
+        }
+
+        .safe-pb {
+            padding-bottom: calc(34px + 80px);
+        }
+
+        .progress-ring__circle {
+            transition: stroke-dashoffset 0.35s cubic-bezier(0.35, 0, 0.15, 1);
+            transform: rotate(-90deg);
+            transform-origin: 50% 50%;
+        }
+
+        .tap-target {
+            min-height: 44px;
+            min-width: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "tertiary": "#006823",
+                        "surface-container-highest": "#dbe3f6",
+                        "glass-thick": "rgba(255, 255, 255, 0.8)",
+                        "surface-variant": "#dbe3f6",
+                        "secondary": "#0060ab",
+                        "surface-container": "#e7eeff",
+                        "on-primary-container": "#fff5fb",
+                        "primary-fixed": "#fbd7ff",
+                        "on-tertiary": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "surface-container-lowest": "#ffffff",
+                        "glass-border": "rgba(255, 255, 255, 0.6)",
+                        "on-secondary-container": "#003868",
+                        "on-tertiary-fixed": "#002106",
+                        "background": "#f9f9ff",
+                        "surface-dim": "#d2daed",
+                        "tertiary-container": "#00842f",
+                        "on-error": "#ffffff",
+                        "inverse-primary": "#f0b0ff",
+                        "secondary-fixed-dim": "#a3c9ff",
+                        "orange": "#FF9F0A",
+                        "glass-fill": "rgba(255, 255, 255, 0.35)",
+                        "surface-container-high": "#e0e8fb",
+                        "on-background": "#141c29",
+                        "inverse-surface": "#29313f",
+                        "tertiary-fixed-dim": "#47e266",
+                        "inverse-on-surface": "#ecf1ff",
+                        "on-secondary": "#ffffff",
+                        "on-primary-fixed": "#330044",
+                        "on-surface-variant": "#4f4350",
+                        "secondary-container": "#54a3ff",
+                        "tertiary-fixed": "#6cff82",
+                        "primary-container": "#a34cbe",
+                        "primary-fixed-dim": "#f0b0ff",
+                        "surface-bright": "#f9f9ff",
+                        "on-tertiary-fixed-variant": "#00531a",
+                        "card-gradient": "linear-gradient(135deg, #4D9EFA 0%, #BF7DF5 100%)",
+                        "on-primary-fixed-variant": "#72188f",
+                        "outline": "#817381",
+                        "primary": "#8731a3",
+                        "error": "#FF453A",
+                        "secondary-fixed": "#d3e3ff",
+                        "surface-container-low": "#f0f3ff",
+                        "on-error-container": "#93000a",
+                        "gold": "#FFD60A",
+                        "on-tertiary-container": "#e6ffe0",
+                        "on-primary": "#ffffff",
+                        "on-secondary-fixed-variant": "#004883",
+                        "on-secondary-fixed": "#001c39",
+                        "surface": "#f9f9ff",
+                        "on-surface": "#141c29",
+                        "surface-tint": "#8d37a9",
+                        "outline-variant": "#d2c1d2"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    spacing: {
+                        "mobile-margin": "20px",
+                        "mobile-gutter": "16px",
+                        "desktop-margin": "64px",
+                        "desktop-gutter": "24px",
+                        "safe-top": "44px",
+                        "max-width": "1280px",
+                        "safe-bottom": "34px",
+                        "base": "8px"
+                    },
+                    fontSize: {
+                        "display-xl-mobile": ["34px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "headline-lg-mobile": ["28px", {"lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "body-md-mobile": ["15px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                        "label-caps-mobile": ["12px", {"lineHeight": "1.0", "letterSpacing": "0.05em", "fontWeight": "600"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-background">
+<!-- Top App Bar -->
+<header class="fixed top-0 w-full z-50 backdrop-blur-[28px] bg-glass-fill border-b border-glass-border shadow-[0_12px_40px_0_rgba(71,26,112,0.15)] flex justify-between items-center px-mobile-margin h-14 w-full">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full overflow-hidden border border-primary">
+<img alt="Administrator Profile" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB1ky1q9Icz-xjoB4fc5WBTkxx2JYHijlsKVMX6btzFdbXwaYFcin2VTHuTM8qI0W185_4DFKXY_4opBLyrrR87DPVTMWm9RUNliVmLn__poVBIpHxzTTlooUI8iLS80YOVwdWXqsOIaXAOEzOY5TO4Id45a0Ra0rVBIeX-alqiU8XAJmTxoRIpRRcFDzYf_0unkTzhfN9SJMPW6tGOxgUFajozgGPZ1GrXJj2owAaUCmY5d5cvW2Z2IK1F2A2HNrFrEJfjztVqfDQ4"/>
+</div>
+<span class="font-headline-lg-mobile text-headline-lg-mobile font-bold text-primary">Admin Portal</span>
+</div>
+<button class="tap-target hover:scale-105 transition-transform duration-350 ease-[cubic-bezier(0.35,0,0.15,1)] text-primary">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+</header>
+<main class="pt-24 px-mobile-margin safe-pb">
+<!-- Title Section -->
+<section class="mb-8">
+<h1 class="font-display-xl-mobile text-display-xl-mobile text-on-background">Manage Courses</h1>
+<p class="font-body-md-mobile text-on-surface-variant mt-1">Optimize and organize your curriculum content.</p>
+</section>
+<!-- Active Streams Section -->
+<section class="mb-10">
+<h2 class="font-label-caps-mobile text-label-caps-mobile text-primary uppercase mb-4 tracking-widest">Active Streams</h2>
+<div class="glass-card rounded-3xl p-5 flex items-center gap-5">
+<!-- Progress Circular Indicator -->
+<div class="relative w-20 h-20 flex-shrink-0">
+<svg class="w-full h-full" viewbox="0 0 100 100">
+<circle class="text-surface-container-highest stroke-current" cx="50" cy="50" fill="transparent" r="40" stroke-width="8"></circle>
+<circle class="text-primary-container stroke-current progress-ring__circle" cx="50" cy="50" fill="transparent" r="40" stroke-dasharray="251.2" stroke-dashoffset="70" stroke-linecap="round" stroke-width="8"></circle>
+</svg>
+<div class="absolute inset-0 flex items-center justify-center font-bold text-primary text-sm">72%</div>
+</div>
+<div class="flex-grow">
+<div class="flex items-center gap-2 mb-1">
+<span class="material-symbols-outlined text-primary text-lg">video_settings</span>
+<h3 class="font-bold text-on-surface leading-tight">Video Compression</h3>
+</div>
+<p class="font-body-md-mobile text-on-surface-variant text-sm truncate max-w-[180px]">Unit_04_Lecture.mp4</p>
+<div class="mt-3 flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+<span class="text-[10px] font-bold text-primary uppercase tracking-tighter">Encoding 4K Asset...</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Course Content List -->
+<section>
+<h2 class="font-label-caps-mobile text-label-caps-mobile text-primary uppercase mb-4 tracking-widest">Recent Uploads</h2>
+<div class="grid grid-cols-1 gap-4">
+<!-- Course Item 1 -->
+<div class="glass-card rounded-2xl p-4 flex items-center gap-4 group active:scale-[0.98] transition-all duration-200">
+<div class="w-14 h-14 rounded-xl overflow-hidden liquid-gradient flex items-center justify-center flex-shrink-0 shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined text-white text-2xl">palette</span>
+</div>
+<div class="flex-grow overflow-hidden">
+<h4 class="font-semibold text-on-surface text-base truncate">Intro to Liquid Gradients</h4>
+<div class="flex items-center gap-3 mt-1">
+<span class="text-xs text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">schedule</span> 12:45
+                            </span>
+<span class="text-xs text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">movie</span> MP4
+                            </span>
+</div>
+</div>
+<div class="flex gap-1">
+<button class="tap-target text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">edit</span>
+</button>
+<button class="tap-target text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">delete</span>
+</button>
+</div>
+</div>
+<!-- Course Item 2 -->
+<div class="glass-card rounded-2xl p-4 flex items-center gap-4 active:scale-[0.98] transition-all duration-200">
+<div class="w-14 h-14 rounded-xl overflow-hidden bg-secondary-container flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-on-secondary-container text-2xl">contrast</span>
+</div>
+<div class="flex-grow overflow-hidden">
+<h4 class="font-semibold text-on-surface text-base truncate">Advanced Color Theory</h4>
+<div class="flex items-center gap-3 mt-1">
+<span class="text-xs text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">schedule</span> 24:10
+                            </span>
+<span class="text-xs text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">movie</span> MP4
+                            </span>
+</div>
+</div>
+<div class="flex gap-1">
+<button class="tap-target text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">edit</span>
+</button>
+<button class="tap-target text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">delete</span>
+</button>
+</div>
+</div>
+<!-- Course Item 3 (File) -->
+<div class="glass-card rounded-2xl p-4 flex items-center gap-4 active:scale-[0.98] transition-all duration-200">
+<div class="w-14 h-14 rounded-xl overflow-hidden bg-surface-container-highest flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-primary text-2xl">description</span>
+</div>
+<div class="flex-grow overflow-hidden">
+<h4 class="font-semibold text-on-surface text-base truncate">Syllabus_Phase_01.pdf</h4>
+<div class="flex items-center gap-3 mt-1">
+<span class="text-xs text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">save</span> 4.2 MB
+                            </span>
+</div>
+</div>
+<div class="flex gap-1">
+<button class="tap-target text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">download</span>
+</button>
+<button class="tap-target text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">delete</span>
+</button>
+</div>
+</div>
+<!-- Course Item 4 -->
+<div class="glass-card rounded-2xl p-4 flex items-center gap-4 active:scale-[0.98] transition-all duration-200">
+<div class="w-14 h-14 rounded-xl overflow-hidden liquid-gradient flex items-center justify-center flex-shrink-0 shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined text-white text-2xl">layers</span>
+</div>
+<div class="flex-grow overflow-hidden">
+<h4 class="font-semibold text-on-surface text-base truncate">Glassmorphism Masterclass</h4>
+<div class="flex items-center gap-3 mt-1">
+<span class="text-xs text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">schedule</span> 18:55
+                            </span>
+<span class="text-xs text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">movie</span> MP4
+                            </span>
+</div>
+</div>
+<div class="flex gap-1">
+<button class="tap-target text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">edit</span>
+</button>
+<button class="tap-target text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">delete</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Floating Action Button -->
+<button class="fixed bottom-24 right-6 w-16 h-16 rounded-full liquid-gradient shadow-[0_8px_32px_0_rgba(71,26,112,0.3)] flex items-center justify-center text-white z-50 active:scale-90 transition-all duration-200 ease-[cubic-bezier(0.35,0,0.15,1)]" title="Upload Course">
+<span class="material-symbols-outlined text-3xl" style="font-variation-settings: 'FILL' 1;">add</span>
+</button>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 w-full z-50 backdrop-blur-[28px] bg-glass-thick rounded-t-xl border-t border-glass-border shadow-[0_-8px_32px_0_rgba(71,26,112,0.1)] fixed bottom-0 left-0 w-full flex justify-around items-center px-4 pb-safe-bottom pt-2">
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-glass-fill transition-colors tap-target" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-caps-mobile text-label-caps-mobile mt-1">Dashboard</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-4 py-1 active:scale-90 transition-all duration-200 ease-[cubic-bezier(0.35,0,0.15,1)] tap-target" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">school</span>
+<span class="font-label-caps-mobile text-label-caps-mobile mt-1">Courses</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-glass-fill transition-colors tap-target" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="font-label-caps-mobile text-label-caps-mobile mt-1">Users</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-glass-fill transition-colors tap-target" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-caps-mobile text-label-caps-mobile mt-1">Settings</span>
+</a>
+</nav>
+<!-- Animated Shader Background (Subtle Overlay) -->
+<div class="fixed inset-0 -z-10 pointer-events-none opacity-30">
+
+</div>
+<script>
+        // Simple Micro-interaction for the FAB
+        const fab = document.querySelector('button[title="Upload Course"]');
+        fab.addEventListener('click', () => {
+            console.log('Upload Action Triggered');
+        });
+
+        // Hover/Interaction feedback for cards
+        const cards = document.querySelectorAll('.glass-card');
+        cards.forEach(card => {
+            card.addEventListener('touchstart', () => {
+                card.style.transform = 'scale(0.98)';
+            });
+            card.addEventListener('touchend', () => {
+                card.style.transform = 'scale(1)';
+            });
+        });
+    </script>
+</body></html>

@@ -1,0 +1,606 @@
+﻿<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CareerElite Pro | Ad Moderation Console</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "card-gradient": "linear-gradient(135deg, #4D9EFA 0%, #BF7DF5 100%)",
+                    "secondary": "#0060ab",
+                    "tertiary-fixed-dim": "#47e266",
+                    "surface-dim": "#d2daed",
+                    "secondary-fixed-dim": "#a3c9ff",
+                    "tertiary-container": "#00842f",
+                    "background": "#f9f9ff",
+                    "on-background": "#141c29",
+                    "error-container": "#ffdad6",
+                    "gold": "#FFD60A",
+                    "orange": "#FF9F0A",
+                    "outline-variant": "#d2c1d2",
+                    "on-surface": "#141c29",
+                    "error": "#FF453A",
+                    "on-primary-fixed-variant": "#72188f",
+                    "on-tertiary-fixed-variant": "#00531a",
+                    "on-secondary-fixed-variant": "#004883",
+                    "surface-variant": "#dbe3f6",
+                    "surface-tint": "#8d37a9",
+                    "tertiary": "#006823",
+                    "primary-container": "#a34cbe",
+                    "surface": "#f9f9ff",
+                    "on-secondary-fixed": "#001c39",
+                    "surface-container-high": "#e0e8fb",
+                    "tertiary-fixed": "#6cff82",
+                    "inverse-on-surface": "#ecf1ff",
+                    "secondary-container": "#54a3ff",
+                    "on-tertiary-fixed": "#002106",
+                    "primary": "#8731a3",
+                    "secondary-fixed": "#d3e3ff",
+                    "on-tertiary-container": "#e6ffe0",
+                    "outline": "#817381",
+                    "on-surface-variant": "#4f4350",
+                    "glass-thick": "rgba(255, 255, 255, 0.8)",
+                    "surface-container-lowest": "#ffffff",
+                    "inverse-primary": "#f0b0ff",
+                    "glass-border": "rgba(255, 255, 255, 0.6)",
+                    "inverse-surface": "#29313f",
+                    "primary-fixed": "#fbd7ff",
+                    "glass-fill": "rgba(255, 255, 255, 0.35)",
+                    "surface-container": "#e7eeff",
+                    "primary-fixed-dim": "#f0b0ff",
+                    "on-primary-container": "#fff5fb",
+                    "surface-bright": "#f9f9ff",
+                    "surface-container-low": "#f0f3ff",
+                    "on-tertiary": "#ffffff",
+                    "surface-container-highest": "#dbe3f6",
+                    "on-secondary-container": "#003868",
+                    "on-error-container": "#93000a",
+                    "on-secondary": "#ffffff",
+                    "on-primary-fixed": "#330044",
+                    "on-primary": "#ffffff",
+                    "on-error": "#ffffff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "base": "8px",
+                    "safe-top": "44px",
+                    "desktop-gutter": "24px",
+                    "mobile-margin": "20px",
+                    "mobile-gutter": "16px",
+                    "desktop-margin": "64px",
+                    "max-width": "1280px",
+                    "safe-bottom": "34px"
+            },
+            "fontFamily": {
+                    "display-xl": ["Inter", "sans-serif"],
+                    "body-md": ["Inter", "sans-serif"],
+                    "label-caps": ["Inter", "sans-serif"],
+                    "headline-lg": ["Inter", "sans-serif"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background: #DCE4F7; /* Specific pastel lavender-blue from prompt */
+            font-family: 'Inter', sans-serif;
+            color: #471A70; /* Deep purple from prompt */
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .glass-card {
+            backdrop-filter: blur(28px);
+            background: rgba(255, 255, 255, 0.35);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 12px 40px 0 rgba(71, 26, 112, 0.15);
+            transition: all 0.35s cubic-bezier(0.25, 0.1, 0.25, 1);
+        }
+        .glass-card:hover {
+            transform: translateY(-4px) scale(1.01);
+            background: rgba(255, 255, 255, 0.45);
+            box-shadow: 0 20px 50px 0 rgba(71, 26, 112, 0.25);
+        }
+        .details-panel {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease-out, opacity 0.3s ease;
+            opacity: 0;
+        }
+        .glass-card:hover .details-panel {
+            max-height: 500px;
+            opacity: 1;
+            margin-top: 1rem;
+        }
+        .btn-spring {
+            transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .btn-spring:active {
+            transform: scale(0.94);
+        }
+    </style>
+
+<style id="admin-layout-fix">
+  /* ====== HIDE ORIGINAL INTERNAL SIDEBARS ====== */
+  aside:not(#admin-sidebar),
+  [class*="sidebar"]:not(#admin-sidebar) {
+    display: none !important;
+  }
+
+  /* ====== TOP NAV: push right of admin sidebar ====== */
+  nav.fixed.top-0:not(#admin-sidebar),
+  header.fixed:not(#admin-sidebar),
+  nav.fixed:not(#admin-sidebar) {
+    left: 240px !important;
+    width: calc(100vw - 240px) !important;
+    z-index: 9990 !important;
+    box-sizing: border-box;
+  }
+
+  /* ====== BODY: no overflow ====== */
+  html, body {
+    overflow-x: hidden !important;
+    background: #DCE4F7 !important;
+  }
+
+  /* ====== MAIN CONTENT: full width minus sidebar ====== */
+  main,
+  .main-content,
+  div[class*="ml-64"],
+  div[class*="pl-64"],
+  div[class*="md:ml-"],
+  div[class*="md:pl-"],
+  div[class*="lg:ml-"],
+  div[class*="lg:pl-"] {
+    margin-left: 0 !important;
+    padding-left: 0 !important;
+    padding-top: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  /* ====== THE REAL FIX: offset entire body content ====== */
+  body {
+    padding-left: 240px !important;
+    padding-top: 64px !important;
+    box-sizing: border-box;
+    min-height: 100vh;
+    width: 100vw !important;
+    max-width: 100vw !important;
+  }
+
+  /* ====== Sidebar stays fixed, outside body padding ====== */
+  #admin-sidebar {
+    padding-left: 0 !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 240px !important;
+    z-index: 99999 !important;
+  }
+</style>
+</head>
+<body class="min-h-screen">
+<!-- SHARED ADMIN SIDEBAR -->
+<style id="admin-nav-css">
+  .admin-nav-link { display:flex;align-items:center;gap:10px;padding:10px 14px;border-radius:12px;font-family:'Inter',sans-serif;font-size:11.5px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;cursor:pointer;text-decoration:none;color:#2d1152;transition:background 0.15s;margin:1px 0; }
+  .admin-nav-link:hover { background:rgba(71,26,112,0.08); }
+  .admin-nav-link.active { background:#471A70;color:#fff; }
+  .admin-nav-link.active .anav-icon { color:#fff; }
+  .anav-icon { font-family:'Material Symbols Outlined';font-size:19px;font-weight:normal;font-style:normal;line-height:1;letter-spacing:normal;text-transform:none;display:inline-block;-webkit-font-feature-settings:'liga';font-feature-settings:'liga';-webkit-font-smoothing:antialiased;color:#2d1152;flex-shrink:0;width:20px; }
+</style>
+<aside id="admin-sidebar" style="position:fixed;left:0;top:0;height:100vh;width:240px;background:#fff;display:flex;flex-direction:column;padding:20px 0 16px;z-index:99999;border-right:1px solid rgba(71,26,112,0.09);box-shadow:2px 0 14px rgba(71,26,112,0.07);overflow-y:auto;">
+  <div style="padding:0 18px;margin-bottom:20px;">
+    <div style="display:flex;align-items:center;gap:10px;">
+      <div style="width:36px;height:36px;border-radius:10px;background:#471A70;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+        <span class="anav-icon" style="color:#fff;font-size:18px;">admin_panel_settings</span>
+      </div>
+      <div>
+        <div style="font-family:'Inter',sans-serif;font-size:13px;font-weight:800;color:#1a0533;">Admin Console</div>
+        <div style="font-family:'Inter',sans-serif;font-size:10px;color:rgba(71,26,112,0.5);font-weight:500;">Internal Access Only</div>
+      </div>
+    </div>
+  </div>
+  <nav style="display:flex;flex-direction:column;padding:0 8px;flex:1;gap:0;">
+    <a href="desktop_26f948ad3cd8471dbc91fb662c7c35a7_Central_Dashboard_Admin_Module.html" class="admin-nav-link " id="anav-dashboard">
+      <span class="anav-icon">dashboard</span><span>Central Dashboard</span>
+    </a>
+    <a href="desktop_54d5f0f8362a4e279b958d3ee6e27864_Assignment_Generator_Admin_Module.html" class="admin-nav-link 2" id="anav-assign-gen">
+      <span class="anav-icon">edit_note</span><span>Assignment Generator</span>
+    </a>
+    <a href="desktop_a8f12953a7ab4dd287fe9d32f7f7f0d3_Advertisement_Moderator_Admin_Module.html" class="admin-nav-link active" id="anav-ad-mod">
+      <span class="anav-icon">campaign</span><span>Ad Moderator</span>
+    </a>
+    <a href="desktop_1d699cebc531409eaa607ec8fbdba8a7_Document_Verification_Viewer_-_Admin_Console.html" class="admin-nav-link 4" id="anav-doc-verify">
+      <span class="anav-icon">verified_user</span><span>Doc Verification</span>
+    </a>
+    <a href="desktop_ebcc7c1f3daf45f7a59183d1fda584b9_Success_Story_Publisher_Admin_Console.html" class="admin-nav-link 5" id="anav-success-pub">
+      <span class="anav-icon">auto_stories</span><span>Success Publisher</span>
+    </a>
+    <a href="desktop_169677f127374c2b908c2ee327be6597_Student_Submission_Evaluator_Evaluation_Cockpit.html" class="admin-nav-link 6" id="anav-evaluator">
+      <span class="anav-icon">grading</span><span>Submission Evaluator</span>
+    </a>
+    <a href="desktop_df940767afd74f8da599c97f7661f259_Anti_Cheating_Suspicious_Activity_Log_Board.html" class="admin-nav-link 7" id="anav-anticheat">
+      <span class="anav-icon">security_update_warning</span><span>Anti-Cheat Logs</span>
+    </a>
+    <a href="desktop_c6f0aa98715e456591fff25c7df65a2b_Test_Question_Bank_Creator_Split_Editor.html" class="admin-nav-link 8" id="anav-qbank">
+      <span class="anav-icon">quiz</span><span>Question Bank Creator</span>
+    </a>
+    <a href="desktop_8ff103c6ce6f44619e695be8619b7625_Course_Management_Portal_Asset_Manager.html" class="admin-nav-link 9" id="anav-course-mgmt">
+      <span class="anav-icon">school</span><span>Course Management</span>
+    </a>
+  </nav>
+  <div style="padding:12px 8px 0;margin-top:10px;border-top:1px solid rgba(71,26,112,0.08);">
+    <a href="#" style="display:flex;align-items:center;gap:10px;padding:9px 14px;border-radius:10px;color:#c0295a;text-decoration:none;font-family:'Inter',sans-serif;font-size:11px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;" onmouseover="this.style.background='rgba(192,41,90,0.07)'" onmouseout="this.style.background='transparent'">
+      <span class="anav-icon" style="color:#c0295a;font-size:18px;">logout</span>Log Out
+    </a>
+  </div>
+</aside>
+
+<!-- TopNavBar -->
+<header class="fixed top-0 w-full z-50 bg-glass-fill backdrop-blur-3xl border-b border-glass-border shadow-[0_12px_40px_0_rgba(71,26,112,0.15)]">
+<div class="flex justify-between items-center h-20 px-desktop-margin max-w-max-width mx-auto">
+<div class="font-display-xl text-[24px] font-extrabold text-on-background tracking-tight">
+                CareerElite Pro
+            </div>
+<nav class="hidden md:flex items-center space-x-8">
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors hover:scale-95 duration-350 ease-out" href="#">Campaigns</a>
+<a class="font-body-md text-body-md text-primary border-b-2 border-primary font-bold pb-1" href="#">Analytics</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors hover:scale-95 duration-350 ease-out" href="#">Talent Pool</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors hover:scale-95 duration-350 ease-out" href="#">Budget</a>
+</nav>
+<div class="flex items-center space-x-4">
+<button class="bg-primary text-on-primary px-6 py-2 rounded-full font-bold hover:scale-95 transition-transform duration-350 active:scale-90 shadow-lg">
+                    Create Ad
+                </button>
+<div class="w-10 h-10 rounded-full bg-surface-container-high border-2 border-white overflow-hidden shadow-sm">
+<img alt="Recruiter Profile" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAq4Dy7ePzebrH646fOa9Re3u3qwWngOObnqfdHPzuKCTQNed4uW2vE1PKKsmfzxkLNSj7pf0A-utXTya0595fx58fRNUBhUGnHvgFESsnT2XU38k9Ao8l02h7xZiGdRj1gKqsyPzZE9eBN1QrzbcPctPpDFoJLSI1oaLCcdnAmg3OELUKLkC339eF4YPQVj-lVWUn9Oi2MAmrYpuBeVOe_zQOquyz94Xv7HvJXvEMDYqKetNF-sRENi9q-tDFYNqEmHrbQ5YsxI5Mq"/>
+</div>
+</div>
+</div>
+</header>
+<main class="pt-32 pb-24 px-desktop-margin max-w-max-width mx-auto">
+<!-- Header & Filters -->
+<div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
+<div>
+<h1 class="font-display-xl text-display-xl text-[#471A70] mb-2">Ad Moderation</h1>
+<p class="text-[#471A70]/70 font-body-md">Manage and approve incoming corporate advertisements.</p>
+</div>
+<div class="flex p-1 bg-white/30 backdrop-blur-md border border-white/40 rounded-2xl">
+<button id="filter-pending" class="px-6 py-2 rounded-xl bg-white text-primary font-bold shadow-sm transition-all">Pending</button>
+<button id="filter-active" class="px-6 py-2 rounded-xl text-[#471A70] font-semibold hover:bg-white/20 transition-all">Active</button>
+<button id="filter-rejected" class="px-6 py-2 rounded-xl text-[#471A70] font-semibold hover:bg-white/20 transition-all">Rejected</button>
+</div>
+</div>
+<!-- Moderation Grid -->
+<div id="ad-moderation-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+    <!-- Dynamic Cards Injected Here -->
+</div>
+
+<!-- Empty Queue State -->
+<div id="empty-moderation-state" class="hidden glass-card rounded-3xl p-16 text-center max-w-xl mx-auto border-dashed border-2 border-primary/20 my-12">
+    <div class="mb-6 flex justify-center">
+        <div class="w-24 h-24 rounded-full bg-primary/5 flex items-center justify-center border border-primary/10 relative overflow-hidden">
+            <div class="absolute inset-0 bg-gradient-to-br from-primary/20 to-transparent animate-pulse"></div>
+            <span class="material-symbols-outlined text-5xl text-primary/30">playlist_add_check</span>
+        </div>
+    </div>
+    <h3 class="text-xl font-bold text-[#471A70] mb-2">Queue Clear</h3>
+    <p class="text-on-surface-variant text-sm mb-4 max-w-xs mx-auto">No advertisements matching this filter are in the moderation queue.</p>
+</div>
+</main>
+
+<!-- Micro-interaction & Dynamic Moderation Scripts -->
+<script>
+    // Seeded / Default ads state
+    const defaultAds = [
+        {
+            id: "ad_google",
+            company: "Google",
+            title: "Software Engineering Residency 2024",
+            stipend: "$8,500/mo",
+            target: "CS Seniors",
+            badge: "Urgent Approval",
+            badgeClass: "bg-gold/90 text-on-background",
+            duration: "24h Remaining",
+            status: "pending",
+            image: "https://lh3.googleusercontent.com/aida-public/AB6AXuAB70ECW7f78YuQItY14fdhA8KB3j6_2HyaLWDW2gTUCSCluyF2w9p7GaEXGV8-CTwMCl1AT2EwRHwkdXVkcAokLrtvMI4y4bsiaLnX2orlrcpKX3OSdX0O6fwKTuxAPN-HwSGfXCIwpdcJKcvhmTRZLLhxI5z_KM7H4aOObdqwqmPoqWyuM2PDHkqVHF5p0-Zgg65RKiX4VlF1P2umkzpkdPWb8gQsbue24ubiNHCw-irX_KEp9VSCx00rln2rfpPY6ENLo1u9eqYF"
+        },
+        {
+            id: "ad_spotify",
+            company: "Spotify",
+            title: "Associate Product Designer",
+            stipend: "$7,200/mo",
+            target: "Entry-level Designers",
+            badge: "New Submission",
+            badgeClass: "bg-tertiary-fixed/90 text-on-tertiary-fixed",
+            duration: "Starts Oct 1",
+            status: "pending",
+            image: "https://lh3.googleusercontent.com/aida-public/AB6AXuCkfxGtS3Q9Yn8_MrmonM0aVKkiXEFRdht8FnDaBOlVqycA7uoaPh7e7YPaO0nTz-TfhHPdB0sRdjdpH3XL6kgqnhootU2XhezWeAWx_-GbdRpS0Ihy2htyTBubfABLjoCFCJQLzoQXP05skyDCgII53O8AvbCsJOxWc0u4HaqYxtOYa6ehs2sdB53aL2sx7cUOGpZfRYm7T1Ao0amR9GrFnyri688cGFE_GFf7BejoNCDvOzn8uq1VK5Wl11LFFt6urV6lLFz-Fogx"
+        },
+        {
+            id: "ad_stripe",
+            company: "Stripe",
+            title: "Fintech Engineering Lead",
+            stipend: "$12,000/mo",
+            target: "L5+ Engineers",
+            badge: "",
+            badgeClass: "",
+            duration: "Starts Nov 15",
+            status: "pending",
+            image: "https://lh3.googleusercontent.com/aida-public/AB6AXuCy5921ZqgUvHQL6kMATqZmdFtavNsntcmx6I3VMh6b5K7ezpmGjGhITpfGxhM3K53x9ZA0Xru7MzGQ626nFsxIqFae4TsVxyGXczJYRNqaKA240ewzkx4pKhKekjqOqkFOUkXSOky95yFnGxcwRkhuNVwqJDPwnjHeCvuBPTcRdtz9ndDQf8ibuGa5GyWxHQN-3PC1JF4NII0pscJn6FSxETAw5BLgMqAnk4rrg2uBSlc51A6QQNCZ24T-b-iLxfDBGIApepFL9pCf"
+        },
+        {
+            id: "ad_airbnb",
+            company: "Airbnb",
+            title: "Market Operations Intern",
+            stipend: "$5,500/mo",
+            target: "Business Undergrads",
+            badge: "",
+            badgeClass: "",
+            duration: "12h Remaining",
+            status: "active",
+            image: "https://lh3.googleusercontent.com/aida-public/AB6AXuDM7rncacM1qyxJUJJuecm7Ym_Jzhv2nXpaTJHeE0KIlzh9_Yu6QC-t3yEAyXgspHoZhPKkyPt9RfPZJaPSA5oIwSiI1J8qpeNuOVZhHYYz5H1jE0UfCxCOOllsvijA7KbNmXe7GrGx_edWhMlqm1jZ50-DdtQTTfFQAesEF53T2FRhhwvVI33-YwmY3t2TBeyM_yD3YNDPP-9tBE20Yd175WBPBdXIInuHZ7yMbhuvTxBaeIl820u6UO6O7uLlHsCCcrYKrMwMGM7f"
+        },
+        {
+            id: "ad_openai",
+            company: "OpenAI",
+            title: "Research Scientist (L6)",
+            stipend: "$18,000/mo",
+            target: "PhD Candidates",
+            badge: "AI Managed",
+            badgeClass: "bg-primary/90 text-white",
+            duration: "Starts Jan 2025",
+            status: "active",
+            image: "https://lh3.googleusercontent.com/aida-public/AB6AXuA7_WAvmAcP4ugy0WDq43khVxnQMYqeQ_O-nmksMYykVN1q22OUBnEU1SBrWoCVltQokR1pFTqG08vIdYHruzXbpg0XoSY6JkxjgFbk6Bf7dKqg8UhlMUvzrNriBfXzYwtWcA1ke1DXUGiDZAOGigXYXnFwpesg2eshH04JxbQW8_BYpQ4oJKVwgl2JPB-vlUr_aSsgQlTIaDZn4QdlSFPHMePCpuL68llY5jhJ2VFxw6qi5hfXZuK4YDy9am-1b0cvMyhzoVasYYCO"
+        },
+        {
+            id: "ad_netflix",
+            company: "Netflix",
+            title: "UI Engineering Lead",
+            stipend: "$15,500/mo",
+            target: "Staff Engineers",
+            badge: "",
+            badgeClass: "",
+            duration: "Starts Feb 1",
+            status: "rejected",
+            image: "https://lh3.googleusercontent.com/aida-public/AB6AXuCdWJkRYjaxG1vM7H89Tc5Y99tZ4NEM10fOBevvoe8X41fpiZK5Zcwgzlt2JDTkLOJlKU0Y0EL1gRE9bSrpH-S3o-tCAGYG9Bd0iTkH7122EATTlcfon5KApRIA3WoQe9dSTe5DfCkdxTuNrf-ZE_rQX1OoDuyQxqcKC1idrTAji0PgvBu4HzwWHeRJWaUo4wHXTVQ6lvIwQFsSJABwcnsu4L75WV632TvLSDv1fiUnhJcekhId5vTuivzRi-TSsQtnuWR_QO3bRGlA"
+        }
+    ];
+
+    let adsList = [];
+    let currentFilter = 'pending';
+
+    const gridContainer = document.getElementById('ad-moderation-grid');
+    const emptyState = document.getElementById('empty-moderation-state');
+
+    function loadAds() {
+        const localAds = localStorage.getItem('ad_moderation_list');
+        if (localAds) {
+            adsList = JSON.parse(localAds);
+        } else {
+            adsList = [...defaultAds];
+            localStorage.setItem('ad_moderation_list', JSON.stringify(adsList));
+        }
+        renderGrid();
+    }
+
+    function renderGrid() {
+        gridContainer.innerHTML = '';
+        const filtered = adsList.filter(ad => ad.status === currentFilter);
+
+        if (filtered.length === 0) {
+            gridContainer.classList.remove('grid');
+            emptyState.classList.remove('hidden');
+            return;
+        }
+
+        gridContainer.classList.add('grid');
+        emptyState.classList.add('hidden');
+
+        filtered.forEach(ad => {
+            const card = document.createElement('div');
+            card.className = "glass-card rounded-[32px] p-4 flex flex-col group";
+
+            const badgeHtml = ad.badge ? `
+                <div class="absolute top-4 right-4 ${ad.badgeClass} backdrop-blur-md px-3 py-1 rounded-full text-[11px] font-bold tracking-wider uppercase">
+                    ${ad.badge}
+                </div>
+            ` : '';
+
+            let actionButtonsHtml = '';
+            if (ad.status === 'pending') {
+                actionButtonsHtml = `
+                    <button class="approve-btn flex-1 bg-primary text-white py-3 rounded-2xl font-bold btn-spring hover:shadow-lg flex items-center justify-center gap-2" data-id="${ad.id}">
+                        <span class="material-symbols-outlined text-sm">check_circle</span> Approve
+                    </button>
+                    <button class="reject-btn w-12 h-12 flex items-center justify-center rounded-2xl bg-white/50 border border-white/60 text-error hover:bg-error/10 transition-colors btn-spring" data-id="${ad.id}">
+                        <span class="material-symbols-outlined">block</span>
+                    </button>
+                    <button class="flag-btn w-12 h-12 flex items-center justify-center rounded-2xl bg-white/50 border border-white/60 text-[#471A70] hover:bg-[#471A70]/10 transition-colors btn-spring" data-id="${ad.id}">
+                        <span class="material-symbols-outlined">flag</span>
+                    </button>
+                `;
+            } else if (ad.status === 'active') {
+                actionButtonsHtml = `
+                    <div class="flex-1 text-green-700 text-sm font-semibold flex items-center gap-1">
+                        <span class="material-symbols-outlined text-green-600">check_circle</span> Approved
+                    </div>
+                    <button class="reject-btn w-12 h-12 flex items-center justify-center rounded-2xl bg-white/50 border border-white/60 text-error hover:bg-error/10 transition-colors btn-spring" data-id="${ad.id}" title="Reject Ad">
+                        <span class="material-symbols-outlined">block</span>
+                    </button>
+                `;
+            } else if (ad.status === 'rejected') {
+                actionButtonsHtml = `
+                    <div class="flex-1 text-red-600 text-sm font-semibold flex items-center gap-1">
+                        <span class="material-symbols-outlined text-red-500">block</span> Rejected
+                    </div>
+                    <button class="approve-btn w-12 h-12 flex items-center justify-center rounded-2xl bg-white/50 border border-white/60 text-primary hover:bg-primary/10 transition-colors btn-spring" data-id="${ad.id}" title="Approve Ad">
+                        <span class="material-symbols-outlined">check_circle</span>
+                    </button>
+                `;
+            }
+
+            card.innerHTML = `
+                <div class="relative w-full h-48 rounded-[24px] overflow-hidden mb-4">
+                    <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" src="${ad.image}"/>
+                    ${badgeHtml}
+                </div>
+                <div class="px-2">
+                    <div class="flex justify-between items-start mb-2">
+                        <h3 class="font-headline-lg text-headline-lg text-[#471A70]">${ad.company}</h3>
+                        <span class="bg-secondary-container/30 text-secondary px-3 py-1 rounded-full text-[12px] font-bold">${ad.duration}</span>
+                    </div>
+                    <p class="text-[#471A70]/60 text-sm mb-4">${ad.title}</p>
+                    <!-- Hover Expansion -->
+                    <div class="details-panel border-t border-white/20 pt-4">
+                        <div class="grid grid-cols-2 gap-4 mb-6">
+                            <div>
+                                <span class="block text-[10px] uppercase font-bold text-[#471A70]/50 tracking-widest mb-1">Target</span>
+                                <p class="text-sm font-semibold">${ad.target}</p>
+                            </div>
+                            <div>
+                                <span class="block text-[10px] uppercase font-bold text-[#471A70]/50 tracking-widest mb-1">Stipend</span>
+                                <p class="text-sm font-semibold">${ad.stipend}</p>
+                            </div>
+                        </div>
+                        <!-- Action Panel -->
+                        <div class="flex items-center gap-2">
+                            ${actionButtonsHtml}
+                        </div>
+                    </div>
+                </div>
+            `;
+            gridContainer.appendChild(card);
+        });
+
+        // Wire button spring effects & clicks
+        wireSpringEffects();
+        wireCardActions();
+    }
+
+    function updateAdStatus(id, newStatus) {
+        adsList = adsList.map(ad => {
+            if (ad.id === id) ad.status = newStatus;
+            return ad;
+        });
+        localStorage.setItem('ad_moderation_list', JSON.stringify(adsList));
+        
+        let message = '';
+        if (newStatus === 'active') message = 'Advertisement approved and activated.';
+        else if (newStatus === 'rejected') message = 'Advertisement rejected.';
+        
+        showToast(message, 'success');
+        renderGrid();
+    }
+
+    function showToast(message, type = 'success') {
+        if (window.parent && window.parent.App && typeof window.parent.App.showToast === 'function') {
+            window.parent.App.showToast(message, type);
+        } else {
+            let container = document.getElementById('local-toast-container');
+            if (!container) {
+                container = document.createElement('div');
+                container.id = 'local-toast-container';
+                container.className = 'fixed bottom-5 right-5 z-50 flex flex-col gap-3 pointer-events-none';
+                document.body.appendChild(container);
+            }
+            const toast = document.createElement('div');
+            toast.className = `pointer-events-auto flex items-center gap-3 px-6 py-4 rounded-2xl shadow-xl transition-all duration-300 transform translate-y-10 opacity-0 ${
+                type === 'error' ? 'bg-red-500 text-white' : 'bg-primary text-white font-semibold'
+            }`;
+            toast.innerHTML = `<span class="material-symbols-outlined">${type === 'error' ? 'error' : 'check_circle'}</span><span class="text-sm font-semibold">${message}</span>`;
+            container.appendChild(toast);
+            toast.offsetHeight;
+            toast.classList.remove('translate-y-10', 'opacity-0');
+            setTimeout(() => {
+                toast.classList.add('translate-y-10', 'opacity-0');
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
+    }
+
+    function wireCardActions() {
+        document.querySelectorAll('.approve-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const adId = this.dataset.id;
+                updateAdStatus(adId, 'active');
+            });
+        });
+
+        document.querySelectorAll('.reject-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const adId = this.dataset.id;
+                updateAdStatus(adId, 'rejected');
+            });
+        });
+
+        document.querySelectorAll('.flag-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                showToast('Ad flagged for policy compliance review.', 'success');
+            });
+        });
+    }
+
+    function wireSpringEffects() {
+        document.querySelectorAll('.btn-spring').forEach(button => {
+            button.addEventListener('mousedown', () => {
+                button.style.transform = 'scale(0.94)';
+            });
+            button.addEventListener('mouseup', () => {
+                button.style.transform = 'scale(1)';
+            });
+            button.addEventListener('mouseleave', () => {
+                button.style.transform = 'scale(1)';
+            });
+        });
+    }
+
+    // Toggle filter buttons and update currentFilter state
+    const filterPending = document.getElementById('filter-pending');
+    const filterActive = document.getElementById('filter-active');
+    const filterRejected = document.getElementById('filter-rejected');
+
+    const filterBtns = [filterPending, filterActive, filterRejected];
+    const filters = ['pending', 'active', 'rejected'];
+
+    filterBtns.forEach((btn, index) => {
+        if (btn) {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => {
+                    b.classList.remove('bg-white', 'text-primary', 'shadow-sm');
+                    b.classList.add('text-[#471A70]', 'hover:bg-white/20');
+                });
+                btn.classList.add('bg-white', 'text-primary', 'shadow-sm');
+                btn.classList.remove('text-[#471A70]', 'hover:bg-white/20');
+
+                currentFilter = filters[index];
+                renderGrid();
+            });
+        }
+    });
+
+    // Run Initializer
+    document.addEventListener('DOMContentLoaded', loadAds);
+    if (document.readyState === 'interactive' || document.readyState === 'complete') {
+        loadAds();
+    }
+</script>
+</body></html>

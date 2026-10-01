@@ -1,0 +1,1126 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+  <script>
+    if (window.self !== window.top) {
+      const style = document.createElement('style');
+      style.innerHTML = `
+        header, nav, aside, 
+        .SideNavBar, .TopNavBar, 
+        #SideNavBar, #TopNavBar {
+          display: none !important;
+        }
+        main, .main-content {
+          margin-left: 0 !important;
+          padding-top: 1.5rem !important;
+        }
+        main.ml-64, main.lg\\:ml-64 {
+          margin-left: 0 !important;
+          padding-top: 2rem !important;
+        }
+      `;
+      document.documentElement.appendChild(style);
+    }
+  </script>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>Mock Interviews Hub | Liquid Glass Elite</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#8731a3",
+            "primary-container": "#a34cbe",
+            "secondary": "#0060ab",
+            "secondary-container": "#54a3ff",
+            "surface": "#f9f9ff",
+            "surface-dim": "#d2daed",
+            "surface-container": "#e7eeff",
+            "surface-container-high": "#e0e8fb",
+            "surface-container-highest": "#dbe3f6",
+            "on-surface": "#141c29",
+            "on-background": "#471A70",
+            "glass-fill": "rgba(255, 255, 255, 0.45)",
+            "glass-thick": "rgba(255, 255, 255, 0.8)",
+            "glass-border": "rgba(255, 255, 255, 0.6)",
+            "error": "#FF453A",
+            "gold": "#FFD60A",
+            "orange": "#FF9F0A"
+          }
+        }
+      }
+    };
+  </script>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      background-color: #f9f9ff;
+      background-image: radial-gradient(at 0% 0%, #DCE4F7 0px, transparent 50%), 
+                        radial-gradient(at 100% 100%, #fbd7ff 0px, transparent 50%);
+      min-height: 100vh;
+      color: #471A70;
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+    }
+    .glass-card {
+      background: rgba(255, 255, 255, 0.45);
+      backdrop-filter: blur(28px);
+      -webkit-backdrop-filter: blur(28px);
+      border: 1px solid rgba(255, 255, 255, 0.65);
+      box-shadow: 0 12px 40px 0 rgba(71, 26, 112, 0.1);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .glass-card:hover {
+      box-shadow: 0 18px 48px 0 rgba(71, 26, 112, 0.16);
+    }
+    .glass-card-interactive {
+      background: rgba(255, 255, 255, 0.45);
+      backdrop-filter: blur(28px);
+      -webkit-backdrop-filter: blur(28px);
+      border: 1px solid rgba(255, 255, 255, 0.65);
+      box-shadow: 0 12px 35px 0 rgba(71, 26, 112, 0.08);
+      transition: all 0.25s ease;
+    }
+    .glass-card-interactive:hover {
+      transform: translateY(-3px);
+      border-color: rgba(135, 49, 163, 0.4);
+      box-shadow: 0 16px 42px 0 rgba(135, 49, 163, 0.15);
+    }
+    .glass-thick {
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(32px);
+      -webkit-backdrop-filter: blur(32px);
+      border: 1px solid rgba(255, 255, 255, 0.8);
+      box-shadow: 0 20px 50px rgba(71, 26, 112, 0.18);
+    }
+    .pulse-indicator {
+      box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7);
+      animation: pulseGreen 1.8s infinite;
+    }
+    @keyframes pulseGreen {
+      0% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7); }
+      70% { box-shadow: 0 0 0 10px rgba(34, 197, 94, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
+    }
+    .active-pill {
+      background: #8731a3 !important;
+      color: #ffffff !important;
+      box-shadow: 0 4px 14px rgba(135, 49, 163, 0.3) !important;
+    }
+    .wave-bar {
+      animation: soundWave 1.2s ease-in-out infinite alternate;
+    }
+    @keyframes soundWave {
+      0% { height: 6px; }
+      100% { height: 28px; }
+    }
+  </style>
+</head>
+<body class="p-4 md:p-6 w-full min-h-screen">
+  
+  <!-- Main Header Banner -->
+  <header class="glass-card rounded-3xl p-6 md:p-8 mb-8 relative overflow-hidden">
+    <div class="absolute -right-16 -top-16 w-80 h-80 bg-gradient-to-br from-purple-400/20 to-blue-500/20 rounded-full blur-3xl pointer-events-none"></div>
+    <div class="relative z-10 flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6">
+      <div class="max-w-2xl">
+        <div class="flex items-center gap-3 mb-2">
+          <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-primary/10 text-primary border border-primary/20">
+            <span class="material-symbols-outlined text-sm" style="font-variation-settings:'FILL' 1;">psychology</span>
+            AI-POWERED PREPARATION
+          </span>
+          <span class="inline-flex items-center gap-1 text-xs font-semibold text-emerald-700 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 pulse-indicator"></span>
+            Simulators Live
+          </span>
+        </div>
+        <h1 class="text-2xl md:text-4xl font-extrabold text-[#471A70] tracking-tight mb-2">
+          Mock Interviews Studio
+        </h1>
+        <p class="text-sm md:text-base text-purple-950/70 font-medium">
+          Master FAANG-level technical rounds and behavioral STAR interviews with real-time biometric feedback, live code execution, and 1-on-1 industry mentor evaluations.
+        </p>
+      </div>
+
+      <!-- Quick Action Buttons & Readiness Score -->
+      <div class="flex flex-wrap items-center gap-4">
+        <!-- Readiness Radial Box -->
+        <div class="glass-card rounded-2xl p-4 flex items-center gap-4 bg-white/60">
+          <div class="relative w-14 h-14 flex items-center justify-center">
+            <svg class="w-full h-full transform -rotate-90" viewBox="0 0 36 36">
+              <path class="text-purple-200" stroke-width="3.5" stroke="currentColor" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+              <path class="text-primary" stroke-dasharray="88, 100" stroke-width="3.5" stroke-linecap="round" stroke="currentColor" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+            </svg>
+            <span class="absolute font-extrabold text-sm text-primary">88%</span>
+          </div>
+          <div>
+            <div class="text-[11px] font-bold uppercase tracking-wider text-purple-950/60">Readiness Score</div>
+            <div class="font-extrabold text-sm text-purple-950 flex items-center gap-1">
+              <span>Interview Ready</span>
+              <span class="material-symbols-outlined text-base text-amber-500" style="font-variation-settings:'FILL' 1;">verified</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Start Mock Trigger -->
+        <button id="startAiMockBtn" onclick="openSimulatorModal('technical')" class="bg-primary hover:bg-[#a34cbe] text-white font-bold px-6 py-3.5 rounded-full shadow-lg shadow-primary/25 hover:shadow-primary/40 active:scale-95 transition-all flex items-center gap-2 text-sm">
+          <span class="material-symbols-outlined text-lg">play_arrow</span>
+          <span>Start AI Mock</span>
+        </button>
+
+        <button onclick="openMentorModal()" class="bg-white/80 hover:bg-white text-purple-950 font-bold px-5 py-3.5 rounded-full border border-glass-border shadow-md hover:border-primary/40 active:scale-95 transition-all flex items-center gap-2 text-sm">
+          <span class="material-symbols-outlined text-lg text-primary">calendar_add_on</span>
+          <span>Book Mentor</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Quick Stats Metric Bar -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8 pt-6 border-t border-purple-950/10">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-purple-100 flex items-center justify-center text-primary font-bold">
+          <span class="material-symbols-outlined text-xl">fact_check</span>
+        </div>
+        <div>
+          <div class="text-lg font-extrabold text-purple-950" id="totalMocksCount">14</div>
+          <div class="text-xs text-purple-950/60 font-medium">Completed Sessions</div>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-blue-100 flex items-center justify-center text-secondary font-bold">
+          <span class="material-symbols-outlined text-xl">code_blocks</span>
+        </div>
+        <div>
+          <div class="text-lg font-extrabold text-purple-950">92%</div>
+          <div class="text-xs text-purple-950/60 font-medium">Avg Technical Score</div>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-emerald-100 flex items-center justify-center text-emerald-700 font-bold">
+          <span class="material-symbols-outlined text-xl">record_voice_over</span>
+        </div>
+        <div>
+          <div class="text-lg font-extrabold text-purple-950">94%</div>
+          <div class="text-xs text-purple-950/60 font-medium">Speech & Clarity</div>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-amber-100 flex items-center justify-center text-amber-700 font-bold">
+          <span class="material-symbols-outlined text-xl">timer</span>
+        </div>
+        <div>
+          <div class="text-lg font-extrabold text-purple-950">18.5 hrs</div>
+          <div class="text-xs text-purple-950/60 font-medium">Practice Time</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- 4 Primary Interview Modes Grid -->
+  <section class="mb-10">
+    <div class="flex items-center justify-between mb-4">
+      <h2 class="text-lg font-extrabold text-purple-950 flex items-center gap-2">
+        <span class="material-symbols-outlined text-primary">hub</span>
+        Select Interview Format
+      </h2>
+      <span class="text-xs font-semibold text-purple-950/60">Choose your simulation type</span>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5">
+      <!-- Mode 1: AI Technical -->
+      <div onclick="openSimulatorModal('technical')" class="glass-card-interactive rounded-2xl p-6 cursor-pointer group flex flex-col justify-between relative overflow-hidden bg-white/50">
+        <div class="absolute top-0 right-0 w-24 h-24 bg-purple-500/10 rounded-bl-full pointer-events-none group-hover:scale-110 transition-transform"></div>
+        <div>
+          <div class="w-12 h-12 rounded-2xl bg-primary/10 text-primary flex items-center justify-center mb-4 group-hover:bg-primary group-hover:text-white transition-colors">
+            <span class="material-symbols-outlined text-2xl">terminal</span>
+          </div>
+          <div class="flex items-center gap-2 mb-1">
+            <h3 class="font-extrabold text-base text-purple-950">AI Technical Mock</h3>
+            <span class="text-[10px] font-bold uppercase tracking-wider bg-purple-100 text-primary px-2 py-0.5 rounded-md">Live Code</span>
+          </div>
+          <p class="text-xs text-purple-950/70 leading-relaxed mb-4">
+            Live coding sandbox with algorithmic challenges, system design, test cases, and instant AI grading.
+          </p>
+        </div>
+        <div class="flex items-center justify-between pt-4 border-t border-purple-950/10">
+          <span class="text-xs font-bold text-primary flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+            Launch Sandbox <span class="material-symbols-outlined text-sm">arrow_forward</span>
+          </span>
+          <span class="text-[11px] font-semibold text-purple-950/50">45 Mins</span>
+        </div>
+      </div>
+
+      <!-- Mode 2: AI Behavioral -->
+      <div onclick="openSimulatorModal('behavioral')" class="glass-card-interactive rounded-2xl p-6 cursor-pointer group flex flex-col justify-between relative overflow-hidden bg-white/50">
+        <div class="absolute top-0 right-0 w-24 h-24 bg-blue-500/10 rounded-bl-full pointer-events-none group-hover:scale-110 transition-transform"></div>
+        <div>
+          <div class="w-12 h-12 rounded-2xl bg-blue-100 text-secondary flex items-center justify-center mb-4 group-hover:bg-secondary group-hover:text-white transition-colors">
+            <span class="material-symbols-outlined text-2xl">sentiment_satisfied</span>
+          </div>
+          <div class="flex items-center gap-2 mb-1">
+            <h3 class="font-extrabold text-base text-purple-950">AI Behavioral Coach</h3>
+            <span class="text-[10px] font-bold uppercase tracking-wider bg-blue-100 text-secondary px-2 py-0.5 rounded-md">STAR Model</span>
+          </div>
+          <p class="text-xs text-purple-950/70 leading-relaxed mb-4">
+            Speech cadence analyzer, filler-word detector, STAR technique evaluation, and confidence score.
+          </p>
+        </div>
+        <div class="flex items-center justify-between pt-4 border-t border-purple-950/10">
+          <span class="text-xs font-bold text-secondary flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+            Start Speech Test <span class="material-symbols-outlined text-sm">arrow_forward</span>
+          </span>
+          <span class="text-[11px] font-semibold text-purple-950/50">30 Mins</span>
+        </div>
+      </div>
+
+      <!-- Mode 3: 1-on-1 Mentor Session -->
+      <div onclick="openMentorModal()" class="glass-card-interactive rounded-2xl p-6 cursor-pointer group flex flex-col justify-between relative overflow-hidden bg-white/50">
+        <div class="absolute top-0 right-0 w-24 h-24 bg-emerald-500/10 rounded-bl-full pointer-events-none group-hover:scale-110 transition-transform"></div>
+        <div>
+          <div class="w-12 h-12 rounded-2xl bg-emerald-100 text-emerald-700 flex items-center justify-center mb-4 group-hover:bg-emerald-600 group-hover:text-white transition-colors">
+            <span class="material-symbols-outlined text-2xl">person_pin</span>
+          </div>
+          <div class="flex items-center gap-2 mb-1">
+            <h3 class="font-extrabold text-base text-purple-950">1-on-1 Senior Mentor</h3>
+            <span class="text-[10px] font-bold uppercase tracking-wider bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded-md">Verified Pro</span>
+          </div>
+          <p class="text-xs text-purple-950/70 leading-relaxed mb-4">
+            Book 45-min live sessions with verified senior engineers & hiring managers from Google, Stripe, Meta.
+          </p>
+        </div>
+        <div class="flex items-center justify-between pt-4 border-t border-purple-950/10">
+          <span class="text-xs font-bold text-emerald-700 flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+            Schedule Slot <span class="material-symbols-outlined text-sm">arrow_forward</span>
+          </span>
+          <span class="text-[11px] font-semibold text-purple-950/50">45 Mins</span>
+        </div>
+      </div>
+
+      <!-- Mode 4: Peer Match -->
+      <div onclick="startPeerMatch()" class="glass-card-interactive rounded-2xl p-6 cursor-pointer group flex flex-col justify-between relative overflow-hidden bg-white/50">
+        <div class="absolute top-0 right-0 w-24 h-24 bg-amber-500/10 rounded-bl-full pointer-events-none group-hover:scale-110 transition-transform"></div>
+        <div>
+          <div class="w-12 h-12 rounded-2xl bg-amber-100 text-amber-700 flex items-center justify-center mb-4 group-hover:bg-amber-600 group-hover:text-white transition-colors">
+            <span class="material-symbols-outlined text-2xl">groups</span>
+          </div>
+          <div class="flex items-center gap-2 mb-1">
+            <h3 class="font-extrabold text-base text-purple-950">Peer-to-Peer Match</h3>
+            <span class="text-[10px] font-bold uppercase tracking-wider bg-amber-100 text-amber-800 px-2 py-0.5 rounded-md">Instant</span>
+          </div>
+          <p class="text-xs text-purple-950/70 leading-relaxed mb-4">
+            Get matched with fellow student candidates for reciprocal mock interviews and peer review swap.
+          </p>
+        </div>
+        <div class="flex items-center justify-between pt-4 border-t border-purple-950/10">
+          <span class="text-xs font-bold text-amber-700 flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+            Find Partner <span class="material-symbols-outlined text-sm">arrow_forward</span>
+          </span>
+          <span class="text-[11px] font-semibold text-purple-950/50">60 Mins</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Two Column Layout: Upcoming Mocks & Recent Performance Scorecard -->
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-10">
+    
+    <!-- Left Column: Upcoming Scheduled Mocks (7 cols) -->
+    <div class="lg:col-span-7 flex flex-col">
+      <div class="flex items-center justify-between mb-4">
+        <h2 class="text-lg font-extrabold text-purple-950 flex items-center gap-2">
+          <span class="material-symbols-outlined text-primary">event_available</span>
+          Upcoming Scheduled Sessions
+        </h2>
+        <span class="text-xs font-bold text-primary hover:underline cursor-pointer" onclick="openMentorModal()">+ Schedule New</span>
+      </div>
+
+      <div class="space-y-4 flex-1" id="upcomingMocksContainer">
+        <!-- Upcoming Card 1 -->
+        <div class="glass-card rounded-2xl p-5 border-l-4 border-l-primary flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+          <div class="flex items-start gap-3.5">
+            <div class="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center text-primary flex-shrink-0">
+              <span class="material-symbols-outlined text-2xl">smart_toy</span>
+            </div>
+            <div>
+              <div class="flex items-center gap-2 mb-1">
+                <h4 class="font-extrabold text-sm text-purple-950">Senior Frontend Architecture Mock</h4>
+                <span class="text-[10px] font-bold text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded-full flex items-center gap-1">
+                  <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 pulse-indicator"></span> Starts in 45m
+                </span>
+              </div>
+              <p class="text-xs text-purple-950/70 mb-2">Interviewer: AI Interviewer (Claude 3.7 Pro) • Virtual DOM, SSR & Performance</p>
+              <div class="flex items-center gap-3 text-[11px] text-purple-950/60 font-medium">
+                <span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">schedule</span> Today, 4:30 PM</span>
+                <span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">videocam</span> WebRTC Studio</span>
+              </div>
+            </div>
+          </div>
+          <div class="flex items-center gap-2 w-full md:w-auto justify-end">
+            <button onclick="openSimulatorModal('technical')" class="bg-primary text-white font-bold text-xs px-4 py-2 rounded-xl shadow hover:bg-primary-container transition-all flex items-center gap-1.5">
+              <span class="material-symbols-outlined text-sm">login</span> Enter Room
+            </button>
+            <button onclick="alert('Session syllabus and test cases copied to clipboard!')" class="p-2 rounded-xl border border-glass-border hover:bg-white text-purple-950/70" title="Prep Notes">
+              <span class="material-symbols-outlined text-sm">description</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Upcoming Card 2 -->
+        <div class="glass-card rounded-2xl p-5 border-l-4 border-l-secondary flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+          <div class="flex items-start gap-3.5">
+            <img class="w-12 h-12 rounded-2xl object-cover flex-shrink-0 border border-secondary/30" src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=150&auto=format&fit=crop&q=80" alt="Sarah Jenkins">
+            <div>
+              <div class="flex items-center gap-2 mb-1">
+                <h4 class="font-extrabold text-sm text-purple-950">System Design & Distributed Caching</h4>
+                <span class="text-[10px] font-bold text-secondary bg-blue-100 px-2 py-0.5 rounded-full">Confirmed</span>
+              </div>
+              <p class="text-xs text-purple-950/70 mb-2">Mentor: Sarah Jenkins (Staff Engineer @ Stripe) • High Availability Systems</p>
+              <div class="flex items-center gap-3 text-[11px] text-purple-950/60 font-medium">
+                <span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">calendar_month</span> Tomorrow, 10:00 AM</span>
+                <span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">attach_money</span> Free with Ambassador</span>
+              </div>
+            </div>
+          </div>
+          <div class="flex items-center gap-2 w-full md:w-auto justify-end">
+            <button onclick="alert('Mentor Sarah Jenkins has received your portfolio & notes.')" class="bg-white/80 hover:bg-white text-purple-950 font-bold text-xs px-4 py-2 rounded-xl border border-glass-border shadow-sm flex items-center gap-1.5">
+              <span class="material-symbols-outlined text-sm">event</span> Sync Calendar
+            </button>
+            <button onclick="alert('Reschedule request sent to mentor.')" class="p-2 rounded-xl border border-glass-border hover:bg-white text-purple-950/70" title="Reschedule">
+              <span class="material-symbols-outlined text-sm">edit_calendar</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Upcoming Card 3 -->
+        <div class="glass-card rounded-2xl p-5 border-l-4 border-l-purple-300 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+          <div class="flex items-start gap-3.5">
+            <div class="w-12 h-12 rounded-2xl bg-amber-100 flex items-center justify-center text-amber-700 flex-shrink-0">
+              <span class="material-symbols-outlined text-2xl">psychology_alt</span>
+            </div>
+            <div>
+              <div class="flex items-center gap-2 mb-1">
+                <h4 class="font-extrabold text-sm text-purple-950">Behavioral Leadership & Conflict Resolution</h4>
+                <span class="text-[10px] font-bold text-purple-950/60 bg-purple-100 px-2 py-0.5 rounded-full">Scheduled</span>
+              </div>
+              <p class="text-xs text-purple-950/70 mb-2">Interviewer: AI Behavioral Coach • STAR Method & Impact Metric</p>
+              <div class="flex items-center gap-3 text-[11px] text-purple-950/60 font-medium">
+                <span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">calendar_month</span> Friday, 2:00 PM</span>
+                <span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">timer</span> 30 Mins</span>
+              </div>
+            </div>
+          </div>
+          <div class="flex items-center gap-2 w-full md:w-auto justify-end">
+            <button onclick="openSimulatorModal('behavioral')" class="bg-white/80 hover:bg-white text-purple-950 font-bold text-xs px-4 py-2 rounded-xl border border-glass-border shadow-sm flex items-center gap-1.5">
+              <span class="material-symbols-outlined text-sm">tune</span> Test Audio/Cam
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Column: Recent Performance & AI Feedback Scorecard (5 cols) -->
+    <div class="lg:col-span-5 flex flex-col">
+      <div class="flex items-center justify-between mb-4">
+        <h2 class="text-lg font-extrabold text-purple-950 flex items-center gap-2">
+          <span class="material-symbols-outlined text-primary">query_stats</span>
+          Latest AI Performance Diagnostic
+        </h2>
+        <span class="text-xs font-semibold text-purple-950/60">Session #14 (Yesterday)</span>
+      </div>
+
+      <div class="glass-card rounded-2xl p-6 flex-1 flex flex-col justify-between">
+        <div>
+          <div class="flex items-center justify-between pb-4 border-b border-purple-950/10 mb-4">
+            <div>
+              <h3 class="font-extrabold text-base text-purple-950">Full-Stack Data Engineering</h3>
+              <p class="text-xs text-purple-950/60">Topic: LRU Cache & Distributed Locking</p>
+            </div>
+            <div class="text-right">
+              <span class="text-2xl font-black text-primary">94/100</span>
+              <div class="text-[10px] font-bold text-emerald-700">Top 5% Student</div>
+            </div>
+          </div>
+
+          <!-- Category Progress Bars -->
+          <div class="space-y-3.5 mb-6">
+            <div>
+              <div class="flex justify-between text-xs font-bold text-purple-950 mb-1">
+                <span>Technical Problem Solving & DSA</span>
+                <span class="text-primary">96%</span>
+              </div>
+              <div class="w-full h-2 rounded-full bg-purple-100 overflow-hidden">
+                <div class="h-full bg-gradient-to-r from-primary to-primary-container rounded-full" style="width: 96%"></div>
+              </div>
+            </div>
+
+            <div>
+              <div class="flex justify-between text-xs font-bold text-purple-950 mb-1">
+                <span>Communication & Trade-off Explanation</span>
+                <span class="text-secondary">88%</span>
+              </div>
+              <div class="w-full h-2 rounded-full bg-blue-100 overflow-hidden">
+                <div class="h-full bg-gradient-to-r from-secondary to-secondary-container rounded-full" style="width: 88%"></div>
+              </div>
+            </div>
+
+            <div>
+              <div class="flex justify-between text-xs font-bold text-purple-950 mb-1">
+                <span>Code Cleanliness & Edge-Cases</span>
+                <span class="text-emerald-700">92%</span>
+              </div>
+              <div class="w-full h-2 rounded-full bg-emerald-100 overflow-hidden">
+                <div class="h-full bg-emerald-500 rounded-full" style="width: 92%"></div>
+              </div>
+            </div>
+
+            <div>
+              <div class="flex justify-between text-xs font-bold text-purple-950 mb-1">
+                <span>Time Complexity Optimization (Big-O)</span>
+                <span class="text-amber-700">90%</span>
+              </div>
+              <div class="w-full h-2 rounded-full bg-amber-100 overflow-hidden">
+                <div class="h-full bg-amber-500 rounded-full" style="width: 90%"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Key Takeaways & AI Notes -->
+          <div class="bg-white/60 rounded-xl p-3.5 border border-glass-border space-y-2 mb-4">
+            <div class="flex items-center gap-2 text-xs font-extrabold text-emerald-800">
+              <span class="material-symbols-outlined text-sm" style="font-variation-settings:'FILL' 1;">thumb_up</span>
+              Key Strengths:
+            </div>
+            <p class="text-[11px] text-purple-950/80 leading-normal">
+              Flawless implementation of Doubly-Linked List + Hash Map. Promptly identified concurrency bottlenecks and lock contention.
+            </p>
+            <div class="flex items-center gap-2 text-xs font-extrabold text-amber-800 pt-1">
+              <span class="material-symbols-outlined text-sm" style="font-variation-settings:'FILL' 1;">tips_and_updates</span>
+              Suggested Improvements:
+            </div>
+            <p class="text-[11px] text-purple-950/80 leading-normal">
+              State assumptions clearly before writing helper functions. Articulate space trade-offs between array vs hash lookups out loud.
+            </p>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-3 pt-3 border-t border-purple-950/10">
+          <button onclick="alert('Downloading full session AI evaluation & audio recording...')" class="flex-1 bg-white/80 hover:bg-white text-purple-950 font-bold text-xs py-2.5 rounded-xl border border-glass-border shadow-sm flex items-center justify-center gap-1.5">
+            <span class="material-symbols-outlined text-sm">download</span> Full Transcript & Report
+          </button>
+          <button onclick="openSimulatorModal('technical')" class="bg-primary text-white font-bold text-xs py-2.5 px-4 rounded-xl shadow hover:bg-primary-container flex items-center justify-center gap-1.5">
+            <span class="material-symbols-outlined text-sm">replay</span> Retake Track
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Practice Tracks & Question Bank Library -->
+  <section class="mb-12">
+    <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
+      <div>
+        <h2 class="text-lg font-extrabold text-purple-950 flex items-center gap-2">
+          <span class="material-symbols-outlined text-primary">menu_book</span>
+          Curated Practice Tracks & Question Bank
+        </h2>
+        <p class="text-xs text-purple-950/60 font-medium">Select a focused track to practice specific interview topics and company formats.</p>
+      </div>
+
+      <!-- Filter Tabs -->
+      <div class="flex flex-wrap items-center gap-1.5 bg-white/50 p-1.5 rounded-2xl border border-glass-border">
+        <button onclick="filterTrack('all', this)" class="track-tab active-pill text-xs font-bold px-3.5 py-1.5 rounded-xl transition-all">All Tracks</button>
+        <button onclick="filterTrack('frontend', this)" class="track-tab text-xs font-semibold text-purple-950/70 hover:text-purple-950 px-3.5 py-1.5 rounded-xl transition-all">Frontend & UI</button>
+        <button onclick="filterTrack('backend', this)" class="track-tab text-xs font-semibold text-purple-950/70 hover:text-purple-950 px-3.5 py-1.5 rounded-xl transition-all">Backend & System</button>
+        <button onclick="filterTrack('dsa', this)" class="track-tab text-xs font-semibold text-purple-950/70 hover:text-purple-950 px-3.5 py-1.5 rounded-xl transition-all">Data Structures</button>
+        <button onclick="filterTrack('behavioral', this)" class="track-tab text-xs font-semibold text-purple-950/70 hover:text-purple-950 px-3.5 py-1.5 rounded-xl transition-all">STAR Behavioral</button>
+      </div>
+    </div>
+
+    <!-- Tracks Cards Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6" id="tracksGrid">
+      
+      <!-- Track Card 1: Frontend -->
+      <div class="track-card glass-card-interactive rounded-2xl p-6 flex flex-col justify-between" data-category="frontend">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-[10px] font-bold uppercase tracking-wider bg-purple-100 text-primary px-2.5 py-1 rounded-lg">Frontend Track</span>
+            <div class="flex items-center gap-1 text-[11px] font-bold text-amber-600 bg-amber-50 px-2 py-0.5 rounded-md border border-amber-200">
+              <span class="material-symbols-outlined text-xs">star</span> High Frequency
+            </div>
+          </div>
+          <h3 class="font-extrabold text-base text-purple-950 mb-1.5">React 19 & State Management Deep Dive</h3>
+          <p class="text-xs text-purple-950/70 leading-relaxed mb-4">
+            Component lifecycles, custom hooks, Virtual DOM diffing, Suspense, Concurrent Mode, and Redux/Zustand architecture.
+          </p>
+          <div class="flex flex-wrap gap-1.5 mb-5">
+            <span class="text-[10px] font-medium bg-white/70 text-purple-950/70 px-2 py-0.5 rounded-md border border-purple-950/10">Meta Format</span>
+            <span class="text-[10px] font-medium bg-white/70 text-purple-950/70 px-2 py-0.5 rounded-md border border-purple-950/10">React Hooks</span>
+            <span class="text-[10px] font-medium bg-white/70 text-purple-950/70 px-2 py-0.5 rounded-md border border-purple-950/10">Performance</span>
+          </div>
+        </div>
+        <div class="flex items-center justify-between pt-4 border-t border-purple-950/10">
+          <div class="text-[11px] text-purple-950/60 font-semibold">18 Questions • 45 Mins</div>
+          <button onclick="openSimulatorModal('technical', 'React 19 & Custom Hooks')" class="bg-primary hover:bg-[#a34cbe] text-white font-bold text-xs px-4 py-2 rounded-xl shadow transition-all flex items-center gap-1">
+            Launch Mock <span class="material-symbols-outlined text-sm">play_arrow</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Track Card 2: DSA -->
+      <div class="track-card glass-card-interactive rounded-2xl p-6 flex flex-col justify-between" data-category="dsa">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-[10px] font-bold uppercase tracking-wider bg-blue-100 text-secondary px-2.5 py-1 rounded-lg">Algorithms Track</span>
+            <div class="flex items-center gap-1 text-[11px] font-bold text-red-600 bg-red-50 px-2 py-0.5 rounded-md border border-red-200">
+              Medium - Hard
+            </div>
+          </div>
+          <h3 class="font-extrabold text-base text-purple-950 mb-1.5">Graph Traversals & Dynamic Programming</h3>
+          <p class="text-xs text-purple-950/70 leading-relaxed mb-4">
+            Dijkstra's shortest path, topological sorting, memoization grids, 0/1 knapsack, and recursion tree pruning.
+          </p>
+          <div class="flex flex-wrap gap-1.5 mb-5">
+            <span class="text-[10px] font-medium bg-white/70 text-purple-950/70 px-2 py-0.5 rounded-md border border-purple-950/10">Google Format</span>
+            <span class="text-[10px] font-medium bg-white/70 text-purple-950/70 px-2 py-0.5 rounded-md border border-purple-950/10">BFS/DFS</span>
+            <span class="text-[10px] font-medium bg-white/70 text-purple-950/70 px-2 py-0.5 rounded-md border border-purple-950/10">DP Optimization</span>
+          </div>
+        </div>
+        <div class="flex items-center justify-between pt-4 border-t border-purple-950/10">
+          <div class="text-[11px] text-purple-950/60 font-semibold">24 Questions • 60 Mins</div>
+          <button onclick="openSimulatorModal('technical', 'Graph Traversals & DP')" class="bg-primary hover:bg-[#a34cbe] text-white font-bold text-xs px-4 py-2 rounded-xl shadow transition-all flex items-center gap-1">
+            Launch Mock <span class="material-symbols-outlined text-sm">play_arrow</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Track Card 3: Backend & System Design -->
+      <div class="track-card glass-card-interactive rounded-2xl p-6 flex flex-col justify-between" data-category="backend">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-[10px] font-bold uppercase tracking-wider bg-emerald-100 text-emerald-800 px-2.5 py-1 rounded-lg">System Architecture</span>
+            <div class="flex items-center gap-1 text-[11px] font-bold text-purple-700 bg-purple-50 px-2 py-0.5 rounded-md border border-purple-200">
+              Scalability
+            </div>
+          </div>
+          <h3 class="font-extrabold text-base text-purple-950 mb-1.5">Distributed Rate Limiter & Message Queues</h3>
+          <p class="text-xs text-purple-950/70 leading-relaxed mb-4">
+            Token bucket vs leaky bucket algorithm, Redis cluster synchronization, Kafka partitioning, and idempotent API consumers.
+          </p>
+          <div class="flex flex-wrap gap-1.5 mb-5">
+            <span class="text-[10px] font-medium bg-white/70 text-purple-950/70 px-2 py-0.5 rounded-md border border-purple-950/10">Uber / Stripe</span>
+            <span class="text-[10px] font-medium bg-white/70 text-purple-950/70 px-2 py-0.5 rounded-md border border-purple-950/10">Redis</span>
+            <span class="text-[10px] font-medium bg-white/70 text-purple-950/70 px-2 py-0.5 rounded-md border border-purple-950/10">Kafka</span>
+          </div>
+        </div>
+        <div class="flex items-center justify-between pt-4 border-t border-purple-950/10">
+          <div class="text-[11px] text-purple-950/60 font-semibold">12 Scenarios • 45 Mins</div>
+          <button onclick="openSimulatorModal('technical', 'Distributed Rate Limiter')" class="bg-primary hover:bg-[#a34cbe] text-white font-bold text-xs px-4 py-2 rounded-xl shadow transition-all flex items-center gap-1">
+            Launch Mock <span class="material-symbols-outlined text-sm">play_arrow</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Track Card 4: Behavioral -->
+      <div class="track-card glass-card-interactive rounded-2xl p-6 flex flex-col justify-between" data-category="behavioral">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-[10px] font-bold uppercase tracking-wider bg-amber-100 text-amber-800 px-2.5 py-1 rounded-lg">Behavioral & HR</span>
+            <div class="flex items-center gap-1 text-[11px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-md border border-emerald-200">
+              Essential
+            </div>
+          </div>
+          <h3 class="font-extrabold text-base text-purple-950 mb-1.5">Amazon 16 Leadership Principles (STAR)</h3>
+          <p class="text-xs text-purple-950/70 leading-relaxed mb-4">
+            Customer Obsession, Ownership, Bias for Action, Disagree & Commit, and Dive Deep situational storytelling.
+          </p>
+          <div class="flex flex-wrap gap-1.5 mb-5">
+            <span class="text-[10px] font-medium bg-white/70 text-purple-950/70 px-2 py-0.5 rounded-md border border-purple-950/10">Amazon LP</span>
+            <span class="text-[10px] font-medium bg-white/70 text-purple-950/70 px-2 py-0.5 rounded-md border border-purple-950/10">STAR Framework</span>
+            <span class="text-[10px] font-medium bg-white/70 text-purple-950/70 px-2 py-0.5 rounded-md border border-purple-950/10">Tone Analysis</span>
+          </div>
+        </div>
+        <div class="flex items-center justify-between pt-4 border-t border-purple-950/10">
+          <div class="text-[11px] text-purple-950/60 font-semibold">16 Prompts • 30 Mins</div>
+          <button onclick="openSimulatorModal('behavioral', 'Amazon Leadership Principles')" class="bg-secondary hover:bg-blue-700 text-white font-bold text-xs px-4 py-2 rounded-xl shadow transition-all flex items-center gap-1">
+            Start Speech Test <span class="material-symbols-outlined text-sm">mic</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Track Card 5: Full-Stack -->
+      <div class="track-card glass-card-interactive rounded-2xl p-6 flex flex-col justify-between" data-category="frontend">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-[10px] font-bold uppercase tracking-wider bg-purple-100 text-primary px-2.5 py-1 rounded-lg">Full-Stack Track</span>
+            <div class="flex items-center gap-1 text-[11px] font-bold text-blue-700 bg-blue-50 px-2 py-0.5 rounded-md border border-blue-200">
+              Interactive
+            </div>
+          </div>
+          <h3 class="font-extrabold text-base text-purple-950 mb-1.5">REST & GraphQL API Contract Architecture</h3>
+          <p class="text-xs text-purple-950/70 leading-relaxed mb-4">
+            Schema stitching, query complexity validation, N+1 problem mitigation, pagination patterns, and JWT session handling.
+          </p>
+          <div class="flex flex-wrap gap-1.5 mb-5">
+            <span class="text-[10px] font-medium bg-white/70 text-purple-950/70 px-2 py-0.5 rounded-md border border-purple-950/10">Full-Stack</span>
+            <span class="text-[10px] font-medium bg-white/70 text-purple-950/70 px-2 py-0.5 rounded-md border border-purple-950/10">GraphQL</span>
+            <span class="text-[10px] font-medium bg-white/70 text-purple-950/70 px-2 py-0.5 rounded-md border border-purple-950/10">JWT Auth</span>
+          </div>
+        </div>
+        <div class="flex items-center justify-between pt-4 border-t border-purple-950/10">
+          <div class="text-[11px] text-purple-950/60 font-semibold">15 Questions • 45 Mins</div>
+          <button onclick="openSimulatorModal('technical', 'GraphQL & REST APIs')" class="bg-primary hover:bg-[#a34cbe] text-white font-bold text-xs px-4 py-2 rounded-xl shadow transition-all flex items-center gap-1">
+            Launch Mock <span class="material-symbols-outlined text-sm">play_arrow</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Track Card 6: DSA Advanced -->
+      <div class="track-card glass-card-interactive rounded-2xl p-6 flex flex-col justify-between" data-category="dsa">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-[10px] font-bold uppercase tracking-wider bg-blue-100 text-secondary px-2.5 py-1 rounded-lg">Algorithms Track</span>
+            <div class="flex items-center gap-1 text-[11px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-md border border-emerald-200">
+              FAANG Core
+            </div>
+          </div>
+          <h3 class="font-extrabold text-base text-purple-950 mb-1.5">Trie, Segment Trees & Bit Manipulation</h3>
+          <p class="text-xs text-purple-950/70 leading-relaxed mb-4">
+            Prefix search auto-completion, range sum queries, binary indexed trees, bitwise XOR tricks, and memory optimization.
+          </p>
+          <div class="flex flex-wrap gap-1.5 mb-5">
+            <span class="text-[10px] font-medium bg-white/70 text-purple-950/70 px-2 py-0.5 rounded-md border border-purple-950/10">Advanced DSA</span>
+            <span class="text-[10px] font-medium bg-white/70 text-purple-950/70 px-2 py-0.5 rounded-md border border-purple-950/10">Trie</span>
+            <span class="text-[10px] font-medium bg-white/70 text-purple-950/70 px-2 py-0.5 rounded-md border border-purple-950/10">Bit Hacks</span>
+          </div>
+        </div>
+        <div class="flex items-center justify-between pt-4 border-t border-purple-950/10">
+          <div class="text-[11px] text-purple-950/60 font-semibold">20 Questions • 50 Mins</div>
+          <button onclick="openSimulatorModal('technical', 'Trie & Bit Manipulation')" class="bg-primary hover:bg-[#a34cbe] text-white font-bold text-xs px-4 py-2 rounded-xl shadow transition-all flex items-center gap-1">
+            Launch Mock <span class="material-symbols-outlined text-sm">play_arrow</span>
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- LIVE SIMULATOR MODAL OVERLAY (High Fidelity WebRTC & Live Code Sandbox) -->
+  <div id="simulatorModal" class="fixed inset-0 bg-black/60 backdrop-blur-md z-50 hidden flex items-center justify-center p-3 md:p-6 overflow-y-auto">
+    <div class="glass-thick rounded-3xl w-full max-w-6xl max-h-[92vh] flex flex-col overflow-hidden shadow-2xl border border-white/80">
+      
+      <!-- Modal Top Bar -->
+      <div class="px-6 py-4 bg-white/80 border-b border-purple-950/10 flex items-center justify-between flex-shrink-0">
+        <div class="flex items-center gap-3">
+          <div class="w-9 h-9 rounded-xl bg-primary text-white flex items-center justify-center font-bold">
+            <span class="material-symbols-outlined text-xl">smart_toy</span>
+          </div>
+          <div>
+            <h3 class="font-extrabold text-sm md:text-base text-purple-950 flex items-center gap-2">
+              <span id="modalSessionTitle">AI Live Technical Mock Simulator</span>
+              <span class="text-[10px] font-bold text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded-full flex items-center gap-1">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 pulse-indicator"></span> Recording & Analyzing
+              </span>
+            </h3>
+            <p class="text-[11px] text-purple-950/60 font-medium">Topic: <span id="modalTrackSub">Algorithms & Data Structures</span> • AI Proctor: Claude 3.7 Pro</p>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-3">
+          <div class="bg-purple-950/5 px-3 py-1.5 rounded-xl flex items-center gap-2 text-xs font-bold text-purple-950">
+            <span class="material-symbols-outlined text-sm text-primary">timer</span>
+            <span id="simulatorTimer">39:45</span>
+          </div>
+          <button onclick="closeSimulatorModal()" class="p-2 rounded-xl text-purple-950/60 hover:bg-purple-950/10 transition-colors">
+            <span class="material-symbols-outlined text-xl">close</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Modal Body (Two-Panel Layout) -->
+      <div class="flex-1 grid grid-cols-1 lg:grid-cols-12 overflow-hidden min-h-[500px]">
+        
+        <!-- Left Panel: Problem Statement, Biometrics & Audio (5 cols) -->
+        <div class="lg:col-span-5 p-6 overflow-y-auto border-r border-purple-950/10 flex flex-col justify-between bg-white/40 space-y-6">
+          <div>
+            <!-- Question Header -->
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-[11px] font-bold uppercase tracking-wider text-primary bg-primary/10 px-2.5 py-0.5 rounded-md">Problem #1 of 3</span>
+              <span class="text-[11px] font-bold text-amber-700 bg-amber-100 px-2.5 py-0.5 rounded-md">Medium-Hard</span>
+            </div>
+            <h4 class="font-extrabold text-lg text-purple-950 mb-2">Implement an LRU (Least Recently Used) Cache</h4>
+            <p class="text-xs text-purple-950/80 leading-relaxed mb-4">
+              Design a data structure that follows the constraints of a Least Recently Used (LRU) cache with <code class="bg-purple-100 text-primary px-1.5 py-0.5 rounded font-mono text-[11px]">get(key)</code> and <code class="bg-purple-100 text-primary px-1.5 py-0.5 rounded font-mono text-[11px]">put(key, value)</code> operations in strictly <strong class="text-purple-950">O(1) average time complexity</strong>.
+            </p>
+
+            <!-- Examples -->
+            <div class="bg-purple-950/5 rounded-xl p-3 text-[11px] font-mono text-purple-950 space-y-1 mb-4">
+              <div class="text-purple-950/60 font-sans font-bold text-[10px] uppercase">Example Operations:</div>
+              <div>LRUCache lRUCache = new LRUCache(2);</div>
+              <div>lRUCache.put(1, 1); // cache is {1=1}</div>
+              <div>lRUCache.put(2, 2); // cache is {1=1, 2=2}</div>
+              <div>lRUCache.get(1);    // returns 1</div>
+              <div>lRUCache.put(3, 3); // LRU key 2 is evicted</div>
+            </div>
+
+            <!-- AI Live Coaching Feed -->
+            <div class="bg-primary/5 border border-primary/20 rounded-2xl p-4">
+              <div class="flex items-center gap-2 text-xs font-bold text-primary mb-2">
+                <span class="material-symbols-outlined text-base">psychology</span>
+                Real-Time AI Proctor Feedback:
+              </div>
+              <p class="text-xs text-purple-950/80 leading-relaxed italic" id="liveAiHint">
+                "Great initial setup! Remember to explain why a Doubly Linked List is preferred over a Singly Linked List for O(1) node deletion before writing the eviction helper."
+              </p>
+            </div>
+          </div>
+
+          <!-- Live Biometric & Speech HUD -->
+          <div class="glass-card rounded-2xl p-4 bg-white/70 border border-purple-950/10">
+            <div class="flex items-center justify-between mb-3">
+              <div class="flex items-center gap-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 pulse-indicator"></span>
+                <span class="text-xs font-extrabold text-purple-950">AI Biometric & Speech Stream</span>
+              </div>
+              <span class="text-[10px] font-bold text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded">98% Clarity</span>
+            </div>
+
+            <!-- Simulated Webcam & Speech Wave -->
+            <div class="flex items-center gap-4">
+              <div class="relative w-24 h-16 rounded-xl bg-purple-950 overflow-hidden flex-shrink-0 flex items-center justify-center">
+                <img class="w-full h-full object-cover opacity-80" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80" alt="Camera feed">
+                <div class="absolute inset-0 border-2 border-emerald-400/60 rounded-xl pointer-events-none"></div>
+                <span class="absolute bottom-1 right-1 text-[8px] bg-red-600 text-white font-bold px-1 rounded">REC</span>
+              </div>
+
+              <!-- Audio Wave Visualizer -->
+              <div class="flex-1">
+                <div class="flex items-end gap-1 h-8 justify-between px-2 mb-1">
+                  <div class="w-1.5 bg-primary/70 rounded-full wave-bar" style="animation-delay: 0.1s"></div>
+                  <div class="w-1.5 bg-primary/70 rounded-full wave-bar" style="animation-delay: 0.3s"></div>
+                  <div class="w-1.5 bg-primary/70 rounded-full wave-bar" style="animation-delay: 0.2s"></div>
+                  <div class="w-1.5 bg-primary/70 rounded-full wave-bar" style="animation-delay: 0.5s"></div>
+                  <div class="w-1.5 bg-primary/70 rounded-full wave-bar" style="animation-delay: 0.4s"></div>
+                  <div class="w-1.5 bg-primary/70 rounded-full wave-bar" style="animation-delay: 0.2s"></div>
+                  <div class="w-1.5 bg-primary/70 rounded-full wave-bar" style="animation-delay: 0.6s"></div>
+                </div>
+                <div class="flex justify-between text-[10px] font-semibold text-purple-950/60">
+                  <span>Pace: 136 WPM</span>
+                  <span>Fillers: 0</span>
+                  <span>Confidence: 94%</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Right Panel: Code Sandbox & Compiler Output (7 cols) -->
+        <div class="lg:col-span-7 p-6 flex flex-col justify-between bg-white/70 space-y-4">
+          <div>
+            <!-- Code Editor Toolbar -->
+            <div class="flex items-center justify-between pb-3 border-b border-purple-950/10 mb-3">
+              <div class="flex items-center gap-2">
+                <span class="text-xs font-bold text-purple-950">Language:</span>
+                <select id="codeLanguageSelect" class="text-xs font-bold bg-white text-purple-950 rounded-xl px-3 py-1.5 border border-purple-950/20 focus:border-primary">
+                  <option value="javascript">JavaScript (Node.js 20)</option>
+                  <option value="python">Python 3.12</option>
+                  <option value="typescript">TypeScript 5.4</option>
+                  <option value="cpp">C++ (GCC 13)</option>
+                </select>
+              </div>
+
+              <div class="flex items-center gap-2">
+                <button onclick="resetEditorCode()" class="text-xs font-bold text-purple-950/70 hover:text-purple-950 px-2.5 py-1 rounded-lg border border-purple-950/10 hover:bg-white flex items-center gap-1">
+                  <span class="material-symbols-outlined text-sm">restart_alt</span> Reset
+                </button>
+              </div>
+            </div>
+
+            <!-- Code Textarea Sandbox -->
+            <div class="relative rounded-2xl overflow-hidden border border-purple-950/20 shadow-inner bg-[#1e1e2e]">
+              <div class="flex items-center justify-between px-4 py-2 bg-[#181825] border-b border-white/10 text-[11px] text-gray-400 font-mono">
+                <span>solution.js</span>
+                <span>UTF-8</span>
+              </div>
+              <textarea id="mockCodeEditor" class="w-full h-64 p-4 font-mono text-xs text-purple-200 bg-transparent border-none resize-none focus:ring-0 outline-none leading-relaxed" spellcheck="false">class Node {
+  constructor(key, val) {
+    this.key = key;
+    this.val = val;
+    this.prev = null;
+    this.next = null;
+  }
+}
+
+class LRUCache {
+  constructor(capacity) {
+    this.capacity = capacity;
+    this.map = new Map();
+    this.head = new Node(0, 0);
+    this.tail = new Node(0, 0);
+    this.head.next = this.tail;
+    this.tail.prev = this.head;
+  }
+
+  get(key) {
+    if (!this.map.has(key)) return -1;
+    const node = this.map.get(key);
+    this._remove(node);
+    this._add(node);
+    return node.val;
+  }
+
+  put(key, value) {
+    if (this.map.has(key)) {
+      this._remove(this.map.get(key));
+    }
+    const node = new Node(key, value);
+    this._add(node);
+    this.map.set(key, node);
+    if (this.map.size > this.capacity) {
+      const lru = this.head.next;
+      this._remove(lru);
+      this.map.delete(lru.key);
+    }
+  }
+
+  _remove(node) {
+    node.prev.next = node.next;
+    node.next.prev = node.prev;
+  }
+
+  _add(node) {
+    node.prev = this.tail.prev;
+    node.next = this.tail;
+    this.tail.prev.next = node;
+    this.tail.prev = node;
+  }
+}</textarea>
+            </div>
+
+            <!-- Test Cases Console Output -->
+            <div class="mt-4 bg-purple-950/5 rounded-2xl p-4 border border-purple-950/10">
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-xs font-extrabold text-purple-950 flex items-center gap-1.5">
+                  <span class="material-symbols-outlined text-sm text-emerald-600">check_circle</span>
+                  Test Results Console
+                </span>
+                <span id="testSummaryBadge" class="text-[10px] font-bold text-emerald-800 bg-emerald-100 px-2 py-0.5 rounded">4/4 Passed (12ms)</span>
+              </div>
+              <div class="text-[11px] font-mono text-purple-950/80 space-y-1" id="consoleOutput">
+                <div class="text-emerald-700">✓ Test 1: Capacity 2 insertion and retrieval (Passed)</div>
+                <div class="text-emerald-700">✓ Test 2: LRU eviction on 3rd put (Passed)</div>
+                <div class="text-emerald-700">✓ Test 3: Get updates recency order (Passed)</div>
+                <div class="text-emerald-700">✓ Test 4: O(1) time complexity stress test (Passed)</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bottom Execution Buttons -->
+          <div class="flex items-center justify-between pt-4 border-t border-purple-950/10">
+            <button onclick="runTestCases()" class="bg-white hover:bg-purple-50 text-purple-950 font-bold text-xs px-5 py-3 rounded-xl border border-glass-border shadow-sm flex items-center gap-2 transition-all">
+              <span class="material-symbols-outlined text-sm text-primary">play_circle</span> Run Test Cases
+            </button>
+
+            <button onclick="submitSimulatorSession()" class="bg-primary hover:bg-[#a34cbe] text-white font-bold text-xs px-6 py-3 rounded-xl shadow-lg shadow-primary/25 hover:shadow-primary/40 flex items-center gap-2 transition-all">
+              <span class="material-symbols-outlined text-sm">assignment_turned_in</span> Submit & Generate AI Evaluation
+            </button>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <!-- MENTOR BOOKING MODAL -->
+  <div id="mentorModal" class="fixed inset-0 bg-black/60 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+    <div class="glass-thick rounded-3xl w-full max-w-2xl p-6 md:p-8 shadow-2xl border border-white/80 space-y-6">
+      <div class="flex items-center justify-between pb-4 border-b border-purple-950/10">
+        <div>
+          <h3 class="font-extrabold text-xl text-purple-950">Book 1-on-1 Mentor Mock</h3>
+          <p class="text-xs text-purple-950/70 font-medium">Schedule a dedicated 45-min live interview with verified senior engineers.</p>
+        </div>
+        <button onclick="closeMentorModal()" class="p-2 rounded-xl text-purple-950/60 hover:bg-purple-950/10">
+          <span class="material-symbols-outlined text-xl">close</span>
+        </button>
+      </div>
+
+      <div class="space-y-4">
+        <div>
+          <label class="block text-xs font-bold text-purple-950 mb-1.5">Select Mentor:</label>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+            <div class="mentor-select-card p-3 rounded-2xl border-2 border-primary bg-primary/5 cursor-pointer flex items-center gap-3">
+              <img class="w-10 h-10 rounded-xl object-cover" src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=150&auto=format&fit=crop&q=80" alt="Sarah">
+              <div>
+                <div class="font-extrabold text-xs text-purple-950">Sarah Jenkins</div>
+                <div class="text-[10px] text-purple-950/70">Staff Engineer @ Stripe</div>
+              </div>
+            </div>
+            <div class="mentor-select-card p-3 rounded-2xl border border-purple-950/20 bg-white cursor-pointer flex items-center gap-3 hover:border-primary/50">
+              <img class="w-10 h-10 rounded-xl object-cover" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80" alt="David">
+              <div>
+                <div class="font-extrabold text-xs text-purple-950">David Zhao</div>
+                <div class="text-[10px] text-purple-950/70">Senior SWE @ Google</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-4">
+          <div>
+            <label class="block text-xs font-bold text-purple-950 mb-1.5">Session Date:</label>
+            <input type="date" value="2026-10-05" class="w-full text-xs font-semibold p-3 rounded-xl border border-purple-950/20 bg-white focus:border-primary">
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-purple-950 mb-1.5">Time Slot:</label>
+            <select class="w-full text-xs font-semibold p-3 rounded-xl border border-purple-950/20 bg-white focus:border-primary">
+              <option>10:00 AM - 10:45 AM</option>
+              <option>02:00 PM - 02:45 PM</option>
+              <option>05:30 PM - 06:15 PM</option>
+            </select>
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-purple-950 mb-1.5">Target Interview Round:</label>
+          <select class="w-full text-xs font-semibold p-3 rounded-xl border border-purple-950/20 bg-white focus:border-primary">
+            <option>Frontend & Architecture (React / Next.js)</option>
+            <option>Backend & Distributed Systems</option>
+            <option>Data Structures & Algorithmic Problem Solving</option>
+            <option>Hiring Manager & Behavioral Leadership</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="pt-4 border-t border-purple-950/10 flex items-center justify-end gap-3">
+        <button onclick="closeMentorModal()" class="px-5 py-2.5 rounded-xl font-bold text-xs text-purple-950/70 hover:bg-purple-950/5">Cancel</button>
+        <button onclick="confirmMentorBooking()" class="px-6 py-2.5 rounded-xl font-bold text-xs bg-primary text-white hover:bg-primary-container shadow-md">Confirm Booking</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Search Filtering Function for Parent Window integration
+    function filterMockInterviews(query) {
+      const clean = (query || '').toLowerCase().trim();
+      const cards = document.querySelectorAll('.track-card, #upcomingMocksContainer > div');
+      cards.forEach(card => {
+        const text = card.textContent.toLowerCase();
+        if (!clean || text.includes(clean)) {
+          card.style.display = '';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    // Filter practice tracks by category tab
+    function filterTrack(category, btn) {
+      document.querySelectorAll('.track-tab').forEach(t => t.className = 'track-tab text-xs font-semibold text-purple-950/70 hover:text-purple-950 px-3.5 py-1.5 rounded-xl transition-all');
+      btn.className = 'track-tab active-pill text-xs font-bold px-3.5 py-1.5 rounded-xl transition-all';
+
+      const cards = document.querySelectorAll('.track-card');
+      cards.forEach(card => {
+        if (category === 'all' || card.dataset.category === category) {
+          card.style.display = '';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    // Modal Simulator controls
+    function openSimulatorModal(type, customTitle) {
+      const modal = document.getElementById('simulatorModal');
+      const title = document.getElementById('modalSessionTitle');
+      const trackSub = document.getElementById('modalTrackSub');
+      
+      if (type === 'behavioral') {
+        title.innerText = 'AI Live Behavioral & STAR Simulator';
+        trackSub.innerText = customTitle || 'Amazon Leadership Principles (STAR)';
+      } else {
+        title.innerText = 'AI Live Technical Mock Simulator';
+        trackSub.innerText = customTitle || 'Data Structures & Algorithms';
+      }
+      
+      modal.classList.remove('hidden');
+      startTimer();
+    }
+
+    function closeSimulatorModal() {
+      document.getElementById('simulatorModal').classList.add('hidden');
+    }
+
+    function openMentorModal() {
+      document.getElementById('mentorModal').classList.remove('hidden');
+    }
+
+    function closeMentorModal() {
+      document.getElementById('mentorModal').classList.add('hidden');
+    }
+
+    function confirmMentorBooking() {
+      closeMentorModal();
+      alert('Mock interview session booked successfully! Calendar invite and prep guide sent to your email.');
+    }
+
+    function startPeerMatch() {
+      alert('Scanning active peers in your timezone... Match found with Alex Sterling (UI/UX Track)! Live invite sent.');
+    }
+
+    let timerInterval = null;
+    function startTimer() {
+      let seconds = 2400; // 40 minutes
+      if (timerInterval) clearInterval(timerInterval);
+      timerInterval = setInterval(() => {
+        seconds--;
+        if (seconds <= 0) {
+          clearInterval(timerInterval);
+          return;
+        }
+        const mins = Math.floor(seconds / 60);
+        const secs = seconds % 60;
+        document.getElementById('simulatorTimer').innerText = `${mins}:${secs < 10 ? '0' : ''}${secs}`;
+      }, 1000);
+    }
+
+    function runTestCases() {
+      const consoleEl = document.getElementById('consoleOutput');
+      consoleEl.innerHTML = `
+        <div class="text-purple-950/70 italic">Compiling and executing test suite...</div>
+      `;
+      setTimeout(() => {
+        consoleEl.innerHTML = `
+          <div class="text-emerald-700 font-bold">✓ Test 1: Capacity 2 insertion and retrieval (Passed - 2ms)</div>
+          <div class="text-emerald-700 font-bold">✓ Test 2: LRU eviction on 3rd put (Passed - 3ms)</div>
+          <div class="text-emerald-700 font-bold">✓ Test 3: Get updates recency order (Passed - 1ms)</div>
+          <div class="text-emerald-700 font-bold">✓ Test 4: O(1) time complexity stress test (Passed - 6ms)</div>
+        `;
+        document.getElementById('liveAiHint').innerText = '"All 4 test cases passed cleanly! Time complexity is O(1) for both operations. Ready for final evaluation submission."';
+      }, 600);
+    }
+
+    function submitSimulatorSession() {
+      closeSimulatorModal();
+      const currentCount = parseInt(document.getElementById('totalMocksCount').innerText) || 14;
+      document.getElementById('totalMocksCount').innerText = currentCount + 1;
+      alert('🎉 Mock Interview Submitted Successfully!\n\nOverall Score: 95/100 (Exceptional)\nTechnical Accuracy: 96%\nCommunication: 92%\nDetailed AI diagnostic report is now available on your dashboard.');
+    }
+
+    function resetEditorCode() {
+      document.getElementById('mockCodeEditor').value = `class LRUCache {\n  constructor(capacity) {\n    this.capacity = capacity;\n  }\n\n  get(key) {\n    // Implement O(1) get\n  }\n\n  put(key, value) {\n    // Implement O(1) put\n  }\n}`;
+    }
+  </script>
+</body>
+</html>

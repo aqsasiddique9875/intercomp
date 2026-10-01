@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+  <script>
+    if (window.self !== window.top) {
+      const style = document.createElement('style');
+      style.innerHTML = `
+        header, nav, aside, 
+        .SideNavBar, .TopNavBar, 
+        #SideNavBar, #TopNavBar {
+          display: none !important;
+        }
+        main, .main-content {
+          margin-left: 0 !important;
+          padding-top: 1.5rem !important;
+        }
+        main.ml-64, main.lg\\:ml-64 {
+          margin-left: 0 !important;
+          padding-top: 2rem !important;
+        }
+      `;
+      document.documentElement.appendChild(style);
+    }
+  </script>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>Resource Library | Intercomp Student Portal</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&amp;display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet" />
+  <script id="tailwind-config">
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#8731a3",
+            "primary-container": "#a34cbe",
+            "secondary": "#0060ab",
+            "background": "#DCE4F7",
+            "deep-purple": "#471A70",
+            "glass-fill": "rgba(255, 255, 255, 0.35)",
+            "glass-thick": "rgba(255, 255, 255, 0.8)",
+            "glass-border": "rgba(255, 255, 255, 0.6)",
+            "gold": "#FFD60A",
+            "orange": "#FF9F0A"
+          }
+        }
+      }
+    };
+  </script>
+  <style>
+    ::-webkit-scrollbar {
+      display: none;
+    }
+    * {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    body {
+      background-color: #DCE4F7;
+      color: #471A70;
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+    }
+    .glass-card {
+      background: rgba(255, 255, 255, 0.35);
+      backdrop-filter: blur(28px);
+      -webkit-backdrop-filter: blur(28px);
+      border: 1px solid rgba(255, 255, 255, 0.6);
+      box-shadow: 0 12px 40px 0 rgba(71, 26, 112, 0.15);
+    }
+    .liquid-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: -1;
+      filter: blur(80px);
+      opacity: 0.6;
+    }
+    .blob {
+      position: absolute;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(163, 76, 190, 0.4) 0%, rgba(84, 163, 255, 0.1) 70%);
+      border-radius: 50%;
+      animation: move 20s infinite alternate;
+    }
+    @keyframes move {
+      from { transform: translate(-10%, -10%); }
+      to { transform: translate(20%, 20%); }
+    }
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      vertical-align: middle;
+    }
+    .active-tab {
+      background-color: #8731a3;
+      color: #ffffff !important;
+    }
+  </style>
+</head>
+<body class="min-h-screen">
+  <div class="liquid-bg">
+    <div class="blob" style="top: -10%; left: -10%;"></div>
+    <div class="blob" style="bottom: -10%; right: -10%; background: radial-gradient(circle, rgba(84, 163, 255, 0.4) 0%, rgba(163, 76, 190, 0.1) 70%); animation-delay: -5s;"></div>
+  </div>
+
+  <main class="pt-6 px-6 md:px-12 pb-20 max-w-7xl mx-auto">
+    <!-- Header -->
+    <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
+      <div>
+        <h1 class="text-3xl font-black text-deep-purple tracking-tight">Curated Resource Library</h1>
+        <p class="text-sm text-deep-purple/70 mt-1">Unlock cheat sheets, handbooks, and interview guides curated by senior mentors.</p>
+      </div>
+      <div class="flex items-center gap-3">
+        <div class="glass-card px-4 py-2 rounded-full flex items-center gap-2">
+          <span class="material-symbols-outlined text-primary text-xl" style="font-variation-settings: 'FILL' 1;">bookmark</span>
+          <span class="text-xs font-bold text-deep-purple">Bookmarks: <span id="bookmarkCount">0</span></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Search & Filter Controls -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 mb-8">
+      <div class="lg:col-span-4 glass-card px-4 py-2.5 rounded-2xl flex items-center">
+        <span class="material-symbols-outlined text-deep-purple/50 mr-3">search</span>
+        <input id="libSearchInput" type="text" placeholder="Search files, guides, cheat sheets..." class="bg-transparent border-none focus:ring-0 text-sm text-deep-purple placeholder-deep-purple/50 w-full p-0" oninput="filterResources()" />
+      </div>
+      <div class="lg:col-span-8 flex flex-wrap gap-2 items-center">
+        <button onclick="changeCategory('all', this)" class="active-tab text-xs font-bold text-deep-purple/80 px-4 py-2.5 rounded-full border border-glass-border hover:bg-white/20 transition-all">All Resources</button>
+        <button onclick="changeCategory('ebook', this)" class="text-xs font-bold text-deep-purple/80 px-4 py-2.5 rounded-full border border-glass-border hover:bg-white/20 transition-all">E-Books & Handbooks</button>
+        <button onclick="changeCategory('cheatsheet', this)" class="text-xs font-bold text-deep-purple/80 px-4 py-2.5 rounded-full border border-glass-border hover:bg-white/20 transition-all">Cheat Sheets & Roadmaps</button>
+        <button onclick="changeCategory('course', this)" class="text-xs font-bold text-deep-purple/80 px-4 py-2.5 rounded-full border border-glass-border hover:bg-white/20 transition-all">Video Prep Guides</button>
+      </div>
+    </div>
+
+    <!-- Library Grid -->
+    <div id="libraryGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+      <!-- Dynamically filled -->
+    </div>
+
+    <!-- Bottom Request Module -->
+    <div class="mt-12 glass-card p-8 rounded-3xl grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative overflow-hidden">
+      <div class="absolute -right-24 -bottom-24 w-80 h-80 bg-primary/10 rounded-full blur-3xl pointer-events-none"></div>
+      <div class="lg:col-span-8">
+        <h3 class="text-xl font-bold text-deep-purple">Can't find a specific roadmap or reference handbook?</h3>
+        <p class="text-xs text-deep-purple/70 mt-1.5">Submit a custom request. Our AI and mentor network will curate and upload it to the catalog within 24 hours.</p>
+      </div>
+      <div class="lg:col-span-4">
+        <div class="flex gap-2">
+          <input id="customRequestInput" type="text" placeholder="e.g. AWS Solutions Architect cheat sheet" class="bg-white/50 border border-glass-border focus:border-primary focus:ring-1 focus:ring-primary rounded-xl px-4 py-2.5 text-xs text-deep-purple placeholder-deep-purple/50 flex-grow" />
+          <button onclick="submitRequest()" class="bg-primary hover:bg-primary-container text-white px-5 py-2.5 rounded-xl font-bold text-xs shadow-md transition-all whitespace-nowrap active:scale-95">Request Resource</button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    const resources = [
+      {
+        id: "lib1",
+        title: "Cracking the Coding Interview Prep",
+        desc: "Over 180+ programming interview questions, algorithmic patterns, and high-performance solutions.",
+        category: "ebook",
+        type: "PDF E-Book",
+        size: "4.8 MB",
+        level: "Advanced",
+        icon: "menu_book",
+        color: "text-amber-500 bg-amber-500/10",
+        saved: false
+      },
+      {
+        id: "lib2",
+        title: "Figma UI/UX Masterclass Blueprint",
+        desc: "Essential design system shortcuts, autolayout guidelines, variants configuration, and vector shortcuts.",
+        category: "cheatsheet",
+        type: "Interactive PDF",
+        size: "1.2 MB",
+        level: "Beginner",
+        icon: "design_services",
+        color: "text-purple-600 bg-purple-600/10",
+        saved: false
+      },
+      {
+        id: "lib3",
+        title: "System Design Essentials Handbook",
+        desc: "Architecting scalable backend databases, microservices patterns, load balancing, caching, and CDN architectures.",
+        category: "ebook",
+        type: "E-Book",
+        size: "6.5 MB",
+        level: "Advanced",
+        icon: "dns",
+        color: "text-blue-600 bg-blue-600/10",
+        saved: false
+      },
+      {
+        id: "lib4",
+        title: "React Hooks & State Management Video Guide",
+        desc: "Premium video guide demonstrating clean context hook patterns, Redux toolkit structures, and rendering speed optimization.",
+        category: "course",
+        type: "Video Course (4h)",
+        size: "HD Streaming",
+        level: "Intermediate",
+        icon: "video_library",
+        color: "text-emerald-600 bg-emerald-600/10",
+        saved: false
+      },
+      {
+        id: "lib5",
+        title: "LeetCode 75 Patterns Cheat Sheet",
+        desc: "Top 75 highly recurring questions grouped by patterns (Two Pointers, Sliding Window, DFS, Dynamic Programming).",
+        category: "cheatsheet",
+        type: "Markdown / PDF",
+        size: "820 KB",
+        level: "Intermediate",
+        icon: "integration_instructions",
+        color: "text-orange bg-orange/10",
+        saved: false
+      },
+      {
+        id: "lib6",
+        title: "SQL & Query Tuning Reference Card",
+        desc: "Cheat sheet covering window functions, CTE operations, indexing setups, and profiling query execution plans.",
+        category: "cheatsheet",
+        type: "Cheatsheet Sheet",
+        size: "450 KB",
+        level: "Beginner",
+        icon: "database",
+        color: "text-cyan-600 bg-cyan-600/10",
+        saved: false
+      },
+      {
+        id: "lib7",
+        title: "Docker & Kubernetes Deployment Sheet",
+        desc: "Ready-to-use YAML templates for multi-stage Docker builds, pod setup, service routing, ingress setup, and configmaps.",
+        category: "cheatsheet",
+        type: "YAML Cheatsheet",
+        size: "1.4 MB",
+        level: "Intermediate",
+        icon: "cloud",
+        color: "text-indigo-600 bg-indigo-600/10",
+        saved: false
+      },
+      {
+        id: "lib8",
+        title: "Product Management Case Studies Prep",
+        desc: "Frameworks for answering design, estimation, and core product metrics questions during FAANG interviews.",
+        category: "ebook",
+        type: "Case Handbook",
+        size: "3.2 MB",
+        level: "Intermediate",
+        icon: "insights",
+        color: "text-rose-600 bg-rose-600/10",
+        saved: false
+      }
+    ];
+
+    let currentCategory = 'all';
+
+    function renderResources() {
+      const grid = document.getElementById('libraryGrid');
+      if (!grid) return;
+      grid.innerHTML = '';
+
+      const term = document.getElementById('libSearchInput').value.toLowerCase();
+
+      const filtered = resources.filter(res => {
+        const matchesCategory = (currentCategory === 'all' || res.category === currentCategory);
+        const matchesSearch = res.title.toLowerCase().includes(term) || res.desc.toLowerCase().includes(term);
+        return matchesCategory && matchesSearch;
+      });
+
+      if (filtered.length === 0) {
+        grid.innerHTML = `
+          <div class="col-span-full py-16 flex flex-col items-center text-center">
+            <span class="material-symbols-outlined text-5xl text-deep-purple/30 mb-3">folder_off</span>
+            <p class="text-sm font-semibold text-deep-purple/60">No resources found matching the criteria.</p>
+          </div>
+        `;
+        return;
+      }
+
+      filtered.forEach(res => {
+        const card = document.createElement('div');
+        card.className = "glass-card p-5 rounded-2xl flex flex-col justify-between hover:scale-[1.02] hover:shadow-lg transition-all duration-300 relative group overflow-hidden h-[280px]";
+        
+        card.innerHTML = `
+          <div class="absolute -right-8 -top-8 w-20 h-20 bg-primary/5 rounded-full group-hover:scale-125 transition-transform duration-500"></div>
+          <div>
+            <div class="flex justify-between items-start mb-3">
+              <div class="p-2.5 rounded-xl ${res.color} flex items-center justify-center">
+                <span class="material-symbols-outlined text-xl">${res.icon}</span>
+              </div>
+              <button onclick="toggleBookmark('${res.id}', event)" class="p-1.5 rounded-full hover:bg-white/40 transition-colors text-deep-purple/40 hover:text-primary">
+                <span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' ${res.saved ? 1 : 0};">${res.saved ? 'bookmark' : 'bookmark_border'}</span>
+              </button>
+            </div>
+            <h4 class="text-sm font-bold text-deep-purple group-hover:text-primary transition-colors line-clamp-2 leading-snug">${res.title}</h4>
+            <p class="text-xs text-deep-purple/60 mt-2 line-clamp-3 font-body-md leading-normal">${res.desc}</p>
+          </div>
+          <div class="mt-4 pt-3 border-t border-deep-purple/10 flex items-center justify-between">
+            <div class="flex flex-col gap-0.5">
+              <span class="text-[9px] font-bold text-deep-purple/50 uppercase tracking-wide">${res.type}</span>
+              <span class="text-[10px] font-bold text-primary">${res.size}</span>
+            </div>
+            <button onclick="downloadResource('${res.title}', event)" class="flex items-center gap-1 bg-white/50 border border-glass-border hover:bg-primary hover:text-white hover:border-transparent px-3 py-1.5 rounded-lg text-[10px] font-bold text-deep-purple transition-all active:scale-95">
+              <span class="material-symbols-outlined text-xs">download</span> Download
+            </button>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+
+      // Update bookmark count
+      const bookmarked = resources.filter(r => r.saved).length;
+      document.getElementById('bookmarkCount').textContent = bookmarked;
+    }
+
+    function toggleBookmark(id, e) {
+      e.stopPropagation();
+      const res = resources.find(r => r.id === id);
+      if (res) {
+        res.saved = !res.saved;
+        if (window.parent && window.parent.App && typeof window.parent.App.showToast === 'function') {
+          window.parent.App.showToast(res.saved ? `"${res.title}" added to bookmarks` : `"${res.title}" removed from bookmarks`, "success");
+        }
+        renderResources();
+      }
+    }
+
+    function downloadResource(title, e) {
+      e.stopPropagation();
+      if (window.parent && window.parent.App && typeof window.parent.App.showToast === 'function') {
+        window.parent.App.showToast(`Downloading "${title}"...`, "success");
+      }
+      try {
+        const text = `Intercomp Curated Resource\n===========================\nResource: ${title}\n\nThis is a mock resource containing curated guides and study material for Intercomp candidates.\nEnjoy learning and prep well!`;
+        const blob = new Blob([text], { type: 'text/plain' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `${title.toLowerCase().replace(/[^a-z0-9]+/g, '_')}_guide.txt`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+      } catch (err) {
+        console.error("Error triggering download:", err);
+      }
+    }
+
+    function changeCategory(cat, btn) {
+      currentCategory = cat;
+      document.querySelectorAll('.lg\\:col-span-8 button').forEach(b => b.classList.remove('active-tab'));
+      btn.classList.add('active-tab');
+      renderResources();
+    }
+
+    function filterResources(term) {
+      if (term !== undefined) {
+        const input = document.getElementById('libSearchInput');
+        if (input) input.value = term;
+      }
+      renderResources();
+    }
+    window.filterResources = filterResources;
+
+    function submitRequest() {
+      const input = document.getElementById('customRequestInput');
+      const val = input.value.trim();
+      if (!val) {
+        if (window.parent && window.parent.App && typeof window.parent.App.showToast === 'function') {
+          window.parent.App.showToast("Please enter the name of the resource you need", "warning");
+        }
+        return;
+      }
+      if (window.parent && window.parent.App && typeof window.parent.App.showToast === 'function') {
+        window.parent.App.showToast(`Requested resource "${val}" successfully. Curation in progress!`, "success");
+      }
+      input.value = '';
+    }
+
+    // Initial render
+    renderResources();
+  </script>
+</body>
+</html>

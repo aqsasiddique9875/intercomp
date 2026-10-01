@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
+<title>JobPath | New Assignment</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-surface-variant": "#4f4350",
+                        "orange": "#FF9F0A",
+                        "background": "#f9f9ff",
+                        "on-background": "#471A70",
+                        "card-gradient": "linear-gradient(135deg, #4D9EFA 0%, #BF7DF5 100%)",
+                        "outline-variant": "#d2c1d2",
+                        "on-error": "#ffffff",
+                        "surface-variant": "#dbe3f6",
+                        "surface-tint": "#8d37a9",
+                        "surface": "#f9f9ff",
+                        "surface-container-low": "#f0f3ff",
+                        "on-secondary": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "secondary-container": "#54a3ff",
+                        "glass-fill": "rgba(255, 255, 255, 0.35)",
+                        "inverse-on-surface": "#ecf1ff",
+                        "on-tertiary-container": "#e6ffe0",
+                        "secondary-fixed": "#d3e3ff",
+                        "tertiary-fixed": "#6cff82",
+                        "surface-container-lowest": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "primary-fixed": "#fbd7ff",
+                        "on-tertiary-fixed": "#002106",
+                        "tertiary-fixed-dim": "#47e266",
+                        "primary-container": "#a34cbe",
+                        "on-primary": "#ffffff",
+                        "on-secondary-fixed": "#001c39",
+                        "secondary": "#0060ab",
+                        "glass-thick": "rgba(255, 255, 255, 0.8)",
+                        "outline": "#817381",
+                        "on-primary-fixed": "#330044",
+                        "on-tertiary-fixed-variant": "#00531a",
+                        "surface-container-high": "#e0e8fb",
+                        "on-primary-container": "#fff5fb",
+                        "tertiary-container": "#00842f",
+                        "error": "#FF453A",
+                        "surface-container-highest": "#dbe3f6",
+                        "on-surface": "#141c29",
+                        "inverse-surface": "#29313f",
+                        "glass-border": "rgba(255, 255, 255, 0.6)",
+                        "on-secondary-container": "#003868",
+                        "primary-fixed-dim": "#f0b0ff",
+                        "on-tertiary": "#ffffff",
+                        "gold": "#FFD60A",
+                        "secondary-fixed-dim": "#a3c9ff",
+                        "surface-bright": "#f9f9ff",
+                        "on-primary-fixed-variant": "#72188f",
+                        "tertiary": "#006823",
+                        "primary": "#8731a3",
+                        "on-secondary-fixed-variant": "#004883",
+                        "inverse-primary": "#f0b0ff",
+                        "surface-container": "#e7eeff",
+                        "surface-dim": "#d2daed"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "safe-bottom": "34px",
+                        "mobile-gutter": "16px",
+                        "max-width": "1280px",
+                        "desktop-margin": "64px",
+                        "desktop-gutter": "24px",
+                        "base": "8px",
+                        "mobile-margin": "20px",
+                        "safe-top": "44px"
+                    },
+                    "fontFamily": {
+                        "label-caps": ["Inter"],
+                        "body-md": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "display-xl-mobile": ["Inter"],
+                        "body-md-mobile": ["Inter"],
+                        "label-caps-mobile": ["Inter"],
+                        "display-xl": ["Inter"],
+                        "headline-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-caps": ["13px", {"lineHeight": "1.0", "letterSpacing": "0.03em", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                        "headline-lg-mobile": ["28px", {"lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "display-xl-mobile": ["34px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "body-md-mobile": ["15px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                        "label-caps-mobile": ["12px", {"lineHeight": "1.0", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "display-xl": ["56px", {"lineHeight": "1.1", "letterSpacing": "-0.03em", "fontWeight": "700"}],
+                        "headline-lg": ["34px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "600"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            background: radial-gradient(circle at 0% 0%, #fdfcff 0%, #eef2ff 50%, #f5f0ff 100%);
+            min-height: 100vh;
+            color: #141c29;
+            font-family: 'Inter', sans-serif;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.35);
+            backdrop-filter: blur(28px);
+            -webkit-backdrop-filter: blur(28px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 12px 40px 0 rgba(71, 26, 112, 0.15);
+        }
+        .glass-input {
+            background: rgba(255, 255, 255, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            transition: all 0.3s ease;
+        }
+        .glass-input:focus {
+            background: #ffffff;
+            border-color: #8731a3;
+            box-shadow: 0 0 0 4px rgba(135, 49, 163, 0.1);
+        }
+        .active-scale:active {
+            transform: scale(0.96);
+        }
+        .ios-status-bar {
+            height: 44px;
+        }
+        .ios-home-indicator {
+            height: 34px;
+        }
+    </style>
+</head>
+<body class="antialiased overflow-x-hidden">
+<!-- Top Navigation Anchor -->
+<header class="fixed top-0 left-0 w-full z-50 flex items-center justify-between px-mobile-margin h-safe-top backdrop-blur-[28px] border-b border-glass-border bg-glass-fill">
+<div class="flex items-center gap-2">
+<button class="material-symbols-outlined text-primary active-scale duration-200 ease-in-out" style="font-size: 24px;">arrow_back_ios</button>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-on-background">New Assignment</h1>
+</div>
+<button class="bg-primary text-on-primary px-6 py-2 rounded-full font-label-caps-mobile text-label-caps-mobile active-scale shadow-lg shadow-primary/20">
+            Publish
+        </button>
+</header>
+<main class="pt-[84px] pb-safe-bottom px-mobile-margin max-w-screen-md mx-auto">
+<!-- Section: Basics -->
+<div class="mb-8 space-y-4">
+<h2 class="text-on-background font-bold text-lg mb-2 pl-1">Basics</h2>
+<div class="glass-card rounded-2xl p-6 space-y-6">
+<div class="space-y-2">
+<label class="font-label-caps-mobile text-on-surface-variant ml-1">Assignment Title</label>
+<input class="w-full h-12 px-4 rounded-xl glass-input outline-none font-body-md-mobile text-on-surface" placeholder="e.g. Q3 Design Fidelity Assessment" type="text"/>
+</div>
+<div class="space-y-2">
+<label class="font-label-caps-mobile text-on-surface-variant ml-1">Deadline</label>
+<div class="relative">
+<input class="w-full h-12 px-4 rounded-xl glass-input outline-none font-body-md-mobile text-on-surface appearance-none" type="datetime-local"/>
+<span class="material-symbols-outlined absolute right-4 top-3 text-on-surface-variant pointer-events-none">calendar_today</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Section: Parameters -->
+<div class="mb-8 space-y-4">
+<h2 class="text-on-background font-bold text-lg mb-2 pl-1">Parameters</h2>
+<div class="grid grid-cols-2 gap-4">
+<div class="glass-card rounded-2xl p-5 space-y-2">
+<label class="font-label-caps-mobile text-on-surface-variant">Category</label>
+<select class="w-full h-10 bg-transparent outline-none font-body-md-mobile text-on-surface cursor-pointer">
+<option>UI Design</option>
+<option>Frontend</option>
+<option>Backend</option>
+<option>Project Mgmt</option>
+</select>
+</div>
+<div class="glass-card rounded-2xl p-5 space-y-2">
+<label class="font-label-caps-mobile text-on-surface-variant">Max Points</label>
+<div class="flex items-center gap-2">
+<input class="w-full bg-transparent outline-none font-body-md-mobile text-on-surface font-bold" type="number" value="100"/>
+<span class="text-on-surface-variant font-label-caps-mobile">PTS</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Section: Assets -->
+<div class="mb-8 space-y-4">
+<h2 class="text-on-background font-bold text-lg mb-2 pl-1">Assets</h2>
+<div class="glass-card rounded-3xl p-10 flex flex-col items-center justify-center text-center border-dashed border-2 border-primary/30 bg-white/20 transition-all hover:bg-white/40 group cursor-pointer active-scale">
+<div class="w-20 h-20 mb-6 relative">
+<img alt="Upload cloud icon" class="w-full h-full object-contain" src="https://lh3.googleusercontent.com/aida/AP1WRLufCPufXPgJQQ973RUxU-wQkWShRvWh3G_jbgY9rWJnqKEspLd5Jc0Ndv187iCzwVn1bmOrFCkXgt_oOYi9YixeyC8vMwFniZFjBLsz5kNyF7t26BvG2MNYcdS2WJ1vz0MJvfzSNm3wgS56IdnPm6UX2m3asUQmCQrFDOj6db-WZTWLQOR11iXE2pFiWHn9aoAZQ8dAKUAhugR4741GwifHv_0W8B1I6y2x14LEu9YTL-pGxRCUX6cIxrBq"/>
+</div>
+<h3 class="font-bold text-on-background text-lg mb-1">Attach Briefs or Files</h3>
+<p class="font-body-md-mobile text-on-surface-variant max-w-[200px]">Drag and drop your assignment files here</p>
+<div class="mt-6 px-6 py-2 rounded-full border border-primary/20 text-primary font-label-caps-mobile bg-white/30 group-hover:bg-primary group-hover:text-white transition-colors">
+                    Browse Files
+                </div>
+</div>
+</div>
+<!-- Section: Rubric -->
+<div class="mb-12 space-y-4">
+<div class="flex items-center justify-between pl-1">
+<h2 class="text-on-background font-bold text-lg">Grading Criteria</h2>
+<button class="w-8 h-8 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center active-scale transition-all">
+<span class="material-symbols-outlined" style="font-size: 20px;">add</span>
+</button>
+</div>
+<div class="space-y-3">
+<!-- Criterion 1 -->
+<div class="glass-card rounded-2xl p-4 flex items-center justify-between animate-in fade-in duration-500">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-xl bg-secondary-container/20 flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined">auto_fix_high</span>
+</div>
+<div>
+<p class="font-bold text-on-surface">Design Fidelity</p>
+<p class="font-label-caps-mobile text-on-surface-variant">40 Points</p>
+</div>
+</div>
+<button class="material-symbols-outlined text-outline-variant hover:text-error transition-colors">drag_indicator</button>
+</div>
+<!-- Criterion 2 -->
+<div class="glass-card rounded-2xl p-4 flex items-center justify-between animate-in fade-in duration-700">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-xl bg-tertiary-container/10 flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined">terminal</span>
+</div>
+<div>
+<p class="font-bold text-on-surface">Technical Accuracy</p>
+<p class="font-label-caps-mobile text-on-surface-variant">40 Points</p>
+</div>
+</div>
+<button class="material-symbols-outlined text-outline-variant hover:text-error transition-colors">drag_indicator</button>
+</div>
+<!-- Criterion 3 -->
+<div class="glass-card rounded-2xl p-4 flex items-center justify-between animate-in fade-in duration-1000">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-xl bg-orange/10 flex items-center justify-center text-orange">
+<span class="material-symbols-outlined">history_edu</span>
+</div>
+<div>
+<p class="font-bold text-on-surface">Documentation</p>
+<p class="font-label-caps-mobile text-on-surface-variant">20 Points</p>
+</div>
+</div>
+<button class="material-symbols-outlined text-outline-variant hover:text-error transition-colors">drag_indicator</button>
+</div>
+</div>
+</div>
+</main>
+<!-- Bottom Navigation Shell -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-mobile-margin pb-safe-bottom h-20 backdrop-blur-[28px] border-t border-glass-border bg-glass-thick rounded-t-xl shadow-[0_-8px_30px_0_rgba(71,26,112,0.1)]">
+<a class="flex flex-col items-center justify-center text-on-surface-variant" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-caps-mobile text-label-caps-mobile mt-1">Dashboard</span>
+</a>
+<a class="flex flex-col items-center justify-center text-primary font-bold" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">menu_book</span>
+<span class="font-label-caps-mobile text-label-caps-mobile mt-1">Courses</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="font-label-caps-mobile text-label-caps-mobile mt-1">Students</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-caps-mobile text-label-caps-mobile mt-1">Settings</span>
+</a>
+</nav>
+<!-- Visual Polish: Background Liquid Elements -->
+<div class="fixed top-[-10%] left-[-10%] w-[50%] h-[50%] bg-primary/10 blur-[120px] rounded-full -z-10 pointer-events-none"></div>
+<div class="fixed bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-secondary-container/10 blur-[100px] rounded-full -z-10 pointer-events-none"></div>
+<script>
+        // Simple micro-interaction for buttons
+        document.querySelectorAll('button, .active-scale').forEach(el => {
+            el.addEventListener('touchstart', () => el.style.transform = 'scale(0.96)');
+            el.addEventListener('touchend', () => el.style.transform = 'scale(1)');
+        });
+    </script>
+</body></html>

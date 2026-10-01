@@ -1,0 +1,968 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+  <script>
+    if (window.self !== window.top) {
+      const style = document.createElement('style');
+      style.innerHTML = `
+        header, nav, aside, 
+        .SideNavBar, .TopNavBar, 
+        #SideNavBar, #TopNavBar {
+          display: none !important;
+        }
+        main, .main-content {
+          margin-left: 0 !important;
+          padding-top: 1.5rem !important;
+        }
+        main.ml-64, main.lg\\:ml-64 {
+          margin-left: 0 !important;
+          padding-top: 2rem !important;
+        }
+      `;
+      document.documentElement.appendChild(style);
+    }
+  </script>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Academic Portal | STU-10 Course Catalog</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Plus+Jakarta+Sans:wght@600;700;800&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&amp;family=Plus+Jakarta+Sans:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind Configuration -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                "surface-container-high": "#e6e8ed",
+                "on-primary-fixed-variant": "#72188f",
+                "tertiary": "#70459a",
+                "secondary-container": "#dbe3f6",
+                "on-surface-variant": "#4f4350",
+                "primary-fixed": "#fbd7ff",
+                "inverse-on-surface": "#eff1f6",
+                "on-primary-container": "#fff5fb",
+                "surface-container-highest": "#e0e2e7",
+                "on-error-container": "#93000a",
+                "surface-tint": "#8d37a9",
+                "surface-container-lowest": "#ffffff",
+                "on-primary": "#ffffff",
+                "secondary-fixed": "#dbe3f6",
+                "on-tertiary": "#ffffff",
+                "secondary-fixed-dim": "#bec7d9",
+                "on-error": "#ffffff",
+                "on-tertiary-fixed-variant": "#5d3186",
+                "on-primary-fixed": "#330044",
+                "surface": "#f7f9fe",
+                "tertiary-fixed-dim": "#ddb7ff",
+                "surface-container-low": "#f1f4f9",
+                "outline-variant": "#d2c1d2",
+                "surface-container": "#eceef3",
+                "error-container": "#ffdad6",
+                "outline": "#817381",
+                "on-background": "#181c20",
+                "on-surface": "#181c20",
+                "background": "#f7f9fe",
+                "tertiary-container": "#8a5eb5",
+                "primary-fixed-dim": "#f0b0ff",
+                "inverse-primary": "#f0b0ff",
+                "inverse-surface": "#2d3135",
+                "surface-dim": "#d8dadf",
+                "on-tertiary-fixed": "#2c0050",
+                "surface-variant": "#e0e2e7",
+                "on-secondary-fixed": "#141c29",
+                "surface-bright": "#f7f9fe",
+                "tertiary-fixed": "#f0dbff",
+                "on-secondary": "#ffffff",
+                "primary": "#8731a3",
+                "error": "#ba1a1a",
+                "on-secondary-fixed-variant": "#3f4756",
+                "on-secondary-container": "#5c6575",
+                "secondary": "#565f6e"
+            },
+            "spacing": {
+                "margin-tablet": "32px",
+                "margin-mobile": "16px",
+                "gutter": "24px",
+                "unit": "8px",
+                "container-max-width": "1280px",
+                "margin-desktop": "64px"
+            },
+            "fontFamily": {
+                "label-md": ["Inter"],
+                "label-sm": ["Inter"],
+                "display-lg": ["Plus Jakarta Sans"],
+                "body-lg": ["Inter"],
+                "body-md": ["Inter"],
+                "headline-lg": ["Plus Jakarta Sans"],
+                "headline-md": ["Plus Jakarta Sans"]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        body {
+            background-color: #DCE4F7;
+            color: #471A70;
+            overflow-x: hidden;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.35);
+            backdrop-filter: blur(28px);
+            -webkit-backdrop-filter: blur(28px);
+            border: 0.5px solid rgba(255, 255, 255, 0.4);
+            box-shadow: inset 0 0.5px 0 0 rgba(255, 255, 255, 0.5);
+        }
+
+        .ai-recommendation-card {
+            border: 2px solid #A34CBE;
+            box-shadow: 0 0 15px rgba(163, 76, 190, 0.3);
+            background: rgba(255, 255, 255, 0.45);
+        }
+
+        .tilt-card {
+            transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transform-style: preserve-3d;
+        }
+
+        .tilt-card:hover {
+            transform: translateY(-8px) scale(1.02) rotateX(2deg) rotateY(2deg);
+        }
+
+        .spring-interaction {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .spring-interaction:active {
+            transform: scale(0.95);
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+
+        .icon-3d {
+            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
+            background: linear-gradient(135deg, #A34CBE 0%, #70459A 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Hide scrollbars but keep functionality */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="font-body-md bg-background">
+<!-- Animated Shader Background -->
+
+<!-- TopNavBar -->
+<nav class="fixed top-0 left-0 lg:left-64 w-full lg:w-[calc(100vw-16rem)] z-50 bg-surface-container-lowest/40 backdrop-blur-[28px] border-b border-white/20 shadow-sm h-16 flex justify-between items-center px-margin-desktop">
+<div class="flex items-center gap-8 lg:hidden">
+<span class="font-display-lg text-display-lg text-primary-fixed-dim tracking-tight">Academic Portal</span>
+<div class="hidden md:flex items-center gap-6">
+<a class="text-primary font-bold border-b-2 border-primary pb-1 font-label-md text-label-md" href="#">Catalog</a>
+<a class="text-on-surface-variant font-medium hover:bg-white/10 hover:scale-[1.02] transition-transform duration-200 font-label-md text-label-md px-2" href="#">Library</a>
+<a class="text-on-surface-variant font-medium hover:bg-white/10 hover:scale-[1.02] transition-transform duration-200 font-label-md text-label-md px-2" href="#">Mentors</a>
+</div>
+</div>
+<div class="flex items-center gap-6 ml-auto">
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="bg-white/20 border border-white/30 rounded-full py-2 pl-10 pr-4 focus:ring-2 focus:ring-primary focus:bg-white/40 transition-all font-label-md text-label-md w-64" placeholder="Search Courses..." type="text"/>
+</div>
+<div class="flex gap-3">
+<button class="p-2 rounded-full hover:bg-white/20 transition-all cursor-pointer active:scale-95">
+<span class="material-symbols-outlined text-primary">notifications</span>
+</button>
+<button class="p-2 rounded-full hover:bg-white/20 transition-all cursor-pointer active:scale-95">
+<span class="material-symbols-outlined text-primary">settings</span>
+</button>
+</div>
+<img id="userprofilebtn" alt="Student Profile Avatar" class="w-10 h-10 rounded-full border-2 border-white/50 shadow-md cursor-pointer hover:scale-105 transition-transform" data-alt="A professional headshot of a student with a clear complexion and friendly smile, set against a softly blurred, high-key minimalist academic background. The lighting is bright and even, reflecting a premium Apple-inspired aesthetic with soft shadows. The overall mood is intelligent, approachable, and sophisticated, aligning with a high-fidelity educational platform." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAXXsoGBbbcPrOvzJ7MF184_1kWNmBIA9zvqq99VbJ0FybwaN2sa_DlFRkNnkfqXISCMz5sswpKG0_qut5T5fcbLuXrt1zz6Gr0QsvTxzW3GigCSNKj5Fjsrot3nYlBurm5QfG4AlFYDMXrEc2UlcASWH67ngXI0GaM8WDZhaZeLFJ4mq9LY49TjCjg9Ie5ViPz4Sqz3QhW7HJdSFiws9QC8QHRN8K81lliVMBQMW0WH6UEqgmTYELB69xE86RYEy8IKp1zT1uh_LW0"/>
+</div>
+</nav>
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-0 h-full w-64 z-40 bg-surface-container-low/30 backdrop-blur-[28px] border-r border-white/20 flex flex-col gap-unit p-6 pt-8">
+<div class="mb-6">
+<h2 class="font-headline-md text-headline-md text-on-primary-fixed-variant">Student Portal</h2>
+</div>
+<nav class="flex flex-col gap-1 overflow-y-auto no-scrollbar flex-grow">
+<a class="text-on-surface-variant hover:bg-white/20 rounded-xl px-4 py-3 flex items-center gap-3 spring-interaction group" href="#">
+<span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">dashboard</span>
+<span class="font-label-md">Dashboard</span>
+</a>
+<a class="bg-primary text-on-primary rounded-xl px-4 py-3 flex items-center gap-3 spring-interaction" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">school</span>
+<span class="font-label-md font-bold">Courses</span>
+</a>
+<a class="text-on-surface-variant hover:bg-white/20 rounded-xl px-4 py-3 flex items-center gap-3 spring-interaction group" href="#">
+<span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">assignment</span>
+<span class="font-label-md">Assignments</span>
+</a>
+<a class="text-on-surface-variant hover:bg-white/20 rounded-xl px-4 py-3 flex items-center gap-3 spring-interaction group" href="#">
+<span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">grade</span>
+<span class="font-label-md">Grades</span>
+</a>
+<a class="text-on-surface-variant hover:bg-white/20 rounded-xl px-4 py-3 flex items-center gap-3 spring-interaction group" href="#">
+<span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">calendar_today</span>
+<span class="font-label-md">Schedule</span>
+</a>
+<a class="text-on-surface-variant hover:bg-white/20 rounded-xl px-4 py-3 flex items-center gap-3 spring-interaction group" href="#">
+<span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">work</span>
+<span class="font-label-md">Opportunities</span>
+</a>
+<a class="text-on-surface-variant hover:bg-white/20 rounded-xl px-4 py-3 flex items-center gap-3 spring-interaction group" href="#">
+<span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">insights</span>
+<span class="font-label-md">analytics</span>
+</a>
+<a class="text-on-surface-variant hover:bg-white/20 rounded-xl px-4 py-3 flex items-center gap-3 spring-interaction group" href="#">
+<span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">library_books</span>
+<span class="font-label-md">Library</span>
+</a>
+<a class="text-on-surface-variant hover:bg-white/20 rounded-xl px-4 py-3 flex items-center gap-3 spring-interaction group" href="#">
+<span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">mail</span>
+<span class="font-label-md">Messages</span>
+</a>
+<a class="text-on-surface-variant hover:bg-white/20 rounded-xl px-4 py-3 flex items-center gap-3 spring-interaction group" href="#">
+<span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">group</span>
+<span class="font-label-md">Mentors</span>
+</a>
+</nav>
+<div class="mt-auto space-y-2 pt-4">
+<button class="w-full bg-primary text-on-primary py-3 rounded-full font-label-md hover:shadow-lg transition-all spring-interaction">Upgrade Plan</button>
+<a class="text-on-surface-variant hover:bg-white/20 rounded-xl px-4 py-3 flex items-center gap-3 transition-all" href="#">
+<span class="material-symbols-outlined">logout</span>
+<span class="font-label-md">Logout</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="ml-64 pt-24 px-margin-desktop pb-12">
+<!-- Header Section -->
+<header class="mb-12 flex justify-between items-end">
+<div>
+<h1 class="font-display-lg text-display-lg text-primary tracking-tight mb-2">STU-10 Catalog</h1>
+<p class="text-on-surface-variant text-body-lg max-w-2xl">Elevate your expertise with our world-class selection of specialized professional pathways designed for the next generation of industry leaders.</p>
+</div>
+<div class="flex gap-3">
+<span class="bg-white/30 backdrop-blur-md px-4 py-2 rounded-full border border-white/20 text-primary font-label-md flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">verified</span> 24 New Modules
+                </span>
+</div>
+</header>
+<!-- Bento Grid: AI Recommendations -->
+<section class="mb-16">
+<div class="flex items-center gap-3 mb-6">
+<span class="material-symbols-outlined text-primary" data-weight="fill" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+<h2 class="font-headline-md text-headline-md">AI Tailored For You</h2>
+</div>
+<div id="aiTailoredGrid" class="flex gap-gutter overflow-x-auto no-scrollbar pb-6 snap-x">
+</div>
+</section>
+<!-- Course Listings by Category -->
+
+<!-- Design Section -->
+<section class="mb-16">
+  <div class="flex items-center gap-3 mb-6">
+    <span class="material-symbols-outlined text-primary text-2xl" style="font-variation-settings: 'FILL' 1;">palette</span>
+    <h2 class="font-headline-md text-headline-md text-[#471A70]">Design Courses</h2>
+  </div>
+  <div id="designCoursesGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <!-- UI Design -->
+    <div class="glass-card course-card p-5 rounded-[24px] flex flex-col hover:scale-[1.02] transition-transform duration-300">
+      <div class="h-40 rounded-xl overflow-hidden mb-4 bg-secondary-container relative">
+        <img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAetpSjPe4hKotLVJhShjoVO-yzT8oKpRzqb0pi_S49yIzdtb7N9Q0gaEzkY0lICyq-PfgBLqcKy15Yi_-VBohN-dG62OLQpCmobypc7DZBQcFy9JJiodyi0mCM5lN2Y1LhO5D8zqp0DnKNa9H8104DVB5dwT_KnGbXOzf3PIw9zs_-KPxoR4HbHDo-eOyARZRs9c7hwaJa_3zMWQD4FEUiPs6W2_ZIqSsL2WyJjPz-BJRZjMTh-ERWQtwBEKfWfLr21iCwjMHOiO9j"/>
+      </div>
+      <h3 class="font-headline-md text-[18px] text-[#471A70] mb-1">User Interface Design</h3>
+      <p class="text-on-surface-variant text-xs mb-4 flex-grow">Master visual principles and layout.</p>
+      <div class="flex justify-between items-center pt-3 border-t border-purple-950/10">
+        <span class="font-bold text-primary">Rs. 199.00</span>
+        <button onclick="handleQuickApply(event)" data-link="https://www.coursera.org/specializations/ui-ux-design" class="bg-primary text-on-primary px-4 py-1.5 rounded-full font-bold text-[11px] hover:scale-105 active:scale-95 transition-all focus:outline-none">Apply</button>
+      </div>
+    </div>
+    <!-- UX Research -->
+    <div class="glass-card course-card p-5 rounded-[24px] flex flex-col hover:scale-[1.02] transition-transform duration-300" onclick="goToCoursePlayer('ux-research')">
+      <div class="h-40 rounded-xl overflow-hidden mb-4 bg-secondary-container relative">
+        <img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCQA9RMpZsEsz4lCKIVJnhrSjIB-1BSsfLEVH9bcCgdUOZN5oEO6ZdxC-Y6iKY2ud3UKAJGWT9ikfx71EQ-qQJEceIEtutBN-jYBguXHYn7WCHVMfg9OYLWFtedndvXR3JH10-HpTvSyopli4Mm_5zFUMYvJCL5c0Z-HMZnUu4QIiVyh8M_JNjdOS4BvQN_DYWkcaLh9CnqfB9xZ4LRsbArKJtnd2-lp87z4zFDwLcdKKfuOpD9xTqpC2TbTTNIdMlevF7qI85mEtgl"/>
+      </div>
+      <h3 class="font-headline-md text-[18px] text-[#471A70] mb-1">UX Research & Analytics</h3>
+      <p class="text-on-surface-variant text-xs mb-4 flex-grow">Learn data-driven design methods.</p>
+      <div class="flex justify-between items-center pt-3 border-t border-purple-950/10">
+        <span class="font-bold text-primary">Rs. 199.00</span>
+        <button onclick="handleQuickApply(event)" data-link="https://www.coursera.org/learn/ux-research" class="bg-primary text-on-primary px-4 py-1.5 rounded-full font-bold text-[11px] hover:scale-105 active:scale-95 transition-all focus:outline-none">Apply</button>
+      </div>
+    </div>
+    <!-- Graphic Design -->
+    <div class="glass-card course-card p-5 rounded-[24px] flex flex-col hover:scale-[1.02] transition-transform duration-300">
+      <div class="h-40 rounded-xl overflow-hidden mb-4 bg-secondary-container relative">
+        <img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCXpsmNDK-CuO1YxOWyO_N1LXXWCfTK-y4wSg8B4ycvgkJ4L9Zf9a3UFfxJjJSKjzBzDmoYdLgM_MmFo-BpVS_mx19HDjqriYGxZtZpIjr6jFHk_wnDk_g-sn-LuRi7zVjhVy2EM5_PlUMGbfaFt4pNukwC-IMHtaMxSkE8USUWog0aqEBzgQqiYZCvWA2e_hGCh245BYDMlX_KGNrNQ55zIIOiz3H1eSiweRBJyJD0qIjN4zaOzebs32f3wo_9tSc0qM0IROZOY95X"/>
+      </div>
+      <h3 class="font-headline-md text-[18px] text-[#471A70] mb-1">Graphic Design Fundamentals</h3>
+      <p class="text-on-surface-variant text-xs mb-4 flex-grow">Core principles of visual communication.</p>
+      <div class="flex justify-between items-center pt-3 border-t border-purple-950/10">
+        <span class="font-bold text-primary">Rs. 199.00</span>
+        <button onclick="handleQuickApply(event)" data-link="https://www.coursera.org/specializations/graphic-design" class="bg-primary text-on-primary px-4 py-1.5 rounded-full font-bold text-[11px] hover:scale-105 active:scale-95 transition-all focus:outline-none">Apply</button>
+      </div>
+    </div>
+    <!-- Advanced Interaction -->
+    <div class="glass-card course-card p-5 rounded-[24px] flex flex-col hover:scale-[1.02] transition-transform duration-300">
+      <div class="h-40 rounded-xl overflow-hidden mb-4 bg-secondary-container relative">
+        <img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCVbRwcEsE7VFr1VOHQHSjBQ4rRgEpCmTcTrN_Cq0bW0kRo9IjPVjWPGHg5icB5aH8LZLqpWjAJBlVxUpyqx1kTYJedBaf6kwYtVJF3MJB9cWzaKfNySXow8jt0HmXlJtJnSoNKM3t1ZjhVHQOhAzzsncYtKDQG6ZUKvF5AKU4N3gZxqrQCX_xhAeKzWrxjKRIzjDklaTEZjA2UL4MeFro2jZGyqu4ksx7xGf8hB-3BcZOCWEFtjAAlWSxqBZZU_x8GLp4GBJdu93b9"/>
+      </div>
+      <h3 class="font-headline-md text-[18px] text-[#471A70] mb-1">Advanced Interaction Design</h3>
+      <p class="text-on-surface-variant text-xs mb-4 flex-grow">Creating fluid motion and feedback.</p>
+      <div class="flex justify-between items-center pt-3 border-t border-purple-950/10">
+        <span class="font-bold text-primary">Rs. 199.00</span>
+        <button onclick="handleQuickApply(event)" data-link="https://www.coursera.org/learn/interaction-design" class="bg-primary text-on-primary px-4 py-1.5 rounded-full font-bold text-[11px] hover:scale-105 active:scale-95 transition-all focus:outline-none">Apply</button>
+      </div>
+    </div>
+    <!-- Visual Strategy -->
+    <div class="glass-card course-card p-5 rounded-[24px] flex flex-col hover:scale-[1.02] transition-transform duration-300">
+      <div class="h-40 rounded-xl overflow-hidden mb-4 bg-secondary-container relative">
+        <img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBbGx1aC9CZoU1NFAqXrbJgM6oFdweEv_HWABkuIGANIgBnErgpEqD90C6VJEsss3I14WAHhiJeKxLCThmWyqwBYRGJIhGLKlsX0RfpjBovP3zYCouTMjgLMQsBiZKO8fcJehE33rvjS2HnjXaE1auAsaeT6pP_qkvtIujnnBtIwAQC8eaceq8Ch5NhIVMwEU9kiuBt6YWi_S75ClduMfzmiJ-SQFhtmqxyAbtTxilrOe5qJmkCSB6WCDaw-tUCZgKKhvpYYF424J99"/>
+      </div>
+      <h3 class="font-headline-md text-[18px] text-[#471A70] mb-1">Visual Strategy & Branding</h3>
+      <p class="text-on-surface-variant text-xs mb-4 flex-grow">Build cohesive and memorable brands.</p>
+      <div class="flex justify-between items-center pt-3 border-t border-purple-950/10">
+        <span class="font-bold text-primary">Rs. 199.00</span>
+        <button onclick="handleQuickApply(event)" data-link="https://www.coursera.org/learn/brand-management" class="bg-primary text-on-primary px-4 py-1.5 rounded-full font-bold text-[11px] hover:scale-105 active:scale-95 transition-all focus:outline-none">Apply</button>
+      </div>
+    </div>
+    <!-- Mobile App Design Systems -->
+    <div class="glass-card course-card p-5 rounded-[24px] flex flex-col hover:scale-[1.02] transition-transform duration-300">
+      <div class="h-40 rounded-xl overflow-hidden mb-4 bg-secondary-container relative">
+        <img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAZGNzFwxqdHzn4L04zX8ErGdit7NksS2LHl2NJbinNBywKNw7IceCEk0dwUtLvVsTnmuo3QM6rYHjOKt8QyT1G051c-mRhEdQl2_vHsI7Gqea8rgnCrH4jF82vbieKxh8FvKO53d3V_GYiHy25e7ZY1IJ2NIlTUYCTUEJ3w9RxPhstLHCIL5SpJK2ArOitkQT-ZH-zjiTxHX9I4wYnfELbp3zd63bvtkDmC-xErrU2saRJL0g_6qPSWgBs260ibl7n9hahabwv24oF"/>
+      </div>
+      <h3 class="font-headline-md text-[18px] text-[#471A70] mb-1">Mobile App Design Systems</h3>
+      <p class="text-on-surface-variant text-xs mb-4 flex-grow">Designing scalable mobile frameworks.</p>
+      <div class="flex justify-between items-center pt-3 border-t border-purple-950/10">
+        <span class="font-bold text-primary">Rs. 199.00</span>
+        <button onclick="handleQuickApply(event)" data-link="https://www.coursera.org/learn/mobile-app-design" class="bg-primary text-on-primary px-4 py-1.5 rounded-full font-bold text-[11px] hover:scale-105 active:scale-95 transition-all focus:outline-none">Apply</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Engineering Section -->
+<section class="mb-16">
+  <div class="flex items-center gap-3 mb-6">
+    <span class="material-symbols-outlined text-primary text-2xl" style="font-variation-settings: 'FILL' 1;">precision_manufacturing</span>
+    <h2 class="font-headline-md text-headline-md text-[#471A70]">Engineering Courses</h2>
+  </div>
+  <div id="engineeringCoursesGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <!-- Software Engineering Essentials -->
+    <div class="glass-card course-card p-5 rounded-[24px] flex flex-col hover:scale-[1.02] transition-transform duration-300">
+      <div class="h-40 rounded-xl overflow-hidden mb-4 bg-secondary-container relative">
+        <img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAKoRH6ix2P-W25i194gLkbO0RyxuqSSQKX4YvYe0z6wdc5OAE43b5yKxaTQ31ScbYbRhXkv6ZrosTASi3Ky6iuBjm2ca287r-DMWPCcGIUX3372I7ndUTmABiAOWtadpj06ZF7qT1UDp5WKmukI4qXv4Sknj6UvTjmfHg6ottNXZdV49TLCAtcONEMIWKUsQ7PrxMqO1QsfpNkkef0NSqK2upwQTNQB1pMD-Taha9wwOfXTIb1Un3EGW19j8yEC5gLBBWg4VBPUmBM"/>
+      </div>
+      <h3 class="font-headline-md text-[18px] text-[#471A70] mb-1">Software Engineering Essentials</h3>
+      <p class="text-on-surface-variant text-xs mb-4 flex-grow">Master software lifecycle and quality.</p>
+      <div class="flex justify-between items-center pt-3 border-t border-purple-950/10">
+        <span class="font-bold text-primary">Rs. 249.00</span>
+        <button onclick="handleQuickApply(event)" data-link="https://www.coursera.org/learn/introduction-to-software-engineering" class="bg-primary text-on-primary px-4 py-1.5 rounded-full font-bold text-[11px] hover:scale-105 active:scale-95 transition-all focus:outline-none">Apply</button>
+      </div>
+    </div>
+    <!-- Cloud Architecture & Patterns -->
+    <div class="glass-card course-card p-5 rounded-[24px] flex flex-col hover:scale-[1.02] transition-transform duration-300">
+      <div class="h-40 rounded-xl overflow-hidden mb-4 bg-secondary-container relative">
+        <img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA0MmCVZPML1iN4xJ2yCLg_2G9fGoqkfCqw6q2diDGqpMrLrirBqHOFv6HKf-S3gVJw1GsiypNUCQHGTqXc3xLLl1ecPDpwbmbiYRQ7lXH-tNdawbgpgmkMmGTnd74KrCQgeOPYjU5KFVGIuaTugx_T5tG03JHBeXJrtZk35NJitxLVRmpEhjzAw-uQ5wnjeRoHtVf6Mi8Vvq31ItNp_inPL7ZHkEhiEr0o4KwaG7RTM5h9lFv-3xLo_hGaDFUMpApRnIZRuN5SFZnh"/>
+      </div>
+      <h3 class="font-headline-md text-[18px] text-[#471A70] mb-1">Cloud Architecture & Patterns</h3>
+      <p class="text-on-surface-variant text-xs mb-4 flex-grow">Design scalable cloud systems.</p>
+      <div class="flex justify-between items-center pt-3 border-t border-purple-950/10">
+        <span class="font-bold text-primary">Rs. 299.00</span>
+        <button onclick="handleQuickApply(event)" data-link="https://www.edx.org/course/cloud-architecture" class="bg-primary text-on-primary px-4 py-1.5 rounded-full font-bold text-[11px] hover:scale-105 active:scale-95 transition-all focus:outline-none">Apply</button>
+      </div>
+    </div>
+    <!-- DevOps & CI/CD Pipelines -->
+    <div class="glass-card course-card p-5 rounded-[24px] flex flex-col hover:scale-[1.02] transition-transform duration-300">
+      <div class="h-40 rounded-xl overflow-hidden mb-4 bg-secondary-container relative">
+        <img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCHbQadcJqDITfrvRTBcIILescLcSsjwTjScbjVrSNMrf5DZ5MF0-TAiUkMCRMbMmZu8FXr-L_XCNZEs7ryLYsz6RlkUp82ZhdcJMrgWOj-q_3dO2aD33igFlLoWCrto0im17BqgaAkQh0U7Gq_2ApOSaDn1WfqeGGQnVnCB9iwCLKtLkSXxT8itcPRZhRLIHBClsrRxi-eg7K7Wv3R4s7C8OFwFn6OuqJNXyHvxp7bv8bLlcnxL381wi86tIzRbf5lA2v3SzR4efC7"/>
+      </div>
+      <h3 class="font-headline-md text-[18px] text-[#471A70] mb-1">DevOps & CI/CD Pipelines</h3>
+      <p class="text-on-surface-variant text-xs mb-4 flex-grow">Continuous integration and deployment.</p>
+      <div class="flex justify-between items-center pt-3 border-t border-purple-950/10">
+        <span class="font-bold text-primary">Rs. 249.00</span>
+        <button onclick="handleQuickApply(event)" data-link="https://www.coursera.org/learn/intro-devops" class="bg-primary text-on-primary px-4 py-1.5 rounded-full font-bold text-[11px] hover:scale-105 active:scale-95 transition-all focus:outline-none">Apply</button>
+      </div>
+    </div>
+    <!-- Advanced Data Structures & Algorithms -->
+    <div class="glass-card course-card p-5 rounded-[24px] flex flex-col hover:scale-[1.02] transition-transform duration-300">
+      <div class="h-40 rounded-xl overflow-hidden mb-4 bg-secondary-container relative">
+        <img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDFjy3qxP_yynrTAvp8J9AbInI1EJjh8rXh2awVsu3HM-6xLGYGc0gX7NGbls4RZClc_xirhdmvccvNdaL1HLRUExkVOzXjgIjm0TpQV_xKa-T7fGyB8LMIvtWezBNaPxOegCmW9mLoxhnw-CO9sYA00pALrGdd9sZhAWpnxov-pfFz2QlZ763w_CPQ6fgZjwSDTDmnvC75Geg2YXf2wiqCIUpWwT_qzZc01o25Wxqey6z6XiPTeEO9frc_F8rDRfX74HzGkOejOY1R"/>
+      </div>
+      <h3 class="font-headline-md text-[18px] text-[#471A70] mb-1">Advanced Data Structures & Algorithms</h3>
+      <p class="text-on-surface-variant text-xs mb-4 flex-grow">Advanced algorithmic optimization.</p>
+      <div class="flex justify-between items-center pt-3 border-t border-purple-950/10">
+        <span class="font-bold text-primary">Rs. 299.00</span>
+        <button onclick="handleQuickApply(event)" data-link="https://www.coursera.org/specializations/data-structures-algorithms" class="bg-primary text-on-primary px-4 py-1.5 rounded-full font-bold text-[11px] hover:scale-105 active:scale-95 transition-all focus:outline-none">Apply</button>
+      </div>
+    </div>
+    <!-- Full-Stack Web Development -->
+    <div class="glass-card course-card p-5 rounded-[24px] flex flex-col hover:scale-[1.02] transition-transform duration-300">
+      <div class="h-40 rounded-xl overflow-hidden mb-4 bg-secondary-container relative">
+        <img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBdnHFhMg6RNkCvie79K_ZIogYzrHwkRSvHeQaKWUO8QcFvXTfD3K0bTk0z5Fzk74P1bB1e3Ho2OwwuiITqGdHHzhpVpsPAwjiBgAyALItOsq_b7pdX2Ca5iAVBA5OUVds5t42ivyEcug62_xULpR5oIbNacoPQK9NfX43HFhufe4wlETAZldGbKqcPNyFpBY-mIQqYiRdRGYBL9xhhsoMh4uGaxdwsBCqOemE0WFNl_ZnvLo-cXK5Qiwh9Fy-Bu4cLqXegQ-UPt0nt"/>
+      </div>
+      <h3 class="font-headline-md text-[18px] text-[#471A70] mb-1">Full-Stack Web Development</h3>
+      <p class="text-on-surface-variant text-xs mb-4 flex-grow">End-to-end web applications engineering.</p>
+      <div class="flex justify-between items-center pt-3 border-t border-purple-950/10">
+        <span class="font-bold text-primary">Rs. 249.00</span>
+        <button onclick="handleQuickApply(event)" data-link="https://www.coursera.org/specializations/full-stack-react" class="bg-primary text-on-primary px-4 py-1.5 rounded-full font-bold text-[11px] hover:scale-105 active:scale-95 transition-all focus:outline-none">Apply</button>
+      </div>
+    </div>
+    <!-- Mobile App Engineering -->
+    <div class="glass-card course-card p-5 rounded-[24px] flex flex-col hover:scale-[1.02] transition-transform duration-300">
+      <div class="h-40 rounded-xl overflow-hidden mb-4 bg-secondary-container relative">
+        <img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCcESVQPWihQiKVmC9Bmij3oxdy0lbU97u1aUVFZ6HWGszRauayH026O-0_ePZK-5f21XRVdGomON520FJOhGnCvitlx9cCnGSi9TPU5DiYuVMJr-152M4W1joAHIBAvNeKPp1i6jwOzvGM0ZXMViIidgsxXCaRcuKw7zncSNVS3Y5UO9sTgMn99P1mV7r141gtpTQiZcfqAk7dM8mfcY-vqeTzWnw2SweAQmAQFDrHW4_7ozJS4WEg7ccNenPw4LjljrtMjWkOtKxb"/>
+      </div>
+      <h3 class="font-headline-md text-[18px] text-[#471A70] mb-1">Mobile App Engineering</h3>
+      <p class="text-on-surface-variant text-xs mb-4 flex-grow">Cross-platform and native applications.</p>
+      <div class="flex justify-between items-center pt-3 border-t border-purple-950/10">
+        <span class="font-bold text-primary">Rs. 249.00</span>
+        <button onclick="handleQuickApply(event)" data-link="https://www.coursera.org/specializations/android-app-development" class="bg-primary text-on-primary px-4 py-1.5 rounded-full font-bold text-[11px] hover:scale-105 active:scale-95 transition-all focus:outline-none">Apply</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Business Section -->
+<section class="mb-16">
+  <div class="flex items-center gap-3 mb-6">
+    <span class="material-symbols-outlined text-primary text-2xl" style="font-variation-settings: 'FILL' 1;">corporate_fare</span>
+    <h2 class="font-headline-md text-headline-md text-[#471A70]">Business Courses</h2>
+  </div>
+  <div id="businessCoursesGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <!-- Business Management Essentials -->
+    <div class="glass-card course-card p-5 rounded-[24px] flex flex-col hover:scale-[1.02] transition-transform duration-300">
+      <div class="h-40 rounded-xl overflow-hidden mb-4 bg-secondary-container relative">
+        <img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCuAxkz7D3nGmbxxX5xvZ9wcP9kbKZSsGgJFU2rqJHKs_ViO9hDAQ7YB9cAU39slHBkwzQdJIb_ejcJqQjJtZ4QDeshkAHM1LbjOxXgiUMQlIou4V35EU9qi7owQokMQNNKXg1Kw8RGj8ZMF8EMBTjucoysS3ikekI71JTMy1amy5ZSjiSwMXMQWL7LYr4i53DuHl8Qq7YtHpQS5J2I6RsGGuRO2e45MtrdS-YxWJ0a-bZ4rnQAV7oj6oRF2oPH2cw_HI-KS0jhrGoV"/>
+      </div>
+      <h3 class="font-headline-md text-[18px] text-[#471A70] mb-1">Business Management Essentials</h3>
+      <p class="text-on-surface-variant text-xs mb-4 flex-grow">Organizational management and leadership.</p>
+      <div class="flex justify-between items-center pt-3 border-t border-purple-950/10">
+        <span class="font-bold text-primary">Rs. 199.00</span>
+        <button onclick="handleQuickApply(event)" data-link="https://www.coursera.org/specializations/wharton-business-foundations" class="bg-primary text-on-primary px-4 py-1.5 rounded-full font-bold text-[11px] hover:scale-105 active:scale-95 transition-all focus:outline-none">Apply</button>
+      </div>
+    </div>
+    <!-- Product Management Foundations -->
+    <div class="glass-card course-card p-5 rounded-[24px] flex flex-col hover:scale-[1.02] transition-transform duration-300">
+      <div class="h-40 rounded-xl overflow-hidden mb-4 bg-secondary-container relative">
+        <img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCjFm9V3SHJ_sqvzRKn8GiQbpIXkF6ZvvIqA0aoaeomNK4V-iSbA70o94VAtHLQvMRM7v8WBEaYWMSp_nXYx3S1FhWY_srGjrLg9IXoSTNJfnH_MLTo6UlszFz0E3IceZOdX2sv6UoWboD0rAFOmibAdyaamjo9QLS4HuEk9DtaN23rhSRWezhrJ9bsiOrUaE9sJAJL8jr7rpbf9zcZGmG46h7sSAfiQV2X3vxO6nMqKHWyCXg3nUvu0WxqMvpP-fjbBycOCqxVLAOr"/>
+      </div>
+      <h3 class="font-headline-md text-[18px] text-[#471A70] mb-1">Product Management Foundations</h3>
+      <p class="text-on-surface-variant text-xs mb-4 flex-grow">Learn product lifecycle and strategy.</p>
+      <div class="flex justify-between items-center pt-3 border-t border-purple-950/10">
+        <span class="font-bold text-primary">Rs. 199.00</span>
+        <button onclick="handleQuickApply(event)" data-link="https://www.coursera.org/specializations/product-management" class="bg-primary text-on-primary px-4 py-1.5 rounded-full font-bold text-[11px] hover:scale-105 active:scale-95 transition-all focus:outline-none">Apply</button>
+      </div>
+    </div>
+    <!-- Scaling Startups & Strategy -->
+    <div class="glass-card course-card p-5 rounded-[24px] flex flex-col hover:scale-[1.02] transition-transform duration-300">
+      <div class="h-40 rounded-xl overflow-hidden mb-4 bg-secondary-container relative">
+        <img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB_5RSsa-SrzYlI8tYBOCI1xvAt4oxzcGeTynDaUfY7KfEVraiMi4reuEh7TFSkPC0_MTIOY8vja9WdY8nVfR-56lJa-Ytobk4OgAyA4hgOF25QhZp94OA628szHJDKFMxcNXEkLdHJOB3sdWOjHCnc-uTLzcCfUsau-w7RuljaFtSa6vD9BDpGS1r_gfiFkUqW8IwrjPTqslNpeAP-HdKZ6fXK1tILnEtSg-yF_HLrBgEUIN2y6Bg1csLtYtVr3--nkvArgha3o-Fi"/>
+      </div>
+      <h3 class="font-headline-md text-[18px] text-[#471A70] mb-1">Scaling Startups & Strategy</h3>
+      <p class="text-on-surface-variant text-xs mb-4 flex-grow">Tactical execution for hyper-growth startups.</p>
+      <div class="flex justify-between items-center pt-3 border-t border-purple-950/10">
+        <span class="font-bold text-primary">Rs. 199.00</span>
+        <button onclick="handleQuickApply(event)" data-link="https://www.coursera.org/learn/startup-growth" class="bg-primary text-on-primary px-4 py-1.5 rounded-full font-bold text-[11px] hover:scale-105 active:scale-95 transition-all focus:outline-none">Apply</button>
+      </div>
+    </div>
+    <!-- Venture Capital & Funding -->
+    <div class="glass-card course-card p-5 rounded-[24px] flex flex-col hover:scale-[1.02] transition-transform duration-300">
+      <div class="h-40 rounded-xl overflow-hidden mb-4 bg-secondary-container relative">
+        <img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDmtvTFX3-1k7_ASsIC-h1KcKzYGVnSge-ZDFhBKnRcp32t-QBMD3mUPHmtFMwAWaaD-Vndx93j7MfEsbFQx2IWljICy98LygW5rnMojOcin-2YyEJMOyu6UQ9sAFD4xJ6nzuE_U6zPTl5Segbedo4cDDEzlptwgm_J9ZqIGh5BkzWLHUa_jW4zkRbVoh8XS_-bpu3EqL25JvRe3QTw5kD_OhHK0chpYlgpg8Av4XD5TQhTpl1s2628y-WQA0ibORpZ320Kna7dYXqI"/>
+      </div>
+      <h3 class="font-headline-md text-[18px] text-[#471A70] mb-1">Venture Capital & Funding</h3>
+      <p class="text-on-surface-variant text-xs mb-4 flex-grow">VC dynamics, funding structures, cap tables.</p>
+      <div class="flex justify-between items-center pt-3 border-t border-purple-950/10">
+        <span class="font-bold text-primary">Rs. 199.00</span>
+        <button onclick="handleQuickApply(event)" data-link="https://www.coursera.org/learn/venture-capital" class="bg-primary text-on-primary px-4 py-1.5 rounded-full font-bold text-[11px] hover:scale-105 active:scale-95 transition-all focus:outline-none">Apply</button>
+      </div>
+    </div>
+    <!-- Marketing Strategy & Brand Growth -->
+    <div class="glass-card course-card p-5 rounded-[24px] flex flex-col hover:scale-[1.02] transition-transform duration-300">
+      <div class="h-40 rounded-xl overflow-hidden mb-4 bg-secondary-container relative">
+        <img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDJn7QHxphFEKVv3riw957rrD2tPCSXfFmD8aQjuwqScpxnBZ6-_pTicoG7fHTbLHgXnDYRVejJ3bPoqL6FvjBfvr5yYj6EyzWMQc9e1153U11lYatRVALqVum3kK3UvBzbVWjeGNSTcNlcC2f3Xx_3UXHY5ky9WyzTPoq6ZHf5wDoqcucCITrL9eh9FkYBR8SazIgN6MAq2GOvynuHSG948cOkGKNa9Y7hiM-1sMa_RhZX_g5AD3oS_GFajiQDA8C7Jf6vz8O5gc9c"/>
+      </div>
+      <h3 class="font-headline-md text-[18px] text-[#471A70] mb-1">Marketing Strategy & Brand Growth</h3>
+      <p class="text-on-surface-variant text-xs mb-4 flex-grow">Digital marketing, user acquisition, growth hacking.</p>
+      <div class="flex justify-between items-center pt-3 border-t border-purple-950/10">
+        <span class="font-bold text-primary">Rs. 199.00</span>
+        <button onclick="handleQuickApply(event)" data-link="https://www.coursera.org/specializations/market-strategy" class="bg-primary text-on-primary px-4 py-1.5 rounded-full font-bold text-[11px] hover:scale-105 active:scale-95 transition-all focus:outline-none">Apply</button>
+      </div>
+    </div>
+    <!-- Entrepreneurship & Innovation -->
+    <div class="glass-card course-card p-5 rounded-[24px] flex flex-col hover:scale-[1.02] transition-transform duration-300">
+      <div class="h-40 rounded-xl overflow-hidden mb-4 bg-secondary-container relative">
+        <img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAtbRETssk1I_U9fzesPk68jKKAMWDWY62wlaEH2W_eNgAcyvf38wzMDu9fEGR4glHr0CbyTsBpAbPEtzrVGNZrj5hWI4bF1W6I0UsU6_KA0K2iKhYHzb75rmCzAxlKkK7QzzNMjQS9KmXTCdZMBmcPORW3LFrGWy2O8t_bptGrgYYHhZ8Ai4ZNP65J7270k0C7eZ6jVeOqZenqEW8w1Vqc76Xydjw_FsGB9WH_aSvDXPzD0UobaPZGdRyJztUuD52IxPo5uJI-Jshp"/>
+      </div>
+      <h3 class="font-headline-md text-[18px] text-[#471A70] mb-1">Entrepreneurship & Innovation</h3>
+      <p class="text-on-surface-variant text-xs mb-4 flex-grow">Founder mindset and product-market fit.</p>
+      <div class="flex justify-between items-center pt-3 border-t border-purple-950/10">
+        <span class="font-bold text-primary">Rs. 199.00</span>
+        <button onclick="handleQuickApply(event)" data-link="https://www.coursera.org/specializations/entrepreneurship" class="bg-primary text-on-primary px-4 py-1.5 rounded-full font-bold text-[11px] hover:scale-105 active:scale-95 transition-all focus:outline-none">Apply</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Data Science Section -->
+<section class="mb-16">
+  <div class="flex items-center gap-3 mb-6">
+    <span class="material-symbols-outlined text-primary text-2xl" style="font-variation-settings: 'FILL' 1;">monitoring</span>
+    <h2 class="font-headline-md text-headline-md text-[#471A70]">Data Science Courses</h2>
+  </div>
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <!-- Machine Learning Fundamentals -->
+    <div class="glass-card course-card p-5 rounded-[24px] flex flex-col hover:scale-[1.02] transition-transform duration-300">
+      <div class="h-40 rounded-xl overflow-hidden mb-4 bg-secondary-container relative">
+        <img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuChVa7K-QHTtOhv2m6j8k-B2OSVJCFSCt-sIhIiGQsPKkgS8h8krFW-KXaRKEmfOhaaazDV1vkgAP2BhFKs-YYq67EZy1uy4rvJTDdjyB0IH2mTLKNyhEZmuTpVZ6DyDFlG8F6WX9W5Gj6bD_ofC1rDrKzg0oZ04ZpTnmbCpkyRyI1SvXe_ZEkwc2mXR-EjlDe-AcfH1jvyFsAQ9ruHlm_tl-QL40x4Gb1t8xog3FXhRtlaF7pdymT-DFR_QEJnQXjm3eiGvt8MpsIC"/>
+      </div>
+      <h3 class="font-headline-md text-[18px] text-[#471A70] mb-1">Machine Learning Fundamentals</h3>
+      <p class="text-on-surface-variant text-xs mb-4 flex-grow">Core ML models, training paradigms and systems.</p>
+      <div class="flex justify-between items-center pt-3 border-t border-purple-950/10">
+        <span class="font-bold text-primary">Rs. 299.00</span>
+        <button onclick="handleQuickApply(event)" data-link="https://www.coursera.org/specializations/machine-learning-introduction" class="bg-primary text-on-primary px-4 py-1.5 rounded-full font-bold text-[11px] hover:scale-105 active:scale-95 transition-all focus:outline-none">Apply</button>
+      </div>
+    </div>
+    <!-- Deep Learning & Neural Networks -->
+    <div class="glass-card course-card p-5 rounded-[24px] flex flex-col hover:scale-[1.02] transition-transform duration-300">
+      <div class="h-40 rounded-xl overflow-hidden mb-4 bg-secondary-container relative">
+        <img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCj8qbmOC1Mh8Feau2jRskbeyLj5RMEjvFJpbRwH_DdsbNk03GmQr__LqCXypwm5UiWhg5bwy5AsZpQ_vy7D_sM5rv84X7c-xVWTs_lr96bSCh2taB7Q-pxIBXEtefWFEwx8lCW8aDpcFclKZxla7aqKjSpiwpE9DLTTyh-lIIPPSnU5F7qRME5TR1_TqJ21sltM4kBOB1XvFD0VCSr27-XiTUdNz0KqDEHXQZ9M_7Wf2QogaOCt43VOQJyhhX6N2xEuS3yOF-eG3dR"/>
+      </div>
+      <h3 class="font-headline-md text-[18px] text-[#471A70] mb-1">Deep Learning & Neural Networks</h3>
+      <p class="text-on-surface-variant text-xs mb-4 flex-grow">CNNs, RNNs, Transformers and deep optimization.</p>
+      <div class="flex justify-between items-center pt-3 border-t border-purple-950/10">
+        <span class="font-bold text-primary">Rs. 299.00</span>
+        <button onclick="handleQuickApply(event)" data-link="https://www.coursera.org/specializations/deep-learning" class="bg-primary text-on-primary px-4 py-1.5 rounded-full font-bold text-[11px] hover:scale-105 active:scale-95 transition-all focus:outline-none">Apply</button>
+      </div>
+    </div>
+    <!-- Big Data Analytics & Hadoop -->
+    <div class="glass-card course-card p-5 rounded-[24px] flex flex-col hover:scale-[1.02] transition-transform duration-300">
+      <div class="h-40 rounded-xl overflow-hidden mb-4 bg-secondary-container relative">
+        <img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDWUZa4FW6-voLub3oeWp7XJ-WrWtSTZPx3C-M0ajs-edZFl6Kohohu-3fzHLiL9CMGk6Sc0NPd0nEiTq_J9LRFpcAShKpiTtDgqlLbr4FQ9mY1nFd-DZbaP2FMZpwr0bkGMBZcXrGkMp8-cGcZzFtVwDnctaPVs_J7w8yVExvtsMRzgkX6HujZQRIJsjEF9YpPPAJbMgBw2RltxQBX1BytUY1-W1_VKE1QRUCx_b2ptFo6qmaCy97HF_1PBhoEMTJWWV4c25aiPGGT"/>
+      </div>
+      <h3 class="font-headline-md text-[18px] text-[#471A70] mb-1">Big Data Analytics & Hadoop</h3>
+      <p class="text-on-surface-variant text-xs mb-4 flex-grow">Distributed storage and parallel data processing.</p>
+      <div class="flex justify-between items-center pt-3 border-t border-purple-950/10">
+        <span class="font-bold text-primary">Rs. 299.00</span>
+        <button onclick="handleQuickApply(event)" data-link="https://www.coursera.org/learn/big-data-introduction" class="bg-primary text-on-primary px-4 py-1.5 rounded-full font-bold text-[11px] hover:scale-105 active:scale-95 transition-all focus:outline-none">Apply</button>
+      </div>
+    </div>
+    <!-- Python for Data Science -->
+    <div class="glass-card course-card p-5 rounded-[24px] flex flex-col hover:scale-[1.02] transition-transform duration-300">
+      <div class="h-40 rounded-xl overflow-hidden mb-4 bg-secondary-container relative">
+        <img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAof-NOeMtGP_0QHF3DV4V7eKzA4TD9cEBEMxvEyGKL8mze2Wr-FfKwZonA0UCqHwrBql4iPJUxxNNGr3Lr0JjYvRX79gxRWeobl9IpcS4a62O--iCXhVSgA8hjgnKjqiQWorBwVcrNP_-J7wWIB5ioXcRUaxZKFpGUapwLM-2WdR6g3FjfsCOcI9aW7Z8LqFUtUhczzC04ksMba12VUaD3qXcvqcCzjBAiEzjXGyRkaUIWhx-bJ6TW1MI_dMWff3AukJNoq4EOvVg7"/>
+      </div>
+      <h3 class="font-headline-md text-[18px] text-[#471A70] mb-1">Python for Data Science</h3>
+      <p class="text-on-surface-variant text-xs mb-4 flex-grow">Pandas, NumPy, Scikit-Learn data science stack.</p>
+      <div class="flex justify-between items-center pt-3 border-t border-purple-950/10">
+        <span class="font-bold text-primary">Rs. 299.00</span>
+        <button onclick="handleQuickApply(event)" data-link="https://www.coursera.org/learn/python-for-applied-data-science-ai" class="bg-primary text-on-primary px-4 py-1.5 rounded-full font-bold text-[11px] hover:scale-105 active:scale-95 transition-all focus:outline-none">Apply</button>
+      </div>
+    </div>
+    <!-- Applied Statistics -->
+    <div class="glass-card course-card p-5 rounded-[24px] flex flex-col hover:scale-[1.02] transition-transform duration-300">
+      <div class="h-40 rounded-xl overflow-hidden mb-4 bg-secondary-container relative">
+        <img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCTvsEzys4MkvRzpEMKYGG6j_DzsZ-EYmJgucmx--V0iohmSlFFWdfgNC-WMiUR8drBKV2hXWyJP3BNaHBImtOERe57zpHZABOBl3RYvlp1kpY8TIQblU5SIg2BKOE-coAjIKwCe8aCO30sUnoZIGY0ajQ7titxjqIXqhJ0XXGyOrf9a7HBBEe424D-MFIo5JaM7J7fuQx02AX6Rb2QwtQYrIoNmf50Ak9IsPzDmcWW8cCjJeeVltbt4YO2Sd6vOWP6-24jMV2vg6hn"/>
+      </div>
+      <h3 class="font-headline-md text-[18px] text-[#471A70] mb-1">Applied Statistics</h3>
+      <p class="text-on-surface-variant text-xs mb-4 flex-grow">Probability theory, hypothesis testing and analysis.</p>
+      <div class="flex justify-between items-center pt-3 border-t border-purple-950/10">
+        <span class="font-bold text-primary">Rs. 299.00</span>
+        <button onclick="handleQuickApply(event)" data-link="https://www.coursera.org/learn/stanford-statistics" class="bg-primary text-on-primary px-4 py-1.5 rounded-full font-bold text-[11px] hover:scale-105 active:scale-95 transition-all focus:outline-none">Apply</button>
+      </div>
+    </div>
+    <!-- Data Visualization & Tableau -->
+    <div class="glass-card course-card p-5 rounded-[24px] flex flex-col hover:scale-[1.02] transition-transform duration-300">
+      <div class="h-40 rounded-xl overflow-hidden mb-4 bg-secondary-container relative">
+        <img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCt4IIkyxFQgvsMG7w-hf92WBpF7gJV0vSn6SAZm08vTm07fL9K6qjH1xq3E-2kEfotFcy0ca_-WO4Gh_kYCPPbc3iHcMCel4E86SlLYY5Tr2uMA6cYY72MJTq1lyuoq931kPZ4vGA5RryQ1beL095qMZu7NTkH2J9UOh-R4n3Nf3ngl8x9cOKa_sxY8fg4e3Y53UcAPIGcjOiZ7lqhkePMzRqHxBTV_35TPM3xjJgcdsC5drn67lERk8MESLDLEGUFUml87myBTPNu"/>
+      </div>
+      <h3 class="font-headline-md text-[18px] text-[#471A70] mb-1">Data Visualization & Tableau</h3>
+      <p class="text-on-surface-variant text-xs mb-4 flex-grow">Tableau mapping, reporting and analytics presentation.</p>
+      <div class="flex justify-between items-center pt-3 border-t border-purple-950/10">
+        <span class="font-bold text-primary">Rs. 299.00</span>
+        <button onclick="handleQuickApply(event)" data-link="https://www.coursera.org/specializations/data-visualization" class="bg-primary text-on-primary px-4 py-1.5 rounded-full font-bold text-[11px] hover:scale-105 active:scale-95 transition-all focus:outline-none">Apply</button>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Stats Section -->
+<section class="glass-card p-10 rounded-[48px] mb-12 flex flex-col md:flex-row items-center justify-between gap-8 border border-white/40">
+<div class="flex-1">
+<h2 class="font-display-lg text-display-lg text-primary-fixed-dim mb-4">Master Your Future</h2>
+<p class="text-on-surface-variant text-body-lg">Access over 1,200 curated courses from leading academic institutions and industry pioneers.</p>
+</div>
+<div class="flex gap-12 text-center">
+<div>
+<p class="font-display-lg text-display-lg text-primary">12k+</p>
+<p class="font-label-md text-on-surface-variant">Active Students</p>
+</div>
+<div>
+<p class="font-display-lg text-display-lg text-primary">4.8</p>
+<p class="font-label-md text-on-surface-variant">Avg. Rating</p>
+</div>
+<div>
+<p class="font-display-lg text-display-lg text-primary">100+</p>
+<p class="font-label-md text-on-surface-variant">Expert Mentors</p>
+</div>
+</div>
+</section>
+</main>
+<!-- Micro-interactions Script -->
+<script>
+        document.addEventListener('mousemove', (e) => {
+            const cards = document.querySelectorAll('.tilt-card');
+            cards.forEach(card => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                
+                const rotateX = (y - centerY) / 15;
+                const rotateY = (centerX - x) / 15;
+                
+                if (x > 0 && x < rect.width && y > 0 && y < rect.height) {
+                    card.style.transform = `translateY(-8px) scale(1.03) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+                } else {
+                    card.style.transform = '';
+                }
+            });
+        });
+
+        // Soft ripple effect on buttons
+        const buttons = document.querySelectorAll('.spring-interaction');
+        buttons.forEach(btn => {
+            btn.addEventListener('mousedown', () => {
+                btn.style.transform = 'scale(0.95)';
+            });
+            btn.addEventListener('mouseup', () => {
+                btn.style.transform = '';
+            });
+            btn.addEventListener('mouseleave', () => {
+                btn.style.transform = '';
+            });
+        });
+
+        const allCatalogCourses = [
+          {
+            id: "ux-research",
+            title: "Advanced UX Research",
+            category: "UX Design & Psychology",
+            match: 98,
+            price: "299.00",
+            image: "https://lh3.googleusercontent.com/aida-public/AB6AXuB5nPFYicb2sbkYrGLMTZgJLUV-JCRGQSTmbdl0GEqcX5_XfNvySzN1FB6BtwxKILfGwexbg0dOBBYiSDTYZVOB3_Q3nlyqkiRwISXDxIDd2_dhABeCohrEfCEojeTTzN1rfZXaMMtoGs-wMtuPvmSQBrXU6n5OPooKXKcpG0QBx7a0KCJ5e7pcKyoXY0Bi5bpTQ9bT4W6Aj6ExUY8-0-ENRKLdQE_6EpcYrwYYmlynMEgEsTUJgbFl1za85RGZOjjtS7YIBArMxF0H",
+            link: "https://www.coursera.org/learn/ux-research"
+          },
+          {
+            id: "cloud-architecture",
+            title: "Cloud Systems Architecture",
+            category: "Cloud Computing & Systems",
+            match: 95,
+            price: "349.00",
+            image: "https://lh3.googleusercontent.com/aida-public/AB6AXuCn-ElFrIHx0MXgPpdeWnJGPhGxoA893K80ITNowSuekrSwDkRe6YifVrC6OQWoxXBWHNV4QtQV2L21p5txgMWUnxy18HPIbNowzT7Di1sD40jiRSDrSXV3227NTaZxH1pUGkUxYrQ8DX_ROWENZ_KJPjcYZ56a2lDypz0hVHyMYkeAevfsEC_nzQyjsplb4LzGXHuIMiKWWaqmvllAPhebBb_QfhjzPgu91i9nbygTXO-l79ndXryfLQd3gsc9UwZ3NXojqhEx7S_W",
+            link: "https://www.edx.org/course/cloud-architecture"
+          },
+          {
+            id: "market-psychology",
+            title: "Behavioral Economics & Market Psychology",
+            category: "Business & Strategy",
+            match: 92,
+            price: "275.00",
+            image: "https://lh3.googleusercontent.com/aida-public/AB6AXuAFolK9I5dftlip1Q-nj4q8PUvxpR4YjZQp69vaz5XcvmKtqUitmrnPXUtK01RJ2js6a0sCG3UK0M-atJU_V4CdrGsoeq48Nx8DJeCrqxV8nKoUJBvCN0oGcqY8P78BZDEeVIbgUHHqifBLjGpkX9i-5eFzz4tUHeF5zAhTLwG1Lu80u0kdpAjzriIv7Bae-IDJeqtGB9w_zqwyg4gSlHtWPJMbwhJ13avlg0VEVeT0SxbELgkARVIVHwpgWZzv4rErIe3K6YO3RA1s",
+            link: "https://www.coursera.org/learn/market-psychology"
+          },
+          {
+            id: "dsa-mastery",
+            title: "Data Structures & Algorithms Mastery",
+            category: "Software Engineering",
+            match: 95,
+            price: "299.00",
+            image: "https://lh3.googleusercontent.com/aida-public/AB6AXuDMll_v59WjRrl3ervIDx2Z8PesiHWb1XPjnriuAc50frZqIrxnvHQFZgJbuwFAftIl_MHbjfBVsnAMb6RHeFyFCkFykBSgsf26Xb7WS9CzXqEKyE7LsEOTWsNDcQIuMtbuMhCYFnfeN6jqW1YvyxWjx_g1lssIXiplw2nBDXv7-qGSgNGvb-ayAv8Ti1fj9jkgCxMsPVlPcA6NDgoH0KnfTPpdzkLvEeJe1w16WIV2TeKfYBL3w6mKdQ1czMsME27kDpLQGEYvA_GX",
+            link: "https://www.coursera.org/specializations/data-structures-algorithms"
+          },
+          {
+            id: "cybersecurity-intro",
+            title: "Introduction to Cybersecurity",
+            category: "Cybersecurity & InfoSec",
+            match: 90,
+            price: "199.00",
+            image: "https://lh3.googleusercontent.com/aida-public/AB6AXuDYWRf02uRBA2ERTFvZdC6xU8rj0qUHPVNBIFXBOHWNuMgspvioL03UzBkaK7BJ-gLztILPGv9yvtOLq3-w__4qFhfciCIj7FFADH1zivZX2QN5MIx0zhYbpkRPqgloERiWdDLlebGV_U1e6bV7D7mYxItn6N7flX1BvzrAmNw1ZwBZYOzpzHUk4kF0FZtxCgFaXcmEJ_7xeADVozoKKfSmLe51aFZi8D4gC-fAEBURQmGtnV_sSc0UiLKZmo3U-H9uIUsl4Gd5U8MZ",
+            link: "https://www.edx.org/course/cybersecurity-fundamentals"
+          },
+          {
+            id: "ml-foundations",
+            title: "Machine Learning Foundations",
+            category: "Data Science & AI",
+            match: 97,
+            price: "299.00",
+            image: "https://lh3.googleusercontent.com/aida-public/AB6AXuCmOkXPl-pZqHsSdPSTIWtgS945BlF5olREcW8zY8tjlTrHFL3vzSVJRZGUxZ3hT6Xs0dbQ6wHleWzDVnn8m2WvvJmrF0674LHZ_ZF4dnoVjnOQByrSjZZW7EyHPSD4uhj7EXiV-kjgp_0NIB_mUMfyj56LKht3Wd2OGmqUc1idIKM1Ohaf-SMR7FThBLjfCDGqbzo6CclpniD1GSR9Rthg5qnEHfX8BJsqvExk1vityULtrgWsjyP2pr5MvJVWDnWYqT993330SAY7",
+            link: "https://www.coursera.org/learn/machine-learning"
+          },
+          {
+            id: "fullstack-web",
+            title: "Full-Stack Web Development",
+            category: "Web Development",
+            match: 94,
+            price: "249.00",
+            image: "https://lh3.googleusercontent.com/aida-public/AB6AXuA9WzP-umOsZO2m876OBfodUJDWvq5Yymdiz3H6nEHXja5v66srGXKTHPrCOTi8qGVREnr-MHvuyoY7fpfBPyfwRfrfLIyj1arz2vDIuD0v2Y-fjH4FGT3FHtrzlFuHm2JkbzVITgb2ecd774cnOg_7I0hsRoTR0sQfsofHBCFoTfwqO46Wq227IO-dIG-e2zQZAb54dAH-6IKsqr1cezx-019KbZvGoXozRzbdMLcYPbUsLDOgm2Oma6t44-pNtFJC_DbiPJwl0zub",
+            link: "https://www.udemy.com/course/the-web-developer-bootcamp/"
+          },
+          {
+            id: "pm-masterclass",
+            title: "Product Management Masterclass",
+            category: "Product Management",
+            match: 89,
+            price: "199.00",
+            image: "https://lh3.googleusercontent.com/aida-public/AB6AXuCgvbGaWwemuj8_caXl3y3cFfyQCCpFcScw3_E31GmsKU19ur2L42iMEfzD3AtL9RNKYPA3HWbr1PlKX0BKBsP57UYXzyRxwXxrBbB0ro_gMrcNjEnHmDItdqS6c0D67gEzYqx_PxnTKz60zjs6ruNMO8TwIb2lV8XF4wj8exAValWjqJKiaWyFqUFy4sdH9DpFNANu0tzFg5jtS6XX0rDa4WamVm4QcQmGHuzkI0HfCHiT-M0uvOj40k_YDANRvxx5zQVRDXxdPOTV",
+            link: "https://www.coursera.org/specializations/product-management"
+          },
+          {
+            id: "devops-pipelines",
+            title: "DevOps & CI/CD Pipelines",
+            category: "Infrastructure & Operations",
+            match: 91,
+            price: "249.00",
+            image: "https://lh3.googleusercontent.com/aida-public/AB6AXuDgdPhzoYOHlShWH2VIMyoYQBR8CrdP5IshCQNdd8gyY00UBBqs4UTvaS--99YIcuWTwY8HnmQJo49Vn9Ak59PXP6pmqVBvgsU90FVAJzXDyCJkEvSd0d9P9W6mmz2RhvcaCnmYBZRXC8hdoZOdJEfmiRDO390P91EEAb149hHOCTkp5QSYGCDOZdMPx_kFuwOxbO3F8Dm0S472SBH5-JygKtsMRwm6LCDt484eKZtBiYVW2nY-TvfVAd6CGy8liWIU0Q6_Ot179u2x",
+            link: "https://www.edx.org/course/devops-pipelines"
+          }
+        ];
+
+        function calculateCourseMatch(course, userSkills) {
+          if (course.isUploaded && course.match) {
+            return course.match;
+          }
+          if (!userSkills || userSkills.length === 0) {
+            return course.match || 75;
+          }
+          const titleLower = course.title.toLowerCase();
+          const catLower = course.category.toLowerCase();
+          let matches = 0;
+          userSkills.forEach(skill => {
+            const s = skill.toLowerCase();
+            if (titleLower.includes(s) || catLower.includes(s)) {
+              matches++;
+            }
+          });
+          if (matches > 0) {
+            return Math.min(99, 85 + matches * 5);
+          } else {
+            let hash = 0;
+            for (let i = 0; i < course.id.length; i++) {
+              hash += course.id.charCodeAt(i);
+            }
+            return 70 + (hash % 10);
+          }
+        }
+
+        function appendCourseToCategoryGrid(course) {
+            const cat = (course.category || '').toLowerCase();
+            let gridId = 'designCoursesGrid'; // default
+            
+            if (cat.includes('engineering') || cat.includes('cloud') || cat.includes('software') || cat.includes('dev') || cat.includes('cyber') || cat.includes('infra') || cat.includes('data') || cat.includes('pipeline') || cat.includes('tech')) {
+                gridId = 'engineeringCoursesGrid';
+            } else if (cat.includes('business') || cat.includes('product') || cat.includes('market') || cat.includes('finance') || cat.includes('management') || cat.includes('strategy') || cat.includes('sales') || cat.includes('marketing')) {
+                gridId = 'businessCoursesGrid';
+            }
+            
+            const grid = document.getElementById(gridId);
+            if (!grid) return;
+            
+            const card = document.createElement('div');
+            card.className = 'glass-card course-card p-5 rounded-[24px] flex flex-col hover:scale-[1.02] transition-transform duration-300 cursor-pointer';
+            card.setAttribute('onclick', `goToCoursePlayer('${course.id}')`);
+            
+            const imgUrl = course.image || 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=600&auto=format&fit=crop';
+            
+            card.innerHTML = `
+              <div class="h-40 rounded-xl overflow-hidden mb-4 bg-secondary-container relative">
+                <img class="w-full h-full object-cover" src="${imgUrl}"/>
+              </div>
+              <h3 class="font-headline-md text-[18px] text-[#471A70] mb-1">${course.title}</h3>
+              <p class="text-on-surface-variant text-xs mb-4 flex-grow">${course.category || 'General Pathway'}</p>
+              <div class="flex justify-between items-center pt-3 border-t border-purple-950/10">
+                <span class="font-bold text-primary">Rs. ${course.price || '199.00'}</span>
+                <button onclick="handleQuickApply(event)" data-link="${course.link || '#'}" class="bg-primary text-on-primary px-4 py-1.5 rounded-full font-bold text-[11px] hover:scale-105 active:scale-95 transition-all focus:outline-none">Apply</button>
+              </div>
+            `;
+            
+            grid.insertBefore(card, grid.firstChild);
+        }
+
+        function loadBackendCourses() {
+          const token = localStorage.getItem('supabase_access_token') || 'mock_token_student';
+          const origin = window.location.origin;
+          const apiBase = (!origin || origin.includes('localhost:3000')) ? 'http://localhost:8080' : '';
+          fetch(apiBase + '/api/courses', {
+            headers: {
+              'Authorization': `Bearer ${token}`
+            }
+          })
+          .then(res => {
+            if (!res.ok) throw new Error('Failed to fetch courses');
+            return res.json();
+          })
+          .then(backendCourses => {
+            console.log("Fetched backend courses: ", backendCourses);
+            backendCourses.forEach(bc => {
+              const existing = allCatalogCourses.find(c => c.id === bc.id || c.title === bc.title);
+              if (!existing) {
+                allCatalogCourses.unshift({
+                  id: bc.id,
+                  title: bc.title,
+                  category: bc.category || "General",
+                  match: Number(bc.match) || 90,
+                  price: bc.price || "199.00",
+                  image: bc.image || 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=600&auto=format&fit=crop',
+                  link: bc.link || '#',
+                  isUploaded: true
+                });
+                
+                // Dynamically append course card to corresponding category section
+                appendCourseToCategoryGrid(bc);
+              } else {
+                existing.isUploaded = true;
+              }
+            });
+            renderRecommendations();
+          })
+          .catch(err => {
+            console.error(err);
+            renderRecommendations();
+          });
+        }
+
+        function renderRecommendations() {
+            const grid = document.getElementById('aiTailoredGrid');
+            if (grid) {
+                const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
+                const userSkills = currentUser.skills || [];
+
+                allCatalogCourses.forEach(course => {
+                    course.match = calculateCourseMatch(course, userSkills);
+                });
+
+                // Sort by isUploaded descending first, then by match score descending
+                allCatalogCourses.sort((a, b) => {
+                    if (a.isUploaded && !b.isUploaded) return -1;
+                    if (!a.isUploaded && b.isUploaded) return 1;
+                    return b.match - a.match;
+                });
+
+                // Slice to top 6 recommended courses
+                const recommended = allCatalogCourses.slice(0, 6);
+
+                grid.innerHTML = recommended.map((course, idx) => `
+                    <div class="min-w-[340px] ai-recommendation-card p-6 rounded-[32px] snap-start spring-interaction cursor-pointer group" onclick="goToCoursePlayer('${course.id}')">
+                        <div class="h-40 rounded-2xl overflow-hidden mb-4 bg-primary-container relative">
+                            <img class="w-full h-full object-cover mix-blend-overlay opacity-80" src="${course.image}"/>
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+                            <div class="absolute bottom-3 left-3 bg-white/20 backdrop-blur-md px-3 py-1 rounded-full text-white text-label-sm border border-white/30">${course.match}% Match</div>
+                        </div>
+                        <h3 class="font-headline-md text-headline-md mb-1">${course.title}</h3>
+                        <p class="text-on-surface-variant font-label-md mb-4 italic">${course.category}</p>
+                        <div class="flex justify-between items-center">
+                            <span class="font-bold text-primary">$${course.price}</span>
+                            <button onclick="handleQuickApply(event)" data-link="${course.link}" class="bg-primary text-on-primary px-5 py-2 rounded-full font-bold text-xs hover:scale-105 active:scale-95 transition-all flex items-center justify-center border-none focus:outline-none">Apply</button>
+                        </div>
+                    </div>
+                `).join('');
+            }
+        }
+
+        window.goToCoursePlayer = function(courseId) {
+            localStorage.setItem('activeStudentCourseId', courseId);
+            if (window.parent && window.parent.App && typeof window.parent.App.navigate === 'function') {
+                window.parent.App.navigate('video');
+            } else {
+                window.location.hash = '#/student/courses/video?id=' + courseId;
+            }
+        };
+
+        window.addEventListener('DOMContentLoaded', () => {
+            loadBackendCourses();
+            
+            // Map all static course cards to the internal Course Player
+            setTimeout(() => {
+                document.querySelectorAll('.course-card').forEach(card => {
+                    if (card.hasAttribute('onclick')) return;
+                    const titleEl = card.querySelector('h3');
+                    if (titleEl) {
+                        const titleText = titleEl.textContent.trim();
+                        const id = titleText.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+                        
+                        card.setAttribute('onclick', `goToCoursePlayer('${id}')`);
+                        
+                        const applyBtn = card.querySelector('button');
+                        if (applyBtn) {
+                            applyBtn.setAttribute('onclick', `handleQuickApply(event)`);
+                        }
+                    }
+                });
+            }, 500);
+        });
+
+        window.handleQuickApply = function(event) {
+            if (event) event.preventDefault();
+            event.stopPropagation();
+            const target = event.currentTarget || event.target;
+            const card = target.closest('.course-card, .ai-recommendation-card, .glass-card');
+            
+            let courseId = 'ux-research';
+            if (card) {
+                const titleEl = card.querySelector('h3');
+                if (titleEl) {
+                    const titleText = titleEl.innerText.trim().toLowerCase();
+                    const matched = allCatalogCourses.find(c => c.title.toLowerCase() === titleText);
+                    if (matched) {
+                        courseId = matched.id;
+                    }
+                }
+            }
+            
+            goToCoursePlayer(courseId);
+        };
+
+        window.renderCourses = function(query) {
+            query = (query || '').toLowerCase().trim();
+            const cards = document.querySelectorAll('.course-card, .ai-recommendation-card');
+            cards.forEach(card => {
+                const title = (card.querySelector('h3') ? card.querySelector('h3').textContent : '').toLowerCase();
+                const desc = (card.querySelector('p') ? card.querySelector('p').textContent : '').toLowerCase();
+                if (title.includes(query) || desc.includes(query)) {
+                    card.style.display = '';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+            
+            // Also hide or show sections depending on whether they have visible cards
+            const sections = document.querySelectorAll('section');
+            sections.forEach(sec => {
+                const visibleCards = sec.querySelectorAll('.course-card:not([style*="display: none"]), .ai-recommendation-card:not([style*="display: none"])');
+                const hasCards = sec.querySelectorAll('.course-card, .ai-recommendation-card').length > 0;
+                if (hasCards) {
+                    if (visibleCards.length === 0 && query !== '') {
+                        sec.style.display = 'none';
+                    } else {
+                        sec.style.display = '';
+                    }
+                }
+            });
+        };
+    </script>
+</body></html>

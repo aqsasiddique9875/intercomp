@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/>
+  <title>Systems Limited | Job Postings</title>
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+  <!-- Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            primary: "#8731a3",
+            secondary: "#4D9EFA",
+            background: "#fff7fb",
+            outline: "#817381",
+            "glass-fill": "rgba(255, 255, 255, 0.45)",
+            "glass-border": "rgba(255, 255, 255, 0.6)"
+          },
+          borderRadius: {
+            xxl: "24px"
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      background-color: #DCE4F7;
+      -webkit-tap-highlight-color: transparent;
+      font-family: 'Inter', sans-serif;
+      color: #471A70;
+    }
+    .glass-card {
+      background: rgba(255, 255, 255, 0.4);
+      backdrop-filter: blur(28px);
+      -webkit-backdrop-filter: blur(28px);
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      box-shadow: 0 8px 32px 0 rgba(163, 76, 190, 0.08);
+    }
+    .animated-bg-sphere {
+      position: fixed;
+      width: 350px;
+      height: 350px;
+      border-radius: 50%;
+      filter: blur(80px);
+      z-index: -1;
+      opacity: 0.5;
+      animation: float 20s infinite ease-in-out;
+    }
+    @keyframes float {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(50px, -50px) scale(1.1); }
+    }
+    /* Hide scrollbar */
+    .hide-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .hide-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+</head>
+<body class="antialiased overflow-x-hidden pb-32">
+  <!-- Animated Background Spheres -->
+  <div class="animated-bg-sphere bg-purple-300" style="top: -50px; left: -50px; animation-delay: 0s;"></div>
+  <div class="animated-bg-sphere bg-blue-200" style="bottom: -100px; right: -50px; animation-delay: -5s;"></div>
+
+  <!-- Top AppBar -->
+  <header class="fixed top-0 left-0 right-0 max-w-md mx-auto w-full z-50 bg-white/45 backdrop-blur-[28px] border-b border-white/50 shadow-[0_4px_20px_0_rgba(163,76,190,0.06)] flex justify-between items-center px-5 h-[64px]">
+    <div class="flex items-center gap-3">
+      <div onclick="window.parent.postMessage({ type: 'NAVIGATE', view: 'company-profile' }, '*')" class="w-9 h-9 rounded-full border border-white/80 overflow-hidden shadow-sm cursor-pointer active:scale-95 transition-transform">
+        <img alt="Recruiter Avatar" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDIt827WcUwR9RknikfNiRLVtA9sbTUiLtd0n3jB3z6G-LcVgOH2Q1LSJ95e5CzDJIpIJ5MW47QlldiC3oQ47YxdkpT7yxVIKybu0-SFEgAGF_-PGnr3lHEC2mUOiChHzQlVzeJegHnlKaP42BDNxDuJvyd11-d5rEyg9kglcvwsUMj8OQcfs2DaPaRtXqQYpTnlk1DECitBMwFvdSLRPmO34dRSZsAKs6xpqv5VeKZ0k2W_RiT0X9pBx2iOKk789tArk1DHtKiKeaq"/>
+      </div>
+      <h1 class="font-bold text-base text-primary">RecruiterPro</h1>
+    </div>
+    <div class="flex items-center gap-2">
+      <button class="w-9 h-9 rounded-full bg-white/40 flex items-center justify-center text-primary shadow-sm active:scale-95 transition-transform"><span class="material-symbols-outlined text-[20px]">notifications</span></button>
+      <button class="w-9 h-9 rounded-full bg-white/40 flex items-center justify-center text-primary shadow-sm active:scale-95 transition-transform"><span class="material-symbols-outlined text-[20px]">settings</span></button>
+    </div>
+  </header>
+
+  <main class="mt-[84px] px-5 max-w-md mx-auto space-y-5">
+    
+    <!-- Title Area -->
+    <section class="text-left py-1">
+      <h2 class="text-xl font-extrabold text-[#471A70] tracking-tight">Job Postings</h2>
+      <p class="text-xs text-outline font-medium mt-1">Manage and track your open opportunities</p>
+    </section>
+
+    <!-- Search Bar -->
+    <section>
+      <div class="relative flex items-center glass-card rounded-full px-4 h-11">
+        <span class="material-symbols-outlined text-outline text-[18px] mr-2">search</span>
+        <input id="jobSearchInput" class="bg-transparent border-none focus:ring-0 text-xs w-full placeholder:text-outline/60 text-on-background" placeholder="Search postings by title or department..." type="text" oninput="filterJobs()"/>
+      </div>
+    </section>
+
+    <!-- Filter Chips -->
+    <section class="flex gap-2 overflow-x-auto hide-scrollbar pb-1">
+      <button onclick="setStatusFilter('all')" id="filter-all" class="bg-primary text-white text-xs font-bold px-4 py-2 rounded-full shadow-md active:scale-95 transition-transform shrink-0">All Posts</button>
+      <button onclick="setStatusFilter('live')" id="filter-live" class="bg-white/50 border border-white/70 text-outline text-xs font-bold px-4 py-2 rounded-full active:scale-95 transition-transform shrink-0">Active (3)</button>
+      <button onclick="setStatusFilter('draft')" id="filter-draft" class="bg-white/50 border border-white/70 text-outline text-xs font-bold px-4 py-2 rounded-full active:scale-95 transition-transform shrink-0">Drafts (1)</button>
+    </section>
+
+    <!-- 2-Column Job Grid -->
+    <section id="jobsGrid" class="grid grid-cols-2 gap-4">
+      <!-- Grid items will be dynamically rendered here -->
+    </section>
+
+  </main>
+
+  <!-- Floating Action Button -->
+  <button onclick="if(parent && parent.App && typeof parent.App.navigate === 'function') { parent.App.navigate('company-job-creator'); } else { window.location.href='mobile_b8453ea8503645b49e74d4080f3f56f6_Job_Creator_Form_COM-13.html'; }" class="fixed bottom-24 right-5 w-14 h-14 bg-primary text-white rounded-full shadow-2xl flex items-center justify-center active:scale-90 transition-transform z-40">
+    <span class="material-symbols-outlined text-2xl font-bold">add</span>
+  </button>
+
+  <!-- Bottom Navigation Bar Placeholder -->
+  <nav id="bottom-nav"></nav>
+
+  <script>
+    // Mock Job Postings Data for Systems Limited
+    const jobsData = [
+      {
+        id: "se_intern",
+        title: "Software Engineer Intern",
+        dept: "Engineering",
+        posted: "Posted 2d ago",
+        applied: 247,
+        views: "1.8K",
+        status: "live",
+        icon: "code"
+      },
+      {
+        id: "ux_intern",
+        title: "UI/UX Designer Intern",
+        dept: "Product",
+        posted: "Posted 5d ago",
+        applied: 183,
+        views: "2.1K",
+        status: "live",
+        icon: "palette"
+      },
+      {
+        id: "da_intern",
+        title: "Data Analyst Intern",
+        dept: "Finance",
+        posted: "Posted 1w ago",
+        applied: 312,
+        views: "4.9K",
+        status: "live",
+        icon: "analytics"
+      },
+      {
+        id: "mkt_intern",
+        title: "Marketing Intern",
+        dept: "Marketing",
+        posted: "Draft",
+        applied: 0,
+        views: "0",
+        status: "draft",
+        icon: "campaign"
+      }
+    ];
+
+    let activeFilter = 'all';
+
+    function setStatusFilter(filterVal) {
+      activeFilter = filterVal;
+      
+      // Update chip styles
+      ['all', 'live', 'draft'].forEach(f => {
+        const btn = document.getElementById('filter-' + f);
+        if (btn) {
+          if (f === filterVal) {
+            btn.className = "bg-primary text-white text-xs font-bold px-4 py-2 rounded-full shadow-md active:scale-95 transition-transform shrink-0";
+          } else {
+            btn.className = "bg-white/50 border border-white/70 text-outline text-xs font-bold px-4 py-2 rounded-full active:scale-95 transition-transform shrink-0";
+          }
+        }
+      });
+
+      renderJobsGrid();
+    }
+
+    function filterJobs() {
+      renderJobsGrid();
+    }
+
+    function renderJobsGrid() {
+      const grid = document.getElementById('jobsGrid');
+      if (!grid) return;
+
+      const searchQuery = document.getElementById('jobSearchInput').value.toLowerCase().trim();
+
+      const filtered = jobsData.filter(job => {
+        // Status filter
+        if (activeFilter !== 'all' && job.status !== activeFilter) {
+          return false;
+        }
+        // Search query
+        if (searchQuery && !job.title.toLowerCase().includes(searchQuery) && !job.dept.toLowerCase().includes(searchQuery)) {
+          return false;
+        }
+        return true;
+      });
+
+      if (filtered.length === 0) {
+        grid.innerHTML = `
+          <div class="col-span-2 text-center py-12 text-outline font-medium text-xs">
+            No job postings found
+          </div>
+        `;
+        return;
+      }
+
+      grid.innerHTML = filtered.map(job => {
+        const isLive = job.status === 'live';
+        const badgeBg = isLive ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-700';
+        
+        return `
+          <div class="glass-card rounded-3xl p-4 flex flex-col justify-between h-44 text-left active:scale-[0.98] transition-transform duration-200 cursor-pointer">
+            <!-- Card Header -->
+            <div class="flex justify-between items-start">
+              <div class="w-8 h-8 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
+                <span class="material-symbols-outlined text-lg">${job.icon}</span>
+              </div>
+              <span class="px-2 py-0.5 rounded-full ${badgeBg} font-bold text-[9px] uppercase tracking-wider">${job.status}</span>
+            </div>
+            
+            <!-- Card Body -->
+            <div class="mt-3">
+              <h4 class="font-bold text-[13px] text-[#471A70] leading-snug line-clamp-2">${job.title}</h4>
+              <p class="text-[10px] text-outline mt-0.5 font-medium">${job.dept}</p>
+            </div>
+
+            <!-- Card Footer -->
+            <div class="flex items-center justify-between border-t border-white/30 pt-2 mt-2">
+              <div class="flex items-center gap-2 text-[10px] text-[#471A70] font-bold">
+                <span class="flex items-center gap-0.5"><span class="material-symbols-outlined text-[12px] text-outline">group</span>${job.applied}</span>
+                <span class="flex items-center gap-0.5"><span class="material-symbols-outlined text-[12px] text-outline">visibility</span>${job.views}</span>
+              </div>
+              <div class="flex items-center gap-1.5">
+                <button onclick="alert('Opening details for ${job.title}...')" class="w-6 h-6 rounded-full bg-white/40 flex items-center justify-center text-primary shadow-sm"><span class="material-symbols-outlined text-xs">edit</span></button>
+                <button onclick="event.stopPropagation(); deleteJob('${job.id}')" class="w-6 h-6 rounded-full bg-red-50 border border-red-200 flex items-center justify-center text-red-500 shadow-sm"><span class="material-symbols-outlined text-xs">delete</span></button>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function deleteJob(id) {
+      if (confirm("Are you sure you want to delete this job posting?")) {
+        const token = localStorage.getItem('supabase_access_token') || 'mock_token_company';
+        fetch('/api/jobs/delete', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+          },
+          body: JSON.stringify({ id })
+        })
+        .then(res => res.json())
+        .then(data => {
+          if (data.success) {
+            jobsData = jobsData.filter(j => j.id !== id);
+            renderJobsGrid();
+            if (parent && parent.App && typeof parent.App.showToast === 'function') {
+              parent.App.showToast("Job posting deleted successfully", "success");
+            } else {
+              alert("Job posting deleted successfully");
+            }
+          } else {
+            alert("Error: " + (data.error || "Failed to delete"));
+          }
+        })
+        .catch(err => {
+          console.error("Delete failed:", err);
+          jobsData = jobsData.filter(j => j.id !== id);
+          renderJobsGrid();
+        });
+      }
+    }
+
+    // Initial Render
+    document.addEventListener('DOMContentLoaded', () => {
+      renderJobsGrid();
+    });
+
+    // Touch Feedback
+    document.querySelectorAll('.glass-card, button').forEach(el => {
+      el.addEventListener('touchstart', () => {
+        el.style.transform = 'scale(0.97)';
+        el.style.transition = 'transform 0.15s ease-in-out';
+      });
+      el.addEventListener('touchend', () => {
+        el.style.transform = 'scale(1)';
+      });
+    });
+  </script>
+</body>
+</html>

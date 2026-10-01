@@ -1,0 +1,1264 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Payment & Billing | EliteRecruit</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "secondary": "#a43073",
+                    "on-background": "#141b2b",
+                    "primary-fixed-dim": "#f0b0ff",
+                    "surface-dim": "#d3daef",
+                    "secondary-fixed-dim": "#ffafd3",
+                    "inverse-surface": "#293040",
+                    "on-primary-fixed": "#330044",
+                    "secondary-container": "#fc79bd",
+                    "surface-container-high": "#e1e8fd",
+                    "on-primary-container": "#f4beff",
+                    "surface-bright": "#f9f9ff",
+                    "error-container": "#ffdad6",
+                    "on-tertiary-fixed-variant": "#454747",
+                    "tertiary-container": "#57595a",
+                    "primary": "#6c1089",
+                    "tertiary-fixed-dim": "#c6c6c7",
+                    "on-tertiary": "#ffffff",
+                    "primary-container": "#8731a3",
+                    "inverse-primary": "#f0b0ff",
+                    "error": "#ba1a1a",
+                    "on-secondary-fixed-variant": "#85145a",
+                    "surface-tint": "#8d37a9",
+                    "on-tertiary-container": "#d0d0d0",
+                    "on-primary": "#ffffff",
+                    "tertiary-fixed": "#e2e2e2",
+                    "on-tertiary-fixed": "#1a1c1c",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-container": "#e9edff",
+                    "surface-variant": "#dce2f7",
+                    "surface": "#f9f9ff",
+                    "on-secondary-container": "#76014e",
+                    "secondary-fixed": "#ffd8e7",
+                    "outline": "#817381",
+                    "on-error-container": "#93000a",
+                    "outline-variant": "#d2c1d2",
+                    "on-surface": "#141b2b",
+                    "inverse-on-surface": "#edf0ff",
+                    "on-primary-fixed-variant": "#72198f",
+                    "on-error": "#ffffff",
+                    "background": "#f9f9ff",
+                    "on-surface-variant": "#4f4350",
+                    "on-secondary": "#ffffff",
+                    "tertiary": "#404242",
+                    "primary-fixed": "#fbd7ff",
+                    "on-secondary-fixed": "#3d0026",
+                    "surface-container-low": "#f1f3ff",
+                    "surface-container-highest": "#dce2f7"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "stack-sm": "8px",
+                    "stack-md": "16px",
+                    "margin-mobile": "20px",
+                    "gutter": "24px",
+                    "container-max": "1280px",
+                    "margin-desktop": "64px",
+                    "stack-lg": "32px"
+            },
+            "fontFamily": {
+                    "display-lg-mobile": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "headline-sm": ["Inter"],
+                    "label-md": ["Inter"],
+                    "body-md": ["Inter"],
+                    "headline-md": ["Inter"],
+                    "display-lg": ["Inter"]
+            },
+            "fontSize": {
+                    "display-lg-mobile": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "headline-sm": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "headline-md": ["30px", {"lineHeight": "38px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #DCE4F7;
+            overflow-x: hidden;
+        }
+        .liquid-glass {
+            background: rgba(255, 255, 255, 0.65);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        .organic-blob {
+            position: absolute;
+            filter: blur(80px);
+            z-index: -1;
+            opacity: 0.3;
+            animation: float 20s infinite alternate ease-in-out;
+        }
+        @keyframes float {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(100px, 50px) scale(1.1); }
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        /* Payment Modal */
+        .pay-overlay {
+            position: fixed; inset: 0;
+            background: rgba(10,0,25,0.55);
+            backdrop-filter: blur(6px);
+            z-index: 999999;
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+        .pay-overlay.open { display: flex; }
+        .pay-box {
+            background: #fff;
+            border-radius: 24px;
+            width: 460px;
+            max-width: 96vw;
+            box-shadow: 0 30px 80px rgba(71,26,112,0.3);
+            overflow: hidden;
+        }
+        .pay-step { display: none; }
+        .pay-step.active { display: block; }
+        .method-btn {
+            width: 100%;
+            border: 2px solid rgba(71,26,112,0.12);
+            border-radius: 16px;
+            padding: 16px 20px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            cursor: pointer;
+            background: #fff;
+            transition: all 0.2s;
+            margin-bottom: 12px;
+        }
+        .method-btn:hover, .method-btn.selected {
+            border-color: #471A70;
+            background: rgba(71,26,112,0.04);
+        }
+        .otp-input {
+            width: 52px; height: 58px;
+            border: 2px solid rgba(71,26,112,0.2);
+            border-radius: 12px;
+            font-size: 22px;
+            font-weight: 700;
+            text-align: center;
+            font-family: 'Inter', sans-serif;
+            color: #471A70;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        .otp-input:focus { border-color: #471A70; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .spinner { animation: spin 0.8s linear infinite; }
+        @keyframes pop-in {
+            0% { transform: scale(0); opacity: 0; }
+            60% { transform: scale(1.15); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        .pop-in { animation: pop-in 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
+    </style>
+</head>
+<body class="min-h-screen text-on-surface">
+<!-- ===== SHARED COMMAND CENTER NAV ===== -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,300,0,0" rel="stylesheet" id="ms-font-link"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" id="inter-font-link"/>
+<style id="shared-nav-css">
+  @import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,300,0,0&display=block');
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+  html, body { background-color: #DCE4F7 !important; }
+  body > main { margin-left: 220px !important; padding-top: 78px !important; }
+  .snav-btn:hover { background: rgba(71,26,112,0.08) !important; }
+  .snav-btn-active:hover { background: #3d1660 !important; }
+  .snav-logout:hover { background: rgba(192,41,90,0.07) !important; }
+</style>
+<aside id="shared-sidebar" style="position:fixed;left:0;top:0;height:100vh;width:220px;background:#ffffff;display:flex;flex-direction:column;padding:28px 0 20px;z-index:99999;border-right:1px solid rgba(71,26,112,0.09);box-shadow:2px 0 14px rgba(71,26,112,0.07);">
+  <!-- Title -->
+  <div style="padding:0 20px;margin-bottom:26px;">
+    <div style="font-family:'Inter',sans-serif;font-size:19px;font-weight:900;color:#1a0533;letter-spacing:-0.4px;line-height:1.2;"><span style="color:#8731a3;">Intercomp</span></div>
+    <div style="font-family:'Inter',sans-serif;font-size:10px;color:rgba(71,26,112,0.6);margin-top:3px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;">Company Portal</div>
+  </div>
+  <!-- Nav Items -->
+  <nav style="display:flex;flex-direction:column;padding:0 10px;flex:1;gap:0;overflow-y:auto;">
+    <a href="#" id="snav-dashboard" class="snav-btn" style="display:flex;align-items:center;gap:12px;padding:11px 14px;border-radius:12px;color:#2d1152;text-decoration:none;font-family:'Inter',sans-serif;font-size:12px;font-weight:600;letter-spacing:0.07em;text-transform:uppercase;cursor:pointer;background:transparent;transition:background 0.15s ease;margin:1px 0;border:none;width:100%;text-align:left;">
+      <span style="font-family:'Material Symbols Outlined';font-size:20px;font-weight:normal;font-style:normal;line-height:1;letter-spacing:normal;text-transform:none;display:inline-block;white-space:nowrap;word-wrap:normal;direction:ltr;-webkit-font-feature-settings:'liga';font-feature-settings:'liga';-webkit-font-smoothing:antialiased;color:#2d1152;flex-shrink:0;width:22px;">dashboard</span><span>Dashboard</span>
+    </a>
+    <a href="#" id="snav-jobboard" class="snav-btn" style="display:flex;align-items:center;gap:12px;padding:11px 14px;border-radius:12px;color:#2d1152;text-decoration:none;font-family:'Inter',sans-serif;font-size:12px;font-weight:600;letter-spacing:0.07em;text-transform:uppercase;cursor:pointer;background:transparent;transition:background 0.15s ease;margin:1px 0;border:none;width:100%;text-align:left;">
+      <span style="font-family:'Material Symbols Outlined';font-size:20px;font-weight:normal;font-style:normal;line-height:1;letter-spacing:normal;text-transform:none;display:inline-block;white-space:nowrap;word-wrap:normal;direction:ltr;-webkit-font-feature-settings:'liga';font-feature-settings:'liga';-webkit-font-smoothing:antialiased;color:#2d1152;flex-shrink:0;width:22px;">assignment</span><span>Job Board</span>
+    </a>
+    <a href="#" id="snav-talent" class="snav-btn" style="display:flex;align-items:center;gap:12px;padding:11px 14px;border-radius:12px;color:#2d1152;text-decoration:none;font-family:'Inter',sans-serif;font-size:12px;font-weight:600;letter-spacing:0.07em;text-transform:uppercase;cursor:pointer;background:transparent;transition:background 0.15s ease;margin:1px 0;border:none;width:100%;text-align:left;">
+      <span style="font-family:'Material Symbols Outlined';font-size:20px;font-weight:normal;font-style:normal;line-height:1;letter-spacing:normal;text-transform:none;display:inline-block;white-space:nowrap;word-wrap:normal;direction:ltr;-webkit-font-feature-settings:'liga';font-feature-settings:'liga';-webkit-font-smoothing:antialiased;color:#2d1152;flex-shrink:0;width:22px;">person_search</span><span>Talent Pool</span>
+    </a>
+    <a href="#" id="snav-postings" class="snav-btn" style="display:flex;align-items:center;gap:12px;padding:11px 14px;border-radius:12px;color:#2d1152;text-decoration:none;font-family:'Inter',sans-serif;font-size:12px;font-weight:600;letter-spacing:0.07em;text-transform:uppercase;cursor:pointer;background:transparent;transition:background 0.15s ease;margin:1px 0;border:none;width:100%;text-align:left;">
+      <span style="font-family:'Material Symbols Outlined';font-size:20px;font-weight:normal;font-style:normal;line-height:1;letter-spacing:normal;text-transform:none;display:inline-block;white-space:nowrap;word-wrap:normal;direction:ltr;-webkit-font-feature-settings:'liga';font-feature-settings:'liga';-webkit-font-smoothing:antialiased;color:#2d1152;flex-shrink:0;width:22px;">work</span><span>Postings</span>
+    </a>
+    <a href="#" id="snav-kanban" class="snav-btn" style="display:flex;align-items:center;gap:12px;padding:11px 14px;border-radius:12px;color:#2d1152;text-decoration:none;font-family:'Inter',sans-serif;font-size:12px;font-weight:600;letter-spacing:0.07em;text-transform:uppercase;cursor:pointer;background:transparent;transition:background 0.15s ease;margin:1px 0;border:none;width:100%;text-align:left;">
+      <span style="font-family:'Material Symbols Outlined';font-size:20px;font-weight:normal;font-style:normal;line-height:1;letter-spacing:normal;text-transform:none;display:inline-block;white-space:nowrap;word-wrap:normal;direction:ltr;-webkit-font-feature-settings:'liga';font-feature-settings:'liga';-webkit-font-smoothing:antialiased;color:#2d1152;flex-shrink:0;width:22px;">groups</span><span>Applicants</span>
+    </a>
+    <a href="#" id="snav-scheduler" class="snav-btn" style="display:flex;align-items:center;gap:12px;padding:11px 14px;border-radius:12px;color:#2d1152;text-decoration:none;font-family:'Inter',sans-serif;font-size:12px;font-weight:600;letter-spacing:0.07em;text-transform:uppercase;cursor:pointer;background:transparent;transition:background 0.15s ease;margin:1px 0;border:none;width:100%;text-align:left;">
+      <span style="font-family:'Material Symbols Outlined';font-size:20px;font-weight:normal;font-style:normal;line-height:1;letter-spacing:normal;text-transform:none;display:inline-block;white-space:nowrap;word-wrap:normal;direction:ltr;-webkit-font-feature-settings:'liga';font-feature-settings:'liga';-webkit-font-smoothing:antialiased;color:#2d1152;flex-shrink:0;width:22px;">event_available</span><span>Interviews</span>
+    </a>
+    <a href="#" id="snav-analytics" class="snav-btn" style="display:flex;align-items:center;gap:12px;padding:11px 14px;border-radius:12px;color:#2d1152;text-decoration:none;font-family:'Inter',sans-serif;font-size:12px;font-weight:600;letter-spacing:0.07em;text-transform:uppercase;cursor:pointer;background:transparent;transition:background 0.15s ease;margin:1px 0;border:none;width:100%;text-align:left;">
+      <span style="font-family:'Material Symbols Outlined';font-size:20px;font-weight:normal;font-style:normal;line-height:1;letter-spacing:normal;text-transform:none;display:inline-block;white-space:nowrap;word-wrap:normal;direction:ltr;-webkit-font-feature-settings:'liga';font-feature-settings:'liga';-webkit-font-smoothing:antialiased;color:#2d1152;flex-shrink:0;width:22px;">monitoring</span><span>Analytics</span>
+    </a>
+    <a href="#" id="snav-saved-drafts" class="snav-btn" style="display:flex;align-items:center;gap:12px;padding:11px 14px;border-radius:12px;color:#2d1152;text-decoration:none;font-family:'Inter',sans-serif;font-size:12px;font-weight:600;letter-spacing:0.07em;text-transform:uppercase;cursor:pointer;background:transparent;transition:background 0.15s ease;margin:1px 0;border:none;width:100%;text-align:left;">
+      <span style="font-family:'Material Symbols Outlined';font-size:20px;font-weight:normal;font-style:normal;line-height:1;letter-spacing:normal;text-transform:none;display:inline-block;white-space:nowrap;word-wrap:normal;direction:ltr;-webkit-font-feature-settings:'liga';font-feature-settings:'liga';-webkit-font-smoothing:antialiased;color:#2d1152;flex-shrink:0;width:22px;">drafts</span><span>Save Draft</span>
+    </a>
+    <a href="#" id="snav-payment" class="snav-btn" style="display:flex;align-items:center;gap:12px;padding:11px 14px;border-radius:12px;color:#2d1152;text-decoration:none;font-family:'Inter',sans-serif;font-size:12px;font-weight:600;letter-spacing:0.07em;text-transform:uppercase;cursor:pointer;background:transparent;transition:background 0.15s ease;margin:1px 0;border:none;width:100%;text-align:left;">
+      <span style="font-family:'Material Symbols Outlined';font-size:20px;font-weight:normal;font-style:normal;line-height:1;letter-spacing:normal;text-transform:none;display:inline-block;white-space:nowrap;word-wrap:normal;direction:ltr;-webkit-font-feature-settings:'liga';font-feature-settings:'liga';-webkit-font-smoothing:antialiased;color:#2d1152;flex-shrink:0;width:22px;">payments</span><span>Payment</span>
+    </a>
+  </nav>
+  <!-- New Job Posting Button -->
+  <div style="padding:0 12px;margin-top:14px;">
+    <button id="snav-new-posting" style="width:100%;padding:13px 0;background:#471A70;color:#fff;border:none;border-radius:999px;font-family:'Inter',sans-serif;font-weight:700;font-size:13px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:7px;box-shadow:0 4px 16px rgba(71,26,112,0.28);transition:all 0.2s;letter-spacing:0.02em;">
+      <span style="font-family:'Material Symbols Outlined';font-size:18px;font-weight:normal;font-style:normal;line-height:1;letter-spacing:normal;text-transform:none;-webkit-font-feature-settings:'liga';font-feature-settings:'liga';-webkit-font-smoothing:antialiased;color:#fff;display:inline-block;">add</span>
+      New Job Posting
+    </button>
+  </div>
+  <!-- Bottom: Help + Logout -->
+  <div style="padding:12px 10px 0;margin-top:10px;border-top:1px solid rgba(71,26,112,0.08);">
+    <a href="#" id="snav-help" style="display:flex;align-items:center;gap:11px;padding:9px 12px;border-radius:10px;color:rgba(45,17,82,0.5);text-decoration:none;font-family:'Inter',sans-serif;font-size:11.5px;font-weight:600;letter-spacing:0.07em;text-transform:uppercase;cursor:pointer;background:transparent;transition:background 0.15s;margin-bottom:2px;" class="snav-btn">
+      <span style="font-family:'Material Symbols Outlined';font-size:18px;font-weight:normal;font-style:normal;line-height:1;letter-spacing:normal;text-transform:none;-webkit-font-feature-settings:'liga';font-feature-settings:'liga';-webkit-font-smoothing:antialiased;color:rgba(71,26,112,0.4);display:inline-block;">help_outline</span>
+      Help Center
+    </a>
+    <a href="#" id="snav-logout" class="snav-logout" style="display:flex;align-items:center;gap:11px;padding:9px 12px;border-radius:10px;color:#c0295a;text-decoration:none;font-family:'Inter',sans-serif;font-size:11.5px;font-weight:600;letter-spacing:0.07em;text-transform:uppercase;cursor:pointer;background:transparent;transition:background 0.15s;">
+      <span style="font-family:'Material Symbols Outlined';font-size:18px;font-weight:normal;font-style:normal;line-height:1;letter-spacing:normal;text-transform:none;-webkit-font-feature-settings:'liga';font-feature-settings:'liga';-webkit-font-smoothing:antialiased;color:#c0295a;display:inline-block;">logout</span>
+      Log Out
+    </a>
+  </div>
+</aside>
+<style id="topbar-search-styles">
+  #topbar-search {
+    width: 144px;
+    transition: width 0.3s ease;
+  }
+  @media (min-width: 768px) {
+    #topbar-search {
+      width: 192px;
+    }
+    #topbar-search:focus {
+      width: 240px;
+    }
+  }
+  @media (min-width: 1024px) {
+    #topbar-search {
+      width: 256px;
+    }
+    #topbar-search:focus {
+      width: 320px;
+    }
+  }
+</style>
+<!-- Shared Top Bar -->
+<header id="shared-topbar" style="position:fixed;top:0;left:220px;width:calc(100vw - 220px);height:56px;background:rgba(255,255,255,0.15);backdrop-filter:blur(28px);-webkit-backdrop-filter:blur(28px);display:flex;align-items:center;justify-content:flex-end;padding:0 32px;gap:24px;z-index:99998;border-bottom:1px solid rgba(255,255,255,0.6);box-shadow:0 12px 40px 0 rgba(71,26,112,0.08);">
+  <div style="display:flex;align-items:center;gap:8px;background:rgba(255,255,255,0.2);padding:6px 16px;border-radius:999px;border:1px solid rgba(255,255,255,0.6);box-shadow:0 2px 4px rgba(0,0,0,0.02);transition:all 0.3s;">
+    <span style="font-family:'Material Symbols Outlined';font-size:18px;font-weight:normal;font-style:normal;line-height:1;letter-spacing:normal;text-transform:none;-webkit-font-feature-settings:'liga';font-feature-settings:'liga';-webkit-font-smoothing:antialiased;color:#2d1152;display:inline-block;user-select:none;">search</span>
+    <input id="topbar-search" style="background:transparent;border:none;outline:none;color:#2d1152;font-size:12px;font-family:'Inter',sans-serif;padding:0;margin:0;height:20px;line-height:20px;box-shadow:none;" placeholder="Search candidates..." type="text"/>
+  </div>
+  <div style="position:relative;cursor:pointer;display:flex;align-items:center;justify-content:center;">
+    <span style="font-family:'Material Symbols Outlined';font-size:22px;font-weight:normal;font-style:normal;line-height:1;letter-spacing:normal;text-transform:none;-webkit-font-feature-settings:'liga';font-feature-settings:'liga';-webkit-font-smoothing:antialiased;color:#2d1152;display:inline-block;">notifications</span>
+    <span style="position:absolute;top:1.5px;right:1.5px;width:8px;height:8px;background:#ff453a;border-radius:50%;border:1.5px solid #ffffff;"></span>
+  </div>
+  <span style="font-family:'Material Symbols Outlined';font-size:22px;font-weight:normal;font-style:normal;line-height:1;letter-spacing:normal;text-transform:none;-webkit-font-feature-settings:'liga';font-feature-settings:'liga';-webkit-font-smoothing:antialiased;color:#2d1152;display:inline-block;cursor:pointer;">settings</span>
+  <div style="width:40px;height:40px;border-radius:50%;overflow:hidden;cursor:pointer;border:2px solid #8731a3;box-shadow:0 2px 8px rgba(135,49,163,0.15);transition:transform 0.2s;">
+    <img alt="Profile" style="width:100%;height:100%;object-fit:cover;" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA25J-RpNqe_ribsVF3fd4mnzE6ifwHeZuVNu5AMQU2EnYpClByPq7nwtb_OW8YWdE9zHhVr_myUbTkksryul6U1vE6tYcUe2Is_Ykf44A04yPQngjPdz5xvO59lZYpyYogiOT7fWRVG0OG2uYrLcYBA_hW8xxo8YeR57ryeTXbIvT3Ziwr5FLGpOpoVx-euTPcJedNNZFG0cab6QctiazShZ8qfEjAKNGvyzlC9_fl1G_pUaR0pvuTjw1ClquEYOqjrb_2RPHXuypu"/>
+  </div>
+</header>
+<!-- Nav Wiring -->
+<script id="shared-nav-wiring">
+(function() {
+  var ACTIVE_BG = '#471A70';
+  var ACTIVE_COLOR = '#ffffff';
+  var INACTIVE_BG = 'transparent';
+  var INACTIVE_COLOR = '#2d1152';
+  var ACTIVE_ICON_COLOR = '#ffffff';
+  var INACTIVE_ICON_COLOR = '#2d1152';
+  var BASE_STYLE = "display:flex;align-items:center;gap:12px;padding:11px 14px;border-radius:12px;text-decoration:none;font-family:'Inter',sans-serif;font-size:12px;font-weight:600;letter-spacing:0.07em;text-transform:uppercase;cursor:pointer;margin:1px 0;border:none;width:100%;text-align:left;transition:background 0.15s ease;";
+  var ICON_BASE = "font-family:'Material Symbols Outlined';font-size:20px;font-weight:normal;font-style:normal;line-height:1;letter-spacing:normal;text-transform:none;display:inline-block;white-space:nowrap;word-wrap:normal;direction:ltr;-webkit-font-feature-settings:'liga';font-feature-settings:'liga';-webkit-font-smoothing:antialiased;flex-shrink:0;width:22px;";
+
+  var routes = {
+    'snav-dashboard':    'recruiter-dash',
+    'snav-jobboard':     'jobboard',
+    'snav-talent':       'talent',
+    'snav-postings':     'postings',
+    'snav-kanban':       'kanban',
+    'snav-scheduler':    'scheduler',
+    'snav-analytics':    'recruiter-analytics',
+    'snav-saved-drafts': 'saved-drafts',
+    'snav-payment':      'payment'
+  };
+
+  function navigate(dest) {
+    if (window.parent && window.parent.App) window.parent.App.navigate(dest);
+  }
+
+  function setActive(route) {
+    var reverseMap = {};
+    Object.keys(routes).forEach(function(k) { reverseMap[routes[k]] = k; });
+    var activeId = reverseMap[route];
+    Object.keys(routes).forEach(function(id) {
+      var el = document.getElementById(id);
+      if (!el) return;
+      var icon = el.querySelector('span:first-child');
+      if (id === activeId) {
+        el.style.cssText = BASE_STYLE + 'background:' + ACTIVE_BG + ';color:' + ACTIVE_COLOR + ';font-weight:700;';
+        if (icon) icon.style.color = ACTIVE_ICON_COLOR;
+      } else {
+        el.style.cssText = BASE_STYLE + 'background:' + INACTIVE_BG + ';color:' + INACTIVE_COLOR + ';';
+        if (icon) icon.style.color = INACTIVE_ICON_COLOR;
+        el.onmouseover = function() { this.style.background = 'rgba(71,26,112,0.08)'; };
+        el.onmouseout  = function() { this.style.background = INACTIVE_BG; };
+      }
+    });
+  }
+
+  // Wire clicks
+  Object.keys(routes).forEach(function(id) {
+    var el = document.getElementById(id);
+    if (!el) return;
+    el.addEventListener('click', function(e) { e.preventDefault(); navigate(routes[id]); });
+  });
+
+  // New Job Posting button
+  var btn = document.getElementById('snav-new-posting');
+  if (btn) {
+    btn.addEventListener('click', function() { navigate('job-create'); });
+    btn.addEventListener('mouseenter', function() { btn.style.opacity='0.87'; btn.style.transform='translateY(-1px)'; });
+    btn.addEventListener('mouseleave', function() { btn.style.opacity='1'; btn.style.transform='translateY(0)'; });
+  }
+
+  // Log Out
+  var logout = document.getElementById('snav-logout');
+  if (logout) {
+    logout.addEventListener('click', function(e) {
+      e.preventDefault();
+      localStorage.removeItem('isLoggedIn');
+      if (window.parent && window.parent.App) window.parent.App.navigate('landing');
+    });
+  }
+
+  // Set active from parent App
+  function trySetActive() {
+    try {
+      if (window.parent && window.parent.App && window.parent.App.activeView) {
+        setActive(window.parent.App.activeView);
+      }
+    } catch(e) {}
+  }
+  trySetActive();
+  setTimeout(trySetActive, 200);
+  window.setNavActive = setActive;
+
+  // Fix main content offset
+  var mainEl = document.querySelector('body > main');
+  if (mainEl) {
+    mainEl.style.setProperty('margin-left', '220px', 'important');
+    mainEl.style.setProperty('padding-top', '60px', 'important');
+  }
+})();
+</script>
+<!-- ===== END SHARED NAV ===== -->
+
+
+
+
+<!-- Background -->
+<div class="fixed inset-0 overflow-hidden -z-20 pointer-events-none">
+<div class="organic-blob w-[600px] h-[600px] bg-purple-300 rounded-full -top-48 -left-48"></div>
+<div class="organic-blob w-[500px] h-[500px] bg-pink-200 rounded-full bottom-0 -right-24" style="animation-delay: -5s;"></div>
+</div>
+<!-- Side Navigation -->
+
+<!-- Main Canvas -->
+<main class="ml-[220px] pt-[58px] min-h-screen">
+<!-- Top App Bar -->
+
+<!-- Content -->
+<div class="pt-[58px] px-gutter pb-stack-lg max-w-container-max mx-auto space-y-stack-lg">
+<!-- Page Heading -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+<div>
+<h2 class="font-display-lg-mobile md:font-display-lg text-display-lg-mobile md:text-display-lg text-[#471A70]" id="page-main-title">Payment & Billing</h2>
+<p class="font-body-md text-body-md text-on-surface-variant" id="page-main-subtitle">Manage your subscription, payment methods, and invoices.</p>
+</div>
+</div>
+<!-- Stats Row -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter" id="recruiter-stats-row">
+<div class="liquid-glass p-stack-lg rounded-3xl transition-transform hover:scale-[1.02] duration-200">
+<div class="flex justify-between items-start mb-2">
+<span class="p-2 bg-primary/10 rounded-xl">
+<span class="material-symbols-outlined text-[#471A70]">account_balance_wallet</span>
+</span>
+</div>
+<p class="text-on-surface-variant font-label-md text-label-md">Total Spent</p>
+<h3 class="font-headline-md text-headline-md font-bold text-[#471A70] mt-1">Rs 15,000</h3>
+<div class="mt-4 flex items-center gap-1 text-green-600 text-xs font-bold">
+<span class="material-symbols-outlined text-sm">trending_up</span>
+<span>12% from last month</span>
+</div>
+</div>
+<div class="liquid-glass p-stack-lg rounded-3xl transition-transform hover:scale-[1.02] duration-200">
+<div class="flex justify-between items-start mb-2">
+<span class="p-2 bg-secondary/10 rounded-xl">
+<span class="material-symbols-outlined text-secondary">assignment_turned_in</span>
+</span>
+</div>
+<p class="text-on-surface-variant font-label-md text-label-md">Active Jobs</p>
+<h3 class="font-headline-md text-headline-md font-bold text-[#471A70] mt-1" id="active-jobs-count">0</h3>
+<div class="mt-4 flex items-center gap-1 text-on-surface-variant text-xs">
+<span>Across departments</span>
+</div>
+</div>
+<div class="liquid-glass p-stack-lg rounded-3xl transition-transform hover:scale-[1.02] duration-200">
+<div class="flex justify-between items-start mb-2">
+<span class="p-2 bg-primary/10 rounded-xl">
+<span class="material-symbols-outlined text-[#471A70]">event</span>
+</span>
+</div>
+<p class="text-on-surface-variant font-label-md text-label-md">Next Billing Date</p>
+<h3 class="font-headline-md text-headline-md font-bold text-[#471A70] mt-1">Jul 15, 2025</h3>
+<div class="mt-4 flex items-center gap-1 text-on-surface-variant text-xs">
+<span>Auto-renew enabled</span>
+</div>
+</div>
+</div>
+<!-- Subscription & Payment Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-gutter" id="recruiter-sub-grid">
+<!-- Current Plan -->
+<div class="liquid-glass p-stack-lg rounded-3xl flex flex-col justify-between">
+<div>
+<div class="flex justify-between items-center mb-6">
+<h4 class="font-headline-sm text-headline-sm text-[#471A70]">Current Plan</h4>
+<span class="px-3 py-1 bg-primary/10 text-primary rounded-full text-xs font-bold uppercase tracking-wider">Active</span>
+</div>
+<div class="mb-8">
+<h5 class="text-xl font-bold text-primary">Basic Plan</h5>
+<p class="text-on-surface-variant font-body-md text-body-md">Rs 2,500 / month</p>
+</div>
+<ul class="space-y-4 mb-8">
+<li class="flex items-center gap-3 text-on-surface">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="font-body-md">Unlimited Job Postings</span>
+</li>
+<li class="flex items-center gap-3 text-on-surface">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="font-body-md">Advanced Talent Filters</span>
+</li>
+<li class="flex items-center gap-3 text-on-surface">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="font-body-md">Priority Support</span>
+</li>
+</ul>
+</div>
+<button class="w-full bg-[#471A70] hover:opacity-90 text-white py-4 rounded-2xl font-bold transition-all shadow-lg active:scale-95">
+Upgrade to Premium
+</button>
+</div>
+<!-- Payment Method -->
+<div class="liquid-glass p-stack-lg rounded-3xl flex flex-col justify-between">
+<div>
+<h4 class="font-headline-sm text-headline-sm text-[#471A70] mb-6">Payment Method</h4>
+<div class="bg-gradient-to-br from-[#471A70] to-[#a43073] p-8 rounded-2xl text-white shadow-2xl relative overflow-hidden mb-6">
+<div class="absolute -right-12 -top-12 w-48 h-48 bg-white/10 rounded-full blur-2xl"></div>
+<div class="absolute -left-12 -bottom-12 w-32 h-32 bg-white/10 rounded-full blur-xl"></div>
+<div class="flex justify-between items-start mb-12">
+<span class="material-symbols-outlined text-4xl">contactless</span>
+<div class="flex gap-2">
+<div class="w-10 h-6 bg-white/20 rounded-md"></div>
+<div class="w-10 h-6 bg-white/40 rounded-md"></div>
+</div>
+</div>
+<div class="space-y-4">
+<p class="text-xl tracking-[0.2em] font-mono">â€¢â€¢â€¢â€¢ â€¢â€¢â€¢â€¢ â€¢â€¢â€¢â€¢ 4242</p>
+<div class="flex justify-between items-end">
+<div>
+<p class="text-[10px] uppercase opacity-60">Card Holder</p>
+<p class="text-sm font-bold">EliteRecruit Corp</p>
+</div>
+<div>
+<p class="text-[10px] uppercase opacity-60">Expires</p>
+<p class="text-sm font-bold">12/26</p>
+</div>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-2 text-on-surface-variant mb-8 px-2">
+<span class="material-symbols-outlined text-sm">info</span>
+<p class="text-xs">Your primary payment method for recurring billing.</p>
+</div>
+</div>
+<button class="w-full border-2 border-primary/20 hover:border-primary text-primary py-4 rounded-2xl font-bold transition-all active:scale-95 flex items-center justify-center gap-2">
+<span class="material-symbols-outlined">add_card</span>
+Add New Card
+</button>
+</div>
+</div>
+<!-- Boost Job Posting -->
+<section class="space-y-stack-md" id="recruiter-boost-section">
+<div class="flex items-center justify-between">
+<h4 class="font-headline-sm text-headline-sm text-[#471A70]">Boost Job Posting</h4>
+<p class="text-sm text-on-surface-variant">Get more applicants with premium visibility</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-gutter">
+<div class="liquid-glass p-6 rounded-3xl border-2 border-primary/30 flex flex-col justify-between transition-transform hover:scale-[1.02]">
+<div>
+<div class="flex justify-between items-start mb-4">
+<span class="px-3 py-1 bg-primary text-on-primary rounded-full text-[10px] font-bold uppercase tracking-wider">Premium</span>
+<span class="material-symbols-outlined text-primary">rocket_launch</span>
+</div>
+<h5 class="font-bold text-lg text-[#471A70]">Top 1 Spot</h5>
+<p class="text-xs text-on-surface-variant mb-4">Maximum exposure at the very top of all searches.</p>
+<p class="text-xl font-bold text-primary mb-6">Rs 10,000 <span class="text-xs font-normal text-on-surface-variant">/ posting</span></p>
+</div>
+<button onclick="openPayModal('Top 1 Spot','Rs. 10,000')" class="w-full bg-[#471A70] text-white py-3 rounded-xl font-bold text-sm transition-all active:scale-95 shadow-md">Boost Now</button>
+</div>
+<div class="liquid-glass p-6 rounded-3xl flex flex-col justify-between transition-transform hover:scale-[1.02]">
+<div>
+<div class="flex justify-between items-start mb-4">
+<span class="px-3 py-1 bg-secondary/10 text-secondary rounded-full text-[10px] font-bold uppercase tracking-wider">High Visibility</span>
+<span class="material-symbols-outlined text-secondary">trending_up</span>
+</div>
+<h5 class="font-bold text-lg text-[#471A70]">Top 3 Placement</h5>
+<p class="text-xs text-on-surface-variant mb-4">Stay within the first three results for 30 days.</p>
+<p class="text-xl font-bold text-[#471A70] mb-6">Rs 5,000 <span class="text-xs font-normal text-on-surface-variant">/ posting</span></p>
+</div>
+<button onclick="openPayModal('Top 3 Placement','Rs. 5,000')" class="w-full border border-primary/20 hover:border-primary text-primary py-3 rounded-xl font-bold text-sm transition-all active:scale-95">Select Plan</button>
+</div>
+<div class="liquid-glass p-6 rounded-3xl flex flex-col justify-between transition-transform hover:scale-[1.02]">
+<div>
+<div class="flex justify-between items-start mb-4">
+<span class="px-3 py-1 bg-primary/5 text-on-surface-variant rounded-full text-[10px] font-bold uppercase tracking-wider">Increased Reach</span>
+<span class="material-symbols-outlined text-on-surface-variant">visibility</span>
+</div>
+<h5 class="font-bold text-lg text-[#471A70]">Top 10 Visibility</h5>
+<p class="text-xs text-on-surface-variant mb-4">Appear in the top 10 results for relevant searches.</p>
+<p class="text-xl font-bold text-[#471A70] mb-6">Rs 2,500 <span class="text-xs font-normal text-on-surface-variant">/ posting</span></p>
+</div>
+<button onclick="openPayModal('Top 10 Visibility','Rs. 2,500')" class="w-full border border-primary/20 hover:border-primary text-primary py-3 rounded-xl font-bold text-sm transition-all active:scale-95">Select Plan</button>
+</div>
+<div class="liquid-glass p-6 rounded-3xl flex flex-col justify-between transition-transform hover:scale-[1.02]">
+<div>
+<div class="flex justify-between items-start mb-4">
+<span class="px-3 py-1 bg-black/5 text-on-surface-variant rounded-full text-[10px] font-bold uppercase tracking-wider">Basic</span>
+<span class="material-symbols-outlined text-on-surface-variant">list_alt</span>
+</div>
+<h5 class="font-bold text-lg text-[#471A70]">Standard Posting</h5>
+<p class="text-xs text-on-surface-variant mb-4">Regular visibility in the general job listings.</p>
+<p class="text-xl font-bold text-[#471A70] mb-6">Rs 0 <span class="text-xs font-normal text-on-surface-variant">(Free)</span></p>
+</div>
+<button class="w-full border border-black/10 text-on-surface-variant py-3 rounded-xl font-bold text-sm transition-all cursor-not-allowed opacity-50" disabled>Current Plan</button>
+</div>
+</div>
+</section>
+<!-- Billing History -->
+<div class="liquid-glass rounded-3xl overflow-hidden shadow-sm" id="recruiter-billing-history">
+<div class="p-stack-lg border-b border-white/20 flex justify-between items-center">
+<h4 class="font-headline-sm text-headline-sm text-[#471A70]">Billing History</h4>
+<button class="text-primary font-bold text-sm hover:underline flex items-center gap-1">
+Download All <span class="material-symbols-outlined text-sm">download</span>
+</button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-primary/5">
+<th class="px-gutter py-4 font-label-md text-label-md text-on-surface-variant">Date</th>
+<th class="px-gutter py-4 font-label-md text-label-md text-on-surface-variant">Description</th>
+<th class="px-gutter py-4 font-label-md text-label-md text-on-surface-variant text-right">Amount (PKR)</th>
+<th class="px-gutter py-4 font-label-md text-label-md text-on-surface-variant text-center">Status</th>
+<th class="px-gutter py-4 font-label-md text-label-md text-on-surface-variant"></th>
+</tr>
+</thead>
+<tbody class="divide-y divide-black/[0.05]">
+<tr class="hover:bg-white/40 transition-colors">
+<td class="px-gutter py-5 font-body-md text-body-md text-on-surface">Jun 15, 2025</td>
+<td class="px-gutter py-5">
+<div class="font-bold text-[#471A70]">Basic Plan Monthly</div>
+<div class="text-xs text-on-surface-variant">INV-2025-089</div>
+</td>
+<td class="px-gutter py-5 font-bold text-[#471A70] text-right">Rs 2,500</td>
+<td class="px-gutter py-5 text-center">
+<span class="inline-flex items-center gap-1 px-3 py-1 bg-green-100 text-green-700 rounded-full text-xs font-bold">
+<span class="w-1.5 h-1.5 bg-green-600 rounded-full"></span> Paid
+</span>
+</td>
+<td class="px-gutter py-5 text-right">
+<button class="p-2 hover:bg-primary/10 rounded-full text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-xl">description</span>
+</button>
+</td>
+</tr>
+<tr class="hover:bg-white/40 transition-colors">
+<td class="px-gutter py-5 font-body-md text-body-md text-on-surface">May 15, 2025</td>
+<td class="px-gutter py-5">
+<div class="font-bold text-[#471A70]">Basic Plan Monthly</div>
+<div class="text-xs text-on-surface-variant">INV-2025-045</div>
+</td>
+<td class="px-gutter py-5 font-bold text-[#471A70] text-right">Rs 2,500</td>
+<td class="px-gutter py-5 text-center">
+<span class="inline-flex items-center gap-1 px-3 py-1 bg-green-100 text-green-700 rounded-full text-xs font-bold">
+<span class="w-1.5 h-1.5 bg-green-600 rounded-full"></span> Paid
+</span>
+</td>
+<td class="px-gutter py-5 text-right">
+<button class="p-2 hover:bg-primary/10 rounded-full text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-xl">description</span>
+</button>
+</td>
+</tr>
+<tr class="hover:bg-white/40 transition-colors">
+<td class="px-gutter py-5 font-body-md text-body-md text-on-surface">Apr 15, 2025</td>
+<td class="px-gutter py-5">
+<div class="font-bold text-[#471A70]">Job Post Boost</div>
+<div class="text-xs text-on-surface-variant">INV-2025-012</div>
+</td>
+<td class="px-gutter py-5 font-bold text-[#471A70] text-right">Rs 1,000</td>
+<td class="px-gutter py-5 text-center">
+<span class="inline-flex items-center gap-1 px-3 py-1 bg-green-100 text-green-700 rounded-full text-xs font-bold">
+<span class="w-1.5 h-1.5 bg-green-600 rounded-full"></span> Paid
+</span>
+</td>
+<td class="px-gutter py-5 text-right">
+<button class="p-2 hover:bg-primary/10 rounded-full text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-xl">description</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="p-4 bg-primary/5 flex justify-center">
+<button class="text-on-surface-variant hover:text-primary font-bold text-xs">View all historical transactions</button>
+</div>
+</div>
+
+<!-- Admin Billing & Platform Revenue Console (Hidden by default, shown dynamically if isAdminPortal) -->
+<div id="admin-billing-console" class="hidden space-y-stack-lg w-full">
+  <!-- Admin Stats Row -->
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+    <!-- Platform Revenue -->
+    <div class="liquid-glass p-stack-lg rounded-3xl transition-transform hover:scale-[1.02] duration-200">
+      <div class="flex justify-between items-start mb-2">
+        <span class="p-2 bg-primary/10 rounded-xl">
+          <span class="material-symbols-outlined text-[#471A70]">payments</span>
+        </span>
+      </div>
+      <p class="text-on-surface-variant font-label-md text-label-md">Total Platform Revenue</p>
+      <h3 class="font-headline-md text-headline-md font-bold text-[#471A70] mt-1" id="admin-total-revenue">Rs 0</h3>
+      <div class="mt-4 flex items-center gap-1 text-green-600 text-xs font-bold">
+        <span class="material-symbols-outlined text-sm">trending_up</span>
+        <span>Platform Sales Ledger</span>
+      </div>
+    </div>
+
+    <!-- Active Subs -->
+    <div class="liquid-glass p-stack-lg rounded-3xl transition-transform hover:scale-[1.02] duration-200">
+      <div class="flex justify-between items-start mb-2">
+        <span class="p-2 bg-secondary/10 rounded-xl">
+          <span class="material-symbols-outlined text-secondary">business</span>
+        </span>
+      </div>
+      <p class="text-on-surface-variant font-label-md text-label-md">Active Company Subscriptions</p>
+      <h3 class="font-headline-md text-headline-md font-bold text-[#471A70] mt-1" id="admin-active-subs">0</h3>
+      <div class="mt-4 flex items-center gap-1 text-on-surface-variant text-xs">
+        <span>Subscribed Recruiter Partners</span>
+      </div>
+    </div>
+
+    <!-- Course Sales -->
+    <div class="liquid-glass p-stack-lg rounded-3xl transition-transform hover:scale-[1.02] duration-200">
+      <div class="flex justify-between items-start mb-2">
+        <span class="p-2 bg-primary/10 rounded-xl">
+          <span class="material-symbols-outlined text-[#471A70]">school</span>
+        </span>
+      </div>
+      <p class="text-on-surface-variant font-label-md text-label-md">Course Sales Revenue</p>
+      <h3 class="font-headline-md text-headline-md font-bold text-[#471A70] mt-1" id="admin-course-sales">Rs 0</h3>
+      <div class="mt-4 flex items-center gap-1 text-on-surface-variant text-xs">
+        <span>Student Course Enrollments</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Company Plan Purchases Table -->
+  <div class="liquid-glass rounded-3xl overflow-hidden shadow-sm">
+    <div class="p-stack-lg border-b border-white/20 flex justify-between items-center bg-primary/5">
+      <div class="flex items-center gap-3">
+        <span class="p-2 bg-primary/10 rounded-xl text-primary flex items-center justify-center">
+          <span class="material-symbols-outlined">business_center</span>
+        </span>
+        <div>
+          <h4 class="font-headline-sm text-[18px] text-[#471A70] font-bold">Company Plan Purchases Ledger</h4>
+          <p class="text-xs text-on-surface-variant">Real-time subscription & boosts record</p>
+        </div>
+      </div>
+      <button class="text-primary font-bold text-sm hover:underline flex items-center gap-1">
+        Export CSV <span class="material-symbols-outlined text-sm">download</span>
+      </button>
+    </div>
+    <div class="overflow-x-auto">
+      <table class="w-full text-left border-collapse">
+        <thead>
+          <tr class="bg-primary/5">
+            <th class="px-gutter py-4 font-label-md text-label-md text-on-surface-variant">Txn ID</th>
+            <th class="px-gutter py-4 font-label-md text-label-md text-on-surface-variant">Company Name</th>
+            <th class="px-gutter py-4 font-label-md text-label-md text-on-surface-variant">Plan / Package</th>
+            <th class="px-gutter py-4 font-label-md text-label-md text-on-surface-variant">Purchase Date</th>
+            <th class="px-gutter py-4 font-label-md text-label-md text-on-surface-variant text-right">Amount (PKR)</th>
+            <th class="px-gutter py-4 font-label-md text-label-md text-on-surface-variant text-center">Status</th>
+          </tr>
+        </thead>
+        <tbody id="company-plans-tbody" class="divide-y divide-black/[0.05]">
+          <!-- Dynamic -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Student Course Purchases Table -->
+  <div class="liquid-glass rounded-3xl overflow-hidden shadow-sm">
+    <div class="p-stack-lg border-b border-white/20 flex justify-between items-center bg-primary/5">
+      <div class="flex items-center gap-3">
+        <span class="p-2 bg-secondary/10 rounded-xl text-secondary flex items-center justify-center">
+          <span class="material-symbols-outlined">local_library</span>
+        </span>
+        <div>
+          <h4 class="font-headline-sm text-[18px] text-[#471A70] font-bold">Student Course Purchases Ledger</h4>
+          <p class="text-xs text-on-surface-variant">Real-time academic course sales record</p>
+        </div>
+      </div>
+      <button class="text-primary font-bold text-sm hover:underline flex items-center gap-1">
+        Export CSV <span class="material-symbols-outlined text-sm">download</span>
+      </button>
+    </div>
+    <div class="overflow-x-auto">
+      <table class="w-full text-left border-collapse">
+        <thead>
+          <tr class="bg-primary/5">
+            <th class="px-gutter py-4 font-label-md text-label-md text-on-surface-variant">Txn ID</th>
+            <th class="px-gutter py-4 font-label-md text-label-md text-on-surface-variant">Student Name</th>
+            <th class="px-gutter py-4 font-label-md text-label-md text-on-surface-variant">Course Title</th>
+            <th class="px-gutter py-4 font-label-md text-label-md text-on-surface-variant">Purchase Date</th>
+            <th class="px-gutter py-4 font-label-md text-label-md text-on-surface-variant text-right">Amount (PKR)</th>
+            <th class="px-gutter py-4 font-label-md text-label-md text-on-surface-variant text-center">Status</th>
+          </tr>
+        </thead>
+        <tbody id="student-courses-tbody" class="divide-y divide-black/[0.05]">
+          <!-- Dynamic -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- Support Footer -->
+<div class="liquid-glass p-stack-lg rounded-3xl flex flex-col md:flex-row items-center justify-between gap-4">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 bg-primary/10 rounded-2xl flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">help_outline</span>
+</div>
+<div>
+<h5 class="font-bold text-[#471A70]">Need help with billing?</h5>
+<p class="text-sm text-on-surface-variant">Our support team is available 24/7 for Pakistan-based customers.</p>
+</div>
+</div>
+<button class="px-8 py-3 bg-white hover:bg-surface-container text-primary border border-primary/20 rounded-xl font-bold transition-all shadow-sm">
+Contact Support
+</button>
+</div>
+</div>
+</main>
+
+<!-- ============================================================
+     JAZZCASH / EASYPAISA PAYMENT MODAL
+============================================================ -->
+<div id="pay-overlay" class="pay-overlay" onclick="if(event.target===this)closePayModal()">
+  <div class="pay-box">
+
+    <!-- Header -->
+    <div style="background:linear-gradient(135deg,#471A70,#a43073);padding:24px 28px;display:flex;justify-content:space-between;align-items:center;">
+      <div>
+        <div style="font-family:'Inter',sans-serif;font-size:12px;font-weight:600;color:rgba(255,255,255,0.7);letter-spacing:0.06em;text-transform:uppercase;margin-bottom:4px;">Boost Job Posting</div>
+        <div id="pay-plan-name" style="font-family:'Inter',sans-serif;font-size:20px;font-weight:800;color:#fff;">Top 1 Spot</div>
+      </div>
+      <div style="text-align:right;">
+        <div style="font-family:'Inter',sans-serif;font-size:11px;color:rgba(255,255,255,0.6);">Amount</div>
+        <div id="pay-amount-show" style="font-family:'Inter',sans-serif;font-size:22px;font-weight:800;color:#fff;">Rs. 10,000</div>
+      </div>
+    </div>
+
+    <!-- STEP 1: Choose Method -->
+    <div id="step-method" class="pay-step active" style="padding:28px;">
+      <h3 style="font-family:'Inter',sans-serif;font-size:16px;font-weight:800;color:#1a0533;margin:0 0 6px;">Select Payment Method</h3>
+      <p style="font-family:'Inter',sans-serif;font-size:13px;color:rgba(71,26,112,0.55);margin:0 0 24px;">Choose your preferred mobile payment wallet</p>
+
+      <!-- JazzCash -->
+      <button class="method-btn" id="btn-jazzcash" onclick="selectMethod('jazzcash')">
+        <div style="width:52px;height:52px;border-radius:14px;background:linear-gradient(135deg,#CC0000,#FF3333);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+          <span style="font-family:'Inter',sans-serif;font-size:11px;font-weight:900;color:#fff;letter-spacing:-0.5px;">JAZZ</span>
+        </div>
+        <div style="text-align:left;flex:1;">
+          <div style="font-family:'Inter',sans-serif;font-size:15px;font-weight:700;color:#1a0533;">JazzCash</div>
+          <div style="font-family:'Inter',sans-serif;font-size:12px;color:rgba(71,26,112,0.5);">Pay via JazzCash mobile account</div>
+        </div>
+        <div style="width:20px;height:20px;border-radius:50%;border:2px solid rgba(71,26,112,0.3);" id="radio-jazzcash"></div>
+      </button>
+
+      <!-- Easypaisa -->
+      <button class="method-btn" id="btn-easypaisa" onclick="selectMethod('easypaisa')">
+        <div style="width:52px;height:52px;border-radius:14px;background:linear-gradient(135deg,#006B3C,#00A651);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+          <span style="font-family:'Inter',sans-serif;font-size:10px;font-weight:900;color:#fff;letter-spacing:-0.5px;">EASY</span>
+        </div>
+        <div style="text-align:left;flex:1;">
+          <div style="font-family:'Inter',sans-serif;font-size:15px;font-weight:700;color:#1a0533;">Easypaisa</div>
+          <div style="font-family:'Inter',sans-serif;font-size:12px;color:rgba(71,26,112,0.5);">Pay via Easypaisa mobile account</div>
+        </div>
+        <div style="width:20px;height:20px;border-radius:50%;border:2px solid rgba(71,26,112,0.3);" id="radio-easypaisa"></div>
+      </button>
+
+      <button id="btn-proceed" onclick="goToPhone()" disabled style="width:100%;padding:14px;background:#ccc;border:none;border-radius:14px;font-family:'Inter',sans-serif;font-size:14px;font-weight:700;color:#fff;cursor:not-allowed;transition:all 0.2s;margin-top:8px;">Continue →</button>
+      <button onclick="closePayModal()" style="width:100%;padding:10px;background:transparent;border:none;font-family:'Inter',sans-serif;font-size:13px;color:rgba(71,26,112,0.5);cursor:pointer;margin-top:6px;">Cancel</button>
+    </div>
+
+    <!-- STEP 2: Enter Phone -->
+    <div id="step-phone" class="pay-step" style="padding:28px;">
+      <button onclick="goStep('method')" style="display:flex;align-items:center;gap:6px;background:none;border:none;font-family:'Inter',sans-serif;font-size:13px;font-weight:600;color:#471A70;cursor:pointer;padding:0;margin-bottom:20px;">
+        <span style="font-family:'Material Symbols Outlined';font-size:18px;display:inline-block;">arrow_back</span> Back
+      </button>
+      <div id="phone-logo-area" style="display:flex;align-items:center;gap:12px;margin-bottom:20px;">
+        <div id="phone-logo" style="width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;"></div>
+        <div>
+          <div id="phone-method-name" style="font-family:'Inter',sans-serif;font-size:16px;font-weight:700;color:#1a0533;"></div>
+          <div style="font-family:'Inter',sans-serif;font-size:12px;color:rgba(71,26,112,0.5);">Enter your registered mobile number</div>
+        </div>
+      </div>
+
+      <label style="font-family:'Inter',sans-serif;font-size:12px;font-weight:600;color:rgba(71,26,112,0.6);display:block;margin-bottom:8px;">Mobile Number</label>
+      <div style="display:flex;align-items:center;border:2px solid rgba(71,26,112,0.2);border-radius:14px;overflow:hidden;margin-bottom:6px;">
+        <div style="padding:14px 16px;background:rgba(71,26,112,0.05);font-family:'Inter',sans-serif;font-size:14px;font-weight:700;color:#471A70;border-right:1px solid rgba(71,26,112,0.1);">+92</div>
+        <input id="phone-input" type="tel" maxlength="10" placeholder="3XX XXXXXXX" style="flex:1;padding:14px 16px;border:none;outline:none;font-family:'Inter',sans-serif;font-size:15px;font-weight:600;color:#1a0533;background:transparent;" oninput="onPhoneInput(this)"/>
+      </div>
+      <div id="phone-demo-hint" style="font-family:'Inter',sans-serif;font-size:12px;color:rgba(71,26,112,0.45);margin-bottom:20px;">Demo: <span onclick="fillDemoNumber()" style="color:#471A70;font-weight:700;cursor:pointer;text-decoration:underline;">3001234567</span></div>
+
+      <div style="background:rgba(71,26,112,0.05);border-radius:12px;padding:14px;margin-bottom:20px;">
+        <div style="font-family:'Inter',sans-serif;font-size:12px;color:rgba(71,26,112,0.6);margin-bottom:4px;">You will be charged</div>
+        <div id="confirm-amount" style="font-family:'Inter',sans-serif;font-size:20px;font-weight:800;color:#471A70;">Rs. 10,000</div>
+      </div>
+
+      <button id="btn-send-otp" onclick="sendOTP()" style="width:100%;padding:14px;background:#471A70;border:none;border-radius:14px;font-family:'Inter',sans-serif;font-size:14px;font-weight:700;color:#fff;cursor:pointer;">Send OTP →</button>
+      <button onclick="closePayModal()" style="width:100%;padding:10px;background:transparent;border:none;font-family:'Inter',sans-serif;font-size:13px;color:rgba(71,26,112,0.5);cursor:pointer;margin-top:6px;">Cancel</button>
+    </div>
+
+    <!-- STEP 3: OTP -->
+    <div id="step-otp" class="pay-step" style="padding:28px;text-align:center;">
+      <button onclick="goStep('phone')" style="display:flex;align-items:center;gap:6px;background:none;border:none;font-family:'Inter',sans-serif;font-size:13px;font-weight:600;color:#471A70;cursor:pointer;padding:0;margin-bottom:24px;">
+        <span style="font-family:'Material Symbols Outlined';font-size:18px;display:inline-block;">arrow_back</span> Back
+      </button>
+      <div style="width:64px;height:64px;border-radius:50%;background:rgba(71,26,112,0.08);display:flex;align-items:center;justify-content:center;margin:0 auto 16px;">
+        <span style="font-family:'Material Symbols Outlined';font-size:32px;color:#471A70;display:inline-block;">sms</span>
+      </div>
+      <h3 style="font-family:'Inter',sans-serif;font-size:17px;font-weight:800;color:#1a0533;margin:0 0 8px;">Enter OTP Code</h3>
+      <p style="font-family:'Inter',sans-serif;font-size:13px;color:rgba(71,26,112,0.55);margin:0 0 4px;">A 6-digit code was sent to</p>
+      <p id="otp-phone-display" style="font-family:'Inter',sans-serif;font-size:14px;font-weight:700;color:#471A70;margin:0 0 28px;">+92 3001234567</p>
+
+      <div style="display:flex;gap:10px;justify-content:center;margin-bottom:24px;">
+        <input class="otp-input" id="otp0" maxlength="1" type="text" inputmode="numeric" oninput="otpNext(this,0)"/>
+        <input class="otp-input" id="otp1" maxlength="1" type="text" inputmode="numeric" oninput="otpNext(this,1)"/>
+        <input class="otp-input" id="otp2" maxlength="1" type="text" inputmode="numeric" oninput="otpNext(this,2)"/>
+        <input class="otp-input" id="otp3" maxlength="1" type="text" inputmode="numeric" oninput="otpNext(this,3)"/>
+        <input class="otp-input" id="otp4" maxlength="1" type="text" inputmode="numeric" oninput="otpNext(this,4)"/>
+        <input class="otp-input" id="otp5" maxlength="1" type="text" inputmode="numeric" oninput="otpNext(this,5)"/>
+      </div>
+
+      <div style="font-family:'Inter',sans-serif;font-size:12px;color:rgba(71,26,112,0.45);margin-bottom:6px;">Demo OTP: <strong style="color:#471A70;cursor:pointer;" onclick="fillDemoOTP()">123456</strong></div>
+      <div id="otp-timer" style="font-family:'Inter',sans-serif;font-size:12px;color:rgba(71,26,112,0.45);margin-bottom:24px;">Resend in <span id="otp-countdown">30</span>s</div>
+
+      <button id="btn-verify" onclick="verifyOTP()" style="width:100%;padding:14px;background:#471A70;border:none;border-radius:14px;font-family:'Inter',sans-serif;font-size:14px;font-weight:700;color:#fff;cursor:pointer;">Verify & Pay</button>
+    </div>
+
+    <!-- STEP 4: Processing -->
+    <div id="step-processing" class="pay-step" style="padding:48px 28px;text-align:center;">
+      <div style="width:72px;height:72px;border:4px solid rgba(71,26,112,0.15);border-top:4px solid #471A70;border-radius:50%;margin:0 auto 24px;" class="spinner"></div>
+      <h3 style="font-family:'Inter',sans-serif;font-size:18px;font-weight:800;color:#1a0533;margin:0 0 8px;">Processing Payment…</h3>
+      <p style="font-family:'Inter',sans-serif;font-size:13px;color:rgba(71,26,112,0.55);margin:0;">Please wait, do not close this window.</p>
+    </div>
+
+    <!-- STEP 5: Success -->
+    <div id="step-success" class="pay-step" style="padding:40px 28px;text-align:center;">
+      <div class="pop-in" style="width:80px;height:80px;border-radius:50%;background:linear-gradient(135deg,#059669,#34d399);display:flex;align-items:center;justify-content:center;margin:0 auto 20px;">
+        <span style="font-family:'Material Symbols Outlined';font-size:40px;color:#fff;display:inline-block;">check</span>
+      </div>
+      <h3 style="font-family:'Inter',sans-serif;font-size:20px;font-weight:800;color:#1a0533;margin:0 0 8px;">Payment Successful! 🎉</h3>
+      <p id="success-desc" style="font-family:'Inter',sans-serif;font-size:13px;color:rgba(71,26,112,0.6);margin:0 0 24px;">Your job posting has been boosted.</p>
+
+      <div style="background:rgba(71,26,112,0.05);border-radius:14px;padding:18px;margin-bottom:24px;text-align:left;">
+        <div style="display:flex;justify-content:space-between;margin-bottom:10px;">
+          <span style="font-family:'Inter',sans-serif;font-size:13px;color:rgba(71,26,112,0.55);">Plan</span>
+          <span id="receipt-plan" style="font-family:'Inter',sans-serif;font-size:13px;font-weight:700;color:#1a0533;"></span>
+        </div>
+        <div style="display:flex;justify-content:space-between;margin-bottom:10px;">
+          <span style="font-family:'Inter',sans-serif;font-size:13px;color:rgba(71,26,112,0.55);">Amount Paid</span>
+          <span id="receipt-amount" style="font-family:'Inter',sans-serif;font-size:13px;font-weight:700;color:#471A70;"></span>
+        </div>
+        <div style="display:flex;justify-content:space-between;margin-bottom:10px;">
+          <span style="font-family:'Inter',sans-serif;font-size:13px;color:rgba(71,26,112,0.55);">Payment via</span>
+          <span id="receipt-method" style="font-family:'Inter',sans-serif;font-size:13px;font-weight:700;color:#1a0533;"></span>
+        </div>
+        <div style="display:flex;justify-content:space-between;">
+          <span style="font-family:'Inter',sans-serif;font-size:13px;color:rgba(71,26,112,0.55);">Transaction ID</span>
+          <span id="receipt-txn" style="font-family:'Inter',sans-serif;font-size:12px;font-weight:600;color:#471A70;font-family:monospace;"></span>
+        </div>
+      </div>
+
+      <button onclick="closePayModal()" style="width:100%;padding:14px;background:#471A70;border:none;border-radius:14px;font-family:'Inter',sans-serif;font-size:14px;font-weight:700;color:#fff;cursor:pointer;">Done ✓</button>
+    </div>
+
+  </div>
+</div>
+
+<script>
+// ===== NAV WIRING =====
+var navMap = {
+  'nav-dashboard': 'recruiter-dash',
+  'nav-jobboard': 'jobboard',
+  'nav-talent': 'talent',
+  'nav-postings': 'postings',
+  'nav-kanban': 'kanban',
+  'nav-scheduler': 'scheduler',
+  'nav-analytics': 'recruiter-analytics',
+  'nav-saved-drafts': 'saved-drafts',
+  'nav-payment': 'payment'
+};
+Object.keys(navMap).forEach(function(id) {
+  var el = document.getElementById(id);
+  if (el) el.addEventListener('click', function(e) {
+    e.preventDefault();
+    if (window.parent && window.parent.App) window.parent.App.navigate(navMap[id]);
+  });
+});
+
+// ===== ACTIVE JOBS COUNT FROM LOCALSTORAGE =====
+var published = JSON.parse(localStorage.getItem('publishedJobs') || '[]');
+var countEl = document.getElementById('active-jobs-count');
+if (countEl) countEl.textContent = published.length || 4;
+
+// ===== MICRO INTERACTIONS =====
+document.querySelectorAll('.liquid-glass').forEach(function(card) {
+  card.addEventListener('mouseenter', function() {
+    card.style.borderColor = 'rgba(71, 26, 112, 0.3)';
+  });
+  card.addEventListener('mouseleave', function() {
+    card.style.borderColor = 'rgba(255, 255, 255, 0.3)';
+  });
+});
+
+// ========================
+// PAYMENT MODAL LOGIC
+// ========================
+var _selectedMethod = null;
+var _planName = '';
+var _amount = '';
+var _otpTimer = null;
+
+function openPayModal(plan, amount) {
+  _planName = plan;
+  _amount = amount;
+  _selectedMethod = null;
+  document.getElementById('pay-plan-name').textContent = plan;
+  document.getElementById('pay-amount-show').textContent = amount;
+  document.getElementById('confirm-amount').textContent = amount;
+  // Reset
+  ['jazzcash','easypaisa'].forEach(function(m) {
+    document.getElementById('btn-'+m).classList.remove('selected');
+    document.getElementById('radio-'+m).style.background = '';
+    document.getElementById('radio-'+m).style.borderColor = 'rgba(71,26,112,0.3)';
+  });
+  document.getElementById('btn-proceed').disabled = true;
+  document.getElementById('btn-proceed').style.background = '#ccc';
+  document.getElementById('btn-proceed').style.cursor = 'not-allowed';
+  document.getElementById('phone-input').value = '';
+  [0,1,2,3,4,5].forEach(function(i){ document.getElementById('otp'+i).value=''; });
+  goStep('method');
+  document.getElementById('pay-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closePayModal() {
+  document.getElementById('pay-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+  if (_otpTimer) { clearInterval(_otpTimer); _otpTimer = null; }
+}
+
+function goStep(step) {
+  document.querySelectorAll('.pay-step').forEach(function(el){ el.classList.remove('active'); });
+  document.getElementById('step-'+step).classList.add('active');
+}
+
+function selectMethod(method) {
+  _selectedMethod = method;
+  ['jazzcash','easypaisa'].forEach(function(m) {
+    var btn = document.getElementById('btn-'+m);
+    var radio = document.getElementById('radio-'+m);
+    if (m === method) {
+      btn.classList.add('selected');
+      radio.style.background = '#471A70';
+      radio.style.borderColor = '#471A70';
+    } else {
+      btn.classList.remove('selected');
+      radio.style.background = '';
+      radio.style.borderColor = 'rgba(71,26,112,0.3)';
+    }
+  });
+  var proceedBtn = document.getElementById('btn-proceed');
+  proceedBtn.disabled = false;
+  proceedBtn.style.background = '#471A70';
+  proceedBtn.style.cursor = 'pointer';
+}
+
+function goToPhone() {
+  if (!_selectedMethod) return;
+  // Update phone step with method info
+  var isJazz = _selectedMethod === 'jazzcash';
+  var logo = document.getElementById('phone-logo');
+  logo.style.background = isJazz ? 'linear-gradient(135deg,#CC0000,#FF3333)' : 'linear-gradient(135deg,#006B3C,#00A651)';
+  logo.innerHTML = '<span style="font-family:\'Inter\',sans-serif;font-size:10px;font-weight:900;color:#fff;">' + (isJazz ? 'JAZZ' : 'EASY') + '</span>';
+  document.getElementById('phone-method-name').textContent = isJazz ? 'JazzCash' : 'Easypaisa';
+  goStep('phone');
+}
+
+function onPhoneInput(el) {
+  el.value = el.value.replace(/\D/g, '').substring(0, 10);
+}
+
+function fillDemoNumber() {
+  document.getElementById('phone-input').value = '3001234567';
+}
+
+function sendOTP() {
+  var phone = document.getElementById('phone-input').value;
+  if (phone.length < 10) {
+    alert('Please enter a valid 10-digit mobile number (e.g. 3001234567)');
+    return;
+  }
+  document.getElementById('otp-phone-display').textContent = '+92 ' + phone.substring(0,3) + ' ' + phone.substring(3);
+  goStep('otp');
+  startOTPTimer();
+  // Auto-fill demo OTP after 1s for demo
+  setTimeout(function() { fillDemoOTP(); }, 1200);
+}
+
+function startOTPTimer() {
+  var secs = 30;
+  document.getElementById('otp-countdown').textContent = secs;
+  if (_otpTimer) clearInterval(_otpTimer);
+  _otpTimer = setInterval(function() {
+    secs--;
+    document.getElementById('otp-countdown').textContent = secs;
+    if (secs <= 0) { clearInterval(_otpTimer); document.getElementById('otp-timer').innerHTML = '<span style="color:#471A70;font-weight:700;cursor:pointer;" onclick="sendOTP()">Resend OTP</span>'; }
+  }, 1000);
+}
+
+function fillDemoOTP() {
+  ['1','2','3','4','5','6'].forEach(function(d,i){
+    document.getElementById('otp'+i).value = d;
+  });
+}
+
+function otpNext(el, idx) {
+  el.value = el.value.replace(/\D/g, '').substring(0, 1);
+  if (el.value && idx < 5) {
+    document.getElementById('otp' + (idx+1)).focus();
+  }
+}
+
+function verifyOTP() {
+  var code = '';
+  for(var i=0;i<6;i++) code += document.getElementById('otp'+i).value;
+  if (code.length < 6) { alert('Please enter the 6-digit OTP'); return; }
+  // Show processing
+  goStep('processing');
+  // Simulate 2s processing
+  setTimeout(function() {
+    showSuccess();
+  }, 2000);
+}
+
+function showSuccess() {
+  goStep('success');
+  var methodLabel = _selectedMethod === 'jazzcash' ? 'JazzCash' : 'Easypaisa';
+  var txnId = 'TXN' + Date.now().toString().slice(-8).toUpperCase();
+  document.getElementById('receipt-plan').textContent = _planName;
+  document.getElementById('receipt-amount').textContent = _amount;
+  document.getElementById('receipt-method').textContent = methodLabel;
+  document.getElementById('receipt-txn').textContent = txnId;
+  document.getElementById('success-desc').textContent = '"' + _planName + '" has been activated. Your listing is now boosted!';
+  // Save to localStorage
+  var payments = JSON.parse(localStorage.getItem('paymentHistory') || '[]');
+  payments.unshift({ plan: _planName, amount: _amount, method: methodLabel, txn: txnId, date: new Date().toLocaleDateString('en-PK') });
+  localStorage.setItem('paymentHistory', JSON.stringify(payments));
+  if (_otpTimer) { clearInterval(_otpTimer); _otpTimer = null; }
+}
+
+// ========================
+// ADMIN PORTAL DETECTOR & RENDERER
+// ========================
+(function() {
+  var isAdminPortal = false;
+  try {
+    isAdminPortal = (window.self !== window.top) && (window.parent.document.getElementById('mainNavBar') || window.parent.location.pathname.includes('/admin'));
+  } catch(e) {
+    isAdminPortal = window.location.pathname.includes('/admin');
+  }
+
+  if (isAdminPortal) {
+    // 1. Swap titles for admin console
+    var titleEl = document.getElementById('page-main-title');
+    var subtitleEl = document.getElementById('page-main-subtitle');
+    if (titleEl) titleEl.textContent = 'Platform Billings & Revenue';
+    if (subtitleEl) subtitleEl.textContent = 'Audit platform financial logs, company plan packages, and student course purchases.';
+
+    // 2. Hide recruiter sections
+    var statsRow = document.getElementById('recruiter-stats-row');
+    var subGrid = document.getElementById('recruiter-sub-grid');
+    var boostSec = document.getElementById('recruiter-boost-section');
+    var billHist = document.getElementById('recruiter-billing-history');
+    if (statsRow) statsRow.classList.add('hidden');
+    if (subGrid) subGrid.classList.add('hidden');
+    if (boostSec) boostSec.classList.add('hidden');
+    if (billHist) billHist.classList.add('hidden');
+
+    // 3. Show admin console
+    var adminConsole = document.getElementById('admin-billing-console');
+    if (adminConsole) adminConsole.classList.remove('hidden');
+
+    // 4. Fetch platform ledger
+    fetch('/api/payments')
+      .then(function(res) { return res.json(); })
+      .then(function(data) {
+        renderAdminBillings(data);
+      })
+      .catch(function(err) {
+        console.error("Failed to load platform payments ledger:", err);
+        // Fallback mock
+        renderAdminBillings({
+          companyPlans: [
+            { id: "TXN98481903", companyName: "skylync.io", planName: "Premium Subscription", amount: 10000, date: "2026-06-15", status: "Paid" },
+            { id: "TXN98481904", companyName: "coreknot.io", planName: "Basic Subscription", amount: 2500, date: "2026-06-12", status: "Paid" },
+            { id: "TXN98481905", companyName: "zylor.io", planName: "Top 1 Spot Boost", amount: 10000, date: "2026-06-20", status: "Paid" }
+          ],
+          studentCourses: [
+            { id: "TXN74839201", studentName: "Ali Siddique", courseTitle: "Advanced UI/UX Liquid Design Patterns", amount: 1200, date: "2026-06-22", status: "Paid" },
+            { id: "TXN74839202", studentName: "Ayesha Lodhi", courseTitle: "Building Scalable RESTful backends", amount: 1500, date: "2026-06-23", status: "Paid" },
+            { id: "TXN74839203", studentName: "Bilal Khan", courseTitle: "Advanced UI/UX Liquid Design Patterns", amount: 1200, date: "2026-06-24", status: "Paid" }
+          ]
+        });
+      });
+  }
+})();
+
+function renderAdminBillings(data) {
+  var companyPlans = data.companyPlans || [];
+  var studentCourses = data.studentCourses || [];
+
+  // Sum valuations
+  var companyTotal = companyPlans.reduce(function(acc, item) { return acc + item.amount; }, 0);
+  var studentTotal = studentCourses.reduce(function(acc, item) { return acc + item.amount; }, 0);
+  var grandTotal = companyTotal + studentTotal;
+
+  var revenueEl = document.getElementById('admin-total-revenue');
+  var activeSubsEl = document.getElementById('admin-active-subs');
+  var courseSalesEl = document.getElementById('admin-course-sales');
+
+  if (revenueEl) revenueEl.textContent = 'Rs ' + grandTotal.toLocaleString('en-PK');
+  if (activeSubsEl) activeSubsEl.textContent = companyPlans.filter(function(p) { return p.planName.toLowerCase().includes('subscription'); }).length;
+  if (courseSalesEl) courseSalesEl.textContent = 'Rs ' + studentTotal.toLocaleString('en-PK');
+
+  // Render company ledger
+  var companyTbody = document.getElementById('company-plans-tbody');
+  if (companyTbody) {
+    companyTbody.innerHTML = '';
+    companyPlans.forEach(function(item) {
+      var tr = document.createElement('tr');
+      tr.className = 'hover:bg-white/40 transition-colors';
+      tr.innerHTML = `
+        <td class="px-gutter py-5 font-mono text-xs text-on-surface-variant">${item.id}</td>
+        <td class="px-gutter py-5 font-bold text-[#471A70]">${item.companyName}</td>
+        <td class="px-gutter py-5 font-body-md text-body-md text-on-surface">${item.planName}</td>
+        <td class="px-gutter py-5 font-body-md text-body-md text-on-surface-variant">${item.date}</td>
+        <td class="px-gutter py-5 font-bold text-right text-primary">Rs ${item.amount.toLocaleString('en-PK')}</td>
+        <td class="px-gutter py-5 text-center">
+          <span class="inline-flex items-center gap-1 px-3 py-1 bg-green-100 text-green-700 rounded-full text-xs font-bold">
+            <span class="w-1.5 h-1.5 bg-green-600 rounded-full"></span> ${item.status}
+          </span>
+        </td>
+      `;
+      companyTbody.appendChild(tr);
+    });
+  }
+
+  // Render student ledger
+  var studentTbody = document.getElementById('student-courses-tbody');
+  if (studentTbody) {
+    studentTbody.innerHTML = '';
+    studentCourses.forEach(function(item) {
+      var tr = document.createElement('tr');
+      tr.className = 'hover:bg-white/40 transition-colors';
+      tr.innerHTML = `
+        <td class="px-gutter py-5 font-mono text-xs text-on-surface-variant">${item.id}</td>
+        <td class="px-gutter py-5 font-bold text-[#471A70]">${item.studentName}</td>
+        <td class="px-gutter py-5 font-body-md text-body-md text-on-surface">${item.courseTitle}</td>
+        <td class="px-gutter py-5 font-body-md text-body-md text-on-surface-variant">${item.date}</td>
+        <td class="px-gutter py-5 font-bold text-right text-[#471A70]">Rs ${item.amount.toLocaleString('en-PK')}</td>
+        <td class="px-gutter py-5 text-center">
+          <span class="inline-flex items-center gap-1 px-3 py-1 bg-green-100 text-green-700 rounded-full text-xs font-bold">
+            <span class="w-1.5 h-1.5 bg-green-600 rounded-full"></span> ${item.status}
+          </span>
+        </td>
+      `;
+      studentTbody.appendChild(tr);
+    });
+  }
+}
+</script>
+</body></html>
+
+
+
+
+
+
+
+
+
+
+
+
+

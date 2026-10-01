@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SecureTest Portal | Guidelines &amp; Validation</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Hanken Grotesk', sans-serif;
+            background-color: #DCE4F7;
+            overflow-x: hidden;
+        }
+
+        .glass-card {
+            backdrop-filter: blur(28px);
+            background: rgba(255, 255, 255, 0.35);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 12px 40px 0 rgba(71, 26, 112, 0.08);
+        }
+
+        .laser-line {
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #30D158, transparent);
+            box-shadow: 0 0 15px #30D158;
+            animation: scan 3s ease-in-out infinite;
+        }
+
+        @keyframes scan {
+            0% { top: 0%; opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { top: 100%; opacity: 0; }
+        }
+
+        .pulse-red {
+            animation: pulse-red 2s infinite;
+        }
+
+        @keyframes pulse-red {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(255, 69, 58, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(255, 69, 58, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(255, 69, 58, 0); }
+        }
+
+        .ios-toggle:checked + .toggle-bg {
+            background-color: #30D158;
+        }
+
+        .ios-toggle:checked + .toggle-bg .toggle-dot {
+            transform: translateX(100%);
+        }
+
+        .liquid-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(120deg, #DCE4F7 0%, #f0dbff 50%, #DCE4F7 100%);
+            background-size: 400% 400%;
+            animation: gradient-flow 15s ease infinite;
+        }
+
+        @keyframes gradient-flow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-dim": "#ebd0ff",
+                        "secondary": "#0060ab",
+                        "surface-variant": "#f0dbff",
+                        "tertiary": "#006823",
+                        "primary": "#8731a3",
+                        "success-laser": "#30D158",
+                        "glass-surface": "rgba(255, 255, 255, 0.35)",
+                        "on-surface": "#2c0050",
+                        "glass-border": "rgba(255, 255, 255, 0.60)",
+                        "background-wash": "#DCE4F7",
+                        "error-red": "#FF453A"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "xxl": "24px",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "desktop-margin": "64px",
+                        "container-max": "1280px"
+                    },
+                    "fontFamily": {
+                        "display-xl": ["Hanken Grotesk"],
+                        "body-md": ["Hanken Grotesk"],
+                        "headline-lg": ["Hanken Grotesk"]
+                    },
+                    "fontSize": {
+                        "display-xl": ["56px", {"lineHeight": "1.1", "letterSpacing": "-0.03em", "fontWeight": "700"}],
+                        "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                        "headline-lg": ["34px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "600"}]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="min-h-screen text-on-surface">
+<div class="liquid-bg"></div>
+<!-- TopNavBar -->
+<header class="bg-glass-surface backdrop-blur-[28px] border-b border-glass-border shadow-sm sticky top-0 z-50">
+<nav class="flex justify-between items-center w-full px-desktop-margin h-16 max-w-container-max mx-auto">
+<div class="flex items-center gap-8">
+<span class="font-headline-lg text-headline-lg font-bold text-primary">SecureTest Portal</span>
+<div class="hidden md:flex gap-6">
+<a class="text-on-surface-variant hover:text-primary transition-all duration-300 font-body-md text-body-md" href="#">Dashboard</a>
+<a class="text-on-surface-variant hover:text-primary transition-all duration-300 font-body-md text-body-md" href="#">Support</a>
+<a class="text-primary font-bold border-b-2 border-primary font-body-md text-body-md" href="#">Guidelines</a>
+<a class="text-on-surface-variant hover:text-primary transition-all duration-300 font-body-md text-body-md" href="#">History</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="hover:backdrop-brightness-95 transition-all duration-300 p-2 rounded-full active:scale-95">
+<span class="material-symbols-outlined text-primary">settings</span>
+</button>
+<button class="hover:backdrop-brightness-95 transition-all duration-300 p-2 rounded-full active:scale-95">
+<span class="material-symbols-outlined text-primary">account_circle</span>
+</button>
+</div>
+</nav>
+</header>
+<main class="max-w-container-max mx-auto px-desktop-margin py-12">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
+<!-- Left Column: Integrity & Rules -->
+<div class="flex flex-col gap-8">
+<div class="glass-card rounded-xxl p-10 flex flex-col gap-8">
+<div>
+<h1 class="font-headline-lg text-headline-lg text-[#471A70] mb-2">System Integrity Check</h1>
+<p class="text-on-surface-variant font-body-md text-body-md">Ensuring your environment meets academic standards.</p>
+</div>
+<!-- Status Items -->
+<div class="flex flex-col gap-5">
+<div class="flex items-center justify-between p-4 bg-white/40 rounded-xl border border-white/40">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-primary" data-weight="fill">videocam</span>
+<span class="font-body-md text-body-md font-semibold">Webcam Stream</span>
+</div>
+<span class="text-tertiary flex items-center gap-1 font-semibold">
+<span class="material-symbols-outlined text-sm">check_circle</span>
+                                Active
+                            </span>
+</div>
+<div class="flex items-center justify-between p-4 bg-white/40 rounded-xl border border-white/40">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-primary" data-weight="fill">mic</span>
+<span class="font-body-md text-body-md font-semibold">Microphone Levels</span>
+</div>
+<div class="flex gap-1">
+<div class="w-1.5 h-4 bg-tertiary rounded-full"></div>
+<div class="w-1.5 h-4 bg-tertiary rounded-full"></div>
+<div class="w-1.5 h-4 bg-tertiary/30 rounded-full"></div>
+</div>
+</div>
+<div class="flex items-center justify-between p-4 bg-white/40 rounded-xl border border-white/40">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-primary" data-weight="fill">fullscreen</span>
+<span class="font-body-md text-body-md font-semibold">Fullscreen Mode</span>
+</div>
+<span class="text-tertiary flex items-center gap-1 font-semibold">
+<span class="material-symbols-outlined text-sm">check_circle</span>
+                                Active
+                            </span>
+</div>
+</div>
+<hr class="border-white/40"/>
+<!-- Exam Rules -->
+<div>
+<h2 class="font-body-md text-lg font-bold text-[#471A70] mb-4">Exam Rules</h2>
+<ul class="flex flex-col gap-4">
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-tertiary mt-0.5">check</span>
+<span class="font-body-md text-body-md text-on-surface-variant">No external materials allowed in the workspace.</span>
+</li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-tertiary mt-0.5">check</span>
+<span class="font-body-md text-body-md text-on-surface-variant">Maintain constant visibility within the webcam frame.</span>
+</li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-tertiary mt-0.5">check</span>
+<span class="font-body-md text-body-md text-on-surface-variant">A quiet, private environment is strictly required.</span>
+</li>
+</ul>
+</div>
+<!-- iOS Toggle -->
+<div class="mt-4 flex items-center justify-between">
+<span class="font-body-md text-body-md font-bold text-[#471A70]">Acknowledge Test Rules</span>
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer ios-toggle" id="rule-ack" type="checkbox"/>
+<div class="w-12 h-6 bg-gray-300 rounded-full transition-colors duration-200 toggle-bg relative">
+<div class="absolute top-0.5 left-0.5 bg-white w-5 h-5 rounded-full shadow-md transition-transform duration-200 transform toggle-dot"></div>
+</div>
+</label>
+</div>
+</div>
+<!-- Footer Action -->
+<button class="opacity-50 cursor-not-allowed bg-success-laser text-white font-bold py-5 px-10 rounded-xl transition-all duration-300 flex items-center justify-center gap-3 shadow-lg active:scale-95 group" disabled="" id="proceed-btn">
+<span class="font-body-md text-body-md uppercase tracking-wider">Proceed to Assessment</span>
+<span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</button>
+</div>
+<!-- Right Column: Validation Feed -->
+<div class="relative h-full min-h-[600px] rounded-xxl overflow-hidden glass-card">
+<img alt="Webcam validation frame" class="absolute inset-0 w-full h-full object-cover grayscale-[20%]" data-alt="A focused young professional woman looking directly into a webcam in a clean, brightly lit modern home office environment. She is centered in the frame, maintaining a neutral expression for identity verification. The scene is illuminated with soft, high-key lighting, emphasizing a professional and secure atmosphere. The color palette is dominated by soft whites and cool blues, matching a premium light-mode digital interface aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDg4vHR-1bu9F2XwANBOopDJ9n8P7TFq8ApqZV0XYkNb6tIVLTEgnUh54k4X2pjiWMvojKJgr5trNgygeWRxCVrUHSTBLVZ-UAeHHTPZbEdTcCOPeYUpjz0JXhBFmTQMYu3V6yOYDKhjVO0KWG9HtjTapjHY27vheoL9dBCYqNTH5f9VCYznMG65bK3BLxvp4JA6bgKiLmvtOSvqSeOAt_ESYlWyKxjV2QlJzEeSVOPKEkFHRJZ00A4acKK_WcafIweNF1n5C66dm50"/>
+<!-- Scanning Laser Effect -->
+<div class="absolute inset-0 z-10 pointer-events-none overflow-hidden">
+<div class="laser-line relative w-full"></div>
+</div>
+<!-- Active Indicator Overlay -->
+<div class="absolute top-6 right-6 z-20 flex items-center gap-2 bg-black/40 backdrop-blur-md px-4 py-2 rounded-full border border-white/20">
+<div class="w-2.5 h-2.5 bg-error-red rounded-full pulse-red"></div>
+<span class="text-white font-bold text-xs tracking-widest uppercase">Camera Active</span>
+</div>
+<!-- Bottom Verification UI -->
+<div class="absolute bottom-0 inset-x-0 p-8 z-20 bg-gradient-to-t from-black/60 to-transparent">
+<div class="flex items-end justify-between">
+<div>
+<p class="text-white/70 text-xs font-bold uppercase tracking-widest mb-1">Face Recognition</p>
+<h3 class="text-white font-headline-lg text-xl">Identity Verified</h3>
+</div>
+<div class="w-24 h-24 border-2 border-success-laser rounded-xl flex items-center justify-center backdrop-blur-sm bg-white/10">
+<span class="material-symbols-outlined text-success-laser text-5xl" style="font-variation-settings: 'FILL' 1;">face</span>
+</div>
+</div>
+</div>
+<!-- Border Glow Effect -->
+<div class="absolute inset-0 border-[6px] border-success-laser/20 rounded-xxl pointer-events-none"></div>
+</div>
+</div>
+</main>
+<script>
+        const checkbox = document.getElementById('rule-ack');
+        const btn = document.getElementById('proceed-btn');
+
+        checkbox.addEventListener('change', () => {
+            if (checkbox.checked) {
+                btn.disabled = false;
+                btn.classList.remove('opacity-50', 'cursor-not-allowed');
+                btn.classList.add('hover:shadow-green-500/30', 'hover:-translate-y-1');
+            } else {
+                btn.disabled = true;
+                btn.classList.add('opacity-50', 'cursor-not-allowed');
+                btn.classList.remove('hover:shadow-green-500/30', 'hover:-translate-y-1');
+            }
+        });
+
+        // Simple animation to keep the scan active
+        const laser = document.querySelector('.laser-line');
+        function restartScan() {
+            laser.style.animation = 'none';
+            laser.offsetHeight; /* trigger reflow */
+            laser.style.animation = null; 
+        }
+        
+        // Micro-interactions for buttons
+        document.querySelectorAll('button').forEach(button => {
+            button.addEventListener('mousedown', () => {
+                button.style.transform = 'scale(0.96)';
+            });
+            button.addEventListener('mouseup', () => {
+                button.style.transform = '';
+            });
+        });
+    </script>
+</body></html>

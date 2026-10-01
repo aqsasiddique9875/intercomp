@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/>
+<title>JobFlow | Search &amp; Filters</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-variant": "#dbe3f6",
+                        "on-secondary": "#ffffff",
+                        "tertiary-fixed": "#6cff82",
+                        "surface-container-highest": "#dbe3f6",
+                        "surface": "#f9f9ff",
+                        "inverse-primary": "#f0b0ff",
+                        "primary-fixed-dim": "#f0b0ff",
+                        "secondary-fixed": "#d3e3ff",
+                        "on-error-container": "#93000a",
+                        "on-surface": "#141c29",
+                        "on-background": "#141c29",
+                        "error": "#FF453A",
+                        "primary-container": "#a34cbe",
+                        "on-error": "#ffffff",
+                        "outline": "#817381",
+                        "tertiary-fixed-dim": "#47e266",
+                        "error-container": "#ffdad6",
+                        "secondary": "#0060ab",
+                        "surface-dim": "#d2daed",
+                        "on-tertiary-fixed": "#002106",
+                        "on-tertiary-container": "#e6ffe0",
+                        "on-secondary-container": "#003868",
+                        "primary": "#8731a3",
+                        "secondary-container": "#54a3ff",
+                        "surface-bright": "#f9f9ff",
+                        "on-primary": "#ffffff",
+                        "secondary-fixed-dim": "#a3c9ff",
+                        "primary-fixed": "#fbd7ff",
+                        "on-secondary-fixed-variant": "#004883",
+                        "on-primary-container": "#fff5fb",
+                        "outline-variant": "#d2c1d2",
+                        "orange": "#FF9F0A",
+                        "on-tertiary": "#ffffff",
+                        "on-surface-variant": "#4f4350",
+                        "glass-border": "rgba(255, 255, 255, 0.6)",
+                        "surface-container-low": "#f0f3ff",
+                        "gold": "#FFD60A",
+                        "background": "#f9f9ff",
+                        "surface-container-lowest": "#ffffff",
+                        "tertiary": "#006823",
+                        "surface-container": "#e7eeff",
+                        "surface-tint": "#8d37a9",
+                        "tertiary-container": "#00842f",
+                        "inverse-surface": "#29313f",
+                        "on-tertiary-fixed-variant": "#00531a",
+                        "glass-thick": "rgba(255, 255, 255, 0.8)",
+                        "surface-container-high": "#e0e8fb",
+                        "on-secondary-fixed": "#001c39",
+                        "glass-fill": "rgba(255, 255, 255, 0.35)",
+                        "on-primary-fixed-variant": "#72188f",
+                        "inverse-on-surface": "#ecf1ff",
+                        "on-primary-fixed": "#330044"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "base": "8px",
+                        "safe-top": "44px",
+                        "mobile-margin": "20px",
+                        "max-width": "1280px",
+                        "desktop-gutter": "24px",
+                        "mobile-gutter": "16px",
+                        "desktop-margin": "64px",
+                        "safe-bottom": "34px"
+                    },
+                    "fontFamily": {
+                        "label-caps-mobile": ["Inter"],
+                        "display-xl": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "body-md": ["Inter"],
+                        "body-md-mobile": ["Inter"],
+                        "display-xl-mobile": ["Inter"],
+                        "label-caps": ["Inter"],
+                        "headline-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-caps-mobile": ["12px", {"lineHeight": "1.0", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "display-xl": ["56px", {"lineHeight": "1.1", "letterSpacing": "-0.03em", "fontWeight": "700"}],
+                        "headline-lg-mobile": ["28px", {"lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                        "body-md-mobile": ["15px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                        "display-xl-mobile": ["34px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "label-caps": ["13px", {"lineHeight": "1.0", "letterSpacing": "0.03em", "fontWeight": "600"}],
+                        "headline-lg": ["34px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "600"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            background-color: #DCE4F7;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        .glass-card {
+            background: rgba(255, 255, 255, 0.35);
+            backdrop-filter: blur(28px);
+            -webkit-backdrop-filter: blur(28px);
+            border: 0.5px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 12px 40px 0 rgba(71, 26, 112, 0.15);
+        }
+
+        .glass-sheet {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(40px);
+            -webkit-backdrop-filter: blur(40px);
+            border-top: 1px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0 -8px 32px 0 rgba(71, 26, 112, 0.1);
+        }
+
+        .liquid-chip {
+            transition: all 0.3s cubic-bezier(0.17, 0.67, 0.41, 1.08);
+        }
+
+        .liquid-chip.active {
+            background: #8731a3;
+            color: white;
+            box-shadow: 0 4px 12px rgba(135, 49, 163, 0.3);
+        }
+
+        .spring-bottom-sheet {
+            transform: translateY(100%);
+            transition: transform 0.5s cubic-bezier(0.17, 0.67, 0.41, 1.08);
+        }
+
+        .spring-bottom-sheet.open {
+            transform: translateY(0);
+        }
+
+        .orb-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        .custom-range::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 24px;
+            height: 24px;
+            background: #8731a3;
+            border: 4px solid white;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .custom-range::-moz-range-thumb {
+            width: 24px;
+            height: 24px;
+            background: #8731a3;
+            border: 4px solid white;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body class="min-h-screen text-on-surface selection:bg-primary/30">
+<!-- Subtle Moving Orb Background -->
+<div class="orb-background">
+
+</div>
+<!-- Top AppBar (from JSON schema) -->
+<header class="fixed top-0 w-full z-50 bg-glass-fill backdrop-blur-xl border-b border-glass-border shadow-sm flex items-center justify-center h-16 shrink-0">
+<div class="max-w-6xl w-full flex items-center justify-between px-5">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full overflow-hidden border-2 border-primary p-0.5">
+<img alt="User Avatar" class="w-full h-full rounded-full object-cover" src="https://lh3.googleusercontent.com/aida/AP1WRLso_htihnJ33V7q5zYbt8u-NfoB3ZJISVs-vTicj-4qC5ECtS5f1-4w6YV4027sl6FECnMGNFL4Eze2hGxzE5ViYe1GBC8aDxIr22IBxwvOTBnY5DdP0lr1Mr2oLjdLDQEY0cdp3BV6_eqpLSJsYhE7rCzOhJ8HUy0EsOj0u-xBNtknhbc6cEOMP7n10QkRNTVn5eQUKTTbb4EwqYmkzCf2khW3fWkeIqVSOMA4d6uGGMlKakT_BMt5YDQ"/>
+</div>
+<h1 class="text-sm font-bold text-[#471A70]">Hello, Studentone!</h1>
+</div>
+<div class="flex items-center gap-3">
+<button class="w-10 h-10 rounded-full bg-white/40 border border-white/60 flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-primary text-[22px]">notifications</span>
+</button>
+<button class="w-10 h-10 rounded-full bg-white/40 border border-white/60 flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-primary text-[22px]">settings</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Main Content Area -->
+<main class="pt-20 pb-32 px-mobile-margin min-h-screen">
+<!-- Search Bar & Horizontal Categories -->
+<section class="space-y-6 mb-8">
+<div class="relative flex items-center glass-card rounded-full px-4 py-2 w-full">
+<span class="material-symbols-outlined text-primary/60 mr-3" data-icon="search">search</span>
+<input id="jobSearchInput" class="bg-transparent border-none focus:ring-0 text-on-surface-variant font-body-md-mobile w-full placeholder:text-on-surface-variant/50 pr-10" placeholder="Search internships, roles..." type="text"/>
+<button class="absolute right-3 text-primary active:scale-95 transition-transform flex items-center justify-center h-8 w-8 hover:bg-glass-thick/10 rounded-full" onclick="toggleFilters()">
+<span class="material-symbols-outlined text-[20px]" data-icon="tune">tune</span>
+</button>
+</div>
+<div class="flex gap-3 overflow-x-auto no-scrollbar pb-2 -mx-mobile-margin px-mobile-margin">
+<button class="liquid-chip active flex-shrink-0 px-5 py-2 rounded-full font-label-caps-mobile text-label-caps-mobile bg-white/40 border border-white/60" onclick="selectChip(this)">Discover</button>
+<button class="liquid-chip flex-shrink-0 px-5 py-2 rounded-full font-label-caps-mobile text-label-caps-mobile bg-white/40 border border-white/60 text-on-surface-variant" onclick="selectChip(this)">Design</button>
+<button class="liquid-chip flex-shrink-0 px-5 py-2 rounded-full font-label-caps-mobile text-label-caps-mobile bg-white/40 border border-white/60 text-on-surface-variant" onclick="selectChip(this)">Coding</button>
+<button class="liquid-chip flex-shrink-0 px-5 py-2 rounded-full font-label-caps-mobile text-label-caps-mobile bg-white/40 border border-white/60 text-on-surface-variant" onclick="selectChip(this)">Product</button>
+<button class="liquid-chip flex-shrink-0 px-5 py-2 rounded-full font-label-caps-mobile text-label-caps-mobile bg-white/40 border border-white/60 text-on-surface-variant" onclick="selectChip(this)">Marketing</button>
+</div>
+</section>
+<!-- Liquid Glass Job Cards -->
+<section id="jobsContainer" class="space-y-4">
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-[#471A70] mb-2">Featured for You</h2>
+<!-- Card 1 -->
+<div class="glass-card rounded-3xl p-5 flex flex-col gap-4 active:scale-[0.98] transition-transform duration-300">
+<div class="flex justify-between items-start">
+<div class="flex gap-4">
+<div class="w-12 h-12 rounded-2xl bg-[#f0b0ff] flex items-center justify-center text-primary font-bold">A</div>
+<div>
+<h3 class="font-bold text-[#471A70] text-lg">UX Design Intern</h3>
+<p class="text-on-surface-variant text-sm font-medium">Adobe • San Jose, CA</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;" data-icon="bookmark">bookmark</span>
+</div>
+<div class="flex flex-wrap gap-2">
+<span class="px-3 py-1 rounded-full bg-primary-fixed/30 text-on-primary-fixed text-[11px] font-bold uppercase tracking-wider">Full-time</span>
+<span class="px-3 py-1 rounded-full bg-secondary-fixed/30 text-on-secondary-fixed-variant text-[11px] font-bold uppercase tracking-wider">Rs. 25 - Rs. 40 / hr</span>
+</div>
+<div class="mt-2 flex items-center justify-between">
+<div class="flex -space-x-2">
+<img alt="Applicant" class="w-8 h-8 rounded-full border-2 border-white" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBoL7FTYw-0tSoCWubr1H1d2QovqO0M6VoV6ddD41zWllK8_0zCDMMc-oi4RElfelZCgZX4H9NXdnckNKipo4NF6dgmb654pcX5k70GddYpYxBk8IRabUYRjTyWuMEO--SZA3d8ZNieF-t4WBB8qyuvv5L3p0VTKjLbpMXiAJOLE_p31dzvcLTrXr1vD1AWbeCsCRx696s5g3lwwL32bKNddiEopPfxkakcKMUKvX4evqLq4GqXyDeTdVjAU5TlHn49GCfIxW7HD3Vl"/>
+<img alt="Applicant" class="w-8 h-8 rounded-full border-2 border-white" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDA72gg-_9o0sb7L0PhXqcJqUvkf_mbPVuhZ3EUAgpq_YnLM9LqbsW_XVePm9jFwU0owUS1us2Rw3lm32uXzKxCrOxq3DAE7rXLHI2PfI4UvQs00B6DE3MQzSIm4cPL-_6ZvXUK45ewcYg6Ny-ZW_QCuZKHD9GTIefZnHbAHCIcaoOkT-2h2a5CT6Vb9ZGPU5sZZGCPnYgNldmzQ7IlHDGs4koYZJU1VRGeaZjsWr1TRxUTusmiZ70xUaw9o2kyqMpOTpA_TYditZr9"/>
+<div class="w-8 h-8 rounded-full border-2 border-white bg-surface-variant flex items-center justify-center text-[10px] font-bold">+12</div>
+</div>
+<button class="bg-primary text-white px-6 py-2 rounded-full font-bold text-sm shadow-md active:scale-95 transition-transform">Apply Now</button>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="glass-card rounded-3xl p-5 flex flex-col gap-4 active:scale-[0.98] transition-transform duration-300">
+<div class="flex justify-between items-start">
+<div class="flex gap-4">
+<div class="w-12 h-12 rounded-2xl bg-secondary-fixed flex items-center justify-center text-secondary font-bold">G</div>
+<div>
+<h3 class="font-bold text-[#471A70] text-lg">Product Strategist</h3>
+<p class="text-on-surface-variant text-sm font-medium">Google • Mountain View, CA</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 0;" data-icon="bookmark_border">bookmark_border</span>
+</div>
+<div class="flex flex-wrap gap-2">
+<span class="px-3 py-1 rounded-full bg-primary-fixed/30 text-on-primary-fixed text-[11px] font-bold uppercase tracking-wider">Remote</span>
+<span class="px-3 py-1 rounded-full bg-secondary-fixed/30 text-on-secondary-fixed-variant text-[11px] font-bold uppercase tracking-wider">Rs. 120k - Rs. 160k</span>
+</div>
+<div class="mt-2 flex items-center justify-between">
+<p class="text-xs text-on-surface-variant/60">Posted 2h ago</p>
+<button class="bg-primary text-white px-6 py-2 rounded-full font-bold text-sm shadow-md active:scale-95 transition-transform">Apply Now</button>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="glass-card rounded-3xl p-5 flex flex-col gap-4 active:scale-[0.98] transition-transform duration-300">
+<div class="flex justify-between items-start">
+<div class="flex gap-4">
+<div class="w-12 h-12 rounded-2xl bg-tertiary-fixed flex items-center justify-center text-tertiary font-bold">S</div>
+<div>
+<h3 class="font-bold text-[#471A70] text-lg">Frontend Developer</h3>
+<p class="text-on-surface-variant text-sm font-medium">Spotify • New York, NY</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 0;" data-icon="bookmark_border">bookmark_border</span>
+</div>
+<div class="flex flex-wrap gap-2">
+<span class="px-3 py-1 rounded-full bg-primary-fixed/30 text-on-primary-fixed text-[11px] font-bold uppercase tracking-wider">Contract</span>
+<span class="px-3 py-1 rounded-full bg-secondary-fixed/30 text-on-secondary-fixed-variant text-[11px] font-bold uppercase tracking-wider">Rs. 80/hr</span>
+</div>
+<div class="mt-2 flex items-center justify-between">
+<p class="text-xs text-on-surface-variant/60">Posted yesterday</p>
+<button class="bg-primary text-white px-6 py-2 rounded-full font-bold text-sm shadow-md active:scale-95 transition-transform">Apply Now</button>
+</div>
+</div>
+</section>
+</main>
+<!-- Bottom Navigation Bar (from JSON schema) -->
+<nav class="fixed bottom-0 w-full z-50 pb-safe-bottom backdrop-blur-3xl rounded-t-xl bg-glass-thick border-t border-glass-border shadow-lg flex justify-around items-center h-16 px-mobile-gutter" id="bottom-nav">
+<a class="flex flex-col items-center justify-center text-primary font-bold active:scale-90 transition-transform duration-[0.35s]" href="#">
+<span class="material-symbols-outlined" data-icon="explore">explore</span>
+<span class="font-label-caps-mobile text-label-caps-mobile">Discover</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant active:scale-90 transition-transform duration-[0.35s]" href="#">
+<span class="material-symbols-outlined" data-icon="assignment_turned_in">assignment_turned_in</span>
+<span class="font-label-caps-mobile text-label-caps-mobile">Applied</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant active:scale-90 transition-transform duration-[0.35s]" href="#">
+<span class="material-symbols-outlined" data-icon="bookmark">bookmark</span>
+<span class="font-label-caps-mobile text-label-caps-mobile">Saved</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant active:scale-90 transition-transform duration-[0.35s]" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-label-caps-mobile text-label-caps-mobile">Profile</span>
+</a>
+</nav>
+<!-- Advanced Filter Bottom Sheet Overlay -->
+<div class="fixed inset-0 bg-black/20 z-[60] opacity-0 pointer-events-none transition-opacity duration-300" id="filter-overlay" onclick="toggleFilters()"></div>
+<!-- Filter Bottom Sheet -->
+<div class="spring-bottom-sheet fixed bottom-0 left-0 right-0 z-[70] glass-sheet rounded-t-[40px] px-8 pt-4 pb-12" id="filter-sheet">
+<div class="flex justify-center mb-6">
+<div class="w-12 h-1.5 rounded-full bg-on-surface/10"></div>
+</div>
+<div class="flex justify-between items-center mb-8">
+<h2 class="text-2xl font-extrabold text-[#471A70]">Advanced Filters</h2>
+<button class="text-primary font-bold text-sm" onclick="resetFilters()">Reset</button>
+</div>
+<div class="space-y-8 max-h-[60vh] overflow-y-auto no-scrollbar">
+<!-- Salary Range -->
+<div>
+<div class="flex justify-between mb-4">
+<span class="font-bold text-on-surface-variant">Salary Range</span>
+<span class="text-primary font-bold" id="salaryRangeLabel">Rs. 40k — Rs. 180k</span>
+</div>
+<input class="w-full h-1.5 bg-surface-container rounded-lg appearance-none custom-range" max="200" min="0" id="filterSalarySlider" type="range" value="200"/>
+</div>
+<!-- Job Type Checkboxes -->
+<div>
+<span class="font-bold text-on-surface-variant block mb-4">Job Type</span>
+<div class="grid grid-cols-2 gap-4">
+<label class="flex items-center gap-3 cursor-pointer">
+<input checked="" class="w-5 h-5 rounded border-primary/20 text-primary focus:ring-primary filter-checkbox" value="Full-time" type="checkbox"/>
+<span class="text-on-surface-variant font-medium">Full-time</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer">
+<input checked="" class="w-5 h-5 rounded border-primary/20 text-primary focus:ring-primary filter-checkbox" value="Contract" type="checkbox"/>
+<span class="text-on-surface-variant font-medium">Contract</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer">
+<input checked="" class="w-5 h-5 rounded border-primary/20 text-primary focus:ring-primary filter-checkbox" value="Remote" type="checkbox"/>
+<span class="text-on-surface-variant font-medium">Remote</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer">
+<input checked="" class="w-5 h-5 rounded border-primary/20 text-primary focus:ring-primary filter-checkbox" value="Internship" type="checkbox"/>
+<span class="text-on-surface-variant font-medium">Internship</span>
+</label>
+</div>
+</div>
+<!-- Location -->
+<div>
+<span class="font-bold text-on-surface-variant block mb-4">Location</span>
+<div class="flex items-center gap-3 glass-card rounded-2xl px-4 py-3">
+<span class="material-symbols-outlined text-primary/60" data-icon="location_on">location_on</span>
+<input class="bg-transparent border-none focus:ring-0 w-full text-sm font-medium" id="filterLocationInput" placeholder="e.g. San Francisco" type="text"/>
+</div>
+</div>
+</div>
+<!-- Action Button -->
+<div class="mt-8">
+<button class="w-full bg-primary text-white font-bold py-4 rounded-2xl shadow-xl active:scale-95 transition-transform text-lg" onclick="applyFilters()">Apply Filters</button>
+</div>
+</div>
+<script>
+        function toggleFilters() {
+            const sheet = document.getElementById('filter-sheet');
+            const overlay = document.getElementById('filter-overlay');
+            const isOpen = sheet.classList.contains('open');
+
+            if (isOpen) {
+                sheet.classList.remove('open');
+                overlay.style.opacity = '0';
+                overlay.classList.add('pointer-events-none');
+            } else {
+                sheet.classList.add('open');
+                overlay.style.opacity = '1';
+                overlay.classList.remove('pointer-events-none');
+            }
+        }
+
+        function selectChip(el) {
+            document.querySelectorAll('.liquid-chip').forEach(chip => {
+                chip.classList.remove('active');
+                chip.classList.add('text-on-surface-variant');
+            });
+            el.classList.add('active');
+            el.classList.remove('text-on-surface-variant');
+            filterJobs();
+        }
+
+        function parseSalaryRange(salaryStr) {
+            if (!salaryStr) return { min: 0, max: 1000000 };
+            const cleaned = salaryStr.toLowerCase();
+            const numbers = [];
+            const matches = cleaned.match(/\d+[\d,.]*/g);
+            if (matches) {
+                matches.forEach(m => {
+                    let num = parseFloat(m.replace(/,/g, ''));
+                    if (!isNaN(num)) {
+                        const idx = cleaned.indexOf(m);
+                        if (idx !== -1 && cleaned[idx + m.length] === 'k') {
+                            num *= 1000;
+                        }
+                        numbers.push(num);
+                    }
+                });
+            }
+            if (numbers.length === 0) return { min: 0, max: 1000000 };
+            if (numbers.length === 1) {
+                const val = numbers[0] < 500 ? numbers[0] * 1000 : numbers[0];
+                return { min: val, max: val };
+            }
+            let min = Math.min(...numbers);
+            let max = Math.max(...numbers);
+            if (min < 500) min = min * 1000;
+            if (max < 500) max = max * 1000;
+            return { min, max };
+        }
+
+        function filterJobs() {
+            const searchInput = document.getElementById('jobSearchInput');
+            const searchQuery = searchInput ? searchInput.value.toLowerCase().trim() : '';
+            
+            const locationInput = document.getElementById('filterLocationInput');
+            const locationVal = locationInput ? locationInput.value.toLowerCase().trim() : '';
+            
+            const salarySlider = document.getElementById('filterSalarySlider');
+            const maxSalaryVal = salarySlider ? parseInt(salarySlider.value) : 200;
+
+            const activeChip = document.querySelector('.liquid-chip.active');
+            const category = activeChip ? activeChip.textContent.trim().toLowerCase() : 'discover';
+
+            const selectedTypes = [];
+            document.querySelectorAll('.filter-checkbox:checked').forEach(cb => {
+                selectedTypes.push(cb.value);
+            });
+
+            const filtered = allJobs.filter(job => {
+                // Only show active (live) jobs to students
+                if (job.status !== 'active') {
+                    return false;
+                }
+
+                // Category Chip Filter
+                if (category && category !== 'discover') {
+                    const jobTitle = (job.title || '').toLowerCase();
+                    const jobDesc = (job.description || '').toLowerCase();
+                    const jobCompany = (job.company || '').toLowerCase();
+                    const skills = (job.skillsRequired || []).filter(s => typeof s === 'string').map(s => s.toLowerCase());
+                    
+                    let categoryMatch = false;
+                    if (category === 'design') {
+                        categoryMatch = jobTitle.includes('design') || jobTitle.includes('ux') || jobTitle.includes('ui') || jobTitle.includes('figma') || jobTitle.includes('graphics') || jobDesc.includes('design') || skills.some(s => s.includes('design') || s.includes('ux') || s.includes('ui') || s.includes('figma'));
+                    } else if (category === 'coding') {
+                        categoryMatch = jobTitle.includes('developer') || jobTitle.includes('engineer') || jobTitle.includes('programmer') || jobTitle.includes('coder') || jobTitle.includes('coding') || jobTitle.includes('fullstack') || jobTitle.includes('backend') || jobTitle.includes('frontend') || jobDesc.includes('code') || jobDesc.includes('developer') || jobDesc.includes('engineer') || skills.some(s => s.includes('javascript') || s.includes('node') || s.includes('sql') || s.includes('react') || s.includes('dart') || s.includes('code') || s.includes('programmer') || s.includes('developer'));
+                    } else if (category === 'product') {
+                        categoryMatch = jobTitle.includes('product') || jobTitle.includes('manager') || jobTitle.includes('owner') || jobDesc.includes('product') || jobDesc.includes('manager') || skills.some(s => s.includes('product') || s.includes('manager') || s.includes('scrum'));
+                    } else if (category === 'marketing') {
+                        categoryMatch = jobTitle.includes('marketing') || jobTitle.includes('sales') || jobTitle.includes('seo') || jobTitle.includes('growth') || jobDesc.includes('marketing') || jobDesc.includes('sales') || skills.some(s => s.includes('marketing') || s.includes('sales') || s.includes('seo'));
+                    }
+                    
+                    if (!categoryMatch) return false;
+                }
+
+                if (searchQuery) {
+                    const matchQuery = 
+                        job.title.toLowerCase().includes(searchQuery) ||
+                        job.company.toLowerCase().includes(searchQuery) ||
+                        (job.location || '').toLowerCase().includes(searchQuery);
+                    if (!matchQuery) return false;
+                }
+
+                if (locationVal) {
+                    const matchLocation = (job.location || '').toLowerCase().includes(locationVal);
+                    if (!matchLocation) return false;
+                }
+
+                if (selectedTypes.length > 0) {
+                    let typeMatch = false;
+                    selectedTypes.forEach(t => {
+                        const jobType = (job.type || '').toLowerCase();
+                        const jobLoc = (job.location || '').toLowerCase();
+                        if (t === 'Full-time' && (jobType.includes('full-time') || jobType.includes('permanent'))) {
+                            typeMatch = true;
+                        }
+                        if (t === 'Contract' && jobType.includes('contract')) {
+                            typeMatch = true;
+                        }
+                        if (t === 'Internship' && jobType.includes('internship')) {
+                            typeMatch = true;
+                        }
+                        if (t === 'Remote' && (jobType.includes('remote') || jobLoc.includes('remote'))) {
+                            typeMatch = true;
+                        }
+                    });
+                    if (!typeMatch) return false;
+                }
+
+                if (maxSalaryVal < 200) {
+                    const salaryRange = parseSalaryRange(job.salary);
+                    const maxSalaryK = salaryRange.max / 1000;
+                    if (maxSalaryK > maxSalaryVal) {
+                        return false;
+                    }
+                }
+
+                return true;
+            });
+
+            renderJobs(filtered);
+        }
+
+        function applyFilters() {
+            filterJobs();
+            toggleFilters();
+        }
+
+        function resetFilters() {
+            document.getElementById('filterLocationInput').value = '';
+            document.getElementById('filterSalarySlider').value = 200;
+            document.getElementById('salaryRangeLabel').textContent = "Any Salary";
+            
+            document.querySelectorAll('.filter-checkbox').forEach(cb => {
+                cb.checked = true;
+            });
+
+            filterJobs();
+        }
+
+        function viewJobDetails(jobId) {
+            const job = allJobs.find(j => String(j.id) === String(jobId));
+            if (job) {
+                localStorage.setItem('selectedJob', JSON.stringify(job));
+            }
+            window.parent.postMessage({ type: 'NAVIGATE', view: 'job-details' }, '*');
+        }
+
+        // Handle micro-interactions for cards
+        document.querySelectorAll('.glass-card').forEach(card => {
+            card.addEventListener('touchstart', () => {
+                card.style.transform = 'scale(0.98)';
+            });
+            card.addEventListener('touchend', () => {
+                card.style.transform = 'scale(1)';
+            });
+        });
+
+        // ===================== DYNAMIC JOB LOADING =====================
+        let allJobs = [];
+
+        function loadJobs() {
+          // Dynamic greeting based on current logged in user
+          const storedUser = localStorage.getItem('currentUser');
+          if (storedUser) {
+            try {
+              const userObj = JSON.parse(storedUser);
+              const userName = userObj.username || userObj.email || 'Alex';
+              const capitalized = userName.charAt(0).toUpperCase() + userName.slice(1);
+              const greetingEl = document.querySelector('header h1');
+              if (greetingEl) {
+                greetingEl.textContent = `Hello, ${capitalized}!`;
+              }
+            } catch (err) {}
+          }
+
+          const token = localStorage.getItem('supabase_access_token') || 'mock_token_student';
+          fetch('/api/jobs', {
+            headers: {
+              'Authorization': `Bearer ${token}`
+            }
+          })
+          .then(res => res.json())
+          .then(data => {
+            console.log("Mobile Jobs fetched: ", data);
+            allJobs = data;
+            renderJobs(allJobs);
+            
+            // Set initial range label and listeners
+            const slider = document.getElementById('filterSalarySlider');
+            const label = document.getElementById('salaryRangeLabel');
+            if (slider && label) {
+                slider.addEventListener('input', (e) => {
+                    const val = e.target.value;
+                    if (val >= 200) {
+                        label.textContent = "Any Salary";
+                    } else {
+                        label.textContent = `Up to Rs. ${val}k`;
+                    }
+                });
+            }
+          })
+          .catch(err => {
+            console.error("Failed to load jobs: ", err);
+          });
+        }
+
+        function renderJobs(list) {
+          const container = document.getElementById("jobsContainer");
+          if (!container) return;
+
+          if (list.length === 0) {
+            container.innerHTML = `
+              <h2 class="font-headline-lg-mobile text-headline-lg-mobile text-[#471A70] mb-2">Featured for You</h2>
+              <p class="text-xs text-on-surface-variant/60 italic py-8 text-center">No matching internships or roles found.</p>
+            `;
+            return;
+          }
+
+          container.innerHTML = `<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-[#471A70] mb-2">Featured for You</h2>` + 
+          list.map((job, idx) => {
+            const firstLetter = (job.company || 'A').charAt(0).toUpperCase();
+            const bgColors = ['bg-[#f0b0ff] text-primary', 'bg-secondary-fixed text-secondary', 'bg-tertiary-fixed text-tertiary', 'bg-[#fbd7ff] text-[#8d37a9]'];
+            const logoStyle = bgColors[idx % bgColors.length];
+
+            const savedJobs = JSON.parse(localStorage.getItem('savedJobs') || '[]');
+            const isSaved = savedJobs.includes(String(job.id));
+            const bookmarkIcon = isSaved ? 'bookmark' : 'bookmark_border';
+
+            return `
+              <div class="glass-card rounded-3xl p-5 flex flex-col gap-4 active:scale-[0.98] transition-transform duration-300">
+                <div class="flex justify-between items-start">
+                  <div class="flex gap-4">
+                    <div class="w-12 h-12 rounded-2xl ${logoStyle} flex items-center justify-center font-bold">${firstLetter}</div>
+                    <div>
+                      <h3 class="font-bold text-[#471A70] text-lg text-left">${job.title}</h3>
+                      <p class="text-on-surface-variant text-sm font-medium text-left">${job.company} • ${job.location || 'Remote'}</p>
+                    </div>
+                  </div>
+                  <span class="material-symbols-outlined text-primary cursor-pointer active:scale-95 transition-transform" style="font-variation-settings: 'FILL' ${isSaved ? 1 : 0};" onclick="toggleSaveJob(event, '${job.id}')" data-icon="${bookmarkIcon}">${bookmarkIcon}</span>
+                </div>
+                <div class="flex flex-wrap gap-2">
+                  <span class="px-3 py-1 rounded-full bg-primary-fixed/30 text-on-primary-fixed text-[11px] font-bold uppercase tracking-wider">${job.type || 'Full-time'}</span>
+                  <span class="px-3 py-1 rounded-full bg-secondary-fixed/30 text-on-secondary-fixed-variant text-[11px] font-bold uppercase tracking-wider">${job.salary || 'Rs. 80k - Rs. 120k'}</span>
+                </div>
+                <div class="mt-2 flex items-center justify-between">
+                  <p class="text-xs text-on-surface-variant/60">Posted recently</p>
+                  <button onclick="viewJobDetails('${job.id}')" class="bg-primary text-white px-6 py-2 rounded-full font-bold text-sm shadow-md active:scale-95 transition-transform">Apply Now</button>
+                </div>
+              </div>
+            `;
+          }).join('');
+        }
+
+        function toggleSaveJob(event, jobId) {
+          if (event) event.stopPropagation();
+          let savedJobs = JSON.parse(localStorage.getItem('savedJobs') || '[]');
+          jobId = String(jobId);
+          if (savedJobs.includes(jobId)) {
+            savedJobs = savedJobs.filter(id => id !== jobId);
+          } else {
+            savedJobs.push(jobId);
+          }
+          localStorage.setItem('savedJobs', JSON.stringify(savedJobs));
+          renderJobs(allJobs);
+        }
+
+        // Search Input Activation
+        document.getElementById('jobSearchInput').addEventListener('input', (e) => {
+            filterJobs();
+        });
+
+        // Call on load
+        loadJobs();
+    </script>
+</body></html>

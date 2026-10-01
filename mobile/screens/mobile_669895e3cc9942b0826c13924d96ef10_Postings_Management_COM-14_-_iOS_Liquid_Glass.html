@@ -1,0 +1,1606 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/>
+  <title>Systems Limited | Job Postings</title>
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+  <!-- Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            primary: "#8731a3",
+            secondary: "#4D9EFA",
+            background: "#fff7fb",
+            outline: "#817381",
+            "glass-fill": "rgba(255, 255, 255, 0.45)",
+            "glass-border": "rgba(255, 255, 255, 0.6)"
+          },
+          borderRadius: {
+            xxl: "24px"
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      background-color: #DCE4F7;
+      -webkit-tap-highlight-color: transparent;
+      font-family: 'Inter', sans-serif;
+      color: #471A70;
+    }
+    .glass-card {
+      background: rgba(255, 255, 255, 0.4);
+      backdrop-filter: blur(28px);
+      -webkit-backdrop-filter: blur(28px);
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      box-shadow: 0 8px 32px 0 rgba(163, 76, 190, 0.08);
+    }
+    .animated-bg-sphere {
+      position: fixed;
+      width: 350px;
+      height: 350px;
+      border-radius: 50%;
+      filter: blur(80px);
+      z-index: -1;
+      opacity: 0.5;
+      animation: float 20s infinite ease-in-out;
+    }
+    @keyframes float {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(50px, -50px) scale(1.1); }
+    }
+    /* Hide scrollbar */
+    .hide-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .hide-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    #detail-job-desc ul {
+      list-style-type: disc !important;
+      padding-left: 20px !important;
+      margin-top: 8px !important;
+      margin-bottom: 8px !important;
+    }
+    #detail-job-desc ol {
+      list-style-type: decimal !important;
+      padding-left: 20px !important;
+      margin-top: 8px !important;
+      margin-bottom: 8px !important;
+    }
+    #detail-job-desc li {
+      margin-bottom: 6px !important;
+      font-size: 12px !important;
+      font-weight: 600 !important;
+      color: #726580 !important;
+    }
+    #detail-job-desc strong {
+      font-weight: 800 !important;
+      color: #471A70 !important;
+    }
+    #detail-job-desc em {
+      font-style: italic !important;
+    }
+    #detail-job-desc a {
+      color: #8731a3 !important;
+      text-decoration: underline !important;
+      font-weight: 700 !important;
+    }
+  </style>
+</head>
+<body class="antialiased overflow-x-hidden pb-32">
+  <!-- Animated Background Spheres -->
+  <div class="animated-bg-sphere bg-purple-300" style="top: -50px; left: -50px; animation-delay: 0s;"></div>
+  <div class="animated-bg-sphere bg-blue-200" style="bottom: -100px; right: -50px; animation-delay: -5s;"></div>
+
+  <!-- Top AppBar -->
+  <header class="fixed top-0 left-0 right-0 max-w-md mx-auto w-full z-50 bg-white/45 backdrop-blur-[28px] border-b border-white/50 shadow-[0_4px_20px_0_rgba(163,76,190,0.06)] flex justify-between items-center px-5 h-[64px]">
+    <div class="flex items-center gap-3">
+      <div onclick="window.parent.postMessage({ type: 'NAVIGATE', view: 'company-profile' }, '*')" class="w-9 h-9 rounded-full border border-white/80 overflow-hidden shadow-sm cursor-pointer active:scale-95 transition-transform">
+        <img alt="Recruiter Avatar" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDIt827WcUwR9RknikfNiRLVtA9sbTUiLtd0n3jB3z6G-LcVgOH2Q1LSJ95e5CzDJIpIJ5MW47QlldiC3oQ47YxdkpT7yxVIKybu0-SFEgAGF_-PGnr3lHEC2mUOiChHzQlVzeJegHnlKaP42BDNxDuJvyd11-d5rEyg9kglcvwsUMj8OQcfs2DaPaRtXqQYpTnlk1DECitBMwFvdSLRPmO34dRSZsAKs6xpqv5VeKZ0k2W_RiT0X9pBx2iOKk789tArk1DHtKiKeaq"/>
+      </div>
+      <h1 class="font-bold text-base text-primary">RecruiterPro</h1>
+    </div>
+    <div class="flex items-center gap-2">
+      <button class="w-9 h-9 rounded-full bg-white/40 flex items-center justify-center text-primary shadow-sm active:scale-95 transition-transform"><span class="material-symbols-outlined text-[20px]">notifications</span></button>
+      <button class="w-9 h-9 rounded-full bg-white/40 flex items-center justify-center text-primary shadow-sm active:scale-95 transition-transform"><span class="material-symbols-outlined text-[20px]">settings</span></button>
+    </div>
+  </header>
+
+  <main class="mt-[84px] px-5 max-w-md mx-auto space-y-5">
+    
+    <!-- Search Bar -->
+    <section>
+      <div class="relative flex items-center glass-card rounded-full px-4 h-11">
+        <span class="material-symbols-outlined text-outline text-[18px] mr-2">search</span>
+        <input id="jobSearchInput" class="bg-transparent border-none focus:ring-0 text-xs w-full placeholder:text-outline/60 text-on-background" placeholder="Search postings by title or department..." type="text" oninput="filterJobs()"/>
+      </div>
+    </section>
+
+    <!-- Filter Chips -->
+    <section class="flex gap-2 overflow-x-auto hide-scrollbar pb-1">
+      <button onclick="setStatusFilter('all')" id="filter-all" class="bg-primary text-white text-xs font-bold px-4 py-2 rounded-full shadow-md active:scale-95 transition-transform shrink-0">All Posts</button>
+      <button onclick="setStatusFilter('live')" id="filter-live" class="bg-white/50 border border-white/70 text-outline text-xs font-bold px-4 py-2 rounded-full active:scale-95 transition-transform shrink-0">Active (3)</button>
+      <button onclick="setStatusFilter('draft')" id="filter-draft" class="bg-white/50 border border-white/70 text-outline text-xs font-bold px-4 py-2 rounded-full active:scale-95 transition-transform shrink-0">Drafts (1)</button>
+      <button onclick="setStatusFilter('deleted')" id="filter-deleted" class="bg-white/50 border border-white/70 text-outline text-xs font-bold px-4 py-2 rounded-full active:scale-95 transition-transform shrink-0">Deleted (0)</button>
+    </section>
+
+    <!-- Single Column Job List -->
+    <section id="jobsGrid" class="flex flex-col gap-4">
+      <!-- Grid items will be dynamically rendered here -->
+    </section>
+
+  </main>
+
+  <!-- Floating Action Button -->
+  <button onclick="openCreatePostModal()" class="fixed bottom-24 right-5 w-14 h-14 bg-primary text-white rounded-full shadow-2xl flex items-center justify-center active:scale-90 transition-transform z-40">
+    <span class="material-symbols-outlined text-2xl font-bold">add</span>
+  </button>
+
+  <!-- Bottom Navigation Bar Placeholder -->
+  <nav id="bottom-nav"></nav>
+
+  <script>
+    // Fallback Mock Job Postings Data for Systems Limited
+    const mockJobsData = [
+      {
+        id: "se_intern",
+        title: "Software Engineer Intern",
+        dept: "Engineering",
+        posted: "Posted 2d ago",
+        applied: 247,
+        views: "1.8K",
+        status: "live",
+        icon: "code",
+        company: "SkyLync",
+        address: "Islamabad, Pakistan",
+        link: "https://skylync.io",
+        salary: "Rs. 15,000 — Rs. 25,000",
+        description: "Join our Engineering team to work on scalable cloud platforms, microservices, and modern frontend technologies..."
+      },
+      {
+        id: "ux_intern",
+        title: "UI/UX Designer Intern",
+        dept: "Product",
+        posted: "Posted 5d ago",
+        applied: 183,
+        views: "2.1K",
+        status: "live",
+        icon: "palette",
+        company: "Zylor",
+        address: "Karachi, Pakistan",
+        link: "https://zylor.io",
+        salary: "Rs. 12,000 — Rs. 18,000",
+        description: "Help us craft intuitive web and mobile designs, prototypes, and user test methodologies for high-end consumer products..."
+      },
+      {
+        id: "da_intern",
+        title: "Data Analyst Intern",
+        dept: "Finance",
+        posted: "Posted 1w ago",
+        applied: 312,
+        views: "4.9K",
+        status: "live",
+        icon: "analytics",
+        company: "TechFlow",
+        address: "Lahore, Pakistan",
+        link: "https://techflow.com",
+        salary: "Rs. 10,000 — Rs. 15,000",
+        description: "Analyze customer patterns, transaction funnels, and retention rates using Python, SQL, and data visualization tools..."
+      },
+      {
+        id: "mkt_intern",
+        title: "Marketing Intern",
+        dept: "Marketing",
+        posted: "Draft",
+        applied: 0,
+        views: "0",
+        status: "draft",
+        icon: "campaign",
+        company: "TechFlow",
+        address: "Lahore, Pakistan",
+        link: "https://techflow.com",
+        salary: "Rs. 8,000 — Rs. 12,000",
+        description: "Assist the growth team in managing search ads, social content streams, newsletter outreach, and community activation..."
+      }
+    ];
+
+    let jobsData = [...mockJobsData];
+
+    function fetchJobsFromServer() {
+      const token = localStorage.getItem('supabase_access_token') || 'mock_token_company';
+      fetch('/api/jobs', {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      })
+      .then(res => {
+        if (!res.ok) throw new Error("HTTP error " + res.status);
+        return res.json();
+      })
+      .then(data => {
+        console.log("Recruiter Postings fetched: ", data);
+        if (Array.isArray(data) && data.length > 0) {
+          jobsData = data.map(j => {
+            return {
+              id: String(j.id),
+              title: j.title || 'Untitled Job',
+              dept: j.dept || j.department || (j.title.toLowerCase().includes('engineer') || j.title.toLowerCase().includes('developer') ? 'Engineering' : j.title.toLowerCase().includes('designer') ? 'Product' : 'Marketing'),
+              posted: j.posted || (j.created_at ? "Posted " + new Date(j.created_at).toLocaleDateString() : "Posted recently"),
+              applied: j.applied || 0,
+              views: j.views || "0",
+              status: j.status || 'draft',
+              boosted: j.boosted || false,
+              icon: j.icon || (j.title.toLowerCase().includes('engineer') || j.title.toLowerCase().includes('developer') ? 'code' : j.title.toLowerCase().includes('designer') ? 'palette' : 'work'),
+              company: j.company || 'TechFlow',
+              address: j.location || j.address || 'Lahore, Pakistan',
+              link: j.link || '',
+              description: j.description || '',
+              imageUrl: j.imageUrl || null
+            };
+          });
+        }
+        renderJobsGrid();
+      })
+      .catch(err => {
+        console.warn("Failed to load recruiter jobs, using fallback mocks: ", err);
+        renderJobsGrid();
+      });
+    }
+
+    let activeFilter = 'all';
+
+    // Set active filter
+    function setStatusFilter(filterVal) {
+      activeFilter = filterVal;
+      
+      // Update chip styles
+      ['all', 'live', 'draft', 'deleted'].forEach(f => {
+        const btn = document.getElementById('filter-' + f);
+        if (btn) {
+          if (f === filterVal) {
+            btn.className = "bg-primary text-white text-xs font-bold px-4 py-2 rounded-full shadow-md active:scale-95 transition-transform shrink-0";
+          } else {
+            btn.className = "bg-white/50 border border-white/70 text-outline text-xs font-bold px-4 py-2 rounded-full active:scale-95 transition-transform shrink-0";
+          }
+        }
+      });
+
+      renderJobsGrid();
+    }
+
+    function filterJobs() {
+      renderJobsGrid();
+    }
+
+    function renderJobsGrid() {
+      const grid = document.getElementById('jobsGrid');
+      if (!grid) return;
+
+      const searchQuery = document.getElementById('jobSearchInput').value.toLowerCase().trim();
+
+      const filtered = jobsData.filter(job => {
+        // Exclude deleted jobs from standard lists
+        if (activeFilter !== 'deleted' && job.status === 'deleted') {
+          return false;
+        }
+
+        // Status filter
+        if (activeFilter === 'live' && job.status !== 'active') {
+          return false;
+        }
+        if (activeFilter === 'draft' && job.status !== 'draft' && job.status !== 'paused') {
+          return false;
+        }
+        if (activeFilter === 'deleted' && job.status !== 'deleted') {
+          return false;
+        }
+
+        // Search query
+        if (searchQuery && !job.title.toLowerCase().includes(searchQuery) && !job.dept.toLowerCase().includes(searchQuery)) {
+          return false;
+        }
+        return true;
+      });
+
+      // Update chip counts dynamically
+      const activeCount = jobsData.filter(j => j.status === 'active').length;
+      const draftCount = jobsData.filter(j => j.status === 'draft' || j.status === 'paused').length;
+      const deletedCount = jobsData.filter(j => j.status === 'deleted').length;
+      
+      const liveBtn = document.getElementById('filter-live');
+      if (liveBtn) liveBtn.textContent = `Active (${activeCount})`;
+      
+      const draftBtn = document.getElementById('filter-draft');
+      if (draftBtn) draftBtn.textContent = `Drafts (${draftCount})`;
+
+      const deletedBtn = document.getElementById('filter-deleted');
+      if (deletedBtn) deletedBtn.textContent = `Deleted (${deletedCount})`;
+
+      if (filtered.length === 0) {
+        grid.innerHTML = `
+          <div class="text-center py-12 text-outline font-medium text-xs w-full">
+            No job postings found
+          </div>
+        `;
+        return;
+      }
+
+      grid.innerHTML = filtered.map(job => {
+        const isLive = job.status === 'active';
+        const isPaused = job.status === 'paused';
+        const isDraft = job.status === 'draft';
+        const isDeleted = job.status === 'deleted';
+        
+        let badgeText = 'LIVE';
+        let badgeBg = 'bg-green-100 text-green-700';
+        if (isPaused) {
+          badgeText = 'PAUSED';
+          badgeBg = 'bg-amber-100 text-amber-700';
+        } else if (isDraft) {
+          badgeText = 'DRAFT';
+          badgeBg = 'bg-gray-100 text-gray-700';
+        } else if (isDeleted) {
+          badgeText = 'DELETED';
+          badgeBg = 'bg-red-100 text-red-700';
+        }
+
+        const isBoosted = job.boosted === true;
+        const playPauseIcon = isLive ? 'pause' : 'play_arrow';
+        const playPauseTitle = isLive ? 'Pause Posting' : 'Resume Posting';
+        
+        return `
+          <div onclick="openViewPostModal('${job.id}')" class="glass-card rounded-2xl p-4 flex flex-col gap-4 text-left active:scale-[0.99] transition-transform duration-200 cursor-pointer">
+            <div class="flex items-start justify-between">
+              <div class="flex items-center gap-3.5 min-w-0 flex-1 mr-2">
+                <div class="w-11 h-11 rounded-xl overflow-hidden bg-primary/10 flex items-center justify-center text-primary shrink-0 border border-white/80">
+                  ${job.imageUrl ? `<img src="${job.imageUrl}" class="w-full h-full object-cover"/>` : `<span class="material-symbols-outlined text-lg">${job.icon}</span>`}
+                </div>
+                <div class="min-w-0 flex-1">
+                  <div class="flex items-center gap-2 flex-wrap">
+                    <h4 class="font-bold text-sm text-[#471A70] truncate leading-tight">${job.title}</h4>
+                    <span class="px-2 py-0.5 rounded-full ${badgeBg} font-bold text-[8px] uppercase tracking-wider">${badgeText}</span>
+                    ${isBoosted ? `<span class="px-2 py-0.5 rounded-full bg-purple-600 text-white font-extrabold text-[8px] uppercase tracking-wider shadow-sm flex items-center gap-0.5"><span class="material-symbols-outlined text-[8px] font-extrabold">keyboard_double_arrow_up</span>BOOSTED</span>` : ''}
+                  </div>
+                  <p class="text-[10px] text-outline mt-0.5 font-medium">${job.dept}</p>
+                  <div class="flex items-center gap-2.5 text-[9px] text-[#471A70]/70 font-bold mt-1">
+                    <span class="flex items-center gap-0.5"><span class="material-symbols-outlined text-[11px] text-outline font-normal">group</span>${job.applied} applied</span>
+                    <span class="flex items-center gap-0.5"><span class="material-symbols-outlined text-[11px] text-outline font-normal">visibility</span>${job.views} views</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="flex items-center justify-between border-t border-purple-950/5 pt-3">
+              <div class="flex items-center gap-2">
+                ${isDeleted ? `
+                  <!-- Restore -->
+                  <button onclick="event.stopPropagation(); restoreJob('${job.id}')" class="w-8 h-8 rounded-full bg-white/60 border border-white/80 flex items-center justify-center text-primary shadow-sm active:scale-90 transition-transform" title="Restore Posting">
+                    <span class="material-symbols-outlined text-sm">settings_backup_restore</span>
+                  </button>
+                  
+                  <!-- Delete Permanently -->
+                  <button onclick="event.stopPropagation(); deleteJob('${job.id}')" class="w-8 h-8 rounded-full bg-red-50 border border-red-200 flex items-center justify-center text-red-500 shadow-sm active:scale-90 transition-transform" title="Delete Permanently">
+                    <span class="material-symbols-outlined text-sm">delete_forever</span>
+                  </button>
+                ` : `
+                  <!-- Edit -->
+                  <button onclick="event.stopPropagation(); openEditPostModal('${job.id}')" class="w-8 h-8 rounded-full bg-white/60 border border-white/80 flex items-center justify-center text-primary shadow-sm active:scale-90 transition-transform" title="Edit Posting">
+                    <span class="material-symbols-outlined text-sm">edit</span>
+                  </button>
+                  
+                  <!-- Pause / Resume -->
+                  <button onclick="event.stopPropagation(); togglePauseJob('${job.id}')" class="w-8 h-8 rounded-full bg-white/60 border border-white/80 flex items-center justify-center text-primary shadow-sm active:scale-90 transition-transform" title="${playPauseTitle}">
+                    <span class="material-symbols-outlined text-sm">${playPauseIcon}</span>
+                  </button>
+                  
+                  <!-- View -->
+                  <button onclick="event.stopPropagation(); openViewPostModal('${job.id}')" class="w-8 h-8 rounded-full bg-white/60 border border-white/80 flex items-center justify-center text-primary shadow-sm active:scale-90 transition-transform" title="View Posting Details">
+                    <span class="material-symbols-outlined text-sm">visibility</span>
+                  </button>
+                  
+                  <!-- Delete -->
+                  <button onclick="event.stopPropagation(); deleteJob('${job.id}')" class="w-8 h-8 rounded-full bg-red-50 border border-red-200 flex items-center justify-center text-red-500 shadow-sm active:scale-90 transition-transform" title="Delete Posting">
+                    <span class="material-symbols-outlined text-sm">delete</span>
+                  </button>
+                `}
+              </div>
+              
+              <!-- Boost Button -->
+              <div>
+                ${isDeleted ? '' : (isBoosted ? `
+                  <span class="h-8 px-3 rounded-full bg-purple-50 border border-purple-200 flex items-center gap-1 text-purple-600 text-xs font-bold shadow-sm" title="Already Boosted">
+                    <span class="material-symbols-outlined text-sm">done</span> Boosted
+                  </span>
+                ` : `
+                  <button onclick="event.stopPropagation(); boostJob('${job.id}')" class="h-8 px-3 rounded-full bg-white/60 border border-white/80 flex items-center gap-1 text-primary text-xs font-bold shadow-sm active:scale-90 transition-transform" title="Boost Posting">
+                    <span class="material-symbols-outlined text-sm">keyboard_double_arrow_up</span> Boost
+                  </button>
+                `)}
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function togglePauseJob(id) {
+      const token = localStorage.getItem('supabase_access_token') || 'mock_token_company';
+      fetch('/api/jobs/pause', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify({ id })
+      })
+      .then(res => res.json())
+      .then(data => {
+        if (data.success) {
+          fetchJobsFromServer();
+          if (parent && parent.App && typeof parent.App.showToast === 'function') {
+            const newStatus = data.job.status;
+            parent.App.showToast(`Job posting is now ${newStatus}`, "success");
+          }
+        } else {
+          alert("Error: " + (data.error || "Failed to toggle status"));
+        }
+      })
+      .catch(err => {
+        console.error("Pause toggle failed:", err);
+        const job = jobsData.find(j => j.id === id);
+        if (job) {
+          job.status = job.status === 'paused' ? 'active' : 'paused';
+          renderJobsGrid();
+        }
+      });
+    }
+
+    function boostJob(id) {
+      localStorage.setItem('boostingJobId', id);
+      window.parent.postMessage({ type: 'NAVIGATE', view: 'company-plans' }, '*');
+    }
+
+    function restoreJob(id) {
+      if (confirm("Are you sure you want to restore this job posting?")) {
+        const token = localStorage.getItem('supabase_access_token') || 'mock_token_company';
+        fetch('/api/jobs/update', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+          },
+          body: JSON.stringify({ id, status: 'active' })
+        })
+        .then(res => res.json())
+        .then(data => {
+          if (data.success) {
+            const target = jobsData.find(j => j.id === id);
+            if (target) target.status = 'active';
+            renderJobsGrid();
+            if (parent && parent.App && typeof parent.App.showToast === 'function') {
+              parent.App.showToast("Job posting restored successfully", "success");
+            } else {
+              alert("Job posting restored successfully");
+            }
+          } else {
+            alert("Error: " + (data.error || "Failed to restore"));
+          }
+        })
+        .catch(err => {
+          console.error("Restore failed:", err);
+          const target = jobsData.find(j => j.id === id);
+          if (target) target.status = 'active';
+          renderJobsGrid();
+        });
+      }
+    }
+
+    function deleteJob(id) {
+      const job = jobsData.find(j => j.id === id);
+      if (!job) return;
+
+      if (job.status === 'deleted') {
+        if (confirm("Are you sure you want to permanently delete this job posting? This action cannot be undone.")) {
+          const token = localStorage.getItem('supabase_access_token') || 'mock_token_company';
+          fetch('/api/jobs/delete', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({ id })
+          })
+          .then(res => res.json())
+          .then(data => {
+            if (data.success) {
+              jobsData = jobsData.filter(j => j.id !== id);
+              renderJobsGrid();
+              if (parent && parent.App && typeof parent.App.showToast === 'function') {
+                parent.App.showToast("Job posting permanently deleted", "success");
+              } else {
+                alert("Job posting permanently deleted");
+              }
+            } else {
+              alert("Error: " + (data.error || "Failed to delete"));
+            }
+          })
+          .catch(err => {
+            console.error("Delete failed:", err);
+            jobsData = jobsData.filter(j => j.id !== id);
+            renderJobsGrid();
+          });
+        }
+      } else {
+        if (confirm("Are you sure you want to delete this job posting? It will be moved to the Deleted tab.")) {
+          const token = localStorage.getItem('supabase_access_token') || 'mock_token_company';
+          fetch('/api/jobs/update', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({ id, status: 'deleted' })
+          })
+          .then(res => res.json())
+          .then(data => {
+            if (data.success) {
+              const target = jobsData.find(j => j.id === id);
+              if (target) target.status = 'deleted';
+              renderJobsGrid();
+              if (parent && parent.App && typeof parent.App.showToast === 'function') {
+                parent.App.showToast("Job posting moved to Deleted list", "success");
+              } else {
+                alert("Job posting moved to Deleted list");
+              }
+            } else {
+              alert("Error: " + (data.error || "Failed to delete"));
+            }
+          })
+          .catch(err => {
+            console.error("Delete failed:", err);
+            const target = jobsData.find(j => j.id === id);
+            if (target) target.status = 'deleted';
+            renderJobsGrid();
+          });
+        }
+      }
+    }
+
+    function autoResizeTextarea(textarea) {
+      if (!textarea) return;
+      textarea.style.height = 'auto';
+      textarea.style.height = textarea.scrollHeight + 'px';
+    }
+
+    // Initial Render
+    document.addEventListener('DOMContentLoaded', () => {
+      fetchJobsFromServer();
+      
+      // Auto-update stats from database every 5 seconds (Real-time update)
+      setInterval(() => {
+        const createModal = document.getElementById('create-post-modal');
+        const detailsModal = document.getElementById('jobDetailsModal');
+        const compareModal = document.getElementById('compareModal');
+        
+        const isEditing = createModal && !createModal.classList.contains('hidden');
+        const isViewingDetails = detailsModal && !detailsModal.classList.contains('hidden');
+        const isViewingCompare = compareModal && !compareModal.classList.contains('hidden');
+        
+        if (!isEditing && !isViewingDetails && !isViewingCompare) {
+          fetchJobsFromServer();
+        }
+      }, 5000);
+      
+      const descTextarea = document.getElementById('form-job-desc');
+      if (descTextarea) {
+        descTextarea.style.overflowY = 'hidden';
+        descTextarea.addEventListener('input', () => {
+          autoResizeTextarea(descTextarea);
+        });
+        descTextarea.addEventListener('keydown', (e) => {
+          if (e.ctrlKey && e.shiftKey) {
+            if (e.key === '>' || e.code === 'Period' || e.keyCode === 190) {
+              e.preventDefault();
+              changeSelectionFontSize('increase');
+            } else if (e.key === '<' || e.code === 'Comma' || e.keyCode === 188) {
+              e.preventDefault();
+              changeSelectionFontSize('decrease');
+            }
+          }
+        });
+      }
+    });
+
+    function changeSelectionFontSize(direction) {
+      const textarea = document.getElementById('form-job-desc');
+      if (!textarea) return;
+
+      const start = textarea.selectionStart;
+      const end = textarea.selectionEnd;
+      const text = textarea.value;
+      const selected = text.substring(start, end);
+
+      if (!selected) {
+        const placeholder = 'text';
+        const tagOpen = direction === 'increase' ? '[size-up]' : '[size-down]';
+        const tagClose = direction === 'increase' ? '[/size-up]' : '[/size-down]';
+        const replacement = `${tagOpen}${placeholder}${tagClose}`;
+        textarea.value = text.substring(0, start) + replacement + text.substring(end);
+        textarea.focus();
+        textarea.setSelectionRange(start + tagOpen.length, start + tagOpen.length + placeholder.length);
+        autoResizeTextarea(textarea);
+        return;
+      }
+
+      // Check if it is a heading line cycle
+      const isLineStart = start === 0 || text.charAt(start - 1) === '\n';
+      if (isLineStart && (selected.startsWith('#') || !selected.includes('\n'))) {
+        let cleanText = selected.trim();
+        let currentLevel = 0;
+        if (cleanText.startsWith('###### ')) {
+          currentLevel = 6;
+          cleanText = cleanText.substring(7);
+        } else if (cleanText.startsWith('##### ')) {
+          currentLevel = 5;
+          cleanText = cleanText.substring(6);
+        } else if (cleanText.startsWith('#### ')) {
+          currentLevel = 4;
+          cleanText = cleanText.substring(5);
+        } else if (cleanText.startsWith('### ')) {
+          currentLevel = 3;
+          cleanText = cleanText.substring(4);
+        } else if (cleanText.startsWith('## ')) {
+          currentLevel = 2;
+          cleanText = cleanText.substring(3);
+        } else if (cleanText.startsWith('# ')) {
+          currentLevel = 1;
+          cleanText = cleanText.substring(2);
+        }
+
+        let newPrefix = '';
+        if (direction === 'increase') {
+          if (currentLevel === 0) newPrefix = '###### ';
+          else if (currentLevel === 6) newPrefix = '##### ';
+          else if (currentLevel === 5) newPrefix = '#### ';
+          else if (currentLevel === 4) newPrefix = '### ';
+          else if (currentLevel === 3) newPrefix = '## ';
+          else if (currentLevel === 2) newPrefix = '# ';
+          else newPrefix = '# ';
+        } else {
+          if (currentLevel === 1) newPrefix = '## ';
+          else if (currentLevel === 2) newPrefix = '### ';
+          else if (currentLevel === 3) newPrefix = '#### ';
+          else if (currentLevel === 4) newPrefix = '##### ';
+          else if (currentLevel === 5) newPrefix = '###### ';
+          else if (currentLevel === 6) newPrefix = '';
+          else newPrefix = '';
+        }
+
+        const replacement = newPrefix + cleanText;
+        textarea.value = text.substring(0, start) + replacement + text.substring(end);
+        textarea.focus();
+        textarea.setSelectionRange(start, start + replacement.length);
+        autoResizeTextarea(textarea);
+        return;
+      }
+
+      const tagOpen = direction === 'increase' ? '[size-up]' : '[size-down]';
+      const tagClose = direction === 'increase' ? '[/size-up]' : '[/size-down]';
+      
+      if (selected.startsWith(tagOpen) && selected.endsWith(tagClose)) {
+        const unwrapped = selected.substring(tagOpen.length, selected.length - tagClose.length);
+        textarea.value = text.substring(0, start) + unwrapped + text.substring(end);
+        textarea.focus();
+        textarea.setSelectionRange(start, start + unwrapped.length);
+      } else {
+        const replacement = `${tagOpen}${selected}${tagClose}`;
+        textarea.value = text.substring(0, start) + replacement + text.substring(end);
+        textarea.focus();
+        textarea.setSelectionRange(start, start + replacement.length);
+      }
+      autoResizeTextarea(textarea);
+    }
+  </script>
+
+  <!-- Job Details Modal (Premium Glassmorphic Sheet) -->
+  <div id="jobDetailsModal" class="fixed inset-0 z-50 hidden bg-[#E7EEFF] overflow-y-auto pb-12">
+    <!-- Header -->
+    <header class="fixed top-0 left-0 right-0 max-w-md mx-auto w-full z-50 bg-white/45 backdrop-blur-[28px] border-b border-white/50 shadow-[0_4px_20px_0_rgba(163,76,190,0.06)] flex justify-between items-center px-5 h-[64px]">
+      <button onclick="closeJobDetailsModal()" class="w-9 h-9 rounded-full bg-white/40 flex items-center justify-center text-[#471A70] shadow-sm active:scale-95 transition-transform">
+        <span class="material-symbols-outlined text-[20px]">close</span>
+      </button>
+      <h1 class="font-bold text-sm text-[#471A70]">Job Details</h1>
+      <div class="w-9 h-9"></div> <!-- spacer -->
+    </header>
+
+    <!-- Main Scrollable Content -->
+    <main class="mt-[80px] px-5 max-w-md mx-auto space-y-5 text-left">
+      <!-- Title Card -->
+      <div class="glass-card rounded-2xl p-5 flex items-start gap-4">
+        <div id="detail-job-icon-container" class="w-14 h-14 rounded-2xl bg-primary/10 overflow-hidden flex items-center justify-center text-primary shrink-0 border border-white/60 shadow-sm">
+          <span id="detail-job-icon" class="material-symbols-outlined text-2xl">work</span>
+        </div>
+        <div class="min-w-0">
+          <h2 id="detail-job-title" class="font-bold text-lg text-[#471A70] leading-tight">Lead UX Designer</h2>
+          <p id="detail-job-company" class="text-xs text-outline font-medium mt-1">Systems Limited • Lahore, Pakistan</p>
+          <div class="flex items-center gap-1.5 mt-2">
+            <span id="detail-job-status" class="px-2 py-0.5 rounded-full bg-green-100 text-green-700 font-bold text-[8px] uppercase tracking-wider">LIVE</span>
+            <span id="detail-job-boosted" class="px-2 py-0.5 rounded-full bg-purple-600 text-white font-extrabold text-[8px] uppercase tracking-wider shadow-sm flex items-center gap-0.5"><span class="material-symbols-outlined text-[8px] font-extrabold">keyboard_double_arrow_up</span>BOOSTED</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Metrics Grid -->
+      <div class="grid grid-cols-3 gap-3">
+        <div class="bg-white/50 border border-white/70 p-3.5 rounded-2xl text-center">
+          <span class="block text-[8px] text-outline font-bold uppercase tracking-wider mb-0.5">Stipend Range</span>
+          <span id="detail-job-salary" class="text-[11px] font-bold text-[#471A70] break-words">Rs. 8k - 12k</span>
+        </div>
+        <div class="bg-white/50 border border-white/70 p-3.5 rounded-2xl text-center">
+          <span class="block text-[8px] text-outline font-bold uppercase tracking-wider mb-0.5">Applications</span>
+          <span id="detail-job-applied" class="text-[11px] font-bold text-[#471A70]">0 received</span>
+        </div>
+        <div class="bg-white/50 border border-white/70 p-3.5 rounded-2xl text-center">
+          <span class="block text-[8px] text-outline font-bold uppercase tracking-wider mb-0.5">Department</span>
+          <span id="detail-job-dept" class="text-[11px] font-bold text-[#471A70] truncate">Product</span>
+        </div>
+      </div>
+
+      <!-- Job Description -->
+      <div class="space-y-2">
+        <h3 class="text-xs font-extrabold text-outline uppercase tracking-wider">Job Description</h3>
+        <div class="glass-card rounded-2xl p-4 bg-white/40">
+          <p id="detail-job-desc" class="text-xs font-semibold text-[#726580] leading-relaxed whitespace-pre-line">We are looking for a talented designer to join our product team...</p>
+        </div>
+      </div>
+
+      <!-- Skills Required -->
+      <div class="space-y-2" id="detail-job-skills-section">
+        <h3 class="text-xs font-extrabold text-outline uppercase tracking-wider">Skills Required</h3>
+        <div id="detail-job-skills" class="flex flex-wrap gap-2">
+          <!-- Dynamically populated -->
+        </div>
+      </div>
+
+      <!-- Action Buttons Row -->
+      <div class="flex gap-4 pt-3">
+        <button id="btn-promote-listing" onclick="promoteCurrentListing()" class="flex-1 h-12 rounded-2xl bg-primary text-white font-bold text-xs shadow-lg shadow-primary/25 active:scale-95 transition-all flex items-center justify-center gap-1">
+          <span class="material-symbols-outlined text-sm">rocket_launch</span> Promote Listing
+        </button>
+        <button id="btn-compare-listing" onclick="compareCurrentListing()" class="flex-1 h-12 rounded-2xl bg-primary/10 border border-primary/40 text-primary font-bold text-xs active:scale-95 transition-all flex items-center justify-center gap-1">
+          <span class="material-symbols-outlined text-sm">compare_arrows</span> Compare
+        </button>
+      </div>
+    </main>
+  </div>
+
+  <!-- Compare Performance Modal (Premium Sheet) -->
+  <div id="compareModal" class="fixed inset-0 z-50 hidden bg-[#E7EEFF] overflow-y-auto pb-12">
+    <!-- Header -->
+    <header class="fixed top-0 left-0 right-0 max-w-md mx-auto w-full z-50 bg-white/45 backdrop-blur-[28px] border-b border-white/50 shadow-[0_4px_20px_0_rgba(163,76,190,0.06)] flex justify-between items-center px-5 h-[64px]">
+      <button onclick="closeCompareModal()" class="w-9 h-9 rounded-full bg-white/40 flex items-center justify-center text-[#471A70] shadow-sm active:scale-95 transition-transform">
+        <span class="material-symbols-outlined text-[20px]">close</span>
+      </button>
+      <h1 class="font-bold text-sm text-[#471A70]">Compare Performance</h1>
+      <div class="w-9 h-9"></div> <!-- spacer -->
+    </header>
+
+    <!-- Main Scrollable Content -->
+    <main class="mt-[80px] px-5 max-w-md mx-auto space-y-4 text-left">
+      <div>
+        <p class="text-[10px] text-outline font-semibold">Comparing against all active listings</p>
+      </div>
+
+      <!-- Quick highlight grid -->
+      <div class="grid grid-cols-3 gap-3 bg-white/50 border border-white/70 p-4 rounded-2xl">
+        <div class="text-center border-r border-purple-950/10">
+          <span class="block text-[8px] text-outline font-bold uppercase tracking-wider mb-0.5">Views</span>
+          <span id="compare-current-views" class="text-base font-extrabold text-[#471A70]">0</span>
+          <span id="compare-current-views-diff" class="block text-[9px] font-bold text-green-600">--</span>
+        </div>
+        <div class="text-center border-r border-purple-950/10">
+          <span class="block text-[8px] text-outline font-bold uppercase tracking-wider mb-0.5">Applied</span>
+          <span id="compare-current-apps" class="text-base font-extrabold text-[#471A70]">0</span>
+          <span id="compare-current-apps-diff" class="block text-[9px] font-bold text-green-600">--</span>
+        </div>
+        <div class="text-center">
+          <span class="block text-[8px] text-outline font-bold uppercase tracking-wider mb-0.5">Conversion</span>
+          <span id="compare-current-conv" class="text-base font-extrabold text-[#471A70]">0%</span>
+          <span id="compare-current-conv-diff" class="block text-[9px] font-bold text-green-600">--</span>
+        </div>
+      </div>
+
+      <!-- Comparison Rows List -->
+      <div class="space-y-3">
+        <h3 class="text-xs font-extrabold text-outline uppercase tracking-wider">Active Postings Performance</h3>
+        <div id="compare-rows-list" class="flex flex-col gap-3">
+          <!-- Dynamically populated candidate rows -->
+        </div>
+      </div>
+
+      <!-- Tip & Promote -->
+      <div class="bg-white/50 border border-white/70 p-4 rounded-2xl space-y-3">
+        <div class="flex items-start gap-2 text-xs font-semibold text-[#726580] leading-relaxed">
+          <span class="material-symbols-outlined text-green-600 font-bold shrink-0">tips_and_updates</span>
+          <p><strong>Tip:</strong> Promote this listing to boost views by up to 3x and get priority placement in student feeds.</p>
+        </div>
+        <button onclick="closeCompareModal(); boostCurrentJobFromCompare()" class="w-full h-11 bg-primary text-white font-bold rounded-xl active:scale-95 transition-transform flex items-center justify-center gap-1 text-xs shadow-md">
+          Promote Now →
+        </button>
+      </div>
+    </main>
+  </div>
+
+  <!-- Bottom Navigation Bar Placeholder -->
+  <nav id="bottom-nav"></nav>
+
+  <!-- Job Posting Modal (Full Screen Sheet) -->
+  <div id="create-post-modal" class="fixed inset-0 z-50 hidden bg-[#E7EEFF] overflow-y-auto pb-12">
+    <!-- Header -->
+    <header class="fixed top-0 left-0 right-0 max-w-md mx-auto w-full z-50 bg-white/45 backdrop-blur-[28px] border-b border-white/50 shadow-[0_4px_20px_0_rgba(163,76,190,0.06)] flex justify-between items-center px-5 h-[64px]">
+      <button onclick="closeCreatePostModal()" class="w-9 h-9 rounded-full bg-white/40 flex items-center justify-center text-[#471A70] shadow-sm active:scale-95 transition-transform">
+        <span class="material-symbols-outlined text-[20px]">close</span>
+      </button>
+      <h1 class="font-bold text-sm text-[#471A70]">New Job Posting</h1>
+      <button onclick="saveNewPosting(editingJobId ? 'keep' : 'live')" class="w-9 h-9 rounded-full bg-primary flex items-center justify-center text-white shadow-md active:scale-95 transition-transform">
+        <span class="material-symbols-outlined text-[20px]">check</span>
+      </button>
+    </header>
+
+    <!-- Main Form Scrollable Content -->
+    <main class="mt-[80px] px-5 max-w-md mx-auto space-y-4 text-left">
+      
+      <!-- Job Title -->
+      <div class="flex flex-col gap-1">
+        <label class="text-[10px] font-extrabold uppercase tracking-wider text-outline">Job Title</label>
+        <input type="text" id="form-job-title" value="Senior UX Designer" class="w-full bg-white border border-white/80 rounded-2xl h-11 px-4 text-xs font-semibold text-[#471A70] focus:ring-primary focus:border-primary" />
+      </div>
+
+      <!-- Department -->
+      <div class="flex flex-col gap-1">
+        <label class="text-[10px] font-extrabold uppercase tracking-wider text-outline">Department</label>
+        <input type="text" id="form-job-dept" value="Design & Creative" class="w-full bg-white border border-white/80 rounded-2xl h-11 px-4 text-xs font-semibold text-[#471A70] focus:ring-primary focus:border-primary" />
+      </div>
+
+      <!-- Company Name -->
+      <div class="flex flex-col gap-1">
+        <label class="text-[10px] font-extrabold uppercase tracking-wider text-outline">Company Name</label>
+        <input type="text" id="form-job-company" value="TechFlow" class="w-full bg-white border border-white/80 rounded-2xl h-11 px-4 text-xs font-semibold text-[#471A70] focus:ring-primary focus:border-primary" />
+      </div>
+
+      <!-- Company Address -->
+      <div class="flex flex-col gap-1">
+        <label class="text-[10px] font-extrabold uppercase tracking-wider text-outline">Company Address</label>
+        <input type="text" id="form-job-address" oninput="updateMapLocationBadge(this.value)" value="Lahore, Pakistan" class="w-full bg-white border border-white/80 rounded-2xl h-11 px-4 text-xs font-semibold text-[#471A70] focus:ring-primary focus:border-primary" />
+      </div>
+
+      <!-- Company Website / Apply Link -->
+      <div class="flex flex-col gap-1">
+        <label class="text-[10px] font-extrabold uppercase tracking-wider text-outline">Company Website / Apply Link</label>
+        <input type="text" id="form-job-link" value="https://techflow.io/careers" class="w-full bg-white border border-white/80 rounded-2xl h-11 px-4 text-xs font-semibold text-[#471A70] focus:ring-primary focus:border-primary" />
+      </div>
+
+      <!-- Location Map -->
+      <div class="flex flex-col gap-1">
+        <label class="text-[10px] font-extrabold uppercase tracking-wider text-outline">Location Map</label>
+        <div class="relative w-full h-32 rounded-2xl overflow-hidden shadow-inner border border-white/80">
+          <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCk6A_8loi2EkdvUrrh0_suRsMR_gCqgm4aHXQ-JdRUq5JmikZa7PzqiJGHK620S76xtY5T8K3dyboqb1e4-gFDFcr8XoPiRqrrdkpHqfcZ5EBUhSgdm4bmcw9FokDI9fokbJOA2RORpkU9OQKadyxk3qtHhN3N0NGdKyjvV6bHLYyskcoW4FGy9IpZPhGzkgvJR0k7zA317vhBpAZ-ZsU0NEkKwckFxqIKLVDKIL2CqAFgqEuwvHbZfgYzrByK4x-acX8fdGFgni_d" class="w-full h-full object-cover"/>
+          <div class="absolute inset-0 bg-[#471A70]/10 flex items-center justify-center">
+            <span class="px-3 py-1.5 rounded-full bg-white/90 shadow-md text-[10px] font-extrabold text-[#471A70] flex items-center gap-1 max-w-[90%] truncate">
+              <span class="material-symbols-outlined text-[12px]">location_on</span> <span id="map-location-badge">Lahore, Pakistan</span>
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Salary Range -->
+      <div class="flex flex-col gap-1">
+        <label class="text-[10px] font-extrabold uppercase tracking-wider text-outline">Salary Range (Monthly)</label>
+        <input type="text" id="form-job-salary" value="Rs. 8,000 — Rs. 12,000" class="w-full bg-white border border-white/80 rounded-2xl h-11 px-4 text-xs font-semibold text-[#471A70] focus:ring-primary focus:border-primary" />
+      </div>
+
+      <!-- Job Description -->
+      <div class="flex flex-col gap-1">
+        <label class="text-[10px] font-extrabold uppercase tracking-wider text-outline">Job Description</label>
+        <div class="border border-white/80 rounded-2xl overflow-hidden bg-white">
+          <div class="flex items-center gap-3 px-3 py-2 bg-gray-50 border-b border-gray-100 text-outline">
+            <button type="button" onclick="formatText('bold')" class="material-symbols-outlined text-[16px] font-bold active:scale-90 transition-transform">format_bold</button>
+            <button type="button" onclick="formatText('italic')" class="material-symbols-outlined text-[16px] font-bold active:scale-90 transition-transform">format_italic</button>
+            <button type="button" onclick="formatText('list')" class="material-symbols-outlined text-[16px] font-bold active:scale-90 transition-transform">format_list_bulleted</button>
+            <button type="button" onclick="formatText('link')" class="material-symbols-outlined text-[16px] font-bold active:scale-90 transition-transform">link</button>
+          </div>
+          <textarea id="form-job-desc" style="resize: none;" rows="4" class="w-full border-0 focus:ring-0 p-3 text-xs font-semibold text-[#726580] leading-relaxed">As a Senior UX Designer at TechFlow, you will lead the user experience strategy for our flagship fintech platform. You will work closely with product managers and engineers to craft seamless, accessible, and delightful interfaces for over 10 million users globally.</textarea>
+        </div>
+      </div>
+
+      <!-- Required Skills -->
+      <div class="flex flex-col gap-1">
+        <label class="text-[10px] font-extrabold uppercase tracking-wider text-outline">Required Skills</label>
+        <div class="flex flex-wrap gap-1.5 p-3 bg-white border border-white/80 rounded-2xl" id="form-skills-container">
+          <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary/10 text-primary text-[10px] font-bold">UI Design <button type="button" onclick="removeFormSkill(this)" class="material-symbols-outlined text-[12px] font-bold">close</button></span>
+          <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary/10 text-primary text-[10px] font-bold">Figma <button type="button" onclick="removeFormSkill(this)" class="material-symbols-outlined text-[12px] font-bold">close</button></span>
+          <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary/10 text-primary text-[10px] font-bold">Prototyping <button type="button" onclick="removeFormSkill(this)" class="material-symbols-outlined text-[12px] font-bold">close</button></span>
+          <input type="text" id="form-skill-input" class="bg-transparent border-0 focus:ring-0 p-0 text-xs font-semibold text-[#471A70] w-28 placeholder:text-outline/50" placeholder="Type and press Enter..." onkeydown="handleSkillInput(event)" />
+        </div>
+        <p class="text-[9px] text-outline font-medium">Press Enter or comma to add a skill</p>
+      </div>
+
+      <!-- Questionnaire Attachments -->
+      <div class="flex flex-col gap-1">
+        <label class="text-[10px] font-extrabold uppercase tracking-wider text-outline">Questionnaire Attachments</label>
+        <div class="border-2 border-dashed border-primary/30 rounded-2xl p-6 bg-white/40 flex flex-col items-center justify-center gap-2 cursor-pointer active:scale-[0.99] transition-transform" onclick="triggerFileInput()">
+          <input type="file" id="form-file-input" class="hidden" multiple onchange="handleFileSelected(event)" />
+          <span class="material-symbols-outlined text-primary text-3xl">upload_file</span>
+          <span class="text-xs font-extrabold text-primary">Click to upload or drag & drop</span>
+          <span class="text-[9px] font-medium text-outline">Images, PDF, DOCX up to 10MB</span>
+          <div id="form-uploaded-files" class="w-full space-y-1.5 mt-2"></div>
+        </div>
+      </div>
+
+      <!-- Action Button Row -->
+      <div class="flex gap-4 pt-2">
+        <button type="button" onclick="saveNewPosting('draft')" class="flex-1 h-12 rounded-2xl bg-white border border-white/80 text-[#471A70] font-bold text-xs active:scale-95 transition-all">Save Draft</button>
+        <button type="button" onclick="saveNewPosting('live')" class="flex-grow-[1.5] h-12 rounded-2xl bg-primary text-white font-bold text-xs shadow-lg shadow-primary/25 active:scale-95 transition-all">Publish</button>
+      </div>
+
+    </main>
+  </div>
+
+  <script>
+    // Touch Feedback
+    document.querySelectorAll('.glass-card, button').forEach(el => {
+      el.addEventListener('touchstart', () => {
+        el.style.transform = 'scale(0.97)';
+        el.style.transition = 'transform 0.15s ease-in-out';
+      });
+      el.addEventListener('touchend', () => {
+        el.style.transform = 'scale(1)';
+      });
+    });
+
+    // Modal Control Functions and Edit tracking
+    let editingJobId = null;
+
+    function resetFormInputs() {
+      document.getElementById('form-job-title').disabled = false;
+      document.getElementById('form-job-dept').disabled = false;
+      document.getElementById('form-job-company').disabled = false;
+      document.getElementById('form-job-address').disabled = false;
+      document.getElementById('form-job-link').disabled = false;
+      document.getElementById('form-job-salary').disabled = false;
+      document.getElementById('form-job-desc').disabled = false;
+      document.getElementById('form-skill-input').style.display = 'block';
+      document.getElementById('form-file-input').disabled = false;
+
+      const actionRow = document.querySelector('#create-post-modal main > div:last-child');
+      if (actionRow) {
+        actionRow.style.display = 'flex';
+      }
+    }
+
+    function openCreatePostModal() {
+      resetFormInputs();
+      editingJobId = null;
+      uploadedImageBase64 = null;
+      document.getElementById('form-job-title').value = "";
+      document.getElementById('form-job-dept').value = "";
+      document.getElementById('form-job-company').value = "TechFlow";
+      document.getElementById('form-job-address').value = "Lahore, Pakistan";
+      updateMapLocationBadge("Lahore, Pakistan");
+      document.getElementById('form-job-link').value = "https://techflow.io/careers";
+      document.getElementById('form-job-salary').value = "Rs. 8,000 — Rs. 12,000";
+      const descArea = document.getElementById('form-job-desc');
+      descArea.value = "";
+      document.getElementById('form-uploaded-files').innerHTML = "";
+      
+      const titleEl = document.querySelector('#create-post-modal h1');
+      if (titleEl) titleEl.textContent = "New Job Posting";
+      
+      document.getElementById('create-post-modal').classList.remove('hidden');
+      setTimeout(() => {
+        autoResizeTextarea(descArea);
+      }, 50);
+    }
+
+    function openEditPostModal(jobId) {
+      resetFormInputs();
+      const job = jobsData.find(j => j.id === jobId);
+      if (!job) return;
+
+      editingJobId = jobId;
+      uploadedImageBase64 = job.imageUrl || null;
+      
+      document.getElementById('form-job-title').value = job.title || '';
+      document.getElementById('form-job-dept').value = job.dept || '';
+      document.getElementById('form-job-company').value = job.company || 'TechFlow';
+      document.getElementById('form-job-address').value = job.address || 'Lahore, Pakistan';
+      updateMapLocationBadge(job.address || "Lahore, Pakistan");
+      document.getElementById('form-job-link').value = job.link || 'https://techflow.io/careers';
+      document.getElementById('form-job-salary').value = job.salary || 'Rs. 8,000 — Rs. 12,000';
+      const descArea = document.getElementById('form-job-desc');
+      descArea.value = job.description || '';
+
+      const uploadContainer = document.getElementById('form-uploaded-files');
+      uploadContainer.innerHTML = '';
+      if (job.imageUrl) {
+        const div = document.createElement('div');
+        div.className = "flex items-center justify-between bg-white/60 px-3 py-1.5 rounded-lg border border-white/80 text-[10px] font-bold text-[#471A70] w-full mt-1.5";
+        div.innerHTML = `
+          <span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">image</span>Uploaded Job Image</span>
+          <button type="button" onclick="uploadedImageBase64 = null; this.parentElement.remove()" class="material-symbols-outlined text-[12px] text-outline font-bold">close</button>
+        `;
+        uploadContainer.appendChild(div);
+      }
+
+      // Populate skills badges
+      const formSkillsContainer = document.getElementById('form-skills-container');
+      const skillInput = document.getElementById('form-skill-input');
+      if (formSkillsContainer && skillInput) {
+        // Remove existing badge spans
+        const existingBadges = formSkillsContainer.querySelectorAll('span');
+        existingBadges.forEach(b => b.remove());
+
+        const skills = job.skillsRequired || ['Figma', 'Prototyping', 'UI/UX Design'];
+        skills.forEach(skill => {
+          const badge = document.createElement('span');
+          badge.className = "inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary/10 text-primary text-[10px] font-bold";
+          badge.innerHTML = `${skill} <button type="button" onclick="removeFormSkill(this)" class="material-symbols-outlined text-[12px] font-bold">close</button>`;
+          formSkillsContainer.insertBefore(badge, skillInput);
+        });
+      }
+
+      const titleEl = document.querySelector('#create-post-modal h1');
+      if (titleEl) titleEl.textContent = "Edit Job Posting";
+
+      document.getElementById('create-post-modal').classList.remove('hidden');
+      setTimeout(() => {
+        autoResizeTextarea(descArea);
+      }, 50);
+    }
+
+    let currentJobIdForDetails = null;
+
+    function openViewPostModal(jobId) {
+      const job = jobsData.find(j => j.id === jobId);
+      if (!job) return;
+
+      currentJobIdForDetails = jobId;
+
+      // Populate elements
+      const iconContainer = document.getElementById('detail-job-icon-container');
+      if (iconContainer) {
+        if (job.imageUrl) {
+          iconContainer.innerHTML = `<img src="${job.imageUrl}" class="w-full h-full object-cover"/>`;
+        } else {
+          iconContainer.innerHTML = `<span id="detail-job-icon" class="material-symbols-outlined text-2xl">${job.icon || 'work'}</span>`;
+        }
+      }
+
+      const titleEl = document.getElementById('detail-job-title');
+      if (titleEl) titleEl.textContent = job.title || 'Untitled Job';
+
+      const companyEl = document.getElementById('detail-job-company');
+      if (companyEl) companyEl.textContent = `${job.company || 'TechFlow'} • ${job.address || 'Lahore, Pakistan'}`;
+
+      const statusEl = document.getElementById('detail-job-status');
+      if (statusEl) {
+        statusEl.textContent = (job.status || 'active').toUpperCase();
+        if (job.status === 'paused') {
+          statusEl.className = "px-2 py-0.5 rounded-full bg-amber-100 text-amber-700 font-bold text-[8px] uppercase tracking-wider";
+        } else if (job.status === 'draft') {
+          statusEl.className = "px-2 py-0.5 rounded-full bg-gray-100 text-gray-700 font-bold text-[8px] uppercase tracking-wider";
+        } else if (job.status === 'deleted') {
+          statusEl.className = "px-2 py-0.5 rounded-full bg-red-100 text-red-700 font-bold text-[8px] uppercase tracking-wider";
+        } else {
+          statusEl.className = "px-2 py-0.5 rounded-full bg-green-100 text-green-700 font-bold text-[8px] uppercase tracking-wider";
+        }
+      }
+
+      const boostedEl = document.getElementById('detail-job-boosted');
+      if (boostedEl) {
+        boostedEl.style.display = job.boosted ? 'inline-flex' : 'none';
+      }
+
+      const salaryEl = document.getElementById('detail-job-salary');
+      if (salaryEl) salaryEl.textContent = job.salary || 'Rs. 8,000 — Rs. 12,000';
+
+      const appliedEl = document.getElementById('detail-job-applied');
+      if (appliedEl) appliedEl.textContent = `${job.applied} received`;
+
+      const deptEl = document.getElementById('detail-job-dept');
+      if (deptEl) deptEl.textContent = job.dept || 'Product';
+
+      const descEl = document.getElementById('detail-job-desc');
+      if (descEl) descEl.innerHTML = parseMarkdown(job.description || 'No description provided.');
+
+      // Populate skills section
+      const skillsSection = document.getElementById('detail-job-skills-section');
+      const skillsContainer = document.getElementById('detail-job-skills');
+      if (skillsSection && skillsContainer) {
+        if (job.skillsRequired && Array.isArray(job.skillsRequired) && job.skillsRequired.length > 0) {
+          skillsSection.style.display = 'block';
+          skillsContainer.innerHTML = job.skillsRequired.map(skill => `
+            <span class="px-3 py-1.5 rounded-full bg-[#E5D5FA] text-[#8731a3] text-[10px] font-bold shadow-sm">${skill}</span>
+          `).join('');
+        } else {
+          skillsSection.style.display = 'none';
+        }
+      }
+
+      document.getElementById('jobDetailsModal').classList.remove('hidden');
+    }
+
+    function parseMarkdown(text) {
+      if (!text) return '';
+      
+      // Escape HTML to prevent XSS
+      let html = text
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;');
+
+      // Size up and size down custom tags
+      html = html.replace(/\[size-up\](.*?)\[\/size-up\]/g, '<span style="font-size: 1.25em; font-weight: 700; color: #471A70; display: inline;">$1</span>');
+      html = html.replace(/\[size-down\](.*?)\[\/size-down\]/g, '<span style="font-size: 0.85em; color: #817381; display: inline;">$1</span>');
+
+      // Headings: H1 to H6
+      html = html.split('\n').map(line => {
+        if (line.startsWith('###### ')) {
+          return `<h6 class="text-[9px] font-extrabold text-[#471A70] mt-1.5 mb-0.5">${line.substring(7)}</h6>`;
+        } else if (line.startsWith('##### ')) {
+          return `<h5 class="text-[10px] font-extrabold text-[#471A70] mt-1.5 mb-0.5">${line.substring(6)}</h5>`;
+        } else if (line.startsWith('#### ')) {
+          return `<h4 class="text-[11px] font-extrabold text-[#471A70] mt-2 mb-0.5">${line.substring(5)}</h4>`;
+        } else if (line.startsWith('### ')) {
+          return `<h3 class="text-xs font-extrabold text-[#471A70] mt-2 mb-0.5">${line.substring(4)}</h3>`;
+        } else if (line.startsWith('## ')) {
+          return `<h2 class="text-sm font-extrabold text-[#471A70] mt-2.5 mb-1">${line.substring(3)}</h2>`;
+        } else if (line.startsWith('# ')) {
+          return `<h1 class="text-base font-extrabold text-[#471A70] mt-3 mb-1">${line.substring(2)}</h1>`;
+        }
+        return line;
+      }).join('\n');
+      
+      // Bold: **text**
+      html = html.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+      
+      // Italic: *text*
+      html = html.replace(/\*([^*]+)\*/g, '<em>$1</em>');
+      
+      // Bullet lists
+      html = html.split('\n').map(line => {
+        const match = line.match(/^(\s*)-\s+(.*)$/);
+        if (match) {
+          return `<li>${match[2]}</li>`;
+        }
+        return line;
+      }).join('\n');
+      html = html.replace(/(<li>.*?<\/li>)+/gs, '<ul>$&</ul>');
+
+      // Ordered lists (counting)
+      html = html.split('\n').map(line => {
+        const match = line.match(/^(\s*)\d+\.\s+(.*)$/);
+        if (match) {
+          return `<li class="list-decimal">${match[2]}</li>`;
+        }
+        return line;
+      }).join('\n');
+      html = html.replace(/(<li class="list-decimal">.*?<\/li>)+/gs, '<ol>$&</ol>');
+
+      // Link: [text](url)
+      html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank">$1</a>');
+
+      return html;
+    }
+
+    function closeJobDetailsModal() {
+      document.getElementById('jobDetailsModal').classList.add('hidden');
+      currentJobIdForDetails = null;
+    }
+
+    function promoteCurrentListing() {
+      if (!currentJobIdForDetails) return;
+      closeJobDetailsModal();
+      boostJob(currentJobIdForDetails);
+    }
+
+    function closeCompareModal() {
+      document.getElementById('compareModal').classList.add('hidden');
+    }
+
+    function boostCurrentJobFromCompare() {
+      if (!currentJobIdForDetails) return;
+      boostJob(currentJobIdForDetails);
+    }
+
+    function compareCurrentListing() {
+      if (!currentJobIdForDetails) return;
+      const job = jobsData.find(j => j.id === currentJobIdForDetails);
+      if (!job) return;
+
+      const activeJobs = jobsData.filter(j => j.status === 'active' || j.status === 'paused');
+      if (activeJobs.length === 0) return;
+
+      // Parse views and applied
+      const parseVal = (v) => typeof v === 'string' ? parseInt(v.replace(/[^0-9]/g, '')) || 0 : v || 0;
+      
+      const totalViews = activeJobs.reduce((sum, j) => sum + parseVal(j.views), 0);
+      const totalApps = activeJobs.reduce((sum, j) => sum + parseVal(j.applied), 0);
+      
+      const avgViews = Math.round(totalViews / activeJobs.length);
+      const avgApps = Math.round(totalApps / activeJobs.length);
+      
+      const getConvRate = (j) => {
+        const v = parseVal(j.views);
+        const a = parseVal(j.applied);
+        return v > 0 ? parseFloat((a / v * 100).toFixed(1)) : 0.0;
+      };
+      
+      const totalConv = activeJobs.reduce((sum, j) => sum + getConvRate(j), 0);
+      const avgConv = parseFloat((totalConv / activeJobs.length).toFixed(1));
+
+      const maxViews = Math.max(...activeJobs.map(j => parseVal(j.views)), 1);
+      const maxApps = Math.max(...activeJobs.map(j => parseVal(j.applied)), 1);
+
+      // Current job metrics
+      const currentViews = parseVal(job.views);
+      const currentApps = parseVal(job.applied);
+      const currentConv = getConvRate(job);
+
+      document.getElementById('compare-current-views').textContent = currentViews.toLocaleString();
+      document.getElementById('compare-current-apps').textContent = currentApps.toLocaleString();
+      document.getElementById('compare-current-conv').textContent = `${currentConv}%`;
+
+      // Set differentials
+      const setDiff = (el, val, avg) => {
+        if (val >= avg) {
+          el.textContent = `↑ Above avg (${avg.toLocaleString()})`;
+          el.className = "block text-[9px] font-bold text-green-600";
+        } else {
+          el.textContent = `↓ Below avg (${avg.toLocaleString()})`;
+          el.className = "block text-[9px] font-bold text-red-600";
+        }
+      };
+
+      setDiff(document.getElementById('compare-current-views-diff'), currentViews, avgViews);
+      setDiff(document.getElementById('compare-current-apps-diff'), currentApps, avgApps);
+      
+      const convDiffEl = document.getElementById('compare-current-conv-diff');
+      if (currentConv >= avgConv) {
+        convDiffEl.textContent = `↑ Above avg (${avgConv}%)`;
+        convDiffEl.className = "block text-[9px] font-bold text-green-600";
+      } else {
+        convDiffEl.textContent = `↓ Below avg (${avgConv}%)`;
+        convDiffEl.className = "block text-[9px] font-bold text-red-600";
+      }
+
+      // Populate list rows
+      const listContainer = document.getElementById('compare-rows-list');
+      listContainer.innerHTML = activeJobs.map(j => {
+        const jViews = parseVal(j.views);
+        const jApps = parseVal(j.applied);
+        const jConv = getConvRate(j);
+        const isThis = j.id === currentJobIdForDetails;
+
+        const viewPct = Math.round(jViews / maxViews * 100);
+        const appPct = Math.round(jApps / maxApps * 100);
+
+        const viewColor = isThis ? 'bg-primary' : (jViews >= avgViews ? 'bg-green-600' : 'bg-gray-400');
+        const appColor = isThis ? 'bg-primary' : (jApps >= avgApps ? 'bg-green-600' : 'bg-gray-400');
+        const viewTextColor = isThis ? 'text-primary' : (jViews >= avgViews ? 'text-green-600' : 'text-gray-500');
+        const appTextColor = isThis ? 'text-primary' : (jApps >= avgApps ? 'text-green-600' : 'text-gray-500');
+
+        return `
+          <div class="glass-card rounded-2xl p-4 flex flex-col gap-2.5 ${isThis ? 'border-primary/55 bg-primary/5' : ''}">
+            <div class="flex justify-between items-center">
+              <h4 class="font-bold text-xs text-[#471A70] truncate max-w-[200px]">
+                ${isThis ? '<span class="text-[8px] bg-primary text-white px-2 py-0.5 rounded-full mr-1.5 font-bold uppercase">This</span>' : ''}${j.title}
+              </h4>
+              <span class="text-xs font-bold ${jConv >= avgConv ? 'text-green-600' : 'text-red-500'}">${jConv}% conversion</span>
+            </div>
+            
+            <div class="space-y-1.5">
+              <div class="flex items-center justify-between text-[9px] font-bold text-outline uppercase tracking-wider">
+                <span>Views</span>
+                <span class="${viewTextColor}">${jViews.toLocaleString()}</span>
+              </div>
+              <div class="w-full bg-purple-950/5 h-2 rounded-full overflow-hidden">
+                <div class="${viewColor} h-full" style="width: ${viewPct}%"></div>
+              </div>
+            </div>
+
+            <div class="space-y-1.5">
+              <div class="flex items-center justify-between text-[9px] font-bold text-outline uppercase tracking-wider">
+                <span>Applications</span>
+                <span class="${appTextColor}">${jApps.toLocaleString()}</span>
+              </div>
+              <div class="w-full bg-purple-950/5 h-2 rounded-full overflow-hidden">
+                <div class="${appColor} h-full" style="width: ${appPct}%"></div>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      document.getElementById('compareModal').classList.remove('hidden');
+    }
+
+    function closeCreatePostModal() {
+      document.getElementById('create-post-modal').classList.add('hidden');
+      resetFormInputs();
+    }
+
+    // Skills Interactive Handling
+    function handleSkillInput(e) {
+      if (e.key === 'Enter' || e.key === ',') {
+        e.preventDefault();
+        const input = document.getElementById('form-skill-input');
+        const val = input.value.trim().replace(/,/g, '');
+        if (val) {
+          addSkillBadge(val);
+          input.value = '';
+        }
+      }
+    }
+
+    function addSkillBadge(name) {
+      const container = document.getElementById('form-skills-container');
+      const input = document.getElementById('form-skill-input');
+      
+      const badge = document.createElement('span');
+      badge.className = "inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary/10 text-primary text-[10px] font-bold";
+      badge.innerHTML = `${name} <button type="button" onclick="removeFormSkill(this)" class="material-symbols-outlined text-[12px] font-bold">close</button>`;
+      
+      container.insertBefore(badge, input);
+    }
+
+    function removeFormSkill(button) {
+      button.parentElement.remove();
+    }
+
+    // Upload Files Handling
+    function triggerFileInput() {
+      document.getElementById('form-file-input').click();
+    }
+
+    let uploadedImageBase64 = null;
+
+    function handleFileSelected(e) {
+      const files = e.target.files;
+      const container = document.getElementById('form-uploaded-files');
+      container.innerHTML = '';
+      uploadedImageBase64 = null;
+
+      for (let i = 0; i < files.length; i++) {
+        const file = files[i];
+        
+        if (file.type.startsWith('image/')) {
+          const reader = new FileReader();
+          reader.onload = function(evt) {
+            uploadedImageBase64 = evt.target.result;
+          };
+          reader.readAsDataURL(file);
+        }
+
+        const div = document.createElement('div');
+        div.className = "flex items-center justify-between bg-white/60 px-3 py-1.5 rounded-lg border border-white/80 text-[10px] font-bold text-[#471A70] w-full mt-1.5";
+        div.innerHTML = `
+          <span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">description</span>${file.name}</span>
+          <button type="button" onclick="uploadedImageBase64 = null; this.parentElement.remove()" class="material-symbols-outlined text-[12px] text-outline font-bold">close</button>
+        `;
+        container.appendChild(div);
+      }
+    }
+
+    function updateMapLocationBadge(address) {
+      const badge = document.getElementById('map-location-badge');
+      if (badge) {
+        badge.textContent = address || 'Lahore, Pakistan';
+      }
+    }
+
+    function formatText(type) {
+      const textarea = document.getElementById('form-job-desc');
+      if (!textarea) return;
+
+      const start = textarea.selectionStart;
+      const end = textarea.selectionEnd;
+      const text = textarea.value;
+      const selected = text.substring(start, end);
+
+      let replacement = '';
+      if (type === 'bold') {
+        replacement = `**${selected || 'bold text'}**`;
+      } else if (type === 'italic') {
+        replacement = `*${selected || 'italic text'}*`;
+      } else if (type === 'list') {
+        if (selected) {
+          replacement = selected.split('\n').map(line => `- ${line}`).join('\n');
+        } else {
+          replacement = `- list item`;
+        }
+      } else if (type === 'link') {
+        replacement = `[${selected || 'link text'}](https://)`;
+      }
+
+      textarea.value = text.substring(0, start) + replacement + text.substring(end);
+      textarea.focus();
+      textarea.setSelectionRange(start, start + replacement.length);
+      autoResizeTextarea(textarea);
+    }
+
+    // Save dynamic posting
+    function saveNewPosting(status = 'draft') {
+      const title = document.getElementById('form-job-title').value.trim();
+      const dept = document.getElementById('form-job-dept').value.trim();
+      const company = document.getElementById('form-job-company').value.trim();
+      const address = document.getElementById('form-job-address').value.trim();
+      const link = document.getElementById('form-job-link').value.trim();
+      const salary = document.getElementById('form-job-salary').value.trim();
+      const desc = document.getElementById('form-job-desc').value.trim();
+      
+      if (!title || !dept) {
+        alert("Please enter Job Title and Department.");
+        return;
+      }
+
+      // Collect skills from DOM badges
+      const skillsContainer = document.getElementById('form-skills-container');
+      let skillsRequired = ['Figma', 'Prototyping', 'UI/UX Design'];
+      if (skillsContainer) {
+        const badges = skillsContainer.querySelectorAll('span');
+        if (badges.length > 0) {
+          skillsRequired = Array.from(badges).map(badge => {
+            let textNode = "";
+            for (let child of badge.childNodes) {
+              if (child.nodeType === Node.TEXT_NODE) {
+                textNode += child.textContent;
+              }
+            }
+            return textNode.trim();
+          }).filter(Boolean);
+        }
+      }
+
+      // Automatically determine matching icon from department title
+      let icon = 'work';
+      const lowerDept = dept.toLowerCase();
+      if (lowerDept.includes('code') || lowerDept.includes('engineer') || lowerDept.includes('tech') || lowerDept.includes('dev')) {
+        icon = 'code';
+      } else if (lowerDept.includes('design') || lowerDept.includes('creative') || lowerDept.includes('art') || lowerDept.includes('product')) {
+        icon = 'palette';
+      } else if (lowerDept.includes('data') || lowerDept.includes('finance') || lowerDept.includes('analyst')) {
+        icon = 'analytics';
+      } else if (lowerDept.includes('marketing') || lowerDept.includes('sales') || lowerDept.includes('pr')) {
+        icon = 'campaign';
+      }
+
+      const token = localStorage.getItem('supabase_access_token') || 'mock_token_company';
+      let dbStatus = status === 'live' ? 'active' : (status === 'draft' ? 'draft' : 'paused');
+      if (editingJobId) {
+        const existingJob = jobsData.find(j => j.id === editingJobId);
+        if (existingJob && status === 'keep') {
+          dbStatus = existingJob.status;
+        }
+      }
+
+      if (editingJobId) {
+        const existingJob = jobsData.find(j => j.id === editingJobId);
+        const payload = {
+          id: editingJobId,
+          title: title,
+          company: company || 'TechFlow',
+          dept: dept,
+          department: dept,
+          location: address || 'Lahore, Pakistan',
+          salary: salary || 'Rs. 8,000 — Rs. 12,000',
+          description: desc,
+          status: dbStatus,
+          link: link || 'https://techflow.com',
+          skillsRequired: skillsRequired,
+          imageUrl: uploadedImageBase64 || (existingJob ? existingJob.imageUrl : null)
+        };
+
+        fetch('/api/jobs/update', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+          },
+          body: JSON.stringify(payload)
+        })
+        .then(res => res.json())
+        .then(data => {
+          console.log("Job updated on server: ", data);
+          fetchJobsFromServer();
+        })
+        .catch(err => {
+          console.error("Job update failed on server, using fallback: ", err);
+          const job = jobsData.find(j => j.id === editingJobId);
+          if (job) {
+            job.title = title;
+            job.dept = dept;
+            job.company = company;
+            job.address = address;
+            job.link = link;
+            job.salary = salary;
+            job.description = desc;
+            job.status = dbStatus;
+            job.icon = icon;
+            job.skillsRequired = skillsRequired;
+            job.posted = dbStatus === 'active' ? "Updated just now" : (dbStatus === 'paused' ? "Paused" : "Draft");
+          }
+          renderJobsGrid();
+        });
+        editingJobId = null;
+      } else {
+        const payload = {
+          title: title,
+          company: company || 'TechFlow',
+          dept: dept,
+          department: dept,
+          location: address || 'Lahore, Pakistan',
+          salary: salary || 'Rs. 8,000 — Rs. 12,000',
+          type: 'Internship',
+          description: desc,
+          skillsRequired: skillsRequired,
+          status: dbStatus,
+          link: link || 'https://techflow.com',
+          imageUrl: uploadedImageBase64
+        };
+
+        fetch('/api/jobs/create', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+          },
+          body: JSON.stringify(payload)
+        })
+        .then(res => res.json())
+        .then(data => {
+          console.log("Job created on server: ", data);
+          fetchJobsFromServer();
+        })
+        .catch(err => {
+          console.error("Job creation failed on server, using fallback: ", err);
+          const newJob = {
+            id: 'job_' + Date.now(),
+            title: title,
+            dept: dept,
+            company: company,
+            address: address,
+            link: link,
+            salary: salary,
+            description: desc,
+            posted: dbStatus === 'active' ? "Posted just now" : (dbStatus === 'paused' ? "Paused" : "Draft"),
+            applied: 0,
+            views: "0",
+            status: dbStatus,
+            icon: icon,
+            skillsRequired: skillsRequired,
+            imageUrl: uploadedImageBase64
+          };
+          jobsData.unshift(newJob);
+          renderJobsGrid();
+        });
+      }
+
+      closeCreatePostModal();
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<title>Student Submission Evaluator</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-bright": "#f9f9ff",
+                    "primary-fixed-dim": "#f0b0ff",
+                    "on-primary-fixed": "#330044",
+                    "tertiary": "#006823",
+                    "glass-fill": "rgba(255, 255, 255, 0.35)",
+                    "on-tertiary-fixed": "#002106",
+                    "on-background": "#141c29",
+                    "on-primary": "#ffffff",
+                    "tertiary-fixed": "#6cff82",
+                    "on-secondary": "#ffffff",
+                    "on-secondary-fixed-variant": "#004883",
+                    "glass-thick": "rgba(255, 255, 255, 0.8)",
+                    "secondary-container": "#54a3ff",
+                    "on-surface-variant": "#4f4350",
+                    "primary-container": "#a34cbe",
+                    "on-tertiary-fixed-variant": "#00531a",
+                    "surface-container-high": "#e0e8fb",
+                    "on-tertiary-container": "#e6ffe0",
+                    "on-secondary-container": "#003868",
+                    "on-primary-container": "#fff5fb",
+                    "on-tertiary": "#ffffff",
+                    "on-surface": "#141c29",
+                    "glass-border": "rgba(255, 255, 255, 0.6)",
+                    "card-gradient": "linear-gradient(135deg, #4D9EFA 0%, #BF7DF5 100%)",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-container-low": "#f0f3ff",
+                    "error": "#FF453A",
+                    "surface": "#f9f9ff",
+                    "error-container": "#ffdad6",
+                    "primary": "#8731a3",
+                    "outline-variant": "#d2c1d2",
+                    "secondary-fixed": "#d3e3ff",
+                    "tertiary-fixed-dim": "#47e266",
+                    "surface-container-highest": "#dbe3f6",
+                    "surface-container": "#e7eeff",
+                    "on-primary-fixed-variant": "#72188f",
+                    "secondary-fixed-dim": "#a3c9ff",
+                    "surface-tint": "#8d37a9",
+                    "inverse-surface": "#29313f",
+                    "gold": "#FFD60A",
+                    "secondary": "#0060ab",
+                    "primary-fixed": "#fbd7ff",
+                    "on-error": "#ffffff",
+                    "surface-dim": "#d2daed",
+                    "inverse-primary": "#f0b0ff",
+                    "outline": "#817381",
+                    "on-secondary-fixed": "#001c39",
+                    "on-error-container": "#93000a",
+                    "tertiary-container": "#00842f",
+                    "orange": "#FF9F0A",
+                    "background": "#DCE4F7",
+                    "surface-variant": "#dbe3f6",
+                    "inverse-on-surface": "#ecf1ff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "12px",
+                    "2xl": "24px",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "mobile-gutter": "16px",
+                    "safe-bottom": "34px",
+                    "safe-top": "44px",
+                    "max-width": "1280px",
+                    "desktop-margin": "64px",
+                    "mobile-margin": "20px",
+                    "desktop-gutter": "24px",
+                    "base": "8px"
+            },
+            "fontFamily": {
+                    "headline-lg": ["Inter"],
+                    "body-md": ["Inter"],
+                    "label-caps": ["Inter"],
+                    "display-xl": ["Inter"],
+                    "headline-lg-mobile": ["Inter"],
+                    "display-xl-mobile": ["Inter"],
+                    "body-md-mobile": ["Inter"],
+                    "label-caps-mobile": ["Inter"]
+            },
+            "fontSize": {
+                    "headline-lg": ["34px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                    "label-caps": ["13px", {"lineHeight": "1.0", "letterSpacing": "0.03em", "fontWeight": "600"}],
+                    "display-xl": ["56px", {"lineHeight": "1.1", "letterSpacing": "-0.03em", "fontWeight": "700"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "display-xl-mobile": ["34px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "body-md-mobile": ["15px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                    "label-caps-mobile": ["12px", {"lineHeight": "1.0", "letterSpacing": "0.05em", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #DCE4F7;
+            font-family: 'Inter', sans-serif;
+            color: #471A70;
+            -webkit-font-smoothing: antialiased;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.35);
+            backdrop-filter: blur(28px);
+            -webkit-backdrop-filter: blur(28px);
+            border: 0.5px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 12px 40px 0 rgba(71, 26, 112, 0.15);
+        }
+        .slider-thumb::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 24px;
+            height: 24px;
+            background: #A34CBE;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 3px solid white;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        .slider-thumb::-moz-range-thumb {
+            width: 24px;
+            height: 24px;
+            background: #A34CBE;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 3px solid white;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: rgba(255,255,255,0.1);
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: rgba(135, 49, 163, 0.3);
+            border-radius: 10px;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="flex flex-col min-h-screen">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 backdrop-blur-2xl bg-glass-fill border-b border-glass-border shadow-[0_12px_40px_0_rgba(71,26,112,0.15)] flex items-center justify-between px-mobile-margin h-14 w-full">
+<button class="flex items-center justify-center w-10 h-10 text-primary active:scale-95 transition-transform duration-200">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile font-bold text-primary">Submission Review</h1>
+<button class="flex items-center justify-center w-10 h-10 text-primary active:scale-95 transition-transform duration-200">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</header>
+<main class="flex-grow pt-20 pb-40 px-mobile-margin">
+<!-- Submission Viewer -->
+<section class="mb-8">
+<div class="glass-card rounded-2xl p-6 relative overflow-hidden group">
+<div class="flex items-start justify-between mb-4">
+<div class="flex items-center gap-4">
+<div class="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-3xl" style="font-variation-settings: 'FILL' 1;">description</span>
+</div>
+<div>
+<h2 class="font-headline-lg-mobile text-lg text-on-background leading-tight">User Research Report</h2>
+<p class="text-on-surface-variant font-label-caps-mobile mt-1">PDF • 4.2 MB • Submitted 2h ago</p>
+</div>
+</div>
+</div>
+<div class="relative w-full aspect-[4/3] rounded-lg overflow-hidden bg-white/40 border border-white/40 mb-4">
+<img class="w-full h-full object-cover blur-[1px] opacity-80" data-alt="A clean, professional document layout on a digital screen, featuring complex data visualizations, charts, and structured text paragraphs. The document is presented in a modern, light-mode interface with soft lavender and blue atmospheric lighting. The overall aesthetic is high-fidelity and educational, emphasizing a high-quality student submission in a premium digital learning platform." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAhqgmRZUyIRvRlJfDOz29oDtc0yVuglVoo0xT0q15W3fd-3Npw-hmQqZk1v7qVM4SMLkUj1c6-Gn-RswHHMm9HDS96OGYzXNnFmhu0dSRHnsSNBlW9JSl9zBQp1YfYfJeM992q3zO0JTSJoSZMTVluqjAUAlGXMbjOonHxPdIM8j3aUcwhNcEPmWbSR3w5TWz1Qp-857py_Sp-CnIGjDyoR9VmcWAmwQGMWhbq42Z9aA5MXvDfpH988ZD8CXygcdON73X1HGyI6is0"/>
+<div class="absolute inset-0 flex items-center justify-center bg-black/5 backdrop-blur-[2px]">
+<button class="bg-primary text-white font-label-caps-mobile py-3 px-6 rounded-full flex items-center gap-2 shadow-lg active:scale-95 transition-all">
+<span class="material-symbols-outlined text-sm">open_in_full</span>
+                            VIEW FULLSCREEN
+                        </button>
+</div>
+</div>
+</div>
+</section>
+<!-- Rubrics Section -->
+<section class="mb-8 space-y-4">
+<div class="flex items-center justify-between px-1">
+<h3 class="font-label-caps-mobile text-primary uppercase tracking-widest">Rubric Evaluation</h3>
+<span class="text-primary font-bold">114 / 120 Total</span>
+</div>
+<!-- Rubric 1 -->
+<div class="glass-card rounded-xl p-5">
+<div class="flex justify-between items-center mb-4">
+<span class="font-headline-lg-mobile text-base text-on-background">Technical Accuracy</span>
+<span class="bg-primary-container/20 text-primary font-bold text-sm px-2 py-0.5 rounded-lg" id="score1">38/40</span>
+</div>
+<input class="w-full h-1.5 bg-white/50 rounded-lg appearance-none cursor-pointer slider-thumb" max="40" min="0" oninput="document.getElementById('score1').innerText = this.value + '/40'" type="range" value="38"/>
+</div>
+<!-- Rubric 2 -->
+<div class="glass-card rounded-xl p-5">
+<div class="flex justify-between items-center mb-4">
+<span class="font-headline-lg-mobile text-base text-on-background">Visual Fidelity</span>
+<span class="bg-primary-container/20 text-primary font-bold text-sm px-2 py-0.5 rounded-lg" id="score2">36/40</span>
+</div>
+<input class="w-full h-1.5 bg-white/50 rounded-lg appearance-none cursor-pointer slider-thumb" max="40" min="0" oninput="document.getElementById('score2').innerText = this.value + '/40'" type="range" value="36"/>
+</div>
+<!-- Rubric 3 -->
+<div class="glass-card rounded-xl p-5">
+<div class="flex justify-between items-center mb-4">
+<span class="font-headline-lg-mobile text-base text-on-background">Documentation</span>
+<span class="bg-primary-container/20 text-primary font-bold text-sm px-2 py-0.5 rounded-lg" id="score3">40/40</span>
+</div>
+<input class="w-full h-1.5 bg-white/50 rounded-lg appearance-none cursor-pointer slider-thumb" max="40" min="0" oninput="document.getElementById('score3').innerText = this.value + '/40'" type="range" value="40"/>
+</div>
+</section>
+<!-- Feedback Editor -->
+<section class="mb-4">
+<h3 class="font-label-caps-mobile text-primary uppercase tracking-widest mb-4 px-1">Detailed Feedback</h3>
+<div class="glass-card rounded-2xl p-1">
+<textarea class="w-full bg-glass-thick/50 backdrop-blur-md border-none rounded-2xl p-4 text-body-md-mobile text-on-background placeholder:text-on-surface-variant focus:ring-2 focus:ring-primary/20 min-h-[140px] custom-scrollbar" placeholder="Add specific feedback for the student..."></textarea>
+</div>
+<div class="flex gap-2 mt-3 px-1">
+<button class="bg-white/40 hover:bg-white/60 text-primary text-xs font-bold py-2 px-4 rounded-full transition-colors flex items-center gap-1">
+<span class="material-symbols-outlined text-xs">auto_fix</span> Quick Tips
+                </button>
+<button class="bg-white/40 hover:bg-white/60 text-primary text-xs font-bold py-2 px-4 rounded-full transition-colors flex items-center gap-1">
+<span class="material-symbols-outlined text-xs">mic</span> Voice Note
+                </button>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full z-50 rounded-t-xl backdrop-blur-2xl bg-glass-thick border-t border-glass-border shadow-[0_-12px_40px_0_rgba(71,26,112,0.1)] flex justify-around items-center w-full h-safe-bottom px-mobile-gutter pb-4">
+<!-- Save Draft (Inactive) -->
+<button class="flex flex-col items-center justify-center text-on-surface-variant hover:opacity-80 active:scale-95 transition-all duration-300 ease-out">
+<span class="material-symbols-outlined">save</span>
+<span class="font-label-caps-mobile text-label-caps-mobile mt-1">Save Draft</span>
+</button>
+<!-- Previous (Inactive) -->
+<button class="flex flex-col items-center justify-center text-on-surface-variant hover:opacity-80 active:scale-95 transition-all duration-300 ease-out">
+<span class="material-symbols-outlined">chevron_left</span>
+<span class="font-label-caps-mobile text-label-caps-mobile mt-1">Previous</span>
+</button>
+<!-- Submit Grade (Active) -->
+<button class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-6 py-2 hover:opacity-80 active:scale-95 transition-all duration-300 ease-out shadow-lg">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="font-label-caps-mobile text-label-caps-mobile mt-0.5">Submit Grade</span>
+</button>
+</nav>
+<!-- Background Atmospheric Effect (Vanilla JS Micro-interaction) -->
+<div class="fixed inset-0 -z-10 pointer-events-none transition-all duration-1000 ease-in-out opacity-40" id="bg-glow"></div>
+<script>
+        const glow = document.getElementById('bg-glow');
+        document.addEventListener('mousemove', (e) => {
+            const x = (e.clientX / window.innerWidth) * 100;
+            const y = (e.clientY / window.innerHeight) * 100;
+            glow.style.background = `radial-gradient(circle at ${x}% ${y}%, rgba(163, 76, 190, 0.25) 0%, transparent 50%)`;
+        });
+        
+        // Initial state
+        glow.style.background = `radial-gradient(circle at 50% 50%, rgba(163, 76, 190, 0.25) 0%, transparent 50%)`;
+    </script>
+</body></html>

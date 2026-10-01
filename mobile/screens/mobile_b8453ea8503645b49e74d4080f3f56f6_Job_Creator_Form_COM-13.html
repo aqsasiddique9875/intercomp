@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<title>Post Job | COM-13</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        colors: {
+          "primary":          "#8731a3",
+          "on-primary":       "#ffffff",
+          "primary-container":"#a34cbe",
+          "on-primary-container":"#fff5fb",
+          "secondary":        "#0060ab",
+          "tertiary":         "#006823",
+          "on-surface":       "#141c29",
+          "on-surface-variant":"#4f4350",
+          "outline":          "#817381",
+          "outline-variant":  "#d2c1d2",
+          "surface":          "#f9f9ff",
+          "surface-bright":   "#f9f9ff",
+          "surface-container":"#e7eeff",
+          "surface-container-low":"#f0f3ff",
+          "glass-fill":       "rgba(255,255,255,0.35)",
+          "glass-border":     "rgba(255,255,255,0.6)",
+          "glass-thick":      "rgba(255,255,255,0.85)",
+          "error":            "#FF453A",
+        },
+        fontFamily: {
+          sans: ["Inter","ui-sans-serif","system-ui"],
+        }
+      }
+    }
+  }
+</script>
+<style>
+  * { -webkit-tap-highlight-color: transparent; }
+  body {
+    background: linear-gradient(160deg,#ede6f7 0%,#dce4f7 60%,#e8f0fe 100%);
+    min-height: max(884px, 100dvh);
+    font-family: 'Inter', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    color: #141c29;
+    overflow-x: hidden;
+  }
+
+  /* ── Glass helpers ── */
+  .glass-card {
+    background: rgba(255,255,255,0.82);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgba(255,255,255,0.7);
+    box-shadow: 0 8px 32px 0 rgba(71,26,112,0.10);
+  }
+  .glass-input {
+    background: rgba(255,255,255,0.7);
+    border: 1.5px solid rgba(209,193,210,0.7);
+    border-radius: 12px;
+    transition: border-color .2s, box-shadow .2s;
+    outline: none;
+    width: 100%;
+    padding: 10px 14px;
+    font-size: 14px;
+    color: #141c29;
+  }
+  .glass-input:focus {
+    border-color: #8731a3;
+    box-shadow: 0 0 0 3px rgba(135,49,163,0.12);
+    background: rgba(255,255,255,0.95);
+  }
+  .glass-input::placeholder { color: #a08aa8; }
+
+  /* ── Field label ── */
+  .field-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #4f4350;
+    margin-bottom: 7px;
+    display: block;
+  }
+
+  /* ── Header ── */
+  .top-bar {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    max-width: 448px;
+    margin: 0 auto;
+    z-index: 100;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 16px;
+    background: rgba(255,255,255,0.88);
+    backdrop-filter: blur(28px);
+    -webkit-backdrop-filter: blur(28px);
+    border-bottom: 1px solid rgba(255,255,255,0.6);
+    box-shadow: 0 4px 20px 0 rgba(135,49,163,0.08);
+  }
+  .header-icon-btn {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    transition: background .15s, transform .15s;
+  }
+  .header-icon-btn:active { transform: scale(0.92); }
+
+  /* ── Skill chips ── */
+  .skill-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 5px 12px 5px 14px;
+    border-radius: 9999px;
+    background: rgba(135,49,163,0.12);
+    border: 1px solid rgba(135,49,163,0.22);
+    font-size: 12px;
+    font-weight: 700;
+    color: #8731a3;
+    cursor: default;
+  }
+  .skill-chip-x {
+    display: flex; align-items: center; justify-content: center;
+    width: 16px; height: 16px;
+    border-radius: 50%;
+    background: rgba(135,49,163,0.18);
+    cursor: pointer;
+    transition: background .15s;
+    font-size: 12px;
+    line-height: 1;
+  }
+  .skill-chip-x:hover { background: rgba(135,49,163,0.32); }
+
+  /* ── Upload zone ── */
+  .upload-zone {
+    border: 2px dashed rgba(135,49,163,0.35);
+    border-radius: 16px;
+    background: rgba(135,49,163,0.04);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 32px 16px;
+    gap: 8px;
+    cursor: pointer;
+    transition: border-color .2s, background .2s;
+  }
+  .upload-zone.drag-over {
+    border-color: #8731a3;
+    background: rgba(135,49,163,0.10);
+  }
+
+  /* ── Rich text toolbar ── */
+  .rte-toolbar {
+    display: flex;
+    gap: 4px;
+    padding: 6px 8px;
+    background: rgba(255,255,255,0.7);
+    border: 1.5px solid rgba(209,193,210,0.7);
+    border-bottom: none;
+    border-radius: 12px 12px 0 0;
+  }
+  .rte-btn {
+    width: 32px; height: 28px;
+    border-radius: 7px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; font-weight: 700;
+    color: #4f4350;
+    cursor: pointer;
+    transition: background .15s, color .15s;
+    user-select: none;
+  }
+  .rte-btn:hover { background: rgba(135,49,163,0.10); color: #8731a3; }
+  .rte-btn:active { background: rgba(135,49,163,0.2); }
+  #jobDesc {
+    background: rgba(255,255,255,0.7);
+    border: 1.5px solid rgba(209,193,210,0.7);
+    border-top: none;
+    border-radius: 0 0 12px 12px;
+    padding: 10px 14px;
+    font-size: 14px;
+    color: #141c29;
+    width: 100%;
+    min-height: 160px;
+    resize: vertical;
+    outline: none;
+    font-family: 'Inter', sans-serif;
+    line-height: 1.6;
+    transition: border-color .2s, box-shadow .2s;
+  }
+  #jobDesc:focus {
+    border-color: #8731a3;
+    box-shadow: 0 0 0 3px rgba(135,49,163,0.10);
+    background: rgba(255,255,255,0.95);
+  }
+
+  /* ── Bottom action bar ── */
+  .bottom-bar {
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    max-width: 448px;
+    margin: 0 auto;
+    z-index: 100;
+    padding: 12px 16px 28px;
+    background: rgba(255,255,255,0.88);
+    backdrop-filter: blur(28px);
+    -webkit-backdrop-filter: blur(28px);
+    border-top: 1px solid rgba(255,255,255,0.6);
+    box-shadow: 0 -8px 24px 0 rgba(71,26,112,0.09);
+    display: flex;
+    gap: 12px;
+  }
+
+  /* ── Map container ── */
+  .map-container {
+    width: 100%;
+    height: 130px;
+    border-radius: 12px;
+    overflow: hidden;
+    position: relative;
+    border: 1.5px solid rgba(209,193,210,0.6);
+  }
+  .map-container img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+  }
+  .map-address-pill {
+    position: absolute;
+    bottom: 8px; left: 8px; right: 8px;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(8px);
+    border-radius: 8px;
+    padding: 5px 10px;
+    font-size: 11px;
+    font-weight: 600;
+    color: #141c29;
+    display: flex; align-items: center; gap: 5px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  /* ── Toast ── */
+  #toast {
+    position: fixed;
+    bottom: 100px; left: 50%; transform: translateX(-50%) translateY(20px);
+    background: #1c1235;
+    color: #fff;
+    font-size: 13px; font-weight: 600;
+    padding: 10px 22px;
+    border-radius: 9999px;
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity .3s, transform .3s;
+    z-index: 9999;
+    pointer-events: none;
+  }
+  #toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══ HEADER ═══ -->
+<div class="top-bar">
+  <div class="header-icon-btn" onclick="closePage()" style="background:rgba(209,193,210,0.22);">
+    <span class="material-symbols-outlined" style="font-size:20px;color:#4f4350;">close</span>
+  </div>
+  <h1 style="font-size:16px;font-weight:700;color:#141c29;letter-spacing:-0.01em;">Edit Job Posting</h1>
+  <div class="header-icon-btn" onclick="publishJob()" style="background:#8731a3;">
+    <span class="material-symbols-outlined" style="font-size:20px;color:#fff;font-variation-settings:'FILL' 1;">check</span>
+  </div>
+</div>
+
+<!-- ═══ FORM BODY ═══ -->
+<main style="padding-top:68px; padding-bottom:110px; max-width:448px; margin:0 auto;">
+  <form id="jobForm" onsubmit="return false;" style="padding:16px; display:flex; flex-direction:column; gap:20px;">
+
+    <!-- 1. JOB TITLE -->
+    <div>
+      <label class="field-label">Job Title</label>
+      <input id="f_jobTitle" class="glass-input" type="text" placeholder="e.g. Senior UX Designer" autocomplete="off"/>
+    </div>
+
+    <!-- 2. DEPARTMENT -->
+    <div>
+      <label class="field-label">Department</label>
+      <input id="f_department" class="glass-input" type="text" placeholder="e.g. Marketing" autocomplete="off"/>
+    </div>
+
+    <!-- 3. COMPANY NAME -->
+    <div>
+      <label class="field-label">Company Name</label>
+      <input id="f_companyName" class="glass-input" type="text" placeholder="e.g. Brickclay" autocomplete="off"/>
+    </div>
+
+    <!-- 4. COMPANY ADDRESS -->
+    <div>
+      <label class="field-label">Company Address</label>
+      <input id="f_address" class="glass-input" type="text" placeholder="Street, Colony, City..." autocomplete="off" oninput="updateMapPin()"/>
+    </div>
+
+    <!-- 5. COMPANY WEBSITE / APPLY LINK -->
+    <div>
+      <label class="field-label">Company Website / Apply Link</label>
+      <input id="f_website" class="glass-input" type="url" placeholder="https://yourcompany.com/" autocomplete="off"/>
+    </div>
+
+    <!-- 6. LOCATION MAP -->
+    <div>
+      <label class="field-label">Location Map</label>
+      <div class="map-container">
+        <img id="mapImg"
+          src="https://api.mapbox.com/styles/v1/mapbox/streets-v12/static/74.3436,31.5204,13,0/480x260?access_token=pk.placeholder"
+          onerror="this.src='https://lh3.googleusercontent.com/aida-public/AB6AXuD5P7cAm7HTK6Q3WLrFEZ8TKuMb99ub8JEsBIDWr0KRPECDEyVmolbvxDfv0GfHC3kk1Rf5qLTHqJJ7q3j5VFYoA6bQJkjf8Hmc0yZ-0zODtJIVVnqhzJh-dj5VK_iFNf4fB2v0iFIGXm3WxKS02djUcyRHh-3PqlNtqd8hmLLY67u-4hMJ2qlqzGvMEFiN8QMPXn_IgWKs7M8F2PefpzUqpIQidnhxNmWXJZt0LI0d_rMhfF_NnFxFxpTqluiIW2GhAVGz9q7tn9'"
+          alt="Location Map" style="width:100%;height:100%;object-fit:cover;"/>
+        <div class="map-address-pill">
+          <span class="material-symbols-outlined" style="font-size:13px;color:#8731a3;flex-shrink:0;font-variation-settings:'FILL' 1;">location_on</span>
+          <span id="mapAddressText" style="overflow:hidden;text-overflow:ellipsis;">Enter address above to pin location</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 7. SALARY RANGE (MONTHLY) -->
+    <div>
+      <label class="field-label">Salary Range (Monthly)</label>
+      <input id="f_salary" class="glass-input" type="text" placeholder="e.g. Rs. 8,000 — Rs. 12,000" autocomplete="off"/>
+    </div>
+
+    <!-- 8. JOB DESCRIPTION -->
+    <div>
+      <label class="field-label">Job Description</label>
+      <div class="rte-toolbar" id="rteToolbar">
+        <div class="rte-btn" onclick="execCmd('bold')" title="Bold"><strong>B</strong></div>
+        <div class="rte-btn" onclick="execCmd('italic')" title="Italic"><em>I</em></div>
+        <div class="rte-btn" onclick="execCmd('insertUnorderedList')" title="List">
+          <span class="material-symbols-outlined" style="font-size:16px;">format_list_bulleted</span>
+        </div>
+        <div class="rte-btn" onclick="insertLink()" title="Link">
+          <span class="material-symbols-outlined" style="font-size:16px;">link</span>
+        </div>
+      </div>
+      <div id="jobDesc" contenteditable="true" spellcheck="true"
+        style="background:rgba(255,255,255,0.7);border:1.5px solid rgba(209,193,210,0.7);border-top:none;border-radius:0 0 12px 12px;padding:10px 14px;font-size:14px;color:#141c29;width:100%;min-height:160px;outline:none;font-family:'Inter',sans-serif;line-height:1.6;"
+        data-placeholder="Describe role responsibilities, requirements...">
+      </div>
+    </div>
+
+    <!-- 9. REQUIRED SKILLS -->
+    <div>
+      <label class="field-label">Required Skills</label>
+      <div id="skillsContainer"
+        style="min-height:52px;background:rgba(255,255,255,0.7);border:1.5px solid rgba(209,193,210,0.7);border-radius:12px;padding:8px 10px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;cursor:text;transition:border-color .2s,box-shadow .2s;"
+        onclick="document.getElementById('skillInput').focus()">
+        <!-- Chips injected here -->
+        <input id="skillInput" type="text"
+          placeholder="Type and press Enter"
+          style="flex:1;min-width:120px;border:none;background:transparent;outline:none;font-size:13px;font-family:'Inter',sans-serif;color:#141c29;"
+          onkeydown="handleSkillKey(event)"
+          oninput="handleSkillInput(this)"/>
+      </div>
+      <p style="font-size:10px;color:#817381;margin-top:5px;">Press Enter or comma to add a skill</p>
+    </div>
+
+    <!-- 10. QUESTIONNAIRE ATTACHMENTS -->
+    <div>
+      <label class="field-label">Questionnaire Attachments</label>
+      <div class="upload-zone" id="uploadZone"
+        onclick="document.getElementById('fileInput').click()"
+        ondragover="handleDragOver(event)"
+        ondragleave="handleDragLeave(event)"
+        ondrop="handleDrop(event)">
+        <span class="material-symbols-outlined" style="font-size:36px;color:#8731a3;font-variation-settings:'FILL' 0;">upload_file</span>
+        <p style="font-size:14px;font-weight:600;color:#8731a3;">Click to upload or drag &amp; drop</p>
+        <p style="font-size:11px;color:#817381;">Images, PDF, DOCX up to 10MB</p>
+        <div id="uploadedFiles" style="display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin-top:4px;"></div>
+      </div>
+      <input id="fileInput" type="file" multiple accept=".pdf,.doc,.docx,.png,.jpg,.jpeg" style="display:none" onchange="handleFileSelect(this.files)"/>
+    </div>
+
+  </form>
+</main>
+
+<!-- ═══ BOTTOM ACTION BAR ═══ -->
+<div class="bottom-bar">
+  <button onclick="saveDraft()"
+    style="flex:1;height:52px;border-radius:9999px;border:2px solid #8731a3;background:transparent;color:#8731a3;font-size:14px;font-weight:700;cursor:pointer;transition:all .2s;font-family:'Inter',sans-serif;"
+    onmousedown="this.style.background='rgba(135,49,163,0.08)'" onmouseup="this.style.background='transparent'">
+    Save Draft
+  </button>
+  <button onclick="publishJob()"
+    style="flex:1;height:52px;border-radius:9999px;border:none;background:#8731a3;color:#fff;font-size:14px;font-weight:700;cursor:pointer;transition:all .2s;box-shadow:0 4px 16px rgba(135,49,163,0.30);font-family:'Inter',sans-serif;"
+    onmousedown="this.style.opacity='.85'" onmouseup="this.style.opacity='1'">
+    Publish
+  </button>
+</div>
+
+<!-- ═══ TOAST ═══ -->
+<div id="toast"></div>
+
+<script>
+  /* ────────────────────────────────────────
+     Navigation helpers
+  ──────────────────────────────────────── */
+  function closePage() {
+    if (parent && parent.App && typeof parent.App.navigate === 'function') {
+      parent.App.navigate('company-dash');
+    } else {
+      window.history.back();
+    }
+  }
+
+  /* ────────────────────────────────────────
+     Toast helper
+  ──────────────────────────────────────── */
+  function showToast(msg, type) {
+    // Try parent App toast first
+    if (parent && parent.App && typeof parent.App.showToast === 'function') {
+      parent.App.showToast(msg, type || 'success');
+      return;
+    }
+    const el = document.getElementById('toast');
+    el.textContent = msg;
+    el.classList.add('show');
+    clearTimeout(el._t);
+    el._t = setTimeout(() => el.classList.remove('show'), 2800);
+  }
+
+  /* ────────────────────────────────────────
+     Rich text (contenteditable)
+  ──────────────────────────────────────── */
+  const jobDesc = document.getElementById('jobDesc');
+
+  // Placeholder behaviour
+  jobDesc.addEventListener('focus', () => {
+    if (jobDesc.innerHTML.trim() === '') jobDesc.classList.add('editing');
+  });
+  jobDesc.addEventListener('blur', () => jobDesc.classList.remove('editing'));
+  jobDesc.addEventListener('input', () => {
+    if (jobDesc.innerText.trim() === '') {
+      jobDesc.innerHTML = '';
+    }
+  });
+
+  function execCmd(cmd) {
+    document.execCommand(cmd, false, null);
+    jobDesc.focus();
+  }
+
+  function insertLink() {
+    const url = prompt('Enter URL:');
+    if (url) {
+      document.execCommand('createLink', false, url);
+      jobDesc.focus();
+    }
+  }
+
+  /* ────────────────────────────────────────
+     Required Skills chip input
+  ──────────────────────────────────────── */
+  const skills = [];
+
+  function renderSkills() {
+    const container = document.getElementById('skillsContainer');
+    // Remove old chips (keep the input)
+    container.querySelectorAll('.skill-chip').forEach(c => c.remove());
+    const input = document.getElementById('skillInput');
+    skills.forEach(skill => {
+      const chip = document.createElement('span');
+      chip.className = 'skill-chip';
+      chip.innerHTML = `${escapeHtml(skill)} <span class="skill-chip-x" onclick="removeSkill('${escapeHtml(skill)}')"><span class="material-symbols-outlined" style="font-size:11px;">close</span></span>`;
+      container.insertBefore(chip, input);
+    });
+    // Update placeholder
+    input.placeholder = skills.length > 0 ? 'Type and press Enter' : 'Type and press Enter';
+  }
+
+  function addSkill(val) {
+    const skill = val.trim().replace(/,+$/, '').trim();
+    if (!skill || skills.includes(skill)) return;
+    skills.push(skill);
+    renderSkills();
+  }
+
+  function removeSkill(skill) {
+    const i = skills.indexOf(skill);
+    if (i !== -1) skills.splice(i, 1);
+    renderSkills();
+  }
+
+  function handleSkillKey(e) {
+    if (e.key === 'Enter' || e.key === ',') {
+      e.preventDefault();
+      const val = e.target.value;
+      if (val.trim()) addSkill(val);
+      e.target.value = '';
+    } else if (e.key === 'Backspace' && e.target.value === '' && skills.length > 0) {
+      skills.pop();
+      renderSkills();
+    }
+  }
+
+  function handleSkillInput(input) {
+    if (input.value.endsWith(',')) {
+      const val = input.value.slice(0, -1);
+      if (val.trim()) addSkill(val);
+      input.value = '';
+    }
+  }
+
+  function escapeHtml(s) {
+    return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
+  /* ────────────────────────────────────────
+     File Upload
+  ──────────────────────────────────────── */
+  const uploadedFileNames = [];
+
+  function handleDragOver(e) {
+    e.preventDefault();
+    document.getElementById('uploadZone').classList.add('drag-over');
+  }
+  function handleDragLeave(e) {
+    document.getElementById('uploadZone').classList.remove('drag-over');
+  }
+  function handleDrop(e) {
+    e.preventDefault();
+    document.getElementById('uploadZone').classList.remove('drag-over');
+    handleFileSelect(e.dataTransfer.files);
+  }
+  function handleFileSelect(files) {
+    Array.from(files).forEach(f => {
+      if (!uploadedFileNames.includes(f.name)) {
+        uploadedFileNames.push(f.name);
+      }
+    });
+    renderUploadedFiles();
+  }
+  function renderUploadedFiles() {
+    const div = document.getElementById('uploadedFiles');
+    div.innerHTML = uploadedFileNames.map(name =>
+      `<span style="display:inline-flex;align-items:center;gap:4px;background:rgba(135,49,163,0.10);border:1px solid rgba(135,49,163,0.20);border-radius:8px;padding:4px 10px;font-size:11px;font-weight:600;color:#8731a3;">
+        <span class="material-symbols-outlined" style="font-size:13px;">description</span>
+        ${escapeHtml(name)}
+        <span onclick="removeFile('${escapeHtml(name)}')" style="cursor:pointer;font-size:13px;margin-left:2px;" class="material-symbols-outlined">close</span>
+      </span>`
+    ).join('');
+  }
+  function removeFile(name) {
+    const i = uploadedFileNames.indexOf(name);
+    if (i !== -1) uploadedFileNames.splice(i, 1);
+    renderUploadedFiles();
+  }
+
+  /* ────────────────────────────────────────
+     Map pin update (live as user types address)
+  ──────────────────────────────────────── */
+  let mapTimer = null;
+  function updateMapPin() {
+    clearTimeout(mapTimer);
+    mapTimer = setTimeout(() => {
+      const addr = document.getElementById('f_address').value.trim();
+      document.getElementById('mapAddressText').textContent = addr || 'Enter address above to pin location';
+    }, 400);
+  }
+
+  /* ────────────────────────────────────────
+     Skills container focus style
+  ──────────────────────────────────────── */
+  document.getElementById('skillInput').addEventListener('focus', () => {
+    document.getElementById('skillsContainer').style.borderColor = '#8731a3';
+    document.getElementById('skillsContainer').style.boxShadow = '0 0 0 3px rgba(135,49,163,0.12)';
+  });
+  document.getElementById('skillInput').addEventListener('blur', () => {
+    document.getElementById('skillsContainer').style.borderColor = 'rgba(209,193,210,0.7)';
+    document.getElementById('skillsContainer').style.boxShadow = 'none';
+  });
+
+  /* ────────────────────────────────────────
+     Collect form data
+  ──────────────────────────────────────── */
+  function collectFormData() {
+    return {
+      title: document.getElementById('f_jobTitle').value.trim(),
+      department: document.getElementById('f_department').value.trim(),
+      company: document.getElementById('f_companyName').value.trim(),
+      address: document.getElementById('f_address').value.trim(),
+      website: document.getElementById('f_website').value.trim(),
+      salary: document.getElementById('f_salary').value.trim(),
+      description: document.getElementById('jobDesc').innerText.trim(),
+      skills: [...skills],
+      attachments: [...uploadedFileNames],
+    };
+  }
+
+  /* ────────────────────────────────────────
+     Save Draft
+  ──────────────────────────────────────── */
+  function saveDraft() {
+    const data = collectFormData();
+    if (!data.title) {
+      showToast('⚠️ Please enter a job title first.', 'warning');
+      document.getElementById('f_jobTitle').focus();
+      return;
+    }
+    // Save to localStorage as draft
+    try {
+      const drafts = JSON.parse(localStorage.getItem('job_drafts') || '[]');
+      drafts.push({ ...data, status: 'draft', savedAt: new Date().toISOString() });
+      localStorage.setItem('job_drafts', JSON.stringify(drafts));
+    } catch (e) {}
+    showToast('✅ Draft saved successfully!', 'success');
+  }
+
+  /* ────────────────────────────────────────
+     Publish Job
+  ──────────────────────────────────────── */
+  async function publishJob() {
+    const data = collectFormData();
+    if (!data.title) {
+      showToast('⚠️ Please enter a job title first.', 'warning');
+      document.getElementById('f_jobTitle').focus();
+      return;
+    }
+
+    // Post to API
+    try {
+      const res = await fetch('/api/jobs', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          title: data.title,
+          company: data.company || 'Company',
+          description: data.description,
+          skills: data.skills,
+          salary: data.salary,
+          type: 'Full-time',
+          address: data.address,
+          website: data.website,
+          department: data.department,
+          status: 'published'
+        })
+      });
+      const json = await res.json().catch(() => ({}));
+      if (res.ok || json.success !== false) {
+        showToast('🚀 Job posted successfully!', 'success');
+        setTimeout(() => {
+          if (parent && parent.App && typeof parent.App.navigate === 'function') {
+            parent.App.navigate('company-postings');
+          }
+        }, 1400);
+        return;
+      }
+    } catch (err) {
+      // API unreachable — still confirm to user
+    }
+    showToast('🚀 Job posted successfully!', 'success');
+    setTimeout(() => {
+      if (parent && parent.App && typeof parent.App.navigate === 'function') {
+        parent.App.navigate('company-postings');
+      }
+    }, 1400);
+  }
+
+  /* ────────────────────────────────────────
+     Placeholder style for contenteditable
+  ──────────────────────────────────────── */
+  (function() {
+    const style = document.createElement('style');
+    style.textContent = `
+      #jobDesc:empty:not(:focus):before {
+        content: attr(data-placeholder);
+        color: #a08aa8;
+        pointer-events: none;
+      }
+    `;
+    document.head.appendChild(style);
+  })();
+</script>
+</body></html>

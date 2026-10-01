@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
+<title>Talent Search - TalentFlow</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary": "#ffffff",
+                        "gold": "#FFD60A",
+                        "secondary-fixed-dim": "#a3c9ff",
+                        "tertiary": "#006823",
+                        "primary": "#8731a3",
+                        "surface-bright": "#f9f9ff",
+                        "on-primary-fixed-variant": "#72188f",
+                        "surface-dim": "#d2daed",
+                        "on-secondary-fixed-variant": "#004883",
+                        "inverse-primary": "#f0b0ff",
+                        "surface-container": "#e7eeff",
+                        "glass-thick": "rgba(255, 255, 255, 0.8)",
+                        "on-secondary-fixed": "#001c39",
+                        "secondary": "#0060ab",
+                        "on-primary-fixed": "#330044",
+                        "on-tertiary-fixed-variant": "#00531a",
+                        "outline": "#817381",
+                        "surface-container-highest": "#dbe3f6",
+                        "surface-container-high": "#e0e8fb",
+                        "on-primary-container": "#fff5fb",
+                        "tertiary-container": "#00842f",
+                        "error": "#FF453A",
+                        "on-secondary-container": "#003868",
+                        "primary-fixed-dim": "#f0b0ff",
+                        "on-surface": "#141c29",
+                        "on-background": "#141c29",
+                        "inverse-surface": "#29313f",
+                        "glass-border": "rgba(255, 255, 255, 0.6)",
+                        "on-error-container": "#93000a",
+                        "secondary-container": "#54a3ff",
+                        "glass-fill": "rgba(255, 255, 255, 0.35)",
+                        "surface-container-low": "#f0f3ff",
+                        "on-secondary": "#ffffff",
+                        "inverse-on-surface": "#ecf1ff",
+                        "on-tertiary-container": "#e6ffe0",
+                        "secondary-fixed": "#d3e3ff",
+                        "primary-fixed": "#fbd7ff",
+                        "tertiary-fixed": "#6cff82",
+                        "surface-container-lowest": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "primary-container": "#a34cbe",
+                        "on-primary": "#ffffff",
+                        "on-tertiary-fixed": "#002106",
+                        "tertiary-fixed-dim": "#47e266",
+                        "on-surface-variant": "#4f4350",
+                        "orange": "#FF9F0A",
+                        "background": "#f9f9ff",
+                        "outline-variant": "#d2c1d2",
+                        "card-gradient": "linear-gradient(135deg, #4D9EFA 0%, #BF7DF5 100%)",
+                        "on-error": "#ffffff",
+                        "surface-variant": "#dbe3f6",
+                        "surface-tint": "#8d37a9",
+                        "surface": "#f9f9ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "mobile-margin": "20px",
+                        "safe-top": "44px",
+                        "desktop-margin": "64px",
+                        "desktop-gutter": "24px",
+                        "base": "8px",
+                        "safe-bottom": "34px",
+                        "mobile-gutter": "16px",
+                        "max-width": "1280px"
+                    },
+                    "fontFamily": {
+                        "display-xl": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "label-caps-mobile": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "display-xl-mobile": ["Inter"],
+                        "body-md-mobile": ["Inter"],
+                        "label-caps": ["Inter"],
+                        "body-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "display-xl": ["56px", {"lineHeight": "1.1", "letterSpacing": "-0.03em", "fontWeight": "700"}],
+                        "headline-lg": ["34px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                        "label-caps-mobile": ["12px", {"lineHeight": "1.0", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "headline-lg-mobile": ["28px", {"lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "display-xl-mobile": ["34px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "body-md-mobile": ["15px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                        "label-caps": ["13px", {"lineHeight": "1.0", "letterSpacing": "0.03em", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            background-color: #DCE4F7;
+            font-family: 'Inter', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.35);
+            backdrop-filter: blur(28px);
+            -webkit-backdrop-filter: blur(28px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 12px 40px 0 rgba(71, 26, 112, 0.15);
+        }
+        .glass-thick-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(28px);
+            -webkit-backdrop-filter: blur(28px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 12px 40px 0 rgba(71, 26, 112, 0.15);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .active-nav-item {
+            background: #a34cbe; /* primary-container approx */
+            color: #fff5fb; /* on-primary-container */
+            border-radius: 9999px;
+            padding: 4px 16px;
+        }
+        .scroll-hide::-webkit-scrollbar {
+            display: none;
+        }
+        .scroll-hide {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        /* ── Filter Drawer ── */
+        .filter-drawer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            max-width: 448px;
+            margin: 0 auto;
+            z-index: 200;
+            max-height: 88vh;
+            overflow-y: auto;
+            background: rgba(255,255,255,0.92);
+            backdrop-filter: blur(32px);
+            -webkit-backdrop-filter: blur(32px);
+            border: 1px solid rgba(255,255,255,0.7);
+            border-bottom: none;
+            border-radius: 28px 28px 0 0;
+            box-shadow: 0 -12px 40px 0 rgba(71,26,112,0.18);
+            transform: translateY(100%);
+            transition: transform 0.38s cubic-bezier(0.32,0,0.15,1);
+            padding: 0 20px 120px;
+        }
+        .filter-drawer.open {
+            transform: translateY(0);
+        }
+        .filter-drawer-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 190;
+            background: rgba(71,26,112,0.25);
+            backdrop-filter: blur(3px);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+        .filter-drawer-overlay.open {
+            opacity: 1;
+            pointer-events: all;
+        }
+        .filter-chip-active {
+            background: #8731a3 !important;
+            color: #fff !important;
+            border-color: #8731a3 !important;
+        }
+        .filter-section-title {
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: #817381;
+            margin-bottom: 10px;
+            margin-top: 20px;
+        }
+        input[type=range].trust-slider {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 4px;
+            border-radius: 9999px;
+            background: linear-gradient(to right, #8731a3 var(--val, 70%), #ddd var(--val, 70%));
+            outline: none;
+        }
+        input[type=range].trust-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: #8731a3;
+            box-shadow: 0 2px 8px rgba(135,49,163,0.4);
+            cursor: pointer;
+        }
+        .skill-chip-remove {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            background: rgba(135,49,163,0.12);
+            color: #8731a3;
+            border: 1px solid rgba(135,49,163,0.25);
+            border-radius: 9999px;
+            padding: 4px 10px 4px 12px;
+            font-size: 11px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="min-h-screen pb-[100px]">
+<!-- Top Navigation Bar -->
+<header class="fixed top-0 left-0 right-0 max-w-md mx-auto w-full z-50 bg-white/45 backdrop-blur-[28px] border-b border-white/50 shadow-[0_4px_20px_0_rgba(163,76,190,0.06)] flex justify-between items-center px-5 h-[64px]">
+  <div class="flex items-center gap-3">
+    <div onclick="window.parent.postMessage({ type: 'NAVIGATE', view: 'company-profile' }, '*')" class="w-9 h-9 rounded-full border border-white/80 overflow-hidden shadow-sm cursor-pointer active:scale-95 transition-transform">
+      <img alt="Recruiter Avatar" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDIt827WcUwR9RknikfNiRLVtA9sbTUiLtd0n3jB3z6G-LcVgOH2Q1LSJ95e5CzDJIpIJ5MW47QlldiC3oQ47YxdkpT7yxVIKybu0-SFEgAGF_-PGnr3lHEC2mUOiChHzQlVzeJegHnlKaP42BDNxDuJvyd11-d5rEyg9kglcvwsUMj8OQcfs2DaPaRtXqQYpTnlk1DECitBMwFvdSLRPmO34dRSZsAKs6xpqv5VeKZ0k2W_RiT0X9pBx2iOKk789tArk1DHtKiKeaq"/>
+    </div>
+    <h1 class="font-bold text-base text-primary">RecruiterPro</h1>
+  </div>
+  <div class="flex items-center gap-2">
+    <button class="w-9 h-9 rounded-full bg-white/40 flex items-center justify-center text-primary shadow-sm active:scale-95 transition-transform"><span class="material-symbols-outlined text-[20px]">notifications</span></button>
+    <button class="w-9 h-9 rounded-full bg-white/40 flex items-center justify-center text-primary shadow-sm active:scale-95 transition-transform"><span class="material-symbols-outlined text-[20px]">settings</span></button>
+  </div>
+</header>
+<main class="pt-[84px] px-mobile-margin max-w-md mx-auto space-y-6">
+<!-- Search Input -->
+<section>
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-primary">search</span>
+<input id="talentSearchInput" class="w-full h-[52px] pl-12 pr-12 bg-glass-fill border border-glass-border rounded-xl backdrop-blur-[28px] text-on-surface placeholder:text-on-surface-variant focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all font-body-md-mobile" placeholder="Search designers, developers..." type="text" oninput="filterCandidates()"/>
+<button id="filterToggleBtn" onclick="openFilterDrawer()" class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-primary hover:scale-95 transition-transform duration-300">tune</button>
+</div>
+</section>
+<!-- Filter Chips -->
+<section class="flex gap-3 overflow-x-auto scroll-hide pb-2 -mx-mobile-margin px-mobile-margin">
+<button class="chip-filter-btn active-chip flex-none h-[38px] px-5 rounded-full flex items-center gap-2 font-label-caps-mobile transition-all active:scale-95" style="background:#8731a3;color:#fff;border:none;box-shadow:0 4px 14px rgba(135,49,163,0.32)">
+                UI Design
+            </button>
+<button class="chip-filter-btn flex-none h-[38px] px-5 rounded-full flex items-center gap-2 text-on-surface-variant font-label-caps-mobile transition-all active:scale-95" style="background:rgba(255,255,255,0.6);border:1.5px solid rgba(209,193,210,0.6);color:#4f4350;">
+                React
+            </button>
+<button class="chip-filter-btn flex-none h-[38px] px-5 rounded-full flex items-center gap-2 text-on-surface-variant font-label-caps-mobile transition-all active:scale-95" style="background:rgba(255,255,255,0.6);border:1.5px solid rgba(209,193,210,0.6);color:#4f4350;">
+                Python
+            </button>
+<button class="chip-filter-btn flex-none h-[38px] px-5 rounded-full flex items-center gap-2 font-label-caps-mobile transition-all active:scale-95" style="background:rgba(255,255,255,0.6);border:1.5px solid rgba(209,193,210,0.6);color:#4f4350;">
+<span class="material-symbols-outlined text-[18px]">star</span>
+                4.5+
+            </button>
+<button class="chip-filter-btn flex-none h-[38px] px-5 rounded-full flex items-center gap-2 font-label-caps-mobile transition-all active:scale-95" style="background:rgba(255,255,255,0.6);border:1.5px solid rgba(209,193,210,0.6);color:#4f4350;">
+                Trust: 80%+
+            </button>
+</section>
+<!-- Candidate Grid / Vertical List -->
+<section id="candidate-list" class="space-y-4">
+<!-- Candidate Card 1 -->
+<div class="glass-thick-card rounded-2xl p-4 transition-all hover:scale-[1.01] active:scale-95">
+<div class="flex items-start gap-4">
+<img class="w-16 h-16 rounded-2xl object-cover border-2 border-primary/20 shadow-sm" data-alt="A professional headshot of a female UI designer with a confident smile, set against a softly blurred minimalist studio background. The lighting is warm and cinematic, emphasizing a modern light-mode aesthetic with soft lavender and white tones that match the global UI color palette. She is wearing contemporary business-casual attire in a neutral color." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAfM4pXRf53iBGBvzOEMMSLpcFj5UguQ9VH7t4rw0IBL0W3rWiEmQ5pPfqjeTbKnpUYCEH-IvXyuvc-_1sQLppYf-FyIUOA0f6lqf0zeivx-N4H3CII29IFcP7klYHwQ9pcLWE-7SvF9ndYgZG2BxlcKpOEzeqoIdsqWZDqoeA1ZZFTLOcBK6Br0DNzKS_mM_pHThUokkOzUuWl9BxShuDDM7wyTpG1l4PFy7-SbZVj3utVfbNI-USX82fs2wxsfgjAf0F4LLzgbRvl"/>
+<div class="flex-1">
+<div class="flex justify-between items-start">
+<div>
+<h3 class="font-headline-lg-mobile text-[18px] text-on-surface font-bold leading-tight">Elena Thorne</h3>
+<p class="text-on-surface-variant font-body-md-mobile text-[14px]">Senior UX Designer</p>
+</div>
+<!-- Trust Score Pill -->
+<div class="bg-primary/10 px-3 py-1 rounded-full border border-primary/20">
+<span class="text-[12px] font-bold text-primary">96% Trust</span>
+</div>
+</div>
+<p class="text-[12px] text-on-surface-variant mt-1 font-label-caps-mobile">Stanford University</p>
+</div>
+</div>
+<!-- Verification Badges -->
+<div class="flex gap-2 mt-4">
+<div class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-glass-fill border border-glass-border">
+<span class="material-symbols-outlined text-[16px] text-tertiary">verified_user</span>
+<span class="text-[10px] font-bold text-on-surface uppercase tracking-wider">Anti-Cheat</span>
+</div>
+<div class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-glass-fill border border-glass-border">
+<span class="material-symbols-outlined text-[16px] text-primary" style="font-variation-settings: 'FILL' 1;">workspace_premium</span>
+<span class="text-[10px] font-bold text-on-surface uppercase tracking-wider">Skills Verified</span>
+</div>
+<div class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-glass-fill border border-glass-border">
+<span class="material-symbols-outlined text-[16px] text-secondary">fingerprint</span>
+<span class="text-[10px] font-bold text-on-surface uppercase tracking-wider">ID Match</span>
+</div>
+</div>
+<!-- Action Buttons -->
+<div class="flex gap-3 mt-6">
+<button class="flex-1 h-[48px] bg-primary text-on-primary rounded-full font-label-caps-mobile shadow-lg shadow-primary/20 transition-all active:scale-[0.96]">
+                        View Profile
+                    </button>
+<button class="flex-1 h-[48px] glass-card text-primary border-primary/40 border rounded-full font-label-caps-mobile transition-all active:scale-[0.96]">
+                        Invite
+                    </button>
+</div>
+</div>
+<!-- Candidate Card 2 -->
+<div class="glass-thick-card rounded-2xl p-4 transition-all hover:scale-[1.01] active:scale-95">
+<div class="flex items-start gap-4">
+<img class="w-16 h-16 rounded-2xl object-cover border-2 border-primary/20 shadow-sm" data-alt="A portrait of a male lead developer with a friendly and approachable expression, featuring short dark hair and a modern beard. He is positioned in a bright, tech-oriented office environment with soft glass-textured backgrounds. The overall mood is professional, high-fidelity, and sophisticated, echoing the iOS Liquid Glass Elite style with soft blue and lavender atmospheric lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC8UOLGyjTRrYbUwOCSYKj-Z-gq0ouZN7hNMIAz3vOd5ZHsmxedAjNR4mO0CCyj1yUXjowrqfKfGrqlntiu-USCA5NMx5Sdyzam8j4I31vLQBAPdQ_GSOeI5oFatQzZxluzFo840GfQPZjW39dusLw15Is4TEXOLncDW3DkvgkgCmz5EUX9gYK-HvBocpHnUPYI-eodzarNqECBrYs8FGGoRLE1BCd57i4rlscYn9BqV4HJKBvbvdLVmwU18z5IAKB_DSITGsUfCW4N"/>
+<div class="flex-1">
+<div class="flex justify-between items-start">
+<div>
+<h3 class="font-headline-lg-mobile text-[18px] text-on-surface font-bold leading-tight">Marcus Vane</h3>
+<p class="text-on-surface-variant font-body-md-mobile text-[14px]">Full-Stack Developer</p>
+</div>
+<div class="bg-primary/10 px-3 py-1 rounded-full border border-primary/20">
+<span class="text-[12px] font-bold text-primary">91% Trust</span>
+</div>
+</div>
+<p class="text-[12px] text-on-surface-variant mt-1 font-label-caps-mobile">MIT Computer Science</p>
+</div>
+</div>
+<div class="flex gap-2 mt-4">
+<div class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-glass-fill border border-glass-border">
+<span class="material-symbols-outlined text-[16px] text-tertiary">verified_user</span>
+<span class="text-[10px] font-bold text-on-surface uppercase tracking-wider">Anti-Cheat</span>
+</div>
+<div class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-glass-fill border border-glass-border">
+<span class="material-symbols-outlined text-[16px] text-secondary">fingerprint</span>
+<span class="text-[10px] font-bold text-on-surface uppercase tracking-wider">ID Match</span>
+</div>
+</div>
+<div class="flex gap-3 mt-6">
+<button class="flex-1 h-[48px] bg-primary text-on-primary rounded-full font-label-caps-mobile shadow-lg shadow-primary/20 transition-all active:scale-[0.96]">
+                        View Profile
+                    </button>
+<button class="flex-1 h-[48px] glass-card text-primary border-primary/40 border rounded-full font-label-caps-mobile transition-all active:scale-[0.96]">
+                        Invite
+                    </button>
+</div>
+</div>
+<!-- Candidate Card 3 -->
+<div class="glass-thick-card rounded-2xl p-4 transition-all hover:scale-[1.01] active:scale-95">
+<div class="flex items-start gap-4">
+<img class="w-16 h-16 rounded-2xl object-cover border-2 border-primary/20 shadow-sm" data-alt="A portrait of a male product manager in a minimalist, airy creative workspace. The lighting is diffused and soft, creating a clean and modern professional look. The background features subtle glass elements and a pastel blue color palette that integrates perfectly with a glassmorphic design theme. His expression is focused and capable." src="https://lh3.googleusercontent.com/aida-public/AB6AXuArMp2k8iMvTQoE0aZNicCiDrjyyN_aV9dcfcn__eCtLI_XUByV4KGpQF6XbsjTaz0l0Az72mape39hRjzGfjXjKvh57UTSKoqHuPVjBnJUAx9BbK2oGV4PelfwKTt-uombfSdppw3imh6Piaiu-lZwP6s9c22DET5UqBQeqd2X6DCJzg11txyYmjiiyTLz5s89_ZpK-LuejJMaZSonvhpkxZ6d4GHs2dEOoO8apJvsepdIkAMYwzRETI2wEwyebYQ0lDnmLz2ljq_y"/>
+<div class="flex-1">
+<div class="flex justify-between items-start">
+<div>
+<h3 class="font-headline-lg-mobile text-[18px] text-on-surface font-bold leading-tight">Julian Kim</h3>
+<p class="text-on-surface-variant font-body-md-mobile text-[14px]">Product Strategist</p>
+</div>
+<div class="bg-primary/10 px-3 py-1 rounded-full border border-primary/20">
+<span class="text-[12px] font-bold text-primary">88% Trust</span>
+</div>
+</div>
+<p class="text-[12px] text-on-surface-variant mt-1 font-label-caps-mobile">UC Berkeley</p>
+</div>
+</div>
+<div class="flex gap-2 mt-4">
+<div class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-glass-fill border border-glass-border">
+<span class="material-symbols-outlined text-[16px] text-primary" style="font-variation-settings: 'FILL' 1;">workspace_premium</span>
+<span class="text-[10px] font-bold text-on-surface uppercase tracking-wider">Skills Verified</span>
+</div>
+</div>
+<div class="flex gap-3 mt-6">
+<button class="flex-1 h-[48px] bg-primary text-on-primary rounded-full font-label-caps-mobile shadow-lg shadow-primary/20 transition-all active:scale-[0.96]">
+                        View Profile
+                    </button>
+<button class="flex-1 h-[48px] glass-card text-primary border-primary/40 border rounded-full font-label-caps-mobile transition-all active:scale-[0.96]">
+                        Invite
+                    </button>
+</div>
+</div>
+</section>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 left-0 right-0 max-w-md mx-auto w-full z-50 flex justify-around items-center px-mobile-margin pb-safe h-[84px] bg-glass-thick backdrop-blur-[28px] border-t border-glass-border shadow-[0_-8px_30px_0_rgba(71,26,112,0.1)] rounded-t-xl">
+<div class="flex flex-col items-center justify-center text-on-surface-variant hover:opacity-80 transition-opacity cursor-pointer">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-caps-mobile text-label-caps-mobile mt-1">Dashboard</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant hover:opacity-80 transition-opacity cursor-pointer">
+<span class="material-symbols-outlined">work</span>
+<span class="font-label-caps-mobile text-label-caps-mobile mt-1">Postings</span>
+</div>
+<div class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-4 py-2 shadow-md hover:opacity-80 transition-opacity cursor-pointer">
+<span class="material-symbols-outlined">group</span>
+<span class="font-label-caps-mobile text-label-caps-mobile mt-1">Applicants</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant hover:opacity-80 transition-opacity cursor-pointer">
+<span class="material-symbols-outlined">analytics</span>
+<span class="font-label-caps-mobile text-label-caps-mobile mt-1">Reports</span>
+</div>
+</nav>
+<script>
+        /* ──────────────────────────────
+           FILTER STATE
+        ────────────────────────────── */
+        const filterState = {
+            skills: [],
+            universityType: 'all',
+            universityQuery: '',
+            gradYears: [],
+            loginActivity: 'all',
+            minTrust: 0
+        };
+
+        /* ──────────────────────────────
+           DRAWER OPEN / CLOSE
+        ────────────────────────────── */
+        function openFilterDrawer() {
+            document.getElementById('filterDrawer').classList.add('open');
+            document.getElementById('filterOverlay').classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeFilterDrawer() {
+            document.getElementById('filterDrawer').classList.remove('open');
+            document.getElementById('filterOverlay').classList.remove('open');
+            document.body.style.overflow = '';
+        }
+
+        /* ──────────────────────────────
+           SKILLS
+        ────────────────────────────── */
+        function addSkillChip() {
+            const input = document.getElementById('skillInput');
+            const skill = input.value.trim();
+            if (!skill || filterState.skills.includes(skill.toLowerCase())) return;
+            filterState.skills.push(skill.toLowerCase());
+            input.value = '';
+            renderSkillChips();
+            applyFilters();
+        }
+        function removeSkillChip(skill) {
+            filterState.skills = filterState.skills.filter(s => s !== skill);
+            renderSkillChips();
+            applyFilters();
+        }
+        function renderSkillChips() {
+            const container = document.getElementById('activeSkillChips');
+            container.innerHTML = filterState.skills.map(s =>
+                `<span class="skill-chip-remove" onclick="removeSkillChip('${s}')">${s} <span style="font-size:14px;line-height:1" class="material-symbols-outlined">close</span></span>`
+            ).join('');
+        }
+
+        /* ──────────────────────────────
+           UNIVERSITY TYPE
+        ────────────────────────────── */
+        function setUniversityType(type) {
+            filterState.universityType = type;
+            ['all','top-tier','public','private'].forEach(t => {
+                const id = 'uni' + t.replace('-','').replace(t[0], t[0].toUpperCase()).replace('top-tier','TopTier');
+                // Match IDs: uniAll, uniTopTier, uniPublic, uniPrivate
+            });
+            document.getElementById('uniAll').classList.toggle('filter-chip-active', type === 'all');
+            document.getElementById('uniTopTier').classList.toggle('filter-chip-active', type === 'top-tier');
+            document.getElementById('uniPublic').classList.toggle('filter-chip-active', type === 'public');
+            document.getElementById('uniPrivate').classList.toggle('filter-chip-active', type === 'private');
+            // remove border on inactive
+            ['uniAll','uniTopTier','uniPublic','uniPrivate'].forEach(id => {
+                const btn = document.getElementById(id);
+                if (btn.classList.contains('filter-chip-active')) {
+                    btn.classList.remove('border-outline/30','text-on-surface-variant','bg-white/40');
+                } else {
+                    btn.classList.add('border-outline/30','text-on-surface-variant','bg-white/40');
+                    btn.style.borderColor = '';
+                }
+            });
+            applyFilters();
+        }
+
+        /* ──────────────────────────────
+           LOGIN ACTIVITY
+        ────────────────────────────── */
+        function setLoginActivity(period) {
+            filterState.loginActivity = period;
+            ['loginAll','login1w','login1m','login6m'].forEach(id => {
+                document.getElementById(id).classList.remove('filter-chip-active');
+                document.getElementById(id).classList.add('border-outline/30','text-on-surface-variant','bg-white/40');
+            });
+            const map = {all:'loginAll','1week':'login1w','1month':'login1m','6months':'login6m'};
+            const activeBtn = document.getElementById(map[period]);
+            if (activeBtn) {
+                activeBtn.classList.add('filter-chip-active');
+                activeBtn.classList.remove('border-outline/30','text-on-surface-variant','bg-white/40');
+            }
+            applyFilters();
+        }
+
+        /* ──────────────────────────────
+           TRUST SLIDER
+        ────────────────────────────── */
+        function updateTrustDisplay(val) {
+            filterState.minTrust = parseInt(val);
+            document.getElementById('trustDisplay').textContent = val + '%';
+            const slider = document.getElementById('trustSlider');
+            slider.style.setProperty('--val', val + '%');
+        }
+
+        /* ──────────────────────────────
+           MAIN FILTER ENGINE
+        ────────────────────────────── */
+        function filterCandidates() {
+            applyFilters();
+        }
+        function applyFilters() {
+            const query = (document.getElementById('talentSearchInput').value || '').toLowerCase().trim();
+            const uniQuery = (document.getElementById('universityInput') ? document.getElementById('universityInput').value : '').toLowerCase().trim();
+            const gradChecks = ['grad2023','grad2024','grad2025','grad2026'].filter(id => {
+                const el = document.getElementById(id);
+                return el && el.checked;
+            }).map(id => id.replace('grad',''));
+
+            const cards = document.querySelectorAll('#candidate-list > div');
+            let visibleCount = 0;
+            cards.forEach(card => {
+                const name = (card.querySelector('h3') || {}).textContent || '';
+                const title = (card.querySelector('p') || {}).textContent || '';
+                const uniEl = card.querySelector('.font-label-caps-mobile');
+                const uni = uniEl ? uniEl.textContent : '';
+                const trustEl = card.querySelector('.text-primary.font-bold');
+                const trustText = trustEl ? trustEl.textContent : '0';
+                const trustVal = parseInt(trustText);
+                const allText = (name + ' ' + title + ' ' + uni).toLowerCase();
+
+                // Text search
+                let show = !query || allText.includes(query);
+
+                // Skills filter
+                if (show && filterState.skills.length > 0) {
+                    show = filterState.skills.some(skill => allText.includes(skill));
+                }
+
+                // University text search
+                if (show && uniQuery) {
+                    show = uni.toLowerCase().includes(uniQuery);
+                }
+
+                // Trust score filter
+                if (show && filterState.minTrust > 0) {
+                    show = !isNaN(trustVal) && trustVal >= filterState.minTrust;
+                }
+
+                card.style.display = show ? '' : 'none';
+                if (show) visibleCount++;
+            });
+
+            // Update tune icon to show active filter state
+            const tuneBtn = document.getElementById('filterToggleBtn');
+            const hasActive = filterState.skills.length > 0 || filterState.minTrust > 0 ||
+                filterState.universityType !== 'all' || filterState.loginActivity !== 'all' ||
+                uniQuery || gradChecks.length > 0;
+            if (tuneBtn) {
+                tuneBtn.style.color = hasActive ? '#8731a3' : '';
+                tuneBtn.style.fontVariationSettings = hasActive ? "'FILL' 1" : "'FILL' 0";
+            }
+        }
+
+        /* ──────────────────────────────
+           RESET ALL
+        ────────────────────────────── */
+        function resetAllFilters() {
+            filterState.skills = [];
+            filterState.universityType = 'all';
+            filterState.universityQuery = '';
+            filterState.loginActivity = 'all';
+            filterState.minTrust = 0;
+
+            // Reset inputs
+            document.getElementById('skillInput').value = '';
+            document.getElementById('universityInput').value = '';
+            document.getElementById('activeSkillChips').innerHTML = '';
+            document.getElementById('talentSearchInput').value = '';
+            document.getElementById('trustSlider').value = 0;
+            document.getElementById('trustDisplay').textContent = '0%';
+            document.getElementById('trustSlider').style.setProperty('--val', '0%');
+
+            // Reset checkboxes
+            ['grad2023','grad2024','grad2025','grad2026'].forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.checked = false;
+            });
+
+            // Reset university buttons
+            setUniversityType('all');
+            setLoginActivity('all');
+
+            // Show all cards
+            document.querySelectorAll('#candidate-list > div').forEach(card => {
+                card.style.display = '';
+            });
+
+            // Reset tune icon fill
+            const tuneBtn = document.getElementById('filterToggleBtn');
+            if (tuneBtn) {
+                tuneBtn.style.color = '';
+                tuneBtn.style.fontVariationSettings = "'FILL' 0";
+            }
+        }
+
+        /* ──────────────────────────────
+           SKILL CHIP ROW (quick-filter)
+        ────────────────────────────── */
+        document.querySelectorAll('section:nth-of-type(2) button.chip-filter-btn').forEach(button => {
+            button.addEventListener('click', () => {
+                const isActive = button.classList.contains('active-chip');
+                // Deactivate all
+                document.querySelectorAll('section:nth-of-type(2) button.chip-filter-btn').forEach(b => {
+                    b.classList.remove('active-chip');
+                    b.style.background = 'rgba(255,255,255,0.6)';
+                    b.style.color = '#4f4350';
+                    b.style.border = '1.5px solid rgba(209,193,210,0.6)';
+                    b.style.boxShadow = 'none';
+                });
+                // Activate clicked (toggle off if was active)
+                if (!isActive) {
+                    button.classList.add('active-chip');
+                    button.style.background = '#8731a3';
+                    button.style.color = '#fff';
+                    button.style.border = 'none';
+                    button.style.boxShadow = '0 4px 14px rgba(135,49,163,0.32)';
+                }
+            });
+        });
+
+        /* ──────────────────────────────
+           SCROLL ANIMATION
+        ────────────────────────────── */
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('opacity-100', 'translate-y-0');
+                    entry.target.classList.remove('opacity-0', 'translate-y-4');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.glass-thick-card').forEach(card => {
+            card.classList.add('transition-all', 'duration-500', 'opacity-0', 'translate-y-4');
+            observer.observe(card);
+        });
+    </script>
+    <nav id="bottom-nav"></nav>
+
+<!-- ════════════════════════════════════════
+     FILTER DRAWER OVERLAY
+════════════════════════════════════════ -->
+<div id="filterOverlay" class="filter-drawer-overlay" onclick="closeFilterDrawer()"></div>
+
+<!-- ════════════════════════════════════════
+     FILTER DRAWER BOTTOM SHEET
+════════════════════════════════════════ -->
+<div id="filterDrawer" class="filter-drawer" role="dialog" aria-modal="true" aria-label="Filter Candidates">
+
+  <!-- Drag Handle -->
+  <div class="flex justify-center pt-3 pb-1">
+    <div class="w-10 h-1 bg-outline/30 rounded-full"></div>
+  </div>
+
+  <!-- Header -->
+  <div class="flex justify-between items-center mt-3 mb-1">
+    <div class="flex items-center gap-2">
+      <span class="material-symbols-outlined text-primary text-[20px]">filter_list</span>
+      <h2 class="text-base font-extrabold text-[#471A70]">Filter Candidates</h2>
+    </div>
+    <div class="flex items-center gap-2">
+      <button id="resetFiltersBtn" onclick="resetAllFilters()" class="flex items-center gap-1 text-xs font-bold text-primary border border-primary/30 bg-primary/5 px-3 py-1.5 rounded-full active:scale-95 transition-transform">
+        <span class="material-symbols-outlined text-[14px]">filter_alt_off</span>
+        Reset All
+      </button>
+      <button onclick="closeFilterDrawer()" class="w-8 h-8 rounded-full bg-outline/10 flex items-center justify-center active:scale-95 transition-transform">
+        <span class="material-symbols-outlined text-[18px] text-outline">close</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- ── 1. SKILLS SEARCH ── -->
+  <p class="filter-section-title">Skills Search</p>
+  <div class="flex gap-2 items-center">
+    <input id="skillInput" type="text" placeholder="Add a skill..." class="flex-1 h-10 px-4 bg-white/60 border border-white/80 rounded-xl text-sm text-on-surface placeholder:text-outline focus:outline-none focus:ring-2 focus:ring-primary/40 transition-all" onkeydown="if(event.key==='Enter'){addSkillChip()}"/>
+    <button onclick="addSkillChip()" class="w-10 h-10 rounded-xl bg-primary text-white flex items-center justify-center flex-shrink-0 active:scale-95 transition-transform shadow-md">
+      <span class="material-symbols-outlined text-[20px]">add</span>
+    </button>
+  </div>
+  <div id="activeSkillChips" class="flex flex-wrap gap-2 mt-3 min-h-[28px]"></div>
+
+  <!-- ── 2. UNIVERSITY SEARCH ── -->
+  <p class="filter-section-title">University Search</p>
+  <div class="relative mb-3">
+    <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-[18px]">search</span>
+    <input id="universityInput" type="text" placeholder="Search university..." class="w-full h-10 pl-10 pr-4 bg-white/60 border border-white/80 rounded-xl text-sm text-on-surface placeholder:text-outline focus:outline-none focus:ring-2 focus:ring-primary/40 transition-all" oninput="applyFilters()"/>
+  </div>
+  <div class="flex gap-2 flex-wrap">
+    <button id="uniAll" onclick="setUniversityType('all')" class="filter-chip filter-chip-active h-9 px-4 rounded-full border text-xs font-bold transition-all active:scale-95">All</button>
+    <button id="uniTopTier" onclick="setUniversityType('top-tier')" class="filter-chip h-9 px-4 rounded-full border border-outline/30 text-xs font-bold text-on-surface-variant bg-white/40 transition-all active:scale-95">Top Tier</button>
+    <button id="uniPublic" onclick="setUniversityType('public')" class="filter-chip h-9 px-4 rounded-full border border-outline/30 text-xs font-bold text-on-surface-variant bg-white/40 transition-all active:scale-95">Public</button>
+    <button id="uniPrivate" onclick="setUniversityType('private')" class="filter-chip h-9 px-4 rounded-full border border-outline/30 text-xs font-bold text-on-surface-variant bg-white/40 transition-all active:scale-95">Private</button>
+  </div>
+
+  <!-- ── 3. GRADUATION YEAR ── -->
+  <p class="filter-section-title">Graduation Year</p>
+  <div class="grid grid-cols-2 gap-3">
+    <label class="flex items-center gap-3 bg-white/40 border border-white/70 rounded-xl px-4 py-3 cursor-pointer active:scale-95 transition-transform">
+      <input type="checkbox" id="grad2023" value="2023" onchange="applyFilters()" class="w-4 h-4 accent-primary rounded">
+      <span class="text-sm font-semibold text-on-surface">Class of 2023</span>
+    </label>
+    <label class="flex items-center gap-3 bg-white/40 border border-white/70 rounded-xl px-4 py-3 cursor-pointer active:scale-95 transition-transform">
+      <input type="checkbox" id="grad2024" value="2024" onchange="applyFilters()" class="w-4 h-4 accent-primary rounded">
+      <span class="text-sm font-semibold text-on-surface">Class of 2024</span>
+    </label>
+    <label class="flex items-center gap-3 bg-white/40 border border-white/70 rounded-xl px-4 py-3 cursor-pointer active:scale-95 transition-transform">
+      <input type="checkbox" id="grad2025" value="2025" onchange="applyFilters()" class="w-4 h-4 accent-primary rounded">
+      <span class="text-sm font-semibold text-on-surface">Class of 2025</span>
+    </label>
+    <label class="flex items-center gap-3 bg-white/40 border border-white/70 rounded-xl px-4 py-3 cursor-pointer active:scale-95 transition-transform">
+      <input type="checkbox" id="grad2026" value="2026" onchange="applyFilters()" class="w-4 h-4 accent-primary rounded">
+      <span class="text-sm font-semibold text-on-surface">Class of 2026</span>
+    </label>
+  </div>
+
+  <!-- ── 4. LAST LOGIN ACTIVITY ── -->
+  <p class="filter-section-title">Last Login Activity</p>
+  <div class="flex gap-2 flex-wrap">
+    <button id="loginAll" onclick="setLoginActivity('all')" class="filter-chip filter-chip-active h-9 px-4 rounded-full border text-xs font-bold transition-all active:scale-95">All</button>
+    <button id="login1w" onclick="setLoginActivity('1week')" class="filter-chip h-9 px-4 rounded-full border border-outline/30 text-xs font-bold text-on-surface-variant bg-white/40 transition-all active:scale-95">1 Week</button>
+    <button id="login1m" onclick="setLoginActivity('1month')" class="filter-chip h-9 px-4 rounded-full border border-outline/30 text-xs font-bold text-on-surface-variant bg-white/40 transition-all active:scale-95">1 Month</button>
+    <button id="login6m" onclick="setLoginActivity('6months')" class="filter-chip h-9 px-4 rounded-full border border-outline/30 text-xs font-bold text-on-surface-variant bg-white/40 transition-all active:scale-95">6 Months</button>
+  </div>
+
+  <!-- ── 5. MIN TRUST SCORE ── -->
+  <p class="filter-section-title">Min Trust Score</p>
+  <div class="flex items-center gap-4">
+    <input id="trustSlider" type="range" min="0" max="100" value="0" class="trust-slider flex-1" oninput="updateTrustDisplay(this.value); applyFilters()">
+    <span id="trustDisplay" class="text-base font-extrabold text-primary w-12 text-right">0%</span>
+  </div>
+  <div class="flex justify-between text-[10px] text-outline mt-1">
+    <span>0%</span><span>50%</span><span>100%</span>
+  </div>
+
+  <!-- Apply Button -->
+  <button onclick="applyFilters(); closeFilterDrawer()" class="w-full h-14 bg-primary text-white rounded-full font-bold text-base shadow-lg shadow-primary/25 active:scale-[0.97] transition-transform mt-6 flex items-center justify-center gap-2">
+    <span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1">check_circle</span>
+    Apply Filters
+  </button>
+</div>
+</body></html>

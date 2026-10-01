@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
+<title>Verification Queue (ADM-02)</title>
+<!-- Fonts & Icons -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Design System Configuration -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary-container": "#00842f",
+                    "on-secondary-container": "#003868",
+                    "surface-container-high": "#e0e8fb",
+                    "on-tertiary-fixed": "#002106",
+                    "on-background": "#141c29",
+                    "on-secondary-fixed": "#001c39",
+                    "on-primary": "#ffffff",
+                    "primary-container": "#a34cbe",
+                    "inverse-surface": "#29313f",
+                    "on-primary-fixed-variant": "#72188f",
+                    "on-primary-container": "#fff5fb",
+                    "on-error-container": "#93000a",
+                    "gold": "#FFD60A",
+                    "on-tertiary-container": "#e6ffe0",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-container": "#e7eeff",
+                    "tertiary-fixed": "#6cff82",
+                    "background": "#f9f9ff",
+                    "on-error": "#ffffff",
+                    "on-tertiary": "#ffffff",
+                    "surface-container-highest": "#dbe3f6",
+                    "inverse-primary": "#f0b0ff",
+                    "on-surface-variant": "#4f4350",
+                    "surface-bright": "#f9f9ff",
+                    "on-secondary-fixed-variant": "#004883",
+                    "tertiary": "#006823",
+                    "glass-thick": "rgba(255, 255, 255, 0.8)",
+                    "outline": "#817381",
+                    "glass-fill": "rgba(255, 255, 255, 0.35)",
+                    "primary": "#8731a3",
+                    "error-container": "#ffdad6",
+                    "card-gradient": "linear-gradient(135deg, #4D9EFA 0%, #BF7DF5 100%)",
+                    "secondary": "#0060ab",
+                    "secondary-container": "#54a3ff",
+                    "glass-border": "rgba(255, 255, 255, 0.6)",
+                    "surface-dim": "#d2daed",
+                    "outline-variant": "#d2c1d2",
+                    "on-secondary": "#ffffff",
+                    "primary-fixed-dim": "#f0b0ff",
+                    "inverse-on-surface": "#ecf1ff",
+                    "on-tertiary-fixed-variant": "#00531a",
+                    "error": "#FF453A",
+                    "on-primary-fixed": "#330044",
+                    "surface-variant": "#dbe3f6",
+                    "primary-fixed": "#fbd7ff",
+                    "orange": "#FF9F0A",
+                    "on-surface": "#141c29",
+                    "surface-container-low": "#f0f3ff",
+                    "secondary-fixed-dim": "#a3c9ff",
+                    "tertiary-fixed-dim": "#47e266",
+                    "surface": "#f9f9ff",
+                    "secondary-fixed": "#d3e3ff",
+                    "surface-tint": "#8d37a9"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "mobile-margin": "20px",
+                    "max-width": "1280px",
+                    "desktop-gutter": "24px",
+                    "safe-top": "44px",
+                    "mobile-gutter": "16px",
+                    "base": "8px",
+                    "safe-bottom": "34px",
+                    "desktop-margin": "64px"
+            },
+            "fontFamily": {
+                    "display-xl-mobile": ["Inter"],
+                    "display-xl": ["Inter"],
+                    "headline-lg-mobile": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "label-caps-mobile": ["Inter"],
+                    "label-caps": ["Inter"],
+                    "body-md-mobile": ["Inter"],
+                    "body-md": ["Inter"]
+            },
+            "fontSize": {
+                    "display-xl-mobile": ["34px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+                    "display-xl": ["56px", { "lineHeight": "1.1", "letterSpacing": "-0.03em", "fontWeight": "700" }],
+                    "headline-lg-mobile": ["28px", { "lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                    "headline-lg": ["34px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+                    "label-caps-mobile": ["12px", { "lineHeight": "1.0", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                    "label-caps": ["13px", { "lineHeight": "1.0", "letterSpacing": "0.03em", "fontWeight": "600" }],
+                    "body-md-mobile": ["15px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                    "body-md": ["16px", { "lineHeight": "1.5", "fontWeight": "400" }]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background: radial-gradient(circle at 0% 0%, #f9f9ff 0%, #e7eeff 100%);
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+        
+        .glass-card {
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(28px);
+            -webkit-backdrop-filter: blur(28px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 12px 40px 0 rgba(71, 26, 112, 0.1);
+        }
+
+        .neon-accent {
+            box-shadow: 0 0 15px rgba(135, 49, 163, 0.3);
+        }
+
+        .status-badge {
+            padding: 2px 10px;
+            border-radius: 9999px;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        .liquid-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            filter: blur(100px);
+            opacity: 0.4;
+        }
+
+        .liquid-blob {
+            position: absolute;
+            background: linear-gradient(45deg, #a34cbe, #54a3ff);
+            border-radius: 50%;
+            animation: move 20s infinite alternate;
+        }
+
+        @keyframes move {
+            from { transform: translate(0, 0) scale(1); }
+            to { transform: translate(20vw, 30vh) scale(1.5); }
+        }
+
+        /* Material Symbol Style Override */
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            vertical-align: middle;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="min-h-screen text-on-background pb-32">
+<!-- Atmospheric Background -->
+<div class="liquid-bg">
+<div class="liquid-blob w-[300px] h-[300px] top-[-50px] left-[-50px]"></div>
+<div class="liquid-blob w-[400px] h-[400px] bottom-[-100px] right-[-50px]" style="animation-delay: -5s; background: linear-gradient(45deg, #FFD60A, #8731a3);"></div>
+</div>
+<!-- Top Navigation Bar -->
+<header class="fixed top-0 left-0 right-0 max-w-md mx-auto w-full z-50 bg-white/45 backdrop-blur-[28px] border-b border-white/50 shadow-[0_4px_20px_0_rgba(163,76,190,0.06)] flex justify-between items-center px-5 h-[64px]">
+  <div class="flex items-center gap-3">
+    <div onclick="window.parent.postMessage({ type: 'NAVIGATE', view: 'admin-revenue' }, '*')" class="w-9 h-9 rounded-full border border-white/80 overflow-hidden shadow-sm cursor-pointer active:scale-95 transition-transform">
+      <img alt="Admin Avatar" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAGOMLPlm6clUh9ZYYuUPueMCJObuk5uk36yXMyn8JKvA30bUU0uvzJcWbTuaApeW75-XrgAr1xG6g3MrXV3wR8d8lu6WrlkFSXvV_PkhSuTd96S6sBjjZqouQzfPn-MyTe53iOFML6QQkYSBRUS-GOZrOH7ePXI3qRcgUr4MX4JmX4u4eBDyhSrdClrb5sq50KxRq8kwbASFCJpD6V_yjFcr_7m5nY-16NT5dbaGq4rzZKkzjYZeJA8tug0yUD1nKgkhINbv94aGrX"/>
+    </div>
+    <h1 class="font-bold text-base text-primary">SuccessAdmin</h1>
+  </div>
+  <div class="flex items-center gap-2">
+    <button class="w-9 h-9 rounded-full bg-white/40 flex items-center justify-center text-primary shadow-sm active:scale-95 transition-transform"><span class="material-symbols-outlined text-[20px]">notifications</span></button>
+    <button class="w-9 h-9 rounded-full bg-white/40 flex items-center justify-center text-primary shadow-sm active:scale-95 transition-transform"><span class="material-symbols-outlined text-[20px]">settings</span></button>
+  </div>
+</header>
+<!-- Main Content Canvas -->
+<main class="pt-20 px-mobile-margin space-y-6">
+<!-- Summary Stats Section -->
+<section class="grid grid-cols-2 gap-4">
+<div class="glass-card p-5 rounded-3xl space-y-1">
+<span class="text-on-surface-variant font-label-caps-mobile text-label-caps-mobile uppercase">Total Pending</span>
+<div class="flex items-baseline gap-2">
+<span class="font-display-xl-mobile text-display-xl-mobile text-primary">42</span>
+<span class="text-tertiary-container font-bold text-xs">+12%</span>
+</div>
+</div>
+<div class="glass-card p-5 rounded-3xl space-y-1">
+<span class="text-on-surface-variant font-label-caps-mobile text-label-caps-mobile uppercase">Avg. Time</span>
+<div class="flex items-baseline gap-2">
+<span class="font-display-xl-mobile text-display-xl-mobile text-on-surface">14</span>
+<span class="font-label-caps-mobile text-label-caps-mobile text-on-surface-variant">MINS</span>
+</div>
+</div>
+</section>
+<!-- Queue Section Header -->
+<div class="flex items-center justify-between">
+<h2 class="font-headline-lg-mobile text-[20px] font-bold text-on-surface">Queue Logs</h2>
+<button class="text-primary font-bold text-sm flex items-center gap-1 active:scale-95 transition-transform">
+<span>Filter</span>
+<span class="material-symbols-outlined text-[18px]">filter_list</span>
+</button>
+</div>
+<!-- Verification Queue List -->
+<div class="space-y-4">
+<!-- Company Row 1: Stripe -->
+<div class="glass-card p-5 rounded-3xl space-y-4 hover:bg-white/50 transition-colors duration-300">
+<div class="flex justify-between items-start">
+<div class="flex gap-4">
+<div class="w-12 h-12 bg-white rounded-2xl flex items-center justify-center shadow-sm border border-glass-border">
+<img alt="Stripe" class="w-8 h-8 object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBSyhJm15PbEbH2K0MPJLxKOcgC-aMrQ830keeR5bvUXC8kmzD19zaqNLusnL59jFsJK4-TF2s8mswtWp-ZPyBhJc1Y7PpkNWBC0U0EnCHe-Mh8w3Em_Mr0WYC3Md-WbIkR52shKExGB_JLNxtVI578c5ycPFvDkr0dqkyJUMXU3d9mWD_uit0Yq_S_i6g4OZUQbv3IsZxVN1miymQEfSgWLvegbh621s3v57HfrCmEP1oJo81vIpGqcY0OiECfQ035lN5HW5a51Hx3"/>
+</div>
+<div>
+<h3 class="font-bold text-on-surface text-lg">Stripe, Inc.</h3>
+<p class="text-on-surface-variant text-xs font-medium">Submitted: Oct 24, 2:15 PM</p>
+</div>
+</div>
+<span class="status-badge bg-orange/20 text-orange">Priority</span>
+</div>
+<div class="flex gap-3">
+<button class="flex-1 bg-primary text-on-primary h-[44px] rounded-xl font-bold flex items-center justify-center gap-2 active:scale-95 transition-all neon-accent">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+                        Verify Now
+                    </button>
+<button class="px-4 border border-outline-variant text-on-surface-variant h-[44px] rounded-xl font-bold active:scale-95 transition-all">
+                        Decline
+                    </button>
+</div>
+</div>
+<!-- Company Row 2: Airbnb -->
+<div class="glass-card p-5 rounded-3xl space-y-4 hover:bg-white/50 transition-colors duration-300">
+<div class="flex justify-between items-start">
+<div class="flex gap-4">
+<div class="w-12 h-12 bg-white rounded-2xl flex items-center justify-center shadow-sm border border-glass-border">
+<img alt="Airbnb" class="w-8 h-8 object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBVrD5QA0Q3YvXVYcQ4Sd6fIdY2qvj4UAz3V_qD2NG9eGsX3CUl0abOrJBmqL1a1kdJOIgplr6jX7iFR9gwijAsQNYLATTK-8hHLr9DCcNJxCbic7oZAyOkOLUEmcm1tspCI25ECR-BloCXu8ceISGXyaQnHne_ESwnZG0SjeROUm5Yh79Bi_2Be3qAoAbBhbBkbb59ntUDew6YjhV3eJcQkJunLsN_WbX6q-ZmOcy_FsdsSS5wdcOO2_3Gf8NYUYL88GOoMDsQ1CCp"/>
+</div>
+<div>
+<h3 class="font-bold text-on-surface text-lg">Airbnb</h3>
+<p class="text-on-surface-variant text-xs font-medium">Submitted: Oct 24, 1:40 PM</p>
+</div>
+</div>
+<span class="status-badge bg-secondary-container/20 text-secondary">New</span>
+</div>
+<div class="flex gap-3">
+<button class="flex-1 bg-primary text-on-primary h-[44px] rounded-xl font-bold flex items-center justify-center gap-2 active:scale-95 transition-all neon-accent">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+                        Verify Now
+                    </button>
+<button class="px-4 border border-outline-variant text-on-surface-variant h-[44px] rounded-xl font-bold active:scale-95 transition-all">
+                        Decline
+                    </button>
+</div>
+</div>
+<!-- Company Row 3: Notion -->
+<div class="glass-card p-5 rounded-3xl space-y-4 hover:bg-white/50 transition-colors duration-300">
+<div class="flex justify-between items-start">
+<div class="flex gap-4">
+<div class="w-12 h-12 bg-white rounded-2xl flex items-center justify-center shadow-sm border border-glass-border">
+<img alt="Notion" class="w-8 h-8 object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBPc8CacivnfrlZhhHI4yAHPOoQ29VaiB0zeHH0IH41vDXlpxVyxmrS7F-CDhFeXB2oQqcVkpscKYSWl_MhAMJg36Wma3L1GW1gIyg7EgE0c9FE27cpUYbfninOyZalYrSzgFiR3nRw_2HSM58zQt0NOKT7gW0hF8Pf6El4OtkttjQgRKHuGSsbaZy9X-Dkee7ue1GzSkMGPyUsMidlrylqPKiPHIyV6YlSh90EVevbhx9C-iqf3QqYAZ1HJV0fNhcFhuXjlFGgRyRS"/>
+</div>
+<div>
+<h3 class="font-bold text-on-surface text-lg">Notion Labs</h3>
+<p class="text-on-surface-variant text-xs font-medium">Submitted: Oct 24, 11:20 AM</p>
+</div>
+</div>
+<span class="status-badge bg-tertiary-container/20 text-tertiary">Standard</span>
+</div>
+<div class="flex gap-3">
+<button class="flex-1 bg-primary text-on-primary h-[44px] rounded-xl font-bold flex items-center justify-center gap-2 active:scale-95 transition-all neon-accent">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+                        Verify Now
+                    </button>
+<button class="px-4 border border-outline-variant text-on-surface-variant h-[44px] rounded-xl font-bold active:scale-95 transition-all">
+                        Decline
+                    </button>
+</div>
+</div>
+<!-- Company Row 4: Figma -->
+<div class="glass-card p-5 rounded-3xl space-y-4 hover:bg-white/50 transition-colors duration-300 opacity-80">
+<div class="flex justify-between items-start">
+<div class="flex gap-4">
+<div class="w-12 h-12 bg-white rounded-2xl flex items-center justify-center shadow-sm border border-glass-border">
+<img alt="Figma" class="w-8 h-8 object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDaLyw_IeDa5cuJQKK9S58e_DhuohNv1gljxbwCXWyFFR8KeaBjkczP2b1eReMbF1gTydbPuYgXzt_6XhyXoMQpdq-EBEDVUp2msdzENZLlIRfnHT007subls-e_M6ZyfnNEZNZdmoICCl1wHhdzHaCw2nfPUrAXSi1fndI9M496Zf-VO3fcEyHC2ygmU8dxAgAIdPrn3rtwPrX2o4xv81aoRb__HN1x4DpcGW3I6H3BnSnoiWBDBVWAE0SE6AcdXoTTLcsJJv58Ch5"/>
+</div>
+<div>
+<h3 class="font-bold text-on-surface text-lg">Figma Design</h3>
+<p class="text-on-surface-variant text-xs font-medium">Submitted: Oct 23, 5:00 PM</p>
+</div>
+</div>
+<span class="status-badge bg-error-container text-error">Delayed</span>
+</div>
+<div class="flex gap-3">
+<button class="flex-1 bg-primary text-on-primary h-[44px] rounded-xl font-bold flex items-center justify-center gap-2 active:scale-95 transition-all neon-accent">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+                        Verify Now
+                    </button>
+<button class="px-4 border border-outline-variant text-on-surface-variant h-[44px] rounded-xl font-bold active:scale-95 transition-all">
+                        Decline
+                    </button>
+</div>
+</div>
+</div>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 w-full z-50 pb-safe bg-glass-thick backdrop-blur-2xl dark:bg-surface-container-highest border-t border-glass-border shadow-[0_-12px_40px_0_rgba(71,26,112,0.15)] flex justify-around items-center h-16 px-mobile-margin">
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant hover:opacity-80 transition-opacity active:scale-90 duration-300 ease-out" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="font-label-caps-mobile text-label-caps-mobile mt-1">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-primary dark:text-primary-fixed font-bold bg-secondary-container/20 rounded-xl px-3 py-1 active:scale-90 duration-300 ease-out" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+<span class="font-label-caps-mobile text-label-caps-mobile mt-1">Verifications</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant hover:opacity-80 transition-opacity active:scale-90 duration-300 ease-out" href="#">
+<span class="material-symbols-outlined">analytics</span>
+<span class="font-label-caps-mobile text-label-caps-mobile mt-1">Reports</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant hover:opacity-80 transition-opacity active:scale-90 duration-300 ease-out" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-caps-mobile text-label-caps-mobile mt-1">Settings</span>
+</a>
+</nav>
+<!-- Floating Action Button (Optional contextual aid) -->
+<button class="fixed bottom-24 right-6 w-14 h-14 bg-card-gradient text-white rounded-2xl shadow-xl flex items-center justify-center active:scale-90 transition-transform z-40 border border-white/20">
+<span class="material-symbols-outlined text-[28px]">add</span>
+</button>
+<script>
+        // Micro-interaction for haptic-like feedback on buttons
+        document.querySelectorAll('button, a').forEach(btn => {
+            btn.addEventListener('touchstart', () => {
+                // Potential for real Haptics API here
+            });
+        });
+
+        // Atmospheric parallax effect
+        window.addEventListener('mousemove', (e) => {
+            const blobs = document.querySelectorAll('.liquid-blob');
+            const x = e.clientX / window.innerWidth;
+            const y = e.clientY / window.innerHeight;
+            
+            blobs.forEach((blob, index) => {
+                const factor = (index + 1) * 20;
+                blob.style.transform = `translate(${x * factor}px, ${y * factor}px)`;
+            });
+        });
+    </script>
+</body></html>

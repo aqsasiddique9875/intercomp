@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/>
+  <title>SuccessAdmin - System Overview</title>
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+  <!-- Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            primary: "#8731a3",
+            secondary: "#4D9EFA",
+            background: "#fff7fb",
+            outline: "#817381",
+            "glass-fill": "rgba(255, 255, 255, 0.45)",
+            "glass-border": "rgba(255, 255, 255, 0.6)"
+          },
+          borderRadius: {
+            xxl: "24px"
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      background-color: #DCE4F7;
+      -webkit-tap-highlight-color: transparent;
+      font-family: 'Inter', sans-serif;
+      color: #471A70;
+    }
+    .glass-card {
+      background: rgba(255, 255, 255, 0.4);
+      backdrop-filter: blur(28px);
+      -webkit-backdrop-filter: blur(28px);
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      box-shadow: 0 8px 32px 0 rgba(163, 76, 190, 0.08);
+    }
+    .animated-bg-sphere {
+      position: fixed;
+      width: 350px;
+      height: 350px;
+      border-radius: 50%;
+      filter: blur(80px);
+      z-index: -1;
+      opacity: 0.5;
+      animation: float 20s infinite ease-in-out;
+    }
+    @keyframes float {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(50px, -50px) scale(1.1); }
+    }
+    /* Hide scrollbar */
+    .hide-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .hide-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+</head>
+<body class="antialiased overflow-x-hidden pb-32">
+  <!-- Animated Background Spheres -->
+  <div class="animated-bg-sphere bg-purple-300" style="top: -50px; left: -50px; animation-delay: 0s;"></div>
+  <div class="animated-bg-sphere bg-blue-200" style="bottom: -100px; right: -50px; animation-delay: -5s;"></div>
+
+  <!-- Top AppBar -->
+  <header class="fixed top-0 left-0 right-0 max-w-md mx-auto w-full z-50 bg-white/45 backdrop-blur-[28px] border-b border-white/50 shadow-[0_4px_20px_0_rgba(163,76,190,0.06)] flex justify-between items-center px-5 h-[64px]">
+    <div class="flex items-center gap-3">
+      <div onclick="window.parent.postMessage({ type: 'NAVIGATE', view: 'admin-revenue' }, '*')" class="w-9 h-9 rounded-full border border-white/80 overflow-hidden shadow-sm cursor-pointer active:scale-95 transition-transform">
+        <img alt="Admin Avatar" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAGOMLPlm6clUh9ZYYuUPueMCJObuk5uk36yXMyn8JKvA30bUU0uvzJcWbTuaApeW75-XrgAr1xG6g3MrXV3wR8d8lu6WrlkFSXvV_PkhSuTd96S6sBjjZqouQzfPn-MyTe53iOFML6QQkYSBRUS-GOZrOH7ePXI3qRcgUr4MX4JmX4u4eBDyhSrdClrb5sq50KxRq8kwbASFCJpD6V_yjFcr_7m5nY-16NT5dbaGq4rzZKkzjYZeJA8tug0yUD1nKgkhINbv94aGrX"/>
+      </div>
+      <h1 class="font-bold text-base text-primary">SuccessAdmin</h1>
+    </div>
+    <div class="flex items-center gap-2">
+      <button class="w-9 h-9 rounded-full bg-white/40 flex items-center justify-center text-primary shadow-sm active:scale-95 transition-transform"><span class="material-symbols-outlined text-[20px]">notifications</span></button>
+      <button class="w-9 h-9 rounded-full bg-white/40 flex items-center justify-center text-primary shadow-sm active:scale-95 transition-transform"><span class="material-symbols-outlined text-[20px]">settings</span></button>
+    </div>
+  </header>
+
+  <main class="mt-[84px] px-5 max-w-md mx-auto space-y-5 text-left">
+    
+    <!-- Title Area -->
+    <section class="py-1">
+      <h2 class="text-xl font-extrabold text-[#471A70] tracking-tight">System Overview</h2>
+      <p class="text-xs text-outline font-medium mt-1">Live operational telemetry and administrative controls.</p>
+    </section>
+
+    <!-- Live Telemetry Graph Card -->
+    <section class="glass-card p-4 rounded-3xl space-y-4">
+      <div class="flex justify-between items-center">
+        <h3 class="text-xs font-bold text-[#726580] uppercase tracking-wider">Live Telemetry</h3>
+        <span class="bg-primary/10 text-primary text-[9px] font-bold px-2 py-0.5 rounded-full">Real-time Traffic</span>
+      </div>
+
+      <!-- CSS Bar Graph -->
+      <div class="h-28 flex items-end justify-between gap-1 px-2 pt-2 border-b border-white/20">
+        <div class="w-full bg-primary/40 rounded-t-md h-12"></div>
+        <div class="w-full bg-primary/40 rounded-t-md h-20"></div>
+        <div class="w-full bg-primary/40 rounded-t-md h-16"></div>
+        <div class="w-full bg-primary/40 rounded-t-md h-24"></div>
+        <div class="w-full bg-primary/40 rounded-t-md h-14"></div>
+        <div class="w-full bg-primary/40 rounded-t-md h-20"></div>
+        <div class="w-full bg-primary/40 rounded-t-md h-22"></div>
+        <div class="w-full bg-primary/40 rounded-t-md h-18"></div>
+        <div class="w-full bg-primary/40 rounded-t-md h-28"></div>
+        <div class="w-full bg-primary/40 rounded-t-md h-15"></div>
+      </div>
+
+      <!-- Telemetry Metrics -->
+      <div class="grid grid-cols-3 gap-1 text-center pt-1">
+        <div>
+          <span class="text-[8px] font-bold text-outline uppercase">Growth Rate</span>
+          <p class="text-xs font-bold text-green-600 mt-0.5">+12.4%</p>
+        </div>
+        <div>
+          <span class="text-[8px] font-bold text-outline uppercase">Avg Latency</span>
+          <p class="text-xs font-bold text-primary mt-0.5">42ms</p>
+        </div>
+        <div>
+          <span class="text-[8px] font-bold text-outline uppercase">Error Rate</span>
+          <p class="text-xs font-bold text-primary mt-0.5">0.02%</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- System Health Metrics (Bento-style list) -->
+    <section class="space-y-3">
+      <h3 class="text-xs font-bold text-[#726580] uppercase tracking-wider pl-1">System Health</h3>
+      
+      <!-- Server Load -->
+      <div class="glass-card p-4 rounded-2xl space-y-2">
+        <div class="flex justify-between items-center">
+          <div class="flex items-center gap-2">
+            <span class="material-symbols-outlined text-primary text-lg">dns</span>
+            <span class="font-bold text-xs">Server Load</span>
+          </div>
+          <span class="text-xs font-extrabold text-primary">64%</span>
+        </div>
+        <div class="w-full h-2 bg-white/20 rounded-full overflow-hidden">
+          <div class="h-full bg-primary rounded-full" style="width: 64%"></div>
+        </div>
+      </div>
+
+      <!-- Online Users -->
+      <div class="glass-card p-4 rounded-2xl flex items-center justify-between">
+        <div class="flex items-center gap-2">
+          <span class="material-symbols-outlined text-primary text-lg">groups</span>
+          <div>
+            <span class="font-bold text-xs block">Online Users</span>
+            <span class="text-[9px] text-outline">Active sessions</span>
+          </div>
+        </div>
+        <div class="flex items-center gap-2">
+          <!-- Avatars Stack -->
+          <div class="flex -space-x-2">
+            <img class="w-5 h-5 rounded-full border border-white object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAGOMLPlm6clUh9ZYYuUPueMCJObuk5uk36yXMyn8JKvA30bUU0uvzJcWbTuaApeW75-XrgAr1xG6g3MrXV3wR8d8lu6WrlkFSXvV_PkhSuTd96S6sBjjZqouQzfPn-MyTe53iOFML6QQkYSBRUS-GOZrOH7ePXI3qRcgUr4MX4JmX4u4eBDyhSrdClrb5sq50KxRq8kwbASFCJpD6V_yjFcr_7m5nY-16NT5dbaGq4rzZKkzjYZeJA8tug0yUD1nKgkhINbv94aGrX" alt="User 1"/>
+            <img class="w-5 h-5 rounded-full border border-white object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAfM4pXRf53iBGBvzOEMMSLpcFj5UguQ9VH7t4rw0IBL0W3rWiEmQ5pPfqjeTbKnpUYCEH-IvXyuvc-_1sQLppYf-FyIUOA0f6lqf0zeivx-N4H3CII29IFcP7klYHwQ9pcLWE-7SvF9ndYgZG2BxlcKpOEzeqoIdsqWZDqoeA1ZZFTLOcBK6Br0DNzKS_mM_pHThUokkOzUuWl9BxShuDDM7wyTpG1l4PFy7-SbZVj3utVfbNI-USX82fs2wxsfgjAf0F4LLzgbRvl" alt="User 2"/>
+          </div>
+          <span class="text-xs font-extrabold">1,248</span>
+        </div>
+      </div>
+
+      <!-- Verification Queue -->
+      <div onclick="window.parent.postMessage({ type: 'NAVIGATE', view: 'admin-verify' }, '*')" class="glass-card p-4 rounded-2xl space-y-2 cursor-pointer active:scale-[0.98] transition-transform">
+        <div class="flex justify-between items-center">
+          <div class="flex items-center gap-2">
+            <span class="material-symbols-outlined text-primary text-lg">verified_user</span>
+            <span class="font-bold text-xs">Verification Queue</span>
+          </div>
+          <span class="text-xs font-extrabold text-primary">28 pending</span>
+        </div>
+        <div class="w-full h-2 bg-white/20 rounded-full overflow-hidden">
+          <div class="h-full bg-green-500 rounded-full" style="width: 40%"></div>
+        </div>
+      </div>
+
+      <!-- Open Reports & Published Quizzes (2 columns) -->
+      <div class="grid grid-cols-2 gap-3">
+        <div class="glass-card p-4 rounded-2xl space-y-1">
+          <span class="text-[9px] font-bold text-outline uppercase">Open Reports</span>
+          <p class="text-lg font-extrabold text-red-500">14</p>
+          <span class="text-[8px] text-red-500 font-bold block mt-1">Critical Threshold Low</span>
+        </div>
+        <div class="glass-card p-4 rounded-2xl space-y-1">
+          <span class="text-[9px] font-bold text-outline uppercase">Published Quizzes</span>
+          <p class="text-lg font-extrabold text-[#471A70]">28</p>
+          <span class="text-[8px] text-green-600 font-bold block mt-1">Synced with DB</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- System Notification Log Stream -->
+    <section class="glass-card p-4 rounded-3xl space-y-3">
+      <h3 class="text-xs font-bold text-[#726580] uppercase tracking-wider">System Notification Stream</h3>
+      <div class="space-y-3 text-xs font-medium">
+        <!-- Log 1 -->
+        <div class="flex gap-2.5 items-start">
+          <span class="w-2 h-2 rounded-full bg-red-500 mt-1.5 shrink-0"></span>
+          <div class="flex-1">
+            <div class="flex justify-between font-bold text-[#471A70]">
+              <span>Security flag raised</span>
+              <span class="text-[10px] text-outline">18:44:03</span>
+            </div>
+            <p class="text-[10px] text-outline mt-0.5">User ID 88928 suspicious login attempt from Proxy.</p>
+          </div>
+        </div>
+
+        <!-- Log 2 -->
+        <div class="flex gap-2.5 items-start">
+          <span class="w-2 h-2 rounded-full bg-blue-500 mt-1.5 shrink-0"></span>
+          <div class="flex-1">
+            <div class="flex justify-between font-bold text-[#471A70]">
+              <span>New moderator joined</span>
+              <span class="text-[10px] text-outline">18:30:05</span>
+            </div>
+            <p class="text-[10px] text-outline mt-0.5">Moderator "Sarah_Admin" onboarded to verification box.</p>
+          </div>
+        </div>
+
+        <!-- Log 3 -->
+        <div class="flex gap-2.5 items-start">
+          <span class="w-2 h-2 rounded-full bg-green-500 mt-1.5 shrink-0"></span>
+          <div class="flex-1">
+            <div class="flex justify-between font-bold text-[#471A70]">
+              <span>Verification batch complete</span>
+              <span class="text-[10px] text-outline">18:00:05</span>
+            </div>
+            <p class="text-[10px] text-outline mt-0.5">500 users processed in daily ID verification sweep.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Moderator Actions -->
+    <section class="glass-card p-4 rounded-3xl space-y-3">
+      <h3 class="text-xs font-bold text-[#726580] uppercase tracking-wider">Moderator Actions</h3>
+      <div class="space-y-2">
+        <div onclick="window.parent.postMessage({ type: 'NAVIGATE', view: 'admin-verify' }, '*')" class="flex justify-between items-center p-3 rounded-xl bg-white/25 border border-white/30 cursor-pointer active:scale-95 transition-transform">
+          <div class="flex items-center gap-2.5">
+            <span class="material-symbols-outlined text-primary text-lg">verified_user</span>
+            <span class="text-xs font-bold">Verifications Queue</span>
+          </div>
+          <span class="material-symbols-outlined text-outline text-sm">chevron_right</span>
+        </div>
+
+        <div onclick="window.parent.postMessage({ type: 'NAVIGATE', view: 'admin-courses' }, '*')" class="flex justify-between items-center p-3 rounded-xl bg-white/25 border border-white/30 cursor-pointer active:scale-95 transition-transform">
+          <div class="flex items-center gap-2.5">
+            <span class="material-symbols-outlined text-primary text-lg">school</span>
+            <span class="text-xs font-bold">Course Portals</span>
+          </div>
+          <span class="material-symbols-outlined text-outline text-sm">chevron_right</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Priority Shift Callout -->
+    <section class="glass-card p-4 rounded-3xl space-y-3 border border-primary/20">
+      <div class="flex items-center gap-2 text-primary">
+        <span class="material-symbols-outlined text-lg animate-pulse">bolt</span>
+        <h4 class="font-extrabold text-xs">Priority Shift</h4>
+      </div>
+      <p class="text-[11px] leading-relaxed text-outline">
+        System load has increased by 15%. Direct all available moderators to the Verification Queue to prevent backlog overflow.
+      </p>
+      <button onclick="alert('Resources successfully deployed to US-EAST-02-B')" class="w-full h-10 rounded-xl bg-primary text-white font-bold text-xs active:scale-95 transition-transform">
+        Deploy Resources
+      </button>
+    </section>
+
+    <!-- Session Info -->
+    <section class="glass-card p-4 rounded-3xl text-xs font-semibold space-y-2 text-outline">
+      <div class="flex justify-between">
+        <span>Node</span>
+        <span class="font-bold text-[#471A70]">US-EAST-02-B</span>
+      </div>
+      <div class="flex justify-between">
+        <span>Session</span>
+        <span class="font-bold text-[#471A70]">5h 12m</span>
+      </div>
+      <div class="flex justify-between">
+        <span>Encryption</span>
+        <span class="font-bold text-green-600">AES-256</span>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Bottom Navigation Bar Placeholder -->
+  <nav id="bottom-nav"></nav>
+
+  <script>
+    // Touch Feedback
+    document.querySelectorAll('.glass-card, button').forEach(el => {
+      el.addEventListener('touchstart', () => {
+        el.style.transform = 'scale(0.97)';
+        el.style.transition = 'transform 0.15s ease-in-out';
+      });
+      el.addEventListener('touchend', () => {
+        el.style.transform = 'scale(1)';
+      });
+    });
+  </script>
+</body>
+</html>

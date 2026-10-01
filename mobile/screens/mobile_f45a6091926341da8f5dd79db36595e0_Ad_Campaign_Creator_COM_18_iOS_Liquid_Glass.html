@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+                  "glass-thick": "rgba(255, 255, 255, 0.8)",
+                  "secondary": "#0060ab",
+                  "on-secondary-fixed": "#001c39",
+                  "on-tertiary-fixed-variant": "#00531a",
+                  "on-primary-fixed": "#330044",
+                  "outline": "#817381",
+                  "surface-container-highest": "#dbe3f6",
+                  "tertiary-container": "#00842f",
+                  "error": "#FF453A",
+                  "surface-container-high": "#e0e8fb",
+                  "on-primary-container": "#fff5fb",
+                  "primary-fixed-dim": "#f0b0ff",
+                  "on-secondary-container": "#003868",
+                  "inverse-surface": "#29313f",
+                  "glass-border": "rgba(255, 255, 255, 0.6)",
+                  "on-surface": "#141c29",
+                  "on-background": "#141c29",
+                  "secondary-fixed-dim": "#a3c9ff",
+                  "on-tertiary": "#ffffff",
+                  "gold": "#FFD60A",
+                  "primary": "#8731a3",
+                  "tertiary": "#006823",
+                  "surface-bright": "#f9f9ff",
+                  "on-primary-fixed-variant": "#72188f",
+                  "surface-dim": "#d2daed",
+                  "surface-container": "#e7eeff",
+                  "on-secondary-fixed-variant": "#004883",
+                  "inverse-primary": "#f0b0ff",
+                  "on-surface-variant": "#4f4350",
+                  "background": "#f9f9ff",
+                  "orange": "#FF9F0A",
+                  "outline-variant": "#d2c1d2",
+                  "card-gradient": "linear-gradient(135deg, #4D9EFA 0%, #BF7DF5 100%)",
+                  "surface-variant": "#dbe3f6",
+                  "surface-tint": "#8d37a9",
+                  "surface": "#f9f9ff",
+                  "on-error": "#ffffff",
+                  "on-error-container": "#93000a",
+                  "secondary-container": "#54a3ff",
+                  "glass-fill": "rgba(255, 255, 255, 0.35)",
+                  "on-secondary": "#ffffff",
+                  "surface-container-low": "#f0f3ff",
+                  "secondary-fixed": "#d3e3ff",
+                  "inverse-on-surface": "#ecf1ff",
+                  "on-tertiary-container": "#e6ffe0",
+                  "primary-fixed": "#fbd7ff",
+                  "surface-container-lowest": "#ffffff",
+                  "error-container": "#ffdad6",
+                  "tertiary-fixed": "#6cff82",
+                  "on-primary": "#ffffff",
+                  "primary-container": "#a34cbe",
+                  "tertiary-fixed-dim": "#47e266",
+                  "on-tertiary-fixed": "#002106",
+                  "deep-purple": "#471A70"
+          },
+          "borderRadius": {
+                  "DEFAULT": "0.25rem",
+                  "lg": "0.5rem",
+                  "xl": "0.75rem",
+                  "full": "9999px"
+          },
+          "spacing": {
+                  "mobile-margin": "20px",
+                  "safe-top": "44px",
+                  "desktop-margin": "64px",
+                  "desktop-gutter": "24px",
+                  "base": "8px",
+                  "safe-bottom": "34px",
+                  "mobile-gutter": "16px",
+                  "max-width": "1280px"
+          },
+          "fontFamily": {
+                  "headline-lg": ["Inter"],
+                  "display-xl": ["Inter"],
+                  "label-caps-mobile": ["Inter"],
+                  "display-xl-mobile": ["Inter"],
+                  "body-md-mobile": ["Inter"],
+                  "headline-lg-mobile": ["Inter"],
+                  "label-caps": ["Inter"],
+                  "body-md": ["Inter"]
+          },
+          "fontSize": {
+                  "headline-lg": ["34px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                  "display-xl": ["56px", {"lineHeight": "1.1", "letterSpacing": "-0.03em", "fontWeight": "700"}],
+                  "label-caps-mobile": ["12px", {"lineHeight": "1.0", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                  "display-xl-mobile": ["34px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                  "body-md-mobile": ["15px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                  "headline-lg-mobile": ["28px", {"lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                  "label-caps": ["13px", {"lineHeight": "1.0", "letterSpacing": "0.03em", "fontWeight": "600"}],
+                  "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    body {
+      background: linear-gradient(135deg, #f9f9ff 0%, #e0e8fb 100%);
+      min-height: 100vh;
+      color: #471A70;
+      -webkit-font-smoothing: antialiased;
+    }
+    .glass-card {
+      background: rgba(255, 255, 255, 0.45);
+      backdrop-filter: blur(28px);
+      -webkit-backdrop-filter: blur(28px);
+      border: 1px solid rgba(255, 255, 255, 0.6);
+      box-shadow: 0 12px 40px 0 rgba(71, 26, 112, 0.1);
+    }
+    .glass-input {
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.8);
+    }
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+    .slider-thumb::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      height: 24px;
+      width: 24px;
+      border-radius: 50%;
+      background: #8731a3;
+      cursor: pointer;
+      border: 3px solid white;
+      box-shadow: 0 4px 12px rgba(135, 49, 163, 0.3);
+    }
+    .spring-press:active {
+      transform: scale(0.96);
+      transition: transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+  </style>
+</head>
+<body class="pb-safe-bottom">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-glass-thick backdrop-blur-xl border-b border-glass-border shadow-[0_12px_40px_0_rgba(71,26,112,0.15)] h-safe-top">
+<div class="flex justify-between items-center px-mobile-margin h-16 w-full">
+<div class="flex items-center gap-3">
+<button class="spring-press">
+<span class="material-symbols-outlined text-deep-purple">arrow_back_ios</span>
+</button>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile font-bold text-primary">Create Campaign</h1>
+</div>
+<button class="font-label-caps-mobile text-label-caps-mobile text-on-surface-variant hover:opacity-80 transition-opacity uppercase tracking-widest">Skip</button>
+</div>
+</header>
+<main class="pt-24 px-mobile-margin pb-32 space-y-6 max-w-lg mx-auto">
+<!-- Configuration Section (Form) -->
+<section class="glass-card rounded-3xl p-6 space-y-5">
+<!-- Campaign Name -->
+<div class="space-y-2">
+<label class="font-label-caps-mobile text-label-caps-mobile uppercase tracking-wider text-deep-purple/70 px-1">Campaign Name</label>
+<input class="glass-input w-full h-12 px-4 rounded-2xl focus:outline-none focus:ring-2 focus:ring-primary/30 text-body-md-mobile placeholder:text-deep-purple/30" placeholder="e.g. Summer 2024 Hiring" type="text"/>
+</div>
+<!-- Daily Budget -->
+<div class="space-y-4">
+<div class="flex justify-between items-center">
+<label class="font-label-caps-mobile text-label-caps-mobile uppercase tracking-wider text-deep-purple/70 px-1">Daily Budget</label>
+<span class="font-headline-lg-mobile text-primary font-bold" id="budgetValue">Rs. 500</span>
+</div>
+<input class="slider-thumb w-full h-2 bg-primary/20 rounded-lg appearance-none cursor-pointer" id="budgetSlider" max="1000" min="0" type="range" value="500"/>
+</div>
+<!-- Targeting Selectors -->
+<div class="grid grid-cols-2 gap-4">
+<div class="space-y-2">
+<label class="font-label-caps-mobile text-label-caps-mobile uppercase tracking-wider text-deep-purple/70 px-1">University</label>
+<div class="relative">
+<select class="glass-input w-full h-12 px-4 rounded-2xl appearance-none focus:outline-none text-body-md-mobile">
+<option>All Universities</option>
+<option>Stanford</option>
+<option>MIT</option>
+<option>Harvard</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-3 text-deep-purple/50 pointer-events-none">expand_more</span>
+</div>
+</div>
+<div class="space-y-2">
+<label class="font-label-caps-mobile text-label-caps-mobile uppercase tracking-wider text-deep-purple/70 px-1">Grad Year</label>
+<div class="relative">
+<select class="glass-input w-full h-12 px-4 rounded-2xl appearance-none focus:outline-none text-body-md-mobile">
+<option>2024</option>
+<option>2025</option>
+<option>2026</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-3 text-deep-purple/50 pointer-events-none">expand_more</span>
+</div>
+</div>
+</div>
+<!-- Skills Chips -->
+<div class="space-y-3">
+<label class="font-label-caps-mobile text-label-caps-mobile uppercase tracking-wider text-deep-purple/70 px-1">Target Skills</label>
+<div class="flex flex-wrap gap-2">
+<span class="flex items-center gap-2 bg-primary-container/20 text-on-primary-container px-4 py-2 rounded-full font-label-caps-mobile text-label-caps-mobile border border-primary/10">
+            UI Design <button class="material-symbols-outlined text-[14px]">close</button>
+</span>
+<span class="flex items-center gap-2 bg-primary-container/20 text-on-primary-container px-4 py-2 rounded-full font-label-caps-mobile text-label-caps-mobile border border-primary/10">
+            React <button class="material-symbols-outlined text-[14px]">close</button>
+</span>
+<span class="flex items-center gap-2 bg-primary-container/20 text-on-primary-container px-4 py-2 rounded-full font-label-caps-mobile text-label-caps-mobile border border-primary/10">
+            Python <button class="material-symbols-outlined text-[14px]">close</button>
+</span>
+<button class="w-8 h-8 flex items-center justify-center rounded-full bg-white border border-glass-border text-primary spring-press shadow-sm">
+<span class="material-symbols-outlined">add</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Upload Section -->
+<section class="space-y-3">
+<h3 class="font-label-caps-mobile text-label-caps-mobile uppercase tracking-widest text-deep-purple/60 px-1">Visual Assets</h3>
+<div class="glass-card rounded-3xl p-8 border-dashed border-2 border-primary/20 flex flex-col items-center justify-center text-center group cursor-pointer hover:border-primary/40 transition-colors">
+<img alt="Upload Icon" class="w-24 h-24 mb-4 object-contain group-hover:scale-110 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida/AP1WRLufCPufXPgJQQ973RUxU-wQkWShRvWh3G_jbgY9rWJnqKEspLd5Jc0Ndv187iCzwVn1bmOrFCkXgt_oOYi9YixeyC8vMwFniZFjBLsz5kNyF7t26BvG2MNYcdS2WJ1vz0MJvfzSNm3wgS56IdnPm6UX2m3asUQmCQrFDOj6db-WZTWLQOR11iXE2pFiWHn9aoAZQ8dAKUAhugR4741GwifHv_0W8B1I6y2x14LEu9YTL-pGxRCUX6cIxrBq"/>
+<p class="text-body-md-mobile font-semibold text-deep-purple">Tap to upload or drag banner</p>
+<p class="text-xs text-deep-purple/40 mt-1">Recommended: 1200 x 628px</p>
+</div>
+</section>
+<!-- Live Preview Section -->
+<section class="space-y-4">
+<div class="flex items-center justify-between px-1">
+<h3 class="font-headline-lg-mobile text-headline-lg-mobile text-deep-purple font-bold tracking-tight">Live Preview</h3>
+<span class="bg-secondary/10 text-secondary px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest">Student Feed</span>
+</div>
+<!-- Preview Card -->
+<div class="glass-card rounded-3xl p-4 overflow-hidden">
+<div class="bg-white/80 rounded-2xl overflow-hidden border border-glass-border">
+<div class="h-48 w-full bg-surface-container relative overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A sophisticated digital artwork showing a series of glowing interconnected nodes and circuits in vibrant purple and neon blue. The scene is rendered in a high-fidelity 3D style with soft bokeh effects and crystal-clear glass textures, representing high-end technology and global connectivity. The overall mood is futuristic, premium, and professional with soft atmospheric lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBA6h2lXHzhh_WP67ImaCssmu34u9KMCUF6Jz7aGAR5MhqqN6nGPqT8p7hScC9jc7JiLxnCoTWowzeqdgSK2EXFqCWpoUFcMNRWtvIhbCeuwJDKgKOo_GflA9DWWSjVxmK86adRRWFcG0Od7DlabznkTmCUyiUpEQqzkJTw5EcvNaOlz3P8kXmCw5xthTi5AqwKpk2m_i-3_DyWKvqCztMJUz6_7pz41f_1zDvdg6sC0KEcoIE0OE2MvolAS-95QJYHHEWiQLHuE_BV"/>
+<div class="absolute top-3 left-3 bg-white/90 backdrop-blur px-3 py-1 rounded-full flex items-center gap-1 shadow-sm">
+<span class="material-symbols-outlined text-[12px] text-orange" style="font-variation-settings: 'FILL' 1;">stars</span>
+<span class="text-[10px] font-bold text-deep-purple uppercase tracking-tighter">Sponsored</span>
+</div>
+</div>
+<div class="p-4 space-y-3">
+<div>
+<h4 class="text-body-md-mobile font-bold text-deep-purple">Junior UI/UX Designer</h4>
+<p class="text-xs text-deep-purple/60">RecruitElite • Remote / San Francisco</p>
+</div>
+<p class="text-xs text-deep-purple/80 line-clamp-2 leading-relaxed">
+              Join our elite design team building the next generation of recruitment technology. We're looking for passionate grads with a flair for glassmorphism.
+            </p>
+<button class="w-full h-11 bg-primary text-white rounded-xl font-bold text-body-md-mobile spring-press shadow-lg shadow-primary/20">
+              Apply
+            </button>
+</div>
+</div>
+</div>
+</section>
+<!-- CTA Button -->
+<div class="pt-4">
+<button class="w-full h-14 bg-deep-purple text-white rounded-full font-bold text-headline-lg-mobile spring-press shadow-[0_20px_50px_rgba(71,26,112,0.3)] flex items-center justify-center gap-3">
+        Launch Campaign
+        <span class="material-symbols-outlined">rocket_launch</span>
+</button>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full z-50 bg-glass-thick backdrop-blur-[28px] border-t border-glass-border shadow-[0_-12px_40px_0_rgba(71,26,112,0.15)] rounded-t-3xl">
+<div class="flex justify-around items-center px-mobile-margin pb-safe-bottom h-20 w-full">
+<button class="flex flex-col items-center justify-center text-on-surface-variant group">
+<span class="material-symbols-outlined text-2xl group-hover:scale-110 transition-transform">dashboard</span>
+<span class="font-label-caps-mobile text-[10px] mt-1">Dashboard</span>
+</button>
+<button class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-4 py-1.5 shadow-inner">
+<span class="material-symbols-outlined text-2xl">work</span>
+<span class="font-label-caps-mobile text-[10px] mt-0.5">Postings</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant group">
+<span class="material-symbols-outlined text-2xl group-hover:scale-110 transition-transform">group</span>
+<span class="font-label-caps-mobile text-[10px] mt-1">Applicants</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant group">
+<span class="material-symbols-outlined text-2xl group-hover:scale-110 transition-transform">analytics</span>
+<span class="font-label-caps-mobile text-[10px] mt-1">Reports</span>
+</button>
+</div>
+</nav>
+<script>
+    const slider = document.getElementById('budgetSlider');
+    const valueDisplay = document.getElementById('budgetValue');
+    
+    slider.addEventListener('input', (e) => {
+      valueDisplay.textContent = `$${e.target.value}`;
+      const percent = (e.target.value / e.target.max) * 100;
+      slider.style.background = `linear-gradient(to right, #8731a3 ${percent}%, rgba(135, 49, 163, 0.2) ${percent}%)`;
+    });
+
+    // Initial background state for slider
+    const initialPercent = (slider.value / slider.max) * 100;
+    slider.style.background = `linear-gradient(to right, #8731a3 ${initialPercent}%, rgba(135, 49, 163, 0.2) ${initialPercent}%)`;
+  </script>
+</body></html>

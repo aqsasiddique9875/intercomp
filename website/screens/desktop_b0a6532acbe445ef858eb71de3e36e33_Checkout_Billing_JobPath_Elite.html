@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Checkout | JobPath Elite</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                "on-background": "#141c29",
+                "on-tertiary-fixed": "#002106",
+                "on-tertiary-fixed-variant": "#00531a",
+                "error": "#FF453A",
+                "surface-container-lowest": "#ffffff",
+                "tertiary": "#006823",
+                "surface-bright": "#f9f9ff",
+                "secondary-container": "#54a3ff",
+                "card-gradient": "linear-gradient(135deg, #4D9EFA 0%, #BF7DF5 100%)",
+                "tertiary-fixed": "#6cff82",
+                "surface-dim": "#d2daed",
+                "surface-container": "#e7eeff",
+                "on-tertiary-container": "#e6ffe0",
+                "surface-container-highest": "#dbe3f6",
+                "on-tertiary": "#ffffff",
+                "on-primary": "#ffffff",
+                "gold": "#FFD60A",
+                "tertiary-fixed-dim": "#47e266",
+                "tertiary-container": "#00842f",
+                "on-error": "#ffffff",
+                "on-surface": "#141c29",
+                "glass-thick": "rgba(255, 255, 255, 0.8)",
+                "secondary": "#0060ab",
+                "on-primary-container": "#fff5fb",
+                "primary": "#8731a3",
+                "on-secondary-fixed": "#001c39",
+                "inverse-on-surface": "#ecf1ff",
+                "outline-variant": "#d2c1d2",
+                "on-primary-fixed": "#330044",
+                "glass-border": "rgba(255, 255, 255, 0.6)",
+                "on-secondary-fixed-variant": "#004883",
+                "outline": "#817381",
+                "inverse-surface": "#29313f",
+                "error-container": "#ffdad6",
+                "surface-container-high": "#e0e8fb",
+                "glass-fill": "rgba(255, 255, 255, 0.35)",
+                "primary-fixed-dim": "#f0b0ff",
+                "surface-tint": "#8d37a9",
+                "on-secondary-container": "#003868",
+                "on-surface-variant": "#4f4350",
+                "surface": "#f9f9ff",
+                "primary-container": "#a34cbe",
+                "background": "#DCE4F7",
+                "primary-fixed": "#fbd7ff",
+                "orange": "#FF9F0A",
+                "on-error-container": "#93000a",
+                "secondary-fixed-dim": "#a3c9ff",
+                "secondary-fixed": "#d3e3ff",
+                "inverse-primary": "#f0b0ff",
+                "surface-container-low": "#f0f3ff",
+                "on-primary-fixed-variant": "#72188f",
+                "on-secondary": "#ffffff",
+                "surface-variant": "#dbe3f6",
+                "deep-purple": "#471A70"
+            },
+            "borderRadius": {
+                "DEFAULT": "0.25rem",
+                "lg": "0.5rem",
+                "xl": "0.75rem",
+                "full": "9999px",
+                "card": "24px"
+            },
+            "spacing": {
+                "desktop-margin": "64px",
+                "desktop-gutter": "24px",
+                "mobile-gutter": "16px",
+                "safe-top": "44px",
+                "mobile-margin": "20px",
+                "safe-bottom": "34px",
+                "max-width": "1280px",
+                "base": "8px"
+            },
+            "fontFamily": {
+                "body-md": ["Inter"],
+                "headline-lg": ["Inter"],
+                "label-caps": ["Inter"]
+            },
+            "fontSize": {
+                "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                "headline-lg": ["34px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                "label-caps": ["13px", {"lineHeight": "1.0", "letterSpacing": "0.03em", "fontWeight": "600"}]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        body {
+            background-color: #DCE4F7;
+            color: #141c29;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.45);
+            backdrop-filter: blur(28px);
+            -webkit-backdrop-filter: blur(28px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 12px 40px 0 rgba(71, 26, 112, 0.1);
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+
+        .liquid-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.6;
+        }
+
+        .input-focus:focus {
+            border-color: #8731a3;
+            box-shadow: 0 0 0 2px rgba(135, 49, 163, 0.2);
+            outline: none;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .floating-lock {
+            animation: float 4s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+<div class="liquid-bg">
+
+</div>
+<!-- Top Navigation Header -->
+<header class="w-full sticky top-0 z-50 bg-glass-thick backdrop-blur-3xl border-b border-glass-border shadow-[0_12px_40px_0_rgba(71,26,112,0.05)]">
+<div class="max-w-max-width mx-auto flex justify-between items-center px-desktop-margin h-20">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary font-bold text-3xl">hub</span>
+<h1 class="font-headline-lg text-headline-lg font-bold text-deep-purple">JobPath</h1>
+</div>
+<div class="hidden md:flex items-center gap-8">
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors" href="#">Jobs</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors" href="#">Talent</a>
+<a class="font-body-md text-body-md text-primary font-bold border-b-2 border-primary" href="#">Checkout</a>
+<div class="w-10 h-10 rounded-full bg-surface-container overflow-hidden border border-glass-border">
+<img alt="User" class="w-full h-full object-cover" data-alt="A clean professional headshot of a smiling young professional in a business casual outfit, set against a soft, out-of-focus modern office background. The lighting is bright and warm, reflecting a high-quality light-mode aesthetic with a premium, polished feel." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBaVXiDVNYyj4Nhkcd_JcGGmxnV1-oW1cHjcmj4JiVrJsChJbEFyRSLRG1NB6V44OHFqj4n05gOsgDI8wRbB2g0Ayy6PDOO9fZsoCeyQiiQOs1x-hRMXi4LpDEJ8V5_TrdvlFf1megp4Yr0YDZoRqPzp-grt8cE-r8Zm3vhTEbZ96LT7LIp567W6W9OSLU2fH3UQ0bWPlI2v7Tt3akY83Pr-2UHxprFC6EOcSB5HtrIiL2L-HaRvkAgsm7h6B-8HxwWdp4wARQXWRw_"/>
+</div>
+</div>
+</div>
+</header>
+<main class="max-w-max-width mx-auto px-desktop-margin py-12 flex flex-col md:flex-row gap-desktop-gutter">
+<!-- Left Column: Invoice Summary (45%) -->
+<section class="w-full md:w-[45%] flex flex-col gap-8">
+<div class="glass-card rounded-card p-8 transition-transform duration-500 hover:scale-[1.01]">
+<div class="flex items-center justify-between mb-8">
+<h2 class="font-headline-lg text-headline-lg font-bold text-deep-purple">Order Summary</h2>
+<span class="material-symbols-outlined text-deep-purple bg-surface-container p-2 rounded-xl">receipt_long</span>
+</div>
+<div class="space-y-6" id="orderItemsContainer">
+<!-- Dynamic order items will be loaded here via JS -->
+</div>
+</div>
+<!-- Trust Badge -->
+<div class="glass-card rounded-card p-6 flex items-center gap-4 border-l-4 border-primary">
+<div class="relative w-16 h-16 flex-shrink-0">
+<img alt="Secure" class="w-full h-full object-contain floating-lock" data-alt="A stylized 3D rendered glass padlock icon glowing with a soft purple and blue light, encased in a transparent crystal dome. The aesthetic is extremely clean and high-fidelity, following a premium technology and security visual language. Soft ambient lighting creates a futuristic, trustworthy atmosphere." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBBp5NqYbm1k6-AgRrJ3_fMFNU2r2-eHAWS-DI8fQqZlEPxgZNjmllkiRSfpjxdyRbUL0MoBWv5u5e8ZQCSbIY7zVwde2u40gQGpCjgUnuoA_ASP3sCCT7rjcMZ7kp9d-LkJI_oEizPkkXaSQ8MxfYHrbVN1hoT8HNXC7FCqFbXpCijnbu9pWrH_C7LtxHobuoFIyjC-aqCGt2f0xd5bZ94W_4iUwy4tKIXJ0Ac68VujUv2rllpwm6ZDVGPLfLWFvRB0FzsMNSM1-5-"/>
+</div>
+<div>
+<p class="font-bold text-deep-purple text-sm">Secure Checkout Guaranteed</p>
+<p class="text-xs text-on-surface-variant">Your information is encrypted using industry-standard 256-bit SSL protocols.</p>
+</div>
+</div>
+</section>
+<!-- Right Column: Checkout Form (55%) -->
+<section class="w-full md:w-[55%]">
+<div class="glass-card rounded-card p-8 h-full flex flex-col gap-10">
+
+<!-- Payment Method Selector Tabs -->
+<div>
+  <p class="font-label-caps text-label-caps text-on-surface-variant mb-4 uppercase text-center">Select Payment Method</p>
+  <div class="grid grid-cols-2 gap-4" id="paymentMethodSelector">
+    <!-- EasyPaisa Tab -->
+    <button type="button" onclick="selectPaymentMethod('easypaisa')" id="tab-easypaisa" class="flex flex-col items-center justify-center gap-2 py-4 rounded-2xl border-2 border-[#00A859] bg-[#00A859]/10 text-[#00A859] transition-all duration-300">
+      <div class="flex items-center gap-2">
+        <span class="w-3 h-3 rounded-full bg-[#00A859]"></span>
+        <span class="text-sm font-bold font-label-caps">EasyPaisa</span>
+      </div>
+      <span class="text-[10px] text-on-surface-variant/70">Mobile Wallet</span>
+    </button>
+    <!-- JazzCash Tab -->
+    <button type="button" onclick="selectPaymentMethod('jazzcash')" id="tab-jazzcash" class="flex flex-col items-center justify-center gap-2 py-4 rounded-2xl border border-glass-border bg-glass-thick text-on-surface-variant hover:border-[#FFC72C]/50 transition-all duration-300">
+      <div class="flex items-center gap-2">
+        <span class="w-3 h-3 rounded-full bg-[#FFC72C]"></span>
+        <span class="text-sm font-bold font-label-caps">JazzCash</span>
+      </div>
+      <span class="text-[10px] text-on-surface-variant/70">Mobile Wallet</span>
+    </button>
+  </div>
+</div>
+
+<!-- Payment Form -->
+<form class="space-y-6" id="checkoutForm">
+  <!-- Wallet Section -->
+  <div id="walletFormSection" class="space-y-6">
+    <div class="space-y-2">
+      <label class="font-label-caps text-label-caps text-on-surface-variant block ml-1" id="walletNumberLabel">MOBILE ACCOUNT NUMBER</label>
+      <div class="relative">
+        <input id="walletNumberInput" class="w-full pl-16 pr-6 py-4 rounded-2xl bg-glass-thick border border-glass-border input-focus text-on-background font-body-md font-bold tracking-wider" placeholder="03001234567" type="tel" maxlength="11" oninput="validateWalletNumber(this)"/>
+        <span class="absolute left-5 top-1/2 -translate-y-1/2 text-on-surface-variant font-bold text-sm">+92</span>
+      </div>
+      <p class="text-xs text-on-surface-variant/80 ml-1 leading-relaxed">
+        Enter your 11-digit registered account number. Use any demo number (e.g. <span class="font-semibold text-[#8731a3] cursor-pointer underline hover:opacity-85" onclick="fillDemoNumber('03001234567')">03001234567</span> or <span class="font-semibold text-[#8731a3] cursor-pointer underline hover:opacity-85" onclick="fillDemoNumber('03451234567')">03451234567</span>) to simulate a successful payment.
+      </p>
+    </div>
+  </div>
+
+  <!-- Pay Button -->
+  <button id="payButton" onclick="handlePaymentSubmit()" class="w-full mt-6 py-6 rounded-full bg-deep-purple text-white font-headline-lg-mobile text-headline-lg-mobile font-bold flex items-center justify-center gap-3 shadow-[0_8px_30px_rgb(71,26,112,0.3)] hover:shadow-[0_12px_40px_rgb(71,26,112,0.4)] hover:-translate-y-1 transition-all active:scale-95 duration-300" type="button">
+    <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">lock</span>
+    <span id="payButtonText">Pay via EasyPaisa</span>
+  </button>
+  
+  <p class="text-center text-xs text-on-surface-variant px-12">
+      By placing your order, you agree to JobPath's 
+      <a class="underline text-primary" href="#">Terms of Service</a> and 
+      <a class="underline text-primary" href="#">Privacy Policy</a>.
+  </p>
+</form>
+</div>
+</section>
+</main>
+
+<!-- Payment Simulation Modal -->
+<div id="paymentSimModal" class="fixed inset-0 z-[100] hidden items-center justify-center bg-black/60 backdrop-blur-md transition-opacity duration-300">
+  <div class="glass-card rounded-3xl p-8 max-w-md w-full mx-4 flex flex-col gap-6 text-center border border-white/60 shadow-2xl relative">
+    
+    <!-- Modal Header -->
+    <div class="flex flex-col items-center gap-3">
+      <div id="modalLogoBadge" class="w-16 h-16 rounded-2xl flex items-center justify-center text-white text-3xl font-bold shadow-lg animate-bounce">
+        <!-- Will dynamically display EP or JC badge -->
+      </div>
+      <h3 id="modalTitle" class="font-headline-lg text-headline-lg font-bold text-deep-purple">Wallet Authorization</h3>
+      <p id="modalSub" class="text-sm text-on-surface-variant"></p>
+    </div>
+
+    <!-- OTP/PIN Form -->
+    <div id="modalFormSection" class="space-y-4">
+      <div class="space-y-2">
+        <label class="font-label-caps text-label-caps text-on-surface-variant block text-left ml-1 text-center">ENTER 4-DIGIT WALLET PIN</label>
+        <div class="relative">
+          <input id="modalPinInput" class="w-full px-6 py-4 rounded-2xl bg-glass-thick border border-glass-border input-focus text-on-background text-center font-bold tracking-[0.5em] text-lg font-mono" placeholder="••••" type="password" maxlength="4"/>
+        </div>
+        <p class="text-xs text-on-surface-variant/70">
+          For demo simulation, enter any 4-digit PIN (e.g. <span class="font-bold">1234</span>).
+        </p>
+      </div>
+      
+      <!-- Actions -->
+      <div class="grid grid-cols-2 gap-4 pt-2">
+        <button type="button" onclick="closeSimulation()" class="py-4 rounded-full border border-outline-variant text-on-surface-variant hover:bg-black/5 active:scale-95 transition-all font-bold text-xs font-label-caps">
+          Cancel
+        </button>
+        <button type="button" onclick="confirmSimulationPayment()" class="py-4 rounded-full bg-deep-purple text-white hover:bg-opacity-90 active:scale-95 transition-all font-bold text-xs font-label-caps shadow-md flex items-center justify-center gap-2">
+          <span>Authorize</span>
+          <span class="material-symbols-outlined text-sm">chevron_right</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Processing State -->
+    <div id="modalLoadingSection" class="hidden py-8 flex flex-col items-center gap-4">
+      <div class="w-12 h-12 rounded-full border-4 border-primary border-t-transparent animate-spin"></div>
+      <p class="font-bold text-deep-purple">Processing transaction...</p>
+      <p class="text-xs text-on-surface-variant">Communicating securely with telecom provider network</p>
+    </div>
+
+    <!-- Success State -->
+    <div id="modalSuccessSection" class="hidden py-8 flex flex-col items-center gap-4 animate-fade-in">
+      <div class="w-16 h-16 rounded-full bg-tertiary/10 text-tertiary flex items-center justify-center shadow-lg border border-tertiary/20">
+        <span class="material-symbols-outlined text-4xl" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+      </div>
+      <p class="font-extrabold text-2xl text-tertiary">Payment Approved!</p>
+      <p class="text-sm text-on-surface-variant">Your receipt has been generated.</p>
+    </div>
+    
+  </div>
+</div>
+
+<script>
+        let currentMethod = 'easypaisa';
+
+        function selectPaymentMethod(method) {
+            currentMethod = method;
+            const tabEasypaisa = document.getElementById('tab-easypaisa');
+            const tabJazzcash = document.getElementById('tab-jazzcash');
+            
+            const inactiveClasses = ['border', 'border-glass-border', 'bg-glass-thick', 'text-on-surface-variant'];
+            
+            // Reset EasyPaisa
+            if (tabEasypaisa) {
+                tabEasypaisa.classList.remove('border-2', 'border-[#00A859]', 'bg-[#00A859]/10', 'text-[#00A859]');
+                tabEasypaisa.classList.add(...inactiveClasses);
+            }
+            // Reset JazzCash
+            if (tabJazzcash) {
+                tabJazzcash.classList.remove('border-2', 'border-[#FFC72C]', 'bg-[#FFC72C]/10', 'text-[#FF9F0A]');
+                tabJazzcash.classList.add(...inactiveClasses);
+            }
+            
+            // Activate target
+            const activeTab = document.getElementById('tab-' + method);
+            if (activeTab) {
+                activeTab.classList.remove(...inactiveClasses);
+                if (method === 'easypaisa') {
+                    activeTab.classList.add('border-2', 'border-[#00A859]', 'bg-[#00A859]/10', 'text-[#00A859]');
+                } else {
+                    activeTab.classList.add('border-2', 'border-[#FFC72C]', 'bg-[#FFC72C]/10', 'text-[#FF9F0A]');
+                }
+            }
+            
+            // Update button text
+            document.getElementById('payButtonText').textContent = method === 'easypaisa' ? "Pay via EasyPaisa" : "Pay via JazzCash";
+        }
+
+        function fillDemoNumber(num) {
+            const input = document.getElementById('walletNumberInput');
+            if (input) {
+                input.value = num;
+                validateWalletNumber(input);
+            }
+        }
+
+        function validateWalletNumber(input) {
+            input.value = input.value.replace(/\D/g, '');
+        }
+
+        function handlePaymentSubmit() {
+            // Mobile wallet payment
+            const number = document.getElementById('walletNumberInput').value.trim();
+            if (number.length < 11) {
+                alert("Please enter a valid 11-digit mobile number.");
+                return;
+            }
+            
+            openSimulation(currentMethod, number);
+        }
+
+        function openSimulation(method, number) {
+            const modal = document.getElementById('paymentSimModal');
+            const badge = document.getElementById('modalLogoBadge');
+            const title = document.getElementById('modalTitle');
+            const sub = document.getElementById('modalSub');
+            
+            // Set up badge logo & color theme
+            if (method === 'easypaisa') {
+                badge.className = "w-16 h-16 rounded-2xl flex items-center justify-center text-white text-3xl font-extrabold shadow-lg animate-bounce bg-[#00A859]";
+                badge.textContent = "EP";
+                title.textContent = "EasyPaisa Authorization";
+            } else {
+                badge.className = "w-16 h-16 rounded-2xl flex items-center justify-center text-black text-3xl font-extrabold shadow-lg animate-bounce bg-[#FFC72C]";
+                badge.textContent = "JC";
+                title.textContent = "JazzCash Authorization";
+            }
+            
+            sub.textContent = `A simulated payment request prompt has been sent to +92 (${number.slice(0,4)})-${number.slice(4)}. Enter your PIN to approve.`;
+            
+            // Reset modal sections
+            document.getElementById('modalFormSection').classList.remove('hidden');
+            document.getElementById('modalLoadingSection').classList.add('hidden');
+            document.getElementById('modalSuccessSection').classList.add('hidden');
+            document.getElementById('modalPinInput').value = '';
+            
+            // Show Modal
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closeSimulation() {
+            const modal = document.getElementById('paymentSimModal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        function confirmSimulationPayment() {
+            const pin = document.getElementById('modalPinInput').value.trim();
+            if (pin.length < 4) {
+                alert("Please enter your 4-digit security PIN.");
+                return;
+            }
+            
+            // Transition to loading
+            document.getElementById('modalFormSection').classList.add('hidden');
+            document.getElementById('modalLoadingSection').classList.remove('hidden');
+            
+            setTimeout(() => {
+                // Transition to success
+                document.getElementById('modalLoadingSection').classList.add('hidden');
+                document.getElementById('modalSuccessSection').classList.remove('hidden');
+                
+                setTimeout(() => {
+                    closeSimulation();
+                    if (window.parent && window.parent.App && typeof window.parent.App.showToast === 'function') {
+                        window.parent.App.showToast(`Payment successful via ${currentMethod === 'easypaisa' ? 'EasyPaisa' : 'JazzCash'}!`, "success");
+                    }
+                    if (window.parent && window.parent.App) {
+                        window.parent.App.navigate('student-dash');
+                    }
+                }, 1500);
+                
+            }, 1500);
+        }
+
+        // Simple micro-interaction for button press
+        document.querySelectorAll('button').forEach(btn => {
+            btn.addEventListener('mousedown', () => {
+                btn.style.transform = 'scale(0.96)';
+            });
+            btn.addEventListener('mouseup', () => {
+                btn.style.transform = '';
+            });
+        });
+
+        // Form field focus highlights
+        document.querySelectorAll('input').forEach(input => {
+            input.addEventListener('focus', () => {
+                if (input.parentElement && input.parentElement.parentElement) {
+                    input.parentElement.parentElement.classList.add('scale-[1.01]');
+                    input.parentElement.parentElement.style.transition = 'all 0.3s ease';
+                }
+            });
+            input.addEventListener('blur', () => {
+                if (input.parentElement && input.parentElement.parentElement) {
+                    input.parentElement.parentElement.classList.remove('scale-[1.01]');
+                }
+            });
+        });
+
+        // Render order summary from localStorage or fallback defaults in PKR
+        function renderOrderSummary() {
+            let course = { name: "Advanced UI/UX Design Certification", price: "Rs. 199.00" };
+            const stored = localStorage.getItem('selectedCourse');
+            if (stored) {
+                try {
+                    course = JSON.parse(stored);
+                } catch(e) {}
+            }
+            
+            // Clean price value
+            const usdPrice = parseFloat(course.price.replace(/[^0-9.]/g, '')) || 199.00;
+            const pkrRate = 280;
+            const itemPricePKR = Math.round(usdPrice * pkrRate);
+            const addonPricePKR = Math.round(15 * pkrRate); // live mentor addon (~Rs. 4200)
+            
+            const subtotal = itemPricePKR + addonPricePKR;
+            const taxes = Math.round(subtotal * 0.05);
+            const discount = Math.round(subtotal * 0.10);
+            const total = subtotal + taxes - discount;
+            
+            const container = document.getElementById('orderItemsContainer');
+            if (container) {
+                container.innerHTML = `
+                    <!-- Course Item -->
+                    <div class="flex justify-between items-start group">
+                        <div class="flex gap-4">
+                            <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-all duration-300">
+                                <span class="material-symbols-outlined">menu_book</span>
+                            </div>
+                            <div>
+                                <p class="font-body-md text-body-md font-bold text-deep-purple">${course.name}</p>
+                                <p class="text-sm text-on-surface-variant">Full Course Curriculum & Materials</p>
+                            </div>
+                        </div>
+                        <p class="font-body-md text-body-md font-bold text-deep-purple">Rs. ${itemPricePKR.toLocaleString()}</p>
+                    </div>
+                    
+                    <!-- Addon Item -->
+                    <div class="flex justify-between items-start group">
+                        <div class="flex gap-4">
+                            <div class="w-12 h-12 rounded-xl bg-secondary/10 flex items-center justify-center text-secondary group-hover:bg-secondary group-hover:text-white transition-all duration-300">
+                                <span class="material-symbols-outlined">forum</span>
+                            </div>
+                            <div>
+                                <p class="font-body-md text-body-md font-bold text-deep-purple">Interactive Portal Access</p>
+                                <p class="text-sm text-on-surface-variant">Live mentor Q&A & community channels</p>
+                            </div>
+                        </div>
+                        <p class="font-body-md text-body-md font-bold text-deep-purple">Rs. ${addonPricePKR.toLocaleString()}</p>
+                    </div>
+                    
+                    <hr class="border-glass-border"/>
+                    
+                    <!-- Price Breakdown -->
+                    <div class="space-y-3">
+                        <div class="flex justify-between font-body-md text-body-md text-on-surface-variant">
+                            <span>Subtotal</span>
+                            <span>Rs. ${subtotal.toLocaleString()}</span>
+                        </div>
+                        <div class="flex justify-between font-body-md text-body-md text-on-surface-variant">
+                            <span>Taxes (5%)</span>
+                            <span>Rs. ${taxes.toLocaleString()}</span>
+                        </div>
+                        <div class="flex justify-between font-body-md text-body-md text-tertiary font-semibold bg-tertiary/5 p-2 rounded-lg border border-tertiary/10">
+                            <span class="flex items-center gap-2"><span class="material-symbols-outlined text-[18px]">sell</span> Discount (10%)</span>
+                            <span>-Rs. ${discount.toLocaleString()}</span>
+                        </div>
+                    </div>
+                    
+                    <div class="pt-6 border-t-2 border-primary/20 flex justify-between items-end">
+                        <div>
+                            <p class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-widest mb-1">Total Amount</p>
+                            <h3 class="font-headline-lg text-headline-lg font-extrabold text-deep-purple">Rs. ${total.toLocaleString()}</h3>
+                        </div>
+                        <div class="pb-1">
+                            <span class="text-xs text-on-surface-variant bg-surface-container px-2 py-1 rounded">PKR</span>
+                        </div>
+                    </div>
+                `;
+            }
+        }
+        
+        window.addEventListener('DOMContentLoaded', renderOrderSummary);
+    </script>
+</body></html>

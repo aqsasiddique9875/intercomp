@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Lumina Elite | Learning Analytics</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "error": "#ba1a1a",
+                    "outline": "#817381",
+                    "on-tertiary-container": "#8be590",
+                    "tertiary-fixed-dim": "#81da86",
+                    "surface-container-highest": "#dbe3f6",
+                    "glass-thick": "rgba(255, 255, 255, 0.8)",
+                    "on-error": "#ffffff",
+                    "outline-variant": "#d2c1d2",
+                    "tertiary-fixed": "#9df7a0",
+                    "on-surface": "#141c29",
+                    "orange": "#FF9F0A",
+                    "on-secondary-fixed": "#001c39",
+                    "secondary-fixed": "#d3e3ff",
+                    "on-secondary-container": "#003868",
+                    "on-primary-fixed": "#330044",
+                    "surface-container-low": "#f0f3ff",
+                    "primary": "#6c1089",
+                    "primary-fixed-dim": "#f0b0ff",
+                    "tertiary-container": "#006823",
+                    "on-primary-container": "#f4beff",
+                    "on-tertiary": "#ffffff",
+                    "error-container": "#ffdad6",
+                    "gold": "#FFD60A",
+                    "secondary-fixed-dim": "#a3c9ff",
+                    "on-secondary-fixed-variant": "#004883",
+                    "on-surface-variant": "#4f4350",
+                    "glass-fill": "rgba(255, 255, 255, 0.35)",
+                    "inverse-surface": "#29313f",
+                    "surface-container-high": "#e0e8fb",
+                    "on-tertiary-fixed-variant": "#00531a",
+                    "surface-bright": "#f9f9ff",
+                    "card-gradient": "linear-gradient(135deg, #4D9EFA 0%, #BF7DF5 100%)",
+                    "on-error-container": "#93000a",
+                    "on-primary": "#ffffff",
+                    "tertiary": "#004d18",
+                    "surface": "#f9f9ff",
+                    "error-bright": "#FF453A",
+                    "primary-fixed": "#fbd7ff",
+                    "surface-dim": "#d2daed",
+                    "on-background": "#141c29",
+                    "on-secondary": "#ffffff",
+                    "surface-container": "#e7eeff",
+                    "on-tertiary-fixed": "#002106",
+                    "secondary": "#0060ab",
+                    "inverse-on-surface": "#ecf1ff",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-tint": "#8d37a9",
+                    "inverse-primary": "#f0b0ff",
+                    "secondary-container": "#54a3ff",
+                    "primary-container": "#8731a3",
+                    "glass-border": "rgba(255, 255, 255, 0.6)",
+                    "on-primary-fixed-variant": "#72198f",
+                    "background": "#f9f9ff",
+                    "surface-variant": "#dbe3f6",
+                    "deep-purple": "#471A70"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "2xl": "1rem",
+                    "3xl": "1.5rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "mobile-margin": "20px",
+                    "desktop-margin": "64px",
+                    "max-width": "1280px",
+                    "base": "8px",
+                    "mobile-gutter": "16px",
+                    "desktop-gutter": "24px"
+            },
+            "fontFamily": {
+                    "label-caps-mobile": ["Inter"],
+                    "headline-lg-mobile": ["Inter"],
+                    "body-md": ["Inter"],
+                    "label-caps": ["Inter"],
+                    "body-md-mobile": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "display-xl": ["Inter"],
+                    "display-xl-mobile": ["Inter"]
+            },
+            "fontSize": {
+                    "label-caps-mobile": ["12px", {"lineHeight": "1.0", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                    "label-caps": ["13px", {"lineHeight": "1.0", "letterSpacing": "0.03em", "fontWeight": "600"}],
+                    "body-md-mobile": ["15px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                    "headline-lg": ["34px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                    "display-xl": ["56px", {"lineHeight": "1.1", "letterSpacing": "-0.03em", "fontWeight": "700"}],
+                    "display-xl-mobile": ["34px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "800"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background: radial-gradient(circle at top left, #f9f9ff 0%, #e7eeff 50%, #fbd7ff 100%);
+            min-height: 100vh;
+            color: #471A70;
+        }
+
+        .glass-thick-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(28px);
+            -webkit-backdrop-filter: blur(28px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 8px 32px rgba(71, 26, 112, 0.1);
+        }
+
+        .glass-fill-card {
+            background: rgba(255, 255, 255, 0.35);
+            backdrop-filter: blur(28px);
+            -webkit-backdrop-filter: blur(28px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+        }
+
+        .liquid-progress {
+            background: linear-gradient(90deg, #4D9EFA, #BF7DF5);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .liquid-progress::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 200%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            animation: wave 3s infinite linear;
+        }
+
+        @keyframes wave {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(50%); }
+        }
+
+        .chart-bar {
+            transition: height 1s ease-out;
+        }
+
+        .skill-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 8px;
+        }
+    </style>
+</head>
+<body class="p-4 md:p-8 font-body-md text-body-md overflow-x-hidden">
+<main class="max-w-max-width mx-auto space-y-8">
+<!-- 1. Glassmorphic Header -->
+<header class="glass-thick-card p-8 rounded-3xl flex flex-col md:flex-row md:items-center justify-between gap-6 transition-all duration-300">
+<div>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-deep-purple mb-2">
+                    My Progress &amp; Learning Analytics
+                </h1>
+<p class="text-on-surface-variant font-medium">Lumina Elite Portal — Academic Year 2024</p>
+</div>
+<div class="flex items-center gap-4">
+<button class="bg-card-gradient text-white font-label-caps px-6 py-3 rounded-2xl shadow-lg hover:scale-105 transition-transform active:scale-95 flex items-center gap-2">
+<span class="material-symbols-outlined text-[20px]">download</span>
+                    EXPORT REPORT
+                </button>
+</div>
+</header>
+<!-- 2. KPI Grid -->
+<section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+<!-- Active Course Progress -->
+<div class="glass-thick-card p-6 rounded-3xl flex flex-col items-center justify-center text-center group hover:shadow-2xl transition-all">
+<div class="relative w-24 h-24 mb-4">
+<svg class="w-full h-full transform -rotate-90">
+<circle cx="48" cy="48" fill="transparent" r="40" stroke="rgba(0,0,0,0.05)" stroke-width="8"></circle>
+<circle class="transition-all duration-1000 ease-in-out" cx="48" cy="48" fill="transparent" r="40" stroke="url(#grad1)" stroke-dasharray="251" stroke-dashoffset="70" stroke-linecap="round" stroke-width="8"></circle>
+<defs>
+<lineargradient id="grad1" x1="0%" x2="100%" y1="0%" y2="0%">
+<stop offset="0%" style="stop-color:#4D9EFA;stop-opacity:1"></stop>
+<stop offset="100%" style="stop-color:#BF7DF5;stop-opacity:1"></stop>
+</lineargradient>
+</defs>
+</svg>
+<span class="absolute inset-0 flex items-center justify-center font-bold text-xl">72%</span>
+</div>
+<h3 class="font-label-caps text-on-surface-variant opacity-70 uppercase tracking-widest mb-1">Active Course Progress</h3>
+<p class="text-deep-purple font-bold text-lg">System Design II</p>
+</div>
+<!-- Average Assignment Score -->
+<div class="glass-thick-card p-6 rounded-3xl flex flex-col justify-between group hover:scale-[1.02] transition-all">
+<div class="flex justify-between items-start">
+<span class="material-symbols-outlined text-secondary-container bg-secondary-fixed p-3 rounded-2xl" style="font-variation-settings: 'FILL' 1;">analytics</span>
+<span class="text-tertiary font-bold">+2.4%</span>
+</div>
+<div>
+<h3 class="font-label-caps text-on-surface-variant opacity-70 uppercase tracking-widest mt-4">Average Score</h3>
+<p class="text-deep-purple font-display-xl-mobile md:text-display-xl font-extrabold">94<span class="text-2xl font-semibold opacity-50">%</span></p>
+</div>
+</div>
+<!-- Weekly Test Streak -->
+<div class="glass-thick-card p-6 rounded-3xl flex flex-col justify-between group hover:scale-[1.02] transition-all">
+<div class="flex justify-between items-start">
+<span class="material-symbols-outlined text-orange bg-orange/10 p-3 rounded-2xl" style="font-variation-settings: 'FILL' 1;">local_fire_department</span>
+<span class="text-orange font-bold">Hot!</span>
+</div>
+<div>
+<h3 class="font-label-caps text-on-surface-variant opacity-70 uppercase tracking-widest mt-4">Weekly Test Streak</h3>
+<p class="text-deep-purple font-display-xl-mobile md:text-display-xl font-extrabold">12 <span class="text-xl font-semibold opacity-50 uppercase">Days</span></p>
+</div>
+</div>
+<!-- Global Leaderboard Rank -->
+<div class="glass-thick-card p-6 rounded-3xl flex flex-col justify-between group hover:scale-[1.02] transition-all">
+<div class="flex justify-between items-start">
+<span class="material-symbols-outlined text-gold bg-gold/10 p-3 rounded-2xl" style="font-variation-settings: 'FILL' 1;">stars</span>
+<span class="text-primary font-bold">Top 1%</span>
+</div>
+<div>
+<h3 class="font-label-caps text-on-surface-variant opacity-70 uppercase tracking-widest mt-4">Global Rank</h3>
+<p class="text-deep-purple font-display-xl-mobile md:text-display-xl font-extrabold">#12</p>
+</div>
+</div>
+</section>
+<!-- 3. Skill Growth Visualization -->
+<section class="glass-thick-card p-8 rounded-3xl overflow-hidden relative">
+<div class="flex flex-col md:flex-row md:items-center justify-between mb-8 gap-4">
+<div>
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-deep-purple">Skill Proficiency Over Time</h2>
+<p class="text-on-surface-variant">Comparative growth analysis across core specializations</p>
+</div>
+<div class="flex flex-wrap gap-4">
+<div class="flex items-center"><span class="skill-dot bg-[#4D9EFA]"></span> <span class="text-sm font-semibold">Frontend</span></div>
+<div class="flex items-center"><span class="skill-dot bg-[#BF7DF5]"></span> <span class="text-sm font-semibold">Data Structures</span></div>
+<div class="flex items-center"><span class="skill-dot bg-[#8731a3]"></span> <span class="text-sm font-semibold">System Design</span></div>
+<div class="flex items-center"><span class="skill-dot bg-secondary-container"></span> <span class="text-sm font-semibold">UX Research</span></div>
+</div>
+</div>
+<!-- Mock Bar Chart -->
+<div class="h-80 w-full flex items-end justify-between gap-2 px-2 border-b border-glass-border">
+<!-- Group 1 -->
+<div class="flex-1 flex items-end justify-center gap-1 group">
+<div class="chart-bar w-3 bg-[#4D9EFA] rounded-t-lg" style="height: 60%"></div>
+<div class="chart-bar w-3 bg-[#BF7DF5] rounded-t-lg" style="height: 40%"></div>
+<div class="chart-bar w-3 bg-[#8731a3] rounded-t-lg" style="height: 75%"></div>
+<div class="chart-bar w-3 bg-secondary-container rounded-t-lg" style="height: 50%"></div>
+</div>
+<!-- Group 2 -->
+<div class="flex-1 flex items-end justify-center gap-1 group">
+<div class="chart-bar w-3 bg-[#4D9EFA] rounded-t-lg" style="height: 65%"></div>
+<div class="chart-bar w-3 bg-[#BF7DF5] rounded-t-lg" style="height: 55%"></div>
+<div class="chart-bar w-3 bg-[#8731a3] rounded-t-lg" style="height: 80%"></div>
+<div class="chart-bar w-3 bg-secondary-container rounded-t-lg" style="height: 60%"></div>
+</div>
+<!-- Group 3 (Active) -->
+<div class="flex-1 flex items-end justify-center gap-1 group">
+<div class="chart-bar w-3 bg-[#4D9EFA] rounded-t-lg" style="height: 70%"></div>
+<div class="chart-bar w-3 bg-[#BF7DF5] rounded-t-lg" style="height: 68%"></div>
+<div class="chart-bar w-3 bg-[#8731a3] rounded-t-lg" style="height: 90%"></div>
+<div class="chart-bar w-3 bg-secondary-container rounded-t-lg" style="height: 75%"></div>
+</div>
+<!-- Group 4 -->
+<div class="flex-1 flex items-end justify-center gap-1 group">
+<div class="chart-bar w-3 bg-[#4D9EFA] rounded-t-lg" style="height: 85%"></div>
+<div class="chart-bar w-3 bg-[#BF7DF5] rounded-t-lg" style="height: 72%"></div>
+<div class="chart-bar w-3 bg-[#8731a3] rounded-t-lg" style="height: 94%"></div>
+<div class="chart-bar w-3 bg-secondary-container rounded-t-lg" style="height: 82%"></div>
+</div>
+</div>
+<div class="flex justify-between mt-4 font-label-caps text-on-surface-variant px-4">
+<span>Month 1</span>
+<span>Month 2</span>
+<span>Month 3</span>
+<span>Month 4 (Current)</span>
+</div>
+</section>
+<!-- 4. Recent Achievements Table -->
+<section class="glass-thick-card p-8 rounded-3xl space-y-6">
+<div class="flex items-center justify-between">
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-deep-purple">Recent Achievements</h2>
+<button class="text-primary font-bold hover:underline">View All</button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead>
+<tr class="border-b border-glass-border">
+<th class="py-4 font-label-caps text-on-surface-variant opacity-60">ASSESSMENT NAME</th>
+<th class="py-4 font-label-caps text-on-surface-variant opacity-60">CATEGORY</th>
+<th class="py-4 font-label-caps text-on-surface-variant opacity-60">DATE</th>
+<th class="py-4 font-label-caps text-on-surface-variant opacity-60">SCORE</th>
+<th class="py-4 font-label-caps text-on-surface-variant opacity-60">STATUS</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-glass-border/30">
+<tr class="hover:bg-glass-fill transition-colors group">
+<td class="py-5 font-bold text-deep-purple">Advanced UI/UX Final</td>
+<td class="py-5">Design Systems</td>
+<td class="py-5 text-on-surface-variant">Oct 24, 2023</td>
+<td class="py-5">
+<span class="bg-tertiary-fixed text-on-tertiary-fixed font-bold px-3 py-1 rounded-full">98%</span>
+</td>
+<td class="py-5">
+<div class="flex items-center gap-1 text-secondary font-bold">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">verified</span>
+                                    Verified
+                                </div>
+</td>
+</tr>
+<tr class="hover:bg-glass-fill transition-colors group">
+<td class="py-5 font-bold text-deep-purple">Data Structures Quiz</td>
+<td class="py-5">Computer Science</td>
+<td class="py-5 text-on-surface-variant">Oct 20, 2023</td>
+<td class="py-5">
+<span class="bg-secondary-fixed text-on-secondary-fixed font-bold px-3 py-1 rounded-full">92%</span>
+</td>
+<td class="py-5">
+<div class="flex items-center gap-1 text-secondary font-bold">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">verified</span>
+                                    Verified
+                                </div>
+</td>
+</tr>
+<tr class="hover:bg-glass-fill transition-colors group">
+<td class="py-5 font-bold text-deep-purple">System Architecture Project</td>
+<td class="py-5">Engineering</td>
+<td class="py-5 text-on-surface-variant">Oct 15, 2023</td>
+<td class="py-5">
+<span class="bg-primary-fixed text-on-primary-fixed-variant font-bold px-3 py-1 rounded-full">89%</span>
+</td>
+<td class="py-5">
+<div class="flex items-center gap-1 text-secondary font-bold">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">verified</span>
+                                    Verified
+                                </div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<!-- 5. Contextual Footer -->
+<footer class="flex items-center justify-center gap-4 py-8">
+<div class="h-px bg-glass-border flex-grow"></div>
+<div class="flex items-center gap-2 text-on-surface-variant font-label-caps text-label-caps opacity-60">
+<span class="material-symbols-outlined text-[16px]">sync</span>
+                Data updated in real-time. Verified by EduPulse Integrity AI.
+            </div>
+<div class="h-px bg-glass-border flex-grow"></div>
+</footer>
+</main>
+<!-- Micro-interaction Scripts -->
+<script>
+        // Smoothly animate the bars on load
+        document.addEventListener('DOMContentLoaded', () => {
+            const bars = document.querySelectorAll('.chart-bar');
+            bars.forEach(bar => {
+                const finalHeight = bar.style.height;
+                bar.style.height = '0%';
+                setTimeout(() => {
+                    bar.style.height = finalHeight;
+                }, 200);
+            });
+        });
+
+        // Hover effect for KPI cards to shift background slightly
+        const cards = document.querySelectorAll('.glass-thick-card');
+        cards.forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                card.style.setProperty('--mouse-x', `${x}px`);
+                card.style.setProperty('--mouse-y', `${y}px`);
+            });
+        });
+    </script>
+</body></html>

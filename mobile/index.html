@@ -1,0 +1,1147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Intercomp Mobile - iOS Showcase Simulator</title>
+  <!-- Google Fonts: Inter and Outfit -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg-primary: #f9f9ff;
+      --primary: #8731a3;
+      --primary-glow: rgba(135, 49, 163, 0.15);
+      --on-background: #471A70;
+      --outline: #817381;
+      --glass-fill: rgba(255, 255, 255, 0.35);
+      --glass-border: rgba(255, 255, 255, 0.6);
+      --card-gradient: linear-gradient(135deg, #4D9EFA 0%, #BF7DF5 100%);
+      
+      /* Simulator tokens */
+      --bezel-color: #1c1c1e;
+      --bezel-border: #3a3a3c;
+      --phone-width: 390px;
+      --phone-height: 844px;
+      --screen-radius: 40px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      font-family: 'Inter', -apple-system, sans-serif;
+      background-color: #DCE4F7;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Ambient animated background */
+    .ambient-background {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background: radial-gradient(circle at 10% 20%, rgba(220, 228, 247, 0.8) 0%, rgba(245, 240, 255, 0.9) 90%);
+      overflow: hidden;
+    }
+
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(100px);
+      opacity: 0.45;
+      mix-blend-mode: multiply;
+      animation: float 25s infinite ease-in-out;
+    }
+
+    .orb-1 {
+      width: 600px;
+      height: 600px;
+      background-color: #BF7DF5;
+      top: -10%;
+      left: -10%;
+      animation-delay: 0s;
+    }
+
+    .orb-2 {
+      width: 500px;
+      height: 500px;
+      background-color: #4D9EFA;
+      bottom: -10%;
+      right: -10%;
+      animation-delay: -5s;
+    }
+
+    .orb-3 {
+      width: 400px;
+      height: 400px;
+      background-color: #fbd7ff;
+      top: 50%;
+      left: 45%;
+      animation-delay: -10s;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      33% { transform: translate(30px, -50px) scale(1.1); }
+      66% { transform: translate(-20px, 20px) scale(0.95); }
+    }
+
+    /* Main Grid Layout for Showcase */
+    .showcase-container {
+      position: relative;
+      z-index: 10;
+      width: 100%;
+      max-width: 1200px;
+      height: 100vh;
+      max-height: 100vh;
+      display: grid;
+      grid-template-columns: 350px 1fr;
+      gap: 40px;
+      padding: 20px;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    /* Info & Control Sidebar */
+    .sidebar {
+      background: rgba(255, 255, 255, 0.45);
+      backdrop-filter: blur(28px);
+      -webkit-backdrop-filter: blur(28px);
+      border: 1px solid var(--glass-border);
+      border-radius: 32px;
+      padding: 30px;
+      box-shadow: 0 20px 50px 0 rgba(71, 26, 112, 0.1);
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      max-height: calc(100vh - 40px);
+      overflow-y: auto;
+    }
+
+    .brand-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: var(--card-gradient);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 8px 16px rgba(135, 49, 163, 0.2);
+    }
+
+    .brand-icon svg {
+      width: 24px;
+      height: 24px;
+      fill: white;
+    }
+
+    .brand-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 24px;
+      font-weight: 800;
+      color: var(--on-background);
+      letter-spacing: -0.5px;
+    }
+
+    .brand-badge {
+      background: rgba(135, 49, 163, 0.1);
+      color: var(--primary);
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 99px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      display: inline-block;
+      margin-top: 4px;
+    }
+
+    .app-description {
+      font-size: 13.5px;
+      line-height: 1.6;
+      color: #5c4e69;
+    }
+
+    .sidebar-section-title {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--outline);
+      margin-bottom: 8px;
+    }
+
+    /* Device control buttons */
+    .controls-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    .btn-control {
+      background: white;
+      border: 1px solid rgba(135, 49, 163, 0.15);
+      border-radius: 16px;
+      padding: 12px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--on-background);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: all 0.25s ease;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.02);
+    }
+
+    .btn-control:hover {
+      background: #fcfaff;
+      border-color: var(--primary);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 15px var(--primary-glow);
+    }
+
+    .btn-control:active {
+      transform: translateY(0);
+    }
+
+    .btn-control.active {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
+      box-shadow: 0 6px 15px rgba(135, 49, 163, 0.3);
+    }
+
+    /* Quick Login Panel */
+    .role-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .role-item {
+      background: white;
+      border: 1px solid rgba(255,255,255,0.8);
+      border-radius: 20px;
+      padding: 14px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+    }
+
+    .role-item:hover {
+      transform: translateX(4px);
+      border-color: var(--primary);
+      box-shadow: 0 8px 20px rgba(135, 49, 163, 0.1);
+    }
+
+    .role-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: #f3e8ff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+    }
+
+    .role-info {
+      flex: 1;
+    }
+
+    .role-name {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: var(--on-background);
+      margin-bottom: 2px;
+    }
+
+    .role-desc {
+      font-size: 11px;
+      color: var(--outline);
+    }
+
+    /* Simulator Center Canvas */
+    .simulator-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      height: 100%;
+      width: 100%;
+      overflow: visible;
+    }
+
+    /* Responsive phone simulator bezel */
+    .phone-bezel {
+      width: var(--phone-width);
+      height: var(--phone-height);
+      background-color: var(--bezel-color);
+      border: 12px solid var(--bezel-color);
+      border-color: #1a1a1c;
+      border-radius: 56px;
+      box-shadow: 
+        0 0 0 4px var(--bezel-border),
+        0 25px 60px rgba(71, 26, 112, 0.35),
+        inset 0 0 10px rgba(0, 0, 0, 0.8);
+      position: absolute;
+      transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.15);
+      z-index: 10;
+    }
+
+    /* Physical buttons */
+    .phone-btn {
+      position: absolute;
+      background-color: #1c1c1e;
+      border-radius: 3px;
+    }
+    
+    .phone-btn-power {
+      right: -16px;
+      top: 180px;
+      width: 4px;
+      height: 75px;
+      border-left: 2px solid #333;
+    }
+
+    .phone-btn-volup {
+      left: -16px;
+      top: 150px;
+      width: 4px;
+      height: 50px;
+      border-right: 2px solid #333;
+    }
+
+    .phone-btn-voldown {
+      left: -16px;
+      top: 215px;
+      width: 4px;
+      height: 50px;
+      border-right: 2px solid #333;
+    }
+
+    /* Simulator Screen Area */
+    .phone-screen {
+      width: 100%;
+      height: 100%;
+      border-radius: calc(var(--screen-radius) + 4px);
+      overflow: hidden;
+      position: relative;
+      background-color: #fff;
+    }
+
+    /* Simulated Status Bar */
+    .phone-status-bar {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 44px;
+      padding: 0 32px 0 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: #000;
+      font-size: 13.5px;
+      font-weight: 600;
+      letter-spacing: -0.2px;
+      z-index: 999;
+      pointer-events: none;
+      background-color: transparent;
+      transition: color 0.3s ease;
+    }
+
+    .status-bar-dark .phone-status-bar {
+      color: #fff;
+    }
+
+    .status-bar-icons {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .status-bar-icons svg {
+      width: 17px;
+      height: 17px;
+      fill: currentColor;
+    }
+
+    /* Dynamic Island Component */
+    .dynamic-island-container {
+      position: absolute;
+      top: 11px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 1000;
+      pointer-events: auto;
+    }
+
+    .dynamic-island {
+      width: 110px;
+      height: 30px;
+      background: #000;
+      border-radius: 99px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+      transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+      border: 0.5px solid rgba(255, 255, 255, 0.15);
+      cursor: pointer;
+    }
+
+    /* Small dot mode inside island */
+    .island-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #2563eb;
+      position: absolute;
+      right: 15px;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .island-dot.active {
+      opacity: 1;
+      animation: pulse-dot 1.5s infinite;
+    }
+
+    @keyframes pulse-dot {
+      0% { opacity: 0.4; }
+      50% { opacity: 1; }
+      100% { opacity: 0.4; }
+    }
+
+    /* Expanded notification state */
+    .dynamic-island.expanded {
+      width: 324px;
+      height: 72px;
+      border-radius: 26px;
+      padding: 12px 16px;
+      justify-content: flex-start;
+      gap: 12px;
+    }
+
+    .island-content {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease;
+    }
+
+    .dynamic-island.expanded .island-content {
+      opacity: 1;
+      pointer-events: auto;
+      transition-delay: 0.2s;
+    }
+
+    .island-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background: var(--card-gradient);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      color: white;
+    }
+
+    .island-text {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      text-align: left;
+      overflow: hidden;
+    }
+
+    .island-header {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #9ca3af;
+      margin-bottom: 2px;
+    }
+
+    .island-body {
+      font-size: 12px;
+      font-weight: 500;
+      color: #f3f4f6;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    /* Iframe Portal Frame */
+    iframe {
+      position: absolute;
+      top: 44px;
+      left: 0;
+      width: 100%;
+      height: calc(100% - 44px);
+      border: none;
+      display: block;
+      background-color: transparent;
+    }
+
+    /* Home indicator */
+    .phone-home-indicator {
+      position: absolute;
+      bottom: 8px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 140px;
+      height: 5px;
+      background-color: #000;
+      border-radius: 10px;
+      z-index: 999;
+      pointer-events: none;
+      transition: background-color 0.3s ease;
+    }
+
+    .status-bar-dark .phone-home-indicator {
+      background-color: #fff;
+    }
+
+    /* Loading Overlay */
+    .loading-overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: rgba(220, 228, 247, 0.65);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      z-index: 9998;
+      opacity: 1;
+      transition: opacity 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+      pointer-events: none;
+    }
+
+    .spinner {
+      width: 48px;
+      height: 48px;
+      border: 4.5px solid rgba(135, 49, 163, 0.1);
+      border-left-color: #8731a3;
+      border-radius: 50%;
+      animation: spin 0.85s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Touch ripple circle */
+    .touch-ripple {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(135, 49, 163, 0.25);
+      border: 1px solid rgba(135, 49, 163, 0.4);
+      transform: scale(0);
+      pointer-events: none;
+      animation: ripple 0.5s ease-out;
+      z-index: 10000;
+    }
+
+    @keyframes ripple {
+      to {
+        transform: scale(3.5);
+        opacity: 0;
+      }
+    }
+
+    /* Landscape Mode */
+    .phone-bezel.landscape {
+      width: var(--phone-height);
+      height: var(--phone-width);
+      border-radius: 56px;
+    }
+
+    .phone-bezel.landscape .phone-status-bar {
+      display: none;
+    }
+
+    .phone-bezel.landscape .dynamic-island-container {
+      display: none;
+    }
+
+    .phone-bezel.landscape .phone-home-indicator {
+      transform: translateY(-50%) rotate(90deg);
+      bottom: auto;
+      right: 8px;
+      left: auto;
+      width: 5px;
+      height: 140px;
+    }
+
+    /* Dark Mode Bezel */
+    .phone-bezel.dark-mode {
+      border-color: #0d0d0e;
+      box-shadow: 
+        0 0 0 4px #2c2c2e,
+        0 25px 60px rgba(71, 26, 112, 0.45),
+        inset 0 0 10px rgba(0, 0, 0, 0.9);
+    }
+
+    /* Native Responsive Scale: On screens smaller than 768px */
+    @media (max-width: 900px) {
+      .showcase-container {
+        grid-template-columns: 1fr;
+        justify-items: center;
+      }
+      .sidebar {
+        display: none; /* Hide dev sidebar on real mobile screen viewports */
+      }
+    }
+
+    @media (max-width: 768px) {
+      body, html {
+        background-color: #DCE4F7;
+      }
+      .showcase-container {
+        padding: 0;
+        margin: 0;
+        width: 100%;
+        height: 100%;
+      }
+      .simulator-wrapper {
+        width: 100vw;
+        height: 100vh;
+      }
+      .phone-bezel {
+        position: relative !important;
+        width: 100% !important;
+        height: 100% !important;
+        border: none !important;
+        border-radius: 0 !important;
+        box-shadow: none !important;
+        background-color: transparent !important;
+      }
+      .phone-btn, .phone-status-bar, .dynamic-island-container, .phone-home-indicator {
+        display: none !important;
+      }
+      .phone-screen {
+        border-radius: 0 !important;
+      }
+      iframe {
+        top: 0 !important;
+        height: 100% !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Ambient float animation backdrops -->
+  <div class="ambient-background">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+  </div>
+
+  <div class="showcase-container">
+    
+    <!-- Developer Hub Sidebar -->
+    <div class="sidebar">
+      <div class="brand-header">
+        <div class="brand-icon">
+          <svg viewBox="0 0 24 24">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H7c0-2.76 2.24-5 5-5s5 2.24 5 5c0 1.04-.42 1.99-1.07 2.25z"/>
+          </svg>
+        </div>
+        <div>
+          <span class="brand-title">Intercomp</span>
+          <div class="brand-badge">iOS Simulator</div>
+        </div>
+      </div>
+      
+      <p class="app-description">
+        Experience Intercomp's Liquid Glass interface in a mock iPhone environment. Toggle orientations, switch roles dynamically, or inspect anti-cheat events.
+      </p>
+
+      <div>
+        <h4 class="sidebar-section-title">Simulator Controls</h4>
+        <div class="controls-grid">
+          <button class="btn-control active" id="btn-portrait" onclick="setOrientation('portrait')">
+            <svg style="width:18px;height:18px;" viewBox="0 0 24 24"><path fill="currentColor" d="M17,19H7V5H17M17,1H7C5.89,1 5,1.89 5,3V21C5,22.1 5.9,23 7,23H17C18.1,23 19,22.1 19,21V3C19,1.89 18.1,1 17,1Z"/></svg>
+            Portrait
+          </button>
+          <button class="btn-control" id="btn-landscape" onclick="setOrientation('landscape')">
+            <svg style="width:18px;height:18px;" viewBox="0 0 24 24"><path fill="currentColor" d="M19,17V7H5V17H19M21,7V17C21,18.1 20.1,19 19,19H5C3.9,19 3,18.1 3,17V7C3,5.9 3.9,5 5,5H19C20.1,5 21,5.9 21,7Z"/></svg>
+            Landscape
+          </button>
+          <button class="btn-control" id="btn-light" onclick="toggleSimTheme('light')">
+            Light Bezel
+          </button>
+          <button class="btn-control active" id="btn-dark" onclick="toggleSimTheme('dark')">
+            Dark Bezel
+          </button>
+          <button class="btn-control" onclick="reloadSim()">
+            <svg style="width:16px;height:16px;fill:currentColor" viewBox="0 0 24 24"><path d="M17.65 6.35C16.2 4.9 14.21 4 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08c-.82 2.33-3.04 4-5.65 4-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"/></svg>
+            Reload Shell
+          </button>
+          <button class="btn-control" id="btn-toggle-sidebar" onclick="toggleSidebar()">
+            Full Screen
+          </button>
+        </div>
+      </div>
+
+      <div>
+        <h4 class="sidebar-section-title">Quick Test Sign-In</h4>
+        <div class="role-list">
+          <div class="role-item" onclick="quickLogin('student')">
+            <div class="role-icon">🎓</div>
+            <div class="role-info">
+              <div class="role-name">Student Account</div>
+              <div class="role-desc">studentone@gmail.com (123456)</div>
+            </div>
+          </div>
+          <div class="role-item" onclick="quickLogin('recruiter')">
+            <div class="role-icon">👔</div>
+            <div class="role-info">
+              <div class="role-name">Recruiter Account</div>
+              <div class="role-desc">companysecond@gmail.com (123456)</div>
+            </div>
+          </div>
+          <div class="role-item" onclick="quickLogin('admin')">
+            <div class="role-icon">⚙️</div>
+            <div class="role-info">
+              <div class="role-name">Admin Console</div>
+              <div class="role-desc">adminthird@gmail.com (123456)</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+
+    <!-- Simulator Shell Centerpiece -->
+    <div class="simulator-wrapper">
+      
+      <div class="phone-bezel dark-mode" id="deviceBezel">
+        <!-- Physical button mock overlays -->
+        <div class="phone-btn phone-btn-power"></div>
+        <div class="phone-btn phone-btn-volup"></div>
+        <div class="phone-btn phone-btn-voldown"></div>
+        
+        <div class="phone-screen" id="deviceScreen">
+          
+          <!-- iOS Status Bar -->
+          <div class="phone-status-bar" id="statusBar">
+            <span id="statusBarClock">09:41</span>
+            <div class="status-bar-icons">
+              <!-- Cellular Signal (Strength Bar SVG) -->
+              <svg viewBox="0 0 24 24"><path d="M2 22h20V2z" opacity="0.3"/><path d="M2 22h16V6z"/></svg>
+              <!-- WiFi Icon -->
+              <svg viewBox="0 0 24 24"><path d="M12 21l-12-12c4.42-4.42 11.58-4.42 16 0z" opacity="0.3"/><path d="M12 21l-8-8c2.95-2.95 7.72-2.95 10.67 0z"/></svg>
+              <!-- Battery Full Icon -->
+              <svg viewBox="0 0 24 24"><path d="M20 7H4c-1.1 0-2 .9-2 2v6c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V9c0-1.1-.9-2-2-2zm1 8c0 .55-.45 1-1 1H4c-.55 0-1-.45-1-1V9c0-.55.45-1 1-1h16c.55 0 1 .45 1 1v6zM23 11h-1v2h1v-2z"/></svg>
+            </div>
+          </div>
+
+          <!-- Dynamic Island Notch Wrapper -->
+          <div class="dynamic-island-container">
+            <div class="dynamic-island" id="island" onclick="shrinkIsland()">
+              <div class="island-dot" id="islandDot"></div>
+              <div class="island-content" id="islandContent">
+                <div class="island-avatar" id="islandAvatar">💬</div>
+                <div class="island-text">
+                  <span class="island-header" id="islandHeader">Notification</span>
+                  <span class="island-body" id="islandBody">Sample alert description text</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Loader Indicator -->
+          <div class="loading-overlay" id="loadingOverlay">
+            <div class="spinner"></div>
+          </div>
+
+          <!-- The Real Sub-Iframe App -->
+          <iframe id="portalFrame" src="about:blank"></iframe>
+
+          <!-- Home indicator bar -->
+          <div class="phone-home-indicator" id="homeIndicator"></div>
+
+        </div>
+      </div>
+      
+    </div>
+
+  </div>
+
+  <script src="app.js"></script>
+  
+  <script>
+    // Global alert override to redirect native alerts to Dynamic Island
+    window.alert = function(message) {
+      console.log("Parent window alert intercepted:", message);
+      const isWarning = message.toLowerCase().includes('error') || message.toLowerCase().includes('fail') || message.toLowerCase().includes('warning') || message.toLowerCase().includes('cheat');
+      triggerIslandNotification('✨', 'SYSTEM NOTIFICATION', message, isWarning ? 'warning' : 'info');
+    };
+
+    // System clock refresh
+    function updateClock() {
+      const clockEl = document.getElementById('statusBarClock');
+      const now = new Date();
+      let hours = now.getHours();
+      let minutes = now.getMinutes();
+      hours = hours < 10 ? '0' + hours : hours;
+      minutes = minutes < 10 ? '0' + minutes : minutes;
+      clockEl.textContent = `${hours}:${minutes}`;
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
+
+    // Orientation selector
+    function setOrientation(mode) {
+      const bezel = document.getElementById('deviceBezel');
+      const btnPort = document.getElementById('btn-portrait');
+      const btnLand = document.getElementById('btn-landscape');
+      
+      if (mode === 'landscape') {
+        bezel.classList.add('landscape');
+        btnLand.classList.add('active');
+        btnPort.classList.remove('active');
+        playSynthSound('click');
+      } else {
+        bezel.classList.remove('landscape');
+        btnPort.classList.add('active');
+        btnLand.classList.remove('active');
+        playSynthSound('click');
+      }
+      setTimeout(adjustScale, 100);
+    }
+
+    // Light/Dark simulated frame bezel themes
+    function toggleSimTheme(theme) {
+      const bezel = document.getElementById('deviceBezel');
+      const btnLight = document.getElementById('btn-light');
+      const btnDark = document.getElementById('btn-dark');
+      
+      if (theme === 'dark') {
+        bezel.classList.add('dark-mode');
+        btnDark.classList.add('active');
+        btnLight.classList.remove('active');
+      } else {
+        bezel.classList.remove('dark-mode');
+        btnLight.classList.add('active');
+        btnDark.classList.remove('active');
+      }
+      playSynthSound('click');
+    }
+
+    // Shell iframe refresh
+    function reloadSim() {
+      const iframe = document.getElementById('portalFrame');
+      const loader = document.getElementById('loadingOverlay');
+      loader.style.opacity = '1';
+      iframe.src = iframe.src;
+      playSynthSound('click');
+    }
+
+    // Programmatic Web Audio Synthesizer (No external asset dependency)
+    let audioCtx = null;
+    function playSynthSound(type) {
+      try {
+        if (!audioCtx) {
+          audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        }
+        if (audioCtx.state === 'suspended') {
+          audioCtx.resume();
+        }
+
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+
+        if (type === 'click') {
+          // Sharp iOS keyboard-like sound
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(800, audioCtx.currentTime);
+          osc.frequency.exponentialRampToValueAtTime(100, audioCtx.currentTime + 0.08);
+          gain.gain.setValueAtTime(0.2, audioCtx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.08);
+          osc.start();
+          osc.stop(audioCtx.currentTime + 0.08);
+        } else if (type === 'ding') {
+          // Success chime
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(523.25, audioCtx.currentTime); // C5
+          osc.frequency.setValueAtTime(659.25, audioCtx.currentTime + 0.08); // E5
+          osc.frequency.setValueAtTime(783.99, audioCtx.currentTime + 0.16); // G5
+          gain.gain.setValueAtTime(0.15, audioCtx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.45);
+          osc.start();
+          osc.stop(audioCtx.currentTime + 0.45);
+        } else if (type === 'warning') {
+          // Double buzz alert
+          osc.type = 'sawtooth';
+          osc.frequency.setValueAtTime(130, audioCtx.currentTime);
+          gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
+          gain.gain.setValueAtTime(0, audioCtx.currentTime + 0.12);
+          gain.gain.setValueAtTime(0.1, audioCtx.currentTime + 0.18);
+          gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.35);
+          osc.start();
+          osc.stop(audioCtx.currentTime + 0.35);
+        }
+      } catch (e) {
+        console.warn("Audio synthesis failed:", e);
+      }
+    }
+
+    // Dynamic Island notification triggers
+    let islandTimeout = null;
+    function triggerIslandNotification(avatar, header, body, type = 'info') {
+      const island = document.getElementById('island');
+      const dot = document.getElementById('islandDot');
+      const avatarEl = document.getElementById('islandAvatar');
+      const headerEl = document.getElementById('islandHeader');
+      const bodyEl = document.getElementById('islandBody');
+
+      // Populate text
+      avatarEl.textContent = avatar;
+      headerEl.textContent = header;
+      bodyEl.textContent = body;
+
+      // Expand island
+      island.classList.add('expanded');
+      
+      // Sound cue
+      if (type === 'warning') {
+        dot.style.background = '#dc2626'; // Red dot for warnings
+        dot.classList.add('active');
+        playSynthSound('warning');
+      } else {
+        dot.style.background = '#10b981'; // Green dot for OTP/chimes
+        dot.classList.add('active');
+        playSynthSound('ding');
+      }
+
+      // Clear previous timeout
+      if (islandTimeout) clearTimeout(islandTimeout);
+
+      // Auto collapse in 5s
+      islandTimeout = setTimeout(() => {
+        shrinkIsland();
+      }, 5000);
+    }
+
+    function shrinkIsland() {
+      const island = document.getElementById('island');
+      const dot = document.getElementById('islandDot');
+      island.classList.remove('expanded');
+      dot.classList.remove('active');
+    }
+
+    // Interactive pointer ripple clicks
+    const screenEl = document.getElementById('deviceScreen');
+    screenEl.addEventListener('mousedown', (e) => {
+      // Find coordinates inside the screen relative to its bounding rect
+      const rect = screenEl.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+
+      const ripple = document.createElement('div');
+      ripple.className = 'touch-ripple';
+      ripple.style.left = `${x - 15}px`;
+      ripple.style.top = `${y - 15}px`;
+      ripple.style.width = '30px';
+      ripple.style.height = '30px';
+      
+      screenEl.appendChild(ripple);
+      playSynthSound('click');
+
+      // Haptic feedback (physical pulse)
+      if (window.navigator.vibrate) {
+        window.navigator.vibrate(12);
+      }
+
+      // Remove after animation finishes
+      setTimeout(() => ripple.remove(), 500);
+    });
+
+    // Message interceptor from iframe view documents
+    window.addEventListener('message', (event) => {
+      const data = event.data;
+      if (!data) return;
+
+      if (data.type === 'OTP_RECEIVED') {
+        triggerIslandNotification('📨', 'SMS SECURITY CODE', `Your code is ${data.code}`, 'info');
+      } else if (data.type === 'PROCTOR_WARNING') {
+        triggerIslandNotification('⚠️', 'PROCTOR SECURITY ALERT', data.message, 'warning');
+      } else if (data.type === 'TEST_COMPLETED') {
+        triggerIslandNotification('🏆', 'TEST SUBMITTED', `Score updated: ${data.score}%`, 'info');
+      } else if (data.type === 'SHOW_TOAST') {
+        const isWarning = data.isWarning || data.message.toLowerCase().includes('error') || data.message.toLowerCase().includes('fail') || data.message.toLowerCase().includes('warning') || data.message.toLowerCase().includes('cheat');
+        triggerIslandNotification('✨', 'SYSTEM NOTIFICATION', data.message, isWarning ? 'warning' : 'info');
+      } else if (data.type === 'STATUS_BAR_COLOR') {
+        // Change status bar text coloring (light for dark screens, dark for light screens)
+        const statusBar = document.getElementById('deviceBezel');
+        if (data.color === 'white') {
+          statusBar.classList.add('status-bar-dark');
+        } else {
+          statusBar.classList.remove('status-bar-dark');
+        }
+      }
+    });
+
+    // Automated Quick Login Handler
+    function quickLogin(role) {
+      const iframe = document.getElementById('portalFrame');
+      const win = iframe.contentWindow;
+      if (!win) return;
+      
+      let userObj = {};
+      if (role === 'student') {
+        userObj = {
+          id: "student_one",
+          username: "studentone",
+          email: "studentone@gmail.com",
+          password: "123456",
+          role: "student",
+          skills: ["UI/UX Design", "Software Engineering", "React"],
+          rating: 5.0,
+          trustScore: 100
+        };
+        win.localStorage.setItem('currentUser', JSON.stringify(userObj));
+        win.localStorage.setItem('supabase_access_token', 'mock_token_student');
+        
+        triggerIslandNotification('🎓', 'DEVELOPER SIGN-IN', 'Logged in as studentone@gmail.com', 'info');
+        
+        // Let the router navigate
+        if (window.App) {
+          window.App.navigate('student-dash');
+        }
+      } else if (role === 'recruiter') {
+        userObj = {
+          id: "company_second",
+          username: "companysecond",
+          email: "companysecond@gmail.com",
+          password: "123456",
+          role: "recruiter",
+          companyId: "3",
+          companyName: "zylor.io"
+        };
+        win.localStorage.setItem('currentUser', JSON.stringify(userObj));
+        win.localStorage.setItem('supabase_access_token', 'mock_token_recruiter');
+        
+        triggerIslandNotification('👔', 'DEVELOPER SIGN-IN', 'Logged in as companysecond@gmail.com', 'info');
+        
+        if (window.App) {
+          window.App.navigate('company-dash');
+        }
+      } else if (role === 'admin') {
+        userObj = {
+          id: "admin_third",
+          username: "adminthird",
+          email: "adminthird@gmail.com",
+          password: "123456",
+          role: "admin"
+        };
+        win.localStorage.setItem('currentUser', JSON.stringify(userObj));
+        win.localStorage.setItem('supabase_access_token', 'mock_token_admin');
+        
+        triggerIslandNotification('⚙️', 'DEVELOPER REDIRECT', 'Launching Admin Console...', 'info');
+        
+        setTimeout(() => {
+          window.top.location.href = '/admin/index.html';
+        }, 1000);
+      }
+    }
+
+    // Auto-scaling logic to fit the phone bezel perfectly inside the viewport height on desktop
+    function adjustScale() {
+      const bezel = document.getElementById('deviceBezel');
+      const wrapper = bezel ? bezel.parentElement : null;
+      if (!bezel || !wrapper) return;
+      
+      // Only scale on desktop layouts (viewport width >= 900px)
+      if (window.innerWidth < 900) {
+        bezel.style.transform = '';
+        return;
+      }
+      
+      const availableHeight = wrapper.clientHeight - 40; // 40px padding safety margin
+      const availableWidth = wrapper.clientWidth - 40;
+      
+      const bezelWidth = bezel.classList.contains('landscape') ? 868 : 414;
+      const bezelHeight = bezel.classList.contains('landscape') ? 414 : 868;
+      
+      const scaleX = availableWidth / bezelWidth;
+      const scaleY = availableHeight / bezelHeight;
+      const scale = Math.min(scaleX, scaleY, 1); // scale down if needed, but do not scale up
+      
+      bezel.style.transform = `scale(${scale})`;
+      bezel.style.transformOrigin = 'center center';
+    }
+    
+    function toggleSidebar() {
+      const container = document.querySelector('.showcase-container');
+      const sidebar = document.querySelector('.sidebar');
+      const btn = document.getElementById('btn-toggle-sidebar');
+      if (!container || !sidebar || !btn) return;
+      
+      const isHidden = sidebar.style.display === 'none';
+      if (isHidden) {
+        sidebar.style.display = '';
+        container.style.gridTemplateColumns = '350px 1fr';
+        container.style.maxWidth = '1200px';
+        btn.textContent = 'Full Screen';
+        btn.classList.remove('active');
+      } else {
+        sidebar.style.display = 'none';
+        container.style.gridTemplateColumns = '1fr';
+        container.style.maxWidth = '100%';
+        btn.textContent = 'Show Sidebar';
+        btn.classList.add('active');
+      }
+      setTimeout(adjustScale, 150);
+    }
+
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        const sidebar = document.querySelector('.sidebar');
+        if (sidebar && sidebar.style.display === 'none') {
+          toggleSidebar();
+        }
+      }
+    });
+    
+    window.addEventListener('resize', adjustScale);
+    window.addEventListener('load', adjustScale);
+    // Trigger initial scale computation
+    setTimeout(adjustScale, 100);
+  </script>
+</body>
+</html>

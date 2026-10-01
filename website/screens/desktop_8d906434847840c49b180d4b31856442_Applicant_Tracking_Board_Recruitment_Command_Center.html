@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>RecruitFlow | Applicant Tracking Board</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-primary-fixed-variant": "#72188f",
+                    "on-tertiary-container": "#e6ffe0",
+                    "glass-fill": "rgba(255, 255, 255, 0.35)",
+                    "tertiary": "#006823",
+                    "primary-fixed-dim": "#f0b0ff",
+                    "surface-container-lowest": "#ffffff",
+                    "on-error-container": "#93000a",
+                    "secondary-container": "#54a3ff",
+                    "on-tertiary-fixed-variant": "#00531a",
+                    "on-background": "#141c29",
+                    "on-primary-container": "#fff5fb",
+                    "surface-bright": "#f9f9ff",
+                    "tertiary-fixed-dim": "#47e266",
+                    "on-primary": "#ffffff",
+                    "on-secondary-fixed-variant": "#004883",
+                    "gold": "#FFD60A",
+                    "tertiary-fixed": "#6cff82",
+                    "surface-tint": "#8d37a9",
+                    "background": "#f9f9ff",
+                    "on-secondary-fixed": "#001c39",
+                    "secondary": "#0060ab",
+                    "error-container": "#ffdad6",
+                    "on-secondary-container": "#003868",
+                    "surface-container-high": "#e0e8fb",
+                    "surface": "#f9f9ff",
+                    "inverse-primary": "#f0b0ff",
+                    "error": "#FF453A",
+                    "primary-container": "#a34cbe",
+                    "outline": "#817381",
+                    "primary": "#8731a3",
+                    "glass-border": "rgba(255, 255, 255, 0.6)",
+                    "surface-variant": "#dbe3f6",
+                    "orange": "#FF9F0A",
+                    "primary-fixed": "#fbd7ff",
+                    "secondary-fixed-dim": "#a3c9ff",
+                    "card-gradient": "linear-gradient(135deg, #4D9EFA 0%, #BF7DF5 100%)",
+                    "on-surface-variant": "#4f4350",
+                    "on-secondary": "#ffffff",
+                    "surface-container": "#e7eeff",
+                    "on-surface": "#141c29",
+                    "surface-dim": "#d2daed",
+                    "inverse-on-surface": "#ecf1ff",
+                    "outline-variant": "#d2c1d2",
+                    "tertiary-container": "#00842f",
+                    "secondary-fixed": "#d3e3ff",
+                    "on-tertiary": "#ffffff",
+                    "surface-container-low": "#f0f3ff",
+                    "inverse-surface": "#29313f",
+                    "glass-thick": "rgba(255, 255, 255, 0.8)",
+                    "on-primary-fixed": "#330044",
+                    "on-tertiary-fixed": "#002106",
+                    "surface-container-highest": "#dbe3f6",
+                    "on-error": "#ffffff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "mobile-gutter": "16px",
+                    "desktop-gutter": "24px",
+                    "safe-top": "44px",
+                    "mobile-margin": "20px",
+                    "desktop-margin": "64px",
+                    "base": "8px",
+                    "max-width": "1280px",
+                    "safe-bottom": "34px"
+            },
+            "fontFamily": {
+                    "display-xl-mobile": ["Inter"],
+                    "headline-lg-mobile": ["Inter"],
+                    "label-caps-mobile": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "display-xl": ["Inter"],
+                    "body-md-mobile": ["Inter"],
+                    "body-md": ["Inter"],
+                    "label-caps": ["Inter"]
+            },
+            "fontSize": {
+                    "display-xl-mobile": ["34px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "label-caps-mobile": ["12px", {"lineHeight": "1.0", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "headline-lg": ["34px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                    "display-xl": ["56px", {"lineHeight": "1.1", "letterSpacing": "-0.03em", "fontWeight": "700"}],
+                    "body-md-mobile": ["15px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                    "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                    "label-caps": ["13px", {"lineHeight": "1.0", "letterSpacing": "0.03em", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #DCE4F7;
+            background-image: radial-gradient(at 0% 0%, hsla(253,16%,7%,0) 0, transparent 50%), 
+                              radial-gradient(at 50% 0%, hsla(225,39%,30%,0.1) 0, transparent 50%), 
+                              radial-gradient(at 100% 0%, hsla(339,49%,30%,0.1) 0, transparent 50%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.35);
+            backdrop-filter: blur(28px);
+            -webkit-backdrop-filter: blur(28px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 12px 40px 0 rgba(71, 26, 112, 0.15);
+        }
+        .kanban-column {
+            flex: 1 1 0%;
+            min-width: 220px;
+            max-width: 320px;
+        }
+        .drop-zone-highlight {
+            outline: 2px dashed rgba(135, 49, 163, 0.4);
+            outline-offset: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: rgba(135, 49, 163, 0.2);
+            border-radius: 10px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: rgba(135, 49, 163, 0.4);
+        }
+    </style>
+</head>
+<body class="font-body-md text-on-surface">
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-0 h-screen w-64 bg-glass-fill backdrop-blur-3xl border-r border-glass-border flex flex-col pt-8 pb-6 gap-2 z-40 hidden md:flex shadow-sm">
+<div class="px-6 mb-8">
+<h2 class="text-primary font-headline-lg text-[22px] font-black tracking-tight">Intercomp</h2>
+<p class="text-primary/70 font-label-caps text-label-caps uppercase tracking-wider font-bold">Company Portal</p>
+</div>
+<nav class="flex flex-col gap-1">
+<a class="flex items-center gap-4 py-3 px-6 text-on-surface-variant hover:bg-surface-container-low hover:translate-x-1 rounded-xl mx-2 transition-all duration-200" href="#" id="nav-dashboard">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-caps text-label-caps uppercase tracking-wider">Dashboard</span>
+</a>
+<a class="flex items-center gap-4 py-3 px-6 text-on-surface-variant hover:bg-surface-container-low hover:translate-x-1 rounded-xl mx-2 transition-all duration-200" href="#" id="nav-jobboard">
+<span class="material-symbols-outlined">assignment</span>
+<span class="font-label-caps text-label-caps uppercase tracking-wider">Job Board</span>
+</a>
+<a class="flex items-center gap-4 py-3 px-6 text-on-surface-variant hover:bg-surface-container-low hover:translate-x-1 rounded-xl mx-2 transition-all duration-200" href="#" id="nav-talent">
+<span class="material-symbols-outlined">person_search</span>
+<span class="font-label-caps text-label-caps uppercase tracking-wider">Talent Pool</span>
+</a>
+<a class="flex items-center gap-4 py-3 px-6 text-on-surface-variant hover:bg-surface-container-low hover:translate-x-1 rounded-xl mx-2 transition-all duration-200" href="#" id="nav-postings">
+<span class="material-symbols-outlined">work</span>
+<span class="font-label-caps text-label-caps uppercase tracking-wider">Postings</span>
+</a>
+<a class="flex items-center gap-4 py-3 px-6 bg-primary text-on-primary rounded-xl mx-2 shadow-lg transition-all duration-200" href="#" id="nav-applicants">
+<span class="material-symbols-outlined">groups</span>
+<span class="font-label-caps text-label-caps uppercase tracking-wider">Applicants</span>
+</a>
+<a class="flex items-center gap-4 py-3 px-6 text-on-surface-variant hover:bg-surface-container-low hover:translate-x-1 rounded-xl mx-2 transition-all duration-200" href="#" id="nav-interviews">
+<span class="material-symbols-outlined">event_available</span>
+<span class="font-label-caps text-label-caps uppercase tracking-wider">Interviews</span>
+</a>
+<a class="flex items-center gap-4 py-3 px-6 text-on-surface-variant hover:bg-surface-container-low hover:translate-x-1 rounded-xl mx-2 transition-all duration-200" href="#" id="nav-analytics">
+<span class="material-symbols-outlined">monitoring</span>
+<span class="font-label-caps text-label-caps uppercase tracking-wider">Analytics</span>
+</a>
+</nav>
+<div class="mt-auto px-4">
+<button class="w-full py-4 bg-primary text-on-primary rounded-2xl font-bold flex items-center justify-center gap-2 shadow-xl hover:scale-[1.02] active:scale-95 transition-all">
+<span class="material-symbols-outlined">add</span>
+                New Job Posting
+            </button>
+</div>
+<div class="mt-4 border-t border-glass-border pt-4 flex flex-col gap-1">
+<a class="flex items-center gap-4 py-2 px-6 text-on-surface-variant hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">help</span>
+<span class="font-label-caps text-label-caps uppercase tracking-wider">Help Center</span>
+</a>
+<a class="flex items-center gap-4 py-2 px-6 text-error hover:opacity-80 transition-opacity" href="#">
+<span class="material-symbols-outlined">logout</span>
+<span class="font-label-caps text-label-caps uppercase tracking-wider">Log Out</span>
+</a>
+</div>
+</aside>
+<main class="ml-0 md:ml-64 min-h-screen flex flex-col">
+<!-- TopNavBar -->
+<header class="fixed top-0 left-0 md:left-64 w-full md:w-[calc(100vw-16rem)] z-50 flex justify-between items-center px-6 md:px-8 h-14 bg-white/10 backdrop-blur-[28px] border-b border-glass-border shadow-[0_12px_40px_0_rgba(71,26,112,0.08)]">
+<div class="flex items-center gap-4">
+</div>
+<div class="flex items-center gap-6">
+<div class="hidden md:flex items-center bg-white/20 px-4 py-1.5 rounded-full border border-glass-border">
+<span class="material-symbols-outlined text-purple-950 mr-2 text-sm">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-purple-950 placeholder-purple-950/50 text-xs w-64 py-0 outline-none" placeholder="Search candidates..." type="text"/>
+</div>
+<div class="flex items-center gap-4">
+<button class="hover:scale-110 active:scale-95 transition-all text-on-background">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="hover:scale-110 active:scale-95 transition-all text-on-background">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<div class="w-10 h-10 rounded-full overflow-hidden border-2 border-white shadow-sm cursor-pointer hover:ring-2 hover:ring-primary transition-all">
+<img alt="HR Manager" class="w-full h-full object-cover" data-alt="A professional headshot of a middle-aged HR manager with a warm, confident expression. He is wearing a tailored charcoal suit and a crisp white shirt, set against a softly blurred modern office interior. The lighting is bright and natural, reflecting a high-end corporate aesthetic consistent with a premium SaaS dashboard environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCTQblcTNv-M1585wIeKVdiF8-dMwfCGc2wR9m7LF_6IdeRMD1b3RKduRLyQWQjkTZW6Be-VZSS62OkQ96d-ejQPnRK24NLKOBeueGaKHQd7_7jJ1husg5p0v1NmHt00i2w0r42Ht_hZcZdiQlmbvoY76kFau6Bfxo4hAtfqw7GJhiFyYIpRt6-IK4pjNqEYL_e7iaRepXkSxk2VzYoUB1p46lWKf2TDosBe5rLlRxy8uieKWYKuKO9JcZtOaA0tTUrlIU0OMHLNf_D"/>
+</div>
+</div>
+</div>
+</header>
+<!-- Kanban Content -->
+<div class="px-4 py-8 md:px-8 flex-1 flex flex-col gap-8">
+<div class="flex justify-between items-end">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-primary mb-2">Senior UX Designer Board</h2>
+<p class="text-on-surface-variant flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">location_on</span>
+                        London, UK • Remote Friendly
+                    </p>
+</div>
+<div class="flex gap-3">
+<button class="flex items-center gap-2 px-5 py-2.5 glass-card rounded-full text-primary font-bold hover:scale-[1.02] active:scale-[0.96] transition-all">
+<span class="material-symbols-outlined">filter_list</span> Filter
+                    </button>
+<button class="flex items-center gap-2 px-5 py-2.5 glass-card rounded-full text-primary font-bold hover:scale-[1.02] active:scale-[0.96] transition-all">
+<span class="material-symbols-outlined">share</span> Share Board
+                    </button>
+</div>
+</div>
+<!-- Kanban Grid -->
+<div class="flex gap-4 overflow-x-auto pb-8 custom-scrollbar">
+<!-- Applied Column -->
+<div class="kanban-column flex flex-col gap-4">
+<div class="flex justify-between items-center px-2">
+<span class="font-bold text-on-surface-variant flex items-center gap-2">
+                            Applied <span class="px-2 py-0.5 rounded-full bg-primary-container text-on-primary-container text-[12px]">12</span>
+</span>
+<button class="text-on-surface-variant hover:text-primary"><span class="material-symbols-outlined">more_horiz</span></button>
+</div>
+<div class="flex flex-col gap-4 min-h-[400px] p-1 rounded-2xl drop-zone-highlight transition-all">
+<!-- Card 1 -->
+<div class="glass-card rounded-2xl p-4 cursor-grab active:cursor-grabbing hover:scale-[1.02] transition-transform duration-350">
+<div class="flex items-start justify-between mb-4">
+<div class="flex items-center gap-3">
+<img alt="Alex Sterling" class="w-12 h-12 rounded-xl object-cover" data-alt="Close-up portrait of Alex Sterling, a professional male creative with a friendly expression. He has short hair and stylish glasses. The background is a clean, minimalist studio with soft purple and blue ambient lighting, reflecting a modern tech-forward design aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBFRXa_WIOPzB8AafZAF9l1t8oDPzDbcBsCF0cep3Cih3rZonTeCaeAdjknBEo9S3mK3SjIu9RunkOMJDn95ZcMTbJ3wt8bhIeCy00FBO-0x5SEsQGZ9H7GWngoh-kjBfyEXJ0rPPOc6s5HV2HhRDPQr_7TJHuiqwE5xwbnKvjKzthIagA0JtC2PiKo8wZCxZ_DwKBSLmcJLO6_1uIISNOrY1E6eBhjjx9Phiq42MM0Gc73TvYbIqzG7TFZOvt8Nu-dmoF4yqhEd27d"/>
+<div>
+<h4 class="font-bold text-primary">Alex Sterling</h4>
+<p class="text-[13px] text-on-surface-variant">Senior UX Designer</p>
+</div>
+</div>
+<div class="flex items-center gap-1 text-tertiary-container font-bold text-[13px]">
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">verified</span>
+                                    94%
+                                </div>
+</div>
+<div class="flex justify-between items-center">
+<div class="flex -space-x-2">
+<div class="w-8 h-8 rounded-full bg-surface-container-high border-2 border-white flex items-center justify-center text-[10px] font-bold">Figma</div>
+<div class="w-8 h-8 rounded-full bg-surface-container-high border-2 border-white flex items-center justify-center text-[10px] font-bold">A/B</div>
+</div>
+<div class="flex gap-2">
+<button class="w-8 h-8 rounded-lg bg-white/50 hover:bg-primary/10 flex items-center justify-center transition-colors">
+<span class="material-symbols-outlined text-[18px]">chat</span>
+</button>
+<button class="w-8 h-8 rounded-lg bg-white/50 hover:bg-primary/10 flex items-center justify-center transition-colors">
+<span class="material-symbols-outlined text-[18px]">event</span>
+</button>
+<button class="w-8 h-8 rounded-lg bg-white/50 hover:bg-primary/10 flex items-center justify-center transition-colors">
+<span class="material-symbols-outlined text-[18px]">visibility</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="glass-card rounded-2xl p-4 cursor-grab active:cursor-grabbing hover:scale-[1.02] transition-transform duration-350">
+<div class="flex items-start justify-between mb-4">
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 rounded-xl bg-orange/20 text-orange flex items-center justify-center font-bold text-lg">JW</div>
+<div>
+<h4 class="font-bold text-primary">Julian Webb</h4>
+<p class="text-[13px] text-on-surface-variant">Product Designer</p>
+</div>
+</div>
+<div class="flex items-center gap-1 text-on-surface-variant font-bold text-[13px]">
+                                    88%
+                                </div>
+</div>
+<div class="flex justify-between items-center">
+<div class="flex -space-x-2">
+<div class="w-8 h-8 rounded-full bg-surface-container-high border-2 border-white flex items-center justify-center text-[10px] font-bold">Web</div>
+</div>
+<div class="flex gap-2">
+<button class="w-8 h-8 rounded-lg bg-white/50 hover:bg-primary/10 flex items-center justify-center transition-colors">
+<span class="material-symbols-outlined text-[18px]">chat</span>
+</button>
+<button class="w-8 h-8 rounded-lg bg-white/50 hover:bg-primary/10 flex items-center justify-center transition-colors">
+<span class="material-symbols-outlined text-[18px]">visibility</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Screened Column -->
+<div class="kanban-column flex flex-col gap-4">
+<div class="flex justify-between items-center px-2">
+<span class="font-bold text-on-surface-variant flex items-center gap-2">
+                            Screened <span class="px-2 py-0.5 rounded-full bg-surface-container-highest text-on-surface-variant text-[12px]">5</span>
+</span>
+<button class="text-on-surface-variant hover:text-primary"><span class="material-symbols-outlined">more_horiz</span></button>
+</div>
+<div class="flex flex-col gap-4 min-h-[400px] p-1 rounded-2xl hover:drop-zone-highlight transition-all">
+<!-- Card 3 -->
+<div class="glass-card rounded-2xl p-4 cursor-grab active:cursor-grabbing hover:scale-[1.02] transition-transform duration-350">
+<div class="flex items-start justify-between mb-4">
+<div class="flex items-center gap-3">
+<img alt="Maya Chen" class="w-12 h-12 rounded-xl object-cover" data-alt="A portrait of Maya Chen, a modern professional woman with sleek black hair and a confident, intelligent look. She is in a high-tech office environment with soft blurred light reflections on glass surfaces. The lighting is ethereal with a mix of cool blues and warm lavender tones, conveying a premium and futuristic aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA9X1p6FOQVY5LoFNDIgcbe23uBuil18knnWZwGSgtlS6Im_F87R7StfaQWQTHcdigICe_Fdijjyf83CxZAkpNSmVF_WBcR0Nj8l4akQPIY_8llWYrBIWApCuvxGZUOkgC0rDpmYgXelSHGnZ-_ez_I_wT4pKzY8TE_kn8J5kC2IxpAqN_pf1ZF4KVo8O4dRIYqQt1BWGHVhaV4KdiwKIPE7ZF-TCxd43EiSR-q6W6SUEinMN8S9cqBOZjExY9P-52cTIEWyePZCbc4"/>
+<div>
+<h4 class="font-bold text-primary">Maya Chen</h4>
+<p class="text-[13px] text-on-surface-variant">Senior UX Designer</p>
+</div>
+</div>
+<div class="flex items-center gap-1 text-tertiary-container font-bold text-[13px]">
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">verified</span>
+                                    98%
+                                </div>
+</div>
+<div class="flex justify-between items-center">
+<div class="flex -space-x-2">
+<div class="px-3 h-8 rounded-full bg-primary-container/20 text-primary border border-primary/20 flex items-center justify-center text-[10px] font-bold">Top Match</div>
+</div>
+<div class="flex gap-2">
+<button class="w-8 h-8 rounded-lg bg-white/50 hover:bg-primary/10 flex items-center justify-center transition-colors">
+<span class="material-symbols-outlined text-[18px]">chat</span>
+</button>
+<button class="w-8 h-8 rounded-lg bg-white/50 hover:bg-primary/10 flex items-center justify-center transition-colors">
+<span class="material-symbols-outlined text-[18px]">visibility</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Interview Column -->
+<div class="kanban-column flex flex-col gap-4">
+<div class="flex justify-between items-center px-2">
+<span class="font-bold text-on-surface-variant flex items-center gap-2">
+                            Interview <span class="px-2 py-0.5 rounded-full bg-secondary-container/20 text-secondary text-[12px]">8</span>
+</span>
+<button class="text-on-surface-variant hover:text-primary"><span class="material-symbols-outlined">more_horiz</span></button>
+</div>
+<div class="flex flex-col gap-4 min-h-[400px] p-1 rounded-2xl hover:drop-zone-highlight transition-all">
+<!-- Card 4 -->
+<div class="glass-card rounded-2xl p-4 cursor-grab active:cursor-grabbing hover:scale-[1.02] transition-transform duration-350">
+<div class="flex items-start justify-between mb-4">
+<div class="flex items-center gap-3">
+<img alt="Elena Rodriguez" class="w-12 h-12 rounded-xl object-cover" data-alt="A sophisticated portrait of Elena Rodriguez in a bright, modern creative studio. She has a gentle smile and is wearing a stylish neutral-toned blazer. The scene is illuminated by diffused sunlight and subtle lavender ambient light, emphasizing a high-end digital professional atmosphere." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAGy85CgxQ4oHtaM9ouL1GuB-t8M-PP9GBZckIbV4FYuReEvMFx27EKA0rWS4dEofNPdNMmxH-CpbuQxPGJRnjeAt7ldcZwMXMaCRtluOylcJbbBGRUnxWDgv9tSLHQ5Vscew95BkS6htz6O5h9BSr4Hy1gbUnpGDNDGAB3Lrs-N2cIMYKATR-dnbGg5D8g6b333y1E9Xq8nwiTKu9iaXQgz1SGg4eyeg5yfQkkopnmZ7A0XlaX_NFXJOhhlWaOV9PD-ps65g0VPjFz"/>
+<div>
+<h4 class="font-bold text-primary">Elena Rodriguez</h4>
+<p class="text-[13px] text-on-surface-variant">Lead Design</p>
+</div>
+</div>
+<div class="flex items-center gap-1 text-tertiary-container font-bold text-[13px]">
+                                    92%
+                                </div>
+</div>
+<div class="bg-primary/5 rounded-xl p-3 mb-4 border border-primary/10">
+<p class="text-[11px] font-bold text-primary uppercase tracking-wider mb-1">Upcoming Interview</p>
+<p class="text-[13px] text-on-surface font-semibold">Today, 4:00 PM</p>
+</div>
+<div class="flex justify-between items-center">
+<div class="flex gap-1">
+<span class="material-symbols-outlined text-secondary text-[20px]">videocam</span>
+<span class="text-[12px] text-secondary font-medium">Google Meet</span>
+</div>
+<div class="flex gap-2">
+<button class="w-8 h-8 rounded-lg bg-secondary text-white flex items-center justify-center transition-all hover:shadow-lg">
+<span class="material-symbols-outlined text-[18px]">login</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Hired Column -->
+<div class="kanban-column flex flex-col gap-4">
+<div class="flex justify-between items-center px-2">
+<span class="font-bold text-on-surface-variant flex items-center gap-2">
+                            Hired <span class="px-2 py-0.5 rounded-full bg-tertiary-fixed-dim/20 text-tertiary text-[12px]">3</span>
+</span>
+<button class="text-on-surface-variant hover:text-primary"><span class="material-symbols-outlined">more_horiz</span></button>
+</div>
+<div class="flex flex-col gap-4 min-h-[400px] p-1 rounded-2xl hover:drop-zone-highlight transition-all">
+<!-- Empty State or past hires -->
+<div class="glass-card rounded-2xl p-8 flex flex-col items-center justify-center text-center opacity-60">
+<span class="material-symbols-outlined text-[48px] text-tertiary mb-2" style="font-variation-settings: 'FILL' 1;">celebration</span>
+<p class="text-[13px] font-bold text-on-surface-variant">3 Successful Hires</p>
+<p class="text-[11px] text-on-surface-variant/80">Keep up the momentum!</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Floating Action Background Elements -->
+<div class="fixed top-20 right-[-100px] w-[400px] h-[400px] bg-primary/10 blur-[120px] rounded-full -z-10 animate-pulse"></div>
+<div class="fixed bottom-0 left-64 w-[300px] h-[300px] bg-secondary-container/10 blur-[100px] rounded-full -z-10"></div>
+<script>
+        // Micro-interaction for cards
+        document.querySelectorAll('.glass-card').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.borderColor = 'rgba(135, 49, 163, 0.4)';
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.borderColor = 'rgba(255, 255, 255, 0.6)';
+            });
+        });
+
+        // Search bar focus effect
+        const searchInput = document.querySelector('input[type="text"]');
+        searchInput.addEventListener('focus', () => {
+            searchInput.parentElement.classList.add('scale-105');
+        });
+        searchInput.addEventListener('blur', () => {
+            searchInput.parentElement.classList.remove('scale-105');
+        });
+    </script>
+</body></html>

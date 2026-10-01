@@ -1,0 +1,1024 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+  <script>
+    if (window.self !== window.top) {
+      const style = document.createElement('style');
+      style.innerHTML = `
+        header, nav, aside, 
+        .SideNavBar, .TopNavBar, 
+        #SideNavBar, #TopNavBar {
+          display: none !important;
+        }
+        main, .main-content {
+          margin-left: 0 !important;
+          padding-top: 1.5rem !important;
+          margin-top: 0 !important;
+        }
+        main.ml-64, main.lg\\:ml-64 {
+          margin-left: 0 !important;
+          padding-top: 2rem !important;
+          margin-top: 0 !important;
+        }
+      `;
+      document.documentElement.appendChild(style);
+    }
+  </script>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CareerGlass | Job Details</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+                  "on-error-container": "#93000a",
+                  "orange": "#FF9F0A",
+                  "secondary-container": "#54a3ff",
+                  "inverse-on-surface": "#ecf1ff",
+                  "surface-variant": "#dbe3f6",
+                  "tertiary-fixed-dim": "#47e266",
+                  "primary-container": "#a34cbe",
+                  "on-tertiary-container": "#e6ffe0",
+                  "outline-variant": "#d2c1d2",
+                  "on-background": "#471A70",
+                  "background": "#f9f9ff",
+                  "primary-fixed": "#fbd7ff",
+                  "surface-tint": "#8d37a9",
+                  "surface-container-highest": "#dbe3f6",
+                  "on-tertiary-fixed-variant": "#00531a",
+                  "error-container": "#ffdad6",
+                  "tertiary-container": "#00842f",
+                  "primary": "#8731a3",
+                  "surface-container": "#e7eeff",
+                  "on-primary-fixed": "#330044",
+                  "surface-container-high": "#e0e8fb",
+                  "on-primary-container": "#fff5fb",
+                  "on-surface": "#141c29",
+                  "on-secondary-container": "#003868",
+                  "primary-fixed-dim": "#f0b0ff",
+                  "error": "#FF453A",
+                  "inverse-surface": "#29313f",
+                  "glass-border": "rgba(255, 255, 255, 0.6)",
+                  "glass-thick": "rgba(255, 255, 255, 0.8)",
+                  "secondary": "#0060ab",
+                  "on-error": "#ffffff",
+                  "on-tertiary-fixed": "#002106",
+                  "tertiary": "#006823",
+                  "secondary-fixed-dim": "#a3c9ff",
+                  "on-secondary-fixed": "#001c39",
+                  "surface-container-low": "#f0f3ff",
+                  "on-secondary": "#ffffff",
+                  "surface": "#f9f9ff",
+                  "outline": "#817381",
+                  "on-primary-fixed-variant": "#72188f",
+                  "surface-bright": "#f9f9ff",
+                  "inverse-primary": "#f0b0ff",
+                  "tertiary-fixed": "#6cff82",
+                  "on-tertiary": "#ffffff",
+                  "glass-fill": "rgba(255, 255, 255, 0.35)",
+                  "surface-dim": "#d2daed",
+                  "secondary-fixed": "#d3e3ff",
+                  "on-secondary-fixed-variant": "#004883",
+                  "on-primary": "#ffffff",
+                  "on-surface-variant": "#4f4350",
+                  "card-gradient": "linear-gradient(135deg, #4D9EFA 0%, #BF7DF5 100%)",
+                  "surface-container-lowest": "#ffffff",
+                  "gold": "#FFD60A"
+          },
+          "borderRadius": {
+                  "DEFAULT": "0.25rem",
+                  "lg": "0.5rem",
+                  "xl": "2rem",
+                  "full": "9999px"
+          },
+          "spacing": {
+                  "base": "8px",
+                  "safe-top": "44px",
+                  "safe-bottom": "34px",
+                  "mobile-gutter": "16px",
+                  "mobile-margin": "20px",
+                  "desktop-margin": "64px",
+                  "max-width": "1280px",
+                  "desktop-gutter": "24px"
+          },
+          "fontFamily": {
+                  "label-caps": ["Inter", "sans-serif"],
+                  "headline-lg": ["Inter", "sans-serif"],
+                  "display-xl": ["Inter", "sans-serif"],
+                  "body-md": ["Inter", "sans-serif"]
+          },
+          "fontSize": {
+                  "label-caps": ["13px", {"lineHeight": "1.0", "letterSpacing": "0.03em", "fontWeight": "600"}],
+                  "headline-lg": ["34px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                  "display-xl": ["56px", {"lineHeight": "1.1", "letterSpacing": "-0.03em", "fontWeight": "700"}],
+                  "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    body {
+      background: linear-gradient(135deg, #E2EAFF 0%, #E7EEFF 100%);
+      color: #471A70;
+      font-family: 'Inter', sans-serif;
+      overflow: hidden;
+    }
+    .glass-card {
+      background: rgba(255, 255, 255, 0.35);
+      backdrop-filter: blur(28px);
+      -webkit-backdrop-filter: blur(28px);
+      border: 1px solid rgba(255, 255, 255, 0.6);
+      box-shadow: 0 12px 40px 0 rgba(71, 26, 112, 0.15);
+    }
+    .glass-pill {
+      background: rgba(255, 255, 255, 0.5);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+    }
+    .active-card {
+      background: rgba(255, 255, 255, 0.6);
+      border: 1px solid rgba(135, 49, 163, 0.4);
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 4px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: rgba(71, 26, 112, 0.1);
+      border-radius: 10px;
+    }
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+    .primary-gradient {
+      background: linear-gradient(135deg, #4D9EFA 0%, #BF7DF5 100%);
+    }
+  </style>
+</head>
+<body class="h-screen flex flex-col">
+<!-- TopNavBar Implementation from JSON -->
+<header class="fixed top-0 left-0 lg:left-64 w-full lg:w-[calc(100vw-16rem)] z-50 bg-glass-fill backdrop-blur-2xl border-b border-glass-border shadow-[0_12px_40px_0_rgba(71,26,112,0.15)]">
+<div class="flex justify-between items-center px-desktop-margin h-20 w-full max-w-max-width mx-auto">
+<div class="flex items-center gap-8 lg:hidden">
+<span class="font-display-xl text-display-xl font-bold text-primary">CareerGlass</span>
+<div class="hidden md:flex gap-6 items-center">
+<a class="text-on-surface-variant font-medium hover:scale-95 transition-transform duration-350 ease-[cubic-bezier(0.35,0,0.15,1)]" href="#">Discover</a>
+<a class="text-primary font-bold border-b-2 border-primary pb-1" href="#">My Applications</a>
+<a class="text-on-surface-variant font-medium hover:scale-95 transition-transform duration-350 ease-[cubic-bezier(0.35,0,0.15,1)]" href="#">Messages</a>
+<a class="text-on-surface-variant font-medium hover:scale-95 transition-transform duration-350 ease-[cubic-bezier(0.35,0,0.15,1)]" href="#">Insights</a>
+</div>
+</div>
+<div class="flex items-center gap-4 ml-auto">
+<button class="material-symbols-outlined text-primary p-2 hover:bg-white/20 rounded-full transition-all">notifications</button>
+<button class="material-symbols-outlined text-primary p-2 hover:bg-white/20 rounded-full transition-all">settings</button>
+<div id="userprofilebtn" class="w-10 h-10 rounded-full overflow-hidden border-2 border-primary cursor-pointer hover:scale-105 transition-transform">
+<img alt="User profile" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDVfFurT0OoZxFFfNdmAzTH2y3akv9EM6NmlylFuYqvOmpF-exoedc7_7xe5kBH63xkMFLkTWaruZWZjme3DDrfs9CScjqa9JJrkvlIzf8gL7HA6KqWoNYSzoKoMl-FP5c5DDfbaXEjaw1mgPHuvtkMpMnjclLxP4W0qoYtB4O5RBG7noXlU7orFzQWbo69SbHToWemlrjAaUI0opw34caO1mBYoN2YJedoCq915Cn5oN2ZT2aQ35OihjbHz9MK3DzB7G-o5SBC5BGi"/>
+</div>
+</div>
+</div>
+</header>
+<main class="flex-grow mt-20 h-[calc(100vh-80px)] overflow-hidden lg:pl-64 flex flex-col">
+  <!-- SideNavBar (Shared Component) -->
+  <nav class="fixed left-0 top-0 h-full pt-8 pb-10 flex flex-col z-40 w-64 bg-glass-fill backdrop-blur-[28px] border-r border-glass-border shadow-[0_12px_40px_0_rgba(71,26,112,0.15)] hidden lg:flex">
+    <div class="px-6 mb-8">
+      <h2 class="font-bold text-deep-purple text-xl">Student Portal</h2>
+    </div>
+    <div class="flex flex-col gap-1 px-4 overflow-y-auto no-scrollbar flex-grow">
+      <a class="flex items-center gap-3 text-deep-purple/70 px-4 py-3 hover:bg-glass-thick hover:text-primary transition-all rounded-xl" href="#">
+        <span class="material-symbols-outlined">dashboard</span>
+        <span class="font-label-caps text-label-caps">Dashboard</span>
+      </a>
+      <a class="flex items-center gap-3 text-deep-purple/70 px-4 py-3 hover:bg-glass-thick hover:text-primary transition-all rounded-xl" href="#">
+        <span class="material-symbols-outlined">school</span>
+        <span class="font-label-caps text-label-caps">Courses</span>
+      </a>
+      <a class="flex items-center gap-3 text-deep-purple/70 px-4 py-3 hover:bg-glass-thick hover:text-primary transition-all rounded-xl" href="#">
+        <span class="material-symbols-outlined">assignment</span>
+        <span class="font-label-caps text-label-caps">Assignments</span>
+      </a>
+      <a class="flex items-center gap-3 text-deep-purple/70 px-4 py-3 hover:bg-glass-thick hover:text-primary transition-all rounded-xl" href="#">
+        <span class="material-symbols-outlined">grade</span>
+        <span class="font-label-caps text-label-caps">Grades</span>
+      </a>
+      <a class="flex items-center gap-3 text-deep-purple/70 px-4 py-3 hover:bg-glass-thick hover:text-primary transition-all rounded-xl" href="#">
+        <span class="material-symbols-outlined">calendar_today</span>
+        <span class="font-label-caps text-label-caps">Schedule</span>
+      </a>
+      <a class="flex items-center gap-3 bg-primary-container text-on-primary-container rounded-xl px-4 py-3 shadow-md transition-transform duration-200 active:scale-95" href="#">
+        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">work</span>
+        <span class="font-label-caps text-label-caps font-bold">Opportunities</span>
+      </a>
+      <a class="flex items-center gap-3 text-deep-purple/70 px-4 py-3 hover:bg-glass-thick hover:text-primary transition-all rounded-xl" href="#">
+        <span class="material-symbols-outlined">insights</span>
+        <span class="font-label-caps text-label-caps">analytics</span>
+      </a>
+      <a class="flex items-center gap-3 text-deep-purple/70 px-4 py-3 hover:bg-glass-thick hover:text-primary transition-all rounded-xl" href="#">
+        <span class="material-symbols-outlined">library_books</span>
+        <span class="font-label-caps text-label-caps">Library</span>
+      </a>
+      <a class="flex items-center gap-3 text-deep-purple/70 px-4 py-3 hover:bg-glass-thick hover:text-primary transition-all rounded-xl" href="#">
+        <span class="material-symbols-outlined">mail</span>
+        <span class="font-label-caps text-label-caps">Messages</span>
+      </a>
+      <a class="flex items-center gap-3 text-deep-purple/70 px-4 py-3 hover:bg-glass-thick hover:text-primary transition-all rounded-xl" href="#">
+        <span class="material-symbols-outlined">group</span>
+        <span class="font-label-caps text-label-caps">Mentors</span>
+      </a>
+    </div>
+    <div class="px-6 mt-auto">
+      <button class="w-full bg-primary text-white py-4 rounded-full font-bold shadow-xl hover:scale-[1.02] active:scale-95 transition-all">
+        Upgrade Plan
+      </button>
+    </div>
+  </nav>
+
+  <!-- Top bar with title -->
+  <div class="p-8 pb-4 flex flex-col md:flex-row md:items-center justify-between gap-4 flex-shrink-0">
+    <div>
+      <h1 class="font-headline-lg text-headline-lg text-on-background">Job Board</h1>
+      <p class="text-xs text-outline font-medium mt-1">Explore roles matching your skillset</p>
+    </div>
+  </div>
+
+  <!-- Scrollable 3-Column Grid Container -->
+  <div class="flex-grow overflow-y-auto p-8 pt-2 custom-scrollbar">
+    <div id="jobGridContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-[1400px] mx-auto pb-16">
+      <!-- Dynamic Job Cards rendered here -->
+    </div>
+  </div>
+</main>
+
+<!-- Beautiful Job Details Modal -->
+<div id="jobDetailsModal" class="fixed inset-0 z-[99999] hidden flex items-center justify-center p-4 bg-[#E2EAFF]/70 backdrop-blur-md transition-all duration-300">
+  <div class="glass-card w-full max-w-3xl rounded-[32px] overflow-hidden shadow-2xl border border-white/40 flex flex-col max-h-[85vh] transform scale-95 opacity-0 transition-all duration-300" id="modalContainer">
+    <!-- Modal Header -->
+    <div class="p-6 pb-4 border-b border-white/20 flex justify-between items-start relative">
+      <div class="flex items-center gap-5">
+        <div class="w-16 h-16 rounded-2xl overflow-hidden bg-white/90 border border-glass-border flex items-center justify-center shadow-md">
+          <img id="detailLogo" style="mix-blend-mode: multiply;" alt="Company Logo" class="w-12 h-12 object-contain" src=""/>
+        </div>
+        <div class="text-left">
+          <div class="flex items-center gap-2">
+            <h2 id="detailTitle" class="font-bold text-xl text-on-background">Job Title</h2>
+            <span class="material-symbols-outlined text-tertiary text-lg" style="font-variation-settings: 'FILL' 1;">verified</span>
+          </div>
+          <p id="detailCompanyLocation" class="text-on-surface-variant text-sm mt-0.5">
+            <span class="font-bold text-on-background">Company</span> • Location
+          </p>
+        </div>
+      </div>
+      <button onclick="closeJobModal()" class="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center text-on-background hover:bg-white/40 active:scale-90 transition-all">
+        <span class="material-symbols-outlined text-lg">close</span>
+      </button>
+    </div>
+
+    <!-- Modal Content (Scrollable) -->
+    <div class="flex-grow overflow-y-auto p-6 space-y-6 custom-scrollbar text-left">
+      <!-- Type, Salary & Match Info -->
+      <div class="grid grid-cols-3 gap-4">
+        <div class="bg-white/20 p-3.5 rounded-2xl border border-white/30 text-center">
+          <span class="material-symbols-outlined text-primary text-xl">schedule</span>
+          <p class="text-[10px] text-outline uppercase font-bold mt-1">Type</p>
+          <p id="detailCommitment" class="text-xs font-bold text-on-background mt-0.5">Full-time</p>
+        </div>
+        <div class="bg-white/20 p-3.5 rounded-2xl border border-white/30 text-center">
+          <span class="material-symbols-outlined text-primary text-xl">payments</span>
+          <p class="text-[10px] text-outline uppercase font-bold mt-1">Salary</p>
+          <p id="detailSalary" class="text-xs font-bold text-on-background mt-0.5">Rs. 100,000</p>
+        </div>
+        <div class="bg-white/20 p-3.5 rounded-2xl border border-white/30 text-center">
+          <span class="material-symbols-outlined text-primary text-xl">stars</span>
+          <p class="text-[10px] text-outline uppercase font-bold mt-1">Match Score</p>
+          <p id="detailMatchScore" class="text-xs font-bold text-on-background mt-0.5">95% Match</p>
+        </div>
+      </div>
+
+      <!-- Description -->
+      <div class="space-y-2">
+        <h4 class="text-xs font-bold text-outline uppercase tracking-wider">Job Description</h4>
+        <p id="detailDescription" class="text-xs text-on-background/95 leading-relaxed">
+          Job description goes here...
+        </p>
+      </div>
+
+      <!-- Key Responsibilities -->
+      <div class="space-y-2" id="responsibilitiesSection">
+        <h4 class="text-xs font-bold text-outline uppercase tracking-wider">Key Responsibilities</h4>
+        <ul id="detailResponsibilities" class="space-y-2.5 text-xs text-on-background/95">
+          <!-- Dynamically populated list -->
+        </ul>
+      </div>
+
+      <!-- Requirements -->
+      <div class="space-y-2">
+        <h4 class="text-xs font-bold text-outline uppercase tracking-wider">Requirements</h4>
+        <ul id="detailRequirements" class="space-y-2.5 text-xs text-on-background/95">
+          <!-- Dynamically populated list -->
+        </ul>
+      </div>
+
+      <!-- Stipend, Duration, Location Details text -->
+      <div class="pt-3 pb-2 space-y-2 border-t border-white/10" id="detailTextSummary">
+        <p class="text-xs text-on-background/80"><span class="font-bold">Stipend:</span> <span id="detailSummaryStipend">Rs. 8,000 — Rs. 12,000/month</span></p>
+        <p class="text-xs text-on-background/80"><span class="font-bold">Duration:</span> <span id="detailSummaryDuration">3 months</span></p>
+        <p class="text-xs text-on-background/80"><span class="font-bold">Location:</span> <span id="detailSummaryLocation">Lahore (On-site)</span></p>
+      </div>
+
+      <!-- Matched Skills -->
+      <div class="space-y-2">
+        <h4 class="text-xs font-bold text-outline uppercase tracking-wider">Skills Required</h4>
+        <div id="detailSkills" class="flex flex-wrap gap-2">
+          <!-- Skills -->
+        </div>
+      </div>
+
+      <!-- Office Location -->
+      <div class="space-y-2">
+        <h4 class="text-xs font-bold text-outline uppercase tracking-wider">Office Location</h4>
+        <div class="h-40 rounded-2xl overflow-hidden relative border border-white/30">
+          <div id="detailMap" class="absolute inset-0 bg-cover bg-center"></div>
+          <div class="absolute inset-0 bg-primary/10 backdrop-blur-[1px] pointer-events-none"></div>
+        </div>
+        <p id="detailAddress" class="text-[11px] text-outline mt-1.5"></p>
+      </div>
+    </div>
+
+    <!-- Modal Footer -->
+    <div class="p-6 border-t border-white/20 bg-white/10 flex gap-4">
+      <button onclick="closeJobModal()" class="flex-1 h-12 rounded-2xl border border-white/30 text-xs font-bold text-on-background hover:bg-white/20 active:scale-95 transition-all">
+        Cancel
+      </button>
+      <button id="detailApplyBtn" onclick="handleQuickApply(event)" class="flex-[2] h-12 rounded-2xl bg-primary text-white text-xs font-bold shadow-lg shadow-primary/25 hover:scale-[1.02] active:scale-95 transition-all">
+        Apply Now
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+    let allJobs = [];
+    const staticJobs = [
+      {
+        id: "job1",
+        title: "Senior iOS UI Engineer",
+        company: "TechFlow",
+        logo: "../assets/techflow_logo.png",
+        location: "San Francisco, CA",
+        salary: "Rs. 8,000 - Rs. 12,000 / mo",
+        type: "Full-time",
+        timeAgo: "2d ago",
+        description: "We are seeking a Senior iOS UI Engineer with a deep passion for building polished, fluid, and highly interactive user interfaces. You will collaborate closely with product designers to implement our new design system across our flagship iOS application, ensuring premium micro-interactions and pixel-perfect layouts.",
+        requirements: [
+          "5+ years of iOS development experience using Swift, UIKit, and SwiftUI.",
+          "Strong portfolio showcasing custom UI transitions, animations, and high-performance rendering.",
+          "Figma mastery and capability to translate design specs into clean, modular code."
+        ],
+        skillsRequired: ["iOS Development", "Swift", "SwiftUI", "UIKit", "UI Design"],
+        address: "100 Pine St, San Francisco, CA 94111, USA",
+        mapTitle: "TechFlow SF Headquarters",
+        applyLink: "https://techflow.io/careers"
+      },
+      {
+        id: "job2",
+        title: "React Native Developer",
+        company: "Jazz (Mobilink)",
+        logo: "../assets/jazz_logo.png",
+        location: "Islamabad, Pakistan",
+        salary: "Rs. 160,000 - 240,000 / mo",
+        type: "Full-time",
+        timeAgo: "New",
+        description: "Jazz is seeking an experienced React Native Developer to lead the development of our next-generation digital services app. You will focus on optimizing native bridge performance, building reusable UI libraries, and integrating secure payment modules (JazzCash).",
+        requirements: [
+          "3+ years of commercial React Native app development experience.",
+          "Deep knowledge of JavaScript/TypeScript, React hooks, and Redux state management.",
+          "Experience with native iOS/Android bridge integration and performance profiling."
+        ],
+        skillsRequired: ["React Native", "JavaScript", "TypeScript", "Redux", "Mobile Development"],
+        address: "Jazz HQ, Sector G-8, Islamabad, Pakistan",
+        mapTitle: "Jazz Islamabad HQ",
+        applyLink: "https://jazz.com.pk/careers"
+      },
+      {
+        id: "job3",
+        title: "Junior DevOps Engineer",
+        company: "Systems Limited",
+        logo: "../assets/systems_logo.png",
+        location: "Karachi, Pakistan",
+        salary: "Rs. 100,000 - 150,000 / mo",
+        type: "Full-time",
+        timeAgo: "1d ago",
+        description: "Systems Limited is looking for a Junior DevOps Engineer to assist in maintaining our CI/CD pipelines, automating infrastructure provisioning, and monitoring application health across Kubernetes clusters.",
+        requirements: [
+          "Solid understanding of Linux administration and shell scripting (Bash/Python).",
+          "Hands-on experience with Docker, Git, and basic CI/CD concepts (Jenkins/GitHub Actions).",
+          "Familiarity with AWS cloud services is a major plus."
+        ],
+        skillsRequired: ["DevOps", "Docker", "Linux", "AWS", "Software Engineering"],
+        address: "Systems Limited Campus, Shahrah-e-Faisal, Karachi, Pakistan",
+        mapTitle: "Systems Limited Karachi Office",
+        applyLink: "https://www.systemsltd.com/careers"
+      },
+      {
+        id: "job4",
+        title: "Senior React Developer",
+        company: "Contour Software",
+        logo: "../assets/contour_logo.png",
+        location: "Karachi, Pakistan",
+        salary: "Rs. 200,000 - 300,000 / mo",
+        type: "Full-time",
+        timeAgo: "3d ago",
+        description: "Contour Software is hiring a Senior React Developer to build high-scale enterprise SaaS web applications. You will write clean, well-tested code, lead architectural decisions, and mentor junior frontend developers.",
+        requirements: [
+          "5+ years of frontend web development experience specializing in React.js.",
+          "Expertise in modern state management (Zustand, Redux Toolkit) and CSS frameworks (TailwindCSS).",
+          "Strong understanding of web performance optimization and unit testing (Jest/RTL)."
+        ],
+        skillsRequired: ["React", "JavaScript", "Web Development", "HTML", "CSS"],
+        address: "FTC Building, Shahrah-e-Faisal, Karachi, Pakistan",
+        mapTitle: "Contour Software Karachi Office",
+        applyLink: "https://contour-software.com/careers"
+      },
+      {
+        id: "job5",
+        title: "Associate Product Manager",
+        company: "VentureDive",
+        logo: "../assets/venturedive_logo.png",
+        location: "Lahore, Pakistan",
+        salary: "Rs. 90,000 - 130,000 / mo",
+        type: "Full-time",
+        timeAgo: "5d ago",
+        description: "VentureDive is looking for an Associate PM to define roadmap priorities, collaborate with designers and engineers, and synthesize user analytics data.",
+        requirements: [
+          "Strong interest in product strategy, agile project coordination, and user research.",
+          "Excellent communication, documentation, and stakeholder management skills.",
+          "Previous experience in a technical or design role is a plus."
+        ],
+        skillsRequired: ["UI/UX Design", "Figma", "User Research"],
+        address: "Gulberg III, Lahore, Pakistan",
+        mapTitle: "VentureDive Lahore Office",
+        applyLink: "https://careers.venturedive.com"
+      },
+      {
+        id: "job6",
+        title: "Junior Backend Developer",
+        company: "Arbisoft",
+        logo: "../assets/arbisoft_logo.png",
+        location: "Lahore, Pakistan",
+        salary: "Rs. 80,000 - 120,000 / mo",
+        type: "Full-time",
+        timeAgo: "2d ago",
+        description: "Arbisoft is seeking a Junior Backend Developer proficient in Python and Django to construct scalable APIs, write unit tests, and optimize database queries.",
+        requirements: [
+          "Bachelor's degree in Computer Science or related engineering field.",
+          "Strong foundation in data structures, algorithms, and SQL databases.",
+          "Familiarity with Django or Flask frameworks."
+        ],
+        skillsRequired: ["Python", "Django", "SQL", "Software Engineering"],
+        address: "25-C, Sector C, DHA Phase 6, Lahore, Pakistan",
+        mapTitle: "Arbisoft Lahore HQ",
+        applyLink: "https://careers.arbisoft.com"
+      },
+      {
+        id: "job7",
+        title: "Data Science Intern",
+        company: "VentureDive",
+        logo: "../assets/venturedive_logo.png",
+        location: "Lahore, Pakistan",
+        salary: "Rs. 35,000 - 50,000 / mo",
+        type: "Internship",
+        timeAgo: "1w ago",
+        description: "VentureDive is seeking a Data Science Intern to compile user metrics, build predictive models, and write database queries to extract insights.",
+        requirements: [
+          "Undergrad or recent graduate in Math, Statistics, CS, or Finance.",
+          "Proficiency in Python, SQL, and data libraries (Pandas, NumPy).",
+          "Basic understanding of Machine Learning concepts."
+        ],
+        skillsRequired: ["Data Science", "Machine Learning", "Python", "Research"],
+        address: "Gulberg III, Lahore, Pakistan",
+        mapTitle: "VentureDive Lahore Office",
+        applyLink: "https://careers.venturedive.com"
+      }
+    ];
+
+    let activeJobId = null;
+    let displayedJobs = [];
+    let itemsToShow = 9;
+    let totalFilteredCount = 0;
+
+    function calculateJobMatch(job, userSkills) {
+      if (!userSkills || userSkills.length === 0) {
+        let hash = 0;
+        const jobIdStr = String(job.id || '');
+        for (let i = 0; i < jobIdStr.length; i++) hash += jobIdStr.charCodeAt(i);
+        return 75 + (hash % 15);
+      }
+      let matched = 0;
+      let reqSkills = job.skillsRequired || [];
+      if (!Array.isArray(reqSkills)) {
+        if (typeof reqSkills === 'string') {
+          reqSkills = reqSkills.split(',').map(s => s.trim()).filter(Boolean);
+        } else {
+          reqSkills = [];
+        }
+      }
+      reqSkills.forEach(skill => {
+        if (userSkills.some(us => us.toLowerCase() === skill.toLowerCase() || us.toLowerCase().includes(skill.toLowerCase()) || skill.toLowerCase().includes(us.toLowerCase()))) {
+          matched++;
+        }
+      });
+      if (matched > 0 && reqSkills.length > 0) {
+        return Math.min(99, 80 + Math.round((matched / reqSkills.length) * 19));
+      } else {
+        let hash = 0;
+        const jobIdStr = String(job.id || '');
+        for (let i = 0; i < jobIdStr.length; i++) hash += jobIdStr.charCodeAt(i);
+        return 65 + (hash % 10);
+      }
+    }
+
+    function selectJob(jobId) {
+      activeJobId = jobId;
+      const job = allJobs.find(j => j.id === jobId);
+      if (!job) return;
+
+      // Update right details modal
+      document.getElementById('detailLogo').src = job.logo;
+      document.getElementById('detailLogo').alt = `${job.company} Logo`;
+      document.getElementById('detailTitle').textContent = job.title;
+      document.getElementById('detailCompanyLocation').innerHTML = `<span class="font-bold text-on-background">${job.company}</span> • ${job.location}`;
+      
+      document.getElementById('detailCommitment').textContent = job.type;
+      document.getElementById('detailSalary').textContent = job.salary;
+      document.getElementById('detailMatchScore').textContent = `${job.match}% Match`;
+      
+      document.getElementById('detailDescription').textContent = job.description;
+
+      // Determine lists dynamically
+      let responsibilities = [];
+      let requirements = [];
+      const titleLower = (job.title || '').toLowerCase();
+
+      if (titleLower.includes('ux') || titleLower.includes('ui') || titleLower.includes('design')) {
+        responsibilities = [
+          "Collaborate with product designers to implement pixel-perfect user interfaces.",
+          "Create wireframes, high-fidelity prototypes, and user flows.",
+          "Translate user research findings into actionable design decisions.",
+          "Ensure consistent application of our core design system patterns."
+        ];
+        requirements = [
+          "Familiarity with Figma, Adobe XD, or other industry prototyping tools.",
+          "Strong understanding of visual design principles, layouts, and typography.",
+          "Portfolio demonstrating user-centered design processes."
+        ];
+      } else if (titleLower.includes('developer') || titleLower.includes('engineer') || titleLower.includes('react') || titleLower.includes('native') || titleLower.includes('ios')) {
+        responsibilities = [
+          "Develop and maintain robust, reusable, and efficient code components.",
+          "Optimize application performance for maximum speed and scalability.",
+          "Participate in code reviews and collaborate with backend developers.",
+          "Write clean, comprehensive unit tests to ensure software reliability."
+        ];
+        requirements = [
+          "Strong proficiency in JavaScript, TypeScript, Swift, or relevant programming languages.",
+          "Familiarity with Git version control and modern build setups.",
+          "Capability to write unit tests and debug complex systems."
+        ];
+      } else if (titleLower.includes('product') || titleLower.includes('manager') || titleLower.includes('business') || titleLower.includes('analyst')) {
+        responsibilities = [
+          "Analyze business requirements and translate them into functional design specs.",
+          "Conduct user research and synthesize qualitative/quantitative feedback.",
+          "Collaborate with cross-functional engineering and design teams.",
+          "Maintain product roadmap, priority backlogs, and project milestones."
+        ];
+        requirements = [
+          "Background in Business, Computer Science, or equivalent analytical field.",
+          "Strong communication, organization, and project management skills.",
+          "Comfortable analyzing metrics and writing functional specs."
+        ];
+      } else {
+        responsibilities = [
+          "Execute task deliverables within specified deadlines.",
+          "Collaborate with team members to resolve blockers and optimize pipelines.",
+          "Participate in daily standups and sprint planning discussions.",
+          "Document workflow steps and system specifications."
+        ];
+        requirements = [
+          "Currently enrolled in or graduated from a relevant university program.",
+          "Strong willingness to learn and adapt to new technology frameworks.",
+          "Solid problem-solving skills and detail-oriented mindset."
+        ];
+      }
+
+      // If job has custom requirements (like static jobs do), use them!
+      if (job.requirements && job.requirements.length > 0) {
+        requirements = job.requirements;
+      }
+
+      // Render responsibilities list
+      const respUl = document.getElementById('detailResponsibilities');
+      if (respUl) {
+        respUl.innerHTML = responsibilities.map(resp => `
+          <li class="flex gap-3 text-on-background">
+            <span class="material-symbols-outlined text-primary text-base">arrow_forward_ios</span>
+            <span>${resp}</span>
+          </li>
+        `).join('');
+      }
+
+      // Render requirements list
+      const reqUl = document.getElementById('detailRequirements');
+      if (reqUl) {
+        reqUl.innerHTML = requirements.map(req => `
+          <li class="flex gap-3 text-on-background">
+            <span class="material-symbols-outlined text-primary text-base">arrow_forward_ios</span>
+            <span>${req}</span>
+          </li>
+        `).join('');
+      }
+
+      // Update text summary metadata
+      const cleanSalary = (job.salary || '').replace(' / mo', '').replace(' /month', '');
+      const detailSummaryStipend = document.getElementById('detailSummaryStipend');
+      if (detailSummaryStipend) detailSummaryStipend.textContent = `${cleanSalary}`;
+      
+      const detailSummaryDuration = document.getElementById('detailSummaryDuration');
+      if (detailSummaryDuration) {
+        detailSummaryDuration.textContent = job.type === 'Internship' ? '3 months' : 'Permanent';
+      }
+      
+      const detailSummaryLocation = document.getElementById('detailSummaryLocation');
+      if (detailSummaryLocation) {
+        const isHybrid = (job.location || '').toLowerCase().includes('hybrid');
+        const isRemote = (job.location || '').toLowerCase().includes('remote');
+        const locationMode = isHybrid ? 'Hybrid' : (isRemote ? 'Remote' : 'On-site');
+        const cleanLoc = (job.location || '').split(',')[0].trim();
+        detailSummaryLocation.textContent = `${cleanLoc} (${locationMode})`;
+      }
+
+      // Render interactive Google Map embed
+      const mapContainer = document.getElementById('detailMap');
+      const cleanLocation = job.address || job.location || 'Lahore, Pakistan';
+      mapContainer.innerHTML = `<iframe class="w-full h-full border-none" src="https://maps.google.com/maps?q=${encodeURIComponent(cleanLocation)}&t=&z=14&ie=UTF8&iwloc=&output=embed" allowfullscreen></iframe>`;
+
+      document.getElementById('detailAddress').innerHTML = `<span class="font-bold">Address:</span> ${job.address || job.location} <span class="ml-2 px-2.5 py-1 rounded-full bg-primary/10 text-primary text-[10px] font-bold border border-primary/20">Within 5 km Radius</span>`;
+
+      const skillsDiv = document.getElementById('detailSkills');
+      skillsDiv.innerHTML = job.skillsRequired.map(skill => `
+        <span class="px-3 py-1.5 rounded-full bg-primary/10 text-primary text-xs font-bold border border-primary/20">${skill}</span>
+      `).join('');
+
+      const applyBtn = document.getElementById('detailApplyBtn');
+      applyBtn.dataset.link = job.applyLink;
+      applyBtn.setAttribute('data-link', job.applyLink);
+
+      // Open Modal
+      const modal = document.getElementById('jobDetailsModal');
+      const container = document.getElementById('modalContainer');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+      setTimeout(() => {
+        container.classList.remove('scale-95', 'opacity-0');
+        container.classList.add('scale-100', 'opacity-100');
+      }, 50);
+    }
+
+    function closeJobModal() {
+      const modal = document.getElementById('jobDetailsModal');
+      const container = document.getElementById('modalContainer');
+      container.classList.remove('scale-100', 'opacity-100');
+      container.classList.add('scale-95', 'opacity-0');
+      setTimeout(() => {
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+      }, 300);
+    }
+
+    function renderJobGrid() {
+      const container = document.getElementById('jobGridContainer');
+      if (!container) return;
+      container.innerHTML = '';
+
+      if (displayedJobs.length === 0) {
+        container.innerHTML = `<div class="col-span-3 text-center text-outline py-12 text-sm">No matching jobs found.</div>`;
+        return;
+      }
+
+      displayedJobs.forEach(job => {
+        const card = document.createElement('div');
+        card.className = `glass-card p-6 rounded-3xl cursor-pointer hover:scale-[1.03] transition-all duration-300 flex flex-col justify-between h-[280px] hover:shadow-2xl hover:border-primary/30 relative overflow-hidden group`;
+        card.onclick = () => selectJob(job.id);
+
+        card.innerHTML = `
+          <div class="absolute -top-12 -right-12 w-28 h-28 bg-primary/5 rounded-full blur-xl group-hover:scale-125 transition-transform duration-500"></div>
+          
+          <div class="space-y-4">
+            <div class="flex justify-between items-start">
+              <span class="text-[10px] font-bold text-primary uppercase tracking-wider bg-primary/10 px-2.5 py-1 rounded-full">${job.company}</span>
+              <span class="text-[10px] font-bold text-green-700 bg-green-100 px-2.5 py-1 rounded-full">${job.match}% Match</span>
+            </div>
+            
+            <div>
+              <h3 class="font-extrabold text-base text-on-background line-clamp-1 group-hover:text-primary transition-colors">${job.title}</h3>
+              <p class="text-on-surface-variant text-xs mt-1 flex items-center gap-1">
+                <span class="material-symbols-outlined text-sm text-outline">location_on</span>
+                ${job.location}
+              </p>
+            </div>
+
+            <div class="flex flex-wrap gap-1.5">
+              ${job.skillsRequired.slice(0, 3).map(skill => `
+                <span class="text-[9px] font-bold px-2 py-0.5 bg-white/40 text-[#471A70] rounded-full border border-white/50">${skill}</span>
+              `).join('')}
+            </div>
+          </div>
+
+          <div class="pt-4 border-t border-white/20 flex justify-between items-center mt-auto">
+            <div class="text-left">
+              <p class="text-[8px] uppercase tracking-wider text-outline">Est. Salary</p>
+              <p class="text-xs font-bold text-[#471A70]">${job.salary.split('/')[0]}</p>
+            </div>
+            <button onclick="event.stopPropagation(); selectJob('${job.id}')" class="px-4 py-2 rounded-xl bg-primary text-white text-[10px] font-bold hover:bg-primary/90 active:scale-95 transition-all">
+              Apply
+            </button>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+
+      // Appending Load More button if there are more jobs left
+      if (itemsToShow < totalFilteredCount) {
+        const loadMoreDiv = document.createElement('div');
+        loadMoreDiv.className = "col-span-1 md:col-span-2 lg:col-span-3 flex justify-center mt-4";
+        
+        const loadMoreBtn = document.createElement('button');
+        loadMoreBtn.className = "px-8 py-3 bg-white/20 hover:bg-white/40 border border-glass-border rounded-2xl text-xs font-bold text-deep-purple transition-all duration-300";
+        loadMoreBtn.textContent = "Load More Jobs";
+        loadMoreBtn.onclick = (e) => {
+          e.stopPropagation();
+          itemsToShow += 6;
+          renderJobs(document.getElementById('jobSearchInput') ? document.getElementById('jobSearchInput').value : '', false);
+        };
+        loadMoreDiv.appendChild(loadMoreBtn);
+        container.appendChild(loadMoreDiv);
+      }
+    }
+
+    function renderJobs(searchTerm = '', resetActive = true) {
+      const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
+      const userSkills = currentUser.skills || [];
+
+      // Load custom published jobs from localStorage
+      const published = JSON.parse(localStorage.getItem('publishedJobs') || '[]');
+      const customJobs = published.map(p => {
+        var salaryMinVal = p.salaryMin;
+        var salaryMaxVal = p.salaryMax;
+        if (salaryMinVal === undefined || salaryMaxVal === undefined) {
+          var numbers = (p.salary || '').replace(/,/g, '').match(/\d+/g);
+          if (numbers && numbers.length >= 2) {
+            salaryMinVal = parseInt(numbers[0]);
+            salaryMaxVal = parseInt(numbers[1]);
+          } else {
+            salaryMinVal = 8000;
+            salaryMaxVal = 12000;
+          }
+        }
+        
+        let skillsArr = ['UI Design', 'Figma'];
+        if (p.skills) {
+          if (Array.isArray(p.skills)) {
+            skillsArr = p.skills;
+          } else if (typeof p.skills === 'string') {
+            skillsArr = p.skills.split(',').map(s => s.trim()).filter(Boolean);
+          }
+        }
+
+        return {
+          id: String(p.id),
+          title: p.title || 'Untitled Job',
+          company: p.company || 'TechFlow',
+          logo: "../assets/techflow_logo.png",
+          location: p.location || 'Lahore, Pakistan',
+          salary: `Rs. ${salaryMinVal.toLocaleString()} - ${salaryMaxVal.toLocaleString()} / mo`,
+          type: p.type || 'Internship',
+          timeAgo: 'Just now',
+          description: p.description || 'No description provided.',
+          requirements: [
+            "Proficient in the required technologies.",
+            "Strong communication and teamwork skills."
+          ],
+          skillsRequired: skillsArr,
+          address: p.location || 'Lahore, Pakistan',
+          mapTitle: `${p.company || 'Company'} Office`,
+          applyLink: p.link || '#',
+          isPublishedFromCompany: true
+        };
+      });
+
+      // Merge custom jobs, backend jobs, and static jobs
+      allJobs = [...customJobs, ...backendJobs, ...staticJobs];
+      
+      // Deduplicate by ID
+      const seenIds = new Set();
+      allJobs = allJobs.filter(job => {
+        if (seenIds.has(job.id)) return false;
+        seenIds.add(job.id);
+        return true;
+      });
+
+      // Dynamic match score
+      allJobs.forEach(job => {
+        job.match = calculateJobMatch(job, userSkills);
+      });
+
+      // Sort by:
+      // 1. Newly published from company (isPublishedFromCompany === true) first!
+      // 2. Boosted/Premium second
+      // 3. Then by match score descending
+      allJobs.sort((a, b) => {
+        const aPub = a.isPublishedFromCompany ? 1 : 0;
+        const bPub = b.isPublishedFromCompany ? 1 : 0;
+        if (aPub !== bPub) {
+          return bPub - aPub;
+        }
+        const aBoost = a.boosted ? 1 : 0;
+        const bBoost = b.boosted ? 1 : 0;
+        if (aBoost !== bBoost) {
+          return bBoost - aBoost; // Boosted first
+        }
+        return b.match - a.match; // Match score second
+      });
+
+      // Filter by search query
+      const filtered = allJobs.filter(job => {
+        const query = searchTerm.toLowerCase().trim();
+        const titleText = (job.title || '').toLowerCase();
+        const companyText = (job.company || '').toLowerCase();
+        const titleMatch = titleText.includes(query);
+        const companyMatch = companyText.includes(query);
+        
+        let skillsArr = job.skillsRequired || [];
+        if (!Array.isArray(skillsArr)) {
+          if (typeof skillsArr === 'string') {
+            skillsArr = skillsArr.split(',').map(s => s.trim()).filter(Boolean);
+          } else {
+            skillsArr = [];
+          }
+        }
+        const skillsMatch = skillsArr.some(s => s.toLowerCase().includes(query));
+        return titleMatch || companyMatch || skillsMatch;
+      });
+
+      totalFilteredCount = filtered.length;
+      displayedJobs = filtered.slice(0, itemsToShow);
+
+      renderJobGrid();
+    }
+
+    // Ripple Effect for glass cards
+    document.querySelectorAll('.glass-card').forEach(card => {
+      card.addEventListener('mousedown', () => {
+        card.style.transform = 'scale(0.98)';
+      });
+      card.addEventListener('mouseup', () => {
+        card.style.transform = 'scale(1)';
+      });
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = 'scale(1)';
+      });
+    });
+
+    // Bind search input filter
+    const searchInput = document.getElementById('jobSearchInput');
+    if (searchInput) {
+      searchInput.addEventListener('input', (e) => {
+        itemsToShow = 9;
+        renderJobs(e.target.value);
+      });
+    }
+
+    let currentSearchQuery = '';
+    let backendJobs = [];
+    function loadBackendJobs() {
+      const origin = window.location.origin;
+      const apiBase = (!origin || origin.includes('localhost:3000')) ? 'http://localhost:8080' : '';
+      fetch(apiBase + '/api/jobs')
+        .then(res => res.json())
+        .then(jobs => {
+          backendJobs = jobs.map(p => {
+            let salaryMinVal = 8000;
+            let salaryMaxVal = 12000;
+            let numbers = (p.salary || '').replace(/,/g, '').match(/\d+/g);
+            if (numbers && numbers.length >= 2) {
+              salaryMinVal = parseInt(numbers[0]);
+              salaryMaxVal = parseInt(numbers[1]);
+            }
+            let skillsArr = p.skillsRequired || ['UI Design', 'Figma'];
+            return {
+              id: String(p.id),
+              title: p.title || 'Untitled Job',
+              company: p.company || 'TechFlow',
+              logo: "../assets/techflow_logo.png",
+              location: p.location || 'Lahore, Pakistan',
+              salary: p.salary || `Rs. ${salaryMinVal.toLocaleString()} - ${salaryMaxVal.toLocaleString()} / mo`,
+              type: p.type || 'Internship',
+              timeAgo: 'Just now',
+              description: p.description || 'No description provided.',
+              requirements: [
+                "Proficient in the required technologies.",
+                "Strong communication and teamwork skills."
+              ],
+              skillsRequired: skillsArr,
+              address: p.location || 'Lahore, Pakistan',
+              applyLink: p.link || '#',
+              isPublishedFromCompany: true
+            };
+          });
+          renderJobs(currentSearchQuery, false);
+        })
+        .catch(err => {
+          console.error("Failed to load backend jobs:", err);
+        });
+    }
+
+    window.applyForJob = function(jobId) {
+      const job = allJobs.find(j => j.id === jobId);
+      if (job) {
+        const link = job.applyLink;
+        if (link && link !== '#' && (link.startsWith('http://') || link.startsWith('https://'))) {
+          window.open(link, '_blank');
+          return;
+        }
+      }
+      selectJob(jobId);
+    };
+
+    // Initialize job board
+    loadBackendJobs();
+    renderJobs();
+
+    window.renderJobs = function(searchTerm, resetActive) {
+      currentSearchQuery = searchTerm || '';
+      const input = document.getElementById('jobSearchInput');
+      if (input && searchTerm !== undefined) {
+        input.value = searchTerm;
+      }
+      itemsToShow = 9;
+      renderJobs(currentSearchQuery, resetActive);
+    };
+
+    window.handleQuickApply = function(event) {
+      if (event) event.preventDefault();
+      event.stopPropagation();
+      
+      const btn = document.getElementById('detailApplyBtn');
+      const link = btn ? (btn.getAttribute('data-link') || btn.dataset.link || '') : '';
+      
+      if (link && link !== '#' && (link.startsWith('http://') || link.startsWith('https://'))) {
+        try {
+          if (window.parent && window.parent !== window) {
+            window.parent.open(link, '_blank');
+          } else {
+            window.open(link, '_blank');
+          }
+        } catch (e) {
+          window.open(link, '_blank');
+        }
+        return;
+      }
+      
+      // Store selected job details in selectedCourse for the checkout summary
+      const job = allJobs.find(j => j.id === activeJobId);
+      if (job) {
+         localStorage.setItem('selectedCourse', JSON.stringify({ name: job.title + " (" + job.company + ") - Application", price: "Rs. 25.00" }));
+      }
+      
+      if (window.parent && window.parent.App && typeof window.parent.App.handleQuickApply === 'function') {
+        window.parent.App.handleQuickApply('job', link);
+      } else {
+        const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+        if (isLoggedIn) {
+          try {
+            window.parent.location.hash = '#/student/checkout';
+          } catch (e) {
+            window.location.hash = '#/student/checkout';
+          }
+        } else {
+          localStorage.setItem('pendingQuickApply', JSON.stringify({ type: 'job', link: link, view: 'opportunities' }));
+          try {
+            window.parent.location.hash = '#/student/login';
+          } catch (e) {
+            window.location.hash = '#/student/login';
+          }
+        }
+      }
+    };
+  </script>
+</body></html>

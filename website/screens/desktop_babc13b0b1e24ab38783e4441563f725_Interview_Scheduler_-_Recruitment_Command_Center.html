@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>EliteRecruit | Interview Scheduler</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,300,0,0" rel="stylesheet"/>
+<style>
+  html,body{font-family:'Inter',sans-serif;background:#DCE4F7;margin:0;overflow-x:hidden;}
+  .icon{font-family:'Material Symbols Outlined';font-size:20px;font-weight:normal;font-style:normal;line-height:1;letter-spacing:normal;text-transform:none;display:inline-block;white-space:nowrap;-webkit-font-feature-settings:'liga';font-feature-settings:'liga';-webkit-font-smoothing:antialiased;}
+  .glass-card{background:rgba(255,255,255,0.75);border-radius:20px;border:1px solid rgba(255,255,255,0.9);box-shadow:0 4px 24px rgba(71,26,112,0.08);}
+  /* Drag styles */
+  .candidate-card{cursor:grab;user-select:none;transition:transform 0.15s,box-shadow 0.15s,opacity 0.15s;}
+  .candidate-card:active{cursor:grabbing;}
+  .candidate-card.dragging{opacity:0.4;transform:scale(0.95);}
+  .drag-ghost{position:fixed;pointer-events:none;z-index:99999;background:rgba(71,26,112,0.9);color:#fff;border-radius:12px;padding:10px 14px;font-family:'Inter',sans-serif;font-size:12px;font-weight:700;box-shadow:0 8px 32px rgba(71,26,112,0.4);transform:translate(-50%,-50%);white-space:nowrap;display:none;}
+  /* Calendar drop zones */
+  .cal-slot{border-bottom:1px solid rgba(71,26,112,0.07);border-right:1px solid rgba(71,26,112,0.07);min-height:60px;position:relative;transition:background 0.15s;}
+  .cal-slot.drag-over{background:rgba(71,26,112,0.1);outline:2px dashed #471A70;}
+  .cal-slot:last-child{border-right:none;}
+  .cal-slot-label{border-bottom:1px solid rgba(71,26,112,0.07);min-height:60px;display:flex;align-items:flex-start;justify-content:flex-end;padding:8px 10px 0 0;font-size:11px;font-weight:700;color:rgba(71,26,112,0.4);}
+  /* Events */
+  .cal-event{position:absolute;inset:4px;border-radius:10px;padding:8px;font-size:10px;font-weight:700;cursor:pointer;z-index:10;transition:transform 0.15s;}
+  .cal-event:hover{transform:scale(1.02);}
+  .cal-event-purple{background:rgba(71,26,112,0.15);border:1px solid rgba(71,26,112,0.3);color:#471A70;}
+  .cal-event-blue{background:rgba(59,130,246,0.15);border:1px solid rgba(59,130,246,0.3);color:#1d4ed8;}
+  .cal-event-green{background:rgba(5,150,105,0.15);border:1px solid rgba(5,150,105,0.3);color:#059669;}
+  /* View toggle active */
+  .view-btn.active{background:#fff;box-shadow:0 2px 8px rgba(71,26,112,0.15);color:#471A70;font-weight:700;}
+  .view-btn{font-family:'Inter',sans-serif;font-size:13px;font-weight:600;padding:8px 18px;border-radius:10px;border:none;cursor:pointer;background:transparent;color:rgba(71,26,112,0.5);transition:all 0.15s;}
+  /* Message modal */
+  .msg-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.45);backdrop-filter:blur(5px);z-index:999998;display:none;align-items:center;justify-content:center;}
+  .msg-overlay.open{display:flex;}
+  .msg-box{background:#fff;border-radius:22px;width:520px;max-width:95vw;box-shadow:0 24px 80px rgba(71,26,112,0.25);overflow:hidden;}
+  /* Month view */
+  .month-cell{min-height:90px;padding:6px;border-right:1px solid rgba(71,26,112,0.07);border-bottom:1px solid rgba(71,26,112,0.07);cursor:pointer;transition:background 0.15s;position:relative;}
+  .month-cell:hover{background:rgba(71,26,112,0.04);}
+  .month-cell.drag-over{background:rgba(71,26,112,0.1);outline:2px dashed #471A70;}
+  /* Day view */
+  .day-slot{min-height:70px;position:relative;border-bottom:1px solid rgba(71,26,112,0.07);display:flex;gap:12px;align-items:flex-start;padding:8px 12px;}
+  .day-slot.drag-over{background:rgba(71,26,112,0.08);outline:2px dashed #471A70;}
+  /* Pulse animation for drag hint */
+  @keyframes pulse{0%,100%{opacity:.6}50%{opacity:1}}
+  .drag-hint{animation:pulse 2s infinite ease-in-out;}
+  /* Notification toast */
+  .toast{position:fixed;bottom:28px;right:28px;background:#059669;color:#fff;border-radius:14px;padding:14px 20px;font-family:'Inter',sans-serif;font-size:13px;font-weight:600;z-index:9999999;box-shadow:0 8px 32px rgba(5,150,105,0.4);display:flex;align-items:center;gap:10px;transform:translateY(100px);opacity:0;transition:all 0.35s cubic-bezier(0.175,0.885,0.32,1.275);}
+  .toast.show{transform:translateY(0);opacity:1;}
+</style>
+</head>
+<body>
+
+<!-- SHARED NAV -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,300,0,0" rel="stylesheet"/>
+<style id="shared-nav-css">
+  @import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,300,0,0&display=block');
+  html,body{background-color:#DCE4F7!important;}
+  body>main{margin-left:220px!important;padding-top:78px!important;}
+</style>
+<aside id="shared-sidebar" style="position:fixed;left:0;top:0;height:100vh;width:220px;background:#fff;display:flex;flex-direction:column;padding:28px 0 20px;z-index:99999;border-right:1px solid rgba(71,26,112,0.09);box-shadow:2px 0 14px rgba(71,26,112,0.07);">
+  <div style="padding:0 20px;margin-bottom:26px;">
+    <div style="font-family:'Inter',sans-serif;font-size:19px;font-weight:900;color:#1a0533;letter-spacing:-0.4px;line-height:1.2;"><span style="color:#8731a3;">Intercomp</span></div>
+    <div style="font-family:'Inter',sans-serif;font-size:10px;color:rgba(71,26,112,0.6);margin-top:3px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;">Company Portal</div>
+  </div>
+  <nav style="display:flex;flex-direction:column;padding:0 10px;flex:1;gap:0;overflow-y:auto;">
+    <a href="#" id="snav-dashboard" style="display:flex;align-items:center;gap:12px;padding:11px 14px;border-radius:12px;color:#2d1152;text-decoration:none;font-family:'Inter',sans-serif;font-size:12px;font-weight:600;letter-spacing:0.07em;text-transform:uppercase;cursor:pointer;background:transparent;margin:1px 0;border:none;width:100%;text-align:left;transition:background 0.15s;" onmouseover="this.style.background='rgba(71,26,112,0.08)'" onmouseout="this.style.background='transparent'"><span class="icon" style="color:#2d1152;flex-shrink:0;width:22px;">dashboard</span><span>Dashboard</span></a>
+    <a href="#" id="snav-jobboard" style="display:flex;align-items:center;gap:12px;padding:11px 14px;border-radius:12px;color:#2d1152;text-decoration:none;font-family:'Inter',sans-serif;font-size:12px;font-weight:600;letter-spacing:0.07em;text-transform:uppercase;cursor:pointer;background:transparent;margin:1px 0;border:none;width:100%;text-align:left;transition:background 0.15s;" onmouseover="this.style.background='rgba(71,26,112,0.08)'" onmouseout="this.style.background='transparent'"><span class="icon" style="color:#2d1152;flex-shrink:0;width:22px;">assignment</span><span>Job Board</span></a>
+    <a href="#" id="snav-talent" style="display:flex;align-items:center;gap:12px;padding:11px 14px;border-radius:12px;color:#2d1152;text-decoration:none;font-family:'Inter',sans-serif;font-size:12px;font-weight:600;letter-spacing:0.07em;text-transform:uppercase;cursor:pointer;background:transparent;margin:1px 0;border:none;width:100%;text-align:left;transition:background 0.15s;" onmouseover="this.style.background='rgba(71,26,112,0.08)'" onmouseout="this.style.background='transparent'"><span class="icon" style="color:#2d1152;flex-shrink:0;width:22px;">person_search</span><span>Talent Pool</span></a>
+    <a href="#" id="snav-postings" style="display:flex;align-items:center;gap:12px;padding:11px 14px;border-radius:12px;color:#2d1152;text-decoration:none;font-family:'Inter',sans-serif;font-size:12px;font-weight:600;letter-spacing:0.07em;text-transform:uppercase;cursor:pointer;background:transparent;margin:1px 0;border:none;width:100%;text-align:left;transition:background 0.15s;" onmouseover="this.style.background='rgba(71,26,112,0.08)'" onmouseout="this.style.background='transparent'"><span class="icon" style="color:#2d1152;flex-shrink:0;width:22px;">work</span><span>Postings</span></a>
+    <a href="#" id="snav-kanban" style="display:flex;align-items:center;gap:12px;padding:11px 14px;border-radius:12px;color:#2d1152;text-decoration:none;font-family:'Inter',sans-serif;font-size:12px;font-weight:600;letter-spacing:0.07em;text-transform:uppercase;cursor:pointer;background:transparent;margin:1px 0;border:none;width:100%;text-align:left;transition:background 0.15s;" onmouseover="this.style.background='rgba(71,26,112,0.08)'" onmouseout="this.style.background='transparent'"><span class="icon" style="color:#2d1152;flex-shrink:0;width:22px;">groups</span><span>Applicants</span></a>
+    <a href="#" id="snav-scheduler" style="display:flex;align-items:center;gap:12px;padding:11px 14px;border-radius:12px;color:#fff;text-decoration:none;font-family:'Inter',sans-serif;font-size:12px;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;cursor:pointer;background:#471A70;margin:1px 0;border:none;width:100%;text-align:left;"><span class="icon" style="color:#fff;flex-shrink:0;width:22px;">event_available</span><span>Interviews</span></a>
+    <a href="#" id="snav-analytics" style="display:flex;align-items:center;gap:12px;padding:11px 14px;border-radius:12px;color:#2d1152;text-decoration:none;font-family:'Inter',sans-serif;font-size:12px;font-weight:600;letter-spacing:0.07em;text-transform:uppercase;cursor:pointer;background:transparent;margin:1px 0;border:none;width:100%;text-align:left;transition:background 0.15s;" onmouseover="this.style.background='rgba(71,26,112,0.08)'" onmouseout="this.style.background='transparent'"><span class="icon" style="color:#2d1152;flex-shrink:0;width:22px;">monitoring</span><span>Analytics</span></a>
+    <a href="#" id="snav-saved-drafts" style="display:flex;align-items:center;gap:12px;padding:11px 14px;border-radius:12px;color:#2d1152;text-decoration:none;font-family:'Inter',sans-serif;font-size:12px;font-weight:600;letter-spacing:0.07em;text-transform:uppercase;cursor:pointer;background:transparent;margin:1px 0;border:none;width:100%;text-align:left;transition:background 0.15s;" onmouseover="this.style.background='rgba(71,26,112,0.08)'" onmouseout="this.style.background='transparent'"><span class="icon" style="color:#2d1152;flex-shrink:0;width:22px;">drafts</span><span>Save Draft</span></a>
+    <a href="#" id="snav-payment" style="display:flex;align-items:center;gap:12px;padding:11px 14px;border-radius:12px;color:#2d1152;text-decoration:none;font-family:'Inter',sans-serif;font-size:12px;font-weight:600;letter-spacing:0.07em;text-transform:uppercase;cursor:pointer;background:transparent;margin:1px 0;border:none;width:100%;text-align:left;transition:background 0.15s;" onmouseover="this.style.background='rgba(71,26,112,0.08)'" onmouseout="this.style.background='transparent'"><span class="icon" style="color:#2d1152;flex-shrink:0;width:22px;">payments</span><span>Payment</span></a>
+  </nav>
+  <div style="padding:0 12px;margin-top:14px;">
+    <button id="snav-new-posting" style="width:100%;padding:13px 0;background:#471A70;color:#fff;border:none;border-radius:999px;font-family:'Inter',sans-serif;font-weight:700;font-size:13px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:7px;box-shadow:0 4px 16px rgba(71,26,112,0.28);">
+      <span class="icon" style="font-size:18px;color:#fff;">add</span>New Job Posting</button>
+  </div>
+  <div style="padding:12px 10px 0;margin-top:10px;border-top:1px solid rgba(71,26,112,0.08);">
+    <a href="#" style="display:flex;align-items:center;gap:11px;padding:9px 12px;border-radius:10px;color:rgba(45,17,82,0.5);text-decoration:none;font-family:'Inter',sans-serif;font-size:11.5px;font-weight:600;letter-spacing:0.07em;text-transform:uppercase;cursor:pointer;background:transparent;margin-bottom:2px;"><span class="icon" style="font-size:18px;color:rgba(71,26,112,0.4);">help_outline</span>Help Center</a>
+    <a href="#" id="snav-logout" style="display:flex;align-items:center;gap:11px;padding:9px 12px;border-radius:10px;color:#c0295a;text-decoration:none;font-family:'Inter',sans-serif;font-size:11.5px;font-weight:600;letter-spacing:0.07em;text-transform:uppercase;cursor:pointer;background:transparent;"><span class="icon" style="font-size:18px;color:#c0295a;">logout</span>Log Out</a>
+  </div>
+</aside>
+
+<style id="topbar-search-styles">
+  #topbar-search {
+    width: 144px;
+    transition: width 0.3s ease;
+  }
+  @media (min-width: 768px) {
+    #topbar-search {
+      width: 192px;
+    }
+    #topbar-search:focus {
+      width: 240px;
+    }
+  }
+  @media (min-width: 1024px) {
+    #topbar-search {
+      width: 256px;
+    }
+    #topbar-search:focus {
+      width: 320px;
+    }
+  }
+</style>
+<!-- Shared Top Bar -->
+<header id="shared-topbar" style="position:fixed;top:0;left:220px;width:calc(100vw - 220px);height:56px;background:rgba(255,255,255,0.15);backdrop-filter:blur(28px);-webkit-backdrop-filter:blur(28px);display:flex;align-items:center;justify-content:flex-end;padding:0 32px;gap:24px;z-index:99998;border-bottom:1px solid rgba(255,255,255,0.6);box-shadow:0 12px 40px 0 rgba(71,26,112,0.08);">
+  <div style="display:flex;align-items:center;gap:8px;background:rgba(255,255,255,0.2);padding:6px 16px;border-radius:999px;border:1px solid rgba(255,255,255,0.6);box-shadow:0 2px 4px rgba(0,0,0,0.02);transition:all 0.3s;">
+    <span style="font-family:'Material Symbols Outlined';font-size:18px;font-weight:normal;font-style:normal;line-height:1;letter-spacing:normal;text-transform:none;-webkit-font-feature-settings:'liga';font-feature-settings:'liga';-webkit-font-smoothing:antialiased;color:#2d1152;display:inline-block;user-select:none;">search</span>
+    <input id="topbar-search" style="background:transparent;border:none;outline:none;color:#2d1152;font-size:12px;font-family:'Inter',sans-serif;padding:0;margin:0;height:20px;line-height:20px;box-shadow:none;" placeholder="Search candidates..." type="text"/>
+  </div>
+  <div style="position:relative;cursor:pointer;display:flex;align-items:center;justify-content:center;">
+    <span style="font-family:'Material Symbols Outlined';font-size:22px;font-weight:normal;font-style:normal;line-height:1;letter-spacing:normal;text-transform:none;-webkit-font-feature-settings:'liga';font-feature-settings:'liga';-webkit-font-smoothing:antialiased;color:#2d1152;display:inline-block;">notifications</span>
+    <span style="position:absolute;top:1.5px;right:1.5px;width:8px;height:8px;background:#ff453a;border-radius:50%;border:1.5px solid #ffffff;"></span>
+  </div>
+  <span style="font-family:'Material Symbols Outlined';font-size:22px;font-weight:normal;font-style:normal;line-height:1;letter-spacing:normal;text-transform:none;-webkit-font-feature-settings:'liga';font-feature-settings:'liga';-webkit-font-smoothing:antialiased;color:#2d1152;display:inline-block;cursor:pointer;">settings</span>
+  <div style="width:40px;height:40px;border-radius:50%;overflow:hidden;cursor:pointer;border:2px solid #8731a3;box-shadow:0 2px 8px rgba(135,49,163,0.15);transition:transform 0.2s;">
+    <img alt="Profile" style="width:100%;height:100%;object-fit:cover;" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA25J-RpNqe_ribsVF3fd4mnzE6ifwHeZuVNu5AMQU2EnYpClByPq7nwtb_OW8YWdE9zHhVr_myUbTkksryul6U1vE6tYcUe2Is_Ykf44A04yPQngjPdz5xvO59lZYpyYogiOT7fWRVG0OG2uYrLcYBA_hW8xxo8YeR57ryeTXbIvT3Ziwr5FLGpOpoVx-euTPcJedNNZFG0cab6QctiazShZ8qfEjAKNGvyzlC9_fl1G_pUaR0pvuTjw1ClquEYOqjrb_2RPHXuypu"/>
+  </div>
+</header>
+
+<script>
+(function(){
+  var routes={'snav-dashboard':'recruiter-dash','snav-jobboard':'jobboard','snav-talent':'talent','snav-postings':'postings','snav-kanban':'kanban','snav-scheduler':'scheduler','snav-analytics':'recruiter-analytics','snav-saved-drafts':'saved-drafts','snav-payment':'payment'};
+  function nav(d){if(window.parent&&window.parent.App)window.parent.App.navigate(d);}
+  Object.keys(routes).forEach(function(id){var el=document.getElementById(id);if(el)el.addEventListener('click',function(e){e.preventDefault();nav(routes[id]);});});
+  var btn=document.getElementById('snav-new-posting');if(btn)btn.addEventListener('click',function(){nav('job-create');});
+  var lo=document.getElementById('snav-logout');if(lo)lo.addEventListener('click',function(e){e.preventDefault();localStorage.removeItem('isLoggedIn');nav('landing');});
+})();
+</script>
+<!-- END SHARED NAV -->
+
+<!-- Message Sent Modal -->
+<div id="msg-overlay" class="msg-overlay" onclick="if(event.target===this)closeMsgModal()">
+  <div class="msg-box">
+    <div style="background:linear-gradient(135deg,#471A70,#a43073);padding:24px 28px;">
+      <div style="font-family:'Inter',sans-serif;font-size:12px;font-weight:600;color:rgba(255,255,255,0.7);letter-spacing:0.06em;text-transform:uppercase;margin-bottom:4px;">Interview Scheduled</div>
+      <div style="font-family:'Inter',sans-serif;font-size:18px;font-weight:800;color:#fff;" id="msg-title">Message Sent!</div>
+    </div>
+    <div style="padding:28px;">
+      <div style="display:flex;align-items:center;gap:14px;margin-bottom:20px;background:rgba(71,26,112,0.05);border-radius:14px;padding:16px;">
+        <div id="msg-avatar" style="width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,#471A70,#9b3ec8);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-family:'Inter',sans-serif;font-size:16px;font-weight:800;color:#fff;overflow:hidden;"></div>
+        <div>
+          <div id="msg-name" style="font-family:'Inter',sans-serif;font-size:15px;font-weight:700;color:#1a0533;"></div>
+          <div id="msg-role" style="font-family:'Inter',sans-serif;font-size:12px;color:rgba(71,26,112,0.55);"></div>
+        </div>
+      </div>
+      <div style="background:rgba(71,26,112,0.04);border-radius:14px;padding:18px;margin-bottom:20px;">
+        <div style="font-family:'Inter',sans-serif;font-size:11px;font-weight:700;color:rgba(71,26,112,0.5);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:10px;">Automatic Message Sent to Candidate:</div>
+        <div id="msg-body" style="font-family:'Inter',sans-serif;font-size:14px;line-height:1.7;color:#374151;"></div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px;">
+        <div style="background:rgba(71,26,112,0.05);border-radius:10px;padding:12px;">
+          <div style="font-family:'Inter',sans-serif;font-size:10px;font-weight:600;color:rgba(71,26,112,0.5);text-transform:uppercase;">Date & Time</div>
+          <div id="msg-datetime" style="font-family:'Inter',sans-serif;font-size:13px;font-weight:700;color:#1a0533;margin-top:4px;"></div>
+        </div>
+        <div style="background:rgba(71,26,112,0.05);border-radius:10px;padding:12px;">
+          <div style="font-family:'Inter',sans-serif;font-size:10px;font-weight:600;color:rgba(71,26,112,0.5);text-transform:uppercase;">Duration</div>
+          <div id="msg-duration" style="font-family:'Inter',sans-serif;font-size:13px;font-weight:700;color:#1a0533;margin-top:4px;"></div>
+        </div>
+      </div>
+      <div style="display:flex;gap:10px;">
+        <button onclick="closeMsgModal()" style="flex:1;padding:13px;background:#471A70;border:none;border-radius:12px;font-family:'Inter',sans-serif;font-size:14px;font-weight:700;color:#fff;cursor:pointer;">Done ✓</button>
+        <button onclick="closeMsgModal()" style="flex:1;padding:13px;background:rgba(71,26,112,0.07);border:none;border-radius:12px;font-family:'Inter',sans-serif;font-size:14px;font-weight:600;color:#471A70;cursor:pointer;">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div id="toast" class="toast">
+  <span class="icon" style="font-size:20px;color:#fff;">check_circle</span>
+  <span id="toast-text">Interview scheduled!</span>
+</div>
+
+<!-- Drag ghost -->
+<div id="drag-ghost" class="drag-ghost">
+  <span class="icon" style="font-size:16px;vertical-align:middle;color:#fff;">drag_indicator</span>
+  <span id="ghost-name">Candidate</span>
+</div>
+
+<!-- MAIN -->
+<main style="margin-left:220px;padding-top:78px;padding-left:24px;padding-right:24px;padding-bottom:40px;min-height:100vh;box-sizing:border-box;">
+  <div style="display:flex;gap:20px;align-items:flex-start;">
+
+    <!-- LEFT: Pending Scheduling -->
+    <div style="width:280px;flex-shrink:0;display:flex;flex-direction:column;gap:16px;">
+      <div class="glass-card" style="padding:22px;">
+        <h2 style="font-family:'Inter',sans-serif;font-size:18px;font-weight:800;color:#1a0533;margin:0 0 16px;">Pending Scheduling</h2>
+        <label style="font-family:'Inter',sans-serif;font-size:11px;font-weight:600;color:rgba(71,26,112,0.5);text-transform:uppercase;letter-spacing:0.06em;display:block;margin-bottom:8px;">Interview Duration</label>
+        <div style="position:relative;margin-bottom:20px;">
+          <select id="duration-select" style="width:100%;padding:10px 14px;border:1px solid rgba(71,26,112,0.15);border-radius:12px;font-family:'Inter',sans-serif;font-size:14px;font-weight:600;color:#471A70;background:rgba(255,255,255,0.9);appearance:none;outline:none;cursor:pointer;">
+            <option value="30">30 minutes</option>
+            <option value="45" selected>45 minutes</option>
+            <option value="60">60 minutes</option>
+            <option value="90">90 minutes</option>
+          </select>
+          <span class="icon" style="position:absolute;right:12px;top:50%;transform:translateY(-50%);font-size:18px;color:rgba(71,26,112,0.4);pointer-events:none;">expand_more</span>
+        </div>
+
+        <div style="display:flex;flex-direction:column;gap:10px;" id="candidate-list">
+          <!-- Candidate Cards (draggable) -->
+          <div class="candidate-card glass-card" id="card-alex" data-name="Alex Sterling" data-role="Senior UX Designer" data-email="alex.sterling@demo.pk" data-initials="AS" style="padding:14px;cursor:grab;" draggable="true">
+            <div style="display:flex;align-items:center;gap:10px;">
+              <img src="https://i.pravatar.cc/40?img=11" style="width:40px;height:40px;border-radius:50%;object-fit:cover;border:2px solid rgba(71,26,112,0.15);flex-shrink:0;" alt="Alex"/>
+              <div style="flex:1;">
+                <div style="font-family:'Inter',sans-serif;font-size:13px;font-weight:700;color:#1a0533;">Alex Sterling</div>
+                <div style="font-family:'Inter',sans-serif;font-size:11px;color:rgba(71,26,112,0.5);">Senior UX Designer</div>
+              </div>
+              <span class="icon" style="font-size:18px;color:rgba(71,26,112,0.25);">drag_indicator</span>
+            </div>
+            <div class="drag-hint" style="margin-top:10px;display:flex;align-items:center;gap:5px;font-family:'Inter',sans-serif;font-size:10px;font-weight:700;color:#471A70;text-transform:uppercase;letter-spacing:0.05em;">
+              <span class="icon" style="font-size:13px;">touch_app</span> Drag to Schedule
+            </div>
+          </div>
+
+          <div class="candidate-card glass-card" id="card-maya" data-name="Maya Chen" data-role="Product Manager" data-email="maya.chen@demo.pk" data-initials="MC" style="padding:14px;cursor:grab;" draggable="true">
+            <div style="display:flex;align-items:center;gap:10px;">
+              <img src="https://i.pravatar.cc/40?img=47" style="width:40px;height:40px;border-radius:50%;object-fit:cover;border:2px solid rgba(71,26,112,0.15);flex-shrink:0;" alt="Maya"/>
+              <div style="flex:1;">
+                <div style="font-family:'Inter',sans-serif;font-size:13px;font-weight:700;color:#1a0533;">Maya Chen</div>
+                <div style="font-family:'Inter',sans-serif;font-size:11px;color:rgba(71,26,112,0.5);">Product Manager</div>
+              </div>
+              <span class="icon" style="font-size:18px;color:rgba(71,26,112,0.25);">drag_indicator</span>
+            </div>
+            <div class="drag-hint" style="margin-top:10px;display:flex;align-items:center;gap:5px;font-family:'Inter',sans-serif;font-size:10px;font-weight:700;color:#471A70;text-transform:uppercase;letter-spacing:0.05em;">
+              <span class="icon" style="font-size:13px;">touch_app</span> Drag to Schedule
+            </div>
+          </div>
+
+          <div class="candidate-card glass-card" id="card-jordan" data-name="Jordan Wade" data-role="Frontend Lead" data-email="jordan.wade@demo.pk" data-initials="JW" style="padding:14px;cursor:grab;" draggable="true">
+            <div style="display:flex;align-items:center;gap:10px;">
+              <div style="width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#471A70,#9b3ec8);display:flex;align-items:center;justify-content:center;font-family:'Inter',sans-serif;font-size:14px;font-weight:800;color:#fff;flex-shrink:0;">JW</div>
+              <div style="flex:1;">
+                <div style="font-family:'Inter',sans-serif;font-size:13px;font-weight:700;color:#1a0533;">Jordan Wade</div>
+                <div style="font-family:'Inter',sans-serif;font-size:11px;color:rgba(71,26,112,0.5);">Frontend Lead</div>
+              </div>
+              <span class="icon" style="font-size:18px;color:rgba(71,26,112,0.25);">drag_indicator</span>
+            </div>
+            <div class="drag-hint" style="margin-top:10px;display:flex;align-items:center;gap:5px;font-family:'Inter',sans-serif;font-size:10px;font-weight:700;color:#471A70;text-transform:uppercase;letter-spacing:0.05em;">
+              <span class="icon" style="font-size:13px;">touch_app</span> Drag to Schedule
+            </div>
+          </div>
+
+          <div class="candidate-card glass-card" id="card-fatima" data-name="Fatima Zahra" data-role="Data Analyst" data-email="fatima.zahra@demo.pk" data-initials="FZ" style="padding:14px;cursor:grab;" draggable="true">
+            <div style="display:flex;align-items:center;gap:10px;">
+              <img src="https://i.pravatar.cc/40?img=25" style="width:40px;height:40px;border-radius:50%;object-fit:cover;border:2px solid rgba(71,26,112,0.15);flex-shrink:0;" alt="Fatima"/>
+              <div style="flex:1;">
+                <div style="font-family:'Inter',sans-serif;font-size:13px;font-weight:700;color:#1a0533;">Fatima Zahra</div>
+                <div style="font-family:'Inter',sans-serif;font-size:11px;color:rgba(71,26,112,0.5);">Data Analyst</div>
+              </div>
+              <span class="icon" style="font-size:18px;color:rgba(71,26,112,0.25);">drag_indicator</span>
+            </div>
+            <div class="drag-hint" style="margin-top:10px;display:flex;align-items:center;gap:5px;font-family:'Inter',sans-serif;font-size:10px;font-weight:700;color:#471A70;text-transform:uppercase;letter-spacing:0.05em;">
+              <span class="icon" style="font-size:13px;">touch_app</span> Drag to Schedule
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- AI Smart Match -->
+      <div class="glass-card" style="padding:18px;background:rgba(71,26,112,0.05);border:1px solid rgba(71,26,112,0.15);">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;">
+          <span class="icon" style="font-size:22px;color:#471A70;">auto_awesome</span>
+          <div style="font-family:'Inter',sans-serif;font-size:13px;font-weight:700;color:#471A70;">Smart Match Pro</div>
+        </div>
+        <p style="font-family:'Inter',sans-serif;font-size:12px;color:rgba(71,26,112,0.7);line-height:1.6;margin:0;">AI suggests <strong>Tuesday at 10 AM</strong> as the best slot for Alex Sterling — panel availability is 94% for that slot.</p>
+      </div>
+    </div>
+
+    <!-- RIGHT: Calendar -->
+    <div class="glass-card" style="flex:1;padding:24px;">
+      <!-- Calendar Header -->
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
+        <div>
+          <h1 style="font-family:'Inter',sans-serif;font-size:22px;font-weight:800;color:#1a0533;margin:0 0 4px;">Interview Calendar</h1>
+          <p id="cal-subtitle" style="font-family:'Inter',sans-serif;font-size:13px;color:rgba(71,26,112,0.55);margin:0;"></p>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;">
+          <button onclick="prevPeriod()" style="width:32px;height:32px;border-radius:50%;border:1px solid rgba(71,26,112,0.15);background:rgba(255,255,255,0.8);cursor:pointer;display:flex;align-items:center;justify-content:center;">
+            <span class="icon" style="font-size:18px;color:#471A70;">chevron_left</span>
+          </button>
+          <button onclick="goToday()" style="padding:6px 14px;border-radius:8px;border:1px solid rgba(71,26,112,0.2);background:rgba(255,255,255,0.8);font-family:'Inter',sans-serif;font-size:12px;font-weight:600;color:#471A70;cursor:pointer;">Today</button>
+          <button onclick="nextPeriod()" style="width:32px;height:32px;border-radius:50%;border:1px solid rgba(71,26,112,0.15);background:rgba(255,255,255,0.8);cursor:pointer;display:flex;align-items:center;justify-content:center;">
+            <span class="icon" style="font-size:18px;color:#471A70;">chevron_right</span>
+          </button>
+          <div style="display:flex;gap:2px;background:rgba(71,26,112,0.06);border-radius:12px;padding:4px;">
+            <button class="view-btn active" id="btn-week" onclick="switchView('week')">Week</button>
+            <button class="view-btn" id="btn-month" onclick="switchView('month')">Month</button>
+            <button class="view-btn" id="btn-day" onclick="switchView('day')">Day</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Calendar Body -->
+      <div id="calendar-body"></div>
+    </div>
+  </div>
+</main>
+
+<script>
+// ==============================
+// DATA & STATE
+// ==============================
+var currentView = 'week';
+var currentDate = new Date();
+var scheduledInterviews = JSON.parse(localStorage.getItem('scheduledInterviews') || '[]');
+var dragCandidate = null;
+
+// Pre-fill some existing interviews
+if (scheduledInterviews.length === 0) {
+  var base = new Date();
+  // Monday of current week
+  var mon = new Date(base);
+  mon.setDate(base.getDate() - base.getDay() + 1);
+  scheduledInterviews = [
+    { name:'Sarah Lim', role:'UI Developer', date: fmtDate(mon, 1), time:'10:00', duration:60, color:'purple' },
+    { name:'David G.', role:'Backend Dev', date: fmtDate(mon, 3), time:'11:15', duration:45, color:'blue' },
+    { name:'Leo Khan', role:'DevOps Eng.', date: fmtDate(mon, 2), time:'14:00', duration:60, color:'green' }
+  ];
+  saveInterviews();
+}
+
+function fmtDate(base, offset) {
+  var d = new Date(base);
+  d.setDate(d.getDate() + (offset || 0));
+  return d.toISOString().split('T')[0];
+}
+function saveInterviews() {
+  localStorage.setItem('scheduledInterviews', JSON.stringify(scheduledInterviews));
+}
+
+// ==============================
+// VIEW SWITCHING
+// ==============================
+function switchView(view) {
+  currentView = view;
+  ['week','month','day'].forEach(function(v) {
+    document.getElementById('btn-'+v).classList.toggle('active', v===view);
+  });
+  renderCalendar();
+}
+
+function prevPeriod() {
+  if (currentView==='week') currentDate.setDate(currentDate.getDate()-7);
+  else if (currentView==='month') currentDate.setMonth(currentDate.getMonth()-1);
+  else currentDate.setDate(currentDate.getDate()-1);
+  renderCalendar();
+}
+function nextPeriod() {
+  if (currentView==='week') currentDate.setDate(currentDate.getDate()+7);
+  else if (currentView==='month') currentDate.setMonth(currentDate.getMonth()+1);
+  else currentDate.setDate(currentDate.getDate()+1);
+  renderCalendar();
+}
+function goToday() {
+  currentDate = new Date();
+  renderCalendar();
+}
+
+// ==============================
+// RENDER CALENDAR
+// ==============================
+function renderCalendar() {
+  if (currentView === 'week') renderWeek();
+  else if (currentView === 'month') renderMonth();
+  else renderDay();
+}
+
+// --- WEEK VIEW ---
+function renderWeek() {
+  var d = new Date(currentDate);
+  var day = d.getDay(); // 0=Sun
+  var monday = new Date(d);
+  monday.setDate(d.getDate() - (day === 0 ? 6 : day - 1));
+
+  var days = [];
+  for (var i=0;i<7;i++) {
+    var dd = new Date(monday); dd.setDate(monday.getDate()+i);
+    days.push(dd);
+  }
+
+  document.getElementById('cal-subtitle').textContent = fmtRange(days[0]) + ' – ' + fmtRange(days[6]);
+
+  var hours = [8,9,10,11,12,13,14,15,16,17];
+  var dayNames = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+  var today = new Date().toISOString().split('T')[0];
+
+  var html = '<div style="overflow-x:auto;">';
+  html += '<div style="display:grid;grid-template-columns:60px repeat(7,1fr);min-width:700px;">';
+  // Header
+  html += '<div style="height:50px;"></div>';
+  days.forEach(function(dd,i) {
+    var dateStr = dd.toISOString().split('T')[0];
+    var isToday = dateStr === today;
+    html += '<div style="height:50px;display:flex;flex-direction:column;align-items:center;justify-content:center;border-bottom:2px solid rgba(71,26,112,0.1);">';
+    html += '<span style="font-family:Inter,sans-serif;font-size:10px;font-weight:700;color:rgba(71,26,112,0.5);text-transform:uppercase;letter-spacing:0.06em;">' + dayNames[i] + '</span>';
+    html += '<span style="font-family:Inter,sans-serif;font-size:18px;font-weight:800;color:' + (isToday?'#fff':'#1a0533') + ';background:' + (isToday?'#471A70':'transparent') + ';width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin-top:2px;">' + dd.getDate() + '</span>';
+    html += '</div>';
+  });
+
+  // Rows
+  hours.forEach(function(h) {
+    var isLunch = h === 12;
+    html += '<div class="cal-slot-label">' + (h<=12?h+'AM':(h-12)+'PM') + '</div>';
+    days.forEach(function(dd,di) {
+      var dateStr = dd.toISOString().split('T')[0];
+      var timeStr = (h < 10 ? '0' : '') + h + ':00';
+      var eventsHere = scheduledInterviews.filter(function(iv) {
+        return iv.date === dateStr && parseInt(iv.time) === h;
+      });
+      html += '<div class="cal-slot" data-date="' + dateStr + '" data-time="' + timeStr + '"' + (isLunch?' style="background:rgba(71,26,112,0.03);"':'') + '>';
+      if (isLunch) {
+        html += '<div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:Inter,sans-serif;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:rgba(71,26,112,0.3);">Lunch Break</div>';
+      }
+      eventsHere.forEach(function(iv) {
+        html += renderEvent(iv);
+      });
+      html += '</div>';
+    });
+  });
+  html += '</div></div>';
+  document.getElementById('calendar-body').innerHTML = html;
+  wireDropZones();
+}
+
+function renderEvent(iv) {
+  var cls = 'cal-event cal-event-' + (iv.color||'purple');
+  return '<div class="' + cls + '" onclick="showEventDetail(this)" data-name="' + iv.name + '" data-role="' + iv.role + '" data-time="' + iv.time + '" data-duration="' + iv.duration + '">' +
+    '<div style="font-weight:800;">INTERVIEW: ' + iv.name.toUpperCase() + '</div>' +
+    '<div style="opacity:0.75;margin-top:2px;">' + iv.time + ' · ' + iv.duration + 'min</div>' +
+    '<div style="margin-top:6px;display:flex;align-items:center;gap:4px;font-size:9px;">' +
+      '<span style="font-family:\'Material Symbols Outlined\';font-size:12px;display:inline-block;">video_call</span> Join Meeting' +
+    '</div>' +
+  '</div>';
+}
+
+// --- MONTH VIEW ---
+function renderMonth() {
+  var y = currentDate.getFullYear();
+  var m = currentDate.getMonth();
+  var months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  document.getElementById('cal-subtitle').textContent = months[m] + ' ' + y;
+
+  var firstDay = new Date(y, m, 1);
+  var lastDay = new Date(y, m+1, 0);
+  var startDow = firstDay.getDay(); // 0=Sun; make Mon-start
+  var startOffset = (startDow + 6) % 7;
+  var today = new Date().toISOString().split('T')[0];
+  var dayNames = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+
+  var html = '<div style="display:grid;grid-template-columns:repeat(7,1fr);">';
+  // Header
+  dayNames.forEach(function(d) {
+    html += '<div style="padding:8px;text-align:center;font-family:Inter,sans-serif;font-size:10px;font-weight:700;color:rgba(71,26,112,0.5);text-transform:uppercase;letter-spacing:0.06em;border-bottom:2px solid rgba(71,26,112,0.1);">' + d + '</div>';
+  });
+
+  // Empty cells before month start
+  for (var i=0;i<startOffset;i++) {
+    html += '<div class="month-cell" style="background:rgba(71,26,112,0.02);"></div>';
+  }
+
+  // Days of month
+  for (var day=1; day<=lastDay.getDate(); day++) {
+    var dateStr = y + '-' + String(m+1).padStart(2,'0') + '-' + String(day).padStart(2,'0');
+    var isToday = dateStr === today;
+    var dayEvents = scheduledInterviews.filter(function(iv){ return iv.date === dateStr; });
+    html += '<div class="month-cell" data-date="' + dateStr + '" data-time="10:00">';
+    html += '<div style="font-family:Inter,sans-serif;font-size:13px;font-weight:' + (isToday?'800':'600') + ';color:' + (isToday?'#fff':'#1a0533') + ';width:26px;height:26px;border-radius:50%;background:' + (isToday?'#471A70':'transparent') + ';display:flex;align-items:center;justify-content:center;margin-bottom:4px;">' + day + '</div>';
+    dayEvents.forEach(function(iv) {
+      html += '<div style="font-family:Inter,sans-serif;font-size:10px;font-weight:700;padding:2px 6px;border-radius:6px;margin-bottom:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;background:rgba(71,26,112,0.1);color:#471A70;">' + iv.name + '</div>';
+    });
+    html += '</div>';
+  }
+  html += '</div>';
+  document.getElementById('calendar-body').innerHTML = html;
+  wireDropZones();
+}
+
+// --- DAY VIEW ---
+function renderDay() {
+  var dayNames = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+  var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  var d = currentDate;
+  var dateStr = d.toISOString().split('T')[0];
+  document.getElementById('cal-subtitle').textContent = dayNames[d.getDay()] + ', ' + d.getDate() + ' ' + months[d.getMonth()] + ' ' + d.getFullYear();
+
+  var hours = [8,9,10,11,12,13,14,15,16,17];
+  var html = '<div style="display:flex;flex-direction:column;">';
+  hours.forEach(function(h) {
+    var timeStr = (h < 10 ? '0' : '') + h + ':00';
+    var eventsHere = scheduledInterviews.filter(function(iv) {
+      return iv.date === dateStr && parseInt(iv.time) === h;
+    });
+    html += '<div class="day-slot" data-date="' + dateStr + '" data-time="' + timeStr + '">';
+    html += '<div style="width:50px;flex-shrink:0;font-family:Inter,sans-serif;font-size:11px;font-weight:700;color:rgba(71,26,112,0.4);">' + (h<=12?h:'')+(h<12?'AM':(h===12?'PM':(h-12)+'PM')) + '</div>';
+    html += '<div style="flex:1;position:relative;min-height:60px;">';
+    eventsHere.forEach(function(iv) {
+      html += '<div class="' + 'cal-event cal-event-' + (iv.color||'purple') + '" style="position:relative;inset:unset;margin-bottom:6px;">' +
+        '<div style="font-weight:800;font-size:12px;">INTERVIEW: ' + iv.name + '</div>' +
+        '<div style="font-size:11px;opacity:0.75;">' + iv.role + ' · ' + iv.time + ' · ' + iv.duration + ' min</div>' +
+        '<a href="#" style="font-size:10px;color:inherit;margin-top:6px;display:flex;align-items:center;gap:4px;">' +
+          '<span style="font-family:\'Material Symbols Outlined\';font-size:13px;display:inline-block;">video_call</span> Join Meeting' +
+        '</a>' +
+      '</div>';
+    });
+    if (eventsHere.length === 0) {
+      html += '<div style="position:absolute;inset:0;border:2px dashed rgba(71,26,112,0.12);border-radius:10px;display:flex;align-items:center;justify-content:center;font-family:Inter,sans-serif;font-size:11px;color:rgba(71,26,112,0.3);">Drop candidate here</div>';
+    }
+    html += '</div></div>';
+  });
+  html += '</div>';
+  document.getElementById('calendar-body').innerHTML = html;
+  wireDropZones();
+}
+
+function fmtRange(d) {
+  var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  return d.getDate() + ' ' + months[d.getMonth()];
+}
+
+// ==============================
+// DRAG & DROP
+// ==============================
+function wireDropZones() {
+  var zones = document.querySelectorAll('.cal-slot, .month-cell, .day-slot');
+  zones.forEach(function(zone) {
+    zone.addEventListener('dragover', function(e) {
+      e.preventDefault();
+      zone.classList.add('drag-over');
+    });
+    zone.addEventListener('dragleave', function() {
+      zone.classList.remove('drag-over');
+    });
+    zone.addEventListener('drop', function(e) {
+      e.preventDefault();
+      zone.classList.remove('drag-over');
+      if (!dragCandidate) return;
+      var date = zone.getAttribute('data-date');
+      var time = zone.getAttribute('data-time') || '09:00';
+      scheduleInterview(dragCandidate, date, time);
+    });
+  });
+}
+
+// Wire candidate cards drag events
+document.addEventListener('DOMContentLoaded', function() {
+  renderCalendar();
+  wireCandidateCards();
+});
+
+function wireCandidateCards() {
+  var cards = document.querySelectorAll('.candidate-card');
+  var ghost = document.getElementById('drag-ghost');
+  var ghostName = document.getElementById('ghost-name');
+
+  cards.forEach(function(card) {
+    card.addEventListener('dragstart', function(e) {
+      dragCandidate = {
+        name: card.getAttribute('data-name'),
+        role: card.getAttribute('data-role'),
+        email: card.getAttribute('data-email'),
+        initials: card.getAttribute('data-initials')
+      };
+      ghostName.textContent = dragCandidate.name;
+      card.classList.add('dragging');
+      e.dataTransfer.effectAllowed = 'move';
+      // Set invisible drag image
+      var img = new Image(); img.src='data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
+      e.dataTransfer.setDragImage(img, 0, 0);
+    });
+    card.addEventListener('drag', function(e) {
+      if (e.clientX === 0 && e.clientY === 0) return;
+      ghost.style.left = e.clientX + 'px';
+      ghost.style.top = e.clientY + 'px';
+      ghost.style.display = 'block';
+    });
+    card.addEventListener('dragend', function() {
+      card.classList.remove('dragging');
+      ghost.style.display = 'none';
+      dragCandidate = null;
+    });
+  });
+}
+
+// ==============================
+// SCHEDULE INTERVIEW
+// ==============================
+function scheduleInterview(candidate, date, time) {
+  var duration = parseInt(document.getElementById('duration-select').value) || 45;
+  var colors = ['purple','blue','green'];
+  var color = colors[Math.floor(Math.random()*colors.length)];
+  var interview = {
+    name: candidate.name,
+    role: candidate.role,
+    email: candidate.email,
+    date: date,
+    time: time,
+    duration: duration,
+    color: color
+  };
+  scheduledInterviews.push(interview);
+  saveInterviews();
+  renderCalendar();
+
+  // Call Backend API to send email and simulate SMS
+  var currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
+  var companyName = currentUser.companyName || 'EliteRecruit';
+  
+  var d = new Date(date);
+  var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  var days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+  var dateLabel = days[d.getDay()] + ', ' + d.getDate() + ' ' + months[d.getMonth()] + ' ' + d.getFullYear();
+  var hour = parseInt(time);
+  var timeLabel = (hour <= 12 ? hour : hour-12) + ':00 ' + (hour < 12 ? 'AM' : 'PM');
+  var endHour = hour + Math.floor(duration/60);
+  var endMin = duration % 60;
+  var endLabel = (endHour <= 12 ? endHour : endHour-12) + ':' + String(endMin).padStart(2,'0') + ' ' + (endHour < 12 ? 'AM' : 'PM');
+
+  var msgText = 'Dear ' + candidate.name + ',\n\nWe are pleased to invite you for an interview for the position of ' + candidate.role + '.\n\nDate: ' + dateLabel + '\nTime: ' + timeLabel + ' – ' + endLabel + ' (' + duration + ' minutes)\nFormat: Video Interview (Google Meet)\n\nPlease confirm your availability by replying to this message. A meeting link will be shared 30 minutes before the interview.\n\nBest regards,\n' + companyName + ' HR Team';
+
+  fetch('/api/interviews/schedule', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      studentName: candidate.name,
+      studentEmail: candidate.email,
+      company: companyName,
+      date: date,
+      time: time,
+      duration: duration,
+      message: msgText
+    })
+  })
+  .then(res => res.json())
+  .then(data => {
+    console.log("Scheduled on backend:", data);
+  })
+  .catch(err => console.error("Failed to schedule on backend:", err));
+
+  // Show message modal
+  showMessageModal(candidate, date, time, duration);
+  showToast('Interview scheduled for ' + candidate.name + '!');
+}
+
+function showMessageModal(candidate, date, time, duration) {
+  var d = new Date(date);
+  var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  var days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+  var dateLabel = days[d.getDay()] + ', ' + d.getDate() + ' ' + months[d.getMonth()] + ' ' + d.getFullYear();
+  var hour = parseInt(time);
+  var timeLabel = (hour <= 12 ? hour : hour-12) + ':00 ' + (hour < 12 ? 'AM' : 'PM');
+  var endHour = hour + Math.floor(duration/60);
+  var endMin = duration % 60;
+  var endLabel = (endHour <= 12 ? endHour : endHour-12) + ':' + String(endMin).padStart(2,'0') + ' ' + (endHour < 12 ? 'AM' : 'PM');
+
+  var avatarEl = document.getElementById('msg-avatar');
+  if (candidate.email && candidate.email.indexOf('@') > -1) {
+    avatarEl.innerHTML = '<img src="https://i.pravatar.cc/48?u=' + candidate.email + '" style="width:48px;height:48px;border-radius:50%;object-fit:cover;"/>';
+  } else {
+    avatarEl.textContent = candidate.initials || candidate.name.charAt(0);
+  }
+  document.getElementById('msg-name').textContent = candidate.name;
+  document.getElementById('msg-role').textContent = candidate.role;
+  document.getElementById('msg-datetime').textContent = dateLabel + ' · ' + timeLabel + ' – ' + endLabel;
+  document.getElementById('msg-duration').textContent = duration + ' minutes';
+  // Save to student inbox (localStorage)
+  var msgs = JSON.parse(localStorage.getItem('studentInterviewMessages') || '[]');
+  msgs.unshift({
+    id: 'iv_' + Date.now(),
+    from: 'EliteRecruit HR Team',
+    role: 'Talent Acquisition | EliteRecruit',
+    avatar: 'https://i.pravatar.cc/40?img=68',
+    candidateName: candidate.name,
+    candidateEmail: candidate.email,
+    subject: 'Interview Scheduled: ' + candidate.role,
+    date: date,
+    time: time,
+    duration: duration,
+    dateLabel: dateLabel,
+    timeLabel: timeLabel + ' – ' + endLabel,
+    message: 'Dear ' + candidate.name + ',\n\nWe are pleased to invite you for an interview for the position of ' + candidate.role + '.\n\nDate: ' + dateLabel + '\nTime: ' + timeLabel + ' – ' + endLabel + ' (' + duration + ' minutes)\nFormat: Video Interview (Google Meet)\n\nPlease confirm your availability by replying to this message. A meeting link will be shared 30 minutes before the interview.\n\nBest regards,\nEliteRecruit HR Team',
+    isRead: false,
+    sentAt: new Date().toISOString()
+  });
+  localStorage.setItem('studentInterviewMessages', JSON.stringify(msgs));
+
+  var msgBodyEl = document.getElementById('msg-body');
+  if(msgBodyEl) {
+    msgBodyEl.innerHTML =
+      'Dear <strong>' + candidate.name + '</strong>,<br><br>' +
+      'We are pleased to invite you for an interview for the position of <strong>' + candidate.role + '</strong>.<br><br>' +
+      '<strong>Date:</strong> ' + dateLabel + '<br>' +
+      '<strong>Time:</strong> ' + timeLabel + ' – ' + endLabel + ' (' + duration + ' minutes)<br>' +
+      '<strong>Format:</strong> Video Interview (Google Meet)<br><br>' +
+      'Please confirm your availability by replying to this message. A meeting link will be shared 30 minutes before the interview.<br><br>' +
+      'Best regards,<br>EliteRecruit HR Team';
+  }
+
+  document.getElementById('msg-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeMsgModal() {
+  document.getElementById('msg-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function showEventDetail(el) {
+  // Simple tooltip / info
+  var name = el.getAttribute('data-name');
+  var role = el.getAttribute('data-role');
+  var time = el.getAttribute('data-time');
+  var dur = el.getAttribute('data-duration');
+  if (name) {
+    showToast('📅 ' + name + ' · ' + role + ' · ' + time);
+  }
+}
+
+// ==============================
+// TOAST
+// ==============================
+function showToast(msg) {
+  var toast = document.getElementById('toast');
+  document.getElementById('toast-text').textContent = msg;
+  toast.classList.add('show');
+  setTimeout(function(){ toast.classList.remove('show'); }, 3500);
+}
+
+// Initial render
+renderCalendar();
+wireCandidateCards();
+</script>
+</body>
+</html>

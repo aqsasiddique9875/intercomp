@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/>
+  <title>SuccessAdmin | Success Stories</title>
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+  <!-- Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            primary: "#8731a3",
+            secondary: "#4D9EFA",
+            background: "#fff7fb",
+            outline: "#817381",
+            "glass-fill": "rgba(255, 255, 255, 0.45)",
+            "glass-border": "rgba(255, 255, 255, 0.6)"
+          },
+          borderRadius: {
+            xxl: "24px"
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      background-color: #DCE4F7;
+      -webkit-tap-highlight-color: transparent;
+      font-family: 'Inter', sans-serif;
+      color: #471A70;
+    }
+    .glass-card {
+      background: rgba(255, 255, 255, 0.4);
+      backdrop-filter: blur(28px);
+      -webkit-backdrop-filter: blur(28px);
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      box-shadow: 0 8px 32px 0 rgba(163, 76, 190, 0.08);
+    }
+    .animated-bg-sphere {
+      position: fixed;
+      width: 350px;
+      height: 350px;
+      border-radius: 50%;
+      filter: blur(80px);
+      z-index: -1;
+      opacity: 0.5;
+      animation: float 20s infinite ease-in-out;
+    }
+    @keyframes float {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(50px, -50px) scale(1.1); }
+    }
+    /* Hide scrollbar */
+    .hide-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .hide-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+</head>
+<body class="antialiased overflow-x-hidden pb-32">
+  <!-- Animated Background Spheres -->
+  <div class="animated-bg-sphere bg-purple-300" style="top: -50px; left: -50px; animation-delay: 0s;"></div>
+  <div class="animated-bg-sphere bg-blue-200" style="bottom: -100px; right: -50px; animation-delay: -5s;"></div>
+
+  <!-- Top AppBar -->
+  <header class="fixed top-0 left-0 right-0 max-w-md mx-auto w-full z-50 bg-white/45 backdrop-blur-[28px] border-b border-white/50 shadow-[0_4px_20px_0_rgba(163,76,190,0.06)] flex justify-between items-center px-5 h-[64px]">
+    <div class="flex items-center gap-3">
+      <div onclick="window.parent.postMessage({ type: 'NAVIGATE', view: 'admin-revenue' }, '*')" class="w-9 h-9 rounded-full border border-white/80 overflow-hidden shadow-sm cursor-pointer active:scale-95 transition-transform">
+        <img alt="Admin Avatar" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAGOMLPlm6clUh9ZYYuUPueMCJObuk5uk36yXMyn8JKvA30bUU0uvzJcWbTuaApeW75-XrgAr1xG6g3MrXV3wR8d8lu6WrlkFSXvV_PkhSuTd96S6sBjjZqouQzfPn-MyTe53iOFML6QQkYSBRUS-GOZrOH7ePXI3qRcgUr4MX4JmX4u4eBDyhSrdClrb5sq50KxRq8kwbASFCJpD6V_yjFcr_7m5nY-16NT5dbaGq4rzZKkzjYZeJA8tug0yUD1nKgkhINbv94aGrX"/>
+      </div>
+      <h1 class="font-bold text-base text-primary">SuccessAdmin</h1>
+    </div>
+    <div class="flex items-center gap-2">
+      <button class="w-9 h-9 rounded-full bg-white/40 flex items-center justify-center text-primary shadow-sm active:scale-95 transition-transform"><span class="material-symbols-outlined text-[20px]">notifications</span></button>
+      <button class="w-9 h-9 rounded-full bg-white/40 flex items-center justify-center text-primary shadow-sm active:scale-95 transition-transform"><span class="material-symbols-outlined text-[20px]">settings</span></button>
+    </div>
+  </header>
+
+  <main class="mt-[84px] px-5 max-w-md mx-auto space-y-5 text-left">
+    
+    <!-- Title Area -->
+    <section class="py-1">
+      <h2 class="text-xl font-extrabold text-[#471A70] tracking-tight">New Success Story</h2>
+      <p class="text-xs text-outline font-medium mt-1">Draft your student's career milestone and share it with the world.</p>
+    </section>
+
+    <!-- Success Story Draft Form -->
+    <section class="glass-card p-4 rounded-3xl space-y-4">
+      <!-- Student Name & Story Title -->
+      <div class="space-y-3">
+        <div>
+          <label class="block text-[10px] font-bold text-outline uppercase tracking-wider mb-1.5 ml-1">Student Name</label>
+          <input id="studentName" oninput="updateLivePreview()" type="text" placeholder="e.g. Jordan Smith" class="w-full h-11 px-4 rounded-xl border border-white/50 bg-white/30 backdrop-blur-md focus:border-primary focus:ring-1 focus:ring-primary text-xs font-medium text-[#471A70]"/>
+        </div>
+        <div>
+          <label class="block text-[10px] font-bold text-outline uppercase tracking-wider mb-1.5 ml-1">Story Title</label>
+          <input id="storyTitle" oninput="updateLivePreview()" type="text" placeholder="e.g. Breaking into FinTech" class="w-full h-11 px-4 rounded-xl border border-white/50 bg-white/30 backdrop-blur-md focus:border-primary focus:ring-1 focus:ring-primary text-xs font-medium text-[#471A70]"/>
+        </div>
+      </div>
+
+      <!-- Avatar & Logo Uploaders -->
+      <div class="grid grid-cols-2 gap-3">
+        <div class="border-2 border-dashed border-white/50 rounded-2xl p-4 flex flex-col items-center justify-center text-center space-y-1 bg-white/10 cursor-pointer hover:bg-white/20 active:scale-95 transition-all">
+          <span class="material-symbols-outlined text-primary text-xl">cloud_upload</span>
+          <span class="text-[9px] font-bold text-[#471A70]">Student Avatar</span>
+          <span class="text-[8px] text-outline">JPG, PNG up to 2MB</span>
+        </div>
+        <div class="border-2 border-dashed border-white/50 rounded-2xl p-4 flex flex-col items-center justify-center text-center space-y-1 bg-white/10 cursor-pointer hover:bg-white/20 active:scale-95 transition-all">
+          <span class="material-symbols-outlined text-primary text-xl">upload_file</span>
+          <span class="text-[9px] font-bold text-[#471A70]">Company Logo</span>
+          <span class="text-[8px] text-outline">Upload Partner Logo</span>
+        </div>
+      </div>
+
+      <!-- Article Content -->
+      <div>
+        <label class="block text-[10px] font-bold text-outline uppercase tracking-wider mb-1.5 ml-1">Article Content</label>
+        <div class="relative">
+          <textarea id="articleContent" oninput="updateLivePreview()" rows="5" placeholder="Type your success story here... Use the toolbar for formatting." class="w-full p-4 rounded-2xl border border-white/50 bg-white/30 backdrop-blur-md focus:border-primary focus:ring-1 focus:ring-primary text-xs font-medium text-[#471A70] placeholder:text-outline/50"></textarea>
+          
+          <!-- Formatting Toolbar -->
+          <div class="absolute bottom-3 right-3 bg-white/65 backdrop-blur-md rounded-lg p-1.5 flex gap-2 border border-white/85 shadow-sm text-[#471A70]">
+            <button class="material-symbols-outlined text-sm hover:text-primary transition-colors">format_bold</button>
+            <button class="material-symbols-outlined text-sm hover:text-primary transition-colors">format_italic</button>
+            <button class="material-symbols-outlined text-sm hover:text-primary transition-colors">link</button>
+            <button class="material-symbols-outlined text-sm hover:text-primary transition-colors">format_quote</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="grid grid-cols-2 gap-3 pt-2">
+        <button onclick="publishStory()" class="h-11 rounded-xl bg-primary text-white text-xs font-bold active:scale-95 transition-transform">Publish Story</button>
+        <button onclick="saveDraft()" class="h-11 rounded-xl bg-white/40 border border-white/60 text-[#471A70] text-xs font-bold active:scale-95 transition-transform">Save Draft</button>
+      </div>
+    </section>
+
+    <!-- Live Preview Section -->
+    <section class="space-y-3">
+      <div class="flex justify-between items-center px-1">
+        <span class="text-[10px] font-bold text-outline uppercase tracking-wider">Live Preview</span>
+        <div class="bg-white/30 backdrop-blur-md p-0.5 rounded-lg flex border border-white/50 text-[9px] font-bold">
+          <button class="px-2.5 py-1 rounded bg-primary text-white">Card View</button>
+          <button class="px-2.5 py-1 rounded text-outline">Full Post</button>
+        </div>
+      </div>
+
+      <!-- Preview Card -->
+      <div class="glass-card p-5 rounded-3xl space-y-4 border border-primary/20">
+        <div class="flex justify-between items-center">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold text-xs border border-white overflow-hidden shadow-sm">
+              <span id="prevInitial">J</span>
+            </div>
+            <div>
+              <h4 id="prevName" class="font-extrabold text-xs text-[#471A70]">Student Name</h4>
+              <p class="text-[9px] text-outline mt-0.5">Class of 2024</p>
+            </div>
+          </div>
+          <span class="material-symbols-outlined text-outline text-lg">corporate_fare</span>
+        </div>
+
+        <div class="space-y-1.5">
+          <h3 id="prevTitle" class="text-sm font-extrabold text-primary leading-snug">Your Impact Story Starts Here</h3>
+          <p id="prevContent" class="text-xs text-[#471A70]/80 leading-relaxed">The article content you type on the left will appear here in real-time. Craft a compelling narrative of growth, challenges, and ultimate success in the professional world.</p>
+        </div>
+
+        <div class="flex justify-between items-center pt-2 border-t border-white/10">
+          <div class="flex gap-1">
+            <span class="w-5 h-5 rounded-full bg-primary/10 flex items-center justify-center text-[9px] font-bold text-primary">L</span>
+            <span class="w-5 h-5 rounded-full bg-primary/10 flex items-center justify-center text-[9px] font-bold text-primary">G</span>
+            <span class="w-5 h-5 rounded-full bg-primary/10 flex items-center justify-center text-[9px] font-bold text-primary">E</span>
+          </div>
+          <span class="text-[10px] font-bold text-primary flex items-center gap-0.5 cursor-pointer">READ FULL STORY <span class="material-symbols-outlined text-xs">arrow_forward</span></span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Published & Draft Stories -->
+    <section class="glass-card p-4 rounded-3xl space-y-3">
+      <div class="flex justify-between items-center border-b border-white/20 pb-2">
+        <div class="flex items-center gap-2">
+          <span class="material-symbols-outlined text-primary text-base">history_edu</span>
+          <h3 class="text-xs font-bold text-[#726580] uppercase tracking-wider">Published &amp; Draft Stories</h3>
+        </div>
+      </div>
+      
+      <div id="storiesContainer" class="divide-y divide-white/10 text-xs">
+        <!-- Dynmically rendered list -->
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Bottom Navigation Bar Placeholder -->
+  <nav id="bottom-nav"></nav>
+
+  <script>
+    const backendOrigin = window.location.origin.includes('localhost') 
+      ? 'http://localhost:8080' 
+      : window.location.origin;
+
+    let storiesList = [];
+
+    // Fetch Stories from Backend
+    async function loadStories() {
+      try {
+        const res = await fetch(`${backendOrigin}/api/success-stories`);
+        if (res.ok) {
+          storiesList = await res.json();
+          renderStories();
+        }
+      } catch (e) {
+        console.error("Failed to load success stories:", e);
+      }
+    }
+
+    // Live Preview Update
+    function updateLivePreview() {
+      const name = document.getElementById('studentName').value.trim();
+      const title = document.getElementById('storyTitle').value.trim();
+      const content = document.getElementById('articleContent').value.trim();
+
+      document.getElementById('prevName').innerText = name || "Student Name";
+      document.getElementById('prevInitial').innerText = name ? name.charAt(0).toUpperCase() : "J";
+      document.getElementById('prevTitle').innerText = title || "Your Impact Story Starts Here";
+      document.getElementById('prevContent').innerText = content || "The article content you type on the left will appear here in real-time. Craft a compelling narrative of growth, challenges, and ultimate success in the professional world.";
+    }
+
+    // Render Stories List
+    function renderStories() {
+      const container = document.getElementById('storiesContainer');
+      container.innerHTML = '';
+
+      if (storiesList.length === 0) {
+        container.innerHTML = `
+          <div class="py-4 text-center text-outline text-xs">
+            No success stories found. Draft one above!
+          </div>
+        `;
+        return;
+      }
+
+      storiesList.forEach(story => {
+        const badgeColor = story.status === 'Published' ? 'bg-green-100 text-green-700' : 'bg-yellow-100 text-yellow-700';
+        const row = document.createElement('div');
+        row.className = "py-3 flex justify-between items-center";
+        row.innerHTML = `
+          <div>
+            <h5 class="font-bold text-xs">${story.name}</h5>
+            <p class="text-[10px] text-primary font-semibold mt-0.5">${story.title}</p>
+            <p class="text-[9px] text-outline mt-0.5">${story.desc || ''}</p>
+          </div>
+          <div class="flex items-center gap-3">
+            <span class="${badgeColor} text-[9px] font-bold px-2 py-0.5 rounded-full">${story.status}</span>
+            <button class="material-symbols-outlined text-base text-outline hover:text-primary active:scale-90 transition-transform">edit</button>
+            <button onclick="deleteStory('${story.id}')" class="material-symbols-outlined text-base text-red-500 hover:text-red-700 active:scale-90 transition-transform">delete</button>
+          </div>
+        `;
+        container.appendChild(row);
+      });
+    }
+
+    // Delete Story via Backend
+    async function deleteStory(storyId) {
+      try {
+        const res = await fetch(`${backendOrigin}/api/success-stories/delete`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ id: storyId })
+        });
+        if (res.ok) {
+          loadStories(); // Reload data
+        }
+      } catch (e) {
+        console.error("Failed to delete story:", e);
+      }
+    }
+
+    // Publish Story via Backend
+    async function publishStory() {
+      const name = document.getElementById('studentName').value.trim();
+      const title = document.getElementById('storyTitle').value.trim();
+      const content = document.getElementById('articleContent').value.trim();
+
+      if (!name || !title) {
+        alert("Please fill in the Student Name and Story Title.");
+        return;
+      }
+
+      try {
+        const res = await fetch(`${backendOrigin}/api/success-stories/create`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            name: name,
+            title: title,
+            desc: content.substring(0, 60) + (content.length > 60 ? "..." : ""),
+            status: "Published"
+          })
+        });
+        if (res.ok) {
+          // Clear Form
+          document.getElementById('studentName').value = '';
+          document.getElementById('storyTitle').value = '';
+          document.getElementById('articleContent').value = '';
+          updateLivePreview();
+          loadStories(); // Reload list
+        }
+      } catch (e) {
+        console.error("Failed to publish story:", e);
+      }
+    }
+
+    // Save Draft via Backend
+    async function saveDraft() {
+      const name = document.getElementById('studentName').value.trim();
+      const title = document.getElementById('storyTitle').value.trim();
+      const content = document.getElementById('articleContent').value.trim();
+
+      if (!name || !title) {
+        alert("Please fill in the Student Name and Story Title.");
+        return;
+      }
+
+      try {
+        const res = await fetch(`${backendOrigin}/api/success-stories/create`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            name: name,
+            title: title,
+            desc: content.substring(0, 60) + (content.length > 60 ? "..." : ""),
+            status: "Draft"
+          })
+        });
+        if (res.ok) {
+          // Clear Form
+          document.getElementById('studentName').value = '';
+          document.getElementById('storyTitle').value = '';
+          document.getElementById('articleContent').value = '';
+          updateLivePreview();
+          loadStories(); // Reload list
+        }
+      } catch (e) {
+        console.error("Failed to save draft:", e);
+      }
+    }
+
+    // Initial Load
+    loadStories();
+  </script>
+</body>
+</html>

@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+  <script>
+    if (window.self !== window.top) {
+      const style = document.createElement('style');
+      style.innerHTML = `
+        header, nav, aside, 
+        .SideNavBar, .TopNavBar, 
+        #SideNavBar, #TopNavBar {
+          display: none !important;
+        }
+        main, .main-content {
+          margin-left: 0 !important;
+          padding-top: 1.5rem !important;
+        }
+        main.ml-64, main.lg\\:ml-64 {
+          margin-left: 0 !important;
+          padding-top: 2rem !important;
+        }
+      `;
+      document.documentElement.appendChild(style);
+    }
+  </script>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>JobFlow Elite | Mentor Scheduler</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "secondary-fixed": "#d3e3ff",
+                    "secondary": "#0060ab",
+                    "on-primary-fixed-variant": "#72188f",
+                    "surface-variant": "#dbe3f6",
+                    "error": "#FF453A",
+                    "on-primary-fixed": "#330044",
+                    "on-background": "#471A70",
+                    "surface-container-high": "#e0e8fb",
+                    "glass-fill": "rgba(255, 255, 255, 0.35)",
+                    "tertiary-fixed-dim": "#47e266",
+                    "glass-border": "rgba(255, 255, 255, 0.6)",
+                    "outline-variant": "#d2c1d2",
+                    "inverse-on-surface": "#ecf1ff",
+                    "surface-container-lowest": "#ffffff",
+                    "error-container": "#ffdad6",
+                    "on-secondary-fixed-variant": "#004883",
+                    "gold": "#FFD60A",
+                    "surface-container": "#e7eeff",
+                    "surface-container-low": "#f0f3ff",
+                    "primary": "#8731a3",
+                    "surface-dim": "#d2daed",
+                    "surface": "#f9f9ff",
+                    "on-secondary-fixed": "#001c39",
+                    "on-tertiary-fixed": "#002106",
+                    "glass-thick": "rgba(255, 255, 255, 0.8)",
+                    "orange": "#FF9F0A",
+                    "primary-container": "#a34cbe",
+                    "outline": "#817381",
+                    "secondary-fixed-dim": "#a3c9ff",
+                    "on-error": "#ffffff",
+                    "on-primary": "#ffffff",
+                    "on-surface-variant": "#4f4350",
+                    "card-gradient": "linear-gradient(135deg, #4D9EFA 0%, #BF7DF5 100%)",
+                    "on-tertiary-fixed-variant": "#00531a",
+                    "on-secondary": "#ffffff",
+                    "on-primary-container": "#fff5fb",
+                    "on-surface": "#141c29",
+                    "background": "#f9f9ff",
+                    "surface-tint": "#8d37a9",
+                    "inverse-primary": "#f0b0ff",
+                    "on-error-container": "#93000a",
+                    "on-tertiary": "#ffffff",
+                    "tertiary-fixed": "#6cff82",
+                    "on-secondary-container": "#003868",
+                    "primary-fixed-dim": "#f0b0ff",
+                    "primary-fixed": "#fbd7ff",
+                    "inverse-surface": "#29313f",
+                    "tertiary": "#006823",
+                    "tertiary-container": "#00842f",
+                    "secondary-container": "#54a3ff",
+                    "on-tertiary-container": "#e6ffe0",
+                    "surface-bright": "#f9f9ff",
+                    "surface-container-highest": "#dbe3f6"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "mobile-margin": "20px",
+                    "base": "8px",
+                    "max-width": "1280px",
+                    "safe-bottom": "34px",
+                    "safe-top": "44px",
+                    "mobile-gutter": "16px",
+                    "desktop-gutter": "24px",
+                    "desktop-margin": "64px"
+            },
+            "fontFamily": {
+                    "label-caps": ["Inter"],
+                    "body-md": ["Inter"],
+                    "display-xl": ["Inter"],
+                    "headline-lg": ["Inter"]
+            },
+            "fontSize": {
+                    "label-caps": ["13px", {"lineHeight": "1.0", "letterSpacing": "0.03em", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                    "display-xl": ["56px", {"lineHeight": "1.1", "letterSpacing": "-0.03em", "fontWeight": "700"}],
+                    "headline-lg": ["34px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .glass-card {
+            background: rgba(255, 255, 255, 0.35);
+            backdrop-filter: blur(28px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 12px 40px 0 rgba(71, 26, 112, 0.15);
+        }
+        .slot-available {
+            border: 1px solid rgba(77, 158, 250, 0.4);
+            background: rgba(255, 255, 255, 0.2);
+            transition: all 0.35s cubic-bezier(0.35, 0, 0.2, 1);
+        }
+        .slot-available:hover {
+            transform: scale(1.02);
+            background: rgba(77, 158, 250, 0.1);
+            border-color: #4D9EFA;
+        }
+        .slot-booked {
+            opacity: 0.4;
+            background: rgba(20, 28, 41, 0.05);
+            pointer-events: none;
+            border: 1px solid transparent;
+        }
+        .slot-selected {
+            background: #8731a3;
+            color: white !important;
+            border: 1px solid #8731a3;
+            transform: scale(1.02);
+            box-shadow: 0 8px 20px rgba(135, 49, 163, 0.3);
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: rgba(135, 49, 163, 0.2);
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="bg-[#DCE4F7] text-on-surface font-body-md min-h-screen pb-32">
+<!-- TopNavBar -->
+<header class="fixed top-0 left-0 lg:left-64 w-full lg:w-[calc(100vw-16rem)] z-50 bg-glass-fill backdrop-blur-3xl border-b border-glass-border shadow-[0_12px_40px_0_rgba(71,26,112,0.15)]">
+<div class="flex justify-between items-center px-desktop-margin h-20 w-full max-w-max-width mx-auto">
+<div class="flex items-center gap-8 lg:hidden">
+<div class="flex items-center gap-2">
+<img alt="JobFlow Logo" class="h-10 w-10 object-contain" src="https://lh3.googleusercontent.com/aida/AP1WRLtHSlvHQm1XNZ4vaeue1GiJtF1j680ovYDsV1bz1IH37RWIQlHCDhIMbTh8QwjysUr_9axMNLFk7d5MtN1sRrdkCEgDdsjpU6S18_eICdCZ5ObBXpk8IMqmy52sfrJsOQaMvz7hk48gtvML_dmfwlaY-1QmOzz74jRWaBViW4SbLXgO-jIKC3LPueU0Wmini7A--bmI3LnC19bd8jueIoFhpwFhp4dCzG3gBDdCSwoekhL8nTJD3FWqr2Qs"/>
+<span class="font-display-xl text-[28px] tracking-tighter bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary">JobFlow</span>
+</div>
+<nav class="hidden md:flex gap-6 items-center">
+<a class="text-on-surface-variant font-medium hover:scale-105 hover:bg-glass-thick transition-all duration-350 ease-[cubic-bezier(0.35,0,0.2,1)] px-3 py-1 rounded-full" href="#">Explore</a>
+<a class="text-on-surface-variant font-medium hover:scale-105 hover:bg-glass-thick transition-all duration-350 ease-[cubic-bezier(0.35,0,0.2,1)] px-3 py-1 rounded-full" href="#">Memberships</a>
+<a class="text-primary font-bold border-b-2 border-primary pb-1" href="#">Mentors</a>
+<a class="text-on-surface-variant font-medium hover:scale-105 hover:bg-glass-thick transition-all duration-350 ease-[cubic-bezier(0.35,0,0.2,1)] px-3 py-1 rounded-full" href="#">Success Stories</a>
+</nav>
+</div>
+<div class="flex items-center gap-6 ml-auto">
+<div class="flex items-center gap-4 text-on-surface-variant">
+<button class="material-symbols-outlined p-2 rounded-full hover:bg-glass-thick transition-all">notifications</button>
+<button class="material-symbols-outlined p-2 rounded-full hover:bg-glass-thick transition-all">account_balance_wallet</button>
+</div>
+<button class="bg-primary-container text-on-primary-container px-6 py-2.5 rounded-full font-label-caps text-label-caps hover:scale-105 active:scale-95 transition-all shadow-lg">
+                    Upgrade to Gold
+                </button>
+<div id="userprofilebtn" class="h-10 w-10 rounded-full border-2 border-primary overflow-hidden cursor-pointer hover:scale-105 transition-transform">
+<img alt="User avatar" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBH6Q5M1KcPj-tSt1yd3GCGkffP_sW8_yH7HM1xDmx96myNiPCOJyFq2J0lLENBuQms0dSmjyQ2LtSUfOT-iYDZjK9O2nb1HW7UGM6KXtqgLqQzC095qmP2oy3mxASDCx2C6i9ORFsfRAEyJkelQBH-exSp1C6N9nZsPp4pceuzOtrPEcg5Rg-cspZ37WyBor8xMHw5Jmivs0_XJXVFKU_qqB-XbpV-6BOciCm3h9FFV6fLWnKwYv2caJBaijtFTmRY_UYU3IphHJrX"/>
+</div>
+</div>
+</div>
+</header>
+<!-- SideNavBar (Shared Component) -->
+<nav class="fixed left-0 top-0 h-full pt-8 pb-10 flex flex-col z-40 w-64 bg-glass-fill backdrop-blur-[28px] border-r border-glass-border shadow-[0_12px_40px_0_rgba(71,26,112,0.15)] hidden lg:flex">
+<div class="px-6 mb-8">
+<h2 class="font-bold text-deep-purple text-xl">Student Portal</h2>
+</div>
+<div class="flex flex-col gap-1 px-4 overflow-y-auto no-scrollbar flex-grow">
+<a class="flex items-center gap-3 text-deep-purple/70 px-4 py-3 hover:bg-glass-thick hover:text-primary transition-all rounded-xl" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-caps text-label-caps">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 text-deep-purple/70 px-4 py-3 hover:bg-glass-thick hover:text-primary transition-all rounded-xl" href="#">
+<span class="material-symbols-outlined">school</span>
+<span class="font-label-caps text-label-caps">Courses</span>
+</a>
+<a class="flex items-center gap-3 text-deep-purple/70 px-4 py-3 hover:bg-glass-thick hover:text-primary transition-all rounded-xl" href="#">
+<span class="material-symbols-outlined">assignment</span>
+<span class="font-label-caps text-label-caps">Assignments</span>
+</a>
+<a class="flex items-center gap-3 text-deep-purple/70 px-4 py-3 hover:bg-glass-thick hover:text-primary transition-all rounded-xl" href="#">
+<span class="material-symbols-outlined">grade</span>
+<span class="font-label-caps text-label-caps">Grades</span>
+</a>
+<a class="flex items-center gap-3 text-deep-purple/70 px-4 py-3 hover:bg-glass-thick hover:text-primary transition-all rounded-xl" href="#">
+<span class="material-symbols-outlined">calendar_today</span>
+<span class="font-label-caps text-label-caps">Schedule</span>
+</a>
+<a class="flex items-center gap-3 text-deep-purple/70 px-4 py-3 hover:bg-glass-thick hover:text-primary transition-all rounded-xl" href="#">
+<span class="material-symbols-outlined">work</span>
+<span class="font-label-caps text-label-caps">Opportunities</span>
+</a>
+<a class="flex items-center gap-3 text-deep-purple/70 px-4 py-3 hover:bg-glass-thick hover:text-primary transition-all rounded-xl" href="#">
+<span class="material-symbols-outlined">insights</span>
+<span class="font-label-caps text-label-caps">analytics</span>
+</a>
+<a class="flex items-center gap-3 text-deep-purple/70 px-4 py-3 hover:bg-glass-thick hover:text-primary transition-all rounded-xl" href="#">
+<span class="material-symbols-outlined">library_books</span>
+<span class="font-label-caps text-label-caps">Library</span>
+</a>
+<a class="flex items-center gap-3 text-deep-purple/70 px-4 py-3 hover:bg-glass-thick hover:text-primary transition-all rounded-xl" href="#">
+<span class="material-symbols-outlined">mail</span>
+<span class="font-label-caps text-label-caps">Messages</span>
+</a>
+<a class="flex items-center gap-3 bg-primary-container text-on-primary-container rounded-xl px-4 py-3 shadow-md transition-transform duration-200 active:scale-95" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">group</span>
+<span class="font-label-caps text-label-caps font-bold">Mentors</span>
+</a>
+</div>
+<div class="px-6 mt-auto">
+<button class="w-full bg-primary text-white py-4 rounded-full font-bold shadow-xl hover:scale-[1.02] active:scale-95 transition-all">
+                Upgrade Plan
+            </button>
+</div>
+</nav>
+<main class="pt-32 px-desktop-margin max-w-max-width mx-auto lg:pl-64">
+<div class="flex flex-col md:flex-row gap-8">
+<!-- Left Sidebar -->
+<aside class="w-full md:w-1/3 space-y-8">
+<div class="glass-card p-8 rounded-[32px]">
+<div class="flex flex-col items-center text-center mb-8">
+<div class="relative mb-6">
+<div class="absolute -inset-1 bg-gradient-to-tr from-primary to-secondary rounded-full blur-sm opacity-50"></div>
+<img alt="Sarah Jenkins" class="relative w-32 h-32 rounded-full object-cover border-4 border-white" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDHTk_4PfxyzDkrO9QIS68fOLqSUHy-0wql-1QyOphTd4PTny29ZFCRspr3wLd45b1egUKJjPQV1Eamt7D1SE7bH1qNT4316030Vek69XjU8t_goLT4u93MWwGR7H2RS6jjjZUlXKkBfQqdaJFaWBvZ5_UzxpB5-E0xLwE0J8vm-B7tKhQSUfYkwmviydl7QRCsEt3aF6UU-o41oAOyc33tE7wHz0c78r1AJDY85lIGokZm5_UIbulepsWbQMqcHfX6w9aVMVBNw1dY"/>
+<div class="absolute bottom-1 right-1 bg-green-500 w-6 h-6 rounded-full border-4 border-white"></div>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-on-background mb-1">Sarah Jenkins</h1>
+<p class="text-primary font-semibold font-label-caps tracking-wide uppercase mb-4">Senior Product Designer</p>
+<div class="flex flex-wrap justify-center gap-2 mb-6">
+<span class="px-3 py-1 bg-secondary-container/20 text-on-secondary-container rounded-full text-[12px] font-semibold border border-white/40">Glassmorphism</span>
+<span class="px-3 py-1 bg-tertiary-container/20 text-on-tertiary-container rounded-full text-[12px] font-semibold border border-white/40">System Design</span>
+<span class="px-3 py-1 bg-primary-container/20 text-on-primary-container rounded-full text-[12px] font-semibold border border-white/40">Fintech</span>
+</div>
+<p class="text-on-surface-variant text-sm leading-relaxed">
+                            Helping designers master digital materiality and craft high-fidelity interfaces. Over 8+ years leading design systems in the fintech space.
+                        </p>
+</div>
+<div class="space-y-6">
+<div>
+<label class="block text-xs font-bold text-on-background uppercase tracking-widest mb-3 px-1">Session Length</label>
+<div class="relative">
+<select class="w-full appearance-none glass-thick border border-glass-border rounded-2xl px-5 py-4 text-on-surface focus:ring-2 focus:ring-primary focus:outline-none cursor-pointer">
+<option>30 Minutes</option>
+<option selected="">60 Minutes</option>
+<option>90 Minutes</option>
+</select>
+<span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-on-surface-variant">expand_more</span>
+</div>
+</div>
+<div>
+<label class="block text-xs font-bold text-on-background uppercase tracking-widest mb-4 px-1">How to book</label>
+<ul class="space-y-4">
+<li class="flex gap-4 items-start">
+<div class="w-8 h-8 rounded-xl bg-primary text-white flex items-center justify-center font-bold text-sm flex-shrink-0">1</div>
+<p class="text-sm text-on-surface-variant pt-1">Select an available time slot from the weekly agenda.</p>
+</li>
+<li class="flex gap-4 items-start">
+<div class="w-8 h-8 rounded-xl bg-primary text-white flex items-center justify-center font-bold text-sm flex-shrink-0">2</div>
+<p class="text-sm text-on-surface-variant pt-1">Add session notes (optional) to help Sarah prepare.</p>
+</li>
+<li class="flex gap-4 items-start">
+<div class="w-8 h-8 rounded-xl bg-primary text-white flex items-center justify-center font-bold text-sm flex-shrink-0">3</div>
+<p class="text-sm text-on-surface-variant pt-1">Click 'Confirm Booking' to finalize your mentorship.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</aside>
+<!-- Right Agenda Grid -->
+<section class="w-full md:w-2/3">
+<div class="glass-card rounded-[32px] overflow-hidden flex flex-col h-full min-h-[600px]">
+<div class="p-8 border-b border-glass-border flex justify-between items-center bg-white/10">
+<div>
+<h2 class="font-headline-lg text-[24px] text-on-background">October 12 - 16, 2024</h2>
+<p class="text-on-surface-variant text-sm">Timezone: America/New_York (GMT-4)</p>
+</div>
+<div class="flex gap-2">
+<button class="p-3 rounded-2xl glass-thick border border-glass-border text-on-surface-variant hover:text-primary transition-all active:scale-95">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="p-3 rounded-2xl glass-thick border border-glass-border text-on-surface-variant hover:text-primary transition-all active:scale-95">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+<div class="flex-1 overflow-x-auto custom-scrollbar">
+<div class="min-w-[800px] p-8">
+<div class="grid grid-cols-5 gap-6">
+<!-- Days Header -->
+<div class="text-center">
+<span class="block text-xs font-bold text-on-surface-variant uppercase tracking-widest mb-1">Mon</span>
+<span class="text-xl font-bold text-on-background">12</span>
+</div>
+<div class="text-center">
+<span class="block text-xs font-bold text-on-surface-variant uppercase tracking-widest mb-1">Tue</span>
+<span class="text-xl font-bold text-on-background">13</span>
+</div>
+<div class="text-center">
+<span class="block text-xs font-bold text-on-surface-variant uppercase tracking-widest mb-1 text-primary">Wed</span>
+<span class="text-xl font-bold text-primary">14</span>
+</div>
+<div class="text-center">
+<span class="block text-xs font-bold text-on-surface-variant uppercase tracking-widest mb-1">Thu</span>
+<span class="text-xl font-bold text-on-background">15</span>
+</div>
+<div class="text-center">
+<span class="block text-xs font-bold text-on-surface-variant uppercase tracking-widest mb-1">Fri</span>
+<span class="text-xl font-bold text-on-background">16</span>
+</div>
+<!-- Slots Grid -->
+<!-- 9 AM -->
+<button class="slot-available rounded-2xl p-4 text-center text-sm font-medium text-on-background">09:00 AM</button>
+<button class="slot-booked rounded-2xl p-4 text-center text-sm font-medium">09:00 AM</button>
+<button class="slot-available rounded-2xl p-4 text-center text-sm font-medium text-on-background">09:00 AM</button>
+<button class="slot-available rounded-2xl p-4 text-center text-sm font-medium text-on-background">09:00 AM</button>
+<button class="slot-booked rounded-2xl p-4 text-center text-sm font-medium">09:00 AM</button>
+<!-- 10 AM -->
+<button class="slot-available rounded-2xl p-4 text-center text-sm font-medium text-on-background">10:00 AM</button>
+<button class="slot-available rounded-2xl p-4 text-center text-sm font-medium text-on-background">10:00 AM</button>
+<button class="slot-booked rounded-2xl p-4 text-center text-sm font-medium">10:00 AM</button>
+<button class="slot-available rounded-2xl p-4 text-center text-sm font-medium text-on-background">10:00 AM</button>
+<button class="slot-available rounded-2xl p-4 text-center text-sm font-medium text-on-background">10:00 AM</button>
+<!-- 11 AM -->
+<button class="slot-booked rounded-2xl p-4 text-center text-sm font-medium">11:00 AM</button>
+<button class="slot-available rounded-2xl p-4 text-center text-sm font-medium text-on-background">11:00 AM</button>
+<button class="slot-available rounded-2xl p-4 text-center text-sm font-medium text-on-background">11:00 AM</button>
+<button class="slot-booked rounded-2xl p-4 text-center text-sm font-medium">11:00 AM</button>
+<button class="slot-available rounded-2xl p-4 text-center text-sm font-medium text-on-background">11:00 AM</button>
+<!-- 12 PM (Break) -->
+<div class="col-span-5 h-[1px] bg-glass-border my-2"></div>
+<!-- 1 PM -->
+<button class="slot-available rounded-2xl p-4 text-center text-sm font-medium text-on-background">01:00 PM</button>
+<button class="slot-booked rounded-2xl p-4 text-center text-sm font-medium">01:00 PM</button>
+<button class="slot-available rounded-2xl p-4 text-center text-sm font-medium text-on-background">01:00 PM</button>
+<button class="slot-available rounded-2xl p-4 text-center text-sm font-medium text-on-background">01:00 PM</button>
+<button class="slot-available rounded-2xl p-4 text-center text-sm font-medium text-on-background">01:00 PM</button>
+<!-- 2 PM -->
+<button class="slot-available rounded-2xl p-4 text-center text-sm font-medium text-on-background">02:00 PM</button>
+<button class="slot-available rounded-2xl p-4 text-center text-sm font-medium text-on-background">02:00 PM</button>
+<button class="slot-selected rounded-2xl p-4 text-center text-sm font-bold">02:00 PM</button>
+<button class="slot-available rounded-2xl p-4 text-center text-sm font-medium text-on-background">02:00 PM</button>
+<button class="slot-booked rounded-2xl p-4 text-center text-sm font-medium">02:00 PM</button>
+<!-- 3 PM -->
+<button class="slot-booked rounded-2xl p-4 text-center text-sm font-medium">03:00 PM</button>
+<button class="slot-available rounded-2xl p-4 text-center text-sm font-medium text-on-background">03:00 PM</button>
+<button class="slot-available rounded-2xl p-4 text-center text-sm font-medium text-on-background">03:00 PM</button>
+<button class="slot-available rounded-2xl p-4 text-center text-sm font-medium text-on-background">03:00 PM</button>
+<button class="slot-available rounded-2xl p-4 text-center text-sm font-medium text-on-background">03:00 PM</button>
+<!-- 4 PM -->
+<button class="slot-available rounded-2xl p-4 text-center text-sm font-medium text-on-background">04:00 PM</button>
+<button class="slot-available rounded-2xl p-4 text-center text-sm font-medium text-on-background">04:00 PM</button>
+<button class="slot-booked rounded-2xl p-4 text-center text-sm font-medium">04:00 PM</button>
+<button class="slot-available rounded-2xl p-4 text-center text-sm font-medium text-on-background">04:00 PM</button>
+<button class="slot-available rounded-2xl p-4 text-center text-sm font-medium text-on-background">04:00 PM</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+</main>
+<!-- Floating Validation Bar -->
+<div class="fixed bottom-8 left-1/2 -translate-x-1/2 w-full max-w-2xl px-6 z-40">
+<div class="glass-thick backdrop-blur-2xl border border-white/60 p-5 rounded-[24px] shadow-[0_20px_50px_-12px_rgba(71,26,112,0.3)] flex justify-between items-center">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 bg-primary/10 rounded-2xl flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">calendar_today</span>
+</div>
+<div>
+<p class="text-xs font-bold text-on-surface-variant uppercase tracking-wider">Selected Slot</p>
+<p class="text-on-background font-semibold">Oct 14, 2:00 PM <span class="text-on-surface-variant font-normal">(60 min)</span></p>
+</div>
+</div>
+<button class="bg-primary text-white px-8 py-3.5 rounded-2xl font-bold hover:bg-primary-container hover:shadow-xl transition-all active:scale-95 flex items-center gap-2">
+                Confirm Booking
+                <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+</div>
+
+<script>
+        // Micro-interactions for slot selection
+        const slots = document.querySelectorAll('.slot-available');
+        slots.forEach(slot => {
+            slot.addEventListener('click', () => {
+                document.querySelectorAll('.slot-selected').forEach(s => {
+                    s.classList.remove('slot-selected');
+                    s.classList.add('slot-available', 'text-on-background');
+                    s.classList.remove('font-bold');
+                    s.classList.add('font-medium');
+                });
+                slot.classList.remove('slot-available', 'text-on-background');
+                slot.classList.add('slot-selected', 'font-bold');
+                slot.classList.remove('font-medium');
+            });
+        });
+    </script>
+</body></html>

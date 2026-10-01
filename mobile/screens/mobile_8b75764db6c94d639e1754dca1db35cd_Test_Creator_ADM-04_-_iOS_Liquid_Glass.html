@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
+<title>New Assessment | Creator Pro</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        :root {
+            --apple-spring: cubic-bezier(0.35, 0, 0.85, 1);
+            --glass-shadow: 0 12px 40px 0 rgba(71, 26, 112, 0.15);
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+            background: linear-gradient(135deg, #DCE4F7 0%, #f9f9ff 100%);
+            min-height: 100vh;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.35);
+            backdrop-filter: blur(28px);
+            -webkit-backdrop-filter: blur(28px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            box-shadow: var(--glass-shadow);
+        }
+        .glass-input {
+            background: rgba(255, 255, 255, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            transition: all 0.2s ease;
+        }
+        .glass-input:focus {
+            outline: none;
+            border-color: #8731a3;
+            background: #ffffff;
+        }
+        .spring-press:active {
+            transform: scale(0.96);
+            transition: transform 0.35s var(--apple-spring);
+        }
+        .custom-radio:checked + .radio-mark {
+            background-color: #a34cbe;
+            border-color: #a34cbe;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "secondary": "#0060ab",
+                    "error": "#FF453A",
+                    "tertiary-fixed": "#6cff82",
+                    "on-secondary-fixed": "#001c39",
+                    "inverse-surface": "#29313f",
+                    "tertiary-container": "#00842f",
+                    "on-surface": "#141c29",
+                    "glass-thick": "rgba(255, 255, 255, 0.8)",
+                    "outline": "#817381",
+                    "on-background": "#471A70",
+                    "tertiary-fixed-dim": "#47e266",
+                    "surface-container-low": "#f0f3ff",
+                    "surface-container": "#e7eeff",
+                    "error-container": "#ffdad6",
+                    "on-error": "#ffffff",
+                    "surface": "#f9f9ff",
+                    "on-tertiary-fixed-variant": "#00531a",
+                    "on-primary-fixed": "#330044",
+                    "orange": "#FF9F0A",
+                    "on-primary": "#ffffff",
+                    "secondary-fixed": "#d3e3ff",
+                    "surface-container-lowest": "#ffffff",
+                    "primary-container": "#a34cbe",
+                    "glass-border": "rgba(255, 255, 255, 0.6)",
+                    "on-tertiary-container": "#e6ffe0",
+                    "on-primary-container": "#fff5fb",
+                    "primary-fixed": "#fbd7ff",
+                    "inverse-on-surface": "#ecf1ff",
+                    "on-surface-variant": "#4f4350",
+                    "glass-fill": "rgba(255, 255, 255, 0.35)",
+                    "surface-container-high": "#e0e8fb",
+                    "on-primary-fixed-variant": "#72188f",
+                    "on-secondary-fixed-variant": "#004883",
+                    "on-secondary-container": "#003868",
+                    "primary": "#8731a3",
+                    "on-secondary": "#ffffff",
+                    "surface-bright": "#f9f9ff",
+                    "surface-variant": "#dbe3f6",
+                    "on-tertiary-fixed": "#002106",
+                    "surface-dim": "#d2daed",
+                    "inverse-primary": "#f0b0ff",
+                    "primary-fixed-dim": "#f0b0ff",
+                    "background": "#f9f9ff",
+                    "outline-variant": "#d2c1d2",
+                    "secondary-fixed-dim": "#a3c9ff",
+                    "gold": "#FFD60A",
+                    "on-tertiary": "#ffffff",
+                    "surface-tint": "#8d37a9",
+                    "on-error-container": "#93000a",
+                    "surface-container-highest": "#dbe3f6",
+                    "card-gradient": "linear-gradient(135deg, #4D9EFA 0%, #BF7DF5 100%)",
+                    "tertiary": "#006823",
+                    "secondary-container": "#54a3ff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "mobile-gutter": "16px",
+                    "mobile-margin": "20px",
+                    "base": "8px",
+                    "desktop-margin": "64px",
+                    "safe-bottom": "34px",
+                    "safe-top": "44px",
+                    "max-width": "1280px",
+                    "desktop-gutter": "24px"
+            },
+            "fontFamily": {
+                    "headline-lg-mobile": ["Inter"],
+                    "label-caps-mobile": ["Inter"],
+                    "display-xl-mobile": ["Inter"],
+                    "body-md": ["Inter"],
+                    "label-caps": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "display-xl": ["Inter"],
+                    "body-md-mobile": ["Inter"]
+            },
+            "fontSize": {
+                    "headline-lg-mobile": ["28px", {"lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "label-caps-mobile": ["12px", {"lineHeight": "1.0", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "display-xl-mobile": ["34px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                    "label-caps": ["13px", {"lineHeight": "1.0", "letterSpacing": "0.03em", "fontWeight": "600"}],
+                    "headline-lg": ["34px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                    "display-xl": ["56px", {"lineHeight": "1.1", "letterSpacing": "-0.03em", "fontWeight": "700"}],
+                    "body-md-mobile": ["15px", {"lineHeight": "1.5", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="text-on-surface antialiased overflow-x-hidden">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-glass-thick backdrop-blur-[28px] border-b border-glass-border shadow-[0_12px_40px_0_rgba(71,26,112,0.15)] flex items-center justify-between px-mobile-margin h-14">
+<button class="flex items-center justify-center p-2 text-primary spring-press">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile font-bold text-on-surface">New Assessment</h1>
+<button class="px-4 py-1.5 bg-primary-container text-on-primary-container rounded-full font-label-caps-mobile text-label-caps-mobile uppercase tracking-wider spring-press">
+            Save
+        </button>
+</header>
+<!-- Main Content Canvas -->
+<main class="pt-[calc(56px+24px)] pb-[calc(98px+24px)] px-mobile-margin flex flex-col gap-6 max-w-lg mx-auto">
+<!-- Section: Test Basics -->
+<section class="flex flex-col gap-4">
+<div class="flex items-center gap-2 px-1">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'opsz' 20;">edit_note</span>
+<h2 class="font-label-caps-mobile text-label-caps-mobile uppercase text-on-background opacity-70">Test Basics</h2>
+</div>
+<div class="glass-card rounded-3xl p-6 flex flex-col gap-5">
+<div class="flex flex-col gap-2">
+<label class="text-on-background font-semibold text-sm px-1">Assessment Title</label>
+<input class="glass-input h-[52px] px-4 rounded-2xl w-full text-on-surface focus:ring-2 focus:ring-primary/20 border-none" placeholder="e.g. Senior UX Designer Quiz" type="text"/>
+</div>
+<div class="flex flex-col gap-2">
+<label class="text-on-background font-semibold text-sm px-1">Category</label>
+<div class="relative">
+<select class="glass-input h-[52px] px-4 rounded-2xl w-full appearance-none text-on-surface border-none">
+<option>Design &amp; Creative</option>
+<option>Technical Engineering</option>
+<option>Marketing</option>
+<option>Product Management</option>
+</select>
+<span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-on-surface-variant">expand_more</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Section: Question Editor -->
+<section class="flex flex-col gap-4">
+<div class="flex items-center justify-between px-1">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'opsz' 20;">quiz</span>
+<h2 class="font-label-caps-mobile text-label-caps-mobile uppercase text-on-background opacity-70">Question Editor</h2>
+</div>
+<span class="text-xs font-bold text-primary bg-primary-fixed px-2 py-0.5 rounded-md">Q1</span>
+</div>
+<div class="glass-card rounded-3xl p-6 flex flex-col gap-6">
+<div class="flex flex-col gap-2">
+<label class="text-on-background font-semibold text-sm px-1">Question Text</label>
+<textarea class="glass-input p-4 rounded-2xl w-full text-on-surface resize-none border-none focus:ring-2 focus:ring-primary/20" placeholder="Enter your question here..." rows="3"></textarea>
+</div>
+<div class="flex flex-col gap-3">
+<label class="text-on-background font-semibold text-sm px-1">Options</label>
+<!-- Option A -->
+<div class="flex items-center gap-3 group">
+<div class="relative flex items-center justify-center">
+<input checked="" class="custom-radio w-6 h-6 opacity-0 absolute cursor-pointer z-10" name="correct_answer" type="radio"/>
+<div class="radio-mark w-6 h-6 border-2 border-outline-variant rounded-full flex items-center justify-center transition-all">
+<div class="w-2.5 h-2.5 bg-white rounded-full"></div>
+</div>
+</div>
+<input class="glass-input h-11 px-4 rounded-xl flex-1 text-sm border-none focus:ring-1 focus:ring-primary/40" type="text" value="Heuristic Evaluation"/>
+<button class="text-on-surface-variant hover:text-error transition-colors p-1">
+<span class="material-symbols-outlined" style="font-size: 20px;">delete</span>
+</button>
+</div>
+<!-- Option B -->
+<div class="flex items-center gap-3 group">
+<div class="relative flex items-center justify-center">
+<input class="custom-radio w-6 h-6 opacity-0 absolute cursor-pointer z-10" name="correct_answer" type="radio"/>
+<div class="radio-mark w-6 h-6 border-2 border-outline-variant rounded-full flex items-center justify-center transition-all">
+<div class="w-2.5 h-2.5 bg-white rounded-full"></div>
+</div>
+</div>
+<input class="glass-input h-11 px-4 rounded-xl flex-1 text-sm border-none" placeholder="Add option text..." type="text"/>
+<button class="text-on-surface-variant hover:text-error transition-colors p-1">
+<span class="material-symbols-outlined" style="font-size: 20px;">delete</span>
+</button>
+</div>
+<!-- Option C -->
+<div class="flex items-center gap-3 group opacity-60">
+<div class="relative flex items-center justify-center">
+<input class="custom-radio w-6 h-6 opacity-0 absolute cursor-pointer z-10" name="correct_answer" type="radio"/>
+<div class="radio-mark w-6 h-6 border-2 border-outline-variant rounded-full flex items-center justify-center transition-all">
+<div class="w-2.5 h-2.5 bg-white rounded-full"></div>
+</div>
+</div>
+<input class="glass-input h-11 px-4 rounded-xl flex-1 text-sm border-none" placeholder="Add option text..." type="text"/>
+<button class="text-on-surface-variant hover:text-error transition-colors p-1">
+<span class="material-symbols-outlined" style="font-size: 20px;">delete</span>
+</button>
+</div>
+</div>
+<button class="flex items-center justify-center gap-2 py-3 border-2 border-dashed border-primary/30 rounded-2xl text-primary font-semibold text-sm hover:bg-primary/5 transition-colors spring-press">
+<span class="material-symbols-outlined" style="font-size: 20px;">add</span>
+                    Add Option
+                </button>
+</div>
+</section>
+<!-- Section: Classification Tags -->
+<section class="flex flex-col gap-4">
+<div class="flex items-center gap-2 px-1">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'opsz' 20;">sell</span>
+<h2 class="font-label-caps-mobile text-label-caps-mobile uppercase text-on-background opacity-70">Skill Tags</h2>
+</div>
+<div class="flex flex-wrap gap-2">
+<div class="px-4 py-2 bg-primary-container text-on-primary-container rounded-full text-sm font-semibold flex items-center gap-2 border border-white/20 spring-press">
+                    UI Design
+                    <span class="material-symbols-outlined" style="font-size: 16px;">close</span>
+</div>
+<div class="px-4 py-2 bg-glass-thick text-on-surface-variant rounded-full text-sm font-semibold flex items-center gap-2 border border-glass-border spring-press">
+                    User Research
+                    <span class="material-symbols-outlined" style="font-size: 16px;">add</span>
+</div>
+<div class="px-4 py-2 bg-glass-thick text-on-surface-variant rounded-full text-sm font-semibold flex items-center gap-2 border border-glass-border spring-press">
+                    Accessibility
+                    <span class="material-symbols-outlined" style="font-size: 16px;">add</span>
+</div>
+<div class="px-4 py-2 bg-glass-thick text-on-surface-variant rounded-full text-sm font-semibold flex items-center gap-2 border border-glass-border spring-press">
+                    Prototyping
+                    <span class="material-symbols-outlined" style="font-size: 16px;">add</span>
+</div>
+</div>
+</section>
+<!-- Aesthetic Visual Break -->
+<div class="relative w-full h-32 rounded-3xl overflow-hidden glass-card mt-4">
+
+<div class="absolute inset-0 flex items-center justify-center p-6 text-center">
+<p class="font-label-caps-mobile text-on-background leading-relaxed italic opacity-80">
+                    "Precision in assessment starts with clarity in design."
+                </p>
+</div>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full z-50 bg-glass-thick backdrop-blur-[28px] border-t border-glass-border rounded-t-xl shadow-[0_-8px_30px_0_rgba(71,26,112,0.1)] h-[calc(64px+34px)] pb-safe-bottom px-mobile-gutter flex justify-around items-center">
+<!-- Add Question (Active Intention) -->
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-6 py-1.5 transition-transform duration-[0.35s] ease-[cubic-bezier(0.35,0,0.85,1)] active:scale-[0.96]" href="#">
+<span class="material-symbols-outlined" data-icon="add_circle">add_circle</span>
+<span class="font-label-caps-mobile text-label-caps-mobile mt-0.5">Add Question</span>
+</a>
+<!-- Bank -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:opacity-80 transition-opacity active:scale-[0.96]" href="#">
+<span class="material-symbols-outlined" data-icon="database">database</span>
+<span class="font-label-caps-mobile text-label-caps-mobile mt-0.5">Bank</span>
+</a>
+<!-- Preview -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:opacity-80 transition-opacity active:scale-[0.96]" href="#">
+<span class="material-symbols-outlined" data-icon="visibility">visibility</span>
+<span class="font-label-caps-mobile text-label-caps-mobile mt-0.5">Preview</span>
+</a>
+</nav>
+<script>
+        // Micro-interaction for radio buttons
+        document.querySelectorAll('input[type="radio"]').forEach(radio => {
+            radio.addEventListener('change', (e) => {
+                // Remove visual selection from all
+                document.querySelectorAll('.radio-mark').forEach(mark => {
+                    mark.classList.remove('bg-primary-container', 'border-primary');
+                    mark.classList.add('border-outline-variant');
+                });
+                
+                // Add to active
+                if (e.target.checked) {
+                    const mark = e.target.nextElementSibling;
+                    mark.classList.remove('border-outline-variant');
+                    mark.classList.add('bg-primary-container', 'border-primary');
+                }
+            });
+        });
+
+        // Initialize state
+        window.addEventListener('DOMContentLoaded', () => {
+            const checkedRadio = document.querySelector('input[type="radio"]:checked');
+            if(checkedRadio) {
+                const mark = checkedRadio.nextElementSibling;
+                mark.classList.remove('border-outline-variant');
+                mark.classList.add('bg-primary-container', 'border-primary');
+            }
+        });
+    </script>
+</body></html>

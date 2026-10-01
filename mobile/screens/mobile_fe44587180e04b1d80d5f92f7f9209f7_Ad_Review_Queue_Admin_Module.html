@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
+<title>Ad Review Queue (ADM-08)</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary-container": "#00842f",
+                    "on-primary": "#ffffff",
+                    "error": "#FF453A",
+                    "inverse-surface": "#29313f",
+                    "secondary-container": "#54a3ff",
+                    "on-background": "#471A70",
+                    "surface-bright": "#f9f9ff",
+                    "glass-border": "rgba(255, 255, 255, 0.6)",
+                    "on-primary-fixed-variant": "#72188f",
+                    "on-tertiary-fixed-variant": "#00531a",
+                    "surface-dim": "#d2daed",
+                    "secondary": "#0060ab",
+                    "surface-variant": "#dbe3f6",
+                    "surface-container-lowest": "#ffffff",
+                    "tertiary": "#006823",
+                    "on-error": "#ffffff",
+                    "inverse-on-surface": "#ecf1ff",
+                    "on-tertiary-fixed": "#002106",
+                    "outline": "#817381",
+                    "on-primary-fixed": "#330044",
+                    "on-tertiary": "#ffffff",
+                    "surface-container": "#e7eeff",
+                    "inverse-primary": "#f0b0ff",
+                    "primary": "#8731a3",
+                    "card-gradient": "linear-gradient(135deg, #4D9EFA 0%, #BF7DF5 100%)",
+                    "surface": "#f9f9ff",
+                    "on-tertiary-container": "#e6ffe0",
+                    "glass-thick": "rgba(255, 255, 255, 0.8)",
+                    "secondary-fixed-dim": "#a3c9ff",
+                    "on-surface-variant": "#4f4350",
+                    "primary-fixed": "#fbd7ff",
+                    "on-secondary-fixed": "#001c39",
+                    "gold": "#FFD60A",
+                    "surface-container-low": "#f0f3ff",
+                    "primary-fixed-dim": "#f0b0ff",
+                    "on-secondary-container": "#003868",
+                    "background": "#f9f9ff",
+                    "surface-tint": "#8d37a9",
+                    "surface-container-high": "#e0e8fb",
+                    "on-secondary-fixed-variant": "#004883",
+                    "tertiary-fixed": "#6cff82",
+                    "orange": "#FF9F0A",
+                    "outline-variant": "#d2c1d2",
+                    "on-error-container": "#93000a",
+                    "error-container": "#ffdad6",
+                    "primary-container": "#a34cbe",
+                    "surface-container-highest": "#dbe3f6",
+                    "secondary-fixed": "#d3e3ff",
+                    "on-surface": "#141c29",
+                    "tertiary-fixed-dim": "#47e266",
+                    "on-primary-container": "#fff5fb",
+                    "glass-fill": "rgba(255, 255, 255, 0.35)",
+                    "on-secondary": "#ffffff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "desktop-gutter": "24px",
+                    "mobile-margin": "20px",
+                    "max-width": "1280px",
+                    "base": "8px",
+                    "safe-bottom": "34px",
+                    "safe-top": "44px",
+                    "mobile-gutter": "16px",
+                    "desktop-margin": "64px"
+            },
+            "fontFamily": {
+                    "label-caps-mobile": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "body-md-mobile": ["Inter"],
+                    "body-md": ["Inter"],
+                    "display-xl-mobile": ["Inter"],
+                    "label-caps": ["Inter"],
+                    "headline-lg-mobile": ["Inter"],
+                    "display-xl": ["Inter"]
+            },
+            "fontSize": {
+                    "label-caps-mobile": ["12px", {"lineHeight": "1.0", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "headline-lg": ["34px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                    "body-md-mobile": ["15px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                    "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                    "display-xl-mobile": ["34px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "label-caps": ["13px", {"lineHeight": "1.0", "letterSpacing": "0.03em", "fontWeight": "600"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "display-xl": ["56px", {"lineHeight": "1.1", "letterSpacing": "-0.03em", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background: linear-gradient(180deg, #DCE4F7 0%, #f9f9ff 100%);
+            min-height: 100vh;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.45);
+            backdrop-filter: blur(28px);
+            -webkit-backdrop-filter: blur(28px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 12px 40px 0 rgba(71, 26, 112, 0.1);
+        }
+
+        .liquid-spring {
+            transition: transform 0.35s cubic-bezier(0.17, 0.67, 0.5, 1.0);
+        }
+        
+        .liquid-spring:active {
+            transform: scale(0.96);
+        }
+
+        .status-badge {
+            font-size: 10px;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            font-weight: 800;
+        }
+
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="font-body-md-mobile text-on-background selection:bg-primary-fixed">
+<!-- Top App Bar -->
+<header class="fixed top-0 w-full z-50 backdrop-blur-[28px] bg-glass-fill border-b border-glass-border shadow-[0_12px_40px_0_rgba(71,26,112,0.15)] pt-safe-top h-[calc(44px+44px)] flex items-end">
+<div class="flex justify-between items-center px-mobile-margin h-[44px] w-full">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">admin_panel_settings</span>
+<h1 class="text-headline-lg-mobile font-headline-lg-mobile font-bold text-primary">Ad Review Queue</h1>
+</div>
+<button class="material-symbols-outlined text-on-surface-variant hover:opacity-80 active:scale-[0.96] transition-all">filter_list</button>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="pt-[calc(44px+44px+24px)] pb-[calc(64px+34px+24px)] px-mobile-margin">
+<!-- Summary Stats Section -->
+<div class="flex gap-4 overflow-x-auto no-scrollbar pb-6">
+<div class="flex-shrink-0 glass-card rounded-2xl p-4 min-w-[140px]">
+<p class="text-label-caps-mobile text-on-surface-variant opacity-60">PENDING</p>
+<p class="text-headline-lg-mobile font-bold text-primary mt-1">42</p>
+</div>
+<div class="flex-shrink-0 glass-card rounded-2xl p-4 min-w-[140px]">
+<p class="text-label-caps-mobile text-on-surface-variant opacity-60">CRITICAL</p>
+<p class="text-headline-lg-mobile font-bold text-error mt-1">08</p>
+</div>
+<div class="flex-shrink-0 glass-card rounded-2xl p-4 min-w-[140px]">
+<p class="text-label-caps-mobile text-on-surface-variant opacity-60">AVG. TIME</p>
+<p class="text-headline-lg-mobile font-bold text-tertiary mt-1">2.4m</p>
+</div>
+</div>
+<!-- Review Queue Grid -->
+<div class="grid grid-cols-1 gap-mobile-gutter">
+<!-- Card 1: Google -->
+<div class="glass-card rounded-[24px] overflow-hidden flex flex-col group liquid-spring">
+<div class="relative aspect-video">
+<img alt="Premium glassmorphic tech internship ad banner" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida/AP1WRLtIVOjZdtkzg-fDtw9KSltmnB6Tg_Uk2cEoEB3huoXGV8LcMGzIAOysK-OXeUp7PvlyKikEr_ZMeJAqrZ9Yf2lTaNi0QGjCwqRiJOuterJzZ8kyOCaJB56KejJwRFmwtnBq4dJ7snhDzLQxEuThe28LW2mDVa5wunZe1pfW0vxCGgT8uiZLO9seGvZkib4m29Gq6qzqWvgn08dQ7Zpjn1VhhBteQaGMyUxj9qESJnp6kvKVTU3zaZyNl5bp"/>
+<div class="absolute top-4 left-4">
+<span class="status-badge bg-primary-container text-on-primary-container px-3 py-1 rounded-full backdrop-blur-md border border-white/20">NEW</span>
+</div>
+</div>
+<div class="p-5 flex flex-col gap-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-sm border border-glass-border">
+<span class="material-symbols-outlined text-primary">corporate_fare</span>
+</div>
+<div>
+<h3 class="font-bold text-on-background">Google</h3>
+<p class="text-sm text-on-surface-variant">UI Engineering Residency</p>
+</div>
+</div>
+<div class="flex gap-3 pt-2">
+<button class="flex-1 h-[44px] rounded-full bg-tertiary-container text-on-tertiary-container flex items-center justify-center gap-2 font-bold active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                            Approve
+                        </button>
+<button class="w-[44px] h-[44px] rounded-full border border-error/20 flex items-center justify-center text-error bg-error-container/10 active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Card 2: Spotify -->
+<div class="glass-card rounded-[24px] overflow-hidden flex flex-col group liquid-spring">
+<div class="relative aspect-video bg-gradient-to-br from-secondary/20 to-primary/20 flex items-center justify-center">
+<div class="p-8 text-center">
+<span class="material-symbols-outlined text-primary text-4xl mb-2 opacity-40">music_note</span>
+<div class="h-1 w-20 bg-primary/20 rounded-full mx-auto"></div>
+</div>
+<div class="absolute top-4 left-4">
+<span class="status-badge bg-gold text-on-secondary-fixed px-3 py-1 rounded-full backdrop-blur-md border border-white/20">URGENT</span>
+</div>
+</div>
+<div class="p-5 flex flex-col gap-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-sm border border-glass-border">
+<span class="material-symbols-outlined text-on-secondary-fixed-variant">podcasts</span>
+</div>
+<div>
+<h3 class="font-bold text-on-background">Spotify</h3>
+<p class="text-sm text-on-surface-variant">Associate Product Designer</p>
+</div>
+</div>
+<div class="flex gap-3 pt-2">
+<button class="flex-1 h-[44px] rounded-full bg-tertiary-container text-on-tertiary-container flex items-center justify-center gap-2 font-bold active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                            Approve
+                        </button>
+<button class="w-[44px] h-[44px] rounded-full border border-error/20 flex items-center justify-center text-error bg-error-container/10 active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Card 3: Stripe -->
+<div class="glass-card rounded-[24px] overflow-hidden flex flex-col group liquid-spring">
+<div class="relative aspect-video bg-card-gradient opacity-80">
+<div class="absolute inset-0 flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-4xl opacity-50">payments</span>
+</div>
+<div class="absolute top-4 left-4">
+<span class="status-badge bg-surface-container-highest text-on-surface px-3 py-1 rounded-full backdrop-blur-md border border-white/20">RE-REVIEW</span>
+</div>
+</div>
+<div class="p-5 flex flex-col gap-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-sm border border-glass-border">
+<span class="material-symbols-outlined text-secondary">account_balance</span>
+</div>
+<div>
+<h3 class="font-bold text-on-background">Stripe</h3>
+<p class="text-sm text-on-surface-variant">Fintech Lead</p>
+</div>
+</div>
+<div class="flex gap-3 pt-2">
+<button class="flex-1 h-[44px] rounded-full bg-tertiary-container text-on-tertiary-container flex items-center justify-center gap-2 font-bold active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                            Approve
+                        </button>
+<button class="w-[44px] h-[44px] rounded-full border border-error/20 flex items-center justify-center text-error bg-error-container/10 active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 w-full z-50 backdrop-blur-[28px] bg-glass-thick border-t border-glass-border pb-safe-bottom shadow-[0_-8px_30px_rgba(71,26,112,0.1)]">
+<div class="flex justify-around items-center h-[64px] px-mobile-margin w-full">
+<a class="flex flex-col items-center justify-center text-primary font-bold active:scale-[0.92] transition-transform duration-[0.35s] ease-[cubic-bezier(0.17,0.67,0.5,1.0)]" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">view_quilt</span>
+<span class="font-label-caps-mobile text-label-caps-mobile mt-1">Queue</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant opacity-60 hover:bg-glass-fill active:scale-[0.92] transition-all" href="#">
+<span class="material-symbols-outlined">monitoring</span>
+<span class="font-label-caps-mobile text-label-caps-mobile mt-1">Insights</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant opacity-60 hover:bg-glass-fill active:scale-[0.92] transition-all" href="#">
+<span class="material-symbols-outlined">gavel</span>
+<span class="font-label-caps-mobile text-label-caps-mobile mt-1">Policies</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant opacity-60 hover:bg-glass-fill active:scale-[0.92] transition-all" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-caps-mobile text-label-caps-mobile mt-1">Settings</span>
+</a>
+</div>
+</nav>
+<script>
+        // Micro-interactions for button feedback
+        document.querySelectorAll('button').forEach(btn => {
+            btn.addEventListener('touchstart', () => {
+                btn.style.opacity = '0.7';
+            });
+            btn.addEventListener('touchend', () => {
+                btn.style.opacity = '1';
+            });
+        });
+        
+        // Dynamic Greeting or Time Logic if needed for extra high-fidelity feel
+        console.log("iOS Liquid Glass System Initialized - ADM-08");
+    </script>
+</body></html>

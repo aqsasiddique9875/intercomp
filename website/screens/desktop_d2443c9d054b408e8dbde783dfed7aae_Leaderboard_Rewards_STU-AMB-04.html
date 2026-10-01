@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Student Ambassador Leaderboard & Rewards</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined.outline {
+             font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-container": "#fff5ff",
+                        "inverse-surface": "#352e36",
+                        "on-primary-fixed": "#330044",
+                        "on-tertiary-fixed-variant": "#5d3186",
+                        "outline": "#817381",
+                        "surface-container": "#f7eaf5",
+                        "on-secondary-fixed": "#221b00",
+                        "primary-fixed": "#fbd7ff",
+                        "on-tertiary-fixed": "#2c0050",
+                        "surface": "#fff7fb",
+                        "on-error": "#ffffff",
+                        "on-primary-container": "#fff5fb",
+                        "surface-container-highest": "#ecdfe9",
+                        "inverse-on-surface": "#faedf7",
+                        "on-secondary-fixed-variant": "#554600",
+                        "tertiary-container": "#8a5eb5",
+                        "surface-bright": "#fff7fb",
+                        "surface-dim": "#e3d6e1",
+                        "background": "#fff7fb",
+                        "tertiary": "#70459a",
+                        "surface-container-lowest": "#ffffff",
+                        "tertiary-fixed-dim": "#ddb7ff",
+                        "secondary": "#705d00",
+                        "primary": "#8731a3",
+                        "surface-container-low": "#fdf0fa",
+                        "error": "#ba1a1a",
+                        "on-tertiary": "#ffffff",
+                        "primary-fixed-dim": "#f0b0ff",
+                        "on-error-container": "#93000a",
+                        "surface-tint": "#8d37a9",
+                        "outline-variant": "#d2c1d2",
+                        "on-background": "#201921",
+                        "surface-variant": "#ecdfe9",
+                        "error-container": "#ffdad6",
+                        "on-primary-fixed-variant": "#72188f",
+                        "tertiary-fixed": "#f0dbff",
+                        "on-primary": "#ffffff",
+                        "secondary-fixed-dim": "#e9c400",
+                        "surface-container-high": "#f1e4ef",
+                        "inverse-primary": "#f0b0ff",
+                        "on-surface": "#201921",
+                        "on-surface-variant": "#4f4350",
+                        "on-secondary": "#ffffff",
+                        "on-secondary-container": "#6f5c00",
+                        "secondary-container": "#fdd404",
+                        "primary-container": "#a34cbe",
+                        "secondary-fixed": "#ffe171"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "md": "16px",
+                        "xs": "4px",
+                        "xl": "32px",
+                        "sm": "8px",
+                        "unit": "8px",
+                        "lg": "24px",
+                        "2xl": "48px",
+                        "3xl": "64px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "display-lg-mobile": ["Inter"],
+                        "body-md": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "label-sm": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "display-lg-mobile": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gradient-to-br from-[#e6e6fa] to-[#b0e0e6] min-h-screen font-body-lg text-on-background relative overflow-x-hidden selection:bg-primary-container selection:text-on-primary-container">
+<!-- Ambient Background Blobs -->
+<div class="fixed top-[-10%] left-[-10%] w-[50%] h-[50%] rounded-full bg-primary/10 blur-[100px] z-0 pointer-events-none"></div>
+<div class="fixed bottom-[-10%] right-[-10%] w-[50%] h-[50%] rounded-full bg-secondary-container/10 blur-[100px] z-0 pointer-events-none"></div>
+<!-- SideNavBar -->
+<nav class="hidden md:flex h-screen w-64 fixed left-0 top-0 border-r border-white/50 bg-white/10 backdrop-blur-[28px] shadow-[0_20px_40px_rgba(163,76,190,0.1)] z-40 transition-all duration-300 ease-out flex-col py-xl px-md">
+<div class="flex flex-col h-full gap-lg">
+<div class="flex items-center gap-sm px-4">
+<span class="material-symbols-outlined text-primary text-[32px]">emoji_events</span>
+<span class="font-display-lg text-[24px] font-bold text-primary-container leading-none">Ambassador Portal</span>
+</div>
+<div class="flex items-center gap-md px-4 py-2 mt-4 bg-white/5 rounded-xl border border-white/20">
+<img class="w-10 h-10 rounded-full object-cover border border-white/40" data-alt="A close-up portrait of a diverse university student looking confident and professional. The lighting is soft and bright, highlighting a light mode aesthetic with subtle purple background hues. High-status, premium photography style, clear details, modern academic vibe." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAQ-nF2SBv7MdNU9r-UcVRhRLzKaZ1fCQ5o0tn70XGq35SPCOxtmUno7CfzVG2VZOzg2A8ZPLjJ-bnl15U1pqpsvHLfkuCjCW-R7LD-6wRuNPlKcSx5alXc-MJIIe-fky4t7iHCkf-fVykI3kyEzQoD3LEJCMyUCTL-r4ICCA48q-T8GxBYIzqPfOiQ_5k55NAcdVeGT6aQzs7BSVbo86XJKTu8Ir9oaWIjgIn2nvRlU8BnIZ9bqh4gMpsZ-dZ-kq5Baz8N7Pp1cUoJ"/>
+<div class="flex flex-col">
+<span class="font-headline-md text-[16px] leading-tight text-on-surface">Ambassador Elite</span>
+<span class="font-label-sm text-on-surface-variant">Prestige Member</span>
+</div>
+</div>
+<ul class="flex flex-col gap-sm mt-md flex-1">
+<li>
+<a class="text-on-surface-variant flex items-center gap-3 px-4 py-3 hover:bg-white/10 transition-all rounded-xl hover:scale-[1.02] hover:bg-white/20 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined outline">dashboard</span>
+<span class="font-body-md">Dashboard</span>
+</a>
+</li>
+<li>
+<a class="text-on-surface-variant flex items-center gap-3 px-4 py-3 hover:bg-white/10 transition-all rounded-xl hover:scale-[1.02] hover:bg-white/20 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined outline">workspace_premium</span>
+<span class="font-body-md">Missions</span>
+</a>
+</li>
+<li>
+<a class="text-secondary-container font-bold flex items-center gap-3 px-4 py-3 rounded-xl bg-primary/20 hover:scale-[1.02] transition-transform duration-200" href="#">
+<span class="material-symbols-outlined">leaderboard</span>
+<span class="font-body-md">Leaderboard</span>
+</a>
+</li>
+<li>
+<a class="text-on-surface-variant flex items-center gap-3 px-4 py-3 hover:bg-white/10 transition-all rounded-xl hover:scale-[1.02] hover:bg-white/20 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined outline">redeem</span>
+<span class="font-body-md">Rewards</span>
+</a>
+</li>
+<li>
+<a class="text-on-surface-variant flex items-center gap-3 px-4 py-3 hover:bg-white/10 transition-all rounded-xl hover:scale-[1.02] hover:bg-white/20 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined outline">person</span>
+<span class="font-body-md">Profile</span>
+</a>
+</li>
+</ul>
+<button class="bg-secondary-container text-on-secondary-container font-body-md font-bold py-3 px-4 rounded-xl shadow-md hover:scale-[1.02] transition-transform duration-200 flex items-center justify-center gap-2 mt-auto">
+                Join Global Summit
+            </button>
+</div>
+</nav>
+<!-- TopNavBar (Mobile mainly, but structural element) -->
+<header class="fixed top-0 right-0 left-0 md:left-64 h-20 border-b border-white/50 bg-white/10 backdrop-blur-[28px] shadow-[0_4px_30px_rgba(0,0,0,0.05)] z-30 flex justify-between items-center px-xl w-full md:w-[calc(100%-16rem)]">
+<div class="flex items-center gap-4">
+<div class="relative hidden sm:block">
+<span class="material-symbols-outlined outline absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="bg-white/10 border border-white/50 text-on-surface rounded-full py-2 pl-10 pr-4 focus:bg-white/20 focus:border-white focus:outline-none transition-all placeholder:text-on-surface-variant/50 w-64" placeholder="Search..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-md">
+<button class="text-on-surface-variant hover:text-primary transition-colors scale-95 active:scale-90 transition-transform p-2 rounded-full hover:bg-white/10">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="text-on-surface-variant hover:text-primary transition-colors scale-95 active:scale-90 transition-transform p-2 rounded-full hover:bg-white/10">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<img class="w-10 h-10 rounded-full object-cover border border-white/50 md:hidden ml-2" data-alt="A small circular avatar image of a young professional student. Bright lighting, clean background, premium aesthetic suitable for a light mode high-status dashboard." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB9Xqf6CiCeztL1KxfrW0lnQkbWjdwB9bcRESMuRjzHbcgmrcBYM_FSSORWevX_Mea-FmVp_4H5TCehNMQrJ6W8kSwOZ0gER2bqTFiMssRC6LSa_xGZmx_6gzanCg6oQI_J5wOZ8buNJST5jhAelIZLDaqF7E8nUCQ4oA_l-qN5--dB9YwZHftLRX0kyrDLzwJK9_wNBt0VnTwEhCKbgzAByIHx9Iu5SVMsLqhKAKwM-Mv8fb9bdKBC9-m65c0Kh1IQsvEy7Nbwgur6"/>
+</div>
+</header>
+<!-- Main Canvas -->
+<main class="pt-[104px] pl-0 md:pl-[288px] pr-md md:pr-xl pb-xl min-h-screen relative z-10 flex flex-col lg:flex-row gap-xl max-w-[1600px] mx-auto">
+<!-- LEFT PANEL: Leaderboard (60%) -->
+<section class="flex-1 lg:w-[60%] flex flex-col gap-lg">
+<!-- Header & Filters -->
+<div class="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4">
+<div>
+<h1 class="font-headline-md text-[32px] text-on-surface font-bold">Top Ambassadors</h1>
+<p class="font-body-md text-on-surface-variant mt-1">Monthly ranking</p>
+</div>
+<div class="flex bg-white/20 backdrop-blur-[12px] p-1 rounded-full border border-white/40 shadow-sm">
+<button class="px-4 py-1.5 rounded-full bg-primary text-on-primary font-body-md font-medium shadow-sm transition-all">This Month</button>
+<button class="px-4 py-1.5 rounded-full text-on-surface-variant font-body-md font-medium hover:bg-white/30 transition-all">All Time</button>
+</div>
+</div>
+<!-- Podium Cards -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-md items-end mt-4">
+<!-- 2nd Place -->
+<div class="bg-white/10 backdrop-blur-[28px] border border-white/50 rounded-2xl p-lg flex flex-col items-center relative shadow-[0_20px_40px_rgba(163,76,190,0.05)] order-2 md:order-1 h-[90%] transform hover:-translate-y-2 transition-transform duration-300">
+<div class="absolute -top-6 bg-surface-variant/80 backdrop-blur-md rounded-full w-12 h-12 flex items-center justify-center border-2 border-white shadow-md">
+<span class="font-headline-md text-on-surface-variant">2</span>
+</div>
+<img class="w-20 h-20 rounded-full object-cover border-4 border-outline-variant mt-4" data-alt="Portrait of a male student ambassador with a silver glow around the image. Soft studio lighting, bright light mode aesthetic, confident expression. High-quality corporate yet academic feel." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAILJonEr1FgV58z5VuvI0z-99tpfdutTV4FgoWmYM6_8Qs7MvjpY7PmiocEJWEI8esaPh0qZPsWBd0OAokeUVwl_Q8WoLUmila5gi1CUXyNs7bc59CAoxIdBiODdYi3gUJL_VkTtB81s1jWT6-oUK38ieSXvdWD_JFX2F3bp7YxaUyRvlDuFVkQBlvbZfEKS6iEVzjWnnCznqZD0LW5U0YmqtLv9uYvZK9sHw6POwMH4hvfODR4RK1_qfQFvg67R1Bw5pzpZD92ui2"/>
+<span class="material-symbols-outlined text-outline text-[32px] mt-2 drop-shadow-md">military_tech</span>
+<h3 class="font-headline-md text-[18px] text-on-surface mt-2 text-center">Omar Siddiqui</h3>
+<p class="font-body-md text-primary font-medium mt-1">74 referrals</p>
+</div>
+<!-- 1st Place -->
+<div class="bg-gradient-to-b from-primary/10 to-white/10 backdrop-blur-[28px] border border-white/60 rounded-2xl p-lg flex flex-col items-center relative shadow-[0_20px_40px_rgba(163,76,190,0.15)] order-1 md:order-2 h-full z-10 transform hover:-translate-y-2 transition-transform duration-300">
+<span class="material-symbols-outlined text-secondary-container absolute -top-8 text-[48px] drop-shadow-[0_0_15px_rgba(253,212,4,0.5)]">workspace_premium</span>
+<div class="absolute -top-3 bg-secondary-container rounded-full w-12 h-12 flex items-center justify-center border-2 border-white shadow-md">
+<span class="font-headline-md text-on-secondary-container">1</span>
+</div>
+<img class="w-24 h-24 rounded-full object-cover border-4 border-secondary-container mt-6 shadow-lg" data-alt="Portrait of a female student ambassador, wearing professional attire, glowing gold rim light. Bright, clean light mode environment. Prestigious and high-status aesthetic. Sharp focus." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCtEDsid7ZSElijcGQGmj6KwHxErl5DYkxI3hOVYqLpf3zsOifsfM6_TaWz_yxYljawlczrHaxuIuDZ_7xANyn4epXGOdyX6G7iJQ8SjwDdzvOYGWjYaUxCZkKxYcn_PbrSavye8X6ZxxF5PrxB1DKWYf0f0wgFDBxsprBPIVdGwWnbOPYjpewBtYYFabsd-tCYVXu0MqvAFT0R_Kpg3vMgzjZIHwX0enfiQqIzPBtdHSFfbHrPJRHo-zLWX3c-KpHN0KhEbh-VK-it"/>
+<span class="material-symbols-outlined text-secondary-container text-[40px] mt-2 drop-shadow-md">military_tech</span>
+<h3 class="font-headline-md text-[22px] text-on-surface mt-2 text-center font-bold">Zara Malik</h3>
+<p class="font-body-md text-primary font-bold mt-1 text-lg">89 referrals</p>
+</div>
+<!-- 3rd Place -->
+<div class="bg-primary/5 backdrop-blur-[28px] border border-white/50 border-primary/30 rounded-2xl p-lg flex flex-col items-center relative shadow-[0_20px_40px_rgba(163,76,190,0.1)] order-3 md:order-3 h-[85%] transform hover:-translate-y-2 transition-transform duration-300">
+<div class="absolute -top-6 bg-[#CD7F32]/20 backdrop-blur-md rounded-full w-12 h-12 flex items-center justify-center border-2 border-white shadow-md">
+<span class="font-headline-md text-[#A0522D]">3</span>
+</div>
+<div class="absolute top-2 right-2 bg-primary text-white text-[10px] font-bold px-2 py-1 rounded-full uppercase tracking-wider">YOU</div>
+<img class="w-16 h-16 rounded-full object-cover border-4 border-[#CD7F32]/50 mt-4" data-alt="Portrait of a female student looking approachable. Soft warm lighting, light background with subtle lavender gradient. Elite academic setting, high quality digital photography." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCay8EEVZTB7Os27OInL9rdkTOva-1h-oRWJyPTrg_wCRulaHN9mWcxhKJI1mV0LlUDrUAvyh6PMhD6Mp26XYjfIFKq5-SZ_8VDxxcV_cvNbp9RMtnycBy0yUryHIXyv7kbzGmeZrNbUccupTslrd6pICp0-sNsEwBOPHtZcGzR3a6a4b0SGPIPJiHjUvv0GLNVSSDq9FVXr0YRx5AowYz0RQe4pfNrVODcZQ51BdabLu6Xm5RIwe_imoup28Qs5389rzGQOw89SM2V"/>
+<span class="material-symbols-outlined text-[#CD7F32] text-[28px] mt-2 drop-shadow-md">military_tech</span>
+<h3 class="font-headline-md text-[18px] text-on-surface mt-2 text-center font-bold text-primary">Aria Sterling</h3>
+<p class="font-body-md text-primary font-medium mt-1">47 referrals</p>
+</div>
+</div>
+<!-- Ranked List -->
+<div class="bg-white/10 backdrop-blur-[28px] border border-white/50 rounded-2xl shadow-[0_20px_40px_rgba(163,76,190,0.05)] overflow-hidden mt-4">
+<div class="w-full">
+<!-- List Header -->
+<div class="grid grid-cols-[40px_1fr_minmax(80px,auto)_minmax(60px,auto)] gap-4 px-6 py-4 border-b border-white/30 text-on-surface-variant font-label-sm uppercase tracking-wider">
+<div>Rank</div>
+<div>Ambassador</div>
+<div class="text-right">Referrals</div>
+<div class="text-right">Points</div>
+</div>
+<!-- Rows -->
+<div class="flex flex-col">
+<!-- Row 4 -->
+<div class="grid grid-cols-[40px_1fr_minmax(80px,auto)_minmax(60px,auto)] gap-4 px-6 py-4 items-center border-b border-black/5 hover:bg-white/20 transition-colors cursor-pointer group">
+<div class="font-headline-md text-on-surface-variant/70">4</div>
+<div class="flex items-center gap-3">
+<img class="w-10 h-10 rounded-full object-cover" data-alt="Small avatar of a male student. Bright, clean background. Light mode aesthetic, sharp." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDRZsS1RK9J9lL7aCrmqh5Mz6xn1V605XxfM_THeZJ_2-EtbNuyvd3vF4K8U5XUzd9_4j7kkKXp--R0kWC8jzF16vuhZdLyIhP6cwkh8y4FC6N979a7BttqcYLa4yJnKmk6jaQ41S-WfgkVwlOp7Loq3klTubtDh8NYezlKfkPSX-hVrXJZx7lXaD8i1NaZhNC0r-HOezhKn2jYbcOzNejxVxIJ3QyTQHBhbRMLCbyY7G-FPkn34UC88zMNzA9FPr98t2MafzpowQ3d"/>
+<div>
+<div class="font-headline-md text-[16px] text-on-surface">David Chen</div>
+<div class="font-body-md text-[13px] text-on-surface-variant">Tech Institute</div>
+</div>
+</div>
+<div class="text-right font-body-md text-on-surface font-medium">42</div>
+<div class="text-right font-body-md text-primary font-medium">2,100</div>
+</div>
+<!-- Row 5 (Aria - YOU - Highlighted) -->
+<div class="grid grid-cols-[40px_1fr_minmax(80px,auto)_minmax(60px,auto)] gap-4 px-6 py-4 items-center bg-primary/10 border-b border-primary/20 hover:bg-primary/20 transition-colors cursor-pointer relative">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-primary"></div>
+<div class="font-headline-md text-primary">3</div>
+<div class="flex items-center gap-3">
+<img class="w-10 h-10 rounded-full object-cover ring-2 ring-primary/50" data-alt="Small avatar of Aria Sterling from the 3rd place podium. Bright lighting, clean." src="https://lh3.googleusercontent.com/aida-public/AB6AXuASOIH4WIhycmOD67lbWrKxoCkC3EakHPXAVMtkeYGk-ugvrOK-poUxfK1zImjdg8KDC3fU9nvlN7kcF8_b76PFEMRRNSdPoeLEWH04exeX4u69NlVFbVyQSYmxp9WM2uIPOWUhyvEaeMhXmGgkyh229PrNIjYzsvTJgye6fg71oCZdNM2yQMXxWlP9c7iiPIMiV9CJgCRG1F-7luC332PJo7_sdR2fnoQJT7nKMOIOH6CU_V4Nq_0c3jlS-foznJHy8pyp2KkY2smY"/>
+<div>
+<div class="font-headline-md text-[16px] text-on-surface flex items-center gap-2">
+                                        Aria Sterling
+                                        <span class="bg-primary text-white text-[9px] px-1.5 py-0.5 rounded-sm uppercase tracking-widest">You</span>
+</div>
+<div class="font-body-md text-[13px] text-on-surface-variant">State University</div>
+</div>
+</div>
+<div class="text-right font-body-md text-on-surface font-bold">47</div>
+<div class="text-right font-body-md text-primary font-bold">2,840</div>
+</div>
+<!-- Row 6 -->
+<div class="grid grid-cols-[40px_1fr_minmax(80px,auto)_minmax(60px,auto)] gap-4 px-6 py-4 items-center border-b border-black/5 hover:bg-white/20 transition-colors cursor-pointer">
+<div class="font-headline-md text-on-surface-variant/70">5</div>
+<div class="flex items-center gap-3">
+<img class="w-10 h-10 rounded-full object-cover" data-alt="Small avatar of female student. Light mode, bright and clear." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAp6p0qOLw6oqoFVPg00UQSAG_sNnWEqvPHJB3-HJwNZZ6DHFaj8jYJf_1M5Di0inO4n1m1X_oUqGweD7IiBM1LwtEoL6lbWoiZKdIQNKYi6YI1lowtSyz66fiSREhUzfPzj44fCiYhNF17WEbHrsaCZeMuk72rJTJoCIAG2QPiERQuwGwQxBa0jV_axCfSAkFq-8tPsn9BkdBCJ88MwkODmI9IzBa70Bnf_a7QB8iAj28mgDmPTqXJAFuj8_jfNO75Z3h607m13wNN"/>
+<div>
+<div class="font-headline-md text-[16px] text-on-surface">Sarah Jenkins</div>
+<div class="font-body-md text-[13px] text-on-surface-variant">Global College</div>
+</div>
+</div>
+<div class="text-right font-body-md text-on-surface font-medium">38</div>
+<div class="text-right font-body-md text-primary font-medium">1,900</div>
+</div>
+</div>
+<div class="p-4 text-center">
+<button class="text-primary font-body-md font-medium hover:underline">View Full Leaderboard</button>
+</div>
+</div>
+</div>
+</section>
+<!-- RIGHT PANEL: Rewards (40%) -->
+<aside class="flex-1 lg:w-[40%] flex flex-col gap-lg">
+<h2 class="font-headline-md text-[28px] text-on-surface font-bold mb-2">My Rewards</h2>
+<!-- Points Balance Card -->
+<div class="relative overflow-hidden bg-gradient-to-br from-primary to-[#4a0072] rounded-3xl p-xl text-white shadow-[0_20px_40px_rgba(163,76,190,0.3)] border border-white/20">
+<!-- Abstract graphic bg -->
+<div class="absolute top-[-50%] right-[-20%] w-[200px] h-[200px] bg-white/10 rounded-full blur-2xl"></div>
+<div class="absolute bottom-[-20%] left-[-10%] w-[150px] h-[150px] bg-secondary-container/20 rounded-full blur-xl"></div>
+<div class="relative z-10 flex flex-col">
+<span class="font-label-sm text-white/80 uppercase tracking-widest mb-2">Current Balance</span>
+<div class="flex items-end gap-2">
+<span class="font-display-lg text-[56px] leading-none font-bold">2,840</span>
+<span class="font-headline-md text-secondary-container mb-2">XP</span>
+</div>
+<div class="w-full bg-black/20 h-2 rounded-full mt-6 overflow-hidden backdrop-blur-sm border border-white/10">
+<div class="bg-secondary-container h-full rounded-full" style="width: 75%"></div>
+</div>
+<p class="font-body-md text-white/70 text-sm mt-2">660 XP until next tier</p>
+</div>
+</div>
+<!-- Reward Cards List -->
+<div class="flex flex-col gap-md mt-2">
+<div class="flex justify-between items-center px-2">
+<h3 class="font-headline-md text-lg text-on-surface">Available Rewards</h3>
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:text-primary transition-colors">filter_list</span>
+</div>
+<!-- Reward 1 -->
+<div class="bg-white/10 backdrop-blur-[28px] border border-white/50 rounded-2xl p-4 flex items-center justify-between shadow-sm hover:shadow-md transition-shadow group relative overflow-hidden">
+<div class="absolute inset-0 bg-gradient-to-r from-transparent to-white/5 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
+<div class="flex items-center gap-4 relative z-10">
+<div class="w-12 h-12 bg-white/40 rounded-xl flex items-center justify-center border border-white/60 shadow-sm text-primary">
+<span class="material-symbols-outlined">redeem</span>
+</div>
+<div>
+<div class="font-headline-md text-[16px] text-on-surface">Amazon Gift Card $25</div>
+<div class="font-body-md text-sm text-primary font-medium">1,500 XP</div>
+</div>
+</div>
+<button class="bg-white/50 hover:bg-primary hover:text-white text-primary border border-primary/20 px-4 py-2 rounded-full font-label-sm transition-all duration-300 relative z-10">Claim</button>
+</div>
+<!-- Reward 2 (Active/Purple) -->
+<div class="bg-primary/5 backdrop-blur-[28px] border border-primary/30 rounded-2xl p-4 flex items-center justify-between shadow-sm group relative overflow-hidden ring-1 ring-primary/20">
+<div class="flex items-center gap-4 relative z-10">
+<div class="w-12 h-12 bg-primary rounded-xl flex items-center justify-center shadow-md text-white">
+<span class="material-symbols-outlined">workspace_premium</span>
+</div>
+<div>
+<div class="font-headline-md text-[16px] text-on-surface">Premium Subscription 3mo</div>
+<div class="font-body-md text-sm text-primary font-medium">2,000 XP</div>
+</div>
+</div>
+<button class="bg-primary hover:bg-primary-container text-white px-4 py-2 rounded-full font-label-sm shadow-md transition-all duration-300 relative z-10 hover:scale-[1.02]">Claim</button>
+</div>
+<!-- Reward 3 (Claimed) -->
+<div class="bg-white/5 backdrop-blur-[28px] border border-white/30 rounded-2xl p-4 flex items-center justify-between opacity-80">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 bg-surface-variant rounded-xl flex items-center justify-center text-on-surface-variant/50">
+<span class="material-symbols-outlined">verified</span>
+</div>
+<div>
+<div class="font-headline-md text-[16px] text-on-surface-variant line-through">Certificate of Excellence</div>
+<div class="font-body-md text-sm text-on-surface-variant/70">500 XP</div>
+</div>
+</div>
+<div class="bg-emerald-100 text-emerald-700 px-3 py-1 rounded-full font-label-sm flex items-center gap-1 border border-emerald-200">
+<span class="material-symbols-outlined text-[14px]">check_circle</span> Claimed
+                    </div>
+</div>
+<!-- Reward 4 (Locked) -->
+<div class="bg-white/5 backdrop-blur-[28px] border border-white/30 rounded-2xl p-4 flex items-center justify-between opacity-60">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 bg-surface-variant rounded-xl flex items-center justify-center text-on-surface-variant/50">
+<span class="material-symbols-outlined">checkroom</span>
+</div>
+<div>
+<div class="font-headline-md text-[16px] text-on-surface-variant">Exclusive Merch Pack</div>
+<div class="font-body-md text-sm text-on-surface-variant/70">3,500 XP</div>
+</div>
+</div>
+<div class="text-on-surface-variant/50 flex items-center gap-1">
+<span class="material-symbols-outlined text-[20px]">lock</span>
+</div>
+</div>
+</div>
+<!-- Transaction History (Simplified list pattern) -->
+<div class="mt-4 px-2">
+<h3 class="font-headline-md text-lg text-on-surface mb-4">Recent History</h3>
+<div class="flex flex-col gap-0 border-l-2 border-primary/20 ml-2 pl-4">
+<div class="relative py-3 group">
+<div class="absolute -left-[21px] top-1/2 -translate-y-1/2 w-2 h-2 rounded-full bg-primary ring-4 ring-white/50 group-hover:scale-150 transition-transform"></div>
+<div class="flex justify-between items-center">
+<div>
+<p class="font-body-md text-on-surface">Earned from Referral</p>
+<p class="font-label-sm text-on-surface-variant mt-0.5">Oct 24, 2023</p>
+</div>
+<span class="font-headline-md text-sm text-primary font-bold">+50 XP</span>
+</div>
+</div>
+<div class="relative py-3 group">
+<div class="absolute -left-[21px] top-1/2 -translate-y-1/2 w-2 h-2 rounded-full bg-outline ring-4 ring-white/50 group-hover:scale-150 transition-transform"></div>
+<div class="flex justify-between items-center">
+<div>
+<p class="font-body-md text-on-surface">Claimed Certificate</p>
+<p class="font-label-sm text-on-surface-variant mt-0.5">Oct 12, 2023</p>
+</div>
+<span class="font-headline-md text-sm text-outline font-bold">-500 XP</span>
+</div>
+</div>
+</div>
+</div>
+</aside>
+</main>
+</body></html>

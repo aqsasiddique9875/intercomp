@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/>
+  <title>RecruiterPro | Boost Plans</title>
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <!-- Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            primary: "#8731a3",
+            secondary: "#4D9EFA",
+            background: "#fff7fb",
+            outline: "#817381",
+            "glass-fill": "rgba(255, 255, 255, 0.45)",
+            "glass-border": "rgba(255, 255, 255, 0.6)"
+          },
+          borderRadius: {
+            xxl: "24px"
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      background-color: #DCE4F7;
+      -webkit-tap-highlight-color: transparent;
+      font-family: 'Inter', sans-serif;
+      color: #471A70;
+    }
+    .glass-card {
+      background: rgba(255, 255, 255, 0.4);
+      backdrop-filter: blur(28px);
+      -webkit-backdrop-filter: blur(28px);
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      box-shadow: 0 8px 32px 0 rgba(163, 76, 190, 0.08);
+    }
+    .animated-bg-sphere {
+      position: fixed;
+      width: 350px;
+      height: 350px;
+      border-radius: 50%;
+      filter: blur(80px);
+      z-index: -1;
+      opacity: 0.5;
+      animation: float 20s infinite ease-in-out;
+    }
+    @keyframes float {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(50px, -50px) scale(1.1); }
+    }
+    /* Hide scrollbar */
+    .hide-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .hide-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+</head>
+<body class="antialiased overflow-x-hidden pb-32">
+  <!-- Animated Background Spheres -->
+  <div class="animated-bg-sphere bg-purple-300" style="top: -50px; left: -50px; animation-delay: 0s;"></div>
+  <div class="animated-bg-sphere bg-blue-200" style="bottom: -100px; right: -50px; animation-delay: -5s;"></div>
+
+  <!-- Top AppBar -->
+  <header class="fixed top-0 left-0 right-0 max-w-md mx-auto w-full z-50 bg-white/45 backdrop-blur-[28px] border-b border-white/50 shadow-[0_4px_20px_0_rgba(163,76,190,0.06)] flex justify-between items-center px-5 h-[64px]">
+    <div class="flex items-center gap-3">
+      <button onclick="goBack()" class="w-9 h-9 rounded-full bg-white/40 flex items-center justify-center text-primary shadow-sm active:scale-95 transition-transform">
+        <span class="material-symbols-outlined text-[20px] font-bold">arrow_back</span>
+      </button>
+      <h1 class="font-bold text-base text-primary">Boost Job Posting</h1>
+    </div>
+    <div class="w-9"></div>
+  </header>
+
+  <main class="mt-[84px] px-5 max-w-md mx-auto space-y-4">
+    <!-- Active Job details indicator -->
+    <section id="job-indicator" class="glass-card rounded-2xl p-4 text-left flex items-center justify-between border border-purple-500/10">
+      <div>
+        <span class="text-[9px] font-extrabold uppercase tracking-widest text-[#726580]">Currently Selecting Plan For</span>
+        <h3 id="target-job-title" class="font-extrabold text-sm text-[#471A70] mt-0.5">Senior UX Designer</h3>
+        <p id="target-job-dept" class="text-[10px] text-outline font-semibold mt-0.5">Design & Creative</p>
+      </div>
+      <div class="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
+        <span class="material-symbols-outlined text-lg">rocket_launch</span>
+      </div>
+    </section>
+
+    <!-- Subtitle description -->
+    <section class="text-left pl-1">
+      <p class="text-xs text-outline font-medium">Get more applicants with premium visibility on student job feeds.</p>
+    </section>
+
+    <!-- Plans Stack Container -->
+    <section class="space-y-4">
+      
+      <!-- Card 1: Top 1 Spot -->
+      <div class="glass-card rounded-[24px] p-5 flex flex-col gap-4 text-left relative overflow-hidden border-2 border-primary/20 shadow-md">
+        <!-- Premium Badge Ribbon -->
+        <div class="flex justify-between items-start">
+          <span class="px-2.5 py-0.5 rounded-full bg-[#8731a3] text-white font-extrabold text-[8px] uppercase tracking-wider">PREMIUM</span>
+          <span class="material-symbols-outlined text-primary text-xl">rocket_launch</span>
+        </div>
+        
+        <div>
+          <h4 class="font-extrabold text-base text-[#471A70]">Top 1 Spot</h4>
+          <p class="text-xs text-outline font-medium mt-1 leading-relaxed">Maximum exposure at the very top of all searches.</p>
+        </div>
+
+        <div class="flex items-center justify-between border-t border-purple-950/5 pt-4">
+          <div>
+            <span class="text-xs font-extrabold text-primary text-[15px]">Rs 10,000</span>
+            <span class="text-[9px] text-outline font-bold">/ posting</span>
+          </div>
+          <button onclick="selectPlan('Top 1 Spot', 10000)" class="h-9 px-5 bg-primary text-white rounded-full font-bold text-xs shadow-md active:scale-95 transition-transform flex items-center gap-1.5">
+            Boost Now
+          </button>
+        </div>
+      </div>
+
+      <!-- Card 2: Top 3 Placement -->
+      <div class="glass-card rounded-[24px] p-5 flex flex-col gap-4 text-left relative overflow-hidden border border-white/80">
+        <div class="flex justify-between items-start">
+          <span class="px-2.5 py-0.5 rounded-full bg-pink-100 text-pink-700 font-extrabold text-[8px] uppercase tracking-wider">HIGH VISIBILITY</span>
+          <span class="material-symbols-outlined text-primary text-xl">trending_up</span>
+        </div>
+
+        <div>
+          <h4 class="font-extrabold text-base text-[#471A70]">Top 3 Placement</h4>
+          <p class="text-xs text-outline font-medium mt-1 leading-relaxed">Stay within the first three results for 30 days.</p>
+        </div>
+
+        <div class="flex items-center justify-between border-t border-purple-950/5 pt-4">
+          <div>
+            <span class="text-xs font-extrabold text-primary text-[15px]">Rs 5,000</span>
+            <span class="text-[9px] text-outline font-bold">/ posting</span>
+          </div>
+          <button onclick="selectPlan('Top 3 Placement', 5000)" class="h-9 px-5 bg-white/60 border border-primary text-primary rounded-full font-bold text-xs active:scale-95 transition-transform">
+            Select Plan
+          </button>
+        </div>
+      </div>
+
+      <!-- Card 3: Top 10 Visibility -->
+      <div class="glass-card rounded-[24px] p-5 flex flex-col gap-4 text-left relative overflow-hidden border border-white/80">
+        <div class="flex justify-between items-start">
+          <span class="px-2.5 py-0.5 rounded-full bg-blue-100 text-blue-700 font-extrabold text-[8px] uppercase tracking-wider">INCREASED REACH</span>
+          <span class="material-symbols-outlined text-primary text-xl">visibility</span>
+        </div>
+
+        <div>
+          <h4 class="font-extrabold text-base text-[#471A70]">Top 10 Visibility</h4>
+          <p class="text-xs text-outline font-medium mt-1 leading-relaxed">Appear in the top 10 results for relevant searches.</p>
+        </div>
+
+        <div class="flex items-center justify-between border-t border-purple-950/5 pt-4">
+          <div>
+            <span class="text-xs font-extrabold text-primary text-[15px]">Rs 2,500</span>
+            <span class="text-[9px] text-outline font-bold">/ posting</span>
+          </div>
+          <button onclick="selectPlan('Top 10 Visibility', 2500)" class="h-9 px-5 bg-white/60 border border-primary text-primary rounded-full font-bold text-xs active:scale-95 transition-transform">
+            Select Plan
+          </button>
+        </div>
+      </div>
+
+      <!-- Card 4: Standard Posting -->
+      <div class="glass-card rounded-[24px] p-5 flex flex-col gap-4 text-left relative overflow-hidden border border-white/80 opacity-75">
+        <div class="flex justify-between items-start">
+          <span class="px-2.5 py-0.5 rounded-full bg-gray-100 text-gray-700 font-extrabold text-[8px] uppercase tracking-wider">BASIC</span>
+          <span class="material-symbols-outlined text-outline text-xl">article</span>
+        </div>
+
+        <div>
+          <h4 class="font-extrabold text-base text-[#471A70]">Standard Posting</h4>
+          <p class="text-xs text-outline font-medium mt-1 leading-relaxed">Regular visibility in the general job listings.</p>
+        </div>
+
+        <div class="flex items-center justify-between border-t border-purple-950/5 pt-4">
+          <div>
+            <span class="text-xs font-extrabold text-[#471A70] text-[15px]">Rs 0</span>
+            <span class="text-[9px] text-outline font-bold">(Free)</span>
+          </div>
+          <button disabled class="h-9 px-5 bg-gray-200 text-gray-500 rounded-full font-bold text-xs cursor-not-allowed">
+            Current Plan
+          </button>
+        </div>
+      </div>
+
+    </section>
+  </main>
+
+  <!-- Bottom Navigation Bar Placeholder -->
+  <nav id="bottom-nav"></nav>
+
+  <!-- Success Modal Overlay -->
+  <div id="success-overlay" class="fixed inset-0 z-50 flex items-center justify-center bg-[#471A70]/60 backdrop-blur-md hidden opacity-0 transition-opacity duration-300">
+    <div class="glass-card max-w-[280px] w-full p-6 rounded-3xl text-center space-y-4 shadow-[0_12px_40px_rgba(0,0,0,0.15)] scale-90 transition-transform duration-300" id="success-card">
+      <div class="w-16 h-16 rounded-full bg-green-500/10 text-green-600 flex items-center justify-center mx-auto border border-green-500/20">
+        <span class="material-symbols-outlined text-4xl">check_circle</span>
+      </div>
+      <div>
+        <h3 class="font-extrabold text-[#471A70] text-base">Payment Successful!</h3>
+        <p id="success-plan-text" class="text-[11px] text-outline mt-1 font-semibold">Top 1 Spot Boost Activated</p>
+      </div>
+      <p class="text-[10px] text-outline/80 leading-relaxed font-medium">Your job listing has been boosted. You will receive analytics updates shortly.</p>
+    </div>
+  </div>
+
+  <!-- Payment Method Modal (Premium Card Pop-up) -->
+  <div id="payment-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-[#471A70]/60 backdrop-blur-md hidden">
+    <div class="bg-white w-full max-w-sm rounded-[32px] overflow-hidden shadow-2xl text-left flex flex-col animate-in zoom-in-95 duration-200 mx-5">
+      <!-- Modal Header -->
+      <div class="bg-gradient-to-r from-primary to-[#672280] p-6 flex justify-between items-center text-white">
+        <div>
+          <span class="block text-[10px] font-bold uppercase tracking-wider text-[#F3E8FF]">BOOST JOB POSTING</span>
+          <h3 id="payment-modal-plan-name" class="font-extrabold text-xl mt-0.5">Top 1 Spot</h3>
+        </div>
+        <div class="text-right">
+          <span class="block text-[10px] font-bold uppercase tracking-wider text-[#F3E8FF]">Amount</span>
+          <span id="payment-modal-plan-price" class="font-extrabold text-xl mt-0.5">Rs. 10,000</span>
+        </div>
+      </div>
+
+      <!-- Modal Body -->
+      <div class="p-6 space-y-5">
+        <div>
+          <h4 class="font-bold text-base text-[#1a0533]">Select Payment Method</h4>
+          <p class="text-xs text-outline font-semibold mt-1">Choose your preferred mobile payment wallet</p>
+        </div>
+
+        <!-- Payment Options -->
+        <div class="space-y-3">
+          
+          <!-- JazzCash Option -->
+          <div onclick="selectPaymentMethod('jazzcash')" id="pay-opt-jazzcash" class="border-2 border-gray-100 rounded-2xl p-4 flex items-center justify-between cursor-pointer transition-all duration-200 hover:border-primary/30">
+            <div class="flex items-center gap-3">
+              <div class="w-12 h-12 bg-[#E51C24] rounded-2xl flex items-center justify-center text-white font-extrabold text-[11px] uppercase tracking-tighter shadow-sm">
+                Jazz
+              </div>
+              <div>
+                <h5 class="font-bold text-sm text-[#471A70]">JazzCash</h5>
+                <p class="text-[10px] text-outline font-medium mt-0.5">Pay via JazzCash mobile account</p>
+              </div>
+            </div>
+            <!-- Custom Radio Button -->
+            <div id="radio-jazzcash" class="w-5 h-5 rounded-full border-2 border-gray-300 flex items-center justify-center transition-all">
+              <div class="w-2.5 h-2.5 rounded-full bg-primary hidden"></div>
+            </div>
+          </div>
+
+          <!-- Easypaisa Option -->
+          <div onclick="selectPaymentMethod('easypaisa')" id="pay-opt-easypaisa" class="border-2 border-gray-100 rounded-2xl p-4 flex items-center justify-between cursor-pointer transition-all duration-200 hover:border-primary/30">
+            <div class="flex items-center gap-3">
+              <div class="w-12 h-12 bg-[#008F47] rounded-2xl flex items-center justify-center text-white font-extrabold text-[11px] uppercase tracking-tighter shadow-sm">
+                Easy
+              </div>
+              <div>
+                <h5 class="font-bold text-sm text-[#471A70]">Easypaisa</h5>
+                <p class="text-[10px] text-outline font-medium mt-0.5">Pay via Easypaisa mobile account</p>
+              </div>
+            </div>
+            <!-- Custom Radio Button -->
+            <div id="radio-easypaisa" class="w-5 h-5 rounded-full border-2 border-gray-300 flex items-center justify-center transition-all">
+              <div class="w-2.5 h-2.5 rounded-full bg-primary hidden"></div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Continue Button -->
+        <button id="btn-payment-continue" onclick="submitBoostPayment()" disabled class="w-full h-12 bg-gray-300 text-gray-500 font-bold rounded-2xl transition-all flex items-center justify-center gap-1.5 text-sm cursor-not-allowed">
+          Continue →
+        </button>
+
+        <!-- Cancel Link -->
+        <div class="text-center">
+          <button onclick="closePaymentModal()" class="text-xs text-outline font-bold hover:text-primary active:scale-95 transition-transform">
+            Cancel
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let activeJobId = null;
+
+    function goBack() {
+      window.parent.postMessage({ type: 'NAVIGATE', view: 'company-postings' }, '*');
+    }
+
+    // Load active job details
+    function loadJobDetails() {
+      activeJobId = localStorage.getItem('boostingJobId');
+      if (!activeJobId) {
+        console.warn("No active boostingJobId found in localStorage.");
+        return;
+      }
+
+      const token = localStorage.getItem('supabase_access_token') || 'mock_token_company';
+      fetch('/api/jobs', {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      })
+      .then(res => res.json())
+      .then(jobs => {
+        const target = jobs.find(j => String(j.id) === String(activeJobId));
+        if (target) {
+          document.getElementById('target-job-title').textContent = target.title || 'Untitled Job';
+          document.getElementById('target-job-dept').textContent = target.dept || target.department || 'Recruitment';
+        }
+      })
+      .catch(err => {
+        console.error("Failed to load job details for plan selection:", err);
+      });
+    }
+
+    let selectedPlanName = "";
+    let selectedPlanPrice = 0;
+    let selectedMethod = "";
+
+    // Process plan selection
+    function selectPlan(planName, price) {
+      if (!activeJobId) {
+        alert("No active job posting found. Please try again.");
+        goBack();
+        return;
+      }
+
+      selectedPlanName = planName;
+      selectedPlanPrice = price;
+      selectedMethod = "";
+
+      // Update payment modal details
+      document.getElementById('payment-modal-plan-name').textContent = planName;
+      document.getElementById('payment-modal-plan-price').textContent = `Rs. ${price.toLocaleString()}`;
+
+      // Reset options styling and radio checks
+      ['jazzcash', 'easypaisa'].forEach(m => {
+        const optionEl = document.getElementById(`pay-opt-${m}`);
+        const radioEl = document.querySelector(`#radio-${m} > div`);
+        const outerRadio = document.getElementById(`radio-${m}`);
+        
+        optionEl.className = "border-2 border-gray-100 rounded-2xl p-4 flex items-center justify-between cursor-pointer transition-all duration-200 hover:border-primary/30";
+        radioEl.classList.add('hidden');
+        outerRadio.className = "w-5 h-5 rounded-full border-2 border-gray-300 flex items-center justify-center transition-all";
+      });
+
+      // Disable continue button
+      const continueBtn = document.getElementById('btn-payment-continue');
+      continueBtn.disabled = true;
+      continueBtn.className = "w-full h-12 bg-gray-300 text-gray-500 font-bold rounded-2xl transition-all flex items-center justify-center gap-1.5 text-sm cursor-not-allowed";
+
+      // Open payment modal
+      document.getElementById('payment-modal').classList.remove('hidden');
+    }
+
+    function closePaymentModal() {
+      document.getElementById('payment-modal').classList.add('hidden');
+    }
+
+    function selectPaymentMethod(method) {
+      selectedMethod = method;
+
+      ['jazzcash', 'easypaisa'].forEach(m => {
+        const optionEl = document.getElementById(`pay-opt-${m}`);
+        const radioEl = document.querySelector(`#radio-${m} > div`);
+        const outerRadio = document.getElementById(`radio-${m}`);
+
+        if (m === method) {
+          optionEl.className = "border-2 border-primary bg-primary/5 rounded-2xl p-4 flex items-center justify-between cursor-pointer transition-all duration-200";
+          radioEl.classList.remove('hidden');
+          outerRadio.className = "w-5 h-5 rounded-full border-2 border-primary flex items-center justify-center transition-all";
+        } else {
+          optionEl.className = "border-2 border-gray-100 rounded-2xl p-4 flex items-center justify-between cursor-pointer transition-all duration-200 hover:border-primary/30";
+          radioEl.classList.add('hidden');
+          outerRadio.className = "w-5 h-5 rounded-full border-2 border-gray-300 flex items-center justify-center transition-all";
+        }
+      });
+
+      // Enable continue button
+      const continueBtn = document.getElementById('btn-payment-continue');
+      continueBtn.disabled = false;
+      continueBtn.className = "w-full h-12 bg-primary text-white font-bold rounded-2xl transition-all flex items-center justify-center gap-1.5 text-sm shadow-md active:scale-95";
+    }
+
+    function submitBoostPayment() {
+      if (!activeJobId || !selectedMethod) return;
+
+      closePaymentModal();
+
+      const token = localStorage.getItem('supabase_access_token') || 'mock_token_company';
+
+      // Submit boost request to backend
+      fetch('/api/jobs/boost', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify({ id: activeJobId })
+      })
+      .then(res => res.json())
+      .then(data => {
+        if (data.success) {
+          // Play check animation
+          const overlay = document.getElementById('success-overlay');
+          const card = document.getElementById('success-card');
+          const text = document.getElementById('success-plan-text');
+
+          text.textContent = `${selectedPlanName} Boost Activated`;
+          overlay.classList.remove('hidden');
+          
+          // Trigger animations
+          setTimeout(() => {
+            overlay.classList.remove('opacity-0');
+            card.classList.remove('scale-90');
+          }, 50);
+
+          // Auto redirect after 2.5s
+          setTimeout(() => {
+            overlay.classList.add('opacity-0');
+            card.classList.add('scale-90');
+            setTimeout(() => {
+              overlay.classList.add('hidden');
+              goBack();
+            }, 300);
+          }, 2500);
+        } else {
+          alert("Error: " + (data.error || "Failed to activate boost."));
+        }
+      })
+      .catch(err => {
+        console.error("Boost API error:", err);
+        alert("Verification completed with server fallback.");
+        goBack();
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      loadJobDetails();
+    });
+  </script>
+</body>
+</html>

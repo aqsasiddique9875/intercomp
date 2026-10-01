@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CareerElite Pro | Ad Campaign Command</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        :root {
+            --spring-easing: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f9f9ff;
+            color: #471A70;
+            overflow-x: hidden;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.35);
+            backdrop-filter: blur(28px);
+            -webkit-backdrop-filter: blur(28px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            transition: all 0.35s var(--spring-easing);
+        }
+
+        .glass-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 12px 40px 0 rgba(71, 26, 112, 0.15);
+        }
+
+        .liquid-bg {
+            background: radial-gradient(circle at 50% 50%, #DCE4F7 0%, #f9f9ff 100%);
+            position: fixed;
+            inset: 0;
+            z-index: -2;
+        }
+
+        .accent-glow {
+            background: linear-gradient(135deg, #4D9EFA 0%, #BF7DF5 100%);
+            filter: blur(80px);
+            opacity: 0.15;
+            position: absolute;
+            z-index: -1;
+            border-radius: 50%;
+        }
+
+        input[type="range"] {
+            -webkit-appearance: none;
+            appearance: none;
+            background: rgba(71, 26, 112, 0.1);
+            height: 6px;
+            border-radius: 3px;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            height: 18px;
+            width: 18px;
+            border-radius: 50%;
+            background: #8731a3;
+            cursor: pointer;
+            border: 2px solid white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .active-pill {
+            background: linear-gradient(135deg, #4D9EFA 0%, #BF7DF5 100%);
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "outline-variant": "#d2c1d2",
+                      "inverse-on-surface": "#ecf1ff",
+                      "on-surface-variant": "#4f4350",
+                      "gold": "#FFD60A",
+                      "tertiary-container": "#00842f",
+                      "on-background": "#471A70",
+                      "tertiary-fixed-dim": "#47e266",
+                      "glass-border": "rgba(255, 255, 255, 0.6)",
+                      "outline": "#817381",
+                      "surface-variant": "#dbe3f6",
+                      "tertiary": "#006823",
+                      "secondary-container": "#54a3ff",
+                      "card-gradient": "linear-gradient(135deg, #4D9EFA 0%, #BF7DF5 100%)",
+                      "surface-container-highest": "#dbe3f6",
+                      "primary-fixed": "#fbd7ff",
+                      "primary-fixed-dim": "#f0b0ff",
+                      "on-secondary-container": "#003868",
+                      "surface-dim": "#d2daed",
+                      "secondary-fixed-dim": "#a3c9ff",
+                      "primary-container": "#a34cbe",
+                      "on-primary-container": "#fff5fb",
+                      "primary": "#8731a3",
+                      "orange": "#FF9F0A",
+                      "on-tertiary": "#ffffff",
+                      "surface-bright": "#f9f9ff",
+                      "on-secondary": "#ffffff",
+                      "glass-fill": "rgba(255, 255, 255, 0.35)",
+                      "surface-container-low": "#f0f3ff",
+                      "on-tertiary-fixed-variant": "#00531a",
+                      "error-container": "#ffdad6",
+                      "background": "#f9f9ff",
+                      "on-secondary-fixed": "#001c39",
+                      "secondary-fixed": "#d3e3ff",
+                      "inverse-primary": "#f0b0ff",
+                      "tertiary-fixed": "#6cff82",
+                      "secondary": "#0060ab",
+                      "error": "#FF453A",
+                      "on-error": "#ffffff",
+                      "on-surface": "#141c29",
+                      "on-error-container": "#93000a",
+                      "glass-thick": "rgba(255, 255, 255, 0.8)",
+                      "surface-container-high": "#e0e8fb",
+                      "on-tertiary-container": "#e6ffe0",
+                      "surface": "#f9f9ff",
+                      "on-secondary-fixed-variant": "#004883",
+                      "on-primary-fixed-variant": "#72188f",
+                      "inverse-surface": "#29313f",
+                      "on-primary-fixed": "#330044",
+                      "on-tertiary-fixed": "#002106",
+                      "surface-container": "#e7eeff",
+                      "surface-tint": "#8d37a9",
+                      "surface-container-lowest": "#ffffff",
+                      "on-primary": "#ffffff"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "safe-bottom": "34px",
+                      "desktop-margin": "64px",
+                      "mobile-margin": "20px",
+                      "mobile-gutter": "16px",
+                      "max-width": "1280px",
+                      "base": "8px",
+                      "desktop-gutter": "24px",
+                      "safe-top": "44px"
+              },
+              "fontFamily": {
+                      "body-md": ["Inter"],
+                      "display-xl": ["Inter"],
+                      "label-caps": ["Inter"],
+                      "headline-lg": ["Inter"]
+              },
+              "fontSize": {
+                      "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                      "label-caps": ["13px", {"lineHeight": "1.0", "letterSpacing": "0.03em", "fontWeight": "600"}],
+                      "headline-lg": ["34px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                      "display-xl": ["56px", {"lineHeight": "1.1", "letterSpacing": "-0.03em", "fontWeight": "700"}]
+              }
+            },
+          },
+        }
+    </script>
+</head>
+<body class="min-h-screen">
+<div class="liquid-bg"></div>
+<!-- TopNavBar Navigation Shell -->
+<nav class="fixed top-0 w-full z-50 bg-glass-fill backdrop-blur-3xl border-b border-glass-border shadow-[0_12px_40px_0_rgba(71,26,112,0.15)]">
+<div class="flex justify-between items-center h-20 px-desktop-margin max-w-max-width mx-auto">
+<div class="font-display-xl text-[24px] font-extrabold text-on-background tracking-tight">
+                CareerElite Pro
+            </div>
+<div class="hidden md:flex items-center space-x-8">
+<a class="text-on-surface-variant hover:text-primary transition-colors font-body-md text-body-md" href="#">Campaigns</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-body-md text-body-md" href="#">Analytics</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-body-md text-body-md" href="#">Talent Pool</a>
+<a class="text-primary border-b-2 border-primary font-bold pb-1 font-body-md text-body-md" href="#">Budget</a>
+</div>
+<div class="flex items-center space-x-6">
+<div class="hidden lg:flex items-center bg-surface-container rounded-full px-4 py-2">
+<span class="material-symbols-outlined text-outline mr-2" data-icon="search">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-body-md w-48 text-on-surface" placeholder="Search resources..." type="text"/>
+</div>
+<button class="bg-primary text-on-primary px-6 py-2.5 rounded-full font-bold hover:scale-95 transition-transform active:scale-90 duration-200">
+                    Create Ad
+                </button>
+<img alt="Recruiter Profile" class="w-10 h-10 rounded-full border-2 border-white shadow-sm object-cover" data-alt="A professional headshot of a recruitment executive in a high-end corporate setting. The subject wears a sharp charcoal suit and has a confident, warm expression. The background is a soft-focus modern office with glass partitions and cool blue lighting, maintaining the premium CareerElite Pro aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA6hZgmV7dFkV0taLNZN0zS_V36AftGdqVYjch-jebw5tOQoII0Xqgmx3fYq8oLI2f3xjCKS20xP5TghGjzizFNhWrKXAXqiuvd-npZ8K0C8PFazDdEcs4DiCa3Y9fPSAnai9TfiKXpUv3PvtIhi1xgpP1qiSSBUoNp9nXeh_ps_gjrD_0lbURLH-C5PKpAsatQNzxPTxq_eVpMbyEdduGs7JEYlLV22HtxzAlFvyi5rP7mymuRh9StngS_TFswjjoIUZecE-dsbMTg"/>
+</div>
+</div>
+</nav>
+<!-- Main Content -->
+<main class="pt-32 pb-24 px-desktop-margin max-w-max-width mx-auto relative">
+<!-- Decorative Background Glows -->
+<div class="accent-glow w-[500px] h-[500px] -top-20 -left-20"></div>
+<div class="accent-glow w-[600px] h-[600px] bottom-0 -right-40 opacity-10"></div>
+<!-- Hero Section -->
+<section class="text-center mb-20 space-y-4">
+<h1 class="font-display-xl text-display-xl text-on-background mb-4">Ad Campaign Command</h1>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-2xl mx-auto opacity-80">
+                Scale your recruitment reach with precision-targeted advertising. Harness our enterprise-grade delivery system to connect with the world's elite talent pool instantly.
+            </p>
+</section>
+<!-- Pricing Bento Grid -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
+<!-- Starter Plan -->
+<div class="glass-card rounded-[32px] p-8 flex flex-col h-full">
+<div class="mb-6">
+<span class="font-label-caps text-label-caps text-primary uppercase tracking-widest">Starter</span>
+<h3 class="font-headline-lg text-[28px] text-on-background mt-2">Small teams</h3>
+</div>
+<div class="mb-8">
+<div class="flex items-baseline mb-2">
+<span class="text-display-xl text-[44px] font-bold text-on-background">Rs. 0.50</span>
+<span class="text-on-surface-variant ml-2">/ click</span>
+</div>
+<p class="text-on-surface-variant font-body-md">Reach: 5k - 20k impressions</p>
+</div>
+<!-- Slider Component -->
+<div class="space-y-4 mb-8">
+<label class="flex justify-between text-label-caps font-semibold">
+<span>Forecast Reach</span>
+<span class="text-primary" id="starter-val">12k</span>
+</label>
+<input class="w-full" max="20" min="5" oninput="document.getElementById('starter-val').innerText = this.value + 'k'" type="range" value="12"/>
+</div>
+<div class="space-y-4 mb-10 flex-grow">
+<p class="font-semibold text-on-background text-body-md">Placement Highlights:</p>
+<ul class="space-y-3">
+<li class="flex items-center text-on-surface-variant">
+<span class="material-symbols-outlined text-primary mr-3 text-[20px]" data-icon="check_circle">check_circle</span>
+                            Dashboard Banner
+                        </li>
+<li class="flex items-center text-on-surface-variant opacity-50">
+<span class="material-symbols-outlined mr-3 text-[20px]" data-icon="lock">lock</span>
+                            Active Feed Recommendation
+                        </li>
+<li class="flex items-center text-on-surface-variant opacity-50">
+<span class="material-symbols-outlined mr-3 text-[20px]" data-icon="lock">lock</span>
+                            Priority Talent Email
+                        </li>
+</ul>
+</div>
+<button class="w-full bg-white/50 border border-glass-border py-4 rounded-full font-bold text-on-background hover:bg-white transition-colors duration-300">
+                    Select Plan
+                </button>
+</div>
+<!-- Growth Plan (Best Value) -->
+<div class="glass-card rounded-[32px] p-8 flex flex-col h-full relative ring-2 ring-primary/20 shadow-xl scale-105 z-10">
+<div class="absolute -top-4 left-1/2 -translate-x-1/2 active-pill text-white px-4 py-1 rounded-full text-label-caps font-bold shadow-lg">
+                    BEST VALUE
+                </div>
+<div class="mb-6">
+<span class="font-label-caps text-label-caps text-secondary uppercase tracking-widest">Growth</span>
+<h3 class="font-headline-lg text-[28px] text-on-background mt-2">Scaling startups</h3>
+</div>
+<div class="mb-8">
+<div class="flex items-baseline mb-2">
+<span class="text-display-xl text-[44px] font-bold text-on-background">Rs. 0.35</span>
+<span class="text-on-surface-variant ml-2">/ click</span>
+</div>
+<p class="text-on-surface-variant font-body-md">Reach: 50k - 150k impressions</p>
+</div>
+<!-- Slider Component -->
+<div class="space-y-4 mb-8">
+<label class="flex justify-between text-label-caps font-semibold">
+<span>Forecast Reach</span>
+<span class="text-primary" id="growth-val">105k</span>
+</label>
+<input class="w-full" max="150" min="50" oninput="document.getElementById('growth-val').innerText = this.value + 'k'" type="range" value="105"/>
+</div>
+<div class="space-y-4 mb-10 flex-grow">
+<p class="font-semibold text-on-background text-body-md">Placement Highlights:</p>
+<ul class="space-y-3">
+<li class="flex items-center text-on-surface-variant">
+<span class="material-symbols-outlined text-primary mr-3 text-[20px]" data-icon="check_circle">check_circle</span>
+                            Dashboard Banner
+                        </li>
+<li class="flex items-center text-on-surface-variant">
+<span class="material-symbols-outlined text-primary mr-3 text-[20px]" data-icon="check_circle">check_circle</span>
+                            Active Feed Recommendation
+                        </li>
+<li class="flex items-center text-on-surface-variant opacity-50">
+<span class="material-symbols-outlined mr-3 text-[20px]" data-icon="lock">lock</span>
+                            Priority Talent Email
+                        </li>
+</ul>
+</div>
+<button class="w-full active-pill py-4 rounded-full font-bold text-white shadow-lg hover:brightness-110 transition-all duration-300">
+                    Select Plan
+                </button>
+</div>
+<!-- Corporate Boost -->
+<div class="glass-card rounded-[32px] p-8 flex flex-col h-full">
+<div class="mb-6">
+<span class="font-label-caps text-label-caps text-tertiary-container uppercase tracking-widest">Corporate Boost</span>
+<h3 class="font-headline-lg text-[28px] text-on-background mt-2">Enterprise firms</h3>
+</div>
+<div class="mb-8">
+<div class="flex items-baseline mb-2">
+<span class="text-display-xl text-[44px] font-bold text-on-background">Rs. 0.25</span>
+<span class="text-on-surface-variant ml-2">/ click</span>
+</div>
+<p class="text-on-surface-variant font-body-md">Reach: 500k+ impressions</p>
+</div>
+<!-- Slider Component -->
+<div class="space-y-4 mb-8">
+<label class="flex justify-between text-label-caps font-semibold">
+<span>Forecast Reach</span>
+<span class="text-primary" id="corp-val">750k+</span>
+</label>
+<input class="w-full" max="1000" min="500" oninput="document.getElementById('corp-val').innerText = this.value + 'k+'" type="range" value="750"/>
+</div>
+<div class="space-y-4 mb-10 flex-grow">
+<p class="font-semibold text-on-background text-body-md">Placement Highlights:</p>
+<ul class="space-y-3">
+<li class="flex items-center text-on-surface-variant">
+<span class="material-symbols-outlined text-primary mr-3 text-[20px]" data-icon="check_circle">check_circle</span>
+                            Dashboard Banner
+                        </li>
+<li class="flex items-center text-on-surface-variant">
+<span class="material-symbols-outlined text-primary mr-3 text-[20px]" data-icon="check_circle">check_circle</span>
+                            Active Feed Recommendation
+                        </li>
+<li class="flex items-center text-on-surface-variant">
+<span class="material-symbols-outlined text-primary mr-3 text-[20px]" data-icon="check_circle">check_circle</span>
+                            Priority Talent Email
+                        </li>
+</ul>
+</div>
+<button class="w-full bg-white/50 border border-glass-border py-4 rounded-full font-bold text-on-background hover:bg-white transition-colors duration-300">
+                    Select Plan
+                </button>
+</div>
+</div>
+</main>
+
+<script>
+        // Simple spring-like micro-interaction for sliders
+        document.querySelectorAll('input[type="range"]').forEach(slider => {
+            slider.addEventListener('mousedown', () => {
+                slider.style.transform = 'scale(1.02)';
+                slider.style.transition = 'transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+            });
+            slider.addEventListener('mouseup', () => {
+                slider.style.transform = 'scale(1)';
+            });
+        });
+    </script>
+</body></html>

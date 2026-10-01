@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>RecruitHUD | Elite Navigation System</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "glass-thick": "rgba(255, 255, 255, 0.8)",
+                    "background": "#f9f9ff",
+                    "surface-variant": "#dbe3f6",
+                    "surface": "#f9f9ff",
+                    "on-surface-variant": "#4f4350",
+                    "outline-variant": "#d2c1d2",
+                    "tertiary-fixed-dim": "#47e266",
+                    "on-secondary-container": "#003868",
+                    "surface-bright": "#f9f9ff",
+                    "outline": "#817381",
+                    "on-primary-fixed": "#330044",
+                    "on-primary": "#ffffff",
+                    "tertiary-fixed": "#6cff82",
+                    "on-tertiary-container": "#e6ffe0",
+                    "surface-container-high": "#e0e8fb",
+                    "secondary-container": "#54a3ff",
+                    "tertiary": "#006823",
+                    "surface-tint": "#8d37a9",
+                    "on-background": "#471A70",
+                    "inverse-on-surface": "#ecf1ff",
+                    "secondary-fixed": "#d3e3ff",
+                    "on-primary-fixed-variant": "#72188f",
+                    "on-secondary": "#ffffff",
+                    "on-secondary-fixed-variant": "#004883",
+                    "secondary": "#0060ab",
+                    "inverse-surface": "#29313f",
+                    "orange": "#FF9F0A",
+                    "gold": "#FFD60A",
+                    "secondary-fixed-dim": "#a3c9ff",
+                    "surface-container-low": "#f0f3ff",
+                    "on-secondary-fixed": "#001c39",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-container-highest": "#dbe3f6",
+                    "primary-fixed-dim": "#f0b0ff",
+                    "tertiary-container": "#00842f",
+                    "inverse-primary": "#f0b0ff",
+                    "on-tertiary-fixed-variant": "#00531a",
+                    "card-gradient": "linear-gradient(135deg, #4D9EFA 100%, #BF7DF5 0%)",
+                    "surface-dim": "#d2daed",
+                    "on-surface": "#141c29",
+                    "on-error": "#ffffff",
+                    "primary-fixed": "#fbd7ff",
+                    "primary": "#8731a3",
+                    "error-container": "#ffdad6",
+                    "on-tertiary": "#ffffff",
+                    "glass-border": "rgba(255, 255, 255, 0.6)",
+                    "error": "#FF453A",
+                    "on-error-container": "#93000a",
+                    "primary-container": "#a34cbe",
+                    "on-primary-container": "#fff5fb",
+                    "surface-container": "#e7eeff",
+                    "on-tertiary-fixed": "#002106",
+                    "glass-fill": "rgba(255, 255, 255, 0.35)"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "max-width": "1280px",
+                    "desktop-margin": "64px",
+                    "safe-bottom": "34px",
+                    "mobile-margin": "20px",
+                    "mobile-gutter": "16px",
+                    "base": "8px",
+                    "safe-top": "44px",
+                    "desktop-gutter": "24px"
+            },
+            "fontFamily": {
+                    "display-xl": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "body-md": ["Inter"],
+                    "label-caps": ["Inter"]
+            },
+            "fontSize": {
+                    "display-xl": ["56px", {"lineHeight": "1.1", "letterSpacing": "-0.03em", "fontWeight": "700"}],
+                    "headline-lg": ["34px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                    "label-caps": ["13px", {"lineHeight": "1.0", "letterSpacing": "0.03em", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #f9f9ff;
+            font-family: 'Inter', sans-serif;
+            overflow: hidden;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.35);
+            backdrop-filter: blur(28px);
+            -webkit-backdrop-filter: blur(28px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 12px 40px 0 rgba(71, 26, 112, 0.15);
+        }
+
+        .active-route-path {
+            stroke: #4D9EFA;
+            stroke-dasharray: 1000;
+            stroke-dashoffset: 1000;
+            animation: dash 10s linear infinite;
+            filter: drop-shadow(0 0 8px rgba(77, 158, 250, 0.8));
+        }
+
+        @keyframes dash {
+            to {
+                stroke-dashoffset: 0;
+            }
+        }
+
+        .liquid-pulse {
+            animation: pulse-ring 2s cubic-bezier(0.455, 0.03, 0.515, 0.955) infinite;
+        }
+
+        @keyframes pulse-ring {
+            0% { transform: scale(0.3); opacity: 1; }
+            80%, 100% { opacity: 0; transform: scale(1.2); }
+        }
+
+        .scroll-hide::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+</head>
+<body class="text-on-surface">
+<!-- TopNavBar from JSON -->
+<header class="fixed top-0 w-full z-50 flex justify-between items-center px-64 h-20 bg-glass-thick backdrop-blur-[28px] border-b border-glass-border shadow-[0_12px_40px_0_rgba(71,26,112,0.15)]">
+<div class="flex items-center gap-8">
+<span class="font-display-xl text-display-xl font-bold text-on-background">RecruitHUD</span>
+<nav class="hidden md:flex gap-6 items-center">
+<a class="text-on-surface-variant font-body-md text-body-md hover:bg-glass-fill transition-all duration-300 px-3 py-2 rounded-lg" href="#">Talent Map</a>
+<a class="text-on-surface-variant font-body-md text-body-md hover:bg-glass-fill transition-all duration-300 px-3 py-2 rounded-lg" href="#">Global Reach</a>
+<a class="text-primary font-bold border-b-2 border-primary pb-1 font-body-md text-body-md" href="#">In-Transit</a>
+<a class="text-on-surface-variant font-body-md text-body-md hover:bg-glass-fill transition-all duration-300 px-3 py-2 rounded-lg" href="#">Live Stats</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<button class="bg-primary text-on-primary px-6 py-2 rounded-full font-semibold active:scale-95 duration-200 transition-all">Share Location</button>
+<div class="flex gap-2">
+<span class="material-symbols-outlined p-2 text-on-surface-variant hover:bg-glass-fill rounded-full cursor-pointer">notifications</span>
+<span class="material-symbols-outlined p-2 text-on-surface-variant hover:bg-glass-fill rounded-full cursor-pointer">settings</span>
+</div>
+<img alt="Recruiter Profile" class="w-10 h-10 rounded-full object-cover border-2 border-primary" data-alt="A professional headshot of a recruitment executive in a modern glass office environment. The person is wearing a sharp charcoal suit and has a confident, friendly expression. The background is softly blurred, showing hints of advanced technology and panoramic city views, maintaining a high-end corporate aesthetic with clean light-mode lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAKhDAfb1BWjOZwGw6E3o9c5P-tOqxIYMqh9s1WGLZhfbO1zPYQO7FAjfRgJ3cpKZD6rzjeuESPsq4T393j3pkVH88yjszJ14NZl2O5VYXsnwkX_ki2ZOJbOnZqwHvkeCiJ6Ok3cNdyKrdLcslhAxeV6notfwl_PR_JC4FhuQPh9vsapt0PYyt0ydJSZyxFVPVV75s4O0y3bW7lZFZDG8pQekHRZCATyqBUhzmm1Bwt9j1kIAm47pEtqZpz7wu0z1SqX-i7B0gIjh7A"/>
+</div>
+</header>
+<!-- SideNavBar from JSON (Transformed into Route Sidebar) -->
+<aside class="fixed left-0 top-20 h-[calc(100vh-80px)] w-80 bg-glass-fill backdrop-blur-[28px] border-r border-glass-border shadow-[20px_0_40px_rgba(71,26,112,0.1)] flex flex-col p-6 gap-y-4 z-40">
+<div class="mb-4">
+<div class="flex items-center gap-3 mb-2">
+<div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center text-on-primary-container">
+<span class="material-symbols-outlined">navigation</span>
+</div>
+<div>
+<h3 class="font-headline-lg text-[18px] text-on-background font-bold leading-tight">System Active</h3>
+<p class="text-on-surface-variant text-[12px] opacity-70">Recruitment Route 402</p>
+</div>
+</div>
+</div>
+<div class="flex-1 overflow-y-auto scroll-hide space-y-4">
+<div class="p-4 rounded-xl bg-primary text-on-primary shadow-lg transform scale-[1.02] transition-all">
+<div class="flex justify-between items-start mb-2">
+<span class="material-symbols-outlined text-[32px]">turn_right</span>
+<span class="text-label-caps bg-white/20 px-2 py-1 rounded">250m</span>
+</div>
+<p class="font-semibold text-lg leading-tight">Turn right onto Tech Park Drive</p>
+<p class="text-sm opacity-80 mt-1">Then merge onto Route 101 North</p>
+</div>
+<div class="p-4 rounded-xl bg-glass-thick border border-glass-border text-on-surface-variant hover:scale-[1.02] transition-transform">
+<div class="flex justify-between items-center mb-1">
+<span class="material-symbols-outlined text-secondary">straight</span>
+<span class="text-sm font-bold">1.2 km</span>
+</div>
+<p class="text-sm">Continue straight through Enterprise District</p>
+<p class="text-xs opacity-60">Estimated 3 mins</p>
+</div>
+<div class="p-4 rounded-xl bg-glass-thick border border-glass-border text-on-surface-variant hover:scale-[1.02] transition-transform opacity-70">
+<div class="flex justify-between items-center mb-1">
+<span class="material-symbols-outlined text-secondary">turn_left</span>
+<span class="text-sm font-bold">4.8 km</span>
+</div>
+<p class="text-sm">Turn left towards Global HQ</p>
+</div>
+<!-- Quick Links from SideNav JSON -->
+<div class="pt-6 border-t border-glass-border space-y-2">
+<button class="w-full flex items-center gap-3 p-3 rounded-xl hover:bg-glass-thick transition-all text-on-surface-variant">
+<span class="material-symbols-outlined">map</span> Route Overview
+                </button>
+<button class="w-full flex items-center gap-3 p-3 rounded-xl bg-primary text-on-primary font-semibold">
+<span class="material-symbols-outlined">directions</span> Turn-by-Turn
+                </button>
+<button class="w-full flex items-center gap-3 p-3 rounded-xl hover:bg-glass-thick transition-all text-on-surface-variant">
+<span class="material-symbols-outlined">group</span> Live Talent
+                </button>
+<button class="w-full flex items-center gap-3 p-3 rounded-xl hover:bg-glass-thick transition-all text-on-surface-variant">
+<span class="material-symbols-outlined">traffic</span> Traffic
+                </button>
+</div>
+</div>
+<button class="w-full mt-auto py-4 bg-error text-on-error rounded-xl font-bold active:scale-95 duration-350 ease-[0.35,0.85] shadow-lg">
+            End Navigation
+        </button>
+</aside>
+<!-- Main Viewport -->
+<main class="ml-80 pt-20 h-screen w-[calc(100vw-320px)] relative bg-surface-container-low overflow-hidden">
+<!-- Live Map Background -->
+<div class="absolute inset-0 z-0">
+<div class="w-full h-full relative" data-location="San Francisco Tech District" style="">
+<!-- Mock Map UI -->
+<div class="absolute inset-0 bg-[#E0E7FF] opacity-50"></div>
+<svg class="absolute inset-0 w-full h-full" viewbox="0 0 1000 1000">
+<!-- Road Network -->
+<path d="M0,500 L1000,500" fill="none" opacity="0.6" stroke="white" stroke-width="40"></path>
+<path d="M500,0 L500,1000" fill="none" opacity="0.6" stroke="white" stroke-width="40"></path>
+<path d="M200,0 L800,1000" fill="none" opacity="0.4" stroke="white" stroke-width="20"></path>
+<!-- Route Path -->
+<path class="active-route-path" d="M100,500 C300,500 500,400 500,200 L500,50" fill="none" stroke-linecap="round" stroke-width="12"></path>
+<!-- Current Position -->
+<circle cx="500" cy="200" fill="#8731a3" r="12">
+<animate attributename="r" dur="2s" repeatcount="indefinite" values="12;18;12"></animate>
+</circle>
+<circle class="liquid-pulse" cx="500" cy="200" fill="rgba(135, 49, 163, 0.2)" r="25"></circle>
+</svg>
+<!-- POI Markers -->
+<div class="absolute top-[40%] left-[60%] glass-card p-2 rounded-lg flex items-center gap-2 transform -translate-x-1/2">
+<span class="material-symbols-outlined text-primary text-sm" style="font-variation-settings: 'FILL' 1;">stars</span>
+<span class="text-xs font-bold text-on-background">Tech Park Hub</span>
+</div>
+</div>
+</div>
+<!-- Floating Stats Overlay -->
+<div class="absolute top-8 left-1/2 -translate-x-1/2 z-30 flex items-center gap-4 w-full max-w-4xl px-8">
+<div class="flex-1 glass-card p-4 rounded-2xl flex justify-around items-center">
+<div class="text-center px-6 border-r border-glass-border">
+<p class="text-label-caps text-on-surface-variant opacity-60 mb-1">Arrival Time</p>
+<p class="font-headline-lg text-[24px] text-on-background font-extrabold">10:45 <span class="text-sm font-normal">AM</span></p>
+</div>
+<div class="text-center px-6 border-r border-glass-border">
+<p class="text-label-caps text-on-surface-variant opacity-60 mb-1">Time Left</p>
+<p class="font-headline-lg text-[24px] text-primary font-extrabold">18 <span class="text-sm font-normal">mins</span></p>
+</div>
+<div class="text-center px-6">
+<p class="text-label-caps text-on-surface-variant opacity-60 mb-1">Distance</p>
+<p class="font-headline-lg text-[24px] text-on-background font-extrabold">5.4 <span class="text-sm font-normal">km</span></p>
+</div>
+</div>
+<div class="glass-card h-[72px] aspect-square rounded-2xl flex items-center justify-center hover:scale-105 transition-transform cursor-pointer">
+<span class="material-symbols-outlined text-primary text-3xl">add_road</span>
+</div>
+</div>
+<!-- Dynamic Content Widget (Bottom Right) -->
+<div class="absolute bottom-12 right-12 z-30 space-y-4">
+<div class="glass-card p-5 w-72 rounded-3xl animate-fade-in">
+<div class="flex items-center justify-between mb-4">
+<h4 class="font-bold text-on-background">Nearby Candidates</h4>
+<span class="text-xs text-primary font-bold">4 Active</span>
+</div>
+<div class="space-y-3">
+<div class="flex items-center gap-3">
+<img alt="Candidate" class="w-10 h-10 rounded-full object-cover" data-alt="A portrait of a male professional software engineer in a modern setting. He has a focused and confident demeanor. The lighting is soft and cinematic, with cool blue tones in the shadows and warm golden highlights on his face, consistent with a premium high-fidelity digital interface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuACKcF8WYU0E5rsn-1X3MPCrfIj-6o4ng_qQoREHGAU0Jws40hTvFsGndqvKsmvwnLvNycFQwD_Yi-jnUgm9rtbJ6X3NcSan3075C-zmaB-oosl_LxB8okaBKN4sDNZ8f0aWPIsbyPCuL_E1-jWJCmEm1s5ruqlVSgU57Dtdisa8A9EA-MmKEeQ7yyqzAhAttBdjpyvmqwdEYOqkzf-LEGmOeQOAVaT-WlWlgnPgHFxxYXe6qlfaxU4q3I4txjfGCBEjtKajc7thBip"/>
+<div class="flex-1">
+<p class="text-sm font-semibold">Marcus Chen</p>
+<p class="text-xs opacity-60">Senior UI Architect</p>
+</div>
+<div class="w-2 h-2 rounded-full bg-tertiary-fixed-dim"></div>
+</div>
+<div class="flex items-center gap-3">
+<img alt="Candidate" class="w-10 h-10 rounded-full object-cover" data-alt="A close-up portrait of a female creative director with a stylish, modern look. She is in a high-end minimalist office with large windows. The lighting is bright and airy, emphasizing a sophisticated glassmorphic aesthetic with soft pastel accents in the background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCxPRkLqCoZPYi0TtkJBLLFw-twHjEaJZbSRr7b2tCaIwpVDU0yU1wkp-CAarbE3V49Phx2QvC-g2Uh0_QcQY9Qvm5wlgF3K-kyxXIuX2kJnzoMp1YaNABsyN3ZAMhQ6zaUjL2vgmvlOjMt-VpOUL02H2xQNiIBZu_Rsl_UJevQiZ7VUYehGNc4vCRd_TRoyULCwmkcxR7vGi7KHjUlG770jgxU_eoFVZ7fyCGjZvK3KNHjwnuh4X4GQ88eCgdBcnJrCYNJ3k-RywV_"/>
+<div class="flex-1">
+<p class="text-sm font-semibold">Elena Rossi</p>
+<p class="text-xs opacity-60">Creative Director</p>
+</div>
+<div class="w-2 h-2 rounded-full bg-gold"></div>
+</div>
+</div>
+<button class="w-full mt-4 py-2 text-xs font-bold text-primary border border-primary/20 rounded-full hover:bg-primary/5 transition-colors">
+                    View Talent Map
+                </button>
+</div>
+<!-- Weather/Condition Widget -->
+<div class="glass-card p-4 w-72 rounded-3xl flex items-center gap-4">
+<div class="w-12 h-12 bg-card-gradient rounded-2xl flex items-center justify-center text-white">
+<span class="material-symbols-outlined">wb_sunny</span>
+</div>
+<div>
+<p class="text-on-background font-bold">24°C Clear</p>
+<p class="text-xs opacity-60">Optimal Travel Conditions</p>
+</div>
+</div>
+</div>
+</main>
+
+<script>
+        // Micro-interactions for glass elements
+        document.querySelectorAll('.glass-card').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                card.style.setProperty('--mouse-x', `${x}px`);
+                card.style.setProperty('--mouse-y', `${y}px`);
+            });
+        });
+
+        // Simulating location update
+        let pos = 200;
+        const marker = document.querySelector('circle[fill="#8731a3"]');
+        const pulse = document.querySelector('.liquid-pulse');
+        
+        setInterval(() => {
+            pos -= 0.5;
+            if (pos < 50) pos = 200;
+            marker.setAttribute('cy', pos);
+            pulse.setAttribute('cy', pos);
+        }, 100);
+    </script>
+</body></html>

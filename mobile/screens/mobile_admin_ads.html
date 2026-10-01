@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/>
+  <title>SuccessAdmin | Ad Moderation</title>
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+  <!-- Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            primary: "#8731a3",
+            secondary: "#4D9EFA",
+            background: "#fff7fb",
+            outline: "#817381",
+            "glass-fill": "rgba(255, 255, 255, 0.45)",
+            "glass-border": "rgba(255, 255, 255, 0.6)"
+          },
+          borderRadius: {
+            xxl: "24px"
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      background-color: #DCE4F7;
+      -webkit-tap-highlight-color: transparent;
+      font-family: 'Inter', sans-serif;
+      color: #471A70;
+    }
+    .glass-card {
+      background: rgba(255, 255, 255, 0.4);
+      backdrop-filter: blur(28px);
+      -webkit-backdrop-filter: blur(28px);
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      box-shadow: 0 8px 32px 0 rgba(163, 76, 190, 0.08);
+    }
+    .animated-bg-sphere {
+      position: fixed;
+      width: 350px;
+      height: 350px;
+      border-radius: 50%;
+      filter: blur(80px);
+      z-index: -1;
+      opacity: 0.5;
+      animation: float 20s infinite ease-in-out;
+    }
+    @keyframes float {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(50px, -50px) scale(1.1); }
+    }
+    /* Hide scrollbar */
+    .hide-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .hide-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+</head>
+<body class="antialiased overflow-x-hidden pb-32">
+  <!-- Animated Background Spheres -->
+  <div class="animated-bg-sphere bg-purple-300" style="top: -50px; left: -50px; animation-delay: 0s;"></div>
+  <div class="animated-bg-sphere bg-blue-200" style="bottom: -100px; right: -50px; animation-delay: -5s;"></div>
+
+  <!-- Top AppBar -->
+  <header class="fixed top-0 left-0 right-0 max-w-md mx-auto w-full z-50 bg-white/45 backdrop-blur-[28px] border-b border-white/50 shadow-[0_4px_20px_0_rgba(163,76,190,0.06)] flex justify-between items-center px-5 h-[64px]">
+    <div class="flex items-center gap-3">
+      <div onclick="window.parent.postMessage({ type: 'NAVIGATE', view: 'admin-revenue' }, '*')" class="w-9 h-9 rounded-full border border-white/80 overflow-hidden shadow-sm cursor-pointer active:scale-95 transition-transform">
+        <img alt="Admin Avatar" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAGOMLPlm6clUh9ZYYuUPueMCJObuk5uk36yXMyn8JKvA30bUU0uvzJcWbTuaApeW75-XrgAr1xG6g3MrXV3wR8d8lu6WrlkFSXvV_PkhSuTd96S6sBjjZqouQzfPn-MyTe53iOFML6QQkYSBRUS-GOZrOH7ePXI3qRcgUr4MX4JmX4u4eBDyhSrdClrb5sq50KxRq8kwbASFCJpD6V_yjFcr_7m5nY-16NT5dbaGq4rzZKkzjYZeJA8tug0yUD1nKgkhINbv94aGrX"/>
+      </div>
+      <h1 class="font-bold text-base text-primary">SuccessAdmin</h1>
+    </div>
+    <div class="flex items-center gap-2">
+      <button class="w-9 h-9 rounded-full bg-white/40 flex items-center justify-center text-primary shadow-sm active:scale-95 transition-transform"><span class="material-symbols-outlined text-[20px]">notifications</span></button>
+      <button class="w-9 h-9 rounded-full bg-white/40 flex items-center justify-center text-primary shadow-sm active:scale-95 transition-transform"><span class="material-symbols-outlined text-[20px]">settings</span></button>
+    </div>
+  </header>
+
+  <main class="mt-[84px] px-5 max-w-md mx-auto space-y-5 text-left">
+    
+    <!-- Title Area -->
+    <section class="py-1">
+      <h2 class="text-xl font-extrabold text-[#471A70] tracking-tight">Ad Moderation</h2>
+      <p class="text-xs text-outline font-medium mt-1">Manage and approve incoming corporate advertisements.</p>
+    </section>
+
+    <!-- Tab Bar -->
+    <section>
+      <div class="glass-tab p-1 rounded-2xl flex items-center bg-white/20 border border-white/40">
+        <button onclick="switchAdTab('pending')" id="tab-pending" class="flex-1 py-2 rounded-xl text-xs font-bold bg-primary text-white transition-all duration-300">Pending</button>
+        <button onclick="switchAdTab('active')" id="tab-active" class="flex-1 py-2 rounded-xl text-xs font-bold text-outline transition-all duration-300">Active</button>
+        <button onclick="switchAdTab('rejected')" id="tab-rejected" class="flex-1 py-2 rounded-xl text-xs font-bold text-outline transition-all duration-300">Rejected</button>
+      </div>
+    </section>
+
+    <!-- Ads List -->
+    <section id="adsContainer" class="space-y-4">
+      <!-- Ads cards will be dynamically rendered here based on status -->
+    </section>
+
+  </main>
+
+  <!-- Bottom Navigation Bar Placeholder -->
+  <nav id="bottom-nav"></nav>
+
+  <script>
+    const backendOrigin = window.location.origin.includes('localhost') 
+      ? 'http://localhost:8080' 
+      : window.location.origin;
+
+    let adsData = [];
+    let currentTab = 'pending';
+
+    // Fetch Ads from Backend
+    async function loadAds() {
+      try {
+        const res = await fetch(`${backendOrigin}/api/ads`);
+        if (res.ok) {
+          adsData = await res.json();
+          renderAds();
+        }
+      } catch (e) {
+        console.error("Failed to load ads:", e);
+      }
+    }
+
+    // Render Ads Cards
+    function renderAds() {
+      const container = document.getElementById('adsContainer');
+      container.innerHTML = '';
+
+      const filtered = adsData.filter(ad => ad.status === currentTab);
+
+      if (filtered.length === 0) {
+        container.innerHTML = `
+          <div class="glass-card p-10 rounded-3xl text-center text-outline text-xs">
+            No ${currentTab} advertisements to display.
+          </div>
+        `;
+        return;
+      }
+
+      filtered.forEach(ad => {
+        const card = document.createElement('div');
+        card.className = "glass-card rounded-3xl overflow-hidden flex flex-col justify-between";
+        
+        let headerBadges = '';
+        if (ad.urgent) {
+          headerBadges += `<span class="absolute top-3 left-3 bg-yellow-500 text-neutral-950 text-[9px] font-extrabold px-2.5 py-1 rounded-full uppercase tracking-wider shadow-sm">Urgent Approval</span>`;
+        }
+        if (ad.aiManaged) {
+          headerBadges += `<span class="absolute top-3 left-3 bg-purple-600 text-white text-[9px] font-extrabold px-2.5 py-1 rounded-full uppercase tracking-wider shadow-sm">AI Managed</span>`;
+        }
+
+        let actionSection = '';
+        if (ad.status === 'pending') {
+          actionSection = `
+            <div class="grid grid-cols-2 gap-2.5 pt-2 border-t border-white/25 mt-4">
+              <button onclick="approveAd('${ad.id}')" class="h-10 rounded-xl bg-primary text-white text-xs font-bold active:scale-95 transition-transform">Approve</button>
+              <button onclick="rejectAd('${ad.id}')" class="h-10 rounded-xl border border-red-500/30 text-red-500 text-xs font-bold active:scale-95 transition-transform">Reject</button>
+            </div>
+          `;
+        } else if (ad.status === 'active') {
+          actionSection = `
+            <div class="flex items-center gap-1.5 pt-3 border-t border-white/25 mt-4 text-green-600 font-bold text-xs">
+              <span class="material-symbols-outlined text-lg">check_circle</span>
+              <span>Approved &amp; Active on Feed</span>
+            </div>
+          `;
+        } else if (ad.status === 'rejected') {
+          actionSection = `
+            <div class="flex items-center gap-1.5 pt-3 border-t border-white/25 mt-4 text-red-500 font-bold text-xs">
+              <span class="material-symbols-outlined text-lg">cancel</span>
+              <span>Rejected &bull; Feedback Sent</span>
+            </div>
+          `;
+        }
+
+        card.innerHTML = `
+          <div class="h-36 w-full relative overflow-hidden">
+            <img class="w-full h-full object-cover" src="${ad.image}" alt="${ad.company}"/>
+            <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+            ${headerBadges}
+            <span class="absolute bottom-3 right-3 bg-white/30 backdrop-blur-md text-white text-[9px] font-bold px-2 py-0.5 rounded-full">${ad.remaining}</span>
+          </div>
+          <div class="p-4 space-y-3">
+            <div>
+              <h4 class="font-extrabold text-xs text-[#471A70]">${ad.company}</h4>
+              <p class="text-[11px] text-outline mt-0.5">${ad.title}</p>
+            </div>
+            <div class="grid grid-cols-2 gap-2 text-[10px] text-outline font-medium">
+              <div>
+                <span class="block text-[8px] uppercase tracking-wider text-[#726580] font-bold">Target</span>
+                <span class="text-[#471A70] font-semibold">${ad.target}</span>
+              </div>
+              <div>
+                <span class="block text-[8px] uppercase tracking-wider text-[#726580] font-bold">Stipend</span>
+                <span class="text-[#471A70] font-semibold">${ad.stipend}</span>
+              </div>
+            </div>
+            ${actionSection}
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    // Tab Switcher
+    function switchAdTab(tabId) {
+      currentTab = tabId;
+
+      ['pending', 'active', 'rejected'].forEach(t => {
+        const btn = document.getElementById('tab-' + t);
+        if (btn) {
+          btn.className = "flex-1 py-2 rounded-xl text-xs font-bold text-outline transition-all duration-300";
+        }
+      });
+
+      const activeBtn = document.getElementById('tab-' + tabId);
+      if (activeBtn) {
+        activeBtn.className = "flex-1 py-2 rounded-xl text-xs font-bold bg-primary text-white transition-all duration-300";
+      }
+
+      renderAds();
+    }
+
+    // Approve Ad via Backend
+    async function approveAd(adId) {
+      try {
+        const res = await fetch(`${backendOrigin}/api/ads/approve`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ id: adId })
+        });
+        if (res.ok) {
+          loadAds(); // Reload data
+        }
+      } catch (e) {
+        console.error("Failed to approve ad:", e);
+      }
+    }
+
+    // Reject Ad via Backend
+    async function rejectAd(adId) {
+      try {
+        const res = await fetch(`${backendOrigin}/api/ads/reject`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ id: adId })
+        });
+        if (res.ok) {
+          loadAds(); // Reload data
+        }
+      } catch (e) {
+        console.error("Failed to reject ad:", e);
+      }
+    }
+
+    // Initial Load
+    loadAds();
+
+    // Touch Feedback
+    document.querySelectorAll('.glass-card, button').forEach(el => {
+      el.addEventListener('touchstart', () => {
+        el.style.transform = 'scale(0.97)';
+        el.style.transition = 'transform 0.15s ease-in-out';
+      });
+      el.addEventListener('touchend', () => {
+        el.style.transform = 'scale(1)';
+      });
+    });
+  </script>
+</body>
+</html>

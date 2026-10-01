@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<title>TalentPlatform | Recruiter Kanban</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+            overscroll-behavior-y: none;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.35);
+            backdrop-filter: blur(28px);
+            -webkit-backdrop-filter: blur(28px);
+            border: 0.5px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 12px 40px 0 rgba(71, 26, 112, 0.15);
+        }
+
+        .liquid-bg {
+            background: linear-gradient(135deg, #f9f9ff 0%, #e7eeff 50%, #fbd7ff 100%);
+            min-height: 100vh;
+        }
+
+        .active-tab-indicator {
+            view-transition-name: active-tab;
+        }
+
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        .tap-target {
+            min-height: 44px;
+            min-width: 44px;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-container": "#00842f",
+                        "on-secondary-fixed": "#001c39",
+                        "card-gradient": "linear-gradient(135deg, #4D9EFA 0%, #BF7DF5 100%)",
+                        "on-tertiary": "#ffffff",
+                        "surface": "#f9f9ff",
+                        "on-background": "#471A70",
+                        "glass-thick": "rgba(255, 255, 255, 0.8)",
+                        "surface-container-highest": "#dbe3f6",
+                        "surface-container-high": "#e0e8fb",
+                        "surface-container": "#e7eeff",
+                        "on-primary-fixed": "#330044",
+                        "secondary": "#0060ab",
+                        "on-error": "#ffffff",
+                        "primary": "#8731a3",
+                        "on-surface": "#141c29",
+                        "tertiary-fixed-dim": "#47e266",
+                        "surface-container-lowest": "#ffffff",
+                        "on-secondary": "#ffffff",
+                        "on-primary": "#ffffff",
+                        "outline-variant": "#d2c1d2",
+                        "glass-fill": "rgba(255, 255, 255, 0.35)",
+                        "on-secondary-container": "#003868",
+                        "surface-tint": "#8d37a9",
+                        "error": "#FF453A",
+                        "tertiary": "#006823",
+                        "inverse-surface": "#29313f",
+                        "tertiary-fixed": "#6cff82",
+                        "surface-container-low": "#f0f3ff",
+                        "on-tertiary-fixed": "#002106",
+                        "inverse-primary": "#f0b0ff",
+                        "on-tertiary-container": "#e6ffe0",
+                        "glass-border": "rgba(255, 255, 255, 0.6)",
+                        "on-surface-variant": "#4f4350",
+                        "inverse-on-surface": "#ecf1ff",
+                        "primary-fixed": "#fbd7ff",
+                        "secondary-fixed": "#d3e3ff",
+                        "on-primary-container": "#fff5fb",
+                        "error-container": "#ffdad6",
+                        "outline": "#817381",
+                        "on-primary-fixed-variant": "#72188f",
+                        "surface-bright": "#f9f9ff",
+                        "background": "#f9f9ff",
+                        "surface-dim": "#d2daed",
+                        "secondary-fixed-dim": "#a3c9ff",
+                        "gold": "#FFD60A",
+                        "on-secondary-fixed-variant": "#004883",
+                        "secondary-container": "#54a3ff",
+                        "primary-container": "#a34cbe",
+                        "surface-variant": "#dbe3f6",
+                        "orange": "#FF9F0A",
+                        "on-error-container": "#93000a",
+                        "primary-fixed-dim": "#f0b0ff",
+                        "on-tertiary-fixed-variant": "#00531a"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "2xl": "1rem",
+                        "3xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "desktop-margin": "64px",
+                        "safe-top": "44px",
+                        "safe-bottom": "34px",
+                        "mobile-margin": "20px",
+                        "max-width": "1280px",
+                        "desktop-gutter": "24px",
+                        "mobile-gutter": "16px",
+                        "base": "8px"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["Inter"],
+                        "body-md-mobile": ["Inter"],
+                        "label-caps-mobile": ["Inter"],
+                        "display-xl-mobile": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["28px", {"lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "body-md-mobile": ["15px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                        "label-caps-mobile": ["12px", {"lineHeight": "1.0", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "display-xl-mobile": ["34px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "800"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="liquid-bg text-on-background">
+<!-- TopAppBar -->
+<header class="bg-glass-fill backdrop-blur-xl fixed top-0 left-0 right-0 max-w-md mx-auto w-full border-b border-glass-border shadow-[0_12px_40px_0_rgba(71,26,112,0.15)] z-50">
+<div class="flex items-center justify-between px-mobile-margin h-[88px] pt-safe-top w-full">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">verified</span>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile font-bold text-primary">TalentPlatform</h1>
+</div>
+<div class="w-10 h-10 rounded-full overflow-hidden border-2 border-primary-fixed hover:scale-95 transition-transform duration-200">
+<img alt="Recruiter Profile" class="w-full h-full object-cover" data-alt="A professional headshot of a recruitment specialist with a friendly expression. The lighting is bright and airy, typical of a modern office environment. The style is clean and high-fidelity, matching a premium iOS application interface with soft pastel background colors." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBLY5fblfBmrwMi2A6MUzao9NwxP8PWMQnv7dNZoYgvYNh6mJuwn9JslquW7k5LjoFrtgMbXatzt5BX6bnefhQwXnhfycMLK3dgZrHZe_XSSObEZ4HD9vJ6CYs5fBSytaeI9pbTGGYqFvkD2PpUTZhpzAJarRcyJ1IXPMYYp6zz_KfyfG1rtrZgbMt9b_mf541Ct4aU7lLPYPTmN-Z3bkMVqnqPwCTB9-iunddzMBmxNdASsbw2-03GwO6acL68reCqAJx-dty8MKck"/>
+</div>
+</div>
+</header>
+<main class="pt-[104px] pb-[160px] max-w-md mx-auto w-full">
+<!-- Kanban Tab Bar -->
+<div class="sticky top-[88px] z-40 bg-transparent py-4 no-scrollbar overflow-x-auto max-w-md mx-auto w-full">
+<div class="flex gap-4 px-mobile-margin">
+<!-- Applied (Active) -->
+<button class="relative flex-shrink-0 px-6 py-2.5 rounded-full bg-primary text-white text-xs font-bold shadow-[0_4px_12px_rgba(135,49,163,0.25)] transition-all duration-300 active:scale-95 tap-target">
+<span class="font-bold">Applied</span>
+</button>
+<!-- Screened -->
+<button class="relative flex-shrink-0 px-6 py-2.5 rounded-full bg-white/50 border border-white/70 text-outline text-xs font-bold opacity-70 transition-all duration-300 active:scale-95 tap-target">
+<span class="font-bold">Screened</span>
+</button>
+<!-- Interview -->
+<button class="relative flex-shrink-0 px-6 py-2.5 rounded-full bg-white/50 border border-white/70 text-outline text-xs font-bold opacity-70 transition-all duration-300 active:scale-95 tap-target">
+<span class="font-bold">Interview</span>
+</button>
+<!-- Offered -->
+<button class="relative flex-shrink-0 px-6 py-2.5 rounded-full bg-white/50 border border-white/70 text-outline text-xs font-bold opacity-70 transition-all duration-300 active:scale-95 tap-target">
+<span class="font-bold">Offered</span>
+</button>
+</div>
+</div>
+<!-- Lane Content: Applied -->
+<div class="px-mobile-margin mt-2 space-y-4">
+<!-- Candidate Card 1 -->
+<div class="glass-card rounded-3xl p-5 flex flex-col gap-4 animate-in fade-in slide-in-from-bottom-4 duration-500">
+<div class="flex items-start justify-between">
+<div class="flex gap-4">
+<div class="w-14 h-14 rounded-2xl overflow-hidden shadow-sm">
+<img alt="Alex Sterling" class="w-full h-full object-cover" data-alt="A professional studio portrait of a male UX designer named Alex Sterling. He is wearing a stylish modern shirt, and the background is a soft, blurred gradient of lavender and blue, creating a high-end digital aesthetic. The image is crisp and clear, optimized for a premium mobile app interface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC4_R1EsHqIRHOpS7VpRtg3DXMMOH5jDzigS6BdfwQdLdZo8snCQmjVu6O-6xipQa13ydT9-sPmB0gVQ4-XdED0gF0-C52S6_p_q_ddkit09Zqbo-AU5-fjKUQ_Ryh7k_pyEOjLZUjQLWO29NnbLGxf9n9zkRDVSDy0-0ENiEQn6WI5etVGoffb34ZjPysK8p7uSevNrNIPLt_4bWvaiCyHdo-jNOjXYzXE_TSQg0HMQUfq4WFA2Nh9qorkTWG1ff0c74p0IJDhbtiU"/>
+</div>
+<div class="flex flex-col justify-center">
+<h3 class="font-bold text-on-background text-[17px]">Alex Sterling</h3>
+<p class="text-on-surface-variant text-sm font-medium">Senior UX Designer</p>
+</div>
+</div>
+<button class="tap-target flex items-center justify-center text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">more_horiz</span>
+</button>
+</div>
+<div class="flex flex-wrap gap-2">
+<div class="bg-glass-thick px-3 py-1.5 rounded-full border border-glass-border flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-tertiary" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+<span class="text-tertiary font-bold text-[11px] tracking-wide">94% TRUST</span>
+</div>
+<span class="bg-secondary-container/20 text-on-secondary-container px-3 py-1.5 rounded-lg font-bold text-[11px] border border-secondary-container/30 uppercase tracking-widest">Figma</span>
+<span class="bg-secondary-container/20 text-on-secondary-container px-3 py-1.5 rounded-lg font-bold text-[11px] border border-secondary-container/30 uppercase tracking-widest">SwiftUI</span>
+</div>
+</div>
+<!-- Candidate Card 2 -->
+<div class="glass-card rounded-3xl p-5 flex flex-col gap-4 animate-in fade-in slide-in-from-bottom-4 duration-700">
+<div class="flex items-start justify-between">
+<div class="flex gap-4">
+<div class="w-14 h-14 rounded-2xl overflow-hidden shadow-sm">
+<img alt="Jordan Wei" class="w-full h-full object-cover" data-alt="A portrait of Jordan Wei, a technical lead candidate, in a bright studio setting. The lighting is soft and professional, and the background features a subtle glass-like refraction of purple and blue tones. The composition is clean and modern, suitable for a sophisticated professional networking platform." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDtMvaqIxvUooxczaNdQm1Dw2IaokNWNMn4SGdU6kDOxjokrhxgwiCqVRuvzaZ9IqYy7Cpic3RwrsUw2yFOOlvydUdtzph1M-410OCZ4o0FDZrGdtjyAoZ-iYMY50uKGeYsj-wcenYWoilEijcJsQvudbQ6nwO_Z_ca4wKOvHkWgfuem73aPQ4AYHH09BMFlidkEboUWpJvZDTfd4IOlqqwxnu1a6tPZ3573JAPQXZlRohuu3OXXl27UCtFc8EmIcSQIvaCZTwYyhq4"/>
+</div>
+<div class="flex flex-col justify-center">
+<h3 class="font-bold text-on-background text-[17px]">Jordan Wei</h3>
+<p class="text-on-surface-variant text-sm font-medium">Lead iOS Engineer</p>
+</div>
+</div>
+<button class="tap-target flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined">more_horiz</span>
+</button>
+</div>
+<div class="flex flex-wrap gap-2">
+<div class="bg-glass-thick px-3 py-1.5 rounded-full border border-glass-border flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-tertiary" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+<span class="text-tertiary font-bold text-[11px] tracking-wide">88% TRUST</span>
+</div>
+<span class="bg-secondary-container/20 text-on-secondary-container px-3 py-1.5 rounded-lg font-bold text-[11px] border border-secondary-container/30 uppercase tracking-widest">Combine</span>
+<span class="bg-secondary-container/20 text-on-secondary-container px-3 py-1.5 rounded-lg font-bold text-[11px] border border-secondary-container/30 uppercase tracking-widest">Unit Testing</span>
+</div>
+</div>
+<!-- Candidate Card 3 -->
+<div class="glass-card rounded-3xl p-5 flex flex-col gap-4 animate-in fade-in slide-in-from-bottom-4 duration-1000">
+<div class="flex items-start justify-between">
+<div class="flex gap-4">
+<div class="w-14 h-14 rounded-2xl overflow-hidden shadow-sm">
+<img alt="Elena Rodriguez" class="w-full h-full object-cover" data-alt="A high-quality professional portrait of Elena Rodriguez, a Product Manager candidate. The image has a clean, minimalist style with soft focused lighting. The background is a gentle pastel wash, perfectly complementing a futuristic glassmorphic UI design. Her expression is confident and friendly." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBfixS27M9_Fawpew2ITxHhMYZM4xeW3IMRE92LlGnr0GWnZt717q1Yoo48xKlulwrW8AixVyyfRIA8YtXcgwrFhO9biva0vGBT5YKp0cZnONSPNhzyq2GkxtwVpnQOXe9weXfP3DstVpkGzmsQgLV8MBmlsCGgwKUw-5tXYHb16Zbpia81EZyN8zuIApdVqoBkkNBLioAB__EmObILBNSF14ZkxQe0mWl8fngR8VmVEIqCk28VZBYBQYioSYH_u51wuw53zzjZe44N"/>
+</div>
+<div class="flex flex-col justify-center">
+<h3 class="font-bold text-on-background text-[17px]">Elena Rodriguez</h3>
+<p class="text-on-surface-variant text-sm font-medium">Product Manager</p>
+</div>
+</div>
+<button class="tap-target flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined">more_horiz</span>
+</button>
+</div>
+<div class="flex flex-wrap gap-2">
+<div class="bg-glass-thick px-3 py-1.5 rounded-full border border-glass-border flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-tertiary" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+<span class="text-tertiary font-bold text-[11px] tracking-wide">91% TRUST</span>
+</div>
+<span class="bg-secondary-container/20 text-on-secondary-container px-3 py-1.5 rounded-lg font-bold text-[11px] border border-secondary-container/30 uppercase tracking-widest">Agile</span>
+<span class="bg-secondary-container/20 text-on-secondary-container px-3 py-1.5 rounded-lg font-bold text-[11px] border border-secondary-container/30 uppercase tracking-widest">Growth</span>
+</div>
+</div>
+<!-- Candidate Card 4 -->
+<div class="glass-card rounded-3xl p-5 flex flex-col gap-4 animate-in fade-in slide-in-from-bottom-4 duration-[1.2s]">
+<div class="flex items-start justify-between">
+<div class="flex gap-4">
+<div class="w-14 h-14 rounded-2xl overflow-hidden shadow-sm">
+<img alt="Marcus Chen" class="w-full h-full object-cover" data-alt="A detailed portrait of Marcus Chen, a full-stack developer candidate. The lighting is dramatic yet professional, emphasizing a modern tech-forward vibe. The background uses a soft-focus office environment with lavender-blue light-mode tones. The visual quality is cinematic and high-fidelity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBAGqv6rsSKMVCuukUaKmOK_Mcl-293Jmr2TZr01NxmvA9GlvRqfkB5usdIe9ANJCSmWceZ-eeZ6UoU81TUj8UURofLYfiGDNo-vUFKILyYLXZ9Zp9qUA-SJ2pVxIUaBfHZi6Ip5fA5HlmgtCFSxl09FH_KiDljQD9FhvMnGSWf6UbdEbVRdjA60EoFXvumz-M0qFNSI-0AwFCMX7HJ2nDESkAE7NfiIt_ffRmiBnQZ8FaAAChOBipNKN7sWriFO3ru9cOBpSiBlLG1"/>
+</div>
+<div class="flex flex-col justify-center">
+<h3 class="font-bold text-on-background text-[17px]">Marcus Chen</h3>
+<p class="text-on-surface-variant text-sm font-medium">Full Stack Developer</p>
+</div>
+</div>
+<button class="tap-target flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined">more_horiz</span>
+</button>
+</div>
+<div class="flex flex-wrap gap-2">
+<div class="bg-glass-thick px-3 py-1.5 rounded-full border border-glass-border flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-tertiary" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+<span class="text-tertiary font-bold text-[11px] tracking-wide">85% TRUST</span>
+</div>
+<span class="bg-secondary-container/20 text-on-secondary-container px-3 py-1.5 rounded-lg font-bold text-[11px] border border-secondary-container/30 uppercase tracking-widest">Node.js</span>
+<span class="bg-secondary-container/20 text-on-secondary-container px-3 py-1.5 rounded-lg font-bold text-[11px] border border-secondary-container/30 uppercase tracking-widest">React</span>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center pt-2 pb-safe-bottom px-mobile-margin h-[84px] bg-glass-thick backdrop-blur-2xl border-t border-glass-border shadow-[0_-8px_30px_0_rgba(71,26,112,0.1)]">
+<!-- Dashboard -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:opacity-80 transition-all duration-300 active:scale-95" href="#">
+<span class="material-symbols-outlined mb-1">dashboard</span>
+<span class="font-label-caps-mobile text-label-caps-mobile">Dashboard</span>
+</a>
+<!-- Postings -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:opacity-80 transition-all duration-300 active:scale-95" href="#">
+<span class="material-symbols-outlined mb-1">work</span>
+<span class="font-label-caps-mobile text-label-caps-mobile">Postings</span>
+</a>
+<!-- Applicants (Active) -->
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-4 py-1 transition-all duration-300 active:scale-96" href="#">
+<span class="material-symbols-outlined mb-0.5" style="font-variation-settings: 'FILL' 1;">group</span>
+<span class="font-label-caps-mobile text-label-caps-mobile">Applicants</span>
+</a>
+<!-- Reports -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:opacity-80 transition-all duration-300 active:scale-95" href="#">
+<span class="material-symbols-outlined mb-1">assessment</span>
+<span class="font-label-caps-mobile text-label-caps-mobile">Reports</span>
+</a>
+</nav>
+<!-- Micro-interaction Script -->
+<script>
+        // Smooth scroll for the tab bar
+        const scrollContainer = document.querySelector('.no-scrollbar');
+        let isDown = false;
+        letstartX;
+        let scrollLeft;
+
+        scrollContainer.addEventListener('mousedown', (e) => {
+            isDown = true;
+            startX = e.pageX - scrollContainer.offsetLeft;
+            scrollLeft = scrollContainer.scrollLeft;
+        });
+        scrollContainer.addEventListener('mouseleave', () => {
+            isDown = false;
+        });
+        scrollContainer.addEventListener('mouseup', () => {
+            isDown = false;
+        });
+        scrollContainer.addEventListener('mousemove', (e) => {
+            if (!isDown) return;
+            e.preventDefault();
+            const x = e.pageX - scrollContainer.offsetLeft;
+            const walk = (x - startX) * 2;
+            scrollContainer.scrollLeft = scrollLeft - walk;
+        });
+
+        // Simple haptic feedback simulation on card tap
+        document.querySelectorAll('.glass-card').forEach(card => {
+            card.addEventListener('click', () => {
+                card.style.transform = 'scale(0.98)';
+                setTimeout(() => {
+                    card.style.transform = 'scale(1)';
+                }, 100);
+            });
+        });
+    </script>
+</body></html>

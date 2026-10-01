@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>JobPath Admin - Verification Queue</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind Configuration -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "background": "#f9f9ff",
+                    "on-tertiary-fixed-variant": "#00531a",
+                    "on-primary": "#ffffff",
+                    "error": "#FF453A",
+                    "secondary": "#0060ab",
+                    "tertiary": "#006823",
+                    "surface-container-lowest": "#ffffff",
+                    "on-surface": "#141c29",
+                    "surface-container-highest": "#dbe3f6",
+                    "outline-variant": "#d2c1d2",
+                    "inverse-surface": "#29313f",
+                    "surface-bright": "#f9f9ff",
+                    "surface-container-high": "#e0e8fb",
+                    "surface": "#f9f9ff",
+                    "on-secondary": "#ffffff",
+                    "glass-thick": "rgba(255, 255, 255, 0.8)",
+                    "secondary-fixed": "#d3e3ff",
+                    "on-secondary-fixed-variant": "#004883",
+                    "surface-tint": "#8d37a9",
+                    "secondary-fixed-dim": "#a3c9ff",
+                    "inverse-on-surface": "#ecf1ff",
+                    "card-gradient": "linear-gradient(135deg, #4D9EFA 0%, #BF7DF5 100%)",
+                    "on-primary-fixed-variant": "#72188f",
+                    "on-secondary-fixed": "#001c39",
+                    "primary-container": "#a34cbe",
+                    "secondary-container": "#54a3ff",
+                    "primary": "#8731a3",
+                    "on-surface-variant": "#4f4350",
+                    "primary-fixed-dim": "#f0b0ff",
+                    "inverse-primary": "#f0b0ff",
+                    "orange": "#FF9F0A",
+                    "surface-variant": "#dbe3f6",
+                    "primary-fixed": "#fbd7ff",
+                    "tertiary-fixed": "#6cff82",
+                    "glass-border": "rgba(255, 255, 255, 0.6)",
+                    "on-primary-fixed": "#330044",
+                    "tertiary-container": "#00842f",
+                    "surface-dim": "#d2daed",
+                    "surface-container-low": "#f0f3ff",
+                    "on-error": "#ffffff",
+                    "on-secondary-container": "#003868",
+                    "on-background": "#471A70",
+                    "on-tertiary-fixed": "#002106",
+                    "glass-fill": "rgba(255, 255, 255, 0.35)",
+                    "on-error-container": "#93000a",
+                    "on-primary-container": "#fff5fb",
+                    "surface-container": "#e7eeff",
+                    "error-container": "#ffdad6",
+                    "on-tertiary": "#ffffff",
+                    "outline": "#817381",
+                    "tertiary-fixed-dim": "#47e266",
+                    "on-tertiary-container": "#e6ffe0",
+                    "gold": "#FFD60A"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "max-width": "1280px",
+                    "mobile-margin": "20px",
+                    "safe-bottom": "34px",
+                    "desktop-gutter": "24px",
+                    "base": "8px",
+                    "safe-top": "44px",
+                    "mobile-gutter": "16px",
+                    "desktop-margin": "64px"
+            },
+            "fontFamily": {
+                    "body-md": ["Inter"],
+                    "display-xl": ["Inter"],
+                    "label-caps": ["Inter"],
+                    "headline-lg": ["Inter"]
+            },
+            "fontSize": {
+                    "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                    "display-xl": ["56px", {"lineHeight": "1.1", "letterSpacing": "-0.03em", "fontWeight": "700"}],
+                    "label-caps": ["13px", {"lineHeight": "1.0", "letterSpacing": "0.03em", "fontWeight": "600"}],
+                    "headline-lg": ["34px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #DCE4F7; /* Override from prompt */
+            color: #471A70;
+            overflow-x: hidden;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(28px);
+            -webkit-backdrop-filter: blur(28px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 12px 40px 0 rgba(71, 26, 112, 0.15);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .status-badge {
+            padding: 4px 12px;
+            border-radius: 9999px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .liquid-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            background: radial-gradient(circle at 20% 30%, #fbd7ff 0%, transparent 40%),
+                        radial-gradient(circle at 80% 70%, #d3e3ff 0%, transparent 40%),
+                        linear-gradient(135deg, #DCE4F7 0%, #f0f3ff 100%);
+        }
+    </style>
+</head>
+<body class="font-body-md text-on-background">
+<div class="liquid-bg"></div>
+<!-- SideNavBar (Shared Component) -->
+<nav class="fixed left-0 top-0 h-full w-64 z-50 bg-surface-container-low border-r border-glass-border shadow-md flex flex-col p-6 gap-4">
+<div class="mb-8">
+<div class="flex items-center gap-3 mb-2">
+<div class="w-10 h-10 rounded-xl bg-primary flex items-center justify-center text-on-primary">
+<span class="material-symbols-outlined">shield_person</span>
+</div>
+<h1 class="font-headline-lg text-[24px] leading-tight text-primary font-bold">JobPath</h1>
+</div>
+<p class="font-label-caps text-[11px] text-on-surface-variant">Admin Console</p>
+</div>
+<div class="flex flex-col gap-2 flex-grow">
+<!-- Nav Item: Dashboard -->
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-transform duration-300 hover:scale-[1.02] rounded-xl font-label-caps text-label-caps" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span>Dashboard</span>
+</a>
+<!-- Nav Item: Verifications (Active) -->
+<a class="flex items-center gap-3 px-4 py-3 bg-primary-container text-on-primary-container rounded-xl font-bold transition-transform duration-300 scale-[1.02] font-label-caps text-label-caps" href="#">
+<span class="material-symbols-outlined" data-icon="verified_user">verified_user</span>
+<span>Verifications</span>
+</a>
+<!-- Nav Item: Reports -->
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-transform duration-300 hover:scale-[1.02] rounded-xl font-label-caps text-label-caps" href="#">
+<span class="material-symbols-outlined" data-icon="assessment">assessment</span>
+<span>Reports</span>
+</a>
+<!-- Nav Item: Settings -->
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-transform duration-300 hover:scale-[1.02] rounded-xl font-label-caps text-label-caps" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span>Settings</span>
+</a>
+</div>
+<button class="mt-auto bg-primary text-on-primary py-3 px-4 rounded-xl font-bold flex items-center justify-center gap-2 hover:opacity-90 active:scale-95 transition-all">
+<span class="material-symbols-outlined text-[20px]">history</span>
+            Review Logs
+        </button>
+</nav>
+<!-- Main Content Canvas -->
+<main class="ml-64 p-desktop-margin min-h-screen">
+<!-- Header Section -->
+<header class="flex justify-between items-end mb-10">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-on-background mb-1">Verification Queue</h2>
+<div class="flex items-center gap-2 text-on-surface-variant">
+<span class="bg-secondary-container text-on-secondary-container px-3 py-1 rounded-full text-[14px] font-bold">128 Pending</span>
+<span class="text-[14px]">Updated 2 minutes ago</span>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative">
+<input class="bg-glass-thick border-glass-border border rounded-full px-12 py-3 w-72 focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all placeholder:text-on-surface-variant/50" placeholder="Search companies..." type="text"/>
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+</div>
+<button class="w-12 h-12 glass-card rounded-full flex items-center justify-center text-primary hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined">filter_list</span>
+</button>
+</div>
+</header>
+<!-- Main Table Content (Glass Bento Pattern) -->
+<div class="glass-card rounded-[32px] overflow-hidden border border-glass-border">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="border-b border-glass-border bg-white/20">
+<th class="px-8 py-5 font-label-caps text-label-caps text-on-surface-variant">Company Name</th>
+<th class="px-8 py-5 font-label-caps text-label-caps text-on-surface-variant">Reg. Number</th>
+<th class="px-8 py-5 font-label-caps text-label-caps text-on-surface-variant">Date Submitted</th>
+<th class="px-8 py-5 font-label-caps text-label-caps text-on-surface-variant text-center">Uploaded Docs</th>
+<th class="px-8 py-5 font-label-caps text-label-caps text-on-surface-variant">Status</th>
+<th class="px-8 py-5 font-label-caps text-label-caps text-on-surface-variant text-right">Quick Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-glass-border/40">
+<!-- Row 1 -->
+<tr class="hover:bg-secondary/5 transition-colors group">
+<td class="px-8 py-6">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-lg overflow-hidden flex-shrink-0 bg-white">
+<img alt="Company Logo" class="w-full h-full object-contain" data-alt="A clean, professional minimalist tech logo for a financial services company, displayed in a high-fidelity vector style. The logo sits against a soft, blurred lavender background that maintains the premium glassmorphic aesthetic of the admin dashboard. Lighting is bright and even, highlighting the sleek lines and professional branding of the entity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCiFWyQJ0lqWuY2iQ0lNSzCso3RIUVcgh5dmRUn00t-kOuc9gEQKTS7jqhHS64jThcQrAxgTouOE5pBcU-J54UShnum8wXO9qRdUkWYrjsfpIpZBixjktuWrEiaj791Q-2PkN0dWBfGyI9DNz9RvFruFUokROSeAeyDr_wxUnUl9dMlrQe3f457Ec9cdRAyJOaomKu7QJRCFl1aRIzmsUd04DOd227IMlrVttqjb-LwoYdohBDX8eP0kcjchqFQvTErIKWCwIUeieNO"/>
+</div>
+<div>
+<div class="font-bold text-on-background">Stripe Inc.</div>
+<div class="text-[12px] text-on-surface-variant">Fintech / Payments</div>
+</div>
+</div>
+</td>
+<td class="px-8 py-6 text-on-surface font-mono text-[14px]">US-8829441-B</td>
+<td class="px-8 py-6 text-on-surface text-[14px]">Oct 24, 2023</td>
+<td class="px-8 py-6">
+<div class="flex justify-center gap-3">
+<a class="w-8 h-8 rounded-lg bg-surface-container-high flex items-center justify-center text-primary hover:scale-110 transition-transform" href="#" title="Business License">
+<span class="material-symbols-outlined text-[18px]">description</span>
+</a>
+<a class="w-8 h-8 rounded-lg bg-surface-container-high flex items-center justify-center text-primary hover:scale-110 transition-transform" href="#" title="ID Proof">
+<span class="material-symbols-outlined text-[18px]">badge</span>
+</a>
+</div>
+</td>
+<td class="px-8 py-6">
+<span class="status-badge bg-orange/20 text-orange border border-orange/30">Pending</span>
+</td>
+<td class="px-8 py-6">
+<div class="flex justify-end gap-2">
+<button class="w-9 h-9 rounded-lg bg-tertiary/10 text-tertiary flex items-center justify-center hover:bg-tertiary hover:text-white transition-all active:scale-90" title="Approve">
+<span class="material-symbols-outlined text-[20px]">check</span>
+</button>
+<button class="w-9 h-9 rounded-lg bg-error/10 text-error flex items-center justify-center hover:bg-error hover:text-white transition-all active:scale-90" title="Decline">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+<button class="w-9 h-9 rounded-lg bg-secondary/10 text-secondary flex items-center justify-center hover:bg-secondary hover:text-white transition-all active:scale-90" title="View Details">
+<span class="material-symbols-outlined text-[20px]">visibility</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-secondary/5 transition-colors group">
+<td class="px-8 py-6">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-lg overflow-hidden flex-shrink-0 bg-white">
+<img alt="Company Logo" class="w-full h-full object-contain" data-alt="A modern corporate logo for a global hospitality platform, presented with sharp definition and high contrast. The logo is framed by a subtle glassmorphic glow and soft purple shadows, consistent with the futuristic digital workspace. The lighting environment is sophisticated, with a gentle prismatic diffusion around the edges of the icon." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBP_7SFohJbZn18sb5G6nRNvBFOvuobG-_nkBm189zykGuAyEXVlqAJCLnomvoOxiiTbMMjCegrGADhKyYbgD4W6MRqnrVVB0_8VZvkZpWDvjH1Zl_SNaEugFm_WfwvlKHkeOjYIpGsupHkeTp0BMD0n-sJLykzxaXBJyn-XsSLqiFJM_s_EYDTRLvTl8BBr_1Y8JvigprWExCaFaV6f-4tS6I1cCaauThWrXygWXNW-h4uH7KT-9BrbNqmgrtFdj2KLv48AMeExKxh"/>
+</div>
+<div>
+<div class="font-bold text-on-background">Airbnb</div>
+<div class="text-[12px] text-on-surface-variant">Real Estate / Travel</div>
+</div>
+</div>
+</td>
+<td class="px-8 py-6 text-on-surface font-mono text-[14px]">IE-4402199-X</td>
+<td class="px-8 py-6 text-on-surface text-[14px]">Oct 23, 2023</td>
+<td class="px-8 py-6">
+<div class="flex justify-center gap-3">
+<a class="w-8 h-8 rounded-lg bg-surface-container-high flex items-center justify-center text-primary hover:scale-110 transition-transform" href="#" title="Business License">
+<span class="material-symbols-outlined text-[18px]">description</span>
+</a>
+<a class="w-8 h-8 rounded-lg bg-surface-container-high flex items-center justify-center text-primary hover:scale-110 transition-transform" href="#" title="ID Proof">
+<span class="material-symbols-outlined text-[18px]">badge</span>
+</a>
+</div>
+</td>
+<td class="px-8 py-6">
+<span class="status-badge bg-orange/20 text-orange border border-orange/30">Pending</span>
+</td>
+<td class="px-8 py-6">
+<div class="flex justify-end gap-2">
+<button class="w-9 h-9 rounded-lg bg-tertiary/10 text-tertiary flex items-center justify-center hover:bg-tertiary hover:text-white transition-all active:scale-90" title="Approve">
+<span class="material-symbols-outlined text-[20px]">check</span>
+</button>
+<button class="w-9 h-9 rounded-lg bg-error/10 text-error flex items-center justify-center hover:bg-error hover:text-white transition-all active:scale-90" title="Decline">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+<button class="w-9 h-9 rounded-lg bg-secondary/10 text-secondary flex items-center justify-center hover:bg-secondary hover:text-white transition-all active:scale-90" title="View Details">
+<span class="material-symbols-outlined text-[20px]">visibility</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-secondary/5 transition-colors group">
+<td class="px-8 py-6">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-lg overflow-hidden flex-shrink-0 bg-white p-1">
+<img alt="Company Logo" class="w-full h-full object-contain" data-alt="A clean and impactful corporate logo for an aerospace technology company, rendered in a crisp digital format. The background features a soft-focus atmosphere with ethereal light leaks in shades of pale blue and violet. The overall aesthetic is focused and professional, fitting perfectly within the high-end verification dashboard interface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBky-swMkBw9dHHr7839hFj5nN1Mn4uE_w6Lknm5O3e5gqBw7CiEPVpQhzpj_5p7TM1yWNIwQA6AKiM2kXsY-rHanYRX_p9dbaM3OnHNt4DYNLkvjBCisKH8lFidApXM1tmg3qPYTYkv1Q3iMqEI4CkH2yV2gEJakbIKGq7JlbSx3hshuQn-pecpGif8BatmTSYoEwhroxYL9CIFt4pX4071aTZm-I1wkIgThY0HcFYtNwwfcm5Tq_0ztutwdupYKt0O2SnQ7Np_adK"/>
+</div>
+<div>
+<div class="font-bold text-on-background">Space Exploration Technologies</div>
+<div class="text-[12px] text-on-surface-variant">Aerospace / Engineering</div>
+</div>
+</div>
+</td>
+<td class="px-8 py-6 text-on-surface font-mono text-[14px]">US-0019283-K</td>
+<td class="px-8 py-6 text-on-surface text-[14px]">Oct 22, 2023</td>
+<td class="px-8 py-6">
+<div class="flex justify-center gap-3">
+<a class="w-8 h-8 rounded-lg bg-surface-container-high flex items-center justify-center text-primary hover:scale-110 transition-transform" href="#" title="Business License">
+<span class="material-symbols-outlined text-[18px]">description</span>
+</a>
+<a class="w-8 h-8 rounded-lg bg-surface-container-high flex items-center justify-center text-primary hover:scale-110 transition-transform" href="#" title="ID Proof">
+<span class="material-symbols-outlined text-[18px]">badge</span>
+</a>
+</div>
+</td>
+<td class="px-8 py-6">
+<span class="status-badge bg-orange/20 text-orange border border-orange/30">Pending</span>
+</td>
+<td class="px-8 py-6">
+<div class="flex justify-end gap-2">
+<button class="w-9 h-9 rounded-lg bg-tertiary/10 text-tertiary flex items-center justify-center hover:bg-tertiary hover:text-white transition-all active:scale-90" title="Approve">
+<span class="material-symbols-outlined text-[20px]">check</span>
+</button>
+<button class="w-9 h-9 rounded-lg bg-error/10 text-error flex items-center justify-center hover:bg-error hover:text-white transition-all active:scale-90" title="Decline">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+<button class="w-9 h-9 rounded-lg bg-secondary/10 text-secondary flex items-center justify-center hover:bg-secondary hover:text-white transition-all active:scale-90" title="View Details">
+<span class="material-symbols-outlined text-[20px]">visibility</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="hover:bg-secondary/5 transition-colors group">
+<td class="px-8 py-6">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-lg overflow-hidden flex-shrink-0 bg-white p-1">
+<img alt="Company Logo" class="w-full h-full object-contain" data-alt="A minimalist monochrome logo for a software productivity platform, set within a luxurious glassmorphic UI card. The surrounding environment is characterized by gentle light-mode pastels, with a focus on clean white surfaces and translucent layers. The composition is balanced and elegant, echoing the sophisticated aesthetic of high-tier admin software." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDUS4ROgnf1HXf9L9xXeHuFoNUERqYtsgEe85XUW3qDGVb-cJ-MH5Pe9OAcGvu9gH1HWlMPxMeInNnafBITxaLF9T-j4Arkg-55RalGTqtLMXuMhYivcTM7cja3w05Pcl_pcG-PaSP-faHQBP2vGN7k04qSKIWNh9sNdobZ5I9SahypBhTYrmCAiZa9lUPrZ8lnZe8R7DlJO7CkKW9smHBlL8DGgbgtN0zLA1JnUiNwnsiPQoapcFWfuJRC7F1yiGnIhpmX12PTIar-"/>
+</div>
+<div>
+<div class="font-bold text-on-background">Notion Labs</div>
+<div class="text-[12px] text-on-surface-variant">SaaS / Productivity</div>
+</div>
+</div>
+</td>
+<td class="px-8 py-6 text-on-surface font-mono text-[14px]">US-3392100-M</td>
+<td class="px-8 py-6 text-on-surface text-[14px]">Oct 21, 2023</td>
+<td class="px-8 py-6">
+<div class="flex justify-center gap-3">
+<a class="w-8 h-8 rounded-lg bg-surface-container-high flex items-center justify-center text-primary hover:scale-110 transition-transform" href="#" title="Business License">
+<span class="material-symbols-outlined text-[18px]">description</span>
+</a>
+<a class="w-8 h-8 rounded-lg bg-surface-container-high flex items-center justify-center text-primary hover:scale-110 transition-transform" href="#" title="ID Proof">
+<span class="material-symbols-outlined text-[18px]">badge</span>
+</a>
+</div>
+</td>
+<td class="px-8 py-6">
+<span class="status-badge bg-orange/20 text-orange border border-orange/30">Pending</span>
+</td>
+<td class="px-8 py-6">
+<div class="flex justify-end gap-2">
+<button class="w-9 h-9 rounded-lg bg-tertiary/10 text-tertiary flex items-center justify-center hover:bg-tertiary hover:text-white transition-all active:scale-90" title="Approve">
+<span class="material-symbols-outlined text-[20px]">check</span>
+</button>
+<button class="w-9 h-9 rounded-lg bg-error/10 text-error flex items-center justify-center hover:bg-error hover:text-white transition-all active:scale-90" title="Decline">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+<button class="w-9 h-9 rounded-lg bg-secondary/10 text-secondary flex items-center justify-center hover:bg-secondary hover:text-white transition-all active:scale-90" title="View Details">
+<span class="material-symbols-outlined text-[20px]">visibility</span>
+</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Footer / Pagination -->
+<div class="px-8 py-6 bg-white/20 border-t border-glass-border flex justify-between items-center">
+<div class="text-on-surface-variant text-[14px]">
+                    Showing <span class="font-bold text-on-background">1-10</span> of <span class="font-bold text-on-background">128</span> entries
+                </div>
+<div class="flex gap-2">
+<button class="w-10 h-10 rounded-full border border-glass-border flex items-center justify-center text-on-surface-variant hover:bg-white transition-colors disabled:opacity-30" disabled="">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center font-bold shadow-lg">1</button>
+<button class="w-10 h-10 rounded-full border border-glass-border flex items-center justify-center text-on-surface-variant hover:bg-white transition-colors">2</button>
+<button class="w-10 h-10 rounded-full border border-glass-border flex items-center justify-center text-on-surface-variant hover:bg-white transition-colors">3</button>
+<button class="w-10 h-10 rounded-full border border-glass-border flex items-center justify-center text-on-surface-variant hover:bg-white transition-colors">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+<!-- System Stats / Bento Bottom Grid -->
+<div class="grid grid-cols-3 gap-6 mt-6">
+<div class="glass-card p-6 rounded-[24px]">
+<div class="flex items-center justify-between mb-4">
+<div class="font-label-caps text-label-caps text-on-surface-variant">Avg. Verification Time</div>
+<span class="material-symbols-outlined text-primary">schedule</span>
+</div>
+<div class="text-[32px] font-bold text-on-background">4.2 Hours</div>
+<div class="flex items-center gap-1 text-tertiary text-[12px] mt-1">
+<span class="material-symbols-outlined text-[16px]">trending_down</span>
+<span>12% faster than last week</span>
+</div>
+</div>
+<div class="glass-card p-6 rounded-[24px]">
+<div class="flex items-center justify-between mb-4">
+<div class="font-label-caps text-label-caps text-on-surface-variant">Approval Rate</div>
+<span class="material-symbols-outlined text-tertiary">check_circle</span>
+</div>
+<div class="text-[32px] font-bold text-on-background">84.5%</div>
+<div class="w-full bg-surface-container-high h-2 rounded-full mt-2 overflow-hidden">
+<div class="bg-tertiary h-full w-[84.5%] rounded-full"></div>
+</div>
+</div>
+<div class="glass-card p-6 rounded-[24px]">
+<div class="flex items-center justify-between mb-4">
+<div class="font-label-caps text-label-caps text-on-surface-variant">Flagged Submissions</div>
+<span class="material-symbols-outlined text-error">flag</span>
+</div>
+<div class="text-[32px] font-bold text-on-background">14</div>
+<div class="text-[12px] text-on-surface-variant mt-1">Requires manual secondary review</div>
+</div>
+</div>
+</main>
+<script>
+        // Simple Interaction logic for table buttons
+        document.querySelectorAll('button[title]').forEach(button => {
+            button.addEventListener('click', function(e) {
+                const action = this.getAttribute('title');
+                const companyName = this.closest('tr').querySelector('.font-bold').innerText;
+                
+                if (action === 'Approve') {
+                    if(confirm(`Are you sure you want to approve ${companyName}?`)) {
+                        this.closest('tr').style.opacity = '0.3';
+                        this.closest('tr').style.pointerEvents = 'none';
+                        // In real app, send API call here
+                    }
+                } else if (action === 'Decline') {
+                    if(confirm(`Are you sure you want to decline ${companyName}?`)) {
+                        this.closest('tr').style.opacity = '0.3';
+                        this.closest('tr').style.pointerEvents = 'none';
+                    }
+                }
+            });
+        });
+    </script>
+</body></html>

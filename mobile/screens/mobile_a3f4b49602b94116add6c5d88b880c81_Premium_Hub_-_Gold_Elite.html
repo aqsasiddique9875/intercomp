@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<title>Membership Hub - Premium</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-fixed-dim": "#e9c400",
+                        "surface-container-low": "#201921",
+                        "surface-container": "#241d25",
+                        "error-container": "#93000a",
+                        "outline-variant": "#4f4350",
+                        "on-background": "#ecdfe9",
+                        "outline": "#9b8c9b",
+                        "on-primary": "#54006d",
+                        "secondary-fixed": "#f0dbff",
+                        "on-tertiary": "#3b2f00",
+                        "on-error": "#690005",
+                        "secondary-fixed-dim": "#ddb7ff",
+                        "on-tertiary-fixed-variant": "#554600",
+                        "on-primary-fixed": "#330044",
+                        "surface": "#171118",
+                        "primary-fixed": "#fbd7ff",
+                        "inverse-on-surface": "#352e36",
+                        "on-tertiary-container": "#4c3f00",
+                        "surface-container-highest": "#3a323a",
+                        "on-primary-container": "#fff5fb",
+                        "on-error-container": "#ffdad6",
+                        "primary-container": "#a34cbe",
+                        "surface-tint": "#f0b0ff",
+                        "surface-container-lowest": "#120c13",
+                        "surface-container-high": "#2f282f",
+                        "tertiary": "#eac400",
+                        "on-primary-fixed-variant": "#72188f",
+                        "secondary-container": "#5d3186",
+                        "on-surface-variant": "#d2c1d2",
+                        "on-secondary": "#45176e",
+                        "primary": "#f0b0ff",
+                        "error": "#ffb4ab",
+                        "on-secondary-fixed-variant": "#5d3186",
+                        "on-secondary-container": "#d1a1fe",
+                        "secondary": "#ddb7ff",
+                        "on-tertiary-fixed": "#221b00",
+                        "surface-variant": "#3a323a",
+                        "on-secondary-fixed": "#2c0050",
+                        "surface-bright": "#3e373f",
+                        "tertiary-fixed": "#ffe171",
+                        "inverse-primary": "#8d37a9",
+                        "inverse-surface": "#ecdfe9",
+                        "surface-dim": "#171118",
+                        "on-surface": "#ecdfe9",
+                        "background": "#171118",
+                        "tertiary-container": "#caa900",
+                        "primary-fixed-dim": "#f0b0ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "unit-md": "16px",
+                        "unit-lg": "24px",
+                        "unit-xs": "4px",
+                        "margin": "20px",
+                        "unit-xl": "32px",
+                        "gutter": "16px",
+                        "columns": "4",
+                        "unit-sm": "8px"
+                    },
+                    "fontFamily": {
+                        "label-lg": ["Inter"],
+                        "body-md": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "headline-xl": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "body-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-lg": ["13px", {"lineHeight": "18px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                        "body-md": ["15px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "headline-lg": ["28px", {"lineHeight": "34px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "headline-md": ["22px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "headline-xl": ["34px", {"lineHeight": "41px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "label-sm": ["11px", {"lineHeight": "13px", "letterSpacing": "0.06em", "fontWeight": "500"}],
+                        "body-lg": ["17px", {"lineHeight": "22px", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #171118;
+            color: #ecdfe9;
+            -webkit-font-smoothing: antialiased;
+        }
+        .glass-base {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(28px);
+            -webkit-backdrop-filter: blur(28px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .premium-card-glow {
+            box-shadow: 0 0 40px rgba(163, 76, 190, 0.15);
+        }
+        .active-tap {
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .active-tap:active {
+            transform: scale(0.96);
+        }
+        .mesh-gradient {
+            background: radial-gradient(at 0% 0%, rgba(163, 76, 190, 0.15) 0px, transparent 50%),
+                        radial-gradient(at 100% 100%, rgba(255, 214, 10, 0.1) 0px, transparent 50%);
+        }
+    </style>
+</head>
+<body class="mesh-gradient min-h-screen pb-32">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 backdrop-blur-[28px] border-b border-white/5 bg-[#171118]/80 shadow-[0_12px_40px_0_rgba(71,26,112,0.15)] h-14 flex justify-between items-center px-5">
+<div class="flex items-center gap-4">
+<button class="active:scale-[0.96] transition-transform duration-300 flex items-center justify-center w-10 h-10 rounded-full hover:bg-white/5">
+<span class="material-symbols-outlined text-primary">arrow_back</span>
+</button>
+<h1 class="font-headline-lg text-[20px] leading-tight font-bold text-on-surface">Membership Hub</h1>
+</div>
+<button class="active:scale-[0.96] transition-transform duration-300 w-10 h-10 rounded-full flex items-center justify-center hover:bg-white/5">
+<span class="material-symbols-outlined text-on-surface-variant">more_vert</span>
+</button>
+</header>
+<main class="pt-20 px-5 space-y-8">
+<!-- Hero Section -->
+<section class="relative group cursor-pointer active-tap">
+<div class="relative overflow-hidden rounded-[32px] premium-card-glow transition-all duration-500 border border-white/20">
+<img alt="Elite Membership Card" class="w-full h-auto object-cover transform transition-transform duration-700 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCL65DzfMj7I2eHOboWNrEhu_M1dVPEawdvfDcBePq0QxmJVZhUmmPh9Mmhi-YXfFGtPBxiLaVvDMhXTH--X5rNo6JfL5oQp1iVKwRKqk7HxjoYXjFD10q7Np260dUSxDHsLyEkSFwAEdlE89HEz5KtP1zLsIC2DsKwh7XkYu1FNw7ZPzXCkEEclFvRj3P-UvUa1CQ_ip2osBmjWfUpWvzQWdwD6xmUANU-AnfYlBPif_Asf-bi7QC6bXvQ2ba-oqYZJXlApRkqYVjA"/>
+<div class="absolute inset-0 bg-gradient-to-t from-[#171118]/80 via-transparent to-transparent"></div>
+</div>
+<div class="mt-6 space-y-2 text-center">
+<h2 class="font-headline-xl text-headline-xl text-primary">Unlock Elite Status</h2>
+<p class="font-body-md text-on-surface-variant max-w-[280px] mx-auto">Elevate your professional trajectory with exclusive access to world-class coaching tools.</p>
+</div>
+</section>
+<!-- Feature Comparison Grid -->
+<section class="space-y-4">
+<h3 class="font-label-lg text-label-lg uppercase tracking-widest text-on-surface-variant/60 ml-1">Elite Privileges</h3>
+<div class="grid grid-cols-1 gap-4">
+<!-- Feature 1 -->
+<div class="glass-base p-5 rounded-[24px] flex items-center gap-4 border-white/10">
+<div class="w-12 h-12 rounded-2xl bg-primary-container/20 flex items-center justify-center border border-primary/20">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">video_chat</span>
+</div>
+<div>
+<h4 class="font-headline-md text-[17px] text-on-surface">Mock Interviews</h4>
+<p class="font-label-sm text-on-surface-variant/70">Unlimited AI-powered sessions</p>
+</div>
+</div>
+<!-- Feature 2 -->
+<div class="glass-base p-5 rounded-[24px] flex items-center gap-4 border-white/10">
+<div class="w-12 h-12 rounded-2xl bg-tertiary-container/20 flex items-center justify-center border border-tertiary/20">
+<span class="material-symbols-outlined text-tertiary" style="font-variation-settings: 'FILL' 1;">description</span>
+</div>
+<div>
+<h4 class="font-headline-md text-[17px] text-on-surface">Resume Critiques</h4>
+<p class="font-label-sm text-on-surface-variant/70">Daily personalized expert feedback</p>
+</div>
+</div>
+<!-- Feature 3 -->
+<div class="glass-base p-5 rounded-[24px] flex items-center gap-4 border-white/10">
+<div class="w-12 h-12 rounded-2xl bg-secondary-container/20 flex items-center justify-center border border-secondary/20">
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">verified</span>
+</div>
+<div>
+<h4 class="font-headline-md text-[17px] text-on-surface">Priority Tags</h4>
+<p class="font-label-sm text-on-surface-variant/70">Enhanced profile visibility</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Payment Actions -->
+<section class="space-y-4">
+<h3 class="font-label-lg text-label-lg uppercase tracking-widest text-on-surface-variant/60 ml-1">Select Plan</h3>
+<div class="space-y-3">
+<!-- Yearly Option -->
+<button class="w-full active-tap glass-base p-5 rounded-[24px] flex items-center justify-between border-primary/30 bg-primary/5">
+<div class="flex items-center gap-4">
+<div class="w-6 h-6 rounded-full border-2 border-primary flex items-center justify-center">
+<div class="w-3 h-3 bg-primary rounded-full"></div>
+</div>
+<div class="text-left">
+<span class="font-label-sm bg-primary/20 text-primary px-2 py-0.5 rounded-full mb-1 inline-block">BEST VALUE</span>
+<h4 class="font-headline-md text-[18px] text-on-surface">Yearly Elite</h4>
+</div>
+</div>
+<div class="text-right">
+<div class="font-headline-lg text-[22px] text-on-surface">Rs. 199</div>
+<div class="font-label-sm text-on-surface-variant">save Rs. 29/year</div>
+</div>
+</button>
+<!-- Monthly Option -->
+<button class="w-full active-tap glass-base p-5 rounded-[24px] flex items-center justify-between border-white/10">
+<div class="flex items-center gap-4">
+<div class="w-6 h-6 rounded-full border-2 border-on-surface-variant/30"></div>
+<div class="text-left">
+<h4 class="font-headline-md text-[18px] text-on-surface">Monthly</h4>
+</div>
+</div>
+<div class="text-right">
+<div class="font-headline-lg text-[22px] text-on-surface">Rs. 19</div>
+<div class="font-label-sm text-on-surface-variant">flexible billing</div>
+</div>
+</button>
+</div>
+<!-- CTA -->
+<button class="w-full active-tap h-[56px] mt-4 bg-[#FFD60A] text-[#171118] font-bold text-[18px] rounded-[24px] shadow-[0_12px_24px_-8px_rgba(255,214,10,0.4)] flex items-center justify-center gap-2 group">
+                Go Premium
+                <span class="material-symbols-outlined transition-transform group-hover:translate-x-1">arrow_forward</span>
+</button>
+<p class="text-center font-label-sm text-on-surface-variant/50 pt-2 px-8">
+                By subscribing you agree to our Terms of Service. Cancel anytime from your account settings.
+            </p>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full z-50 rounded-t-[28px] backdrop-blur-[32px] border-t border-white/5 bg-[#171118]/90 shadow-[0_-8px_32px_0_rgba(71,26,112,0.1)] h-20 flex justify-around items-center px-5 pb-safe">
+<div class="flex flex-col items-center justify-center text-on-surface-variant opacity-60 hover:opacity-100 transition-opacity active-tap">
+<span class="material-symbols-outlined">explore</span>
+<span class="font-label-sm mt-1">Discover</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant opacity-60 hover:opacity-100 transition-opacity active-tap">
+<span class="material-symbols-outlined">work_history</span>
+<span class="font-label-sm mt-1">Applied</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant opacity-60 hover:opacity-100 transition-opacity active-tap">
+<span class="material-symbols-outlined">bookmark</span>
+<span class="font-label-sm mt-1">Saved</span>
+</div>
+<!-- Active Tab: Profile -->
+<div class="flex flex-col items-center justify-center bg-primary-container/20 text-primary rounded-full px-5 py-2 active-tap">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">person</span>
+<span class="font-label-sm mt-0.5">Profile</span>
+</div>
+</nav>
+<script>
+        // Micro-interactions and subtle parallax
+        document.addEventListener('mousemove', (e) => {
+            const cards = document.querySelectorAll('.active-tap');
+            const x = e.clientX / window.innerWidth;
+            const y = e.clientY / window.innerHeight;
+            
+            cards.forEach(card => {
+                const rect = card.getBoundingClientRect();
+                const cardCenterX = rect.left + rect.width / 2;
+                const cardCenterY = rect.top + rect.height / 2;
+                
+                const angleX = (e.clientY - cardCenterY) / 100;
+                const angleY = (e.clientX - cardCenterX) / -100;
+                
+                if (Math.abs(angleX) < 5 && Math.abs(angleY) < 5) {
+                   // card.style.transform = `perspective(1000px) rotateX(${angleX}deg) rotateY(${angleY}deg)`;
+                }
+            });
+        });
+    </script>
+</body></html>

@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<title>Ad Campaign Creator - Liquid Glass</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-fixed": "#6cff82",
+                        "on-tertiary-fixed-variant": "#00531a",
+                        "inverse-surface": "#29313f",
+                        "outline": "#817381",
+                        "on-background": "#471A70",
+                        "on-tertiary": "#ffffff",
+                        "tertiary-container": "#00842f",
+                        "surface-container-lowest": "#ffffff",
+                        "tertiary": "#006823",
+                        "orange": "#FF9F0A",
+                        "surface-container-low": "#f0f3ff",
+                        "surface-container-high": "#e0e8fb",
+                        "error-container": "#ffdad6",
+                        "on-secondary-container": "#003868",
+                        "on-primary-container": "#fff5fb",
+                        "secondary": "#0060ab",
+                        "primary": "#8731a3",
+                        "card-gradient": "linear-gradient(135deg, #4D9EFA 0%, #BF7DF5 100%)",
+                        "secondary-container": "#54a3ff",
+                        "background": "#f9f9ff",
+                        "surface-variant": "#dbe3f6",
+                        "error": "#FF453A",
+                        "primary-fixed-dim": "#f0b0ff",
+                        "on-surface": "#141c29",
+                        "on-primary": "#ffffff",
+                        "on-secondary-fixed": "#001c39",
+                        "on-primary-fixed-variant": "#72188f",
+                        "glass-thick": "rgba(255, 255, 255, 0.8)",
+                        "on-secondary-fixed-variant": "#004883",
+                        "surface": "#f9f9ff",
+                        "on-surface-variant": "#4f4350",
+                        "on-tertiary-container": "#e6ffe0",
+                        "outline-variant": "#d2c1d2",
+                        "on-error-container": "#93000a",
+                        "inverse-on-surface": "#ecf1ff",
+                        "on-primary-fixed": "#330044",
+                        "primary-fixed": "#fbd7ff",
+                        "inverse-primary": "#f0b0ff",
+                        "on-secondary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "primary-container": "#a34cbe",
+                        "surface-bright": "#f9f9ff",
+                        "glass-border": "rgba(255, 255, 255, 0.6)",
+                        "secondary-fixed-dim": "#a3c9ff",
+                        "glass-fill": "rgba(255, 255, 255, 0.35)",
+                        "surface-tint": "#8d37a9",
+                        "surface-container-highest": "#dbe3f6",
+                        "gold": "#FFD60A",
+                        "secondary-fixed": "#d3e3ff",
+                        "on-tertiary-fixed": "#002106",
+                        "tertiary-fixed-dim": "#47e266",
+                        "surface-dim": "#d2daed",
+                        "surface-container": "#e7eeff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "mobile-margin": "20px",
+                        "safe-bottom": "34px",
+                        "max-width": "1280px",
+                        "desktop-gutter": "24px",
+                        "safe-top": "44px",
+                        "mobile-gutter": "16px",
+                        "desktop-margin": "64px",
+                        "base": "8px"
+                    },
+                    "fontFamily": {
+                        "label-caps": ["Inter"],
+                        "display-xl-mobile": ["Inter"],
+                        "body-md": ["Inter"],
+                        "display-xl": ["Inter"],
+                        "body-md-mobile": ["Inter"],
+                        "label-caps-mobile": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "headline-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-caps": ["13px", {"lineHeight": "1.0", "letterSpacing": "0.03em", "fontWeight": "600"}],
+                        "display-xl-mobile": ["34px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                        "display-xl": ["56px", {"lineHeight": "1.1", "letterSpacing": "-0.03em", "fontWeight": "700"}],
+                        "body-md-mobile": ["15px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                        "label-caps-mobile": ["12px", {"lineHeight": "1.0", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "headline-lg-mobile": ["28px", {"lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "headline-lg": ["34px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "600"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background: radial-gradient(circle at 0% 0%, #F9F9FF 0%, #E7EEFF 100%);
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(28px);
+            -webkit-backdrop-filter: blur(28px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 12px 40px 0 rgba(71, 26, 112, 0.15);
+        }
+
+        .glass-input {
+            background: rgba(255, 255, 255, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .glass-input:focus {
+            background: #ffffff;
+            border-color: #8731a3;
+            box-shadow: 0 0 0 4px rgba(135, 49, 163, 0.1);
+            outline: none;
+        }
+
+        .primary-gradient-btn {
+            background: linear-gradient(135deg, #a34cbe 0%, #8731a3 100%);
+            box-shadow: 0 8px 24px rgba(135, 49, 163, 0.3);
+        }
+
+        .primary-gradient-btn:active {
+            transform: scale(0.96);
+        }
+
+        input[type=range] {
+            -webkit-appearance: none;
+            width: 100%;
+            background: transparent;
+        }
+
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            height: 24px;
+            width: 24px;
+            border-radius: 50%;
+            background: #8731a3;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            border: 4px solid white;
+            margin-top: -10px;
+        }
+
+        input[type=range]::-webkit-slider-runnable-track {
+            width: 100%;
+            height: 4px;
+            cursor: pointer;
+            background: #d2c1d2;
+            border-radius: 2px;
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        .phone-container {
+            width: 260px;
+            height: 520px;
+            border: 10px solid #29313f;
+            border-radius: 36px;
+            background: #f0f3ff;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .phone-island {
+            width: 80px;
+            height: 20px;
+            background: #29313f;
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            border-bottom-left-radius: 12px;
+            border-bottom-right-radius: 12px;
+            z-index: 10;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        .shimmer::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transform: translateX(-100%);
+            animation: shimmer 2s infinite;
+        }
+    </style>
+</head>
+<body class="min-h-screen text-on-surface">
+<!-- Top Navigation Bar -->
+<header class="fixed top-0 left-0 right-0 z-50 bg-glass-thick backdrop-blur-3xl border-b border-glass-border px-mobile-margin h-safe-top flex items-center justify-between shadow-[0_12px_40px_0_rgba(71,26,112,0.15)]">
+<button class="flex items-center justify-center min-w-[44px] min-h-[44px] text-primary active:scale-95 transition-transform duration-200">
+<span class="material-symbols-outlined">close</span>
+</button>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile font-bold text-primary">New Campaign</h1>
+<button class="font-label-caps-mobile text-label-caps-mobile text-primary font-bold hover:opacity-80 active:scale-95 transition-all min-h-[44px] px-2">
+            Preview
+        </button>
+</header>
+<main class="pt-24 pb-32 px-mobile-margin space-y-8 max-w-lg mx-auto">
+<!-- Campaign Form Section -->
+<section class="space-y-6">
+<div class="space-y-2">
+<label class="font-label-caps-mobile text-label-caps-mobile text-on-surface-variant uppercase pl-2">Campaign Name</label>
+<input class="glass-input w-full h-12 px-4 rounded-xl font-body-md-mobile text-on-surface" placeholder="e.g. Summer Internships 2024" type="text"/>
+</div>
+<div class="space-y-4">
+<div class="flex justify-between items-center px-2">
+<label class="font-label-caps-mobile text-label-caps-mobile text-on-surface-variant uppercase">Daily Budget</label>
+<span class="text-primary font-bold">Rs. 150.00</span>
+</div>
+<input class="px-2" max="1000" min="10" step="10" type="range" value="150"/>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div class="space-y-2">
+<label class="font-label-caps-mobile text-label-caps-mobile text-on-surface-variant uppercase pl-2">University</label>
+<select class="glass-input w-full h-12 px-4 rounded-xl font-body-md-mobile text-on-surface appearance-none bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIiIGhlaWdodD0iOCIgdmlld0JveD0iMCAwIDEyIDgiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTEgMUw2IDZMExTEiIHN0cm9rZT0iIzQ3MUE3MCIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48L3N2Zz4=')] bg-[length:12px_8px] bg-[right_1rem_center] bg-no-repeat">
+<option>Ivy Tech</option>
+<option>Stanford</option>
+<option>MIT</option>
+</select>
+</div>
+<div class="space-y-2">
+<label class="font-label-caps-mobile text-label-caps-mobile text-on-surface-variant uppercase pl-2">Grad Year</label>
+<select class="glass-input w-full h-12 px-4 rounded-xl font-body-md-mobile text-on-surface appearance-none bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIiIGhlaWdodD0iOCIgdmlld0JveD0iMCAwIDEyIDgiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTEgMUw2IDZMExTEiIHN0cm9rZT0iIzQ3MUE3MCIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48L3N2Zz4=')] bg-[length:12px_8px] bg-[right_1rem_center] bg-no-repeat">
+<option>2024</option>
+<option>2025</option>
+<option>2026</option>
+</select>
+</div>
+</div>
+<div class="space-y-3">
+<label class="font-label-caps-mobile text-label-caps-mobile text-on-surface-variant uppercase pl-2">Target Skills</label>
+<div class="flex flex-wrap gap-2">
+<span class="bg-primary text-white text-xs px-3 py-1.5 rounded-full flex items-center gap-2">UI Design <span class="material-symbols-outlined text-[14px] cursor-pointer">close</span></span>
+<span class="bg-primary text-white text-xs px-3 py-1.5 rounded-full flex items-center gap-2">Product Strategy <span class="material-symbols-outlined text-[14px] cursor-pointer">close</span></span>
+<button class="bg-secondary-container/20 text-primary border border-primary/20 text-xs px-3 py-1.5 rounded-full flex items-center gap-1 hover:bg-secondary-container/30 transition-colors">
+<span class="material-symbols-outlined text-[14px]">add</span> Add Skill
+                    </button>
+</div>
+</div>
+</section>
+<!-- Visual Assets Upload -->
+<section class="space-y-4">
+<h2 class="font-label-caps-mobile text-label-caps-mobile text-on-surface-variant uppercase pl-2">Visual Assets</h2>
+<div class="w-full aspect-[16/9] glass-card rounded-2xl border-2 border-dashed border-primary/30 flex flex-col items-center justify-center p-6 space-y-4 group cursor-pointer active:scale-[0.98] transition-transform duration-200">
+<div class="w-20 h-20 relative">
+<img alt="Upload Icon" class="w-full h-full object-contain" src="https://lh3.googleusercontent.com/aida/AP1WRLufCPufXPgJQQ973RUxU-wQkWShRvWh3G_jbgY9rWJnqKEspLd5Jc0Ndv187iCzwVn1bmOrFCkXgt_oOYi9YixeyC8vMwFniZFjBLsz5kNyF7t26BvG2MNYcdS2WJ1vz0MJvfzSNm3wgS56IdnPm6UX2m3asUQmCQrFDOj6db-WZTWLQOR11iXE2pFiWHn9aoAZQ8dAKUAhugR4741GwifHv_0W8B1I6y2x14LEu9YTL-pGxRCUX6cIxrBq"/>
+</div>
+<div class="text-center">
+<p class="font-body-md-mobile font-bold text-primary">Upload Banner Graphic</p>
+<p class="text-[12px] text-on-surface-variant">Recommended 1200 x 675 px</p>
+</div>
+</div>
+</section>
+<!-- Live Preview Simulation -->
+<section class="space-y-4">
+<h2 class="font-label-caps-mobile text-label-caps-mobile text-on-surface-variant uppercase pl-2">Live Preview</h2>
+<div class="glass-card rounded-3xl p-8 flex justify-center bg-surface-container-low">
+<div class="phone-container shadow-2xl">
+<div class="phone-island"></div>
+<div class="pt-8 px-4 space-y-4">
+<div class="flex items-center gap-2 mb-2">
+<div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-[18px]">verified</span>
+</div>
+<div>
+<p class="text-[12px] font-bold">RecruitElite</p>
+<p class="text-[10px] text-on-surface-variant">Promoted</p>
+</div>
+</div>
+<div class="relative w-full aspect-[16/9] rounded-xl overflow-hidden bg-surface-container-highest">
+<img class="w-full h-full object-cover" data-alt="A professional high-fidelity UI design workspace with soft ambient lighting. The scene features a sleek modern laptop displaying a vibrant creative application with purple and blue gradients. Transparent glass office partitions blur the background of a high-tech corporate office, emphasizing a premium, focused atmosphere of professional digital craftsmanship and elite recruiting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAxQtgHEvp5IoQli_N3tH7m7mDc6N-ITMAsahUJ5em4TN7LSssi-A_TGbsQVkow2HxIUPylgJr9ZSGsXTu6P4M2AZ-toxQlzjnqBIG0ist7kjPzVd5v6CpkbsrbhVPYBFcEa-hAnEXHVizVEYAl4z7IB8gLD9k22OzLiVgYxmUiMqX9LmWn-q0Ecp4GWcM1w5KexDKiDPZTKj42E970CVyDeqJJ8JlhzjTvO74S1kKKTl-Y0nI-RzqpPBpRiDlcFchsY6zijnRGmBI1"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+<div class="absolute bottom-3 left-3 text-white">
+<p class="font-bold text-sm">Junior UI/UX Designer</p>
+</div>
+</div>
+<div class="space-y-2">
+<div class="h-2 w-full bg-surface-variant rounded-full overflow-hidden relative">
+<div class="absolute inset-0 shimmer"></div>
+</div>
+<div class="h-2 w-3/4 bg-surface-variant rounded-full overflow-hidden relative">
+<div class="absolute inset-0 shimmer"></div>
+</div>
+</div>
+<button class="w-full py-3 bg-primary text-white rounded-xl font-bold text-sm shadow-lg active:scale-95 transition-transform mt-4">
+                            Apply
+                        </button>
+<div class="mt-8 space-y-4 opacity-30">
+<div class="flex gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-variant"></div>
+<div class="space-y-2 flex-1 pt-2">
+<div class="h-2 w-1/2 bg-surface-variant rounded"></div>
+<div class="h-2 w-full bg-surface-variant rounded"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Fixed Primary CTA -->
+<div class="fixed bottom-0 left-0 right-0 p-mobile-margin pb-safe-bottom bg-gradient-to-t from-background via-background to-transparent pointer-events-none">
+<button class="pointer-events-auto primary-gradient-btn w-full h-[56px] rounded-full text-white font-headline-lg-mobile text-[18px] font-bold tracking-tight active:scale-95 transition-transform">
+            Launch Campaign
+        </button>
+</div>
+<!-- Background Decoration -->
+<div class="fixed inset-0 -z-10 pointer-events-none overflow-hidden">
+<div class="absolute -top-[20%] -left-[10%] w-[60%] h-[60%] bg-primary/10 rounded-full blur-[120px]"></div>
+<div class="absolute -bottom-[10%] -right-[10%] w-[50%] h-[50%] bg-secondary/10 rounded-full blur-[100px]"></div>
+</div>
+<script>
+        // Simple slider value update
+        const slider = document.querySelector('input[type="range"]');
+        const budgetDisplay = document.querySelector('.text-primary.font-bold');
+        
+        slider.addEventListener('input', (e) => {
+            budgetDisplay.textContent = `$${parseFloat(e.target.value).toFixed(2)}`;
+        });
+    </script>
+</body></html>

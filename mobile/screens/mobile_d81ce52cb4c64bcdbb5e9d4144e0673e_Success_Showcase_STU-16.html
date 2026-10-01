@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "error": "#FF453A",
+                        "primary": "#8731a3",
+                        "on-error-container": "#93000a",
+                        "secondary-fixed": "#d3e3ff",
+                        "surface-container-low": "#f0f3ff",
+                        "surface": "#f9f9ff",
+                        "on-secondary-fixed-variant": "#004883",
+                        "on-secondary-fixed": "#001c39",
+                        "surface-tint": "#8d37a9",
+                        "on-surface": "#141c29",
+                        "on-tertiary-container": "#e6ffe0",
+                        "gold": "#FFD60A",
+                        "on-primary": "#ffffff",
+                        "outline-variant": "#d2c1d2",
+                        "inverse-on-surface": "#ecf1ff",
+                        "on-secondary": "#ffffff",
+                        "tertiary-fixed-dim": "#47e266",
+                        "on-primary-fixed": "#330044",
+                        "on-background": "#471A70",
+                        "primary-container": "#a34cbe",
+                        "secondary-container": "#54a3ff",
+                        "on-surface-variant": "#4f4350",
+                        "tertiary-fixed": "#6cff82",
+                        "on-primary-fixed-variant": "#72188f",
+                        "outline": "#817381",
+                        "surface-bright": "#f9f9ff",
+                        "primary-fixed-dim": "#f0b0ff",
+                        "card-gradient": "linear-gradient(135deg, #4D9EFA 0%, #BF7DF5 100%)",
+                        "on-tertiary-fixed-variant": "#00531a",
+                        "on-secondary-container": "#003868",
+                        "glass-border": "rgba(255, 255, 255, 0.6)",
+                        "tertiary-container": "#00842f",
+                        "surface-dim": "#d2daed",
+                        "on-tertiary-fixed": "#002106",
+                        "background": "#f9f9ff",
+                        "inverse-primary": "#f0b0ff",
+                        "secondary-fixed-dim": "#a3c9ff",
+                        "on-error": "#ffffff",
+                        "inverse-surface": "#29313f",
+                        "orange": "#FF9F0A",
+                        "glass-fill": "rgba(255, 255, 255, 0.35)",
+                        "surface-container-high": "#e0e8fb",
+                        "glass-thick": "rgba(255, 255, 255, 0.8)",
+                        "surface-container-highest": "#dbe3f6",
+                        "tertiary": "#006823",
+                        "secondary": "#0060ab",
+                        "surface-variant": "#dbe3f6",
+                        "surface-container": "#e7eeff",
+                        "on-primary-container": "#fff5fb",
+                        "surface-container-lowest": "#ffffff",
+                        "primary-fixed": "#fbd7ff",
+                        "on-tertiary": "#ffffff",
+                        "error-container": "#ffdad6"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "mobile-gutter": "16px",
+                        "desktop-margin": "64px",
+                        "desktop-gutter": "24px",
+                        "mobile-margin": "20px",
+                        "safe-bottom": "34px",
+                        "base": "8px",
+                        "safe-top": "44px",
+                        "max-width": "1280px"
+                    },
+                    "fontFamily": {
+                        "label-caps": ["Inter"],
+                        "display-xl-mobile": ["Inter"],
+                        "body-md-mobile": ["Inter"],
+                        "body-md": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "label-caps-mobile": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "display-xl": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-caps": ["13px", {"lineHeight": "1.0", "letterSpacing": "0.03em", "fontWeight": "600"}],
+                        "display-xl-mobile": ["34px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "body-md-mobile": ["15px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                        "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                        "headline-lg-mobile": ["28px", {"lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "label-caps-mobile": ["12px", {"lineHeight": "1.0", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "headline-lg": ["34px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                        "display-xl": ["56px", {"lineHeight": "1.1", "letterSpacing": "-0.03em", "fontWeight": "700"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            -webkit-tap-highlight-color: transparent;
+            font-family: 'Inter', sans-serif;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.35);
+            backdrop-filter: blur(28px);
+            -webkit-backdrop-filter: blur(28px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 12px 40px 0 rgba(71, 26, 112, 0.15);
+        }
+        .ios-status-bar { height: 44px; }
+        .ios-home-indicator { height: 34px; }
+        .liquid-gradient {
+            background: linear-gradient(135deg, #DCE4F7 0%, #f9f9ff 100%);
+        }
+        .active-scale:active { transform: scale(0.96); transition: transform 0.2s cubic-bezier(0.35, 0, 0.25, 1); }
+        .shimmer {
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            background-size: 200% 100%;
+            animation: shimmer 2s infinite;
+        }
+        @keyframes shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface liquid-gradient min-h-screen text-on-surface">
+<!-- Top Navigation Bar -->
+<header class="fixed top-0 w-full z-50 backdrop-blur-2xl bg-glass-fill border-b border-glass-border shadow-[0_12px_40px_0_rgba(71,26,112,0.15)]">
+<div class="ios-status-bar"></div>
+<div class="flex items-center justify-between px-mobile-margin h-14 w-full">
+<button class="active:scale-95 transition-transform duration-300 hover:opacity-80 transition-opacity flex items-center justify-center min-h-[44px] min-w-[44px]">
+<span class="material-symbols-outlined text-primary" data-icon="menu">menu</span>
+</button>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-primary">Success Stories</h1>
+<button class="active:scale-95 transition-transform duration-300 hover:opacity-80 transition-opacity flex items-center justify-center min-h-[44px] min-w-[44px]">
+<span class="material-symbols-outlined text-primary" data-icon="search">search</span>
+</button>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="pt-[114px] pb-[100px] px-mobile-margin">
+<!-- Hero Story Section -->
+<section class="mb-10">
+<div class="glass-card rounded-[32px] overflow-hidden p-1 relative">
+<div class="aspect-[4/5] rounded-[28px] overflow-hidden relative">
+<img class="w-full h-full object-cover" data-alt="A portrait of a young professional woman smiling confidently in a modern, brightly lit co-working space. The background features soft blurs of high-end office furniture and lush greenery. The lighting is ethereal and soft, reflecting a premium iOS aesthetic with lavender and soft blue tones. Her expression is one of genuine accomplishment and pride, conveying a successful career journey." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBPPFzqjVymb2sj-2yTUfsbHuQiIUVSnEqBCdOsdkLjuNT1DSnwewUc9Elx-RN-6yEV8q4rieHY7y-qMkRsZMQigKu3C3a3x1Xx6Io1K5tdInHXmFAX_P1no6VVGmAM4penDmngYPPUgZM5Hv3XI3Ak1lwZtintjhbWrU_XzqMD2ZGgbNBiA2HPN_Oh4fsIizCxTG3yc6PEHPBZI3sg_1dwg2-tXgoTfNaUnvXBr7P_bg7IvJU1J85Ev7L4alFmlFvy9yVCd8tuksKh"/>
+<div class="absolute inset-0 bg-gradient-to-t from-on-background/60 to-transparent"></div>
+<div class="absolute bottom-0 p-6 w-full">
+<span class="bg-primary/20 backdrop-blur-md text-white px-3 py-1 rounded-full font-label-caps-mobile text-label-caps-mobile mb-3 inline-block">MEMBER STORY</span>
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-white mb-2 leading-tight">Sarah landed her dream role at a Fortune 500 company.</h2>
+<button class="flex items-center gap-2 bg-primary text-white px-5 py-3 rounded-full font-label-caps-mobile text-label-caps-mobile active-scale">
+                            WATCH STORY <span class="material-symbols-outlined text-[18px]" data-icon="play_circle">play_circle</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Bento Feed Section -->
+<div class="grid grid-cols-2 gap-4">
+<!-- Bento Card 1: Video Post -->
+<div class="glass-card rounded-[24px] p-4 flex flex-col gap-3 active-scale">
+<div class="aspect-square rounded-[18px] overflow-hidden relative bg-surface-dim">
+<img class="w-full h-full object-cover opacity-80" data-alt="A dynamic action shot of a diverse group of students collaborating over laptops and design sketches in a glass-walled studio. The atmosphere is energetic and creative, with warm morning sunlight streaming through the windows creating soft flares. The color palette is composed of soft blues, purples, and clean whites, emphasizing a collaborative and high-fidelity tech environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCL3d42tlQxu0B4OrPWr2ehMAcvOwq6NPc75x9fTw0re3p1ptKOC5syh0RF7l5_ZV2ia_0SjqaKUCHG7aOY-Qb2S-ujOHQRvpg6Pu3d36bz1QaD6izpXQNbqro84oNFKoW1w15F_o1ikPMF64muo7qmo2X3IV8i3-Re7rpOZ4351KaXn41zUHrT0uLcK8RFMQpLy0dDrAypXh5dmw5cSAL3vqf7alCyDKDtWtIbAGpgtogyf6betsIyDk_XARdogbEmEU2Wp3wszg_s"/>
+<div class="absolute inset-0 flex items-center justify-center">
+<div class="w-12 h-12 bg-white/30 backdrop-blur-xl rounded-full border border-white/50 flex items-center justify-center">
+<span class="material-symbols-outlined text-white" data-icon="play_arrow" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</div>
+</div>
+</div>
+<div class="px-1">
+<h3 class="font-label-caps-mobile text-label-caps-mobile text-on-background mb-1">NETWORK WIN</h3>
+<p class="font-body-md-mobile text-body-md-mobile text-on-surface-variant line-clamp-2">How James leveraged the Network tab to find a mentor.</p>
+</div>
+</div>
+<!-- Bento Card 2: Stat Highlight -->
+<div class="glass-card rounded-[24px] p-5 flex flex-col justify-between bg-primary-fixed/20 border-primary/20">
+<div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center mb-4">
+<span class="material-symbols-outlined text-white text-[20px]" data-icon="trending_up">trending_up</span>
+</div>
+<div>
+<div class="font-display-xl-mobile text-display-xl-mobile text-primary-fixed-dim leading-none">94%</div>
+<p class="font-label-caps-mobile text-label-caps-mobile text-primary/80 mt-2">HIRE RATE POST-COACHING</p>
+</div>
+</div>
+<!-- Bento Card 3: Wide Testimonial -->
+<div class="col-span-2 glass-card rounded-[24px] p-5 flex flex-col gap-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full overflow-hidden border-2 border-primary/30">
+<img data-alt="A close-up professional headshot of a smiling man with glasses, representing a successful alumnus. The background is a soft-focus office environment with lavender and white tones. The lighting is sharp and high-key, highlighting his professional and approachable demeanor within the digital success community." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB6g22x859C_eeea9LaganG5OHkZ3LuO98JrI0bjplML4lO1cu1eIHo2Uyf4K2oadcv-A2Q2jwjiOHLwQ7eTYNUBIjsSW9G6xvf4zgn9x5cENC6BP0a-8ZnNCjNYh31T4f0TDtXCk1LwSEwbnn2P0IMDgWXaeNqyqSieJq5iFkkKiJjaVmAAegP2NUF0zmAlIkJtb_fhwGkGJfe9xbeYgiv9EKq8jsUu0faJxILArwN0kAbt21e5Wl6lCxDqecPMeS5iSz2iV5tP8Pn"/>
+</div>
+<div>
+<p class="font-label-caps text-label-caps text-on-background">David Chen</p>
+<p class="font-label-caps-mobile text-[10px] text-outline">Product Designer @ Meta</p>
+</div>
+<div class="ml-auto">
+<span class="material-symbols-outlined text-gold text-[18px]" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+</div>
+<p class="font-body-md-mobile text-body-md-mobile text-on-surface-variant leading-relaxed">
+                    "The feedback loops here are insane. I went from sending 100 cold emails to getting 3 direct interview invites in one week."
+                </p>
+</div>
+<!-- Bento Card 4: Achievement -->
+<div class="glass-card rounded-[24px] p-4 flex flex-col items-center justify-center text-center gap-2">
+<div class="w-14 h-14 bg-tertiary/10 rounded-full flex items-center justify-center text-tertiary mb-1">
+<span class="material-symbols-outlined text-[32px]" data-icon="workspace_premium" style="font-variation-settings: 'FILL' 1;">workspace_premium</span>
+</div>
+<p class="font-label-caps-mobile text-label-caps-mobile text-on-background">LATEST BADGE</p>
+<p class="font-body-md-mobile text-[13px] text-on-surface-variant">Top Connector</p>
+</div>
+<!-- Bento Card 5: Quote -->
+<div class="glass-card rounded-[24px] p-4 flex flex-col justify-end bg-inverse-surface/5 relative overflow-hidden">
+<span class="material-symbols-outlined absolute -top-2 -left-2 text-primary/10 text-[80px]" data-icon="format_quote">format_quote</span>
+<p class="italic font-body-md-mobile text-body-md-mobile text-on-surface relative z-10">"Success isn't just about the role; it's about the growth."</p>
+<p class="font-label-caps-mobile text-[11px] text-primary mt-3">— Anita R.</p>
+</div>
+</div>
+<!-- Featured Video Feed -->
+<section class="mt-10 space-y-6">
+<h3 class="font-headline-lg-mobile text-[22px] text-on-background px-1">Community Highlights</h3>
+<!-- Video Item 1 -->
+<div class="glass-card rounded-[24px] overflow-hidden p-3 active-scale">
+<div class="flex gap-4">
+<div class="w-24 h-32 rounded-[16px] overflow-hidden bg-surface-container flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="A portrait of a cheerful diverse student group in a modern auditorium setting. They are wearing casual professional attire, with soft purple and teal stage lighting creating a high-fidelity 'glassy' atmosphere. The image captures a moment of shared celebration and achievement in a sophisticated educational or tech setting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCWOslpHpO3-0nC068qj-SXtdqkYAiPon-Gb3WO_RSWuEDnAco1HdZoTmGSDYGXAZH9hvulAWCaJI6YpwCTaf8EGctUF7lWX2B16VBExdmGgme_WjW4pIcbZQVW07Z3Hfz27GzQvW2Osm8TiM4ubrxjfqkrRJXiAvZMYQind6zGok7VMC7JdNb8q3huz2YTuY5_J9FgwqMb2q1-K5a6gGPun3Q0s-N9POmtdrroXWg0pi2bZa-xpX3ZgtZjHxD6MHLnsk0PX5u0Sr2y"/>
+</div>
+<div class="flex flex-col justify-center py-1">
+<p class="font-label-caps-mobile text-[10px] text-primary mb-1 uppercase tracking-wider">Interview Tips</p>
+<h4 class="font-body-md-mobile font-semibold text-on-background leading-snug mb-2">Mastering the 'Whiteboard Challenge'</h4>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px] text-outline" data-icon="visibility">visibility</span>
+<span class="text-[12px] text-outline">2.4k views</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Video Item 2 -->
+<div class="glass-card rounded-[24px] overflow-hidden p-3 active-scale">
+<div class="flex gap-4">
+<div class="w-24 h-32 rounded-[16px] overflow-hidden bg-surface-container flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="A clean, minimalist shot of a creative studio workspace featuring large iMacs, architectural models, and design sketches. The lighting is bright and airy with a lavender-blue tint, fitting the iOS high-fidelity glassmorphic design theme. The scene represents a high-end professional environment where success stories are born." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBsxnUFGCoOmwDkJqla85kGVBrjJv2qv6zLQEycLVWh6n3MCc9TNhORpKf1GMF89K1ED0EWKh6IthQbtQYKuDXYFk9ltU2YKjO7O2P3HcEpCY48SB7NCELye_11IN-n-FVHHnro9ve6Rf7DiVzXUSkBWqd063Oct7zG0oU2RqNiR0qJTvF6Fk474wsf0xvYESZRseBz9nL4COGdU_ixi6xILBf1uht_uUloR9_39lIF3E0uRIXXfNAmKCOrc_F73I4ybOpejrkEYmYH"/>
+</div>
+<div class="flex flex-col justify-center py-1">
+<p class="font-label-caps-mobile text-[10px] text-primary mb-1 uppercase tracking-wider">Salary Negotiation</p>
+<h4 class="font-body-md-mobile font-semibold text-on-background leading-snug mb-2">Getting the package you deserve.</h4>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px] text-outline" data-icon="visibility">visibility</span>
+<span class="text-[12px] text-outline">1.8k views</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Floating Action Button (FAB) - Suppression logic: FAB is relevant on Success screen for sharing own story -->
+<button class="fixed bottom-24 right-6 w-14 h-14 bg-primary text-white rounded-full shadow-[0_8px_25px_rgba(135,49,163,0.4)] flex items-center justify-center active-scale z-40">
+<span class="material-symbols-outlined text-[28px]" data-icon="add">add</span>
+</button>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 w-full z-50 rounded-t-xl backdrop-blur-2xl bg-glass-thick border-t border-glass-border shadow-[0_-8px_30px_0_rgba(71,26,112,0.1)]">
+<div class="flex justify-around items-center w-full pt-2 pb-safe-bottom px-4 h-[84px]">
+<!-- Feed -->
+<button class="flex flex-col items-center justify-center text-on-surface-variant min-h-[44px] min-w-[44px] hover:bg-surface-container-high transition-colors px-2">
+<span class="material-symbols-outlined" data-icon="dynamic_feed">dynamic_feed</span>
+<span class="font-label-caps-mobile text-label-caps-mobile mt-1">Feed</span>
+</button>
+<!-- Network -->
+<button class="flex flex-col items-center justify-center text-on-surface-variant min-h-[44px] min-w-[44px] hover:bg-surface-container-high transition-colors px-2">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+<span class="font-label-caps-mobile text-label-caps-mobile mt-1">Network</span>
+</button>
+<!-- Success (Active) -->
+<button class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-4 py-1 min-h-[44px] active:scale-90 transition-transform duration-200">
+<span class="material-symbols-outlined" data-icon="workspace_premium" style="font-variation-settings: 'FILL' 1;">workspace_premium</span>
+<span class="font-label-caps-mobile text-label-caps-mobile">Success</span>
+</button>
+<!-- Profile -->
+<button class="flex flex-col items-center justify-center text-on-surface-variant min-h-[44px] min-w-[44px] hover:bg-surface-container-high transition-colors px-2">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-label-caps-mobile text-label-caps-mobile mt-1">Profile</span>
+</button>
+</div>
+<div class="ios-home-indicator"></div>
+</nav>
+<script>
+        // Micro-interaction for glass card hover (simulated for touch)
+        document.querySelectorAll('.glass-card').forEach(card => {
+            card.addEventListener('touchstart', () => {
+                card.style.transform = 'scale(0.98)';
+                card.style.transition = 'transform 0.2s cubic-bezier(0.35, 0, 0.25, 1)';
+            });
+            card.addEventListener('touchend', () => {
+                card.style.transform = 'scale(1)';
+            });
+        });
+
+        // Atmospheric background shimmer effect
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes pulse-bg {
+                0% { background-position: 0% 50%; }
+                50% { background-position: 100% 50%; }
+                100% { background-position: 0% 50%; }
+            }
+            .liquid-gradient {
+                background-size: 200% 200%;
+                animation: pulse-bg 15s ease infinite;
+            }
+        `;
+        document.head.append(style);
+    </script>
+</body></html>

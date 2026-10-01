@@ -1,0 +1,402 @@
+[
+  {
+    "id": "desktop_mock_interviews",
+    "title": "Mock Interviews Hub (STU-MOCK-01) - Liquid Glass Elite",
+    "device": "DESKTOP",
+    "filename": "desktop_mock_interviews.html",
+    "width": "2560",
+    "height": "2048"
+  },
+  {
+    "id": "032787d84817489794f0a674bc12be9d",
+    "title": "Performance Analytics - Recruitment Hub",
+    "device": "DESKTOP",
+    "filename": "desktop_032787d84817489794f0a674bc12be9d_Performance_Analytics_Recruitment_Hub.html",
+    "width": "2560",
+    "height": "2048"
+  },
+  {
+    "id": "8fc817f84f484d3887bce6dc5fe9d6ea",
+    "title": "Company Registration & Doc Upload (Desktop)",
+    "device": "DESKTOP",
+    "filename": "desktop_8fc817f84f484d3887bce6dc5fe9d6ea_Company_Registration_Doc_Upload_Desktop.html",
+    "width": "2816",
+    "height": "2150"
+  },
+  {
+    "id": "8fbdc8acf6464e618391e06ace7f9fe0",
+    "title": "Student Registration Wizard (COM-05) - Desktop",
+    "device": "DESKTOP",
+    "filename": "desktop_8fbdc8acf6464e618391e06ace7f9fe0_Student_Registration_Wizard_COM_05_Desktop.html",
+    "width": "2560",
+    "height": "2256"
+  },
+  {
+    "id": "0cf172b6998c4337859c9ffba8c2f0cd",
+    "title": "Assignment Submission (STU-09)",
+    "device": "DESKTOP",
+    "filename": "desktop_0cf172b6998c4337859c9ffba8c2f0cd_Assignment_Submission_STU_09.html",
+    "width": "2560",
+    "height": "2048"
+  },
+  {
+    "id": "ff2d2f5f212d4adbab98aa0c9df4f666",
+    "title": "Assignment Submission (STU-09)",
+    "device": "DESKTOP",
+    "filename": "desktop_ff2d2f5f212d4adbab98aa0c9df4f666_Assignment_Submission_STU_09.html",
+    "width": "100%",
+    "height": "100%"
+  },
+  {
+    "id": "df940767afd74f8da599c97f7661f259",
+    "title": "Anti-Cheating & Suspicious Activity Log Board",
+    "device": "DESKTOP",
+    "filename": "desktop_df940767afd74f8da599c97f7661f259_Anti_Cheating_Suspicious_Activity_Log_Board.html",
+    "width": "2560",
+    "height": "2048"
+  },
+  {
+    "id": "47ab56273a314dcf96ebea138fd28726",
+    "title": "Map & Navigation System - EliteHire",
+    "device": "DESKTOP",
+    "filename": "desktop_47ab56273a314dcf96ebea138fd28726_Map_Navigation_System_EliteHire.html",
+    "width": "2560",
+    "height": "2048"
+  },
+  {
+    "id": "b0a6532acbe445ef858eb71de3e36e33",
+    "title": "Checkout & Billing - JobPath Elite",
+    "device": "DESKTOP",
+    "filename": "desktop_b0a6532acbe445ef858eb71de3e36e33_Checkout_Billing_JobPath_Elite.html",
+    "width": "2560",
+    "height": "2440"
+  },
+  {
+    "id": "a8f12953a7ab4dd287fe9d32f7f7f0d3",
+    "title": "Advertisement Moderator (Admin Module)",
+    "device": "DESKTOP",
+    "filename": "desktop_a8f12953a7ab4dd287fe9d32f7f7f0d3_Advertisement_Moderator_Admin_Module.html",
+    "width": "2560",
+    "height": "2278"
+  },
+  {
+    "id": "54d5f0f8362a4e279b958d3ee6e27864",
+    "title": "Assignment Generator - Admin Module",
+    "device": "DESKTOP",
+    "filename": "desktop_54d5f0f8362a4e279b958d3ee6e27864_Assignment_Generator_Admin_Module.html",
+    "width": "2560",
+    "height": "2492"
+  },
+  {
+    "id": "8a2486e4386645ccbff69a9772ae7c07",
+    "title": "Job Details (STU-03) - Liquid Glass Desktop",
+    "device": "DESKTOP",
+    "filename": "desktop_8a2486e4386645ccbff69a9772ae7c07_Job_Details_STU_03_Liquid_Glass_Desktop.html",
+    "width": "2560",
+    "height": "2048"
+  },
+  {
+    "id": "8d906434847840c49b180d4b31856442",
+    "title": "Applicant Tracking Board - Recruitment Command Center",
+    "device": "DESKTOP",
+    "filename": "desktop_8d906434847840c49b180d4b31856442_Applicant_Tracking_Board_Recruitment_Command_Center.html",
+    "width": "2760",
+    "height": "2048"
+  },
+  {
+    "id": "f842057dc6d044239356d9a94091271e",
+    "title": "Student Profile Viewer - Candidate Detail",
+    "device": "DESKTOP",
+    "filename": "desktop_f842057dc6d044239356d9a94091271e_Student_Profile_Viewer_Candidate_Detail.html",
+    "width": "2560",
+    "height": "3338"
+  },
+  {
+    "id": "ca20e9e2ae964a9cb4e2060d71f5cb93",
+    "title": "Talent Search (Candidate Search)",
+    "device": "DESKTOP",
+    "filename": "desktop_ca20e9e2ae964a9cb4e2060d71f5cb93_Talent_Search_Candidate_Search.html",
+    "width": "2560",
+    "height": "2154"
+  },
+  {
+    "id": "a41be92591f34db0847b80ca8f75f5cb",
+    "title": "Navigation HUD - Route Overview (STU-18)",
+    "device": "DESKTOP",
+    "filename": "desktop_a41be92591f34db0847b80ca8f75f5cb_Navigation_HUD_Route_Overview_STU_18.html",
+    "width": "2560",
+    "height": "2048"
+  },
+  {
+    "id": "652a4f60981b4e48aec1b1e58c75318c",
+    "title": "Main Dashboard (The Habit Loop Hub)",
+    "device": "DESKTOP",
+    "filename": "desktop_652a4f60981b4e48aec1b1e58c75318c_Main_Dashboard_The_Habit_Loop_Hub.html",
+    "width": "2560",
+    "height": "2048"
+  },
+  {
+    "id": "b8c66c97335f4884991bc3f886742561",
+    "title": "Reward & Scholarship System Hub",
+    "device": "DESKTOP",
+    "filename": "desktop_b8c66c97335f4884991bc3f886742561_Reward_Scholarship_System_Hub.html",
+    "width": "2560",
+    "height": "2060"
+  },
+  {
+    "id": "1d699cebc531409eaa607ec8fbdba8a7",
+    "title": "Document Verification Viewer - Admin Console",
+    "device": "DESKTOP",
+    "filename": "desktop_1d699cebc531409eaa607ec8fbdba8a7_Document_Verification_Viewer_Admin_Console.html",
+    "width": "2560",
+    "height": "2466"
+  },
+  {
+    "id": "98a77f9a0aa34450b016bd43b45f4cfd",
+    "title": "Forgot Password (Desktop)",
+    "device": "DESKTOP",
+    "filename": "desktop_98a77f9a0aa34450b016bd43b45f4cfd_Forgot_Password_Desktop.html",
+    "width": "2560",
+    "height": "2048"
+  },
+  {
+    "id": "eb8812503d9949feba810aba199f434c",
+    "title": "Premium Membership Hub - Gold Elite",
+    "device": "DESKTOP",
+    "filename": "desktop_eb8812503d9949feba810aba199f434c_Premium_Membership_Hub_Gold_Elite.html",
+    "width": "2560",
+    "height": "2436"
+  },
+  {
+    "id": "a20bf89f9c0143a491f14f4c9b800e3a",
+    "title": "Test Integrity & Guidelines (STU-06)",
+    "device": "DESKTOP",
+    "filename": "desktop_a20bf89f9c0143a491f14f4c9b800e3a_Test_Integrity_Guidelines_STU_06.html",
+    "width": "2560",
+    "height": "2048"
+  },
+  {
+    "id": "2b156034eeb94154ad5169f671aa646f",
+    "title": "Job Creator & Editor - Split View",
+    "device": "DESKTOP",
+    "filename": "desktop_2b156034eeb94154ad5169f671aa646f_Job_Creator_Editor_Split_View.html",
+    "width": "2560",
+    "height": "2048"
+  },
+  {
+    "id": "c6f0aa98715e456591fff25c7df65a2b",
+    "title": "Test & Question Bank Creator - Split Editor",
+    "device": "DESKTOP",
+    "filename": "desktop_c6f0aa98715e456591fff25c7df65a2b_Test_Question_Bank_Creator_Split_Editor.html",
+    "width": "2560",
+    "height": "2048"
+  },
+  {
+    "id": "4035ff96780a4a6b975d8b66f0ca68d5",
+    "title": "Advertisement System Store - Desktop Catalog",
+    "device": "DESKTOP",
+    "filename": "desktop_4035ff96780a4a6b975d8b66f0ca68d5_Advertisement_System_Store_Desktop_Catalog.html",
+    "width": "2560",
+    "height": "2370"
+  },
+  {
+    "id": "259e275b59144d80865c766dbc962bbc",
+    "title": "Weekly Tests Hub (STU-05) - Desktop Liquid Glass",
+    "device": "DESKTOP",
+    "filename": "desktop_259e275b59144d80865c766dbc962bbc_Weekly_Tests_Hub_STU_05_Desktop_Liquid_Glass.html",
+    "width": "2560",
+    "height": "2774"
+  },
+  {
+    "id": "02ef60e8cd50480eb342757ee5f80671",
+    "title": "Company Verification Queue - Admin Panel",
+    "device": "DESKTOP",
+    "filename": "desktop_02ef60e8cd50480eb342757ee5f80671_Company_Verification_Queue_Admin_Panel.html",
+    "width": "2560",
+    "height": "2152"
+  },
+  {
+    "id": "92044a9e1c374317b32ccd3a24c085b0",
+    "title": "Web App Onboarding - Verified Assessments",
+    "device": "DESKTOP",
+    "filename": "desktop_92044a9e1c374317b32ccd3a24c085b0_Web_App_Onboarding_Verified_Assessments.html",
+    "width": "2560",
+    "height": "2048"
+  },
+  {
+    "id": "ca103fa4b2604fdeb8e97c4995a719d2",
+    "title": "Global Academic Leaderboard (STU-14)",
+    "device": "DESKTOP",
+    "filename": "desktop_ca103fa4b2604fdeb8e97c4995a719d2_Global_Academic_Leaderboard_STU_14.html",
+    "width": "3160",
+    "height": "2848"
+  },
+  {
+    "id": "6d147c4317bf4073a4d6793b4fe7b31f",
+    "title": "Career Mentorship Scheduler - Sarah Jenkins",
+    "device": "DESKTOP",
+    "filename": "desktop_6d147c4317bf4073a4d6793b4fe7b31f_Career_Mentorship_Scheduler_Sarah_Jenkins.html",
+    "width": "2560",
+    "height": "2656"
+  },
+  {
+    "id": "2bb05765b3404d8aa183e003a445cb67",
+    "title": "Login Screen (COM-04) - Desktop Liquid Glass",
+    "device": "DESKTOP",
+    "filename": "desktop_2bb05765b3404d8aa183e003a445cb67_Login_Screen_COM_04_Desktop_Liquid_Glass.html",
+    "width": "2560",
+    "height": "2048"
+  },
+  {
+    "id": "7189c85b1ab541148bcf99b3df1b0b2b",
+    "title": "Desktop Splash Screen - Liquid Glass Elite (Animated)",
+    "device": "DESKTOP",
+    "filename": "desktop_7189c85b1ab541148bcf99b3df1b0b2b_Desktop_Splash_Screen_Liquid_Glass_Elite_Animated.html",
+    "width": "2560",
+    "height": "2048"
+  },
+  {
+    "id": "ebcc7c1f3daf45f7a59183d1fda584b9",
+    "title": "Success Story Publisher - Admin Console",
+    "device": "DESKTOP",
+    "filename": "desktop_ebcc7c1f3daf45f7a59183d1fda584b9_Success_Story_Publisher_Admin_Console.html",
+    "width": "2560",
+    "height": "2048"
+  },
+  {
+    "id": "6a6c6e2ffcec472cb8095585aae804cb",
+    "title": "STU-07 Anti-Cheat Test Player (Desktop)",
+    "device": "DESKTOP",
+    "filename": "desktop_6a6c6e2ffcec472cb8095585aae804cb_STU_07_Anti_Cheat_Test_Player_Desktop.html",
+    "width": "2560",
+    "height": "2048"
+  },
+  {
+    "id": "dbcbd25e2aad48aebc8aca14924256fe",
+    "title": "Gateway / Role Selection (COM-03) - Desktop",
+    "device": "DESKTOP",
+    "filename": "desktop_dbcbd25e2aad48aebc8aca14924256fe_Gateway_Role_Selection_COM_03_Desktop.html",
+    "width": "2560",
+    "height": "2048"
+  },
+  {
+    "id": "26f948ad3cd8471dbc91fb662c7c35a7",
+    "title": "Central Dashboard - Admin Module",
+    "device": "DESKTOP",
+    "filename": "desktop_26f948ad3cd8471dbc91fb662c7c35a7_Central_Dashboard_Admin_Module.html",
+    "width": "2560",
+    "height": "2816"
+  },
+  {
+    "id": "ccfeaf6a83cb45ab9794a18d3d7f3696",
+    "title": "Course Catalog (STU-10) - Desktop Liquid Glass",
+    "device": "DESKTOP",
+    "filename": "desktop_ccfeaf6a83cb45ab9794a18d3d7f3696_Course_Catalog_STU_10_Desktop_Liquid_Glass.html",
+    "width": "2560",
+    "height": "2940"
+  },
+  {
+    "id": "c44fc1eac6114e0ba645cb31fb5519a3",
+    "title": "Navigation HUD - Route Overview (STU-18)",
+    "device": "DESKTOP",
+    "filename": "desktop_c44fc1eac6114e0ba645cb31fb5519a3_Navigation_HUD_Route_Overview_STU_18.html",
+    "width": "2560",
+    "height": "2048"
+  },
+  {
+    "id": "169677f127374c2b908c2ee327be6597",
+    "title": "Student Submission Evaluator - Evaluation Cockpit",
+    "device": "DESKTOP",
+    "filename": "desktop_169677f127374c2b908c2ee327be6597_Student_Submission_Evaluator_Evaluation_Cockpit.html",
+    "width": "2560",
+    "height": "2176"
+  },
+  {
+    "id": "38d13a4151134b38ad31e1c9decf2071",
+    "title": "Ad Campaign Creator & Live Preview",
+    "device": "DESKTOP",
+    "filename": "desktop_38d13a4151134b38ad31e1c9decf2071_Ad_Campaign_Creator_Live_Preview.html",
+    "width": "2560",
+    "height": "2340"
+  },
+  {
+    "id": "45bff8936a0044e694117e3b29aa5016",
+    "title": "Desktop Splash Screen - Liquid Glass Elite",
+    "device": "DESKTOP",
+    "filename": "desktop_45bff8936a0044e694117e3b29aa5016_Desktop_Splash_Screen_Liquid_Glass_Elite.html",
+    "width": "2560",
+    "height": "2048"
+  },
+  {
+    "id": "1316e3c1e4bb47268887f9771fd569c3",
+    "title": "Advanced UI/UX Design - Video Player (STU-11)",
+    "device": "DESKTOP",
+    "filename": "desktop_1316e3c1e4bb47268887f9771fd569c3_Advanced_UI_UX_Design_Video_Player_STU_11.html",
+    "width": "2560",
+    "height": "2048"
+  },
+  {
+    "id": "8b4165aa923042888bc128ee52bfebe4",
+    "title": "Company Dashboard - Command Center",
+    "device": "DESKTOP",
+    "filename": "desktop_8b4165aa923042888bc128ee52bfebe4_Company_Dashboard_Command_Center.html",
+    "width": "2560",
+    "height": "3204"
+  },
+  {
+    "id": "ff00cb05253245a18dcdd5bd2b21d125",
+    "title": "Active Postings Management",
+    "device": "DESKTOP",
+    "filename": "desktop_ff00cb05253245a18dcdd5bd2b21d125_Active_Postings_Management.html",
+    "width": "2560",
+    "height": "2912"
+  },
+  {
+    "id": "83f00bcd687a483892266e8cb14a0d79",
+    "title": "Account Blocked / Pending (Desktop)",
+    "device": "DESKTOP",
+    "filename": "desktop_83f00bcd687a483892266e8cb14a0d79_Account_Blocked_Pending_Desktop.html",
+    "width": "2560",
+    "height": "2048"
+  },
+  {
+    "id": "8ff103c6ce6f44619e695be8619b7625",
+    "title": "Course Management Portal - Asset Manager",
+    "device": "DESKTOP",
+    "filename": "desktop_8ff103c6ce6f44619e695be8619b7625_Course_Management_Portal_Asset_Manager.html",
+    "width": "2560",
+    "height": "2090"
+  },
+  {
+    "id": "46916bc37cc94ecca15651e955f0f6b2",
+    "title": "Assignments Dashboard (STU-08) - Desktop)",
+    "device": "DESKTOP",
+    "filename": "desktop_46916bc37cc94ecca15651e955f0f6b2_Assignments_Dashboard_STU_08_Desktop.html",
+    "width": "2560",
+    "height": "3642"
+  },
+  {
+    "id": "69f29a36c4fb462ba1f179d1b0a2ec84",
+    "title": "Success Showcase - JobFlow Elite",
+    "device": "DESKTOP",
+    "filename": "desktop_69f29a36c4fb462ba1f179d1b0a2ec84_Success_Showcase_JobFlow_Elite.html",
+    "width": "2560",
+    "height": "6222"
+  },
+  {
+    "id": "babc13b0b1e24ab38783e4441563f725",
+    "title": "Interview Scheduler - Recruitment Command Center",
+    "device": "DESKTOP",
+    "filename": "desktop_babc13b0b1e24ab38783e4441563f725_Interview_Scheduler_Recruitment_Command_Center.html",
+    "width": "2560",
+    "height": "2048"
+  },
+  {
+    "id": "243f4482cdec478ca59fe6f217373a36",
+    "title": "Account Security (MFA) - Desktop",
+    "device": "DESKTOP",
+    "filename": "desktop_243f4482cdec478ca59fe6f217373a36_Account_Security_MFA_Desktop.html",
+    "width": "2816",
+    "height": "2252"
+  }
+]

@@ -1,0 +1,989 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>EliteRecruit | Company Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f9f9ff; /* Fallback */
+            margin: 0;
+            overflow-x: hidden;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.35);
+            backdrop-filter: blur(28px);
+            -webkit-backdrop-filter: blur(28px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 12px 40px 0 rgba(71, 26, 112, 0.15);
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: rgba(135, 49, 163, 0.2);
+            border-radius: 10px;
+        }
+
+        @keyframes pulse-shimmer {
+            0% { opacity: 0.6; }
+            50% { opacity: 1; }
+            100% { opacity: 0.6; }
+        }
+        .animate-shimmer {
+            animation: pulse-shimmer 2s infinite ease-in-out;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "tertiary-container": "#00842f",
+                      "secondary-fixed": "#d3e3ff",
+                      "on-tertiary": "#ffffff",
+                      "surface-container-low": "#f0f3ff",
+                      "glass-thick": "rgba(255, 255, 255, 0.8)",
+                      "inverse-surface": "#29313f",
+                      "surface-container-highest": "#dbe3f6",
+                      "on-error": "#ffffff",
+                      "on-tertiary-fixed": "#002106",
+                      "on-primary-fixed": "#330044",
+                      "primary-fixed": "#fbd7ff",
+                      "orange": "#FF9F0A",
+                      "secondary-fixed-dim": "#a3c9ff",
+                      "primary": "#8731a3",
+                      "glass-border": "rgba(255, 255, 255, 0.6)",
+                      "surface-variant": "#dbe3f6",
+                      "on-surface-variant": "#4f4350",
+                      "card-gradient": "linear-gradient(135deg, #4D9EFA 0%, #BF7DF5 100%)",
+                      "surface-dim": "#d2daed",
+                      "surface-container": "#e7eeff",
+                      "on-surface": "#141c29",
+                      "on-secondary": "#ffffff",
+                      "outline-variant": "#d2c1d2",
+                      "on-background": "#471A70",
+                      "inverse-on-surface": "#ecf1ff",
+                      "on-secondary-fixed-variant": "#004883",
+                      "tertiary-fixed-dim": "#47e266",
+                      "on-primary": "#ffffff",
+                      "gold": "#FFD60A",
+                      "surface-tint": "#8d37a9",
+                      "tertiary-fixed": "#6cff82",
+                      "secondary": "#0060ab",
+                      "error-container": "#ffdad6",
+                      "background": "#f9f9ff",
+                      "on-secondary-fixed": "#001c39",
+                      "inverse-primary": "#f0b0ff",
+                      "error": "#FF453A",
+                      "surface": "#f9f9ff",
+                      "primary-container": "#a34cbe",
+                      "outline": "#817381",
+                      "surface-container-high": "#e0e8fb",
+                      "on-secondary-container": "#003868",
+                      "on-tertiary-container": "#e6ffe0",
+                      "tertiary": "#006823",
+                      "glass-fill": "rgba(255, 255, 255, 0.35)",
+                      "on-primary-fixed-variant": "#72188f",
+                      "on-primary-container": "#fff5fb",
+                      "on-tertiary-fixed-variant": "#00531a",
+                      "surface-bright": "#f9f9ff",
+                      "primary-fixed-dim": "#f0b0ff",
+                      "secondary-container": "#54a3ff",
+                      "surface-container-lowest": "#ffffff",
+                      "on-error-container": "#93000a"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "safe-bottom": "34px",
+                      "max-width": "1280px",
+                      "safe-top": "44px",
+                      "mobile-margin": "20px",
+                      "desktop-margin": "64px",
+                      "base": "8px",
+                      "mobile-gutter": "16px",
+                      "desktop-gutter": "24px"
+              },
+              "fontFamily": {
+                      "headline-lg-mobile": ["Inter"],
+                      "display-xl-mobile": ["Inter"],
+                      "body-md": ["Inter"],
+                      "label-caps": ["Inter"],
+                      "label-caps-mobile": ["Inter"],
+                      "headline-lg": ["Inter"],
+                      "display-xl": ["Inter"],
+                      "body-md-mobile": ["Inter"]
+              },
+              "fontSize": {
+                      "headline-lg-mobile": ["28px", {"lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                      "display-xl-mobile": ["34px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                      "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                      "label-caps": ["13px", {"lineHeight": "1.0", "letterSpacing": "0.03em", "fontWeight": "600"}],
+                      "label-caps-mobile": ["12px", {"lineHeight": "1.0", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                      "headline-lg": ["34px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                      "display-xl": ["56px", {"lineHeight": "1.1", "letterSpacing": "-0.03em", "fontWeight": "700"}],
+                      "body-md-mobile": ["15px", {"lineHeight": "1.5", "fontWeight": "400"}]
+              }
+            },
+          },
+        }
+    </script>
+</head>
+<body class="bg-surface text-on-surface custom-scrollbar">
+<!-- Background Decoration -->
+<div class="fixed inset-0 -z-10 bg-[#DCE4F7] overflow-hidden">
+
+<div class="absolute top-[-10%] right-[-10%] w-[600px] h-[600px] bg-primary opacity-10 blur-[120px] rounded-full"></div>
+<div class="absolute bottom-[-10%] left-[-10%] w-[500px] h-[500px] bg-secondary opacity-10 blur-[100px] rounded-full"></div>
+</div>
+<!-- Top Navigation Bar -->
+<header class="fixed top-0 left-0 md:left-64 w-full md:w-[calc(100vw-16rem)] z-50 flex justify-between items-center px-6 md:px-8 h-14 bg-white/10 backdrop-blur-[28px] border-b border-glass-border shadow-[0_12px_40px_0_rgba(71,26,112,0.08)]">
+<div class="flex items-center gap-4">
+</div>
+<div class="flex items-center gap-6">
+<div class="hidden md:flex items-center bg-white/20 px-4 py-1.5 rounded-full border border-glass-border">
+<span class="material-symbols-outlined text-purple-950 mr-2 text-sm">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-purple-950 placeholder-purple-950/50 text-xs w-64 py-0 outline-none" placeholder="Search candidates..." type="text"/>
+</div>
+<div class="flex items-center gap-4">
+<button class="hover:scale-110 active:scale-95 transition-all text-on-background">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="hover:scale-110 active:scale-95 transition-all text-on-background">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<div class="w-10 h-10 rounded-full overflow-hidden border-2 border-white shadow-sm cursor-pointer hover:ring-2 hover:ring-primary transition-all">
+<img alt="HR Manager" class="w-full h-full object-cover" data-alt="A professional headshot of a middle-aged HR manager with a warm, confident expression. He is wearing a tailored charcoal suit and a crisp white shirt, set against a softly blurred modern office interior. The lighting is bright and natural, reflecting a high-end corporate aesthetic consistent with a premium SaaS dashboard environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCTQblcTNv-M1585wIeKVdiF8-dMwfCGc2wR9m7LF_6IdeRMD1b3RKduRLyQWQjkTZW6Be-VZSS62OkQ96d-ejQPnRK24NLKOBeueGaKHQd7_7jJ1husg5p0v1NmHt00i2w0r42Ht_hZcZdiQlmbvoY76kFau6Bfxo4hAtfqw7GJhiFyYIpRt6-IK4pjNqEYL_e7iaRepXkSxk2VzYoUB1p46lWKf2TDosBe5rLlRxy8uieKWYKuKO9JcZtOaA0tTUrlIU0OMHLNf_D"/>
+</div>
+</div>
+</div>
+</header>
+<!-- Side Navigation Bar -->
+<aside class="fixed left-0 top-0 h-screen w-64 bg-glass-fill backdrop-blur-3xl border-r border-glass-border flex flex-col pt-8 pb-6 gap-2 z-40 hidden md:flex shadow-sm">
+<div class="px-6 mb-8">
+<h2 class="text-primary font-headline-lg text-[22px] font-black tracking-tight">Intercomp</h2>
+<p class="text-primary/70 font-label-caps text-label-caps uppercase tracking-wider font-bold">Company Portal</p>
+</div>
+<nav class="flex flex-col gap-1">
+<a class="flex items-center gap-4 py-3 px-6 bg-primary text-on-primary rounded-xl mx-2 shadow-lg transition-all duration-200" href="#" id="nav-dashboard">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-caps text-label-caps uppercase tracking-wider">Dashboard</span>
+</a>
+<a class="flex items-center gap-4 py-3 px-6 text-on-surface-variant hover:bg-surface-container-low hover:translate-x-1 rounded-xl mx-2 transition-all duration-200" href="#" id="nav-jobboard">
+<span class="material-symbols-outlined">assignment</span>
+<span class="font-label-caps text-label-caps uppercase tracking-wider">Job Board</span>
+</a>
+<a class="flex items-center gap-4 py-3 px-6 text-on-surface-variant hover:bg-surface-container-low hover:translate-x-1 rounded-xl mx-2 transition-all duration-200" href="#" id="nav-talent">
+<span class="material-symbols-outlined">person_search</span>
+<span class="font-label-caps text-label-caps uppercase tracking-wider">Talent Pool</span>
+</a>
+<a class="flex items-center gap-4 py-3 px-6 text-on-surface-variant hover:bg-surface-container-low hover:translate-x-1 rounded-xl mx-2 transition-all duration-200" href="#" id="nav-postings">
+<span class="material-symbols-outlined">work</span>
+<span class="font-label-caps text-label-caps uppercase tracking-wider">Postings</span>
+</a>
+<a class="flex items-center gap-4 py-3 px-6 text-on-surface-variant hover:bg-surface-container-low hover:translate-x-1 rounded-xl mx-2 transition-all duration-200" href="#" id="nav-applicants">
+<span class="material-symbols-outlined">groups</span>
+<span class="font-label-caps text-label-caps uppercase tracking-wider">Applicants</span>
+</a>
+<a class="flex items-center gap-4 py-3 px-6 text-on-surface-variant hover:bg-surface-container-low hover:translate-x-1 rounded-xl mx-2 transition-all duration-200" href="#" id="nav-interviews">
+<span class="material-symbols-outlined">event_available</span>
+<span class="font-label-caps text-label-caps uppercase tracking-wider">Interviews</span>
+</a>
+<a class="flex items-center gap-4 py-3 px-6 text-on-surface-variant hover:bg-surface-container-low hover:translate-x-1 rounded-xl mx-2 transition-all duration-200" href="#" id="nav-analytics">
+<span class="material-symbols-outlined">monitoring</span>
+<span class="font-label-caps text-label-caps uppercase tracking-wider">Analytics</span>
+</a>
+</nav>
+<div class="mt-auto px-4">
+<button class="w-full py-4 bg-primary text-on-primary rounded-2xl font-bold flex items-center justify-center gap-2 shadow-xl hover:scale-[1.02] active:scale-95 transition-all">
+<span class="material-symbols-outlined">add</span>
+                New Job Posting
+            </button>
+</div>
+<div class="mt-4 border-t border-glass-border pt-4 flex flex-col gap-1">
+<a class="flex items-center gap-4 py-2 px-6 text-on-surface-variant hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">help</span>
+<span class="font-label-caps text-label-caps uppercase tracking-wider">Help Center</span>
+</a>
+<a class="flex items-center gap-4 py-2 px-6 text-error hover:opacity-80 transition-opacity" href="#">
+<span class="material-symbols-outlined">logout</span>
+<span class="font-label-caps text-label-caps uppercase tracking-wider">Log Out</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="ml-0 md:ml-64 pt-24 px-4 py-8 md:px-8 pb-20">
+<div class="max-w-max-width mx-auto">
+<header class="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-4">
+<div class="flex items-center gap-4 mb-2 flex-wrap">
+<h1 id="welcomeHeader" class="text-on-background font-display-xl text-display-xl tracking-tight leading-none">Welcome Back, Alexander</h1>
+</div>
+<p id="welcomeSub" class="text-on-surface-variant text-body-md opacity-80">Recruiter Portal • Performance statistics are up.</p>
+<div class="flex gap-3">
+<button class="px-6 py-2.5 bg-glass-thick border border-glass-border rounded-full font-semibold text-primary hover:bg-white transition-all flex items-center gap-2">
+<span class="material-symbols-outlined text-[20px]">download</span>
+                        Export Report
+                    </button>
+<button class="px-6 py-2.5 bg-primary text-white rounded-full font-semibold shadow-lg hover:shadow-primary/30 hover:-translate-y-0.5 transition-all">
+                        Platform Settings
+                    </button>
+</div>
+</header>
+
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+<!-- Left Column (30%) - Stats Stack -->
+<div class="lg:col-span-3 space-y-6">
+<div class="glass-card p-6 rounded-[2rem] relative overflow-hidden group">
+<div class="relative z-10">
+<span class="material-symbols-outlined p-3 bg-primary/10 text-primary rounded-2xl mb-4">person_add</span>
+<h3 class="text-on-surface-variant font-label-caps text-label-caps uppercase tracking-widest mb-1">Total Applications</h3>
+<div class="flex items-baseline gap-2">
+<span id="statApplications" class="text-on-background text-4xl font-extrabold">2,840</span>
+<span id="statApplicationsTrend" class="text-tertiary font-bold text-sm flex items-center">+14%</span>
+</div>
+</div>
+<div class="absolute -right-4 -bottom-4 opacity-10 group-hover:scale-110 transition-transform duration-700">
+<span class="material-symbols-outlined text-9xl">person</span>
+</div>
+</div>
+<div class="glass-card p-6 rounded-[2rem] relative overflow-hidden group">
+<div class="relative z-10">
+<span class="material-symbols-outlined p-3 bg-secondary/10 text-secondary rounded-2xl mb-4">work</span>
+<h3 class="text-on-surface-variant font-label-caps text-label-caps uppercase tracking-widest mb-1">Active Postings</h3>
+<div class="flex items-baseline gap-2">
+<span id="statActiveJobs" class="text-on-background text-4xl font-extrabold">42</span>
+<span id="statActiveJobsTrend" class="text-on-surface-variant/40 font-bold text-sm">Stable</span>
+</div>
+</div>
+<div class="absolute -right-4 -bottom-4 opacity-10 group-hover:scale-110 transition-transform duration-700">
+<span class="material-symbols-outlined text-9xl">business_center</span>
+</div>
+</div>
+<div class="glass-card p-6 rounded-[2rem] relative overflow-hidden group">
+<div class="relative z-10">
+<span class="material-symbols-outlined p-3 bg-orange/10 text-orange rounded-2xl mb-4">calendar_today</span>
+<h3 class="text-on-surface-variant font-label-caps text-label-caps uppercase tracking-widest mb-1">Upcoming Interviews</h3>
+<div class="flex items-baseline gap-2">
+<span id="statInterviews" class="text-on-background text-4xl font-extrabold">12</span>
+<span id="statInterviewsTrend" class="text-error font-bold text-sm flex items-center">-2%</span>
+</div>
+</div>
+<div class="absolute -right-4 -bottom-4 opacity-10 group-hover:scale-110 transition-transform duration-700">
+<span class="material-symbols-outlined text-9xl">event</span>
+</div>
+</div>
+<!-- Mini Promo Card -->
+<div class="bg-card-gradient p-8 rounded-[2rem] text-white shadow-2xl relative overflow-hidden">
+<div class="relative z-10">
+<h4 class="text-xl font-bold mb-2">Upgrade to Pro</h4>
+<p class="text-sm opacity-90 mb-4">Unlock advanced AI applicant matching.</p>
+<button class="bg-white text-primary px-5 py-2 rounded-xl text-sm font-bold hover:bg-opacity-90 transition-all">Go Elite</button>
+</div>
+<div class="absolute right-0 bottom-0 opacity-20 transform translate-x-4 translate-y-4">
+<span class="material-symbols-outlined text-[150px]">rocket_launch</span>
+</div>
+</div>
+</div>
+<!-- Center Column (45%) - Visualization & Table -->
+<div class="lg:col-span-6 space-y-8">
+<!-- Hiring Pipeline Visualization -->
+<div class="glass-card p-8 rounded-[2.5rem]">
+<div class="flex justify-between items-center mb-8">
+<h3 class="text-on-background text-xl font-bold">Hiring Pipeline</h3>
+<select class="bg-transparent border-none text-primary font-semibold text-sm focus:ring-0">
+<option>Last 30 Days</option>
+<option>Last 6 Months</option>
+</select>
+</div>
+<div class="relative h-64 w-full flex items-end justify-between gap-4 px-4">
+<!-- Simulated Chart -->
+<div class="w-full flex justify-around items-end h-48 gap-4">
+<div class="flex flex-col items-center gap-3 w-full">
+<div class="w-full bg-secondary-container/20 rounded-t-xl relative group cursor-pointer" style="height: 100%;">
+<div id="pipeSourcingBar" class="absolute inset-0 bg-secondary-container rounded-t-xl transition-all duration-1000 origin-bottom scale-y-[0.8] group-hover:scale-y-[0.85]"></div>
+<div id="pipeSourcingVal" class="absolute -top-8 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity bg-on-background text-white text-[10px] px-2 py-1 rounded">1,240</div>
+</div>
+<span class="text-[10px] font-bold text-on-surface-variant uppercase">Sourcing</span>
+</div>
+<div class="flex flex-col items-center gap-3 w-full">
+<div class="w-full bg-primary-container/20 rounded-t-xl relative group cursor-pointer" style="height: 100%;">
+<div id="pipeScreeningBar" class="absolute inset-0 bg-primary-container rounded-t-xl transition-all duration-1000 origin-bottom scale-y-[0.5] group-hover:scale-y-[0.55]"></div>
+<div id="pipeScreeningVal" class="absolute -top-8 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity bg-on-background text-white text-[10px] px-2 py-1 rounded">820</div>
+</div>
+<span class="text-[10px] font-bold text-on-surface-variant uppercase">Screening</span>
+</div>
+<div class="flex flex-col items-center gap-3 w-full">
+<div class="w-full bg-tertiary-container/20 rounded-t-xl relative group cursor-pointer" style="height: 100%;">
+<div id="pipeInterviewsBar" class="absolute inset-0 bg-tertiary-container rounded-t-xl transition-all duration-1000 origin-bottom scale-y-[0.3] group-hover:scale-y-[0.35]"></div>
+<div id="pipeInterviewsVal" class="absolute -top-8 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity bg-on-background text-white text-[10px] px-2 py-1 rounded">340</div>
+</div>
+<span class="text-[10px] font-bold text-on-surface-variant uppercase">Interviews</span>
+</div>
+<div class="flex flex-col items-center gap-3 w-full">
+<div class="w-full bg-orange/20 rounded-t-xl relative group cursor-pointer" style="height: 100%;">
+<div id="pipeOffersBar" class="absolute inset-0 bg-orange rounded-t-xl transition-all duration-1000 origin-bottom scale-y-[0.1] group-hover:scale-y-[0.15]"></div>
+<div id="pipeOffersVal" class="absolute -top-8 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity bg-on-background text-white text-[10px] px-2 py-1 rounded">48</div>
+</div>
+<span class="text-[10px] font-bold text-on-surface-variant uppercase">Offers</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Active Postings Table -->
+<div class="glass-card rounded-[2.5rem] overflow-hidden">
+<div class="p-8 pb-4 flex justify-between items-center">
+<h3 class="text-on-background text-xl font-bold">Active Postings</h3>
+<button class="text-primary text-sm font-bold hover:underline">View All</button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead>
+<tr class="text-on-surface-variant font-label-caps text-[11px] uppercase tracking-widest border-b border-glass-border">
+<th class="px-8 py-4">Title</th>
+<th class="px-6 py-4">Department</th>
+<th class="px-6 py-4">Applicants</th>
+<th class="px-6 py-4">Status</th>
+</tr>
+</thead>
+<tbody id="postingsTableBody" class="divide-y divide-glass-border/30">
+<tr class="hover:bg-white/30 transition-colors cursor-pointer group">
+<td class="px-8 py-5">
+<div class="font-bold text-on-background">Senior UX Designer</div>
+<div class="text-[12px] opacity-60">Posted 2 days ago</div>
+</td>
+<td class="px-6 py-5 text-on-surface-variant font-medium">Design</td>
+<td class="px-6 py-5">
+<div class="flex -space-x-2">
+<div class="w-7 h-7 rounded-full border-2 border-white overflow-hidden"><img class="w-full h-full object-cover" data-alt="Close-up of a smiling young woman with dark hair, representing a candidate in a talent pool, set against a soft bokeh background that fits the light-mode UI aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCxum11G8pHSMKCfGGsunw2ZIi7-2urqyeBRSQNmZoRKKn4CWgz9BFFu3RAR5gKAKVjBQTUeioWG6XGpaObQc6Bgeebc-mTqs7clm2WSA2Mbb50UqSiABH2uhIuBI23JCBwX_7qagMMA6kfJwk2tvoGYE8GiJZ_j6Eo5LSu2vo1GmT2WrszfXey9JjHSMlEVTnATCurQ6w6FstWJPiCbphsKxhevygh8ws0I_sgHhSRx8o0ZSeJg9eXhN-wKhqRi0jJ87wc3q3VqJgZ"/></div>
+<div class="w-7 h-7 rounded-full border-2 border-white overflow-hidden"><img class="w-full h-full object-cover" data-alt="Close-up portrait of a male professional with glasses, appearing in a recruitment context as a high-quality candidate profile for a modern SaaS dashboard." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDxN8TyzJm2DWTTsdwUIv_M17JuOqVYRZiz06jl7GfuQQJZM5VSnpbM_TlU0NvA7WjCXwK-1x6bngMHpfCH_blPz5_dJ9LZooR4-Ksf_eIYG3Lb9MQ4nfmxkDgFpN7WWrXSfLU3pJlHYIPwVG4k8h8qtLEfL9FTwteybD4JNBW1bytcVx9WgCEAGE4n6G_o_h-yECswCjvZgJDBTofEkGc53hDHzwnXVnHhTfAX089TustJR29GOZVRTji18DKw3EkSw2iUzn68yboY"/></div>
+<div class="w-7 h-7 rounded-full bg-primary-container text-[10px] text-white flex items-center justify-center font-bold">+12</div>
+</div>
+</td>
+<td class="px-6 py-5">
+<span class="bg-tertiary/10 text-tertiary px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-tight">Live</span>
+</td>
+</tr>
+<tr class="hover:bg-white/30 transition-colors cursor-pointer group">
+<td class="px-8 py-5">
+<div class="font-bold text-on-background">Product Manager</div>
+<div class="text-[12px] opacity-60">Posted 5 days ago</div>
+</td>
+<td class="px-6 py-5 text-on-surface-variant font-medium">Product</td>
+<td class="px-6 py-5">
+<div class="flex -space-x-2">
+<div class="w-7 h-7 rounded-full border-2 border-white overflow-hidden"><img class="w-full h-full object-cover" data-alt="High-resolution profile picture of a young professional man with a friendly smile, used as a placeholder for an applicant in a company hiring dashboard." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAcghbVkzvmgAW3HmyC-bCSWpnxG_9JYSERXzAv7AAEJ_zU9HUmI7cDhUnmSzuOGETpi6NESWTMp9QfHpOiqwVdlZ9rhZWFRG7vYvnG825gKRwREH6_rn3iignKw-SsJOIt4ckbYDo-dSxJHyy9-0FfU7hAjk3XjjvuAbQG2mftvTmYmUcPFLuOaQFTMeMHsHP9bbb0v1S1atJVvzriTBe_d1OPH341w2r73jz4SFuTLyDrblob4Fiea0vFDAv2gzdREzw_flcLrYxi"/></div>
+<div class="w-7 h-7 rounded-full bg-primary-container text-[10px] text-white flex items-center justify-center font-bold">+8</div>
+</div>
+</td>
+<td class="px-6 py-5">
+<span class="bg-primary/10 text-primary px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-tight">Pending</span>
+</td>
+</tr>
+<tr class="hover:bg-white/30 transition-colors cursor-pointer group">
+<td class="px-8 py-5">
+<div class="font-bold text-on-background">Fullstack Engineer</div>
+<div class="text-[12px] opacity-60">Posted 1 week ago</div>
+</td>
+<td class="px-6 py-5 text-on-surface-variant font-medium">Engineering</td>
+<td class="px-6 py-5">
+<div class="flex -space-x-2">
+<div class="w-7 h-7 rounded-full border-2 border-white overflow-hidden"><img class="w-full h-full object-cover" data-alt="Close-up of a professional woman looking confidently at the camera, featured as a candidate thumbnail in a premium recruitment analytics platform." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBMYSstusQThqwea-ivblFvNId-5KZulKycZ-OYuvzkTC5IS5wFuKsg4VowJ6Kd7PCQOqISRCjXoeZOsSg9V0xVDymUgXre7PTk9WyJ6p5r1gmBWwzBZNPDY-EXso3HkY6TY1z3-xS1D0ASakHdUYwBwe7_Q7UQCz2-IoDfwpMf1JD6TRxU12eGFG8ErHRlC8-oXqRxoMDK6pfV1qEPpdYtqreqj8h6kg_MH2R4RGF0gbcJp6JiZpKUv7WoNf69vaOyBu1xLvOMZEwn"/></div>
+<div class="w-7 h-7 rounded-full bg-primary-container text-[10px] text-white flex items-center justify-center font-bold">+45</div>
+</div>
+</td>
+<td class="px-6 py-5">
+<span class="bg-secondary/10 text-secondary px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-tight">Live</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="p-6 bg-glass-thick/50 border-t border-glass-border text-center">
+<button class="text-on-surface-variant text-sm font-semibold hover:text-primary transition-colors flex items-center justify-center mx-auto gap-2">
+                                Load 15 more job postings
+                                <span class="material-symbols-outlined text-[18px]">keyboard_arrow_down</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Right Column (25%) - Performance -->
+<div class="lg:col-span-3 space-y-8">
+<div class="glass-card p-6 rounded-[2rem]">
+<h3 class="text-on-background text-lg font-bold mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary">trending_up</span>
+                            Performance Stats
+                        </h3>
+<div class="space-y-8">
+<!-- Ad Clicks -->
+<div>
+<div class="flex justify-between items-end mb-3">
+<div>
+<div class="text-[11px] font-bold text-on-surface-variant uppercase tracking-widest">Ad Clicks</div>
+<div id="perfAdClicks" class="text-2xl font-extrabold text-on-background">12.4k</div>
+</div>
+<div id="perfAdClicksTrend" class="text-tertiary text-xs font-bold flex items-center">+8%</div>
+</div>
+<div class="h-12 w-full flex items-end gap-1">
+<div class="flex-1 bg-secondary/20 rounded-t-sm h-[40%]"></div>
+<div class="flex-1 bg-secondary/20 rounded-t-sm h-[60%]"></div>
+<div class="flex-1 bg-secondary/20 rounded-t-sm h-[50%]"></div>
+<div class="flex-1 bg-secondary rounded-t-sm h-[80%]"></div>
+<div class="flex-1 bg-secondary/20 rounded-t-sm h-[65%]"></div>
+<div class="flex-1 bg-secondary/20 rounded-t-sm h-[90%]"></div>
+<div class="flex-1 bg-secondary/20 rounded-t-sm h-[75%]"></div>
+</div>
+</div>
+<!-- Campaign Performance -->
+<div>
+<div class="flex justify-between items-end mb-3">
+<div>
+<div class="text-[11px] font-bold text-on-surface-variant uppercase tracking-widest">Campaign reach</div>
+<div id="perfReach" class="text-2xl font-extrabold text-on-background">84.2k</div>
+</div>
+<div id="perfReachTrend" class="text-tertiary text-xs font-bold flex items-center">+22%</div>
+</div>
+<div class="relative h-12 w-full overflow-hidden flex items-center">
+<svg class="w-full h-full stroke-primary fill-none stroke-[2px]" viewbox="0 0 100 20">
+<path d="M0,15 Q10,5 20,10 T40,12 T60,5 T80,10 T100,2"></path>
+</svg>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/10 to-transparent"></div>
+</div>
+</div>
+<div class="pt-4 border-t border-glass-border">
+<div class="flex items-center justify-between text-sm mb-4">
+<span class="text-on-surface-variant font-medium">Conversion Rate</span>
+<span id="perfConversion" class="text-on-background font-bold">3.2%</span>
+</div>
+<div class="w-full bg-surface-variant rounded-full h-2 overflow-hidden">
+<div id="perfConversionBar" class="bg-primary h-full rounded-full" style="width: 65%;"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Talent Suggestions -->
+<div class="glass-card p-6 rounded-[2rem]">
+<h3 class="text-on-background text-lg font-bold mb-4">Top Matches</h3>
+<div id="topMatchesContainer" class="space-y-4">
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<script>
+        // Dynamic Company Data Store
+        const companyData = {
+            systems: {
+                name: "Systems Limited",
+                subtitle: "Recruiter Portal for Systems Limited • Performance is up 12% from last month.",
+                stats: {
+                    applications: "2,840",
+                    applicationsTrend: "+14%",
+                    activeJobs: "42",
+                    activeJobsTrend: "Stable",
+                    interviews: "12",
+                    interviewsTrend: "-2%"
+                },
+                pipeline: {
+                    sourcing: { val: 1240, scale: 0.8 },
+                    screening: { val: 820, scale: 0.5 },
+                    interviews: { val: 340, scale: 0.3 },
+                    offers: { val: 48, scale: 0.1 }
+                },
+                postings: [
+                    { title: "Associate Software Engineer", dept: "Engineering", applicants: 45, status: "Live", time: "Posted 2 days ago" },
+                    { title: "Junior DevOps Engineer", dept: "DevOps", applicants: 12, status: "Live", time: "Posted 5 days ago" },
+                    { title: "Full Stack Engineer (MERN)", dept: "Engineering", applicants: 28, status: "Live", time: "Posted 1 week ago" }
+                ],
+                performance: {
+                    clicks: "12.4k",
+                    clicksTrend: "+8%",
+                    reach: "84.2k",
+                    reachTrend: "+22%",
+                    conversion: "3.2%",
+                    conversionScale: "65%"
+                },
+                matches: [
+                    { name: "Alex Sterling", role: "Fullstack Developer", match: "98% Match", img: "https://lh3.googleusercontent.com/aida-public/AB6AXuBQQSHtXSd1Az2qpafyiLQlgYo-t-QmWi-Nj0G9gC9eR1u4avHNZ329vM6YkffP1ktFMOfxBK2dRB6TWy48pfJuo3NUtZmonwn7xdmMqlllO-zbkj3iYyawx6qhywPi85zURp_4m2iX9z1d9OFBg7naJMF1My4rfXODnGkkD6cEKxSFPyiFBodWehMWYB5CjAdjYx9GOGMLy1_W0GhDI1jEHT6P3IQvOdFF_9FeHs6b_SziI1S9F0XGt-Yjb1bys597G31P0WKb6qgG" },
+                    { name: "Sarah Jenkins", role: "DevOps Engineer", match: "95% Match", img: "https://lh3.googleusercontent.com/aida-public/AB6AXuAcghbVkzvmgAW3HmyC-bCSWpnxG_9JYSERXzAv7AAEJ_zU9HUmI7cDhUnmSzuOGETpi6NESWTMp9QfHpOiqwVdlZ9rhZWFRG7vYvnG825gKRwREH6_rn3iignKw-SsJOIt4ckbYDo-dSxJHyy9-0FfU7hAjk3XjjvuAbQG2mftvTmYmUcPFLuOaQFTMeMHsHP9bbb0v1S1atJVvzriTBe_d1OPH341w2r73jz4SFuTLyDrblob4Fiea0vFDAv2gzdREzw_flcLrYxi" }
+                ]
+            },
+            venturedive: {
+                name: "VentureDive",
+                subtitle: "Recruiter Portal for VentureDive • Performance is up 8% from last month.",
+                stats: {
+                    applications: "1,420",
+                    applicationsTrend: "+8%",
+                    activeJobs: "18",
+                    activeJobsTrend: "+2",
+                    interviews: "6",
+                    interviewsTrend: "Stable"
+                },
+                pipeline: {
+                    sourcing: { val: 680, scale: 0.75 },
+                    screening: { val: 410, scale: 0.52 },
+                    interviews: { val: 120, scale: 0.28 },
+                    offers: { val: 18, scale: 0.08 }
+                },
+                postings: [
+                    { title: "UI/UX Designer", dept: "Design", applicants: 22, status: "Live", time: "Posted 1 day ago" },
+                    { title: "AI & Machine Learning Engineer", dept: "Data Science", applicants: 15, status: "Live", time: "Posted 4 days ago" },
+                    { title: "Associate Product Manager", dept: "Product", applicants: 9, status: "Live", time: "Posted 6 days ago" }
+                ],
+                performance: {
+                    clicks: "8.2k",
+                    clicksTrend: "+12%",
+                    reach: "52.4k",
+                    reachTrend: "+15%",
+                    conversion: "2.8%",
+                    conversionScale: "56%"
+                },
+                matches: [
+                    { name: "Aria Sterling", role: "UI/UX Designer", match: "97% Match", img: "https://lh3.googleusercontent.com/aida-public/AB6AXuCxum11G8pHSMKCfGGsunw2ZIi7-2urqyeBRSQNmZoRKKn4CWgz9BFFu3RAR5gKAKVjBQTUeioWG6XGpaObQc6Bgeebc-mTqs7clm2WSA2Mbb50UqSiABH2uhIuBI23JCBwX_7qagMMA6kfJwk2tvoGYE8GiJZ_j6Eo5LSu2vo1GmT2WrszfXey9JjHSMlEVTnATCurQ6w6FstWJPiCbphsKxhevygh8ws0I_sgHhSRx8o0ZSeJg9eXhN-wKhqRi0jJ87wc3q3VqJgZ" },
+                    { name: "Elena Vance", role: "Product Manager", match: "93% Match", img: "https://lh3.googleusercontent.com/aida-public/AB6AXuD-uLZzQjpjf9MFRRHmWd6j_VhunkfgZ0bCmESXXDKIKJZ03n9Z8oiFn3alyR6yAK1EgstIcMSLCRiHTijRG4nbXb06Mq1wMJWwbc_YB4w4lLr4daF-6y3KI1p2hSb9CSBd5WiR9MA2acv8JGkl3O2cKoVeaeE8J_9kOyaBouTruDsoxMVK7kjZqxvEYYPK5WMvRTjdmx71x3RHl58g6yh0UvbNULlgZ9S-ib2DFY07pDFUDG0ZmAEYOptCw7BtnaqJo8Y-sBnjkSqS" }
+                ]
+            },
+            arbisoft: {
+                name: "Arbisoft",
+                subtitle: "Recruiter Portal for Arbisoft • Performance is up 15% from last month.",
+                stats: {
+                    applications: "980",
+                    applicationsTrend: "+20%",
+                    activeJobs: "11",
+                    activeJobsTrend: "+1",
+                    interviews: "5",
+                    interviewsTrend: "+1"
+                },
+                pipeline: {
+                    sourcing: { val: 450, scale: 0.65 },
+                    screening: { val: 290, scale: 0.45 },
+                    interviews: { val: 85, scale: 0.22 },
+                    offers: { val: 12, scale: 0.07 }
+                },
+                postings: [
+                    { title: "Software Engineer (Python/Django)", dept: "Engineering", applicants: 31, status: "Live", time: "Posted 3 days ago" },
+                    { title: "Software Quality Assurance Engineer", dept: "QA", applicants: 14, status: "Live", time: "Posted 5 days ago" }
+                ],
+                performance: {
+                    clicks: "6.8k",
+                    clicksTrend: "+15%",
+                    reach: "44.1k",
+                    reachTrend: "+18%",
+                    conversion: "3.1%",
+                    conversionScale: "62%"
+                },
+                matches: [
+                    { name: "Alex Sterling", role: "Python Developer", match: "96% Match", img: "https://lh3.googleusercontent.com/aida-public/AB6AXuBQQSHtXSd1Az2qpafyiLQlgYo-t-QmWi-Nj0G9gC9eR1u4avHNZ329vM6YkffP1ktFMOfxBK2dRB6TWy48pfJuo3NUtZmonwn7xdmMqlllO-zbkj3iYyawx6qhywPi85zURp_4m2iX9z1d9OFBg7naJMF1My4rfXODnGkkD6cEKxSFPyiFBodWehMWYB5CjAdjYx9GOGMLy1_W0GhDI1jEHT6P3IQvOdFF_9FeHs6b_SziI1S9F0XGt-Yjb1bys597G31P0WKb6qgG" },
+                    { name: "Marcus Miller", role: "QA Automation", match: "92% Match", img: "https://lh3.googleusercontent.com/aida-public/AB6AXuAfx4zsf4g2yyp5ur5OyZhwaBEKE89GBLlU5BBxwQCn1GIGM_hHWx0PDrKobwBQ0zmJgAcGGOvw0FQw6wZ6T1m8m9FUygvSEKbFxL-s4Mzm3cPgEsT-hLcl5nDhMq1uUAFkqnX7aX3h1risA2k5DnMW-H3Ygs8ufrqIWI8qn3n5-azGOhQWRueGBbJ5SoDieEb0GrU14r8M9abNbau53mqbm7EaymCsw47aKMWK7TTnM8mOSW9z0gW_xda92QII6ANEWbAHcAjvjKjt" }
+                ]
+            },
+            jazz: {
+                name: "Jazz (Mobilink)",
+                subtitle: "Recruiter Portal for Jazz (Mobilink) • Performance is up 5% from last month.",
+                stats: {
+                    applications: "1,150",
+                    applicationsTrend: "+4%",
+                    activeJobs: "8",
+                    activeJobsTrend: "-1",
+                    interviews: "4",
+                    interviewsTrend: "Stable"
+                },
+                pipeline: {
+                    sourcing: { val: 520, scale: 0.70 },
+                    screening: { val: 340, scale: 0.48 },
+                    interviews: { val: 90, scale: 0.24 },
+                    offers: { val: 10, scale: 0.06 }
+                },
+                postings: [
+                    { title: "React Native Developer", dept: "Engineering", applicants: 38, status: "Live", time: "Posted 1 week ago" }
+                ],
+                performance: {
+                    clicks: "9.1k",
+                    clicksTrend: "+5%",
+                    reach: "68.3k",
+                    reachTrend: "+10%",
+                    conversion: "2.5%",
+                    conversionScale: "50%"
+                },
+                matches: [
+                    { name: "Sarah Jenkins", role: "React Native Developer", match: "94% Match", img: "https://lh3.googleusercontent.com/aida-public/AB6AXuAcghbVkzvmgAW3HmyC-bCSWpnxG_9JYSERXzAv7AAEJ_zU9HUmI7cDhUnmSzuOGETpi6NESWTMp9QfHpOiqwVdlZ9rhZWFRG7vYvnG825gKRwREH6_rn3iignKw-SsJOIt4ckbYDo-dSxJHyy9-0FfU7hAjk3XjjvuAbQG2mftvTmYmUcPFLuOaQFTMeMHsHP9bbb0v1S1atJVvzriTBe_d1OPH341w2r73jz4SFuTLyDrblob4Fiea0vFDAv2gzdREzw_flcLrYxi" },
+                    { name: "Marcus Miller", role: "Mobile Architect", match: "91% Match", img: "https://lh3.googleusercontent.com/aida-public/AB6AXuAfx4zsf4g2yyp5ur5OyZhwaBEKE89GBLlU5BBxwQCn1GIGM_hHWx0PDrKobwBQ0zmJgAcGGOvw0FQw6wZ6T1m8m9FUygvSEKbFxL-s4Mzm3cPgEsT-hLcl5nDhMq1uUAFkqnX7aX3h1risA2k5DnMW-H3Ygs8ufrqIWI8qn3n5-azGOhQWRueGBbJ5SoDieEb0GrU14r8M9abNbau53mqbm7EaymCsw47aKMWK7TTnM8mOSW9z0gW_xda92QII6ANEWbAHcAjvjKjt" }
+                ]
+            },
+            contour: {
+                name: "Contour Software",
+                subtitle: "Recruiter Portal for Contour Software • Performance is up 9% from last month.",
+                stats: {
+                    applications: "640",
+                    applicationsTrend: "+10%",
+                    activeJobs: "5",
+                    activeJobsTrend: "Stable",
+                    interviews: "3",
+                    interviewsTrend: "Stable"
+                },
+                pipeline: {
+                    sourcing: { val: 310, scale: 0.60 },
+                    screening: { val: 190, scale: 0.40 },
+                    interviews: { val: 60, scale: 0.20 },
+                    offers: { val: 8, scale: 0.05 }
+                },
+                postings: [
+                    { title: "Senior React Developer", dept: "Engineering", applicants: 19, status: "Live", time: "Posted 3 days ago" }
+                ],
+                performance: {
+                    clicks: "4.2k",
+                    clicksTrend: "+6%",
+                    reach: "29.8k",
+                    reachTrend: "+12%",
+                    conversion: "2.9%",
+                    conversionScale: "58%"
+                },
+                matches: [
+                    { name: "Alex Sterling", role: "Senior React Developer", match: "95% Match", img: "https://lh3.googleusercontent.com/aida-public/AB6AXuBQQSHtXSd1Az2qpafyiLQlgYo-t-QmWi-Nj0G9gC9eR1u4avHNZ329vM6YkffP1ktFMOfxBK2dRB6TWy48pfJuo3NUtZmonwn7xdmMqlllO-zbkj3iYyawx6qhywPi85zURp_4m2iX9z1d9OFBg7naJMF1My4rfXODnGkkD6cEKxSFPyiFBodWehMWYB5CjAdjYx9GOGMLy1_W0GhDI1jEHT6P3IQvOdFF_9FeHs6b_SziI1S9F0XGt-Yjb1bys597G31P0WKb6qgG" },
+                    { name: "Aria Sterling", role: "UI Developer", match: "91% Match", img: "https://lh3.googleusercontent.com/aida-public/AB6AXuCxum11G8pHSMKCfGGsunw2ZIi7-2urqyeBRSQNmZoRKKn4CWgz9BFFu3RAR5gKAKVjBQTUeioWG6XGpaObQc6Bgeebc-mTqs7clm2WSA2Mbb50UqSiABH2uhIuBI23JCBwX_7qagMMA6kfJwk2tvoGYE8GiJZ_j6Eo5LSu2vo1GmT2WrszfXey9JjHSMlEVTnATCurQ6w6FstWJPiCbphsKxhevygh8ws0I_sgHhSRx8o0ZSeJg9eXhN-wKhqRi0jJ87wc3q3VqJgZ" }
+                ]
+            },
+            tenpearls: {
+                name: "10Pearls",
+                subtitle: "Recruiter Portal for 10Pearls • Performance is up 11% from last month.",
+                stats: {
+                    applications: "1,890",
+                    applicationsTrend: "+15%",
+                    activeJobs: "24",
+                    activeJobsTrend: "+3",
+                    interviews: "9",
+                    interviewsTrend: "+2"
+                },
+                pipeline: {
+                    sourcing: { val: 890, scale: 0.80 },
+                    screening: { val: 540, scale: 0.55 },
+                    interviews: { val: 180, scale: 0.30 },
+                    offers: { val: 24, scale: 0.08 }
+                },
+                postings: [
+                    { title: "UI Designer Intern", dept: "Design", applicants: 25, status: "Live", time: "Posted 1 week ago" },
+                    { title: "Frontend Developer (React)", dept: "Engineering", applicants: 42, status: "Live", time: "Posted 3 days ago" }
+                ],
+                performance: {
+                    clicks: "11.5k",
+                    clicksTrend: "+14%",
+                    reach: "78.9k",
+                    reachTrend: "+20%",
+                    conversion: "3.4%",
+                    conversionScale: "68%"
+                },
+                matches: [
+                    { name: "Aria Sterling", role: "UI/UX Designer", match: "96% Match", img: "https://lh3.googleusercontent.com/aida-public/AB6AXuCxum11G8pHSMKCfGGsunw2ZIi7-2urqyeBRSQNmZoRKKn4CWgz9BFFu3RAR5gKAKVjBQTUeioWG6XGpaObQc6Bgeebc-mTqs7clm2WSA2Mbb50UqSiABH2uhIuBI23JCBwX_7qagMMA6kfJwk2tvoGYE8GiJZ_j6Eo5LSu2vo1GmT2WrszfXey9JjHSMlEVTnATCurQ6w6FstWJPiCbphsKxhevygh8ws0I_sgHhSRx8o0ZSeJg9eXhN-wKhqRi0jJ87wc3q3VqJgZ" },
+                    { name: "Sarah Jenkins", role: "Frontend Developer", match: "94% Match", img: "https://lh3.googleusercontent.com/aida-public/AB6AXuAcghbVkzvmgAW3HmyC-bCSWpnxG_9JYSERXzAv7AAEJ_zU9HUmI7cDhUnmSzuOGETpi6NESWTMp9QfHpOiqwVdlZ9rhZWFRG7vYvnG825gKRwREH6_rn3iignKw-SsJOIt4ckbYDo-dSxJHyy9-0FfU7hAjk3XjjvuAbQG2mftvTmYmUcPFLuOaQFTMeMHsHP9bbb0v1S1atJVvzriTBe_d1OPH341w2r73jz4SFuTLyDrblob4Fiea0vFDAv2gzdREzw_flcLrYxi" }
+                ]
+            },
+            skylync: {
+                name: "SkyLync Headquarters",
+                subtitle: "Recruiter Portal for SkyLync • Performance is up 18% from last month.",
+                stats: {
+                    applications: "3,120",
+                    applicationsTrend: "+18%",
+                    activeJobs: "55",
+                    activeJobsTrend: "+5",
+                    interviews: "15",
+                    interviewsTrend: "+3"
+                },
+                pipeline: {
+                    sourcing: { val: 1450, scale: 0.9 },
+                    screening: { val: 980, scale: 0.6 },
+                    interviews: { val: 410, scale: 0.4 },
+                    offers: { val: 62, scale: 0.15 }
+                },
+                postings: [
+                    { title: "Senior UX Designer", dept: "Design", applicants: 15, status: "Live", time: "Posted 2 days ago" },
+                    { title: "Backend Dart Developer", dept: "Engineering", applicants: 42, status: "Live", time: "Posted 3 days ago" }
+                ],
+                performance: {
+                    clicks: "15.2k",
+                    clicksTrend: "+10%",
+                    reach: "98.4k",
+                    reachTrend: "+25%",
+                    conversion: "3.5%",
+                    conversionScale: "70%"
+                },
+                matches: [
+                    { name: "Aria Sterling", role: "UI/UX Designer", match: "98% Match", img: "https://lh3.googleusercontent.com/aida-public/AB6AXuCxum11G8pHSMKCfGGsunw2ZIi7-2urqyeBRSQNmZoRKKn4CWgz9BFFu3RAR5gKAKVjBQTUeioWG6XGpaObQc6Bgeebc-mTqs7clm2WSA2Mbb50UqSiABH2uhIuBI23JCBwX_7qagMMA6kfJwk2tvoGYE8GiJZ_j6Eo5LSu2vo1GmT2WrszfXey9JjHSMlEVTnATCurQ6w6FstWJPiCbphsKxhevygh8ws0I_sgHhSRx8o0ZSeJg9eXhN-wKhqRi0jJ87wc3q3VqJgZ" },
+                    { name: "Elena Vance", role: "Senior Frontend", match: "96% Match", img: "https://lh3.googleusercontent.com/aida-public/AB6AXuD-uLZzQjpjf9MFRRHmWd6j_VhunkfgZ0bCmESXXDKIKJZ03n9Z8oiFn3alyR6yAK1EgstIcMSLCRiHTijRG4nbXb06Mq1wMJWwbc_YB4w4lLr4daF-6y3KI1p2hSb9CSBd5WiR9MA2acv8JGkl3O2cKoVeaeE8J_9kOyaBouTruDsoxMVK7kjZqxvEYYPK5WMvRTjdmx71x3RHl58g6yh0UvbNULlgZ9S-ib2DFY07pDFUDG0ZmAEYOptCw7BtnaqJo8Y-sBnjkSqS" }
+                ]
+            },
+            coreknot: {
+                name: "CoreKnot Labs",
+                subtitle: "Recruiter Portal for CoreKnot • Performance is up 6% from last month.",
+                stats: {
+                    applications: "890",
+                    applicationsTrend: "+6%",
+                    activeJobs: "14",
+                    activeJobsTrend: "Stable",
+                    interviews: "8",
+                    interviewsTrend: "Stable"
+                },
+                pipeline: {
+                    sourcing: { val: 410, scale: 0.6 },
+                    screening: { val: 250, scale: 0.4 },
+                    interviews: { val: 70, scale: 0.18 },
+                    offers: { val: 12, scale: 0.08 }
+                },
+                postings: [
+                    { title: "Frontend Developer (React)", dept: "Engineering", applicants: 21, status: "Live", time: "Posted 5 days ago" }
+                ],
+                performance: {
+                    clicks: "5.4k",
+                    clicksTrend: "+4%",
+                    reach: "38.2k",
+                    reachTrend: "+8%",
+                    conversion: "2.7%",
+                    conversionScale: "54%"
+                },
+                matches: [
+                    { name: "Sarah Jenkins", role: "React Developer", match: "95% Match", img: "https://lh3.googleusercontent.com/aida-public/AB6AXuAcghbVkzvmgAW3HmyC-bCSWpnxG_9JYSERXzAv7AAEJ_zU9HUmI7cDhUnmSzuOGETpi6NESWTMp9QfHpOiqwVdlZ9rhZWFRG7vYvnG825gKRwREH6_rn3iignKw-SsJOIt4ckbYDo-dSxJHyy9-0FfU7hAjk3XjjvuAbQG2mftvTmYmUcPFLuOaQFTMeMHsHP9bbb0v1S1atJVvzriTBe_d1OPH341w2r73jz4SFuTLyDrblob4Fiea0vFDAv2gzdREzw_flcLrYxi" }
+                ]
+            },
+            zylor: {
+                name: "Zylor Technologies",
+                subtitle: "Recruiter Portal for Zylor • Performance is up 10% from last month.",
+                stats: {
+                    applications: "1,200",
+                    applicationsTrend: "+10%",
+                    activeJobs: "22",
+                    activeJobsTrend: "+2",
+                    interviews: "11",
+                    interviewsTrend: "+1"
+                },
+                pipeline: {
+                    sourcing: { val: 580, scale: 0.72 },
+                    screening: { val: 360, scale: 0.5 },
+                    interviews: { val: 110, scale: 0.25 },
+                    offers: { val: 18, scale: 0.09 }
+                },
+                postings: [
+                    { title: "Fullstack Engineer Intern", dept: "Engineering", applicants: 28, status: "Live", time: "Posted 1 week ago" },
+                    { title: "Backend Dart Developer", dept: "Engineering", applicants: 15, status: "Live", time: "Posted 3 days ago" }
+                ],
+                performance: {
+                    clicks: "7.8k",
+                    clicksTrend: "+9%",
+                    reach: "48.9k",
+                    reachTrend: "+12%",
+                    conversion: "3.0%",
+                    conversionScale: "60%"
+                },
+                matches: [
+                    { name: "Alex Sterling", role: "Fullstack Developer", match: "97% Match", img: "https://lh3.googleusercontent.com/aida-public/AB6AXuBQQSHtXSd1Az2qpafyiLQlgYo-t-QmWi-Nj0G9gC9eR1u4avHNZ329vM6YkffP1ktFMOfxBK2dRB6TWy48pfJuo3NUtZmonwn7xdmMqlllO-zbkj3iYyawx6qhywPi85zURp_4m2iX9z1d9OFBg7naJMF1My4rfXODnGkkD6cEKxSFPyiFBodWehMWYB5CjAdjYx9GOGMLy1_W0GhDI1jEHT6P3IQvOdFF_9FeHs6b_SziI1S9F0XGt-Yjb1bys597G31P0WKb6qgG" },
+                    { name: "Marcus Miller", role: "DevOps Engineer", match: "94% Match", img: "https://lh3.googleusercontent.com/aida-public/AB6AXuAfx4zsf4g2yyp5ur5OyZhwaBEKE89GBLlU5BBxwQCn1GIGM_hHWx0PDrKobwBQ0zmJgAcGGOvw0FQw6wZ6T1m8m9FUygvSEKbFxL-s4Mzm3cPgEsT-hLcl5nDhMq1uUAFkqnX7aX3h1risA2k5DnMW-H3Ygs8ufrqIWI8qn3n5-azGOhQWRueGBbJ5SoDieEb0GrU14r8M9abNbau53mqbm7EaymCsw47aKMWK7TTnM8mOSW9z0gW_xda92QII6ANEWbAHcAjvjKjt" }
+                ]
+            }
+        };
+
+        function updateDashboard(companyKey) {
+            const data = companyData[companyKey];
+            if (!data) return;
+
+            // Welcome Header
+            const welcomeHeader = document.getElementById('welcomeHeader');
+            if (welcomeHeader) welcomeHeader.textContent = `Welcome Back, Alexander | ${data.name}`;
+
+            // Welcome Subtitle
+            const welcomeSub = document.getElementById('welcomeSub');
+            if (welcomeSub) welcomeSub.textContent = data.subtitle;
+
+            // Stats Cards
+            const statApplications = document.getElementById('statApplications');
+            const statApplicationsTrend = document.getElementById('statApplicationsTrend');
+            if (statApplications) statApplications.textContent = data.stats.applications;
+            if (statApplicationsTrend) statApplicationsTrend.textContent = data.stats.applicationsTrend;
+
+            const statActiveJobs = document.getElementById('statActiveJobs');
+            const statActiveJobsTrend = document.getElementById('statActiveJobsTrend');
+            if (statActiveJobs) statActiveJobs.textContent = data.stats.activeJobs;
+            if (statActiveJobsTrend) statActiveJobsTrend.textContent = data.stats.activeJobsTrend;
+
+            const statInterviews = document.getElementById('statInterviews');
+            const statInterviewsTrend = document.getElementById('statInterviewsTrend');
+            if (statInterviews) statInterviews.textContent = data.stats.interviews;
+            if (statInterviewsTrend) statInterviewsTrend.textContent = data.stats.interviewsTrend;
+
+            // Hiring Pipeline Charts
+            const pipeSourcingBar = document.getElementById('pipeSourcingBar');
+            const pipeSourcingVal = document.getElementById('pipeSourcingVal');
+            if (pipeSourcingBar) pipeSourcingBar.style.transform = `scaleY(${data.pipeline.sourcing.scale})`;
+            if (pipeSourcingVal) pipeSourcingVal.textContent = data.pipeline.sourcing.val;
+
+            const pipeScreeningBar = document.getElementById('pipeScreeningBar');
+            const pipeScreeningVal = document.getElementById('pipeScreeningVal');
+            if (pipeScreeningBar) pipeScreeningBar.style.transform = `scaleY(${data.pipeline.screening.scale})`;
+            if (pipeScreeningVal) pipeScreeningVal.textContent = data.pipeline.screening.val;
+
+            const pipeInterviewsBar = document.getElementById('pipeInterviewsBar');
+            const pipeInterviewsVal = document.getElementById('pipeInterviewsVal');
+            if (pipeInterviewsBar) pipeInterviewsBar.style.transform = `scaleY(${data.pipeline.interviews.scale})`;
+            if (pipeInterviewsVal) pipeInterviewsVal.textContent = data.pipeline.interviews.val;
+
+            const pipeOffersBar = document.getElementById('pipeOffersBar');
+            const pipeOffersVal = document.getElementById('pipeOffersVal');
+            if (pipeOffersBar) pipeOffersBar.style.transform = `scaleY(${data.pipeline.offers.scale})`;
+            if (pipeOffersVal) pipeOffersVal.textContent = data.pipeline.offers.val;
+
+            // Postings Table
+            const postingsTableBody = document.getElementById('postingsTableBody');
+            if (postingsTableBody) {
+                postingsTableBody.innerHTML = '';
+                data.postings.forEach(job => {
+                    const extraCount = Math.max(1, job.applicants - 2);
+                    const avatarHtml = `
+                        <div class="flex -space-x-2">
+                            <div class="w-7 h-7 rounded-full border-2 border-white overflow-hidden"><img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCxum11G8pHSMKCfGGsunw2ZIi7-2urqyeBRSQNmZoRKKn4CWgz9BFFu3RAR5gKAKVjBQTUeioWG6XGpaObQc6Bgeebc-mTqs7clm2WSA2Mbb50UqSiABH2uhIuBI23JCBwX_7qagMMA6kfJwk2tvoGYE8GiJZ_j6Eo5LSu2vo1GmT2WrszfXey9JjHSMlEVTnATCurQ6w6FstWJPiCbphsKxhevygh8ws0I_sgHhSRx8o0ZSeJg9eXhN-wKhqRi0jJ87wc3q3VqJgZ"/></div>
+                            <div class="w-7 h-7 rounded-full border-2 border-white overflow-hidden"><img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDxN8TyzJm2DWTTsdwUIv_M17JuOqVYRZiz06jl7GfuQQJZM5VSnpbM_TlU0NvA7WjCXwK-1x6bngMHpfCH_blPz5_dJ9LZooR4-Ksf_eIYG3Lb9MQ4nfmxkDgFpN7WWrXSfLU3pJlHYIPwVG4k8h8qtLEfL9FTwteybD4JNBW1bytcVx9WgCEAGE4n6G_o_h-yECswCjvZgJDBTofEkGc53hDHzwnXVnHhTfAX089TustJR29GOZVRTji18DKw3EkSw2iUzn68yboY"/></div>
+                            <div class="w-7 h-7 rounded-full bg-primary-container text-[10px] text-white flex items-center justify-center font-bold">+${extraCount}</div>
+                        </div>
+                    `;
+                    const row = document.createElement('tr');
+                    row.className = "hover:bg-white/30 transition-colors cursor-pointer group";
+                    row.onclick = () => {
+                        if (window.top && window.top.location) {
+                            window.top.location.hash = '#/company/postings';
+                        } else {
+                            window.location.hash = '#/company/postings';
+                        }
+                    };
+                    row.innerHTML = `
+                        <td class="px-8 py-5">
+                            <div class="font-bold text-on-background">${job.title}</div>
+                            <div class="text-[12px] opacity-60">${job.time}</div>
+                        </td>
+                        <td class="px-6 py-5 text-on-surface-variant font-medium">${job.dept}</td>
+                        <td class="px-6 py-5">${avatarHtml}</td>
+                        <td class="px-6 py-5">
+                            <span class="bg-tertiary/10 text-tertiary px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-tight">${job.status}</span>
+                        </td>
+                    `;
+                    postingsTableBody.appendChild(row);
+                });
+            }
+
+            // Performance Stats
+            const perfAdClicks = document.getElementById('perfAdClicks');
+            const perfAdClicksTrend = document.getElementById('perfAdClicksTrend');
+            if (perfAdClicks) perfAdClicks.textContent = data.performance.clicks;
+            if (perfAdClicksTrend) perfAdClicksTrend.textContent = data.performance.clicksTrend;
+
+            const perfReach = document.getElementById('perfReach');
+            const perfReachTrend = document.getElementById('perfReachTrend');
+            if (perfReach) perfReach.textContent = data.performance.reach;
+            if (perfReachTrend) perfReachTrend.textContent = data.performance.reachTrend;
+
+            const perfConversion = document.getElementById('perfConversion');
+            const perfConversionBar = document.getElementById('perfConversionBar');
+            if (perfConversion) perfConversion.textContent = data.performance.conversion;
+            if (perfConversionBar) perfConversionBar.style.width = data.performance.conversionScale;
+
+            // Top Matches
+            const topMatchesContainer = document.getElementById('topMatchesContainer');
+            if (topMatchesContainer) {
+                topMatchesContainer.innerHTML = '';
+                data.matches.forEach(match => {
+                    const card = document.createElement('div');
+                    card.className = "flex items-center gap-3 p-3 rounded-2xl hover:bg-white/40 transition-all cursor-pointer";
+                    card.onclick = (e) => {
+                        e.stopPropagation();
+                        if (window.top && window.top.location) {
+                            window.top.location.hash = '#/student/profile';
+                        } else {
+                            window.location.hash = '#/student/profile';
+                        }
+                    };
+                    card.innerHTML = `
+                        <img class="w-10 h-10 rounded-full object-cover" src="${match.img}"/>
+                        <div>
+                            <div class="text-sm font-bold text-on-background leading-tight">${match.name}</div>
+                            <div class="text-[10px] text-on-surface-variant">${match.role} • ${match.match}</div>
+                        </div>
+                    `;
+                    topMatchesContainer.appendChild(card);
+                });
+
+                const btn = document.createElement('button');
+                btn.className = "w-full py-3 bg-glass-thick border border-glass-border rounded-xl text-primary text-xs font-bold uppercase tracking-widest hover:bg-white transition-all";
+                btn.textContent = "Discover More";
+                btn.onclick = (e) => {
+                    e.stopPropagation();
+                    if (window.top && window.top.location) {
+                        window.top.location.hash = '#/company/talent';
+                    } else {
+                        window.location.hash = '#/company/talent';
+                    }
+                };
+                topMatchesContainer.appendChild(btn);
+            }
+        }
+
+        // Setup company detection from localStorage
+        let currentCompanyKey = 'systems'; // fallback default
+        try {
+            const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
+            if (currentUser && currentUser.companyName) {
+                const name = currentUser.companyName.toLowerCase();
+                if (name.includes('zylor')) currentCompanyKey = 'zylor';
+                else if (name.includes('skylync')) currentCompanyKey = 'skylync';
+                else if (name.includes('coreknot')) currentCompanyKey = 'coreknot';
+                else if (name.includes('systems')) currentCompanyKey = 'systems';
+                else if (name.includes('venture')) currentCompanyKey = 'venturedive';
+                else if (name.includes('arbisoft')) currentCompanyKey = 'arbisoft';
+                else if (name.includes('jazz')) currentCompanyKey = 'jazz';
+                else if (name.includes('contour')) currentCompanyKey = 'contour';
+                else if (name.includes('pearls')) currentCompanyKey = 'tenpearls';
+            } else if (currentUser && currentUser.email) {
+                const email = currentUser.email.toLowerCase();
+                if (email.includes('zylor')) currentCompanyKey = 'zylor';
+                else if (email.includes('skylync')) currentCompanyKey = 'skylync';
+                else if (email.includes('coreknot')) currentCompanyKey = 'coreknot';
+                else if (email.includes('systems')) currentCompanyKey = 'systems';
+                else if (email.includes('venturedive')) currentCompanyKey = 'venturedive';
+                else if (email.includes('arbisoft')) currentCompanyKey = 'arbisoft';
+                else if (email.includes('jazz')) currentCompanyKey = 'jazz';
+                else if (email.includes('contour')) currentCompanyKey = 'contour';
+                else if (email.includes('10pearls')) currentCompanyKey = 'tenpearls';
+            }
+        } catch (e) {
+            console.error("Failed to detect logged-in company:", e);
+        }
+
+        // Initial call to populate dashboard
+        updateDashboard(currentCompanyKey);
+
+        // Simple micro-interactions for active elements
+        document.querySelectorAll('.glass-card').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'translateY(-4px)';
+                card.style.transition = 'transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(0)';
+            });
+        });
+    </script>
+</body></html>

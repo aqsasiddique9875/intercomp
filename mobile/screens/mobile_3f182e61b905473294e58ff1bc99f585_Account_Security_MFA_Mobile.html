@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<title>MFA Verification</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-tertiary-container": "#e6ffe0",
+                    "on-secondary-fixed": "#001c39",
+                    "error-container": "#ffdad6",
+                    "primary-fixed-dim": "#f0b0ff",
+                    "inverse-on-surface": "#ecf1ff",
+                    "on-background": "#471A70",
+                    "surface-variant": "#dbe3f6",
+                    "secondary": "#0060ab",
+                    "on-surface": "#141c29",
+                    "surface-container-high": "#e0e8fb",
+                    "outline": "#817381",
+                    "on-surface-variant": "#4f4350",
+                    "card-gradient": "linear-gradient(135deg, #4D9EFA 0%, #BF7DF5 100%)",
+                    "on-secondary": "#ffffff",
+                    "inverse-surface": "#29313f",
+                    "outline-variant": "#d2c1d2",
+                    "surface-tint": "#8d37a9",
+                    "secondary-fixed": "#d3e3ff",
+                    "gold": "#FFD60A",
+                    "surface-container-low": "#f0f3ff",
+                    "on-error": "#ffffff",
+                    "tertiary-fixed": "#6cff82",
+                    "surface": "#f9f9ff",
+                    "primary-container": "#a34cbe",
+                    "on-primary-fixed-variant": "#72188f",
+                    "on-secondary-container": "#003868",
+                    "tertiary": "#006823",
+                    "glass-fill": "rgba(255, 255, 255, 0.35)",
+                    "glass-border": "rgba(255, 255, 255, 0.6)",
+                    "error": "#FF453A",
+                    "surface-container-lowest": "#ffffff",
+                    "tertiary-fixed-dim": "#47e266",
+                    "on-tertiary-fixed": "#002106",
+                    "tertiary-container": "#00842f",
+                    "primary": "#8731a3",
+                    "secondary-container": "#54a3ff",
+                    "inverse-primary": "#f0b0ff",
+                    "on-primary-fixed": "#330044",
+                    "orange": "#FF9F0A",
+                    "surface-dim": "#d2daed",
+                    "secondary-fixed-dim": "#a3c9ff",
+                    "on-primary": "#ffffff",
+                    "on-secondary-fixed-variant": "#004883",
+                    "on-tertiary-fixed-variant": "#00531a",
+                    "on-tertiary": "#ffffff",
+                    "background": "#f9f9ff",
+                    "on-error-container": "#93000a",
+                    "surface-container-highest": "#dbe3f6",
+                    "surface-container": "#e7eeff",
+                    "glass-thick": "rgba(255, 255, 255, 0.8)",
+                    "primary-fixed": "#fbd7ff",
+                    "on-primary-container": "#fff5fb",
+                    "surface-bright": "#f9f9ff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "base": "8px",
+                    "mobile-margin": "20px",
+                    "safe-bottom": "34px",
+                    "desktop-gutter": "24px",
+                    "mobile-gutter": "16px",
+                    "max-width": "1280px",
+                    "desktop-margin": "64px",
+                    "safe-top": "44px"
+            },
+            "fontFamily": {
+                    "display-xl-mobile": ["Inter"],
+                    "body-md-mobile": ["Inter"],
+                    "display-xl": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "label-caps-mobile": ["Inter"],
+                    "label-caps": ["Inter"],
+                    "headline-lg-mobile": ["Inter"],
+                    "body-md": ["Inter"]
+            },
+            "fontSize": {
+                    "display-xl-mobile": ["34px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "body-md-mobile": ["15px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                    "display-xl": ["56px", {"lineHeight": "1.1", "letterSpacing": "-0.03em", "fontWeight": "700"}],
+                    "headline-lg": ["34px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                    "label-caps-mobile": ["12px", {"lineHeight": "1.0", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "label-caps": ["13px", {"lineHeight": "1.0", "letterSpacing": "0.03em", "fontWeight": "600"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #DCE4F7;
+            overflow: hidden;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(28px);
+            -webkit-backdrop-filter: blur(28px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 12px 40px 0 rgba(71, 26, 112, 0.1);
+        }
+
+        .glass-input {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .glass-input.active {
+            border-color: #54a3ff;
+            box-shadow: 0 0 15px rgba(84, 163, 255, 0.4);
+            animation: pulse-blue 2s infinite;
+        }
+
+        @keyframes pulse-blue {
+            0% { box-shadow: 0 0 0 0 rgba(84, 163, 255, 0.4); }
+            70% { box-shadow: 0 0 0 10px rgba(84, 163, 255, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(84, 163, 255, 0); }
+        }
+
+        .keypad-btn:active {
+            transform: scale(0.92);
+            background: rgba(255, 255, 255, 0.6);
+        }
+
+        .liquid-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(120deg, #DCE4F7 0%, #E7EEFF 50%, #F5F7FF 100%);
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="flex flex-col h-screen max-h-screen">
+<div class="liquid-bg"></div>
+<!-- Top App Bar (Shared Component Logic) -->
+<header class="flex items-center px-mobile-margin h-14 w-full top-0 z-10">
+<button class="hover:opacity-80 transition-opacity active:scale-95 duration-200 ease-out">
+<span class="material-symbols-outlined text-primary dark:text-primary-fixed-dim">arrow_back</span>
+</button>
+<h1 class="ml-4 font-headline-lg-mobile text-headline-lg-mobile font-bold text-on-background">Security Check</h1>
+</header>
+<main class="flex-1 overflow-y-auto px-mobile-margin flex flex-col items-center pt-8 pb-32">
+<!-- 3D Glassmorphic Icon Placeholder -->
+<div class="relative w-32 h-32 mb-8 flex items-center justify-center">
+<div class="absolute inset-0 bg-primary/10 blur-3xl rounded-full"></div>
+<div class="glass-card w-24 h-24 rounded-2xl flex items-center justify-center transform rotate-12 transition-transform hover:rotate-0 duration-500">
+<span class="material-symbols-outlined text-6xl text-primary" style="font-variation-settings: 'FILL' 1;">shield_with_heart</span>
+</div>
+<!-- Decorative "Liquid" Glass bubbles -->
+<div class="absolute -top-2 -right-2 w-8 h-8 rounded-full glass-card opacity-60"></div>
+<div class="absolute -bottom-4 -left-2 w-12 h-12 rounded-full glass-card opacity-40"></div>
+</div>
+<!-- Content -->
+<div class="text-center mb-10 w-full">
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile font-extrabold text-on-background mb-2">Verify Your Identity</h2>
+<p class="font-body-md-mobile text-body-md-mobile text-on-surface-variant px-4">Enter the 6-digit code sent to your email.</p>
+</div>
+<!-- Code Inputs -->
+<div class="grid grid-cols-6 gap-2 w-full max-w-sm mb-12" id="otp-container">
+<div class="h-16 glass-input rounded-xl flex items-center justify-center text-2xl font-bold text-on-background active" data-index="0"></div>
+<div class="h-16 glass-input rounded-xl flex items-center justify-center text-2xl font-bold text-on-background" data-index="1"></div>
+<div class="h-16 glass-input rounded-xl flex items-center justify-center text-2xl font-bold text-on-background" data-index="2"></div>
+<div class="h-16 glass-input rounded-xl flex items-center justify-center text-2xl font-bold text-on-background" data-index="3"></div>
+<div class="h-16 glass-input rounded-xl flex items-center justify-center text-2xl font-bold text-on-background" data-index="4"></div>
+<div class="h-16 glass-input rounded-xl flex items-center justify-center text-2xl font-bold text-on-background" data-index="5"></div>
+</div>
+<!-- Links -->
+<div class="flex flex-col items-center gap-4">
+<button class="font-label-caps-mobile text-label-caps-mobile text-primary font-bold hover:opacity-70 transition-opacity">RESEND CODE</button>
+<button class="font-label-caps-mobile text-label-caps-mobile text-outline font-medium hover:opacity-70 transition-opacity">TRY ANOTHER METHOD</button>
+</div>
+</main>
+<!-- Glass Numeric Keypad -->
+<div class="fixed bottom-0 left-0 w-full z-20 px-4 pb-safe-bottom">
+<div class="glass-card rounded-t-3xl p-6 grid grid-cols-3 gap-4 border-b-0">
+<button class="keypad-btn h-14 rounded-xl flex items-center justify-center text-2xl font-bold text-on-background transition-all" onclick="handleKey('1')">1</button>
+<button class="keypad-btn h-14 rounded-xl flex items-center justify-center text-2xl font-bold text-on-background transition-all" onclick="handleKey('2')">2</button>
+<button class="keypad-btn h-14 rounded-xl flex items-center justify-center text-2xl font-bold text-on-background transition-all" onclick="handleKey('3')">3</button>
+<button class="keypad-btn h-14 rounded-xl flex items-center justify-center text-2xl font-bold text-on-background transition-all" onclick="handleKey('4')">4</button>
+<button class="keypad-btn h-14 rounded-xl flex items-center justify-center text-2xl font-bold text-on-background transition-all" onclick="handleKey('5')">5</button>
+<button class="keypad-btn h-14 rounded-xl flex items-center justify-center text-2xl font-bold text-on-background transition-all" onclick="handleKey('6')">6</button>
+<button class="keypad-btn h-14 rounded-xl flex items-center justify-center text-2xl font-bold text-on-background transition-all" onclick="handleKey('7')">7</button>
+<button class="keypad-btn h-14 rounded-xl flex items-center justify-center text-2xl font-bold text-on-background transition-all" onclick="handleKey('8')">8</button>
+<button class="keypad-btn h-14 rounded-xl flex items-center justify-center text-2xl font-bold text-on-background transition-all" onclick="handleKey('9')">9</button>
+<div class="h-14"></div>
+<button class="keypad-btn h-14 rounded-xl flex items-center justify-center text-2xl font-bold text-on-background transition-all" onclick="handleKey('0')">0</button>
+<button class="keypad-btn h-14 rounded-xl flex items-center justify-center text-on-background transition-all" onclick="handleKey('back')">
+<span class="material-symbols-outlined text-3xl">backspace</span>
+</button>
+</div>
+</div>
+<script>
+        let currentCode = "";
+        const maxLen = 6;
+        const inputs = document.querySelectorAll('.glass-input');
+
+        function handleKey(key) {
+            if (key === 'back') {
+                if (currentCode.length > 0) {
+                    currentCode = currentCode.slice(0, -1);
+                }
+            } else if (currentCode.length < maxLen) {
+                currentCode += key;
+            }
+
+            updateDisplay();
+
+            if (currentCode.length === maxLen) {
+                // Simulate success
+                setTimeout(() => {
+                    inputs.forEach(input => {
+                        input.classList.remove('active');
+                        input.classList.add('border-tertiary', 'text-tertiary');
+                    });
+                }, 100);
+            }
+        }
+
+        function updateDisplay() {
+            inputs.forEach((input, index) => {
+                input.textContent = currentCode[index] || "";
+                input.classList.remove('active');
+                if (index === currentCode.length || (index === maxLen - 1 && currentCode.length === maxLen)) {
+                    input.classList.add('active');
+                }
+            });
+        }
+
+        // Simple tactile feedback simulation
+        document.querySelectorAll('button').forEach(btn => {
+            btn.addEventListener('touchstart', () => {
+                if (window.navigator.vibrate) window.navigator.vibrate(10);
+            });
+        });
+    </script>
+</body></html>

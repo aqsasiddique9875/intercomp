@@ -1,0 +1,3323 @@
+{
+  "companies": [
+    {
+      "id": "1",
+      "name": "skylync.io",
+      "status": "verified",
+      "document": "business_tax_cert_2026.pdf",
+      "ratings": 4.8,
+      "location": "New York",
+      "logo": "https://lh3.googleusercontent.com/aida/AP1WRLtHSlvHQm1XNZ4vaeue1GiJtF1j680ovYDsV1bz1IH37RWIQlHCDhIMbTh8QwjysUr_9axMNLFk7d5MtN1sRrdkCEgDdsjpU6S18_eICdCZ5ObBXpk8IMqmy52sfrJsOQaMvz7hk48gtvML_dmfwlaY-1QmOzz74jRWaBViW4SbLXgO-jIKC3LPueU0Wmini7A--bmI3LnC19bd8jueIoFhpwFhp4dCzG3gBDdCSwoekhL8nTJD3FWqr2Qs"
+    },
+    {
+      "id": "2",
+      "name": "coreknot.io",
+      "status": "pending",
+      "document": "incorporation_details.pdf",
+      "ratings": 4.5,
+      "location": "San Francisco",
+      "logo": "https://lh3.googleusercontent.com/aida/AP1WRLtHSlvHQm1XNZ4vaeue1GiJtF1j680ovYDsV1bz1IH37RWIQlHCDhIMbTh8QwjysUr_9axMNLFk7d5MtN1sRrdkCEgDdsjpU6S18_eICdCZ5ObBXpk8IMqmy52sfrJsOQaMvz7hk48gtvML_dmfwlaY-1QmOzz74jRWaBViW4SbLXgO-jIKC3LPueU0Wmini7A--bmI3LnC19bd8jueIoFhpwFhp4dCzG3gBDdCSwoekhL8nTJD3FWqr2Qs"
+    },
+    {
+      "id": "3",
+      "name": "zylor.io",
+      "status": "verified",
+      "document": "tax_verification.pdf",
+      "ratings": 4.9,
+      "location": "Austin",
+      "logo": "https://lh3.googleusercontent.com/aida/AP1WRLtHSlvHQm1XNZ4vaeue1GiJtF1j680ovYDsV1bz1IH37RWIQlHCDhIMbTh8QwjysUr_9axMNLFk7d5MtN1sRrdkCEgDdsjpU6S18_eICdCZ5ObBXpk8IMqmy52sfrJsOQaMvz7hk48gtvML_dmfwlaY-1QmOzz74jRWaBViW4SbLXgO-jIKC3LPueU0Wmini7A--bmI3LnC19bd8jueIoFhpwFhp4dCzG3gBDdCSwoekhL8nTJD3FWqr2Qs"
+    }
+  ],
+  "submissions": [
+    {
+      "id": "101",
+      "studentName": "Alex Sterling",
+      "assignment": "Meta Data API Parser",
+      "repoUrl": "https://github.com/alexsterling/metadata-parser",
+      "status": "graded",
+      "grade": "A+"
+    },
+    {
+      "id": "102",
+      "studentName": "Sarah Jenkins",
+      "assignment": "HSL Design Palette Loader",
+      "repoUrl": "https://github.com/sarahj/hsl-loader",
+      "status": "pending",
+      "grade": null
+    }
+  ],
+  "tests": [
+    {
+      "id": "201",
+      "title": "Technical Assessment",
+      "duration": "90 mins",
+      "questions": 3,
+      "group": "Group A"
+    },
+    {
+      "id": "202",
+      "title": "Backend Architecture Quiz",
+      "duration": "45 mins",
+      "questions": 10,
+      "group": "Group A"
+    },
+    {
+      "id": "203",
+      "title": "Machine Learning Models Evaluation",
+      "duration": "120 mins",
+      "questions": 5,
+      "group": "Group B"
+    },
+    {
+      "id": "204",
+      "title": "Probability & Statistics Quiz",
+      "duration": "45 mins",
+      "questions": 8,
+      "group": "Group B"
+    },
+    {
+      "id": "205",
+      "title": "Advanced UI/UX Layout Quiz",
+      "duration": "30 mins",
+      "questions": 12,
+      "group": "Group C"
+    },
+    {
+      "id": "206",
+      "title": "Heuristic Evaluation Challenge",
+      "duration": "45 mins",
+      "questions": 6,
+      "group": "Group C"
+    },
+    {
+      "id": "1782298306834",
+      "title": "Quiz_104_A",
+      "duration": "45 mins",
+      "questions": 5,
+      "group": "Group A"
+    },
+    {
+      "id": "1782298309996",
+      "title": "Quiz_104_A",
+      "duration": "45 mins",
+      "questions": 5,
+      "group": "Group A"
+    },
+    {
+      "id": "1782298311043",
+      "title": "Quiz_104_A",
+      "duration": "45 mins",
+      "questions": 5,
+      "group": "Group A"
+    },
+    {
+      "id": "1782298907629",
+      "title": "Quiz_104_A",
+      "duration": "45 mins",
+      "questions": 5,
+      "group": "Group A"
+    },
+    {
+      "id": "1782298910090",
+      "title": "Quiz_104_A",
+      "duration": "45 mins",
+      "questions": 5,
+      "group": "Group A"
+    },
+    {
+      "id": "1782299122205",
+      "title": "Quiz_104_A",
+      "duration": "45 mins",
+      "questions": 1,
+      "group": "Group A"
+    },
+    {
+      "id": "1782299511189",
+      "title": "Quiz_104_A",
+      "duration": "45 mins",
+      "questions": 1,
+      "group": "Group A"
+    },
+    {
+      "id": "1782299513300",
+      "title": "Quiz_104_A",
+      "duration": "45 mins",
+      "questions": 1,
+      "group": "Group A"
+    },
+    {
+      "id": "1782399570009",
+      "title": "Quiz_104_A",
+      "duration": "45 mins",
+      "questions": 5,
+      "group": "Group A"
+    },
+    {
+      "id": "1782399571976",
+      "title": "Quiz_104_A",
+      "duration": "45 mins",
+      "questions": 5,
+      "group": "Group A"
+    },
+    {
+      "id": "1782399574610",
+      "title": "Quiz_104_A",
+      "duration": "45 mins",
+      "questions": 5,
+      "group": "Group A"
+    },
+    {
+      "id": "1782541322975",
+      "title": "Quiz_104_A",
+      "duration": "45 mins",
+      "questions": 4,
+      "group": "Group A"
+    },
+    {
+      "id": "1782541326454",
+      "title": "Quiz_104_A",
+      "duration": "45 mins",
+      "questions": 4,
+      "group": "Group A"
+    },
+    {
+      "id": "1782543027392",
+      "title": "AI Quiz Test",
+      "duration": "45 mins",
+      "questions": 1,
+      "group": "All"
+    },
+    {
+      "id": "1782543162735",
+      "title": "AI Quiz Test v2",
+      "duration": "45 mins",
+      "questions": 1,
+      "group": "All",
+      "questionsList": [
+        {
+          "text": "What is AI?",
+          "options": [
+            "A",
+            "B",
+            "C",
+            "D"
+          ],
+          "correctIndex": 0
+        }
+      ]
+    },
+    {
+      "id": "1782543935663",
+      "title": "Quiz_104_A",
+      "duration": "45 mins",
+      "questions": 5,
+      "group": "All",
+      "questionsList": [
+        {
+          "text": "How many planets in our solar system have rings?",
+          "options": [
+            "Two",
+            "Four",
+            "Eight",
+            "Six"
+          ],
+          "correctIndex": 0,
+          "difficulty": 2,
+          "tags": [
+            "Astronomy"
+          ]
+        },
+        {
+          "text": "",
+          "options": [
+            "",
+            "",
+            "",
+            ""
+          ],
+          "correctIndex": 0,
+          "difficulty": 2,
+          "tags": []
+        },
+        {
+          "text": "",
+          "options": [
+            "",
+            "",
+            "",
+            ""
+          ],
+          "correctIndex": 0,
+          "difficulty": 2,
+          "tags": []
+        },
+        {
+          "text": "",
+          "options": [
+            "",
+            "",
+            "",
+            ""
+          ],
+          "correctIndex": 0,
+          "difficulty": 2,
+          "tags": []
+        },
+        {
+          "text": "",
+          "options": [
+            "",
+            "",
+            "",
+            ""
+          ],
+          "correctIndex": 0,
+          "difficulty": 2,
+          "tags": []
+        }
+      ]
+    },
+    {
+      "id": "1782543938410",
+      "title": "Quiz_104_A",
+      "duration": "45 mins",
+      "questions": 5,
+      "group": "All",
+      "questionsList": [
+        {
+          "text": "How many planets in our solar system have rings?",
+          "options": [
+            "Two",
+            "Four",
+            "Eight",
+            "Six"
+          ],
+          "correctIndex": 0,
+          "difficulty": 2,
+          "tags": [
+            "Astronomy"
+          ]
+        },
+        {
+          "text": "",
+          "options": [
+            "",
+            "",
+            "",
+            ""
+          ],
+          "correctIndex": 0,
+          "difficulty": 2,
+          "tags": []
+        },
+        {
+          "text": "",
+          "options": [
+            "",
+            "",
+            "",
+            ""
+          ],
+          "correctIndex": 0,
+          "difficulty": 2,
+          "tags": []
+        },
+        {
+          "text": "",
+          "options": [
+            "",
+            "",
+            "",
+            ""
+          ],
+          "correctIndex": 0,
+          "difficulty": 2,
+          "tags": []
+        },
+        {
+          "text": "",
+          "options": [
+            "",
+            "",
+            "",
+            ""
+          ],
+          "correctIndex": 0,
+          "difficulty": 2,
+          "tags": []
+        }
+      ]
+    },
+    {
+      "id": "1782913742699",
+      "title": "Quiz_104_A",
+      "duration": "45 mins",
+      "questions": 1,
+      "group": "All",
+      "questionsList": [
+        {
+          "text": "How many planets in our solar system have rings?",
+          "options": [
+            "Two",
+            "Four",
+            "Eight",
+            "Six"
+          ],
+          "correctIndex": 0,
+          "difficulty": 2,
+          "tags": [
+            "Astronomy",
+            "Science"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "1782913765159",
+      "title": "Quiz_104_A",
+      "duration": "45 mins",
+      "questions": 1,
+      "group": "All",
+      "questionsList": [
+        {
+          "text": "How many planets in our solar system have rings?",
+          "options": [
+            "Two",
+            "Four",
+            "Eight",
+            "Six"
+          ],
+          "correctIndex": 0,
+          "difficulty": 2,
+          "tags": [
+            "Astronomy",
+            "Science"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "1782913854200",
+      "title": "Quiz_104_A",
+      "duration": "45 mins",
+      "questions": 5,
+      "group": "All",
+      "questionsList": [
+        {
+          "text": "How many planets in our solar system have rings?",
+          "options": [
+            "Two",
+            "Four",
+            "Eight",
+            "Six"
+          ],
+          "correctIndex": 0,
+          "difficulty": 2,
+          "tags": [
+            "Astronomy",
+            "Science"
+          ]
+        },
+        {
+          "text": "",
+          "options": [
+            "",
+            "",
+            "",
+            ""
+          ],
+          "correctIndex": 0,
+          "difficulty": 2,
+          "tags": []
+        },
+        {
+          "text": "",
+          "options": [
+            "",
+            "",
+            "",
+            ""
+          ],
+          "correctIndex": 0,
+          "difficulty": 2,
+          "tags": []
+        },
+        {
+          "text": "",
+          "options": [
+            "",
+            "",
+            "",
+            ""
+          ],
+          "correctIndex": 0,
+          "difficulty": 2,
+          "tags": []
+        },
+        {
+          "text": "what us ajfdsiknsdceukwrhyncdk",
+          "options": [
+            "",
+            "",
+            "",
+            ""
+          ],
+          "correctIndex": 0,
+          "difficulty": 2,
+          "tags": []
+        }
+      ]
+    },
+    {
+      "id": "1782913858335",
+      "title": "Quiz_104_A",
+      "duration": "45 mins",
+      "questions": 5,
+      "group": "All",
+      "questionsList": [
+        {
+          "text": "How many planets in our solar system have rings?",
+          "options": [
+            "Two",
+            "Four",
+            "Eight",
+            "Six"
+          ],
+          "correctIndex": 0,
+          "difficulty": 2,
+          "tags": [
+            "Astronomy",
+            "Science"
+          ]
+        },
+        {
+          "text": "",
+          "options": [
+            "",
+            "",
+            "",
+            ""
+          ],
+          "correctIndex": 0,
+          "difficulty": 2,
+          "tags": []
+        },
+        {
+          "text": "",
+          "options": [
+            "",
+            "",
+            "",
+            ""
+          ],
+          "correctIndex": 0,
+          "difficulty": 2,
+          "tags": []
+        },
+        {
+          "text": "",
+          "options": [
+            "",
+            "",
+            "",
+            ""
+          ],
+          "correctIndex": 0,
+          "difficulty": 2,
+          "tags": []
+        },
+        {
+          "text": "what us ajfdsiknsdceukwrhyncdk",
+          "options": [
+            "",
+            "",
+            "",
+            ""
+          ],
+          "correctIndex": 0,
+          "difficulty": 2,
+          "tags": []
+        }
+      ]
+    },
+    {
+      "id": "1782977753314",
+      "title": "Integration Quiz 1782977753310",
+      "duration": "45 mins",
+      "questions": 1,
+      "group": "Group A",
+      "questionsList": [
+        {
+          "text": "What is 5 + 5?",
+          "options": [
+            "8",
+            "9",
+            "10",
+            "11"
+          ],
+          "correctIndex": 2,
+          "difficulty": 1,
+          "tags": [
+            "Arithmetic"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "1782977902830",
+      "title": "Quiz_104_A",
+      "duration": "45 mins",
+      "questions": 1,
+      "group": "All",
+      "questionsList": [
+        {
+          "text": "How many planets in our solar system have rings?",
+          "options": [
+            "Two",
+            "Four",
+            "Eight",
+            "Six"
+          ],
+          "correctIndex": 0,
+          "difficulty": 2,
+          "tags": [
+            "Astronomy",
+            "Science"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "1782978274125",
+      "title": "Integration Quiz 1782978274120",
+      "duration": "45 mins",
+      "questions": 1,
+      "group": "Group A",
+      "questionsList": [
+        {
+          "text": "What is 5 + 5?",
+          "options": [
+            "8",
+            "9",
+            "10",
+            "11"
+          ],
+          "correctIndex": 2,
+          "difficulty": 1,
+          "tags": [
+            "Arithmetic"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "1782978344042",
+      "title": "AI Test",
+      "duration": "45 mins",
+      "questions": 3,
+      "group": "All",
+      "questionsList": [
+        {
+          "text": "How many planets in our solar system have rings?",
+          "options": [
+            "Two",
+            "Four",
+            "Eight",
+            "Six"
+          ],
+          "correctIndex": 0,
+          "difficulty": 2,
+          "tags": [
+            "Astronomy",
+            "Science"
+          ]
+        },
+        {
+          "text": "How many planets in our solar system have rings?",
+          "options": [
+            "1",
+            "2",
+            "3",
+            "4"
+          ],
+          "correctIndex": 0,
+          "difficulty": 2,
+          "tags": []
+        },
+        {
+          "text": "How many planets in our solar system have rings?",
+          "options": [
+            "2",
+            "3",
+            "1",
+            "5"
+          ],
+          "correctIndex": 0,
+          "difficulty": 2,
+          "tags": []
+        }
+      ]
+    },
+    {
+      "id": "1782978956051",
+      "title": "Integration Quiz 1782978956047",
+      "duration": "45 mins",
+      "questions": 1,
+      "group": "Group A",
+      "questionsList": [
+        {
+          "text": "What is 5 + 5?",
+          "options": [
+            "8",
+            "9",
+            "10",
+            "11"
+          ],
+          "correctIndex": 2,
+          "difficulty": 1,
+          "tags": [
+            "Arithmetic"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "1782979244658",
+      "title": "Integration Quiz 1782979244655",
+      "duration": "45 mins",
+      "questions": 1,
+      "group": "Group A",
+      "questionsList": [
+        {
+          "text": "What is 5 + 5?",
+          "options": [
+            "8",
+            "9",
+            "10",
+            "11"
+          ],
+          "correctIndex": 2,
+          "difficulty": 1,
+          "tags": [
+            "Arithmetic"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "1782984447046",
+      "title": "Integration Quiz 1782984447039",
+      "duration": "45 mins",
+      "questions": 1,
+      "group": "Group A",
+      "questionsList": [
+        {
+          "text": "What is 5 + 5?",
+          "options": [
+            "8",
+            "9",
+            "10",
+            "11"
+          ],
+          "correctIndex": 2,
+          "difficulty": 1,
+          "tags": [
+            "Arithmetic"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "1782984614300",
+      "title": "Integration Quiz 1782984614296",
+      "duration": "45 mins",
+      "questions": 1,
+      "group": "Group A",
+      "questionsList": [
+        {
+          "text": "What is 5 + 5?",
+          "options": [
+            "8",
+            "9",
+            "10",
+            "11"
+          ],
+          "correctIndex": 2,
+          "difficulty": 1,
+          "tags": [
+            "Arithmetic"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "1782985012642",
+      "title": "Integration Quiz 1782985012638",
+      "duration": "45 mins",
+      "questions": 1,
+      "group": "Group A",
+      "questionsList": [
+        {
+          "text": "What is 5 + 5?",
+          "options": [
+            "8",
+            "9",
+            "10",
+            "11"
+          ],
+          "correctIndex": 2,
+          "difficulty": 1,
+          "tags": [
+            "Arithmetic"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "1782985454176",
+      "title": "Integration Quiz 1782985454172",
+      "duration": "45 mins",
+      "questions": 1,
+      "group": "Group A",
+      "questionsList": [
+        {
+          "text": "What is 5 + 5?",
+          "options": [
+            "8",
+            "9",
+            "10",
+            "11"
+          ],
+          "correctIndex": 2,
+          "difficulty": 1,
+          "tags": [
+            "Arithmetic"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "1782985969357",
+      "title": "Integration Quiz 1782985969335",
+      "duration": "45 mins",
+      "questions": 1,
+      "group": "Group A",
+      "questionsList": [
+        {
+          "text": "What is 5 + 5?",
+          "options": [
+            "8",
+            "9",
+            "10",
+            "11"
+          ],
+          "correctIndex": 2,
+          "difficulty": 1,
+          "tags": [
+            "Arithmetic"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "1782986291479",
+      "title": "Integration Quiz 1782986291474",
+      "duration": "45 mins",
+      "questions": 1,
+      "group": "Group A",
+      "questionsList": [
+        {
+          "text": "What is 5 + 5?",
+          "options": [
+            "8",
+            "9",
+            "10",
+            "11"
+          ],
+          "correctIndex": 2,
+          "difficulty": 1,
+          "tags": [
+            "Arithmetic"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "1782987131992",
+      "title": "Integration Quiz 1782987131988",
+      "duration": "45 mins",
+      "questions": 1,
+      "group": "Group A",
+      "questionsList": [
+        {
+          "text": "What is 5 + 5?",
+          "options": [
+            "8",
+            "9",
+            "10",
+            "11"
+          ],
+          "correctIndex": 2,
+          "difficulty": 1,
+          "tags": [
+            "Arithmetic"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "1782987251062",
+      "title": "AI developer",
+      "duration": "45 mins",
+      "questions": 2,
+      "group": "All",
+      "questionsList": [
+        {
+          "text": "How many planets in our solar system have rings?",
+          "options": [
+            "Two",
+            "Four",
+            "Eight",
+            "Six"
+          ],
+          "correctIndex": 2,
+          "difficulty": 2,
+          "tags": [
+            "Astronomy",
+            "Science"
+          ]
+        },
+        {
+          "text": "thid did",
+          "options": [
+            "",
+            "",
+            "",
+            ""
+          ],
+          "correctIndex": 1,
+          "difficulty": 2,
+          "tags": []
+        }
+      ]
+    },
+    {
+      "id": "1782991566435",
+      "title": "Integration Quiz 1782991566427",
+      "duration": "45 mins",
+      "questions": 1,
+      "group": "Group A",
+      "questionsList": [
+        {
+          "text": "What is 5 + 5?",
+          "options": [
+            "8",
+            "9",
+            "10",
+            "11"
+          ],
+          "correctIndex": 2,
+          "difficulty": 1,
+          "tags": [
+            "Arithmetic"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "1783499364148",
+      "title": "Integration Quiz 1783499364133",
+      "duration": "45 mins",
+      "questions": 1,
+      "group": "Group A",
+      "questionsList": [
+        {
+          "text": "What is 5 + 5?",
+          "options": [
+            "8",
+            "9",
+            "10",
+            "11"
+          ],
+          "correctIndex": 2,
+          "difficulty": 1,
+          "tags": [
+            "Arithmetic"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "1783502250180",
+      "title": "Integration Quiz 1783502250178",
+      "duration": "45 mins",
+      "questions": 1,
+      "group": "Group A",
+      "questionsList": [
+        {
+          "text": "What is 5 + 5?",
+          "options": [
+            "8",
+            "9",
+            "10",
+            "11"
+          ],
+          "correctIndex": 2,
+          "difficulty": 1,
+          "tags": [
+            "Arithmetic"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "1783504966225",
+      "title": "Integration Quiz 1783504966221",
+      "duration": "45 mins",
+      "questions": 1,
+      "group": "Group A",
+      "questionsList": [
+        {
+          "text": "What is 5 + 5?",
+          "options": [
+            "8",
+            "9",
+            "10",
+            "11"
+          ],
+          "correctIndex": 2,
+          "difficulty": 1,
+          "tags": [
+            "Arithmetic"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "1783514805393",
+      "title": "Integration Quiz 1783514805387",
+      "duration": "45 mins",
+      "questions": 1,
+      "group": "Group A",
+      "questionsList": [
+        {
+          "text": "What is 5 + 5?",
+          "options": [
+            "8",
+            "9",
+            "10",
+            "11"
+          ],
+          "correctIndex": 2,
+          "difficulty": 1,
+          "tags": [
+            "Arithmetic"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "1783584040942",
+      "title": "Integration Quiz 1783584040937",
+      "duration": "45 mins",
+      "questions": 1,
+      "group": "Group A",
+      "questionsList": [
+        {
+          "text": "What is 5 + 5?",
+          "options": [
+            "8",
+            "9",
+            "10",
+            "11"
+          ],
+          "correctIndex": 2,
+          "difficulty": 1,
+          "tags": [
+            "Arithmetic"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "1783670780171",
+      "title": "Integration Quiz 1783670780162",
+      "duration": "45 mins",
+      "questions": 1,
+      "group": "Group A",
+      "questionsList": [
+        {
+          "text": "What is 5 + 5?",
+          "options": [
+            "8",
+            "9",
+            "10",
+            "11"
+          ],
+          "correctIndex": 2,
+          "difficulty": 1,
+          "tags": [
+            "Arithmetic"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "1783679547105",
+      "title": "Integration Quiz 1783679547096",
+      "duration": "45 mins",
+      "questions": 1,
+      "group": "Group A",
+      "questionsList": [
+        {
+          "text": "What is 5 + 5?",
+          "options": [
+            "8",
+            "9",
+            "10",
+            "11"
+          ],
+          "correctIndex": 2,
+          "difficulty": 1,
+          "tags": [
+            "Arithmetic"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "1783679981422",
+      "title": "Integration Quiz 1783679981407",
+      "duration": "45 mins",
+      "questions": 1,
+      "group": "Group A",
+      "questionsList": [
+        {
+          "text": "What is 5 + 5?",
+          "options": [
+            "8",
+            "9",
+            "10",
+            "11"
+          ],
+          "correctIndex": 2,
+          "difficulty": 1,
+          "tags": [
+            "Arithmetic"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "1783680383670",
+      "title": "Integration Quiz 1783680383661",
+      "duration": "45 mins",
+      "questions": 1,
+      "group": "Group A",
+      "questionsList": [
+        {
+          "text": "What is 5 + 5?",
+          "options": [
+            "8",
+            "9",
+            "10",
+            "11"
+          ],
+          "correctIndex": 2,
+          "difficulty": 1,
+          "tags": [
+            "Arithmetic"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "1783680945512",
+      "title": "Integration Quiz 1783680945508",
+      "duration": "45 mins",
+      "questions": 1,
+      "group": "Group A",
+      "questionsList": [
+        {
+          "text": "What is 5 + 5?",
+          "options": [
+            "8",
+            "9",
+            "10",
+            "11"
+          ],
+          "correctIndex": 2,
+          "difficulty": 1,
+          "tags": [
+            "Arithmetic"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "1783683600490",
+      "title": "Integration Quiz 1783683600485",
+      "duration": "45 mins",
+      "questions": 1,
+      "group": "Group A",
+      "questionsList": [
+        {
+          "text": "What is 5 + 5?",
+          "options": [
+            "8",
+            "9",
+            "10",
+            "11"
+          ],
+          "correctIndex": 2,
+          "difficulty": 1,
+          "tags": [
+            "Arithmetic"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "1783684157685",
+      "title": "Integration Quiz 1783684157682",
+      "duration": "45 mins",
+      "questions": 1,
+      "group": "Group A",
+      "questionsList": [
+        {
+          "text": "What is 5 + 5?",
+          "options": [
+            "8",
+            "9",
+            "10",
+            "11"
+          ],
+          "correctIndex": 2,
+          "difficulty": 1,
+          "tags": [
+            "Arithmetic"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "1783684497851",
+      "title": "Integration Quiz 1783684497846",
+      "duration": "45 mins",
+      "questions": 1,
+      "group": "Group A",
+      "questionsList": [
+        {
+          "text": "What is 5 + 5?",
+          "options": [
+            "8",
+            "9",
+            "10",
+            "11"
+          ],
+          "correctIndex": 2,
+          "difficulty": 1,
+          "tags": [
+            "Arithmetic"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "1783685004808",
+      "title": "Integration Quiz 1783685004797",
+      "duration": "45 mins",
+      "questions": 1,
+      "group": "Group A",
+      "questionsList": [
+        {
+          "text": "What is 5 + 5?",
+          "options": [
+            "8",
+            "9",
+            "10",
+            "11"
+          ],
+          "correctIndex": 2,
+          "difficulty": 1,
+          "tags": [
+            "Arithmetic"
+          ]
+        }
+      ]
+    }
+  ],
+  "assignments": [
+    {
+      "id": "301",
+      "title": "JSON DB Express Server Routing",
+      "deadline": "Thursday"
+    },
+    {
+      "id": "302",
+      "title": "Liquid Glass Responsive Layout design",
+      "deadline": "Saturday"
+    }
+  ],
+  "activities": [
+    {
+      "id": "501",
+      "time": "15:21",
+      "studentName": "Elena Rostova",
+      "alert": "App defocus tab-switch detected",
+      "severity": "high"
+    },
+    {
+      "id": "502",
+      "time": "15:23",
+      "studentName": "Alex Sterling",
+      "alert": "Biometric face alignment offset",
+      "severity": "medium"
+    }
+  ],
+  "users": [
+    {
+      "id": "1",
+      "username": "ariasterling",
+      "email": "aria.sterling@university.edu",
+      "password": "password123",
+      "role": "student",
+      "skills": [
+        "UI/UX Design",
+        "Product Management",
+        "Tailwind CSS"
+      ],
+      "interests": [
+        "UI/UX Design",
+        "Mobile Apps"
+      ],
+      "rating": 4.9,
+      "badges": [
+        "Top Designer",
+        "Consistent Learner",
+        "Elite Performer"
+      ],
+      "trustScore": 98,
+      "graduationYear": "2025",
+      "university": "MIT",
+      "consecutivePassed": 3
+    },
+    {
+      "id": "2",
+      "username": "johnrecruiter",
+      "email": "recruiter@zylor.io",
+      "password": "password123",
+      "role": "recruiter",
+      "companyId": "3",
+      "companyName": "zylor.io"
+    },
+    {
+      "id": "3",
+      "username": "systemadmin",
+      "email": "admin@jobflow.io",
+      "password": "adminsecurepwd",
+      "role": "admin"
+    },
+    {
+      "id": "1781757962444",
+      "username": "alisidd803@gmail.com",
+      "email": "alisidd803@gmail.com",
+      "password": "123aqsa",
+      "role": "admin",
+      "skills": [],
+      "interests": [],
+      "rating": 4,
+      "badges": [],
+      "trustScore": 100,
+      "graduationYear": "2026",
+      "university": "State University",
+      "consecutivePassed": 0,
+      "lastLogin": 1783417293201
+    },
+    {
+      "id": "1781780664406",
+      "username": "testuser_1781780664304",
+      "email": "test_1781780664304@example.com",
+      "password": "password123",
+      "role": "student",
+      "skills": [],
+      "interests": [],
+      "rating": 4,
+      "badges": [],
+      "trustScore": 100,
+      "graduationYear": "2026",
+      "university": "State University",
+      "consecutivePassed": 0
+    },
+    {
+      "id": "1781780906936",
+      "username": "testuser_1781780906931",
+      "email": "test_1781780906931@example.com",
+      "password": "password123",
+      "role": "student",
+      "skills": [],
+      "interests": [],
+      "rating": 4,
+      "badges": [],
+      "trustScore": 100,
+      "graduationYear": "2026",
+      "university": "State University",
+      "consecutivePassed": 0
+    },
+    {
+      "id": "1781781125620",
+      "username": "testuser_1781781125583",
+      "email": "test_1781781125583@example.com",
+      "password": "password123",
+      "role": "student",
+      "skills": [],
+      "interests": [],
+      "rating": 4,
+      "badges": [],
+      "trustScore": 100,
+      "graduationYear": "2026",
+      "university": "State University",
+      "consecutivePassed": 0
+    },
+    {
+      "id": "1781781192637",
+      "username": "aqsa.siddique0987",
+      "email": "aqsa.siddique0987@gmail.com",
+      "password": "123",
+      "role": "student",
+      "skills": [
+        "Quantum Physics",
+        "Biotechnology"
+      ],
+      "interests": [],
+      "rating": 4,
+      "badges": [],
+      "trustScore": 100,
+      "graduationYear": "2026",
+      "university": "State University",
+      "consecutivePassed": 0
+    },
+    {
+      "id": "1781782474211",
+      "username": "testuser_1781782474207",
+      "email": "test_1781782474207@example.com",
+      "password": "password123",
+      "role": "student",
+      "skills": [],
+      "interests": [],
+      "rating": 4,
+      "badges": [],
+      "trustScore": 100,
+      "graduationYear": "2026",
+      "university": "State University",
+      "consecutivePassed": 0
+    },
+    {
+      "id": "1781784050138",
+      "username": "testuser_1781784050135",
+      "email": "test_1781784050135@example.com",
+      "password": "password123",
+      "role": "student",
+      "skills": [],
+      "interests": [],
+      "rating": 4,
+      "badges": [],
+      "trustScore": 100,
+      "graduationYear": "2026",
+      "university": "State University",
+      "consecutivePassed": 0
+    },
+    {
+      "id": "1781785404832",
+      "username": "testuser_1781785402435",
+      "email": "test_1781785402435@example.com",
+      "password": "password123",
+      "role": "student",
+      "skills": [],
+      "interests": [],
+      "rating": 4,
+      "badges": [],
+      "trustScore": 100,
+      "graduationYear": "2026",
+      "university": "State University",
+      "consecutivePassed": 0
+    },
+    {
+      "id": "1781788324158",
+      "username": "testuser_1781788319502",
+      "email": "test_1781788319502@example.com",
+      "password": "password123",
+      "role": "student",
+      "skills": [],
+      "interests": [],
+      "rating": 4,
+      "badges": [],
+      "trustScore": 100,
+      "graduationYear": "2026",
+      "university": "State University",
+      "consecutivePassed": 0
+    },
+    {
+      "id": "1781788972514",
+      "username": "aqsasiddique2004",
+      "email": "aqsasiddique2004@gmail.com",
+      "password": "aqsa",
+      "role": "student",
+      "skills": [
+        "Machine Learning",
+        "Software Engineering",
+        "Web Development"
+      ],
+      "interests": [],
+      "rating": 4,
+      "badges": [],
+      "trustScore": 100,
+      "graduationYear": "2026",
+      "university": "National University of Sciences and Technology (NUST)",
+      "consecutivePassed": 0
+    },
+    {
+      "id": "1781789562668",
+      "username": "testuser_1781789560091",
+      "email": "test_1781789560091@example.com",
+      "password": "password123",
+      "role": "student",
+      "skills": [],
+      "interests": [],
+      "rating": 4,
+      "badges": [],
+      "trustScore": 100,
+      "graduationYear": "2026",
+      "university": "State University",
+      "consecutivePassed": 0
+    },
+    {
+      "id": "1781790234830",
+      "username": "testuser_1781790230885",
+      "email": "test_1781790230885@example.com",
+      "password": "password123",
+      "role": "student",
+      "skills": [],
+      "interests": [],
+      "rating": 4,
+      "badges": [],
+      "trustScore": 100,
+      "graduationYear": "2026",
+      "university": "State University",
+      "consecutivePassed": 0
+    },
+    {
+      "id": "1781790523162",
+      "username": "testuser_1781790522063",
+      "email": "test_1781790522063@example.com",
+      "password": "password123",
+      "role": "student",
+      "skills": [],
+      "interests": [],
+      "rating": 4,
+      "badges": [],
+      "trustScore": 100,
+      "graduationYear": "2026",
+      "university": "State University",
+      "consecutivePassed": 0
+    },
+    {
+      "id": "1781791579832",
+      "username": "testuser_1781791567850",
+      "email": "test_1781791567850@example.com",
+      "password": "password123",
+      "role": "student",
+      "skills": [],
+      "interests": [],
+      "rating": 4,
+      "badges": [],
+      "trustScore": 100,
+      "graduationYear": "2026",
+      "university": "State University",
+      "consecutivePassed": 0
+    },
+    {
+      "id": "1781853020329",
+      "username": "testuser_1781853018014",
+      "email": "test_1781853018014@example.com",
+      "password": "password123",
+      "role": "student",
+      "skills": [],
+      "interests": [],
+      "rating": 4,
+      "badges": [],
+      "trustScore": 100,
+      "graduationYear": "2026",
+      "university": "State University",
+      "consecutivePassed": 0
+    },
+    {
+      "id": "1781853262442",
+      "username": "aqsasiddique0987",
+      "email": "aqsasiddique0987@gmail.com",
+      "password": "aqsa",
+      "role": "student",
+      "skills": [
+        "Software Engineering",
+        "UI/UX Design",
+        "Data Science"
+      ],
+      "interests": [],
+      "rating": 4,
+      "badges": [],
+      "trustScore": 100,
+      "graduationYear": "2026",
+      "university": "National University of Sciences and Technology (NUST)",
+      "consecutivePassed": 0
+    },
+    {
+      "id": "1781856103929",
+      "username": "testuser_1781856101031",
+      "email": "test_1781856101031@example.com",
+      "password": "password123",
+      "role": "student",
+      "skills": [],
+      "interests": [],
+      "rating": 4,
+      "badges": [],
+      "trustScore": 100,
+      "graduationYear": "2026",
+      "university": "State University",
+      "consecutivePassed": 0,
+      "streak": 1,
+      "group": "Group C"
+    },
+    {
+      "id": "1781857768099",
+      "username": "testuser_1781857766324",
+      "email": "test_1781857766324@example.com",
+      "password": "password123",
+      "role": "student",
+      "skills": [],
+      "interests": [],
+      "rating": 4,
+      "badges": [],
+      "trustScore": 100,
+      "graduationYear": "2026",
+      "university": "State University",
+      "consecutivePassed": 0,
+      "streak": 1,
+      "group": "Group C"
+    },
+    {
+      "id": "1781860608703",
+      "username": "testuser_1781860607431",
+      "email": "test_1781860607431@example.com",
+      "password": "password123",
+      "role": "student",
+      "skills": [],
+      "interests": [],
+      "rating": 4,
+      "badges": [],
+      "trustScore": 100,
+      "graduationYear": "2026",
+      "university": "State University",
+      "consecutivePassed": 0,
+      "streak": 1,
+      "group": "Group C"
+    },
+    {
+      "id": "1781861022036",
+      "username": "testuser_1781861020510",
+      "email": "test_1781861020510@example.com",
+      "password": "password123",
+      "role": "student",
+      "skills": [],
+      "interests": [],
+      "rating": 4,
+      "badges": [],
+      "trustScore": 100,
+      "graduationYear": "2026",
+      "university": "State University",
+      "consecutivePassed": 0,
+      "streak": 1,
+      "group": "Group C"
+    },
+    {
+      "id": "1781861789769",
+      "username": "testuser_1781861788329",
+      "email": "test_1781861788329@example.com",
+      "password": "password123",
+      "role": "student",
+      "skills": [],
+      "interests": [],
+      "rating": 4,
+      "badges": [],
+      "trustScore": 100,
+      "graduationYear": "2026",
+      "university": "State University",
+      "consecutivePassed": 0,
+      "streak": 1,
+      "group": "Group C"
+    },
+    {
+      "id": "1782111371808",
+      "username": "testuser_1782111369277",
+      "email": "test_1782111369276@example.com",
+      "password": "password123",
+      "role": "student",
+      "skills": [],
+      "interests": [],
+      "rating": 4,
+      "badges": [],
+      "trustScore": 100,
+      "graduationYear": "2026",
+      "university": "State University",
+      "consecutivePassed": 0,
+      "streak": 1,
+      "group": "Group C"
+    },
+    {
+      "id": "1782135810228",
+      "username": "testuser_1782135808708",
+      "email": "test_1782135808708@example.com",
+      "password": "password123",
+      "role": "student",
+      "skills": [],
+      "interests": [],
+      "rating": 4,
+      "badges": [],
+      "trustScore": 100,
+      "graduationYear": "2026",
+      "university": "State University",
+      "consecutivePassed": 0,
+      "streak": 1,
+      "group": "Group C"
+    },
+    {
+      "id": "1782136887803",
+      "username": "testuser_1782136886292",
+      "email": "test_1782136886292@example.com",
+      "password": "password123",
+      "role": "student",
+      "skills": [],
+      "interests": [],
+      "rating": 4,
+      "badges": [],
+      "trustScore": 100,
+      "graduationYear": "2026",
+      "university": "State University",
+      "consecutivePassed": 0,
+      "streak": 1,
+      "group": "Group C"
+    },
+    {
+      "id": "1782293298304",
+      "username": "testuser_1782293296106",
+      "email": "test_1782293296106@example.com",
+      "password": "password123",
+      "role": "student",
+      "skills": [],
+      "interests": [],
+      "rating": 4,
+      "badges": [],
+      "trustScore": 100,
+      "graduationYear": "2026",
+      "university": "State University",
+      "consecutivePassed": 0,
+      "streak": 1,
+      "group": "Group C"
+    },
+    {
+      "id": "1782293519528",
+      "username": "testuser_1782293518341",
+      "email": "test_1782293518341@example.com",
+      "password": "password123",
+      "role": "student",
+      "skills": [],
+      "interests": [],
+      "rating": 4,
+      "badges": [],
+      "trustScore": 100,
+      "graduationYear": "2026",
+      "university": "State University",
+      "consecutivePassed": 0,
+      "streak": 1,
+      "group": "Group C"
+    },
+    {
+      "id": "student_one",
+      "username": "studentone",
+      "email": "studentone@gmail.com",
+      "password": "123456",
+      "role": "student",
+      "skills": [
+        "UI/UX Design",
+        "Software Engineering",
+        "React"
+      ],
+      "interests": [
+        "UI/UX Design",
+        "Web Apps"
+      ],
+      "rating": 5,
+      "badges": [
+        "Consistent Learner",
+        "Elite Performer"
+      ],
+      "trustScore": 100,
+      "graduationYear": "2026",
+      "university": "State University",
+      "consecutivePassed": 3,
+      "lastLogin": 1783506974759
+    },
+    {
+      "id": "company_second",
+      "username": "companysecond",
+      "email": "companysecond@gmail.com",
+      "password": "123456",
+      "role": "recruiter",
+      "companyId": "3",
+      "companyName": "zylor.io",
+      "lastLogin": 1782456314676
+    },
+    {
+      "id": "admin_third",
+      "username": "adminthird",
+      "email": "adminthird@gmail.com",
+      "password": "123456",
+      "role": "admin",
+      "lastLogin": 1782456345883,
+      "consecutivePassed": 1,
+      "rating": null
+    },
+    {
+      "id": "1782455382780",
+      "username": "testuser_1782455380756",
+      "email": "test_1782455380756@example.com",
+      "password": "password123",
+      "role": "student",
+      "skills": [],
+      "interests": [],
+      "rating": 4,
+      "badges": [],
+      "trustScore": 100,
+      "graduationYear": "2026",
+      "university": "State University",
+      "consecutivePassed": 0,
+      "streak": 1,
+      "group": "Group C",
+      "lastLogin": 1782455383371
+    },
+    {
+      "id": "1782550365805",
+      "username": "testuser_1782550364547",
+      "email": "test_1782550364547@example.com",
+      "password": "password123",
+      "role": "student",
+      "skills": [],
+      "interests": [],
+      "rating": 4,
+      "badges": [],
+      "trustScore": 100,
+      "graduationYear": "2026",
+      "university": "State University",
+      "consecutivePassed": 0,
+      "streak": 1,
+      "group": "Group C",
+      "lastLogin": 1782550366394
+    },
+    {
+      "id": "1782551024994",
+      "username": "testuser_1782551023035",
+      "email": "test_1782551023035@example.com",
+      "password": "password123",
+      "role": "student",
+      "skills": [],
+      "interests": [],
+      "rating": 4,
+      "badges": [],
+      "trustScore": 100,
+      "graduationYear": "2026",
+      "university": "State University",
+      "consecutivePassed": 0,
+      "streak": 1,
+      "group": "Group C",
+      "lastLogin": 1782551025495
+    },
+    {
+      "id": "1782551365470",
+      "username": "testuser_1782551354476",
+      "email": "test_1782551354476@example.com",
+      "password": "password123",
+      "role": "student",
+      "skills": [],
+      "interests": [],
+      "rating": 4,
+      "badges": [],
+      "trustScore": 100,
+      "graduationYear": "2026",
+      "university": "State University",
+      "consecutivePassed": 0,
+      "streak": 1,
+      "group": "Group C",
+      "lastLogin": 1782551376202
+    },
+    {
+      "id": "1782551967084",
+      "username": "testuser_1782551966100",
+      "email": "test_1782551966100@example.com",
+      "password": "password123",
+      "role": "student",
+      "skills": [],
+      "interests": [],
+      "rating": 4,
+      "badges": [],
+      "trustScore": 100,
+      "graduationYear": "2026",
+      "university": "State University",
+      "consecutivePassed": 0,
+      "streak": 1,
+      "group": "Group C",
+      "lastLogin": 1782551967398
+    },
+    {
+      "id": "1782552299112",
+      "username": "testuser_1782552298226",
+      "email": "test_1782552298226@example.com",
+      "password": "password123",
+      "role": "student",
+      "skills": [],
+      "interests": [],
+      "rating": 4,
+      "badges": [],
+      "trustScore": 100,
+      "graduationYear": "2026",
+      "university": "State University",
+      "consecutivePassed": 0,
+      "streak": 1,
+      "group": "Group C",
+      "lastLogin": 1782552299320
+    },
+    {
+      "id": "1782552930274",
+      "username": "testuser_1782552929341",
+      "email": "test_1782552929341@example.com",
+      "password": "password123",
+      "role": "student",
+      "skills": [],
+      "interests": [],
+      "rating": 4,
+      "badges": [],
+      "trustScore": 100,
+      "graduationYear": "2026",
+      "university": "State University",
+      "consecutivePassed": 0,
+      "streak": 1,
+      "group": "Group C",
+      "lastLogin": 1782552930444
+    },
+    {
+      "id": "1782977752995",
+      "username": "testuser_1782977751674",
+      "email": "test_1782977751674@example.com",
+      "password": "password123",
+      "role": "student",
+      "skills": [],
+      "interests": [],
+      "rating": 4,
+      "badges": [],
+      "trustScore": 100,
+      "graduationYear": "2026",
+      "university": "State University",
+      "consecutivePassed": 0,
+      "streak": 1,
+      "group": "Group C",
+      "lastLogin": 1782977753240
+    },
+    {
+      "id": "1782978273757",
+      "username": "testuser_1782978272858",
+      "email": "test_1782978272858@example.com",
+      "password": "password123",
+      "role": "student",
+      "skills": [],
+      "interests": [],
+      "rating": 4,
+      "badges": [],
+      "trustScore": 100,
+      "graduationYear": "2026",
+      "university": "State University",
+      "consecutivePassed": 0,
+      "streak": 1,
+      "group": "Group C",
+      "lastLogin": 1782978274071
+    },
+    {
+      "id": "1782978955839",
+      "username": "testuser_1782978955037",
+      "email": "test_1782978955037@example.com",
+      "password": "password123",
+      "role": "student",
+      "skills": [],
+      "interests": [],
+      "rating": 4,
+      "badges": [],
+      "trustScore": 100,
+      "graduationYear": "2026",
+      "university": "State University",
+      "consecutivePassed": 0,
+      "streak": 1,
+      "group": "Group C",
+      "lastLogin": 1782978955993
+    },
+    {
+      "id": "1782979244443",
+      "username": "testuser_1782979243910",
+      "email": "test_1782979243910@example.com",
+      "password": "password123",
+      "role": "student",
+      "skills": [],
+      "interests": [],
+      "rating": 4,
+      "badges": [],
+      "trustScore": 100,
+      "graduationYear": "2026",
+      "university": "State University",
+      "consecutivePassed": 0,
+      "streak": 1,
+      "group": "Group C",
+      "lastLogin": 1782979244602
+    },
+    {
+      "id": "1782984446421",
+      "username": "testuser_1782984445069",
+      "email": "test_1782984445069@example.com",
+      "password": "password123",
+      "role": "student",
+      "skills": [],
+      "interests": [],
+      "rating": 4,
+      "badges": [],
+      "trustScore": 100,
+      "graduationYear": "2026",
+      "university": "State University",
+      "consecutivePassed": 0,
+      "streak": 1,
+      "group": "Group C",
+      "lastLogin": 1782984446937
+    },
+    {
+      "id": "1782984614037",
+      "username": "testuser_1782984613418",
+      "email": "test_1782984613418@example.com",
+      "password": "password123",
+      "role": "recruiter",
+      "skills": [],
+      "interests": [],
+      "rating": 4,
+      "badges": [],
+      "trustScore": 100,
+      "graduationYear": "2026",
+      "university": "State University",
+      "consecutivePassed": 0,
+      "streak": 1,
+      "group": "Group C",
+      "lastLogin": 1782984614216
+    },
+    {
+      "id": "1782985012298",
+      "username": "testuser_1782985011616",
+      "email": "test_1782985011616@example.com",
+      "password": "password123",
+      "role": "student",
+      "skills": [],
+      "interests": [],
+      "rating": 4,
+      "badges": [],
+      "trustScore": 100,
+      "graduationYear": "2026",
+      "university": "State University",
+      "consecutivePassed": 0,
+      "streak": 1,
+      "group": "Group C",
+      "lastLogin": 1782985012564
+    },
+    {
+      "id": "1782985453654",
+      "username": "testuser_1782985452765",
+      "email": "test_1782985452765@example.com",
+      "password": "password123",
+      "role": "admin",
+      "skills": [],
+      "interests": [],
+      "rating": 4,
+      "badges": [],
+      "trustScore": 100,
+      "graduationYear": "2026",
+      "university": "State University",
+      "consecutivePassed": 0,
+      "streak": 1,
+      "group": "Group C",
+      "lastLogin": 1782985454119
+    },
+    {
+      "id": "1782985968817",
+      "username": "testuser_1782985968046",
+      "email": "test_1782985968046@example.com",
+      "password": "password123",
+      "role": "student",
+      "skills": [],
+      "interests": [],
+      "rating": 4,
+      "badges": [],
+      "trustScore": 100,
+      "graduationYear": "2026",
+      "university": "State University",
+      "consecutivePassed": 0,
+      "streak": 1,
+      "group": "Group C",
+      "lastLogin": 1782985969013
+    },
+    {
+      "id": "1782986291142",
+      "username": "testuser_1782986290211",
+      "email": "test_1782986290211@example.com",
+      "password": "password123",
+      "role": "student",
+      "skills": [],
+      "interests": [],
+      "rating": 4,
+      "badges": [],
+      "trustScore": 100,
+      "graduationYear": "2026",
+      "university": "State University",
+      "consecutivePassed": 0,
+      "streak": 1,
+      "group": "Group C",
+      "lastLogin": 1782986291391
+    },
+    {
+      "id": "1782987131743",
+      "username": "testuser_1782987131238",
+      "email": "test_1782987131238@example.com",
+      "password": "password123",
+      "role": "admin",
+      "skills": [],
+      "interests": [],
+      "rating": 4,
+      "badges": [],
+      "trustScore": 100,
+      "graduationYear": "2026",
+      "university": "State University",
+      "consecutivePassed": 0,
+      "streak": 1,
+      "group": "Group C",
+      "lastLogin": 1782987131925
+    },
+    {
+      "id": "1782991565733",
+      "username": "testuser_1782991564297",
+      "email": "test_1782991564297@example.com",
+      "password": "password123",
+      "role": "admin",
+      "skills": [],
+      "interests": [],
+      "rating": 4,
+      "badges": [],
+      "trustScore": 100,
+      "graduationYear": "2026",
+      "university": "State University",
+      "consecutivePassed": 0,
+      "streak": 1,
+      "group": "Group C",
+      "lastLogin": 1782991566304
+    },
+    {
+      "id": "1783499359342",
+      "username": "testuser_1783499357301",
+      "email": "test_1783499357301@example.com",
+      "password": "password123",
+      "role": "student",
+      "skills": [],
+      "interests": [],
+      "rating": 4,
+      "badges": [],
+      "trustScore": 100,
+      "graduationYear": "2026",
+      "university": "State University",
+      "consecutivePassed": 0,
+      "streak": 1,
+      "group": "Group C",
+      "lastLogin": 1783499364072
+    },
+    {
+      "id": "1783502248909",
+      "username": "testuser_1783502246868",
+      "email": "test_1783502246867@example.com",
+      "password": "password123",
+      "role": "student",
+      "skills": [],
+      "interests": [],
+      "rating": 4,
+      "badges": [],
+      "trustScore": 100,
+      "graduationYear": "2026",
+      "university": "State University",
+      "consecutivePassed": 0,
+      "streak": 1,
+      "group": "Group C",
+      "lastLogin": 1783502250045
+    },
+    {
+      "id": "1783504965879",
+      "username": "testuser_1783504964532",
+      "email": "test_1783504964532@example.com",
+      "password": "password123",
+      "role": "student",
+      "skills": [],
+      "interests": [],
+      "rating": 4,
+      "badges": [],
+      "trustScore": 100,
+      "graduationYear": "2026",
+      "university": "State University",
+      "consecutivePassed": 0,
+      "streak": 1,
+      "group": "Group C",
+      "lastLogin": 1783504966161
+    },
+    {
+      "id": "1783514804660",
+      "username": "testuser_1783514803127",
+      "email": "test_1783514803126@example.com",
+      "password": "password123",
+      "role": "student",
+      "skills": [],
+      "interests": [],
+      "rating": 4,
+      "badges": [],
+      "trustScore": 100,
+      "graduationYear": "2026",
+      "university": "State University",
+      "consecutivePassed": 0,
+      "streak": 1,
+      "group": "Group C",
+      "lastLogin": 1783514805311
+    },
+    {
+      "id": "1783584040165",
+      "username": "testuser_1783584038489",
+      "email": "test_1783584038489@example.com",
+      "password": "password123",
+      "role": "student",
+      "skills": [],
+      "interests": [],
+      "rating": 4,
+      "badges": [],
+      "trustScore": 100,
+      "graduationYear": "2026",
+      "university": "State University",
+      "consecutivePassed": 0,
+      "streak": 1,
+      "group": "Group C",
+      "lastLogin": 1783584040880
+    },
+    {
+      "id": "1783670779475",
+      "username": "testuser_1783670777886",
+      "email": "test_1783670777886@example.com",
+      "password": "password123",
+      "role": "student",
+      "skills": [],
+      "interests": [],
+      "rating": 4,
+      "badges": [],
+      "trustScore": 100,
+      "graduationYear": "2026",
+      "university": "State University",
+      "consecutivePassed": 0,
+      "streak": 1,
+      "group": "Group C",
+      "lastLogin": 1783670780103
+    },
+    {
+      "id": "1783679546002",
+      "username": "testuser_1783679544383",
+      "email": "test_1783679544383@example.com",
+      "password": "password123",
+      "role": "student",
+      "skills": [],
+      "interests": [],
+      "rating": 4,
+      "badges": [],
+      "trustScore": 100,
+      "graduationYear": "2026",
+      "university": "State University",
+      "consecutivePassed": 0,
+      "streak": 1,
+      "group": "Group C",
+      "lastLogin": 1783679546893
+    },
+    {
+      "id": "1783679980936",
+      "username": "testuser_1783679980002",
+      "email": "test_1783679980002@example.com",
+      "password": "password123",
+      "role": "student",
+      "skills": [],
+      "interests": [],
+      "rating": 4,
+      "badges": [],
+      "trustScore": 100,
+      "graduationYear": "2026",
+      "university": "State University",
+      "consecutivePassed": 0,
+      "streak": 1,
+      "group": "Group C",
+      "lastLogin": 1783679981300
+    },
+    {
+      "id": "1783680383291",
+      "username": "testuser_1783680382493",
+      "email": "test_1783680382493@example.com",
+      "password": "password123",
+      "role": "student",
+      "skills": [],
+      "interests": [],
+      "rating": 4,
+      "badges": [],
+      "trustScore": 100,
+      "graduationYear": "2026",
+      "university": "State University",
+      "consecutivePassed": 0,
+      "streak": 1,
+      "group": "Group C",
+      "lastLogin": 1783680383551
+    },
+    {
+      "id": "1783680944862",
+      "username": "testuser_1783680944100",
+      "email": "test_1783680944100@example.com",
+      "password": "password123",
+      "role": "student",
+      "skills": [],
+      "interests": [],
+      "rating": 4,
+      "badges": [],
+      "trustScore": 100,
+      "graduationYear": "2026",
+      "university": "State University",
+      "consecutivePassed": 0,
+      "streak": 1,
+      "group": "Group C",
+      "lastLogin": 1783680945454
+    },
+    {
+      "id": "1783683599665",
+      "username": "testuser_1783683597995",
+      "email": "test_1783683597995@example.com",
+      "password": "password123",
+      "role": "student",
+      "skills": [],
+      "interests": [],
+      "rating": 4,
+      "badges": [],
+      "trustScore": 100,
+      "graduationYear": "2026",
+      "university": "State University",
+      "consecutivePassed": 0,
+      "streak": 1,
+      "group": "Group C",
+      "lastLogin": 1783683600425
+    },
+    {
+      "id": "1783684157378",
+      "username": "testuser_1783684156340",
+      "email": "test_1783684156340@example.com",
+      "password": "password123",
+      "role": "student",
+      "skills": [],
+      "interests": [],
+      "rating": 4,
+      "badges": [],
+      "trustScore": 100,
+      "graduationYear": "2026",
+      "university": "State University",
+      "consecutivePassed": 0,
+      "streak": 1,
+      "group": "Group C",
+      "lastLogin": 1783684157626
+    },
+    {
+      "id": "1783684497574",
+      "username": "testuser_1783684496727",
+      "email": "test_1783684496727@example.com",
+      "password": "password123",
+      "role": "student",
+      "skills": [],
+      "interests": [],
+      "rating": 4,
+      "badges": [],
+      "trustScore": 100,
+      "graduationYear": "2026",
+      "university": "State University",
+      "consecutivePassed": 0,
+      "streak": 1,
+      "group": "Group C",
+      "lastLogin": 1783684497794
+    },
+    {
+      "id": "1783685004452",
+      "username": "testuser_1783685003537",
+      "email": "test_1783685003537@example.com",
+      "password": "password123",
+      "role": "student",
+      "skills": [],
+      "interests": [],
+      "rating": 4,
+      "badges": [],
+      "trustScore": 100,
+      "graduationYear": "2026",
+      "university": "State University",
+      "consecutivePassed": 0,
+      "streak": 1,
+      "group": "Group C",
+      "lastLogin": 1783685004689
+    }
+  ],
+  "success_stories": [
+    {
+      "id": "1",
+      "studentName": "Aria Sterling",
+      "company": "zylor.io",
+      "role": "Product Designer",
+      "story": "Landed my dream internship in my junior year after passing 3 weekly assessments!"
+    },
+    {
+      "id": "2",
+      "studentName": "Sarah Jenkins",
+      "company": "skylync.io",
+      "role": "Frontend Developer",
+      "story": "The anti-cheat verified trust score made skylync reach out directly."
+    },
+    {
+      "id": "story_1782293351624",
+      "studentName": "Jordan Smith",
+      "company": "Google",
+      "role": "FinTech Intern",
+      "story": "",
+      "avatar": "",
+      "logo": "",
+      "statusState": "Published"
+    },
+    {
+      "id": "story_1782293414072",
+      "studentName": "Jordan Smith",
+      "company": "Google",
+      "role": "FinTech Intern",
+      "story": "",
+      "avatar": "",
+      "logo": "",
+      "statusState": "Published"
+    },
+    {
+      "id": "story_1782293598543",
+      "studentName": "Jordan Smith",
+      "company": "Partner Company",
+      "role": "Breaking into FinTech",
+      "story": "Successfully started working as a Software Intern.",
+      "avatar": "http://localhost:8080/screens/desktop_ebcc7c1f3daf45f7a59183d1fda584b9_Success_Story_Publisher_-_Admin_Console.html",
+      "logo": "http://localhost:8080/screens/desktop_ebcc7c1f3daf45f7a59183d1fda584b9_Success_Story_Publisher_-_Admin_Console.html",
+      "statusState": "Published"
+    },
+    {
+      "id": "story_1782293606206",
+      "studentName": "Jordan Smith",
+      "company": "Partner Company",
+      "role": "Breaking into FinTech",
+      "story": "Successfully started working as a Software Intern.",
+      "avatar": "http://localhost:8080/screens/desktop_ebcc7c1f3daf45f7a59183d1fda584b9_Success_Story_Publisher_-_Admin_Console.html",
+      "logo": "http://localhost:8080/screens/desktop_ebcc7c1f3daf45f7a59183d1fda584b9_Success_Story_Publisher_-_Admin_Console.html",
+      "statusState": "Draft"
+    },
+    {
+      "id": "story_1782299141121",
+      "studentName": "Jordan Smith",
+      "company": "Partner Company",
+      "role": "Breaking into FinTech",
+      "story": "Successfully started working as a Software Intern.",
+      "avatar": "http://localhost:8080/screens/desktop_ebcc7c1f3daf45f7a59183d1fda584b9_Success_Story_Publisher_-_Admin_Console.html",
+      "logo": "http://localhost:8080/screens/desktop_ebcc7c1f3daf45f7a59183d1fda584b9_Success_Story_Publisher_-_Admin_Console.html",
+      "statusState": "Published"
+    },
+    {
+      "id": "story_1782299245662",
+      "studentName": "Jordan Smith",
+      "company": "Partner Company",
+      "role": "Breaking into FinTech",
+      "story": "Successfully started working as a Software Intern.",
+      "avatar": "http://localhost:8080/screens/desktop_ebcc7c1f3daf45f7a59183d1fda584b9_Success_Story_Publisher_-_Admin_Console.html",
+      "logo": "http://localhost:8080/screens/desktop_ebcc7c1f3daf45f7a59183d1fda584b9_Success_Story_Publisher_-_Admin_Console.html",
+      "statusState": "Published"
+    },
+    {
+      "id": "story_test_123",
+      "studentName": "Aria Taylor",
+      "company": "Partner Company",
+      "role": "Backend Intern @ Stripe",
+      "story": "Aria completed her training and started as a backend software engineering intern at Stripe.",
+      "avatar": "data:image/png;base64,avatar_mock_data",
+      "logo": "data:image/png;base64,logo_mock_data",
+      "statusState": "Published"
+    },
+    {
+      "id": "story_test_123",
+      "studentName": "Aria Taylor",
+      "company": "Partner Company",
+      "role": "Backend Intern @ Stripe",
+      "story": "Aria completed her training and started as a backend software engineering intern at Stripe.",
+      "avatar": "data:image/png;base64,avatar_mock_data",
+      "logo": "data:image/png;base64,logo_mock_data",
+      "statusState": "Published"
+    },
+    {
+      "id": "story_test_123",
+      "studentName": "Aria Taylor",
+      "company": "Partner Company",
+      "role": "Backend Intern @ Stripe",
+      "story": "Aria completed her training and started as a backend software engineering intern at Stripe.",
+      "avatar": "data:image/png;base64,avatar_mock_data",
+      "logo": "data:image/png;base64,logo_mock_data",
+      "statusState": "Published"
+    },
+    {
+      "id": "story_test_123",
+      "studentName": "Aria Taylor",
+      "company": "Partner Company",
+      "role": "Backend Intern @ Stripe",
+      "story": "Aria completed her training and started as a backend software engineering intern at Stripe.",
+      "avatar": "data:image/png;base64,avatar_mock_data",
+      "logo": "data:image/png;base64,logo_mock_data",
+      "statusState": "Published"
+    },
+    {
+      "id": "story_test_123",
+      "studentName": "Aria Taylor",
+      "company": "Partner Company",
+      "role": "Backend Intern @ Stripe",
+      "story": "Aria completed her training and started as a backend software engineering intern at Stripe.",
+      "avatar": "data:image/png;base64,avatar_mock_data",
+      "logo": "data:image/png;base64,logo_mock_data",
+      "statusState": "Published"
+    },
+    {
+      "id": "story_test_123",
+      "studentName": "Aria Taylor",
+      "company": "Partner Company",
+      "role": "Backend Intern @ Stripe",
+      "story": "Aria completed her training and started as a backend software engineering intern at Stripe.",
+      "avatar": "data:image/png;base64,avatar_mock_data",
+      "logo": "data:image/png;base64,logo_mock_data",
+      "statusState": "Published"
+    },
+    {
+      "id": "story_test_123",
+      "studentName": "Aria Taylor",
+      "company": "Partner Company",
+      "role": "Backend Intern @ Stripe",
+      "story": "Aria completed her training and started as a backend software engineering intern at Stripe.",
+      "avatar": "data:image/png;base64,avatar_mock_data",
+      "logo": "data:image/png;base64,logo_mock_data",
+      "statusState": "Published"
+    },
+    {
+      "id": "story_test_123",
+      "studentName": "Aria Taylor",
+      "company": "Partner Company",
+      "role": "Backend Intern @ Stripe",
+      "story": "Aria completed her training and started as a backend software engineering intern at Stripe.",
+      "avatar": "data:image/png;base64,avatar_mock_data",
+      "logo": "data:image/png;base64,logo_mock_data",
+      "statusState": "Published"
+    },
+    {
+      "id": "story_test_123",
+      "studentName": "Aria Taylor",
+      "company": "Partner Company",
+      "role": "Backend Intern @ Stripe",
+      "story": "Aria completed her training and started as a backend software engineering intern at Stripe.",
+      "avatar": "data:image/png;base64,avatar_mock_data",
+      "logo": "data:image/png;base64,logo_mock_data",
+      "statusState": "Published"
+    },
+    {
+      "id": "story_test_123",
+      "studentName": "Aria Taylor",
+      "company": "Partner Company",
+      "role": "Backend Intern @ Stripe",
+      "story": "Aria completed her training and started as a backend software engineering intern at Stripe.",
+      "avatar": "data:image/png;base64,avatar_mock_data",
+      "logo": "data:image/png;base64,logo_mock_data",
+      "statusState": "Published"
+    },
+    {
+      "id": "story_test_123",
+      "studentName": "Aria Taylor",
+      "company": "Partner Company",
+      "role": "Backend Intern @ Stripe",
+      "story": "Aria completed her training and started as a backend software engineering intern at Stripe.",
+      "avatar": "data:image/png;base64,avatar_mock_data",
+      "logo": "data:image/png;base64,logo_mock_data",
+      "statusState": "Published"
+    },
+    {
+      "id": "story_test_123",
+      "studentName": "Aria Taylor",
+      "company": "Partner Company",
+      "role": "Backend Intern @ Stripe",
+      "story": "Aria completed her training and started as a backend software engineering intern at Stripe.",
+      "avatar": "data:image/png;base64,avatar_mock_data",
+      "logo": "data:image/png;base64,logo_mock_data",
+      "statusState": "Published"
+    },
+    {
+      "id": "story_test_123",
+      "studentName": "Aria Taylor",
+      "company": "Partner Company",
+      "role": "Backend Intern @ Stripe",
+      "story": "Aria completed her training and started as a backend software engineering intern at Stripe.",
+      "avatar": "data:image/png;base64,avatar_mock_data",
+      "logo": "data:image/png;base64,logo_mock_data",
+      "statusState": "Published"
+    },
+    {
+      "id": "story_test_123",
+      "studentName": "Aria Taylor",
+      "company": "Partner Company",
+      "role": "Backend Intern @ Stripe",
+      "story": "Aria completed her training and started as a backend software engineering intern at Stripe.",
+      "avatar": "data:image/png;base64,avatar_mock_data",
+      "logo": "data:image/png;base64,logo_mock_data",
+      "statusState": "Published"
+    },
+    {
+      "id": "story_test_123",
+      "studentName": "Aria Taylor",
+      "company": "Partner Company",
+      "role": "Backend Intern @ Stripe",
+      "story": "Aria completed her training and started as a backend software engineering intern at Stripe.",
+      "avatar": "data:image/png;base64,avatar_mock_data",
+      "logo": "data:image/png;base64,logo_mock_data",
+      "statusState": "Published"
+    },
+    {
+      "id": "story_test_123",
+      "studentName": "Aria Taylor",
+      "company": "Partner Company",
+      "role": "Backend Intern @ Stripe",
+      "story": "Aria completed her training and started as a backend software engineering intern at Stripe.",
+      "avatar": "data:image/png;base64,avatar_mock_data",
+      "logo": "data:image/png;base64,logo_mock_data",
+      "statusState": "Published"
+    },
+    {
+      "id": "story_test_123",
+      "studentName": "Aria Taylor",
+      "company": "Partner Company",
+      "role": "Backend Intern @ Stripe",
+      "story": "Aria completed her training and started as a backend software engineering intern at Stripe.",
+      "avatar": "data:image/png;base64,avatar_mock_data",
+      "logo": "data:image/png;base64,logo_mock_data",
+      "statusState": "Published"
+    },
+    {
+      "id": "story_test_123",
+      "studentName": "Aria Taylor",
+      "company": "Partner Company",
+      "role": "Backend Intern @ Stripe",
+      "story": "Aria completed her training and started as a backend software engineering intern at Stripe.",
+      "avatar": "data:image/png;base64,avatar_mock_data",
+      "logo": "data:image/png;base64,logo_mock_data",
+      "statusState": "Published"
+    },
+    {
+      "id": "story_test_123",
+      "studentName": "Aria Taylor",
+      "company": "Partner Company",
+      "role": "Backend Intern @ Stripe",
+      "story": "Aria completed her training and started as a backend software engineering intern at Stripe.",
+      "avatar": "data:image/png;base64,avatar_mock_data",
+      "logo": "data:image/png;base64,logo_mock_data",
+      "statusState": "Published"
+    },
+    {
+      "id": "story_test_123",
+      "studentName": "Aria Taylor",
+      "company": "Partner Company",
+      "role": "Backend Intern @ Stripe",
+      "story": "Aria completed her training and started as a backend software engineering intern at Stripe.",
+      "avatar": "data:image/png;base64,avatar_mock_data",
+      "logo": "data:image/png;base64,logo_mock_data",
+      "statusState": "Published"
+    },
+    {
+      "id": "story_test_123",
+      "studentName": "Aria Taylor",
+      "company": "Partner Company",
+      "role": "Backend Intern @ Stripe",
+      "story": "Aria completed her training and started as a backend software engineering intern at Stripe.",
+      "avatar": "data:image/png;base64,avatar_mock_data",
+      "logo": "data:image/png;base64,logo_mock_data",
+      "statusState": "Published"
+    },
+    {
+      "id": "story_test_123",
+      "studentName": "Aria Taylor",
+      "company": "Partner Company",
+      "role": "Backend Intern @ Stripe",
+      "story": "Aria completed her training and started as a backend software engineering intern at Stripe.",
+      "avatar": "data:image/png;base64,avatar_mock_data",
+      "logo": "data:image/png;base64,logo_mock_data",
+      "statusState": "Published"
+    },
+    {
+      "id": "story_test_123",
+      "studentName": "Aria Taylor",
+      "company": "Partner Company",
+      "role": "Backend Intern @ Stripe",
+      "story": "Aria completed her training and started as a backend software engineering intern at Stripe.",
+      "avatar": "data:image/png;base64,avatar_mock_data",
+      "logo": "data:image/png;base64,logo_mock_data",
+      "statusState": "Published"
+    },
+    {
+      "id": "story_test_123",
+      "studentName": "Aria Taylor",
+      "company": "Partner Company",
+      "role": "Backend Intern @ Stripe",
+      "story": "Aria completed her training and started as a backend software engineering intern at Stripe.",
+      "avatar": "data:image/png;base64,avatar_mock_data",
+      "logo": "data:image/png;base64,logo_mock_data",
+      "statusState": "Published"
+    },
+    {
+      "id": "story_test_123",
+      "studentName": "Aria Taylor",
+      "company": "Partner Company",
+      "role": "Backend Intern @ Stripe",
+      "story": "Aria completed her training and started as a backend software engineering intern at Stripe.",
+      "avatar": "data:image/png;base64,avatar_mock_data",
+      "logo": "data:image/png;base64,logo_mock_data",
+      "statusState": "Published"
+    },
+    {
+      "id": "story_test_123",
+      "studentName": "Aria Taylor",
+      "company": "Partner Company",
+      "role": "Backend Intern @ Stripe",
+      "story": "Aria completed her training and started as a backend software engineering intern at Stripe.",
+      "avatar": "data:image/png;base64,avatar_mock_data",
+      "logo": "data:image/png;base64,logo_mock_data",
+      "statusState": "Published"
+    }
+  ],
+  "ads": [
+    {
+      "id": "1",
+      "title": "Join SkyLync Elite",
+      "type": "internship",
+      "company": "skylync.io",
+      "description": "Looking for top-tier full-stack React developers.",
+      "views": 124
+    },
+    {
+      "id": "2",
+      "title": "CoreKnot PM Search",
+      "type": "job",
+      "company": "coreknot.io",
+      "description": "Hiring Junior Product Managers with verified logic scores.",
+      "views": 89
+    }
+  ],
+  "mentors": [
+    {
+      "id": "1",
+      "name": "Marcus Chen",
+      "title": "Principal UX Architect at Google",
+      "expertise": "Design systems, mobile interaction models"
+    },
+    {
+      "id": "2",
+      "name": "Elena Rostova",
+      "title": "Director of Engineering at Stripe",
+      "expertise": "Backend architecture, RESTful API design"
+    }
+  ],
+  "software_houses": [
+    {
+      "id": "1",
+      "name": "SkyLync Headquarters",
+      "lat": 37.7749,
+      "lng": -122.4194,
+      "address": "555 Market St, San Francisco, CA"
+    },
+    {
+      "id": "2",
+      "name": "CoreKnot Labs",
+      "lat": 37.7891,
+      "lng": -122.4014,
+      "address": "101 California St, San Francisco, CA"
+    },
+    {
+      "id": "3",
+      "name": "Zylor Technologies",
+      "lat": 37.7699,
+      "lng": -122.4468,
+      "address": "1900 Fillmore St, San Francisco, CA"
+    }
+  ],
+  "schedule": {
+    "groups": {
+      "Group A": {
+        "testDay": "Monday",
+        "assignmentDay": "Thursday"
+      },
+      "Group B": {
+        "testDay": "Tuesday",
+        "assignmentDay": "Friday"
+      },
+      "Group C": {
+        "testDay": "Wednesday",
+        "assignmentDay": "Saturday"
+      }
+    }
+  },
+  "rewards": {
+    "tiers": [
+      {
+        "name": "Gold Tier",
+        "consecutiveRequired": 3,
+        "benefit": "Free Premium Courses & Special Badge"
+      },
+      {
+        "name": "Silver Tier",
+        "consecutiveRequired": 2,
+        "benefit": "Higher profile visibility to companies"
+      }
+    ],
+    "keys": [
+      {
+        "courseId": "2001",
+        "code": "GOLD-UX-9923"
+      }
+    ]
+  },
+  "jobs": [
+    {
+      "id": "1782816413281",
+      "title": "Untitled Job",
+      "company": "zylor.io",
+      "location": "Lahore, Pakistan (Hybrid)",
+      "salary": "Rs. 120,000 - 180,000 / mo",
+      "type": "Full-time",
+      "description": "As a Senior UX Designer at TechFlow, you will er 10 million users globally.",
+      "skillsRequired": [
+        "UI Design",
+        "Figma",
+        "Prototyping"
+      ],
+      "status": "active",
+      "boosted": true,
+      "created_at": 1782816413281
+    },
+    {
+      "id": "1782816768440",
+      "title": "r UX Designer",
+      "company": "zylor.io",
+      "location": "Lahore, Pakistan (Hybrid)",
+      "salary": "Rs. 8,000 - 12,000",
+      "type": "Full-time",
+      "description": "As a Senior UX Designer at TechFlow, you will lead the user experience strategy for our flagship",
+      "skillsRequired": [
+        "UI Design",
+        "Figma",
+        "ux design"
+      ],
+      "status": "active",
+      "boosted": true,
+      "created_at": 1782816768440
+    },
+    {
+      "id": "1782908266685",
+      "title": "Senior UX Designer",
+      "company": "TechFlow",
+      "location": "Lahore, Pakistan",
+      "salary": "Rs. 8,000 — Rs. 12,000",
+      "type": "Permanent",
+      "description": "###### As a Senior UX Designer at TechFlow,you will lead \nthe user experience strategy for our flagship fintech platform. You will work closely with product managers and engineers to craft seamless, accessible, and delightful interfaces for over 10 million users globally.",
+      "skillsRequired": [
+        "Figma",
+        "Prototyping",
+        "UI/UX Design"
+      ],
+      "status": "active",
+      "boosted": true,
+      "created_at": 1782908266685,
+      "link": "https://techflow.io/careers"
+    },
+    {
+      "id": "1783427803689",
+      "title": " Designer",
+      "company": "TechFlow",
+      "location": "Lahore, Pakistan",
+      "salary": "100,000",
+      "type": "Permanent",
+      "description": "As a Senior UX Designer at TechFlow, you will lead the user experience strategy for our flagship fintech platform. You will work closely with product managers and engineers to craft seamless, accessible, and delightful interfaces for over 10 million users globally.",
+      "skillsRequired": [
+        "UI Design",
+        "Figma",
+        "Prototyping"
+      ],
+      "status": "active",
+      "boosted": true,
+      "created_at": 1783427803689
+    },
+    {
+      "id": "1783428432114",
+      "title": "Seni",
+      "company": "Brickclay",
+      "location": "faisalabad, Pakistan",
+      "salary": "Rs. 8,000 — Rs. 12,000",
+      "type": "Permanent",
+      "description": "**As a Senior** UX Designer at TechFlow, you will lead the user experience strategy for our flagship fintech platform. \n\nYou will work closely with product [size-up]managers and engineers [/size-up]to craft - seamless, accessible, and delightful interfaces for over 10 million us\ners globally.",
+      "skillsRequired": [
+        "Figma",
+        "Prototyping",
+        "UI/UX Design"
+      ],
+      "status": "paused",
+      "boosted": true,
+      "created_at": 1783428432114,
+      "dept": "Marketing",
+      "department": "Marketing",
+      "link": "https://www.google.com/search?q=Brickclay%20website",
+      "imageUrl": null
+    },
+    {
+      "id": "1783514995574",
+      "title": "Senior UX Designer",
+      "company": "TechFlow",
+      "location": "East, P-79, Street No. 2, Saeed Colony. 2, Near Lyallpur Galleria, W Canal Rd, Nasar Ullah Khan Town, Faisalabad, 38000",
+      "salary": "Rs. 8,000",
+      "type": "Internship",
+      "description": "",
+      "skillsRequired": [
+        "Figma",
+        "Prototyping",
+        "UI/UX Design"
+      ],
+      "status": "active",
+      "boosted": true,
+      "created_at": 1783514995574,
+      "link": "https://www.brickclay.com/services/agentic-ai/"
+    },
+    {
+      "id": "1783595839066",
+      "title": "Software",
+      "company": "Brickclay",
+      "location": "East, P-79, Street No. 2, Saeed Colony. 2, Near Lyallpur Galleria, W Canal Rd, Nasar Ullah Khan Town, Faisalabad, 38000",
+      "salary": "Rs. 8,000 — Rs. 12,000",
+      "type": "Internship",
+      "description": "### A breakdown of common role descriptions ###at the company includes:1. Senior Business Development ExecutiveRequirements: Bachelor’s degree, 2–3 years of B2B IT sales experience, and a strong track record on freelance platforms (Upwork, LinkedIn Sales Navigator).Responsibilities: Manage online bidding, lead generation, cold emailing, and close deals utilizing CRMs like HubSpot or Salesforce.2. Senior Motion DesignerRequirements: 3–5 years of agency or freelance experience with advanced skills in Adobe After Effects, Premiere Pro, Photoshop, and Illustrator.Responsibilities: Manage end-to-end video production, from storyboarding to final animation, creating high-impact visual content for digital and social channels.3. .NET EngineerRequirements: 1–3 years of hands-on experience with C#, .NET Core/.NET Framework, SQL, and RESTful APIs.Responsibilities: Develop, scale, and maintain both web and desktop applications, write test-driven code, and actively collaborate with UI/UX and product teams.4. SQA EngineerRequirements: Relevant degree with an understanding of software development lifecycles and testing protocols.Responsibilities: Drive quality and reliability for web-based applications, perform **both ma**nual and automated testing, and identify issues early in the pipeline.If you want, let me know:Your specifi*c area of expertise (e.g.*, Software Development, Graphic Design, Marketing)[Your experience level](https://)",
+      "skillsRequired": [
+        "Figma",
+        "Prototyping",
+        "UI/UX Design"
+      ],
+      "status": "active",
+      "boosted": true,
+      "created_at": 1783595839066,
+      "link": "https://brickclay.com/",
+      "applied": 2
+    }
+  ],
+  "courses": [
+    {
+      "id": "ux-research",
+      "title": "Advanced UX Research",
+      "category": "UX Design & Psychology",
+      "price": "299.00",
+      "match": 98,
+      "image": "https://lh3.googleusercontent.com/aida-public/AB6AXuB5nPFYicb2sbkYrGLMTZgJLUV-JCRGQSTmbdl0GEqcX5_XfNvySzN1FB6BtwxKILfGwexbg0dOBBYiSDTYZVOB3_Q3nlyqkiRwISXDxIDd2_dhABeCohrEfCEojeTTzN1rfZXaMMtoGs-wMtuPvmSQBrXU6n5OPooKXKcpG0QBx7a0KCJ5e7pcKyoXY0Bi5bpTQ9bT4W6Aj6ExUY8-0-ENRKLdQE_6EpcYrwYYmlynMEgEsTUJgbFl1za85RGZOjjtS7YIBArMxF0H",
+      "link": "https://www.coursera.org/learn/ux-research",
+      "modules": [
+        {
+          "id": "mod1",
+          "title": "Module 1: Introduction",
+          "items": [
+            {
+              "name": "Overview Video",
+              "type": "video",
+              "url": "Intro_Video.mp4"
+            },
+            {
+              "name": "Getting Started.pdf",
+              "type": "document",
+              "url": "Transcript_V1.pdf"
+            },
+            {
+              "name": "Course Syllabus",
+              "type": "image",
+              "url": "Hero_Asset.png"
+            }
+          ]
+        },
+        {
+          "id": "mod2",
+          "title": "Module 2: Advanced UI",
+          "items": [
+            {
+              "name": "UI Principles.pdf",
+              "type": "document",
+              "url": "UI Principles.pdf"
+            },
+            {
+              "name": "Design Systems.mp4",
+              "type": "video",
+              "url": "Design Systems.mp4"
+            }
+          ]
+        },
+        {
+          "id": "mod3",
+          "title": "Module 3: UX Psychology",
+          "items": [
+            {
+              "name": "Cognitive Load.pdf",
+              "type": "document",
+              "url": "Cognitive Load.pdf"
+            }
+          ]
+        },
+        {
+          "id": "mod4",
+          "title": "Module 4: Prototyping",
+          "items": [
+            {
+              "name": "Figma Basics.mp4",
+              "type": "video",
+              "url": "Figma Basics.mp4"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "course-1782889654836",
+      "title": "full",
+      "category": "software",
+      "match": 60,
+      "price": "150",
+      "image": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=400",
+      "link": "#",
+      "modules": [
+        {
+          "id": "mod1",
+          "title": "Module 1: Introduction",
+          "items": [
+            {
+              "id": "asset-1782901456678-t6lwm",
+              "name": "Kid_kangaroo.mp4",
+              "type": "video",
+              "size": 3094111,
+              "sizeLabel": "3.0 MB",
+              "duration": null,
+              "desc": "",
+              "thumbnail": null,
+              "url": "blob:http://localhost:8080/490a07b8-585c-472b-8957-b414ecd09d04"
+            },
+            {
+              "id": "asset-1782902137116-10mmq",
+              "name": "video_3945370_1782408043.mp4",
+              "type": "video",
+              "size": 8192522,
+              "sizeLabel": "7.8 MB",
+              "duration": "0:08",
+              "desc": "",
+              "thumbnail": null,
+              "url": "/website/uploads/video_3945370_1782408043_1782902137174.mp4"
+            },
+            {
+              "id": "asset-1782902182430-bg4xi",
+              "name": "short1.mp4",
+              "type": "video",
+              "size": 29992035,
+              "sizeLabel": "28.6 MB",
+              "duration": "0:25",
+              "desc": "",
+              "thumbnail": null,
+              "url": "/website/uploads/short1_1782902182466.mp4"
+            },
+            {
+              "id": "asset-1782902412577-55spq",
+              "name": "WhatsApp Image 2026-06-27 at 6.49.01 PM (1).jpeg",
+              "type": "image",
+              "size": 202132,
+              "sizeLabel": "197.4 KB",
+              "duration": null,
+              "desc": "",
+              "thumbnail": "/website/uploads/WhatsApp_Image_2026_06_27_at_6_49_01_PM__1__1782902412595.jpeg",
+              "url": "/website/uploads/WhatsApp_Image_2026_06_27_at_6_49_01_PM__1__1782902412595.jpeg"
+            },
+            {
+              "id": "asset-1782904970276-d1nhk",
+              "name": "Project_Report (2).docx",
+              "type": "document",
+              "size": 17573,
+              "sizeLabel": "17.2 KB",
+              "duration": null,
+              "desc": "",
+              "thumbnail": null,
+              "url": "/website/uploads/Project_Report__2__1782904970286.docx"
+            }
+          ]
+        },
+        {
+          "id": "mod_1782895440651",
+          "title": "module 1",
+          "items": []
+        },
+        {
+          "id": "mod_1782895450786",
+          "title": "module 2",
+          "items": []
+        }
+      ]
+    },
+    {
+      "id": "course-1783673603527",
+      "title": "full stack development",
+      "category": "website developer",
+      "match": 70,
+      "price": "10",
+      "image": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=400",
+      "link": "#",
+      "modules": [
+        {
+          "id": "mod1",
+          "title": "Module 1: Introduction",
+          "items": [
+            {
+              "id": "asset-1783673621009-eux9c",
+              "name": "razzi_ayat_alkursi.png",
+              "type": "image",
+              "size": 1054143,
+              "sizeLabel": "1.0 MB",
+              "duration": null,
+              "desc": "",
+              "thumbnail": "/website/uploads/razzi_ayat_alkursi_1783673621057.png",
+              "url": "/website/uploads/razzi_ayat_alkursi_1783673621057.png"
+            },
+            {
+              "id": "asset-1783673632253-v2i8y",
+              "name": "theme.css",
+              "type": "document",
+              "size": 47565,
+              "sizeLabel": "46.5 KB",
+              "duration": null,
+              "desc": "",
+              "thumbnail": null,
+              "url": "/website/uploads/theme_1783673632270.css"
+            }
+          ]
+        },
+        {
+          "id": "mod_1783675014673",
+          "title": "detail",
+          "items": []
+        }
+      ]
+    }
+  ],
+  "interviews": [
+    {
+      "id": "3001",
+      "studentName": "Aria Sterling",
+      "company": "skylync.io",
+      "date": "2026-06-25",
+      "time": "10:00 AM",
+      "status": "scheduled"
+    },
+    {
+      "id": "1781703783135",
+      "studentName": "Sarah Jenkins",
+      "company": "coreknot.io",
+      "date": "2026-07-02",
+      "time": "02:00 PM",
+      "status": "scheduled"
+    },
+    {
+      "id": "1782814788739",
+      "studentName": "Jordan Wade",
+      "studentEmail": "jordan.wade@demo.pk",
+      "company": "EliteRecruit",
+      "date": "2026-06-29",
+      "time": "14:00",
+      "duration": 45,
+      "status": "scheduled",
+      "message": "Dear Jordan Wade,\n\nWe are pleased to invite you for an interview for the position of Frontend Lead.\n\nDate: Monday, 29 Jun 2026\nTime: 2:00 PM – 2:45 PM (45 minutes)\nFormat: Video Interview (Google Meet)\n\nPlease confirm your availability by replying to this message. A meeting link will be shared 30 minutes before the interview.\n\nBest regards,\nEliteRecruit HR Team"
+    },
+    {
+      "id": "1782815875732",
+      "studentName": "Alex Sterling",
+      "studentEmail": "alex.sterling@demo.pk",
+      "company": "EliteRecruit",
+      "date": "2026-07-03",
+      "time": "09:00",
+      "duration": 45,
+      "status": "scheduled",
+      "message": "Dear Alex Sterling,\n\nWe are pleased to invite you for an interview for the position of Senior UX Designer.\n\nDate: Friday, 3 Jul 2026\nTime: 9:00 AM – 9:45 AM (45 minutes)\nFormat: Video Interview (Google Meet)\n\nPlease confirm your availability by replying to this message. A meeting link will be shared 30 minutes before the interview.\n\nBest regards,\nEliteRecruit HR Team"
+    },
+    {
+      "id": "1783172647577",
+      "studentName": "Maya Chen",
+      "studentEmail": "maya.chen@demo.pk",
+      "company": "EliteRecruit",
+      "date": "2026-07-01",
+      "time": "10:00",
+      "duration": 45,
+      "status": "scheduled",
+      "message": "Dear Maya Chen,\n\nWe are pleased to invite you for an interview for the position of Product Manager.\n\nDate: Wednesday, 1 Jul 2026\nTime: 10:00 AM – 10:45 AM (45 minutes)\nFormat: Video Interview (Google Meet)\n\nPlease confirm your availability by replying to this message. A meeting link will be shared 30 minutes before the interview.\n\nBest regards,\nEliteRecruit HR Team"
+    },
+    {
+      "id": "1783591957129",
+      "studentName": "Alex Sterling",
+      "studentEmail": "alex.sterling@demo.pk",
+      "company": "EliteRecruit",
+      "date": "2026-07-16",
+      "time": "10:00 AM",
+      "duration": 45,
+      "status": "scheduled",
+      "message": "Dear Alex Sterling,\n\nWe are pleased to invite you for an interview for the position of Senior UX Designer.\n\nDate: Thursday, Jul 16, 2026\nTime: 10:00 AM (45 minutes)\nFormat: Video Interview (Google Meet)\n\nPlease confirm your availability by replying to this message. A meeting link will be shared 30 minutes before the interview.\n\nBest regards,\nEliteRecruit HR Team"
+    },
+    {
+      "id": "1790861897053",
+      "studentName": "Alex Sterling",
+      "studentEmail": "alex.sterling@demo.pk",
+      "company": "EliteRecruit",
+      "date": "2026-10-03",
+      "time": "09:00",
+      "duration": 45,
+      "status": "scheduled",
+      "message": "Dear Alex Sterling,\n\nWe are pleased to invite you for an interview for the position of Senior UX Designer.\n\nDate: Saturday, 3 Oct 2026\nTime: 9:00 AM – 9:45 AM (45 minutes)\nFormat: Video Interview (Google Meet)\n\nPlease confirm your availability by replying to this message. A meeting link will be shared 30 minutes before the interview.\n\nBest regards,\nEliteRecruit HR Team"
+    }
+  ],
+  "mockInterviews": [
+    {
+      "id": "MOCK-101",
+      "title": "Senior Frontend Architecture Mock",
+      "type": "AI Technical",
+      "interviewer": "AI Claude 3.7 Pro",
+      "status": "scheduled",
+      "scheduledTime": "Today, 4:30 PM",
+      "score": null,
+      "topic": "Virtual DOM, SSR & Custom Hooks"
+    },
+    {
+      "id": "MOCK-102",
+      "title": "System Design & Distributed Caching",
+      "type": "1-on-1 Mentor",
+      "interviewer": "Sarah Jenkins (Staff SWE @ Stripe)",
+      "status": "confirmed",
+      "scheduledTime": "Tomorrow, 10:00 AM",
+      "score": null,
+      "topic": "High Availability Systems"
+    },
+    {
+      "id": "MOCK-103",
+      "title": "Full-Stack Data Engineering & LRU Cache",
+      "type": "AI Technical",
+      "interviewer": "AI Claude 3.7 Pro",
+      "status": "completed",
+      "scheduledTime": "Yesterday, 3:00 PM",
+      "score": 94,
+      "topic": "LRU Cache & Concurrency"
+    }
+  ],
+  "leaderboard": [
+    {
+      "rank": 1,
+      "name": "Elena Rostova",
+      "points": 1420,
+      "university": "Stanford"
+    },
+    {
+      "rank": 2,
+      "name": "Aria Sterling",
+      "points": 1380,
+      "university": "MIT"
+    },
+    {
+      "rank": 3,
+      "name": "Alex Sterling",
+      "points": 1290,
+      "university": "MIT"
+    },
+    {
+      "rank": 4,
+      "name": "Sarah Jenkins",
+      "points": 1210,
+      "university": "Berkeley"
+    }
+  ],
+  "purchases": {
+    "companyPlans": [
+      {
+        "id": "TXN98481903",
+        "companyName": "skylync.io",
+        "planName": "Premium Subscription",
+        "amount": 10000,
+        "date": "2026-06-15",
+        "status": "Paid"
+      },
+      {
+        "id": "TXN98481904",
+        "companyName": "coreknot.io",
+        "planName": "Basic Subscription",
+        "amount": 2500,
+        "date": "2026-06-12",
+        "status": "Paid"
+      },
+      {
+        "id": "TXN98481905",
+        "companyName": "zylor.io",
+        "planName": "Top 1 Spot Boost",
+        "amount": 10000,
+        "date": "2026-06-20",
+        "status": "Paid"
+      }
+    ],
+    "studentCourses": [
+      {
+        "id": "TXN74839201",
+        "studentName": "Ali Siddique",
+        "courseTitle": "Advanced UI/UX Liquid Design Patterns",
+        "amount": 1200,
+        "date": "2026-06-22",
+        "status": "Paid"
+      },
+      {
+        "id": "TXN74839202",
+        "studentName": "Ayesha Lodhi",
+        "courseTitle": "Building Scalable RESTful backends",
+        "amount": 1500,
+        "date": "2026-06-23",
+        "status": "Paid"
+      },
+      {
+        "id": "TXN74839203",
+        "studentName": "Bilal Khan",
+        "courseTitle": "Advanced UI/UX Liquid Design Patterns",
+        "amount": 1200,
+        "date": "2026-06-24",
+        "status": "Paid"
+      }
+    ]
+  }
+}

@@ -1,0 +1,1345 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en">
+
+<head>
+  <script>
+    if (window.self !== window.top) {
+      const style = document.createElement('style');
+      style.innerHTML = `
+        header, nav, aside, 
+        .SideNavBar, .TopNavBar, 
+        #SideNavBar, #TopNavBar {
+          display: none !important;
+        }
+        main, .main-content {
+          margin-left: 0 !important;
+          padding-top: 1.5rem !important;
+        }
+        main.ml-64, main.lg\\:ml-64 {
+          margin-left: 0 !important;
+          padding-top: 2rem !important;
+        }
+      `;
+      document.documentElement.appendChild(style);
+    }
+  </script>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>JobFlow Dashboard | Alex Rivers</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&amp;display=swap"
+    rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+    rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+    rel="stylesheet" />
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "on-tertiary-fixed": "#002106",
+            "on-secondary-fixed": "#001c39",
+            "card-gradient": "linear-gradient(135deg, #4D9EFA 0%, #BF7DF5 100%)",
+            "on-primary-container": "#fff5fb",
+            "background": "#DCE4F7",
+            "error-container": "#ffdad6",
+            "secondary": "#0060ab",
+            "outline": "#817381",
+            "tertiary-fixed-dim": "#47e266",
+            "inverse-on-surface": "#ecf1ff",
+            "surface-dim": "#d2daed",
+            "inverse-surface": "#29313f",
+            "on-primary": "#ffffff",
+            "gold": "#FFD60A",
+            "primary-fixed": "#fbd7ff",
+            "error": "#FF453A",
+            "glass-border": "rgba(255, 255, 255, 0.6)",
+            "outline-variant": "#d2c1d2",
+            "secondary-fixed": "#d3e3ff",
+            "on-background": "#141c29",
+            "surface-container-highest": "#dbe3f6",
+            "primary-fixed-dim": "#f0b0ff",
+            "on-primary-fixed-variant": "#72188f",
+            "inverse-primary": "#f0b0ff",
+            "glass-thick": "rgba(255, 255, 255, 0.8)",
+            "secondary-fixed-dim": "#a3c9ff",
+            "on-error": "#ffffff",
+            "surface-variant": "#dbe3f6",
+            "primary-container": "#a34cbe",
+            "surface-container": "#e7eeff",
+            "on-tertiary-fixed-variant": "#00531a",
+            "on-tertiary": "#ffffff",
+            "surface-tint": "#8d37a9",
+            "on-secondary-container": "#003868",
+            "surface-bright": "#f9f9ff",
+            "surface": "#f9f9ff",
+            "on-secondary": "#ffffff",
+            "tertiary": "#006823",
+            "primary": "#8731a3",
+            "on-surface-variant": "#4f4350",
+            "orange": "#FF9F0A",
+            "surface-container-low": "#f0f3ff",
+            "on-primary-fixed": "#330044",
+            "secondary-container": "#54a3ff",
+            "tertiary-fixed": "#6cff82",
+            "on-surface": "#141c29",
+            "on-error-container": "#93000a",
+            "glass-fill": "rgba(255, 255, 255, 0.35)",
+            "surface-container-high": "#e0e8fb",
+            "on-secondary-fixed-variant": "#004883",
+            "on-tertiary-container": "#e6ffe0",
+            "surface-container-lowest": "#ffffff",
+            "tertiary-container": "#00842f",
+            "deep-purple": "#471A70"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "2xl": "1.5rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "safe-bottom": "34px",
+            "desktop-gutter": "24px",
+            "desktop-margin": "64px",
+            "base": "8px",
+            "mobile-margin": "20px",
+            "max-width": "1280px",
+            "mobile-gutter": "16px",
+            "safe-top": "44px"
+          },
+          "fontFamily": {
+            "headline-lg": ["Inter"],
+            "body-md": ["Inter"],
+            "label-caps": ["Inter"]
+          },
+          "fontSize": {
+            "headline-lg": ["34px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+            "body-md": ["16px", { "lineHeight": "1.5", "fontWeight": "400" }],
+            "label-caps": ["13px", { "lineHeight": "1.0", "letterSpacing": "0.03em", "fontWeight": "600" }]
+          }
+        },
+      },
+    }
+  </script>
+  <style>
+    /* Hide scrollbar for Chrome, Safari and Opera */
+    ::-webkit-scrollbar {
+      display: none;
+    }
+    /* Hide scrollbar for IE, Edge and Firefox */
+    * {
+      -ms-overflow-style: none;  /* IE and Edge */
+      scrollbar-width: none;  /* Firefox */
+    }
+    body {
+      background-color: #DCE4F7;
+      color: #471A70;
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+    }
+
+    .glass-card {
+      background: rgba(255, 255, 255, 0.35);
+      backdrop-filter: blur(28px);
+      -webkit-backdrop-filter: blur(28px);
+      border: 1px solid rgba(255, 255, 255, 0.6);
+      box-shadow: 0 12px 40px 0 rgba(71, 26, 112, 0.15);
+    }
+
+    .trust-gauge {
+      transition: stroke-dashoffset 1s ease-in-out;
+    }
+
+    .liquid-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: -1;
+      filter: blur(80px);
+      opacity: 0.6;
+    }
+
+    .blob {
+      position: absolute;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(163, 76, 190, 0.4) 0%, rgba(84, 163, 255, 0.1) 70%);
+      border-radius: 50%;
+      animation: move 20s infinite alternate;
+    }
+
+    @keyframes move {
+      from {
+        transform: translate(-10%, -10%);
+      }
+
+      to {
+        transform: translate(20%, 20%);
+      }
+    }
+
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      vertical-align: middle;
+    }
+
+    .active-nav {
+      background: rgba(163, 76, 190, 0.2);
+      box-shadow: inset 0 0 0 1px rgba(163, 76, 190, 0.3);
+    }
+
+    .line-clamp-2 {
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+  </style>
+</head>
+
+<body class="min-h-screen">
+  <div class="liquid-bg">
+    <div class="blob" style="top: -10%; left: -10%;"></div>
+    <div class="blob"
+      style="bottom: -10%; right: -10%; background: radial-gradient(circle, rgba(84, 163, 255, 0.4) 0%, rgba(163, 76, 190, 0.1) 70%); animation-delay: -5s;">
+    </div>
+  </div>
+  <!-- TopNavBar (Shared Component) -->
+  <header
+    class="fixed top-0 left-0 lg:left-64 w-full lg:w-[calc(100vw-16rem)] z-50 flex justify-between items-center px-desktop-margin h-14 bg-white/10 backdrop-blur-[28px] border-b border-glass-border shadow-[0_12px_40px_0_rgba(71,26,112,0.08)]">
+    <div class="flex items-center gap-4 lg:hidden">
+      <img alt="JobFlow Logo" class="h-8 w-auto"
+        src="https://lh3.googleusercontent.com/aida/AP1WRLtHSlvHQm1XNZ4vaeue1GiJtF1j680ovYDsV1bz1IH37RWIQlHCDhIMbTh8QwjysUr_9axMNLFk7d5MtN1sRrdkCEgDdsjpU6S18_eICdCZ5ObBXpk8IMqmy52sfrJsOQaMvz7hk48gtvML_dmfwlaY-1QmOzz74jRWaBViW4SbLXgO-jIKC3LPueU0Wmini7A--bmI3LnC19bd8jueIoFhpwFhp4dCzG3gBDdCSwoekhL8nTJD3FWqr2Qs" />
+      <span class="font-headline-lg text-headline-lg font-bold text-primary">Student Portal</span>
+    </div>
+    <div class="flex items-center gap-6 ml-auto relative">
+      <div class="hidden md:flex items-center bg-white/20 px-4 py-1.5 rounded-full border border-glass-border">
+        <span class="material-symbols-outlined text-deep-purple mr-2">search</span>
+        <input
+          id="searchInput"
+          class="bg-transparent border-none focus:ring-0 text-deep-purple placeholder-deep-purple/50 font-body-md text-body-md w-64 py-0"
+          placeholder="Search courses..." type="text" />
+      </div>
+      <div class="flex gap-3 relative">
+        <button id="notificationBtn" class="p-2 rounded-full hover:bg-glass-thick transition-all duration-300 relative">
+          <span class="material-symbols-outlined text-deep-purple">notifications</span>
+          <span id="notificationBadge" class="absolute top-1.5 right-1.5 w-2 h-2 bg-red-500 rounded-full border border-white"></span>
+        </button>
+        <!-- Notifications Dropdown -->
+        <div id="notificationDropdown" class="absolute right-0 top-12 w-80 rounded-2xl p-4 hidden z-50 shadow-2xl text-left border-2 border-primary/20" style="background-color: #f8f9fc !important; opacity: 1 !important; backdrop-filter: none !important;">
+          <div class="flex justify-between items-center mb-3 pb-2 border-b border-deep-purple/10">
+            <h4 class="font-bold text-deep-purple text-sm">New Updates</h4>
+            <button id="clearNotificationsBtn" class="text-xs text-primary hover:underline font-bold">Mark all read</button>
+          </div>
+          <div class="space-y-3 max-h-60 overflow-y-auto no-scrollbar">
+            <div class="p-2.5 rounded-lg border border-deep-purple/10 shadow-sm flex gap-2.5 items-start" style="background-color: #ffffff !important; opacity: 1 !important;">
+              <span class="material-symbols-outlined text-primary text-lg mt-0.5" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+              <div>
+                <p class="text-xs font-bold text-deep-purple">New AI Recommendation</p>
+                <p class="text-[10px] text-deep-purple/70">"DevOps & CI/CD Pipelines" matches 91% of your profile skills.</p>
+              </div>
+            </div>
+            <div class="p-2.5 rounded-lg border border-deep-purple/10 shadow-sm flex gap-2.5 items-start" style="background-color: #ffffff !important; opacity: 1 !important;">
+              <span class="material-symbols-outlined text-orange text-lg mt-0.5" style="font-variation-settings: 'FILL' 1;">local_fire_department</span>
+              <div>
+                <p class="text-xs font-bold text-deep-purple">Streak Milestone</p>
+                <p id="notificationStreakText" class="text-[10px] text-deep-purple/70">You are on a 1-day streak! Only 4 days left until your next reward.</p>
+              </div>
+            </div>
+            <div class="p-2.5 rounded-lg border border-deep-purple/10 shadow-sm flex gap-2.5 items-start" style="background-color: #ffffff !important; opacity: 1 !important;">
+              <span class="material-symbols-outlined text-green-600 text-lg mt-0.5" style="font-variation-settings: 'FILL' 1;">verified</span>
+              <div>
+                <p class="text-xs font-bold text-deep-purple">Trust Score Active</p>
+                <p class="text-[10px] text-deep-purple/70">Identity verification complete. Current trust score is 85/100.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <button class="p-2 rounded-full hover:bg-glass-thick transition-all duration-300">
+          <span class="material-symbols-outlined text-deep-purple">settings</span>
+        </button>
+        <div id="userprofilebtn" class="h-10 w-10 rounded-full overflow-hidden border-2 border-primary shadow-sm cursor-pointer hover:scale-105 transition-transform">
+          <img alt="User profile" class="w-full h-full object-cover"
+            data-alt="A high-end professional headshot of a modern creative designer with a confident smile. The background is a soft, atmospheric blur of a bright, light-filled studio with subtle purple and blue lens flares. The image has a premium, polished feel consistent with an elite tech executive profile."
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuA25J-RpNqe_ribsVF3fd4mnzE6ifwHeZuVNu5AMQU2EnYpClByPq7nwtb_OW8YWdE9zHhVr_myUbTkksryul6U1vE6tYcUe2Is_Ykf44A04yPQngjPdz5xvO59lZYpyYogiOT7fWRVG0OG2uYrLcYBA_hW8xxo8YeR57ryeTXbIvT3Ziwr5FLGpOpoVx-euTPcJedNNZFG0cab6QctiazShZ8qfEjAKNGvyzlC9_fl1G_pUaR0pvuTjw1ClquEYOqjrb_2RPHXuypu" />
+        </div>
+      </div>
+    </div>
+  </header>
+  <!-- SideNavBar (Shared Component) -->
+  <nav
+    class="fixed left-0 top-0 h-full pt-8 pb-10 flex flex-col z-40 w-64 bg-glass-fill backdrop-blur-[28px] border-r border-glass-border shadow-[0_12px_40px_0_rgba(71,26,112,0.15)] hidden lg:flex">
+    <div class="px-6 mb-8">
+      <h2 class="font-bold text-deep-purple text-xl">Student Portal</h2>
+    </div>
+    <div class="flex flex-col gap-1 px-4 overflow-y-auto no-scrollbar flex-grow">
+      <a class="flex items-center gap-3 bg-primary-container text-on-primary-container rounded-xl px-4 py-3 shadow-md transition-transform duration-200 active:scale-95"
+        href="#">
+        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+        <span class="font-label-caps text-label-caps font-bold">Dashboard</span>
+      </a>
+      <a class="flex items-center gap-3 text-deep-purple/70 px-4 py-3 hover:bg-glass-thick hover:text-primary transition-all rounded-xl"
+        href="#">
+        <span class="material-symbols-outlined">school</span>
+        <span class="font-label-caps text-label-caps">Courses</span>
+      </a>
+      <a class="flex items-center gap-3 text-deep-purple/70 px-4 py-3 hover:bg-glass-thick hover:text-primary transition-all rounded-xl"
+        href="#">
+        <span class="material-symbols-outlined">assignment</span>
+        <span class="font-label-caps text-label-caps">Assignments</span>
+      </a>
+      <a class="flex items-center gap-3 text-deep-purple/70 px-4 py-3 hover:bg-glass-thick hover:text-primary transition-all rounded-xl"
+        href="#">
+        <span class="material-symbols-outlined">grade</span>
+        <span class="font-label-caps text-label-caps">Grades</span>
+      </a>
+      <a class="flex items-center gap-3 text-deep-purple/70 px-4 py-3 hover:bg-glass-thick hover:text-primary transition-all rounded-xl"
+        href="#">
+        <span class="material-symbols-outlined">calendar_today</span>
+        <span class="font-label-caps text-label-caps">Schedule</span>
+      </a>
+      <a class="flex items-center gap-3 text-deep-purple/70 px-4 py-3 hover:bg-glass-thick hover:text-primary transition-all rounded-xl"
+        href="#">
+        <span class="material-symbols-outlined">work</span>
+        <span class="font-label-caps text-label-caps">Opportunities</span>
+      </a>
+      <a class="flex items-center gap-3 text-deep-purple/70 px-4 py-3 hover:bg-glass-thick hover:text-primary transition-all rounded-xl"
+        href="#">
+        <span class="material-symbols-outlined">insights</span>
+        <span class="font-label-caps text-label-caps">analytics</span>
+      </a>
+      <a class="flex items-center gap-3 text-deep-purple/70 px-4 py-3 hover:bg-glass-thick hover:text-primary transition-all rounded-xl"
+        href="#">
+        <span class="material-symbols-outlined">library_books</span>
+        <span class="font-label-caps text-label-caps">Library</span>
+      </a>
+      <a class="flex items-center gap-3 text-deep-purple/70 px-4 py-3 hover:bg-glass-thick hover:text-primary transition-all rounded-xl"
+        href="#">
+        <span class="material-symbols-outlined">mail</span>
+        <span class="font-label-caps text-label-caps">Messages</span>
+      </a>
+      <a class="flex items-center gap-3 text-deep-purple/70 px-4 py-3 hover:bg-glass-thick hover:text-primary transition-all rounded-xl"
+        href="#">
+        <span class="material-symbols-outlined">group</span>
+        <span class="font-label-caps text-label-caps">Mentors</span>
+      </a>
+    </div>
+    <div class="px-6 mt-auto">
+      <button
+        class="w-full bg-primary text-white py-4 rounded-full font-bold shadow-xl hover:scale-[1.02] active:scale-95 transition-all">
+        Upgrade Plan
+      </button>
+    </div>
+  </nav>
+  <!-- Main Content Canvas -->
+  <main class="lg:ml-64 pt-20 px-mobile-margin md:px-desktop-margin pb-20">
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-8">
+      <!-- Center Column: AI Feed -->
+      <div class="md:col-span-9 space-y-8">
+        <!-- AI-Recommended Jobs Section -->
+        <div>
+          <div class="flex justify-between items-center mb-4">
+            <h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg font-black text-deep-purple">
+              AI-Recommended Jobs</h2>
+            <button onclick="navigateToOpportunities(event)" class="text-primary font-label-caps text-label-caps flex items-center gap-1 hover:underline">
+              View All <span class="material-symbols-outlined text-sm">arrow_forward</span>
+            </button>
+          </div>
+          <!-- Dynamic Jobs Grid -->
+          <div id="jobsGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+            <!-- Job cards will be dynamically rendered here -->
+          </div>
+        </div>
+
+        <!-- AI-Recommended Courses Section -->
+        <div>
+          <div class="flex justify-between items-center mb-4">
+            <h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg font-black text-deep-purple">
+              AI-Recommended Courses</h2>
+            <button onclick="navigateToCourses(event)" class="text-primary font-label-caps text-label-caps flex items-center gap-1 hover:underline">
+              View All <span class="material-symbols-outlined text-sm">arrow_forward</span>
+            </button>
+          </div>
+          <!-- Dynamic Course Grid -->
+          <div id="coursesGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+            <!-- Course cards will be dynamically rendered here -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column: Sidebar Widgets -->
+      <div class="md:col-span-3 space-y-8">
+        <!-- Upcoming Tests Timeline -->
+        <div class="glass-card p-6 rounded-2xl">
+          <h3 class="font-label-caps text-label-caps text-deep-purple/60 mb-6 uppercase">Upcoming Tests</h3>
+          <div class="space-y-8 relative">
+            <div class="absolute left-[11px] top-2 bottom-2 w-0.5 bg-primary/20"></div>
+            <div class="relative flex gap-4">
+              <div class="w-6 h-6 rounded-full bg-primary border-4 border-white flex-shrink-0 z-10"></div>
+              <div>
+                <p class="text-sm font-bold text-deep-purple">Technical Assessment</p>
+                <p class="text-xs text-deep-purple/60">Tomorrow, 10:00 AM</p>
+                <p class="mt-1 text-xs text-primary font-medium">Duration: 90 mins</p>
+              </div>
+            </div>
+            <div class="relative flex gap-4">
+              <div class="w-6 h-6 rounded-full bg-secondary border-4 border-white flex-shrink-0 z-10"></div>
+              <div>
+                <p class="text-sm font-bold text-deep-purple">Cognitive Test</p>
+                <p class="text-xs text-deep-purple/60">Friday, 02:00 PM</p>
+                <p class="mt-1 text-xs text-secondary font-medium">Duration: 45 mins</p>
+              </div>
+            </div>
+          </div>
+          <button
+            class="w-full mt-8 py-3 rounded-xl border border-primary text-primary font-bold hover:bg-primary hover:text-white transition-all text-sm">
+            Schedule New
+          </button>
+        </div>
+
+        <!-- Leaderboard -->
+        <div class="glass-card p-6 rounded-2xl">
+          <div class="flex justify-between items-center mb-6">
+            <h3 class="font-label-caps text-label-caps text-deep-purple/60 uppercase">Leaderboard</h3>
+            <span
+              class="text-[10px] bg-gold/20 text-deep-purple font-bold px-2 py-0.5 rounded-full uppercase tracking-tighter">Design
+              Masters</span>
+          </div>
+          <div class="space-y-4">
+            <div class="flex items-center gap-3 p-2 rounded-xl bg-gold/10 border border-gold/20">
+              <span class="text-lg font-black text-gold w-6 text-center">1</span>
+              <div class="w-8 h-8 rounded-full bg-gray-200 overflow-hidden">
+                <img alt="Leader 1"
+                  data-alt="A professional close-up portrait of a female creative lead. She has a bright, approachable expression, set against a soft-focus office background with gentle, warm lighting. The image quality is high-fidelity with a modern, high-contrast edit."
+                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuCOTIe8IIKRj1nm1BtYr2gj3qEvYHfC49iECROcht5YY95iVetMG2Ri-_h5iLqZW7OXXdDPfEBIyIFGk9ydSpc8JDWw_rcI0EvfGniNgE2vkel332e9slOB-L8qdRGNztBI9D-9EizAICxUULxGA6Iohe7RPbE_klZ-lTJELxwYkbymNHv7aHA_P_4xdIKgGCfKiQ4AmU374SJcsPkWjzqVVeWYP67vTw9KfMvjDBBfSyn-E9h5oQyhV8U6rx6T9ZjRd8iy0rV9Xgvf" />
+              </div>
+              <div class="flex-grow">
+                <p class="text-xs font-bold text-deep-purple">Sarah J.</p>
+                <p class="text-[10px] text-deep-purple/50">2,450 pts</p>
+              </div>
+              <span class="material-symbols-outlined text-gold text-sm"
+                style="font-variation-settings: 'FILL' 1;">workspace_premium</span>
+            </div>
+            <div class="flex items-center gap-3 p-2 rounded-xl">
+              <span class="text-lg font-black text-deep-purple/30 w-6 text-center">2</span>
+              <div class="w-8 h-8 rounded-full bg-gray-200 overflow-hidden">
+                <img alt="Leader 2"
+                  data-alt="A headshot of a professional male software engineer with a neutral but confident expression. The lighting is crisp and cool-toned, echoing a high-tech corporate branding aesthetic. The background is clean and slightly blurred."
+                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuBNG6GG-Qdh4rSmiegh2fBuLErHkOHgsakvd5tcnZ_3nx9yowFJfUvbQF7zwF7yFgyuMuDjX0maaRIUSFXozSnSobWjo2T4TpU72VO0mRu5yjYSvf88AhtNo-UNRc9YVAsd1-yXeoI4rrQhdUfhODyDQRKfD2HWWw05nIQ78j7uJEYcXbu5eP9Qy47prAWirkJuozlsMUdepkfDIJkSe1HF7rj-fU01Ymdav3gFr5jecuT7e9cLgOb88zNjqR8GKg_6tYIym_qV7W1B" />
+              </div>
+              <div class="flex-grow">
+                <p class="text-xs font-bold text-deep-purple">David K.</p>
+                <p class="text-[10px] text-deep-purple/50">2,310 pts</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-3 p-2 rounded-xl">
+              <span class="text-lg font-black text-deep-purple/30 w-6 text-center">3</span>
+              <div class="w-8 h-8 rounded-full bg-gray-200 overflow-hidden">
+                <img alt="Leader 3"
+                  data-alt="A professional headshot of a business woman with a friendly, intelligent look. The background is a minimalist corporate setting with glass walls and bright ambient light, creating a professional and premium visual context."
+                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuDgy3K0kiYhyNMrv-z0mYvF-a6M-TAqLwqWqdgrecVC6TscKwfqEr8GsS7b5ALHvdDyqrEQkEnpYQTNFFlo8cX5viCnInGasCJdzpkT6K2TLwUICVgc0kXb8fgqYjtYY5WhZoX6BXJeA06lAXnO1_xLYSMQSKEx_kFxKAgKggaKlUWPiJs7t0uV2IXknNqr1Pt-Hhuw88CfR8gOFGm7wyMOTQ8NM1SsFJ80zjgPt8zFftQuxxHlqS65_ZMbbHLtXeaYGwXYmgQ8E_tJ" />
+              </div>
+              <div class="flex-grow">
+                <p class="text-xs font-bold text-deep-purple">Alex R.</p>
+                <p class="text-[10px] text-deep-purple/50">2,280 pts</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Trust Score Dial -->
+        <div class="glass-card p-6 rounded-2xl flex flex-col items-center text-center">
+          <h3 class="font-label-caps text-label-caps text-deep-purple/60 mb-6 uppercase">Trust Score</h3>
+          <div class="relative w-40 h-40">
+            <svg class="w-full h-full transform -rotate-90">
+              <circle class="text-deep-purple/10" cx="80" cy="80" fill="transparent" r="70" stroke="currentColor"
+                stroke-width="12"></circle>
+              <circle class="text-primary trust-gauge" cx="80" cy="80" fill="transparent" r="70" stroke="currentColor"
+                stroke-dasharray="440" stroke-dashoffset="66" stroke-linecap="round" stroke-width="12"></circle>
+            </svg>
+            <div class="absolute inset-0 flex flex-col items-center justify-center">
+              <span class="text-4xl font-black text-deep-purple">85</span>
+              <span class="text-xs font-label-caps text-deep-purple/50">/100</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Streak Widget -->
+        <div class="glass-card p-6 rounded-2xl cursor-pointer hover:shadow-lg transition-shadow" onclick="triggerCheckIn(event)">
+          <div class="flex justify-between items-start mb-6">
+            <div>
+              <h3 id="streakCount" class="text-3xl font-black text-deep-purple">1</h3>
+              <p class="text-sm font-label-caps text-deep-purple/60 uppercase">Day Streak</p>
+            </div>
+            <div class="p-3 bg-orange/20 rounded-full">
+              <span class="material-symbols-outlined text-orange"
+                style="font-variation-settings: 'FILL' 1;">local_fire_department</span>
+            </div>
+          </div>
+          <div id="streakGrid" class="grid grid-cols-7 gap-2">
+            <!-- Rendered dynamically -->
+          </div>
+          <p id="streakMilestoneText" class="mt-4 text-xs text-center text-deep-purple/50 font-body-md">Keep it up! 3 days to your next milestone.</p>
+        </div>
+      </div>
+    </div>
+  </main>
+  <!-- FAB (Suppressed based on context: Settings/Profile rule) -->
+  <!-- However, since this is a Dashboard (Home), we add a contextual FAB for "Upload Portfolio" -->
+  <button
+    class="fixed bottom-10 right-10 w-16 h-16 bg-primary text-white rounded-full shadow-2xl flex items-center justify-center hover:scale-110 active:scale-95 transition-all z-50 md:hidden">
+    <span class="material-symbols-outlined text-3xl">add</span>
+  </button>
+  <!-- BottomNavBar for Mobile -->
+  <nav
+    class="md:hidden fixed bottom-0 left-0 w-full bg-glass-fill backdrop-blur-[28px] border-t border-glass-border px-6 py-3 flex justify-between items-center z-50">
+    <a class="flex flex-col items-center gap-1 text-primary" href="#">
+      <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+      <span class="text-[10px] font-bold">Home</span>
+    </a>
+    <a class="flex flex-col items-center gap-1 text-deep-purple/50" href="#">
+      <span class="material-symbols-outlined">work</span>
+      <span class="text-[10px] font-bold">Jobs</span>
+    </a>
+    <a class="flex flex-col items-center gap-1 text-deep-purple/50" href="#">
+      <span class="material-symbols-outlined">description</span>
+      <span class="text-[10px] font-bold">Files</span>
+    </a>
+    <a class="flex flex-col items-center gap-1 text-deep-purple/50" href="#">
+      <span class="material-symbols-outlined">mail</span>
+      <span class="text-[10px] font-bold">Chat</span>
+    </a>
+  </nav>
+  <script>
+    // Courses list
+    const allCourses = [
+      {
+        id: "ux-research",
+        title: "Advanced UX Research",
+        provider: "Coursera",
+        category: "UX Design & Psychology",
+        match: 98,
+        duration: "14 hours",
+        level: "Intermediate",
+        image: "https://lh3.googleusercontent.com/aida-public/AB6AXuB5nPFYicb2sbkYrGLMTZgJLUV-JCRGQSTmbdl0GEqcX5_XfNvySzN1FB6BtwxKILfGwexbg0dOBBYiSDTYZVOB3_Q3nlyqkiRwISXDxIDd2_dhABeCohrEfCEojeTTzN1rfZXaMMtoGs-wMtuPvmSQBrXU6n5OPooKXKcpG0QBx7a0KCJ5e7pcKyoXY0Bi5bpTQ9bT4W6Aj6ExUY8-0-ENRKLdQE_6EpcYrwYYmlynMEgEsTUJgbFl1za85RGZOjjtS7YIBArMxF0H",
+        link: "https://www.coursera.org/learn/ux-research"
+      },
+      {
+        id: "cloud-architecture",
+        title: "Cloud Systems Architecture",
+        provider: "edX",
+        category: "Cloud Computing & Systems",
+        match: 95,
+        duration: "18 hours",
+        level: "Beginner",
+        image: "https://lh3.googleusercontent.com/aida-public/AB6AXuCn-ElFrIHx0MXgPpdeWnJGPhGxoA893K80ITNowSuekrSwDkRe6YifVrC6OQWoxXBWHNV4QtQV2L21p5txgMWUnxy18HPIbNowzT7Di1sD40jiRSDrSXV3227NTaZxH1pUGkUxYrQ8DX_ROWENZ_KJPjcYZ56a2lDypz0hVHyMYkeAevfsEC_nzQyjsplb4LzGXHuIMiKWWaqmvllAPhebBb_QfhjzPgu91i9nbygTXO-l79ndXryfLQd3gsc9UwZ3NXojqhEx7S_W",
+        link: "https://www.edx.org/course/cloud-architecture"
+      },
+      {
+        id: "market-psychology",
+        title: "Behavioral Economics & Market Psychology",
+        provider: "Coursera",
+        category: "Business & Strategy",
+        match: 92,
+        duration: "10 hours",
+        level: "Advanced",
+        image: "https://lh3.googleusercontent.com/aida-public/AB6AXuAFolK9I5dftlip1Q-nj4q8PUvxpR4YjZQp69vaz5XcvmKtqUitmrnPXUtK01RJ2js6a0sCG3UK0M-atJU_V4CdrGsoeq48Nx8DJeCrqxV8nKoUJBvCN0oGcqY8P78BZDEeVIbgUHHqifBLjGpkX9i-5eFzz4tUHeF5zAhTLwG1Lu80u0kdpAjzriIv7Bae-IDJeqtGB9w_zqwyg4gSlHtWPJMbwhJ13avlg0VEVeT0SxbELgkARVIVHwpgWZzv4rErIe3K6YO3RA1s",
+        link: "https://www.coursera.org/learn/market-psychology"
+      },
+      {
+        id: "dsa-mastery",
+        title: "Data Structures & Algorithms Mastery",
+        provider: "Coursera",
+        category: "Software Engineering",
+        match: 95,
+        duration: "28 hours",
+        level: "Intermediate",
+        image: "https://lh3.googleusercontent.com/aida-public/AB6AXuDMll_v59WjRrl3ervIDx2Z8PesiHWb1XPjnriuAc50frZqIrxnvHQFZgJbuwFAftIl_MHbjfBVsnAMb6RHeFyFCkFykBSgsf26Xb7WS9CzXqEKyE7LsEOTWsNDcQIuMtbuMhCYFnfeN6jqW1YvyxWjx_g1lssIXiplw2nBDXv7-qGSgNGvb-ayAv8Ti1fj9jkgCxMsPVlPcA6NDgoH0KnfTPpdzkLvEeJe1w16WIV2TeKfYBL3w6mKdQ1czMsME27kDpLQGEYvA_GX",
+        link: "https://www.coursera.org/specializations/data-structures-algorithms"
+      },
+      {
+        id: "cybersecurity-intro",
+        title: "Introduction to Cybersecurity",
+        provider: "edX",
+        category: "Cybersecurity & InfoSec",
+        match: 90,
+        duration: "16 hours",
+        level: "Beginner",
+        image: "https://lh3.googleusercontent.com/aida-public/AB6AXuDYWRf02uRBA2ERTFvZdC6xU8rj0qUHPVNBIFXBOHWNuMgspvioL03UzBkaK7BJ-gLztILPGv9yvtOLq3-w__4qFhfciCIj7FFADH1zivZX2QN5MIx0zhYbpkRPqgloERiWdDLlebGV_U1e6bV7D7mYxItn6N7flX1BvzrAmNw1ZwBZYOzpzHUk4kF0FZtxCgFaXcmEJ_7xeADVozoKKfSmLe51aFZi8D4gC-fAEBURQmGtnV_sSc0UiLKZmo3U-H9uIUsl4Gd5U8MZ",
+        link: "https://www.edx.org/course/cybersecurity-fundamentals"
+      },
+      {
+        id: "ml-foundations",
+        title: "Machine Learning Foundations",
+        provider: "Stanford Online",
+        category: "Data Science & AI",
+        match: 97,
+        duration: "22 hours",
+        level: "Intermediate",
+        image: "https://lh3.googleusercontent.com/aida-public/AB6AXuCmOkXPl-pZqHsSdPSTIWtgS945BlF5olREcW8zY8tjlTrHFL3vzSVJRZGUxZ3hT6Xs0dbQ6wHleWzDVnn8m2WvvJmrF0674LHZ_ZF4dnoVjnOQByrSjZZW7EyHPSD4uhj7EXiV-kjgp_0NIB_mUMfyj56LKht3Wd2OGmqUc1idIKM1Ohaf-SMR7FThBLjfCDGqbzo6CclpniD1GSR9Rthg5qnEHfX8BJsqvExk1vityULtrgWsjyP2pr5MvJVWDnWYqT993330SAY7",
+        link: "https://www.coursera.org/learn/machine-learning"
+      },
+      {
+        id: "fullstack-web",
+        title: "Full-Stack Web Development",
+        provider: "Udemy",
+        category: "Web Development",
+        match: 94,
+        duration: "25 hours",
+        level: "Beginner",
+        image: "https://lh3.googleusercontent.com/aida-public/AB6AXuA9WzP-umOsZO2m876OBfodUJDWvq5Yymdiz3H6nEHXja5v66srGXKTHPrCOTi8qGVREnr-MHvuyoY7fpfBPyfwRfrfLIyj1arz2vDIuD0v2Y-fjH4FGT3FHtrzlFuHm2JkbzVITgb2ecd774cnOg_7I0hsRoTR0sQfsofHBCFoTfwqO46Wq227IO-dIG-e2zQZAb54dAH-6IKsqr1cezx-019KbZvGoXozRzbdMLcYPbUsLDOgm2Oma6t44-pNtFJC_DbiPJwl0zub",
+        link: "https://www.udemy.com/course/the-web-developer-bootcamp/"
+      },
+      {
+        id: "pm-masterclass",
+        title: "Product Management Masterclass",
+        provider: "Coursera",
+        category: "Product Management",
+        match: 89,
+        duration: "12 hours",
+        level: "Intermediate",
+        image: "https://lh3.googleusercontent.com/aida-public/AB6AXuCgvbGaWwemuj8_caXl3y3cFfyQCCpFcScw3_E31GmsKU19ur2L42iMEfzD3AtL9RNKYPA3HWbr1PlKX0BKBsP57UYXzyRxwXxrBbB0ro_gMrcNjEnHmDItdqS6c0D67gEzYqx_PxnTKz60zjs6ruNMO8TwIb2lV8XF4wj8exAValWjqJKiaWyFqUFy4sdH9DpFNANu0tzFg5jtS6XX0rDa4WamVm4QcQmGHuzkI0HfCHiT-M0uvOj40k_YDANRvxx5zQVRDXxdPOTV",
+        link: "https://www.coursera.org/specializations/product-management"
+      },
+      {
+        id: "devops-pipelines",
+        title: "DevOps & CI/CD Pipelines",
+        provider: "edX",
+        category: "Infrastructure & Operations",
+        match: 91,
+        duration: "20 hours",
+        level: "Advanced",
+        image: "https://lh3.googleusercontent.com/aida-public/AB6AXuDgdPhzoYOHlShWH2VIMyoYQBR8CrdP5IshCQNdd8gyY00UBBqs4UTvaS--99YIcuWTwY8HnmQJo49Vn9Ak59PXP6pmqVBvgsU90FVAJzXDyCJkEvSd0d9P9W6mmz2RhvcaCnmYBZRXC8hdoZOdJEfmiRDO390P91EEAb149hHOCTkp5QSYGCDOZdMPx_kFuwOxbO3F8Dm0S472SBH5-JygKtsMRwm6LCDt484eKZtBiYVW2nY-TvfVAd6CGy8liWIU0Q6_Ot179u2x",
+        link: "https://www.edx.org/course/devops-pipelines"
+      }
+    ];
+
+    let favoriteCourseIds = JSON.parse(localStorage.getItem('favoriteCourses') || '[]');
+
+    let allJobs = [];
+    const staticJobs = [
+      {
+        id: "job1",
+        title: "Senior iOS UI Engineer",
+        company: "TechFlow",
+        logo: `https://ui-avatars.com/api/?name=TechFlow&background=F4EEFF&color=8731A3`,
+        location: "San Francisco, CA",
+        salary: "Rs. 8,000 - Rs. 12,000 / mo",
+        type: "Full-time",
+        timeAgo: "2d ago",
+        description: "We are seeking a Senior iOS UI Engineer with a deep passion for building polished, fluid, and highly interactive user interfaces. You will collaborate closely with product designers to implement our new design system across our flagship iOS application, ensuring premium micro-interactions and pixel-perfect layouts.",
+        requirements: [
+          "5+ years of iOS development experience using Swift, UIKit, and SwiftUI.",
+          "Strong portfolio showcasing custom UI transitions, animations, and high-performance rendering.",
+          "Figma mastery and capability to translate design specs into clean, modular code."
+        ],
+        skillsRequired: ["iOS Development", "Swift", "SwiftUI", "UIKit", "UI Design"],
+        address: "100 Pine St, San Francisco, CA 94111, USA",
+        mapTitle: "TechFlow SF Headquarters",
+        applyLink: "https://techflow.io/careers"
+      },
+      {
+        id: "job2",
+        title: "React Native Developer",
+        company: "Jazz (Mobilink)",
+        logo: "../assets/jazz_logo.png",
+        location: "Islamabad, Pakistan",
+        salary: "Rs. 160,000 - 240,000 / mo",
+        type: "Full-time",
+        timeAgo: "New",
+        description: "Jazz is seeking an experienced React Native Developer to lead the development of our next-generation digital services app. You will focus on optimizing native bridge performance, building reusable UI libraries, and integrating secure payment modules (JazzCash).",
+        requirements: [
+          "3+ years of commercial React Native app development experience.",
+          "Deep knowledge of JavaScript/TypeScript, React hooks, and Redux state management.",
+          "Experience with native iOS/Android bridge integration and performance profiling."
+        ],
+        skillsRequired: ["React Native", "JavaScript", "TypeScript", "Redux", "Mobile Development"],
+        address: "Jazz HQ, Sector G-8, Islamabad, Pakistan",
+        mapTitle: "Jazz Islamabad HQ",
+        applyLink: "https://jazz.com.pk/careers"
+      },
+      {
+        id: "job3",
+        title: "Junior DevOps Engineer",
+        company: "Systems Limited",
+        logo: "../assets/systems_logo.png",
+        location: "Karachi, Pakistan",
+        salary: "Rs. 100,000 - 150,000 / mo",
+        type: "Full-time",
+        timeAgo: "1d ago",
+        description: "Systems Limited is looking for a Junior DevOps Engineer to assist in maintaining our CI/CD pipelines, automating infrastructure provisioning, and monitoring application health across Kubernetes clusters.",
+        requirements: [
+          "Solid understanding of Linux administration and shell scripting (Bash/Python).",
+          "Hands-on experience with Docker, Git, and basic CI/CD concepts (Jenkins/GitHub Actions).",
+          "Familiarity with AWS cloud services is a major plus."
+        ],
+        skillsRequired: ["DevOps", "Docker", "Linux", "AWS", "Software Engineering"],
+        address: "Systems Limited Campus, Shahrah-e-Faisal, Karachi, Pakistan",
+        mapTitle: "Systems Limited Karachi Office",
+        applyLink: "https://www.systemsltd.com/careers"
+      },
+      {
+        id: "job4",
+        title: "Senior React Developer",
+        company: "Contour Software",
+        logo: "../assets/contour_logo.png",
+        location: "Karachi, Pakistan",
+        salary: "Rs. 200,000 - 300,000 / mo",
+        type: "Full-time",
+        timeAgo: "3d ago",
+        description: "Contour Software is hiring a Senior React Developer to build high-scale enterprise SaaS web applications. You will write clean, well-tested code, lead architectural decisions, and mentor junior frontend developers.",
+        requirements: [
+          "5+ years of frontend web development experience specializing in React.js.",
+          "Expertise in modern state management (Zustand, Redux Toolkit) and CSS frameworks (TailwindCSS).",
+          "Strong understanding of web performance optimization and unit testing (Jest/RTL)."
+        ],
+        skillsRequired: ["React", "JavaScript", "Web Development", "HTML", "CSS"],
+        address: "FTC Building, Shahrah-e-Faisal, Karachi, Pakistan",
+        mapTitle: "Contour Software Karachi Office",
+        applyLink: "https://contour-software.com/careers"
+      },
+      {
+        id: "job5",
+        title: "Associate Product Manager",
+        company: "VentureDive",
+        logo: "../assets/venturedive_logo.png",
+        location: "Lahore, Pakistan",
+        salary: "Rs. 90,000 - 130,000 / mo",
+        type: "Full-time",
+        timeAgo: "5d ago",
+        description: "VentureDive is looking for an Associate PM to define roadmap priorities, collaborate with designers and engineers, and synthesize user analytics data.",
+        requirements: [
+          "Strong interest in product strategy, agile project coordination, and user research.",
+          "Excellent communication, documentation, and stakeholder management skills.",
+          "Previous experience in a technical or design role is a plus."
+        ],
+        skillsRequired: ["UI/UX Design", "Figma", "User Research"],
+        address: "Gulberg III, Lahore, Pakistan",
+        mapTitle: "VentureDive Lahore Office",
+        applyLink: "https://careers.venturedive.com"
+      },
+      {
+        id: "job6",
+        title: "Junior Backend Developer",
+        company: "Arbisoft",
+        logo: "../assets/arbisoft_logo.png",
+        location: "Lahore, Pakistan",
+        salary: "Rs. 80,000 - 120,000 / mo",
+        type: "Full-time",
+        timeAgo: "2d ago",
+        description: "Arbisoft is seeking a Junior Backend Developer proficient in Python and Django to construct scalable APIs, write unit tests, and optimize database queries.",
+        requirements: [
+          "Bachelor's degree in Computer Science or related engineering field.",
+          "Strong foundation in data structures, algorithms, and SQL databases.",
+          "Familiarity with Django or Flask frameworks."
+        ],
+        skillsRequired: ["Python", "Django", "SQL", "Software Engineering"],
+        address: "25-C, Sector C, DHA Phase 6, Lahore, Pakistan",
+        mapTitle: "Arbisoft Lahore HQ",
+        applyLink: "https://careers.arbisoft.com"
+      },
+      {
+        id: "job7",
+        title: "Data Science Intern",
+        company: "VentureDive",
+        logo: "../assets/venturedive_logo.png",
+        location: "Lahore, Pakistan",
+        salary: "Rs. 35,000 - 50,000 / mo",
+        type: "Internship",
+        timeAgo: "1w ago",
+        description: "VentureDive is seeking a Data Science Intern to compile user metrics, build predictive models, and write database queries to extract insights.",
+        requirements: [
+          "Undergrad or recent graduate in Math, Statistics, CS, or Finance.",
+          "Proficiency in Python, SQL, and data libraries (Pandas, NumPy).",
+          "Basic understanding of Machine Learning concepts."
+        ],
+        skillsRequired: ["Data Science", "Machine Learning", "Python", "Research"],
+        address: "Gulberg III, Lahore, Pakistan",
+        mapTitle: "VentureDive Lahore Office",
+        applyLink: "https://careers.venturedive.com"
+      }
+    ];
+
+    function calculateJobMatch(job, userSkills) {
+      if (!userSkills || userSkills.length === 0) {
+        let hash = 0;
+        for (let i = 0; i < job.id.length; i++) hash += job.id.charCodeAt(i);
+        return 75 + (hash % 15);
+      }
+      let matched = 0;
+      job.skillsRequired.forEach(skill => {
+        if (userSkills.some(us => us.toLowerCase() === skill.toLowerCase() || us.toLowerCase().includes(skill.toLowerCase()) || skill.toLowerCase().includes(us.toLowerCase()))) {
+          matched++;
+        }
+      });
+      if (matched > 0) {
+        return Math.min(99, 80 + Math.round((matched / job.skillsRequired.length) * 19));
+      } else {
+        let hash = 0;
+        for (let i = 0; i < job.id.length; i++) hash += job.id.charCodeAt(i);
+        return 65 + (hash % 10);
+      }
+    }
+
+    function renderJobs(searchTerm = '') {
+      const grid = document.getElementById('jobsGrid');
+      if (!grid) return;
+      grid.innerHTML = '';
+
+      const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
+      const userSkills = currentUser.skills || [];
+
+      // Load custom published jobs from localStorage
+      const published = JSON.parse(localStorage.getItem('publishedJobs') || '[]');
+      const customJobs = published.map(p => {
+        var salaryMinVal = p.salaryMin;
+        var salaryMaxVal = p.salaryMax;
+        if (salaryMinVal === undefined || salaryMaxVal === undefined) {
+          var numbers = (p.salary || '').replace(/,/g, '').match(/\\d+/g);
+          if (numbers && numbers.length >= 2) {
+            salaryMinVal = parseInt(numbers[0]);
+            salaryMaxVal = parseInt(numbers[1]);
+          } else {
+            salaryMinVal = 8000;
+            salaryMaxVal = 12000;
+          }
+        }
+        
+        let skillsArr = ['UI Design', 'Figma'];
+        if (p.skills) {
+          if (Array.isArray(p.skills)) {
+            skillsArr = p.skills;
+          } else if (typeof p.skills === 'string') {
+            skillsArr = p.skills.split(',').map(s => s.trim()).filter(Boolean);
+          }
+        }
+
+        return {
+          id: String(p.id),
+          title: p.title || 'Untitled Job',
+          company: p.company || 'TechFlow',
+          logo: p.logo || `https://ui-avatars.com/api/?name=${encodeURIComponent(p.company || 'TechFlow')}&background=F4EEFF&color=8731A3`,
+          location: p.location || 'Lahore, Pakistan',
+          salary: `Rs. ${salaryMinVal.toLocaleString()} - ${salaryMaxVal.toLocaleString()} / mo`,
+          type: p.type || 'Internship',
+          timeAgo: 'Just now',
+          description: p.description || 'No description provided.',
+          requirements: [
+            "Proficient in the required technologies.",
+            "Strong communication and teamwork skills."
+          ],
+          skillsRequired: skillsArr,
+          address: 'TechFlow HQ, Lahore, Pakistan',
+          mapTitle: 'TechFlow Lahore Office',
+          applyLink: p.link || '#',
+          isPublishedFromCompany: true
+        };
+      });
+
+      // Merge custom jobs and static jobs
+      allJobs = [...customJobs, ...staticJobs];
+
+      // Calculate matches dynamically
+      allJobs.forEach(job => {
+        job.match = calculateJobMatch(job, userSkills);
+      });
+
+      // Sort by:
+      // 1. Newly published from company (isPublishedFromCompany === true) first!
+      // 2. Boosted/Premium second
+      // 3. Then by match score descending
+      allJobs.sort((a, b) => {
+        const aPub = a.isPublishedFromCompany ? 1 : 0;
+        const bPub = b.isPublishedFromCompany ? 1 : 0;
+        if (aPub !== bPub) {
+          return bPub - aPub;
+        }
+        const aBoost = a.boosted ? 1 : 0;
+        const bBoost = b.boosted ? 1 : 0;
+        if (aBoost !== bBoost) {
+          return bBoost - aBoost; // Boosted first
+        }
+        return b.match - a.match; // Match score second
+      });
+      
+      const filtered = allJobs.filter(job => {
+        const term = searchTerm.toLowerCase();
+        return job.title.toLowerCase().includes(term) ||
+               job.company.toLowerCase().includes(term) ||
+               job.skillsRequired.some(s => s.toLowerCase().includes(term));
+      });
+
+      // Limit to exactly 6 jobs
+      const limited = filtered.slice(0, 6);
+
+      if (limited.length === 0) {
+        grid.innerHTML = `
+          <div class="col-span-full py-12 flex flex-col items-center text-center">
+            <span class="material-symbols-outlined text-4xl text-deep-purple/40 mb-3">search_off</span>
+            <p class="text-sm font-medium text-deep-purple/60">No jobs match your search criteria.</p>
+          </div>
+        `;
+        return;
+      }
+
+      limited.forEach(job => {
+        const card = document.createElement('div');
+        card.className = "glass-card p-6 rounded-3xl cursor-pointer hover:scale-[1.03] transition-all duration-300 flex flex-col justify-between h-[280px] hover:shadow-2xl hover:border-primary/30 relative overflow-hidden group";
+        card.onclick = (e) => navigateToOpportunities(e);
+        
+        card.innerHTML = `
+          <div class="absolute -top-12 -right-12 w-28 h-28 bg-primary/5 rounded-full blur-xl group-hover:scale-125 transition-transform duration-500"></div>
+          
+          <div class="space-y-4">
+            <div class="flex justify-between items-start">
+              <span class="text-[10px] font-bold text-primary uppercase tracking-wider bg-primary/10 px-2.5 py-1 rounded-full">${job.company}</span>
+              <span class="text-[10px] font-bold text-green-700 bg-green-100 px-2.5 py-1 rounded-full">${job.match}% Match</span>
+            </div>
+            
+            <div>
+              <h3 class="font-extrabold text-base text-on-background line-clamp-1 group-hover:text-primary transition-colors">${job.title}</h3>
+              <p class="text-on-surface-variant text-xs mt-1 flex items-center gap-1">
+                <span class="material-symbols-outlined text-sm text-outline">location_on</span>
+                ${job.location}
+              </p>
+            </div>
+
+            <div class="flex flex-wrap gap-1.5">
+              ${job.skillsRequired.slice(0, 3).map(skill => `
+                <span class="text-[9px] font-bold px-2 py-0.5 bg-white/40 text-[#471A70] rounded-full border border-white/50">${skill}</span>
+              `).join('')}
+            </div>
+          </div>
+
+          <div class="pt-4 border-t border-white/20 flex justify-between items-center mt-auto">
+            <div class="text-left">
+              <p class="text-[8px] uppercase tracking-wider text-outline">Est. Salary</p>
+              <p class="text-xs font-bold text-[#471A70]">${job.salary.split('/')[0]}</p>
+            </div>
+            <button onclick="event.stopPropagation(); typeof handleQuickApply === 'function' ? handleQuickApply(event) : (window.parent && window.parent.App && typeof window.parent.App.handleQuickApply === 'function' ? window.parent.App.handleQuickApply('job', '${job.applyLink}') : window.location.hash='#/student/checkout')" data-link="${job.applyLink}" class="px-4 py-2 rounded-xl bg-primary text-white text-[10px] font-bold hover:bg-primary/90 active:scale-95 transition-all">
+              Apply
+            </button>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+      
+      // Wire up card mousemove gradient hover
+      grid.querySelectorAll('.glass-card').forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+          const rect = card.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          card.style.setProperty('--mouse-x', `${x}px`);
+          card.style.setProperty('--mouse-y', `${y}px`);
+        });
+      });
+    }
+
+    window.navigateToOpportunities = function(e) {
+      if (e) e.preventDefault();
+      if (window.parent && window.parent.App && typeof window.parent.App.navigate === 'function') {
+        window.parent.App.navigate('opportunities');
+      } else {
+        window.location.href = 'desktop_8a2486e4386645ccbff69a9772ae7c07_Job_Details_STU-03_-_Liquid_Glass_Desktop.html';
+      }
+    };
+
+    window.navigateToCourses = function(e) {
+      if (e) e.preventDefault();
+      if (window.parent && window.parent.App && typeof window.parent.App.navigate === 'function') {
+        window.parent.App.navigate('courses');
+      } else {
+        window.location.href = 'desktop_ccfeaf6a83cb45ab9794a18d3d7f3696_Course_Catalog_STU-10_-_Desktop_Liquid_Glass.html';
+      }
+    };
+
+    function calculateCourseMatch(course, userSkills) {
+      if (!userSkills || userSkills.length === 0) {
+        return course.match || 75;
+      }
+      const titleLower = course.title.toLowerCase();
+      const catLower = course.category.toLowerCase();
+      let matches = 0;
+      userSkills.forEach(skill => {
+        const s = skill.toLowerCase();
+        if (titleLower.includes(s) || catLower.includes(s)) {
+          matches++;
+        }
+      });
+      if (matches > 0) {
+        return Math.min(99, 85 + matches * 5);
+      } else {
+        let hash = 0;
+        for (let i = 0; i < course.id.length; i++) {
+          hash += course.id.charCodeAt(i);
+        }
+        return 70 + (hash % 10);
+      }
+    }
+
+    function renderCourses(searchTerm = '') {
+      const grid = document.getElementById('coursesGrid');
+      if (!grid) return;
+      grid.innerHTML = '';
+
+      const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
+      const userSkills = currentUser.skills || [];
+
+      // Calculate matches dynamically
+      allCourses.forEach(course => {
+        course.match = calculateCourseMatch(course, userSkills);
+      });
+
+      // Sort by match score descending
+      allCourses.sort((a, b) => b.match - a.match);
+      
+      const filtered = allCourses.filter(course => {
+        const term = searchTerm.toLowerCase();
+        return course.title.toLowerCase().includes(term) ||
+               course.provider.toLowerCase().includes(term) ||
+               course.category.toLowerCase().includes(term);
+      });
+
+      // Limit to exactly 6 courses
+      const limited = filtered.slice(0, 6);
+
+      if (limited.length === 0) {
+        grid.innerHTML = `
+          <div class="col-span-full py-12 flex flex-col items-center text-center">
+            <span class="material-symbols-outlined text-4xl text-deep-purple/40 mb-3">search_off</span>
+            <p class="text-sm font-medium text-deep-purple/60">No courses match your search criteria.</p>
+          </div>
+        `;
+        return;
+      }
+
+      limited.forEach(course => {
+        const isFav = favoriteCourseIds.includes(course.id);
+        const card = document.createElement('div');
+        card.className = "glass-card p-3 rounded-2xl group hover:scale-[1.02] hover:shadow-xl transition-all duration-300 relative overflow-hidden flex flex-col justify-between h-[240px]";
+        
+        card.innerHTML = `
+          <div class="absolute -right-10 -top-10 w-28 h-28 bg-primary/10 blur-2xl group-hover:bg-primary/20 transition-colors"></div>
+          <div>
+            <div class="h-28 rounded-xl overflow-hidden mb-2 relative bg-deep-purple/10">
+              <img src="${course.image}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt="${course.title}">
+              <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
+              <div class="absolute top-2 right-2 bg-white/20 backdrop-blur-md px-2 py-0.5 rounded-full text-white text-[9px] border border-white/30 font-bold">
+                ${course.match}% Match
+              </div>
+              <div class="absolute bottom-2 left-2 text-white/90 text-[9px] font-medium">
+                ${course.provider}
+              </div>
+            </div>
+            <h4 class="text-xs font-bold text-deep-purple line-clamp-1 leading-snug group-hover:text-primary transition-colors" title="${course.title}">${course.title}</h4>
+            <p class="text-[10px] text-deep-purple/60 mt-0.5 font-body-md">${course.category}</p>
+          </div>
+          
+          <div class="mt-2">
+            <div class="flex items-center justify-between text-[9px] text-deep-purple/50 mb-2">
+              <span class="flex items-center gap-1"><span class="material-symbols-outlined text-[10px]">schedule</span>${course.duration}</span>
+              <span class="flex items-center gap-1"><span class="material-symbols-outlined text-[10px]">trending_up</span>${course.level}</span>
+            </div>
+            <div class="flex gap-2">
+              <a href="#" onclick="handleQuickApply(event)" data-link="${course.link}" class="flex-grow flex items-center justify-center bg-primary text-white py-1.5 rounded-lg text-[10px] font-bold shadow-md hover:brightness-110 active:scale-95 transition-all border-none border-0 focus:outline-none focus:ring-0">
+                Apply
+              </a>
+              <button onclick="toggleFavorite('${course.id}')" class="p-1.5 glass-card rounded-lg text-deep-purple hover:bg-white/50 transition-all flex items-center justify-center">
+                <span class="material-symbols-outlined text-xs" style="font-variation-settings: 'FILL' ${isFav ? 1 : 0};">${isFav ? 'bookmark' : 'bookmark_border'}</span>
+              </button>
+            </div>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+      
+      // Wire up card mousemove gradient hover
+      grid.querySelectorAll('.glass-card').forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+          const rect = card.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          card.style.setProperty('--mouse-x', `${x}px`);
+          card.style.setProperty('--mouse-y', `${y}px`);
+        });
+      });
+    }
+
+    window.handleQuickApply = function(event) {
+      if (event) {
+        event.preventDefault();
+        event.stopPropagation();
+      }
+      const target = event.currentTarget || event.target;
+      const link = target.getAttribute('data-link');
+      const type = (link && (link.includes('coursera') || link.includes('edx'))) ? 'course' : 'job';
+      
+      if (window.parent && window.parent.App && typeof window.parent.App.handleQuickApply === 'function') {
+        window.parent.App.handleQuickApply(type, link);
+      } else {
+        const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+        if (isLoggedIn) {
+          if (type === 'job') {
+            window.location.hash = '#/student/checkout';
+          } else if (link) {
+            window.open(link, '_blank');
+          }
+        } else {
+          localStorage.setItem('pendingQuickApply', JSON.stringify({ type: type, link: link, view: 'student-dash' }));
+          window.location.hash = '#/student/login';
+        }
+      }
+    };
+
+    window.toggleFavorite = function(courseId) {
+      const index = favoriteCourseIds.indexOf(courseId);
+      if (index === -1) {
+        favoriteCourseIds.push(courseId);
+      } else {
+        favoriteCourseIds.splice(index, 1);
+      }
+      localStorage.setItem('favoriteCourses', JSON.stringify(favoriteCourseIds));
+      
+      const searchInput = document.getElementById('searchInput');
+      const val = searchInput ? searchInput.value : '';
+      renderCourses(val);
+    }
+
+    // Streak Calculation and Daily check-in
+    const todayDateStr = new Date().toISOString().split('T')[0];
+    const lastVisit = localStorage.getItem('lastVisitDate');
+    let streak = parseInt(localStorage.getItem('userStreak') || '1');
+    let streakHistory = JSON.parse(localStorage.getItem('streakHistory') || '[false, false, false, false, false, false, true]');
+
+    // Check-in calculation
+    if (!lastVisit) {
+      localStorage.setItem('lastVisitDate', todayDateStr);
+      localStorage.setItem('userStreak', '1');
+      streakHistory[6] = true; // Checked in today
+      localStorage.setItem('streakHistory', JSON.stringify(streakHistory));
+    } else if (lastVisit !== todayDateStr) {
+      const lastDate = new Date(lastVisit);
+      const currentDate = new Date(todayDateStr);
+      const diffTime = Math.abs(currentDate - lastDate);
+      const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+      
+      if (diffDays === 1) {
+        // Consecutive visit!
+        streak += 1;
+      } else {
+        // Missed days
+        streak = 1; // default back to 1
+      }
+      
+      // Shift history to make room for today
+      streakHistory.shift();
+      streakHistory.push(true); // Checked in today
+      
+      localStorage.setItem('lastVisitDate', todayDateStr);
+      localStorage.setItem('userStreak', streak.toString());
+      localStorage.setItem('streakHistory', JSON.stringify(streakHistory));
+    }
+
+    // Ensure last item (today) is checked in on load
+    streakHistory[6] = true;
+    localStorage.setItem('streakHistory', JSON.stringify(streakHistory));
+
+    function updateNotificationStreak() {
+      const streakTextEl = document.getElementById('notificationStreakText');
+      if (streakTextEl) {
+        const daysLeft = 5 - (streak % 5);
+        streakTextEl.textContent = `You are on a ${streak}-day streak! Only ${daysLeft} days left until your next reward.`;
+      }
+      
+      try {
+        if (window.parent && window.parent.document) {
+          const parentStreakTextEl = window.parent.document.getElementById('sharedNotificationStreakText');
+          if (parentStreakTextEl) {
+            const daysLeft = 5 - (streak % 5);
+            parentStreakTextEl.textContent = `You are on a ${streak}-day streak! Only ${daysLeft} days left until your next reward.`;
+          }
+        }
+      } catch (e) {}
+    }
+
+    function renderStreak() {
+      const countEl = document.getElementById('streakCount');
+      if (countEl) countEl.textContent = streak.toString();
+
+      const grid = document.getElementById('streakGrid');
+      if (grid) {
+        grid.innerHTML = '';
+        streakHistory.forEach((isChecked, index) => {
+          const block = document.createElement('button');
+          block.className = `aspect-square rounded-md shadow-sm transition-all hover:scale-105 active:scale-95 cursor-pointer ${
+            isChecked ? 'bg-primary' : 'bg-primary/20 border border-primary/30'
+          }`;
+          block.title = index === 6 ? 'Today' : `Day ${index + 1}`;
+          block.onclick = (e) => {
+            e.stopPropagation(); // prevent triggering parent widget check-in
+            toggleDay(index);
+          };
+          grid.appendChild(block);
+        });
+      }
+
+      const milestoneEl = document.getElementById('streakMilestoneText');
+      if (milestoneEl) {
+        const daysLeft = 5 - (streak % 5);
+        milestoneEl.textContent = `Keep it up! ${daysLeft} days to your next reward milestone.`;
+      }
+
+      updateNotificationStreak();
+    }
+
+    function toggleDay(index) {
+      streakHistory[index] = !streakHistory[index];
+      
+      // Recalculate streak based on number of true checked days in the history
+      const checkedCount = streakHistory.filter(Boolean).length;
+      // Adjust streak based on the toggle diff
+      const oldCheckedCount = JSON.parse(localStorage.getItem('streakHistory')).filter(Boolean).length;
+      streak += (checkedCount - oldCheckedCount);
+      if (streak < 0) streak = 0;
+
+      localStorage.setItem('streakHistory', JSON.stringify(streakHistory));
+      localStorage.setItem('userStreak', streak.toString());
+      
+      renderStreak();
+      
+      if (window.parent && window.parent.App && typeof window.parent.App.showToast === 'function') {
+        window.parent.App.showToast(`Streak check-in updated! Total streak: ${streak} days 🔥`, 'info');
+      }
+    }
+
+    window.triggerCheckIn = function(event) {
+      if (event) event.preventDefault();
+      
+      if (!streakHistory[6]) {
+        streakHistory[6] = true;
+        streak += 1;
+        localStorage.setItem('streakHistory', JSON.stringify(streakHistory));
+        localStorage.setItem('userStreak', streak.toString());
+        renderStreak();
+        
+        if (window.parent && window.parent.App && typeof window.parent.App.showToast === 'function') {
+          window.parent.App.showToast(`Checked in for today! Streak is now ${streak} days! 🔥`, 'success');
+        }
+      } else {
+        if (window.parent && window.parent.App && typeof window.parent.App.showToast === 'function') {
+          window.parent.App.showToast(`You are already checked in for today! Streak: ${streak} days 🔥`, 'info');
+        }
+      }
+    };
+
+    // Show welcome streak toast once per session
+    if (!sessionStorage.getItem('streakToastShown')) {
+      sessionStorage.setItem('streakToastShown', 'true');
+      setTimeout(() => {
+        if (window.parent && window.parent.App && typeof window.parent.App.showToast === 'function') {
+          window.parent.App.showToast(`Welcome back! Your daily streak is active at ${streak} days! 🔥`, 'success');
+        }
+      }, 1500);
+    }
+
+    // Micro-interaction for the Trust Gauge
+    window.addEventListener('DOMContentLoaded', () => {
+      // Gauge setup
+      const gauge = document.querySelector('.trust-gauge');
+      if (gauge) {
+        const score = 85;
+        const circumference = 2 * Math.PI * 70;
+        const offset = circumference - (score / 100) * circumference;
+
+        setTimeout(() => {
+          gauge.style.strokeDashoffset = offset;
+        }, 500);
+      }
+
+      // Sidebar hover effect for static glass cards
+      document.querySelectorAll('.glass-card').forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+          const rect = card.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          card.style.setProperty('--mouse-x', `${x}px`);
+          card.style.setProperty('--mouse-y', `${y}px`);
+        });
+      });
+
+      // Render items
+      renderCourses();
+      renderJobs();
+      renderStreak();
+
+      // Set up notifications toggling
+      const notificationBtn = document.getElementById('notificationBtn');
+      const notificationDropdown = document.getElementById('notificationDropdown');
+      const notificationBadge = document.getElementById('notificationBadge');
+      const clearNotificationsBtn = document.getElementById('clearNotificationsBtn');
+
+      if (notificationBtn && notificationDropdown) {
+        notificationBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          notificationDropdown.classList.toggle('hidden');
+        });
+
+        document.addEventListener('click', (e) => {
+          if (!notificationDropdown.classList.contains('hidden') && !notificationDropdown.contains(e.target) && e.target !== notificationBtn) {
+            notificationDropdown.classList.add('hidden');
+          }
+        });
+      }
+
+      if (clearNotificationsBtn && notificationBadge) {
+        clearNotificationsBtn.addEventListener('click', () => {
+          notificationBadge.classList.add('hidden');
+          const listItems = notificationDropdown.querySelector('.space-y-3');
+          if (listItems) {
+            listItems.innerHTML = `
+              <p class="text-xs text-deep-purple/50 italic py-4 text-center">No new notifications.</p>
+            `;
+          }
+        });
+      }
+
+      // Search input handler
+      const searchInput = document.getElementById('searchInput');
+      if (searchInput) {
+        searchInput.addEventListener('input', (e) => {
+          renderCourses(e.target.value);
+          renderJobs(e.target.value);
+        });
+      }
+
+      // Expose to window for contextual search routing
+      window.renderCourses = function(searchTerm) {
+        const input = document.getElementById('searchInput');
+        if (input && searchTerm !== undefined) {
+          input.value = searchTerm;
+        }
+        renderCourses(searchTerm || '');
+      };
+
+      window.renderJobs = function(searchTerm) {
+        const input = document.getElementById('searchInput');
+        if (input && searchTerm !== undefined) {
+          input.value = searchTerm;
+        }
+        renderJobs(searchTerm || '');
+      };
+    });
+  </script>
+</body>
+
+</html>

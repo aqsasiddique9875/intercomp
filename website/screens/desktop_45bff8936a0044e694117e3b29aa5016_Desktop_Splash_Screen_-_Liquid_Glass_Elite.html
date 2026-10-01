@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>JobFlow Splash Screen</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+  <style>
+    @keyframes float {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      33% { transform: translateY(-8px) rotate(0.5deg); }
+      66% { transform: translateY(4px) rotate(-0.5deg); }
+    }
+
+    @keyframes glow-pulse {
+      0%, 100% { opacity: 0.4; transform: scale(1); filter: blur(60px); }
+      50% { opacity: 0.8; transform: scale(1.15); filter: blur(80px); }
+    }
+
+    @keyframes spin-custom {
+      to { transform: rotate(360deg); }
+    }
+
+    .logo-enter {
+      animation: logo-spring 1.2s cubic-bezier(0.25, 1, 0.5, 1) forwards, float 6s ease-in-out infinite 1.2s;
+      opacity: 0;
+    }
+
+    @keyframes logo-spring {
+      0% { transform: scale(0.85); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    .glass-shell {
+      background: rgba(255, 255, 255, 0.35);
+      backdrop-filter: blur(28px);
+      -webkit-backdrop-filter: blur(28px);
+      border: 0.5px solid rgba(255, 255, 255, 0.6);
+      box-shadow: 0 12px 40px 0 rgba(71, 26, 112, 0.15);
+    }
+
+    .glow-sphere {
+      background: radial-gradient(circle, #BF7DF5 0%, #4D9EFA 100%);
+      animation: glow-pulse 4s ease-in-out infinite;
+    }
+
+    .progress-spinner {
+      border: 3px solid rgba(135, 49, 163, 0.1);
+      border-top: 3px solid #8731a3;
+      border-radius: 50%;
+      width: 32px;
+      height: 32px;
+      animation: spin-custom 1s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    }
+
+    body, html {
+      height: 100%;
+      width: 100%;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background-color: #f9f9ff;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+  </style>
+</head>
+<body class="flex flex-col items-center justify-center text-on-background relative select-none">
+
+<!-- Background WebGL Shader -->
+<div class="absolute inset-0 w-full h-full z-0" style="display:block;">
+  <canvas id="shader-canvas-ANIMATION_3" style="display:block;width:100%;height:100%"></canvas>
+  <script>
+  (function() {
+    const canvas = document.getElementById('shader-canvas-ANIMATION_3');
+
+    function syncSize() {
+      const w = window.innerWidth;
+      const h = window.innerHeight;
+      if (canvas.width !== w || canvas.height !== h) {
+        canvas.width  = w;
+        canvas.height = h;
+      }
+    }
+    window.addEventListener('resize', syncSize);
+    syncSize();
+
+    const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+    if (!gl) return;
+    const vs = `attribute vec2 a_position;
+varying vec2 v_texCoord;
+void main() {
+  v_texCoord = a_position * 0.5 + 0.5;
+  gl_Position = vec4(a_position, 0.0, 1.0);
+}`;
+    const fs = `precision highp float;
+varying vec2 v_texCoord;
+uniform float u_time;
+uniform vec2 u_resolution;
+
+void main() {
+    vec2 uv = v_texCoord;
+    
+    // Base pastel lavender-blue background
+    vec3 color = vec3(0.863, 0.894, 0.969); // #DCE4F7
+    
+    // Rotating light orb logic
+    vec2 center = vec2(0.5 + 0.3 * cos(u_time * 0.5), 0.5 + 0.2 * sin(u_time * 0.7));
+    float dist = distance(uv, center);
+    
+    // Indigo/Purple light orb (#BF5AF2)
+    vec3 orbColor = vec3(0.749, 0.353, 0.949);
+    float glow = smoothstep(0.6, 0.0, dist);
+    color = mix(color, orbColor, glow * 0.4);
+    
+    // Secondary subtle purple shift
+    vec2 center2 = vec2(0.5 + 0.2 * sin(u_time * 0.4), 0.5 + 0.3 * cos(u_time * 0.6));
+    float dist2 = distance(uv, center2);
+    vec3 purpleGlow = vec3(0.639, 0.298, 0.745); // #A34CBE
+    float glow2 = smoothstep(0.5, 0.0, dist2);
+    color = mix(color, purpleGlow, glow2 * 0.2);
+
+    gl_FragColor = vec4(color, 1.0);
+}`;
+    function cs(type, src) {
+      const s = gl.createShader(type);
+      gl.shaderSource(s, src);
+      gl.compileShader(s);
+      return s;
+    }
+    const prog = gl.createProgram();
+    gl.attachShader(prog, cs(gl.VERTEX_SHADER, vs));
+    gl.attachShader(prog, cs(gl.FRAGMENT_SHADER, fs));
+    gl.linkProgram(prog);
+    gl.useProgram(prog);
+    const buf = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 1,-1, -1,1, 1,1]), gl.STATIC_DRAW);
+    const pos = gl.getAttribLocation(prog, 'a_position');
+    gl.enableVertexAttribArray(pos);
+    gl.vertexAttribPointer(pos, 2, gl.FLOAT, false, 0, 0);
+    const uTime = gl.getUniformLocation(prog, 'u_time');
+    const uRes = gl.getUniformLocation(prog, 'u_resolution');
+
+    function render(t) {
+      gl.viewport(0, 0, canvas.width, canvas.height);
+      if (uTime) gl.uniform1f(uTime, t * 0.001);
+      if (uRes) gl.uniform2f(uRes, canvas.width, canvas.height);
+      gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+      requestAnimationFrame(render);
+    }
+    render(0);
+  })();
+  </script>
+</div>
+
+<!-- Content Canvas -->
+<main class="relative z-10 w-full max-w-md px-6">
+  <div class="glass-shell rounded-[40px] p-12 flex flex-col items-center justify-between min-h-[540px] relative overflow-hidden">
+    <!-- Pulsing Glow Behind Logo -->
+    <div class="glow-sphere absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 rounded-full z-0 pointer-events-none"></div>
+    
+    <!-- 3D Glassmorphic Logo -->
+    <div class="logo-enter relative z-10 flex flex-col items-center transition-all">
+      <img alt="JobFlow Logo" class="w-44 h-44 object-contain drop-shadow-[0_20px_50px_rgba(71,26,112,0.2)]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBxgp7i9gRev6ECoGB3uzpH69Vzx4y1NHg3jf6VFMjH5FLzxDo2gsAwhcHubAY9IEeTVy6zPu2TFY58YHdTmpbykoHwISddvlvFj6DSaP9cel-JA979JDhTrd-S_pK3OYK1Pf50yDi1rBPuv5JxZS_0ORom49Tcwq1c1kR4ignORed9jApuG9wCX2eGt0uKJu6mRJ2LZDIijV7hKlt4DmhCxjjM_AvQBJ_jC8XlH-UvfiJ1yVkbTdd9SWA21kV2ScxGS6jAly3kAEzx"/>
+      <h1 class="mt-6 font-extrabold text-3xl text-[#141c29] tracking-wider">
+        JOBPATH
+      </h1>
+    </div>
+
+    <!-- Progress Indicator -->
+    <div class="relative z-10 mt-8 flex flex-col items-center gap-4">
+      <div class="progress-spinner"></div>
+      <p class="text-xs uppercase font-bold text-[#471A70]/60 tracking-[0.2em] opacity-85">
+        Optimizing Career Flow
+      </p>
+    </div>
+
+    <!-- Footer -->
+    <footer class="relative z-10 mt-8 w-full text-center">
+      <p class="text-xs font-semibold tracking-tight text-[#471A70]/65">
+        Powered by AI-Based Verifications
+      </p>
+    </footer>
+  </div>
+</main>
+
+<!-- Parallax Micro-interaction Script -->
+<script>
+  document.addEventListener('mousemove', (e) => {
+    const logo = document.querySelector('.logo-enter');
+    const glow = document.querySelector('.glow-sphere');
+    if (!logo || !glow) return;
+
+    const xAxis = (window.innerWidth / 2 - e.pageX) / 40;
+    const yAxis = (window.innerHeight / 2 - e.pageY) / 40;
+
+    logo.style.transform = `scale(1) translate(${xAxis}px, ${yAxis}px)`;
+    glow.style.transform = `translate(calc(-50% + ${xAxis * 1.5}px), calc(-50% + ${yAxis * 1.5}px))`;
+  });
+</script>
+</body>
+</html>

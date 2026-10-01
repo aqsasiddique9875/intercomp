@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>EliteRecruit | Saved Drafts</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "outline": "#817381",
+                      "on-secondary-fixed-variant": "#85145a",
+                      "on-surface-variant": "#4f4350",
+                      "error": "#ba1a1a",
+                      "error-container": "#ffdad6",
+                      "secondary-fixed-dim": "#ffafd3",
+                      "tertiary-fixed": "#e2e2e2",
+                      "on-surface": "#141b2b",
+                      "on-primary": "#ffffff",
+                      "outline-variant": "#d2c1d2",
+                      "surface": "#f9f9ff",
+                      "tertiary": "#404242",
+                      "surface-container-high": "#e1e8fd",
+                      "on-tertiary-fixed-variant": "#454747",
+                      "surface-container-highest": "#dce2f7",
+                      "inverse-surface": "#293040",
+                      "tertiary-fixed-dim": "#c6c6c7",
+                      "on-tertiary-container": "#d0d0d0",
+                      "on-error": "#ffffff",
+                      "on-error-container": "#93000a",
+                      "surface-bright": "#f9f9ff",
+                      "secondary-fixed": "#ffd8e7",
+                      "on-background": "#141b2b",
+                      "surface-container": "#e9edff",
+                      "on-primary-fixed": "#330044",
+                      "on-secondary-container": "#76014e",
+                      "on-secondary": "#ffffff",
+                      "surface-dim": "#d3daef",
+                      "primary-fixed": "#fbd7ff",
+                      "on-secondary-fixed": "#3d0026",
+                      "primary-container": "#8731a3",
+                      "tertiary-container": "#57595a",
+                      "secondary-container": "#fc79bd",
+                      "on-primary-container": "#f4beff",
+                      "surface-variant": "#dce2f7",
+                      "on-tertiary": "#ffffff",
+                      "background": "#f9f9ff",
+                      "on-primary-fixed-variant": "#72198f",
+                      "secondary": "#a43073",
+                      "inverse-on-surface": "#edf0ff",
+                      "on-tertiary-fixed": "#1a1c1c",
+                      "primary-fixed-dim": "#f0b0ff",
+                      "inverse-primary": "#f0b0ff",
+                      "surface-tint": "#8d37a9",
+                      "surface-container-lowest": "#ffffff",
+                      "surface-container-low": "#f1f3ff",
+                      "primary": "#6c1089"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "stack-sm": "8px",
+                      "margin-mobile": "20px",
+                      "gutter": "24px",
+                      "stack-md": "16px",
+                      "margin-desktop": "64px",
+                      "container-max": "1280px",
+                      "stack-lg": "32px"
+              },
+              "fontFamily": {
+                      "display-lg": ["Inter"],
+                      "label-md": ["Inter"],
+                      "headline-md": ["Inter"],
+                      "display-lg-mobile": ["Inter"],
+                      "label-sm": ["Inter"],
+                      "body-md": ["Inter"],
+                      "headline-sm": ["Inter"],
+                      "body-lg": ["Inter"]
+              },
+              "fontSize": {
+                      "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                      "headline-md": ["30px", {"lineHeight": "38px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                      "display-lg-mobile": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                      "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "headline-sm": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                      "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}]
+              }
+            },
+          },
+        }
+    </script>
+<style>
+        body {
+            background-color: #DCE4F7;
+            overflow-x: hidden;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.65);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .liquid-bg {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            z-index: -1;
+            background: #DCE4F7;
+            overflow: hidden;
+        }
+
+        .blob {
+            position: absolute;
+            filter: blur(80px);
+            opacity: 0.35;
+            border-radius: 50%;
+            animation: move 20s infinite alternate;
+        }
+
+        @keyframes move {
+            from { transform: translate(0, 0) scale(1); }
+            to { transform: translate(100px, 50px) scale(1.2); }
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface">
+<!-- ===== SHARED COMMAND CENTER NAV ===== -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,300,0,0" rel="stylesheet" id="ms-font-link"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" id="inter-font-link"/>
+<style id="shared-nav-css">
+  @import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,300,0,0&display=block');
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+  html, body { background-color: #DCE4F7 !important; }
+  body > main { margin-left: 220px !important; padding-top: 78px !important; }
+  .snav-btn:hover { background: rgba(71,26,112,0.08) !important; }
+  .snav-btn-active:hover { background: #3d1660 !important; }
+  .snav-logout:hover { background: rgba(192,41,90,0.07) !important; }
+</style>
+<aside id="shared-sidebar" style="position:fixed;left:0;top:0;height:100vh;width:220px;background:#ffffff;display:flex;flex-direction:column;padding:28px 0 20px;z-index:99999;border-right:1px solid rgba(71,26,112,0.09);box-shadow:2px 0 14px rgba(71,26,112,0.07);">
+  <!-- Title -->
+  <div style="padding:0 20px;margin-bottom:26px;">
+    <div style="font-family:'Inter',sans-serif;font-size:19px;font-weight:900;color:#1a0533;letter-spacing:-0.4px;line-height:1.2;"><span style="color:#8731a3;">Intercomp</span></div>
+    <div style="font-family:'Inter',sans-serif;font-size:10px;color:rgba(71,26,112,0.6);margin-top:3px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;">Company Portal</div>
+  </div>
+  <!-- Nav Items -->
+  <nav style="display:flex;flex-direction:column;padding:0 10px;flex:1;gap:0;overflow-y:auto;">
+    <a href="#" id="snav-dashboard" class="snav-btn" style="display:flex;align-items:center;gap:12px;padding:11px 14px;border-radius:12px;color:#2d1152;text-decoration:none;font-family:'Inter',sans-serif;font-size:12px;font-weight:600;letter-spacing:0.07em;text-transform:uppercase;cursor:pointer;background:transparent;transition:background 0.15s ease;margin:1px 0;border:none;width:100%;text-align:left;">
+      <span style="font-family:'Material Symbols Outlined';font-size:20px;font-weight:normal;font-style:normal;line-height:1;letter-spacing:normal;text-transform:none;display:inline-block;white-space:nowrap;word-wrap:normal;direction:ltr;-webkit-font-feature-settings:'liga';font-feature-settings:'liga';-webkit-font-smoothing:antialiased;color:#2d1152;flex-shrink:0;width:22px;">dashboard</span><span>Dashboard</span>
+    </a>
+    <a href="#" id="snav-jobboard" class="snav-btn" style="display:flex;align-items:center;gap:12px;padding:11px 14px;border-radius:12px;color:#2d1152;text-decoration:none;font-family:'Inter',sans-serif;font-size:12px;font-weight:600;letter-spacing:0.07em;text-transform:uppercase;cursor:pointer;background:transparent;transition:background 0.15s ease;margin:1px 0;border:none;width:100%;text-align:left;">
+      <span style="font-family:'Material Symbols Outlined';font-size:20px;font-weight:normal;font-style:normal;line-height:1;letter-spacing:normal;text-transform:none;display:inline-block;white-space:nowrap;word-wrap:normal;direction:ltr;-webkit-font-feature-settings:'liga';font-feature-settings:'liga';-webkit-font-smoothing:antialiased;color:#2d1152;flex-shrink:0;width:22px;">assignment</span><span>Job Board</span>
+    </a>
+    <a href="#" id="snav-talent" class="snav-btn" style="display:flex;align-items:center;gap:12px;padding:11px 14px;border-radius:12px;color:#2d1152;text-decoration:none;font-family:'Inter',sans-serif;font-size:12px;font-weight:600;letter-spacing:0.07em;text-transform:uppercase;cursor:pointer;background:transparent;transition:background 0.15s ease;margin:1px 0;border:none;width:100%;text-align:left;">
+      <span style="font-family:'Material Symbols Outlined';font-size:20px;font-weight:normal;font-style:normal;line-height:1;letter-spacing:normal;text-transform:none;display:inline-block;white-space:nowrap;word-wrap:normal;direction:ltr;-webkit-font-feature-settings:'liga';font-feature-settings:'liga';-webkit-font-smoothing:antialiased;color:#2d1152;flex-shrink:0;width:22px;">person_search</span><span>Talent Pool</span>
+    </a>
+    <a href="#" id="snav-postings" class="snav-btn" style="display:flex;align-items:center;gap:12px;padding:11px 14px;border-radius:12px;color:#2d1152;text-decoration:none;font-family:'Inter',sans-serif;font-size:12px;font-weight:600;letter-spacing:0.07em;text-transform:uppercase;cursor:pointer;background:transparent;transition:background 0.15s ease;margin:1px 0;border:none;width:100%;text-align:left;">
+      <span style="font-family:'Material Symbols Outlined';font-size:20px;font-weight:normal;font-style:normal;line-height:1;letter-spacing:normal;text-transform:none;display:inline-block;white-space:nowrap;word-wrap:normal;direction:ltr;-webkit-font-feature-settings:'liga';font-feature-settings:'liga';-webkit-font-smoothing:antialiased;color:#2d1152;flex-shrink:0;width:22px;">work</span><span>Postings</span>
+    </a>
+    <a href="#" id="snav-kanban" class="snav-btn" style="display:flex;align-items:center;gap:12px;padding:11px 14px;border-radius:12px;color:#2d1152;text-decoration:none;font-family:'Inter',sans-serif;font-size:12px;font-weight:600;letter-spacing:0.07em;text-transform:uppercase;cursor:pointer;background:transparent;transition:background 0.15s ease;margin:1px 0;border:none;width:100%;text-align:left;">
+      <span style="font-family:'Material Symbols Outlined';font-size:20px;font-weight:normal;font-style:normal;line-height:1;letter-spacing:normal;text-transform:none;display:inline-block;white-space:nowrap;word-wrap:normal;direction:ltr;-webkit-font-feature-settings:'liga';font-feature-settings:'liga';-webkit-font-smoothing:antialiased;color:#2d1152;flex-shrink:0;width:22px;">groups</span><span>Applicants</span>
+    </a>
+    <a href="#" id="snav-scheduler" class="snav-btn" style="display:flex;align-items:center;gap:12px;padding:11px 14px;border-radius:12px;color:#2d1152;text-decoration:none;font-family:'Inter',sans-serif;font-size:12px;font-weight:600;letter-spacing:0.07em;text-transform:uppercase;cursor:pointer;background:transparent;transition:background 0.15s ease;margin:1px 0;border:none;width:100%;text-align:left;">
+      <span style="font-family:'Material Symbols Outlined';font-size:20px;font-weight:normal;font-style:normal;line-height:1;letter-spacing:normal;text-transform:none;display:inline-block;white-space:nowrap;word-wrap:normal;direction:ltr;-webkit-font-feature-settings:'liga';font-feature-settings:'liga';-webkit-font-smoothing:antialiased;color:#2d1152;flex-shrink:0;width:22px;">event_available</span><span>Interviews</span>
+    </a>
+    <a href="#" id="snav-analytics" class="snav-btn" style="display:flex;align-items:center;gap:12px;padding:11px 14px;border-radius:12px;color:#2d1152;text-decoration:none;font-family:'Inter',sans-serif;font-size:12px;font-weight:600;letter-spacing:0.07em;text-transform:uppercase;cursor:pointer;background:transparent;transition:background 0.15s ease;margin:1px 0;border:none;width:100%;text-align:left;">
+      <span style="font-family:'Material Symbols Outlined';font-size:20px;font-weight:normal;font-style:normal;line-height:1;letter-spacing:normal;text-transform:none;display:inline-block;white-space:nowrap;word-wrap:normal;direction:ltr;-webkit-font-feature-settings:'liga';font-feature-settings:'liga';-webkit-font-smoothing:antialiased;color:#2d1152;flex-shrink:0;width:22px;">monitoring</span><span>Analytics</span>
+    </a>
+    <a href="#" id="snav-saved-drafts" class="snav-btn" style="display:flex;align-items:center;gap:12px;padding:11px 14px;border-radius:12px;color:#2d1152;text-decoration:none;font-family:'Inter',sans-serif;font-size:12px;font-weight:600;letter-spacing:0.07em;text-transform:uppercase;cursor:pointer;background:transparent;transition:background 0.15s ease;margin:1px 0;border:none;width:100%;text-align:left;">
+      <span style="font-family:'Material Symbols Outlined';font-size:20px;font-weight:normal;font-style:normal;line-height:1;letter-spacing:normal;text-transform:none;display:inline-block;white-space:nowrap;word-wrap:normal;direction:ltr;-webkit-font-feature-settings:'liga';font-feature-settings:'liga';-webkit-font-smoothing:antialiased;color:#2d1152;flex-shrink:0;width:22px;">drafts</span><span>Save Draft</span>
+    </a>
+    <a href="#" id="snav-payment" class="snav-btn" style="display:flex;align-items:center;gap:12px;padding:11px 14px;border-radius:12px;color:#2d1152;text-decoration:none;font-family:'Inter',sans-serif;font-size:12px;font-weight:600;letter-spacing:0.07em;text-transform:uppercase;cursor:pointer;background:transparent;transition:background 0.15s ease;margin:1px 0;border:none;width:100%;text-align:left;">
+      <span style="font-family:'Material Symbols Outlined';font-size:20px;font-weight:normal;font-style:normal;line-height:1;letter-spacing:normal;text-transform:none;display:inline-block;white-space:nowrap;word-wrap:normal;direction:ltr;-webkit-font-feature-settings:'liga';font-feature-settings:'liga';-webkit-font-smoothing:antialiased;color:#2d1152;flex-shrink:0;width:22px;">payments</span><span>Payment</span>
+    </a>
+  </nav>
+  <!-- New Job Posting Button -->
+  <div style="padding:0 12px;margin-top:14px;">
+    <button id="snav-new-posting" style="width:100%;padding:13px 0;background:#471A70;color:#fff;border:none;border-radius:999px;font-family:'Inter',sans-serif;font-weight:700;font-size:13px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:7px;box-shadow:0 4px 16px rgba(71,26,112,0.28);transition:all 0.2s;letter-spacing:0.02em;">
+      <span style="font-family:'Material Symbols Outlined';font-size:18px;font-weight:normal;font-style:normal;line-height:1;letter-spacing:normal;text-transform:none;-webkit-font-feature-settings:'liga';font-feature-settings:'liga';-webkit-font-smoothing:antialiased;color:#fff;display:inline-block;">add</span>
+      New Job Posting
+    </button>
+  </div>
+  <!-- Bottom: Help + Logout -->
+  <div style="padding:12px 10px 0;margin-top:10px;border-top:1px solid rgba(71,26,112,0.08);">
+    <a href="#" id="snav-help" style="display:flex;align-items:center;gap:11px;padding:9px 12px;border-radius:10px;color:rgba(45,17,82,0.5);text-decoration:none;font-family:'Inter',sans-serif;font-size:11.5px;font-weight:600;letter-spacing:0.07em;text-transform:uppercase;cursor:pointer;background:transparent;transition:background 0.15s;margin-bottom:2px;" class="snav-btn">
+      <span style="font-family:'Material Symbols Outlined';font-size:18px;font-weight:normal;font-style:normal;line-height:1;letter-spacing:normal;text-transform:none;-webkit-font-feature-settings:'liga';font-feature-settings:'liga';-webkit-font-smoothing:antialiased;color:rgba(71,26,112,0.4);display:inline-block;">help_outline</span>
+      Help Center
+    </a>
+    <a href="#" id="snav-logout" class="snav-logout" style="display:flex;align-items:center;gap:11px;padding:9px 12px;border-radius:10px;color:#c0295a;text-decoration:none;font-family:'Inter',sans-serif;font-size:11.5px;font-weight:600;letter-spacing:0.07em;text-transform:uppercase;cursor:pointer;background:transparent;transition:background 0.15s;">
+      <span style="font-family:'Material Symbols Outlined';font-size:18px;font-weight:normal;font-style:normal;line-height:1;letter-spacing:normal;text-transform:none;-webkit-font-feature-settings:'liga';font-feature-settings:'liga';-webkit-font-smoothing:antialiased;color:#c0295a;display:inline-block;">logout</span>
+      Log Out
+    </a>
+  </div>
+</aside>
+<style id="topbar-search-styles">
+  #topbar-search {
+    width: 144px;
+    transition: width 0.3s ease;
+  }
+  @media (min-width: 768px) {
+    #topbar-search {
+      width: 192px;
+    }
+    #topbar-search:focus {
+      width: 240px;
+    }
+  }
+  @media (min-width: 1024px) {
+    #topbar-search {
+      width: 256px;
+    }
+    #topbar-search:focus {
+      width: 320px;
+    }
+  }
+</style>
+<!-- Shared Top Bar -->
+<header id="shared-topbar" style="position:fixed;top:0;left:220px;width:calc(100vw - 220px);height:56px;background:rgba(255,255,255,0.15);backdrop-filter:blur(28px);-webkit-backdrop-filter:blur(28px);display:flex;align-items:center;justify-content:flex-end;padding:0 32px;gap:24px;z-index:99998;border-bottom:1px solid rgba(255,255,255,0.6);box-shadow:0 12px 40px 0 rgba(71,26,112,0.08);">
+  <div style="display:flex;align-items:center;gap:8px;background:rgba(255,255,255,0.2);padding:6px 16px;border-radius:999px;border:1px solid rgba(255,255,255,0.6);box-shadow:0 2px 4px rgba(0,0,0,0.02);transition:all 0.3s;">
+    <span style="font-family:'Material Symbols Outlined';font-size:18px;font-weight:normal;font-style:normal;line-height:1;letter-spacing:normal;text-transform:none;-webkit-font-feature-settings:'liga';font-feature-settings:'liga';-webkit-font-smoothing:antialiased;color:#2d1152;display:inline-block;user-select:none;">search</span>
+    <input id="topbar-search" style="background:transparent;border:none;outline:none;color:#2d1152;font-size:12px;font-family:'Inter',sans-serif;padding:0;margin:0;height:20px;line-height:20px;box-shadow:none;" placeholder="Search candidates..." type="text"/>
+  </div>
+  <div style="position:relative;cursor:pointer;display:flex;align-items:center;justify-content:center;">
+    <span style="font-family:'Material Symbols Outlined';font-size:22px;font-weight:normal;font-style:normal;line-height:1;letter-spacing:normal;text-transform:none;-webkit-font-feature-settings:'liga';font-feature-settings:'liga';-webkit-font-smoothing:antialiased;color:#2d1152;display:inline-block;">notifications</span>
+    <span style="position:absolute;top:1.5px;right:1.5px;width:8px;height:8px;background:#ff453a;border-radius:50%;border:1.5px solid #ffffff;"></span>
+  </div>
+  <span style="font-family:'Material Symbols Outlined';font-size:22px;font-weight:normal;font-style:normal;line-height:1;letter-spacing:normal;text-transform:none;-webkit-font-feature-settings:'liga';font-feature-settings:'liga';-webkit-font-smoothing:antialiased;color:#2d1152;display:inline-block;cursor:pointer;">settings</span>
+  <div style="width:40px;height:40px;border-radius:50%;overflow:hidden;cursor:pointer;border:2px solid #8731a3;box-shadow:0 2px 8px rgba(135,49,163,0.15);transition:transform 0.2s;">
+    <img alt="Profile" style="width:100%;height:100%;object-fit:cover;" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA25J-RpNqe_ribsVF3fd4mnzE6ifwHeZuVNu5AMQU2EnYpClByPq7nwtb_OW8YWdE9zHhVr_myUbTkksryul6U1vE6tYcUe2Is_Ykf44A04yPQngjPdz5xvO59lZYpyYogiOT7fWRVG0OG2uYrLcYBA_hW8xxo8YeR57ryeTXbIvT3Ziwr5FLGpOpoVx-euTPcJedNNZFG0cab6QctiazShZ8qfEjAKNGvyzlC9_fl1G_pUaR0pvuTjw1ClquEYOqjrb_2RPHXuypu"/>
+  </div>
+</header>
+<!-- Nav Wiring -->
+<script id="shared-nav-wiring">
+(function() {
+  var ACTIVE_BG = '#471A70';
+  var ACTIVE_COLOR = '#ffffff';
+  var INACTIVE_BG = 'transparent';
+  var INACTIVE_COLOR = '#2d1152';
+  var ACTIVE_ICON_COLOR = '#ffffff';
+  var INACTIVE_ICON_COLOR = '#2d1152';
+  var BASE_STYLE = "display:flex;align-items:center;gap:12px;padding:11px 14px;border-radius:12px;text-decoration:none;font-family:'Inter',sans-serif;font-size:12px;font-weight:600;letter-spacing:0.07em;text-transform:uppercase;cursor:pointer;margin:1px 0;border:none;width:100%;text-align:left;transition:background 0.15s ease;";
+  var ICON_BASE = "font-family:'Material Symbols Outlined';font-size:20px;font-weight:normal;font-style:normal;line-height:1;letter-spacing:normal;text-transform:none;display:inline-block;white-space:nowrap;word-wrap:normal;direction:ltr;-webkit-font-feature-settings:'liga';font-feature-settings:'liga';-webkit-font-smoothing:antialiased;flex-shrink:0;width:22px;";
+
+  var routes = {
+    'snav-dashboard':    'recruiter-dash',
+    'snav-jobboard':     'jobboard',
+    'snav-talent':       'talent',
+    'snav-postings':     'postings',
+    'snav-kanban':       'kanban',
+    'snav-scheduler':    'scheduler',
+    'snav-analytics':    'recruiter-analytics',
+    'snav-saved-drafts': 'saved-drafts',
+    'snav-payment':      'payment'
+  };
+
+  function navigate(dest) {
+    if (window.parent && window.parent.App) window.parent.App.navigate(dest);
+  }
+
+  function setActive(route) {
+    var reverseMap = {};
+    Object.keys(routes).forEach(function(k) { reverseMap[routes[k]] = k; });
+    var activeId = reverseMap[route];
+    Object.keys(routes).forEach(function(id) {
+      var el = document.getElementById(id);
+      if (!el) return;
+      var icon = el.querySelector('span:first-child');
+      if (id === activeId) {
+        el.style.cssText = BASE_STYLE + 'background:' + ACTIVE_BG + ';color:' + ACTIVE_COLOR + ';font-weight:700;';
+        if (icon) icon.style.color = ACTIVE_ICON_COLOR;
+      } else {
+        el.style.cssText = BASE_STYLE + 'background:' + INACTIVE_BG + ';color:' + INACTIVE_COLOR + ';';
+        if (icon) icon.style.color = INACTIVE_ICON_COLOR;
+        el.onmouseover = function() { this.style.background = 'rgba(71,26,112,0.08)'; };
+        el.onmouseout  = function() { this.style.background = INACTIVE_BG; };
+      }
+    });
+  }
+
+  // Wire clicks
+  Object.keys(routes).forEach(function(id) {
+    var el = document.getElementById(id);
+    if (!el) return;
+    el.addEventListener('click', function(e) { e.preventDefault(); navigate(routes[id]); });
+  });
+
+  // New Job Posting button
+  var btn = document.getElementById('snav-new-posting');
+  if (btn) {
+    btn.addEventListener('click', function() { navigate('job-create'); });
+    btn.addEventListener('mouseenter', function() { btn.style.opacity='0.87'; btn.style.transform='translateY(-1px)'; });
+    btn.addEventListener('mouseleave', function() { btn.style.opacity='1'; btn.style.transform='translateY(0)'; });
+  }
+
+  // Log Out
+  var logout = document.getElementById('snav-logout');
+  if (logout) {
+    logout.addEventListener('click', function(e) {
+      e.preventDefault();
+      localStorage.removeItem('isLoggedIn');
+      if (window.parent && window.parent.App) window.parent.App.navigate('landing');
+    });
+  }
+
+  // Set active from parent App
+  function trySetActive() {
+    try {
+      if (window.parent && window.parent.App && window.parent.App.activeView) {
+        setActive(window.parent.App.activeView);
+      }
+    } catch(e) {}
+  }
+  trySetActive();
+  setTimeout(trySetActive, 200);
+  window.setNavActive = setActive;
+
+  // Fix main content offset
+  var mainEl = document.querySelector('body > main');
+  if (mainEl) {
+    mainEl.style.setProperty('margin-left', '220px', 'important');
+    mainEl.style.setProperty('padding-top', '60px', 'important');
+  }
+})();
+</script>
+<!-- ===== END SHARED NAV ===== -->
+
+
+
+
+<!-- Liquid Background -->
+<div class="liquid-bg">
+<div class="blob bg-purple-300 w-[600px] h-[600px] -top-24 -left-24"></div>
+<div class="blob bg-pink-200 w-[500px] h-[500px] bottom-0 right-0" style="animation-delay: -5s;"></div>
+</div>
+<!-- SideNavBar -->
+
+<!-- TopAppBar -->
+
+<!-- Main Content Area -->
+<main class="ml-[220px] pt-[58px] min-h-screen p-margin-desktop" id="drafts-main">
+<!-- Header Section -->
+<section class="mb-stack-lg flex flex-col md:flex-row md:items-end justify-between gap-stack-md">
+<div>
+<div class="flex items-center gap-3 mb-1">
+<h2 class="font-display-lg text-display-lg text-[#471A70]">Saved Drafts</h2>
+<span class="px-3 py-1 bg-primary/20 text-primary rounded-full font-bold text-label-md" id="draft-count">0</span>
+</div>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Manage and finalize your pending internship listings for Pakistani talent.</p>
+</div>
+<button class="bg-[#471A70] text-white font-label-md text-label-md px-6 py-3 rounded-xl shadow-lg flex items-center gap-2 hover:scale-[1.02] transition-transform active:scale-95" id="new-posting-btn">
+<span class="material-symbols-outlined">add_circle</span>
+New Job Posting
+</button>
+</section>
+<!-- Dynamic Drafts Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-gutter mb-margin-desktop" id="drafts-grid">
+<!-- cards injected by JS -->
+</div>
+<!-- Empty State -->
+<section class="glass-panel rounded-3xl p-margin-desktop text-center max-w-3xl mx-auto border-dashed border-2 border-primary/20 hidden" id="empty-state">
+<div class="mb-8 flex justify-center">
+<div class="w-36 h-36 rounded-full bg-primary/5 flex items-center justify-center border border-primary/10 relative overflow-hidden">
+<div class="absolute inset-0 bg-gradient-to-br from-primary/20 to-transparent animate-pulse"></div>
+<span class="material-symbols-outlined text-7xl text-primary/30" style="font-variation-settings: 'FILL' 1;">inbox_customize</span>
+</div>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-2">No drafts yet</h3>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-md mx-auto mb-10">Start a fresh listing to find Pakistan's brightest young talent today.</p>
+<div class="flex flex-col sm:flex-row gap-4 justify-center">
+<button class="bg-[#471A70] text-white px-8 py-4 rounded-2xl font-label-md text-label-md shadow-lg hover:-translate-y-1 transition-all" id="create-btn">
+Create New Posting
+</button>
+<button class="bg-white/40 backdrop-blur-md border border-outline-variant text-on-surface-variant px-8 py-4 rounded-2xl font-label-md text-label-md hover:bg-white/60 transition-all" id="view-jobs-btn">
+View Published Jobs
+</button>
+</div>
+</section>
+</main>
+<script>
+// ===== NAV WIRING =====
+var navMap = {
+  'nav-dashboard': 'recruiter-dash',
+  'nav-jobboard': 'jobboard',
+  'nav-talent': 'talent',
+  'nav-postings': 'postings',
+  'nav-kanban': 'kanban',
+  'nav-scheduler': 'scheduler',
+  'nav-analytics': 'recruiter-analytics',
+  'nav-saved-drafts': 'saved-drafts',
+  'nav-payment': 'payment'
+};
+Object.keys(navMap).forEach(function(id) {
+  var el = document.getElementById(id);
+  if (el) el.addEventListener('click', function(e) {
+    e.preventDefault();
+    if (window.parent && window.parent.App) window.parent.App.navigate(navMap[id]);
+  });
+});
+document.getElementById('new-posting-btn') && document.getElementById('new-posting-btn').addEventListener('click', function() {
+  if (window.parent && window.parent.App) window.parent.App.navigate('job-create');
+});
+document.getElementById('create-btn') && document.getElementById('create-btn').addEventListener('click', function() {
+  if (window.parent && window.parent.App) window.parent.App.navigate('job-create');
+});
+document.getElementById('view-jobs-btn') && document.getElementById('view-jobs-btn').addEventListener('click', function() {
+  if (window.parent && window.parent.App) window.parent.App.navigate('jobboard');
+});
+
+// ===== RENDER DRAFTS FROM LOCALSTORAGE =====
+function renderDrafts() {
+  var drafts = JSON.parse(localStorage.getItem('jobDrafts') || '[]');
+  var grid = document.getElementById('drafts-grid');
+  var empty = document.getElementById('empty-state');
+  var countEl = document.getElementById('draft-count');
+  countEl.textContent = drafts.length;
+
+  if (drafts.length === 0) {
+    grid.innerHTML = '';
+    empty.classList.remove('hidden');
+    return;
+  }
+  empty.classList.add('hidden');
+  grid.innerHTML = drafts.map(function(d, i) {
+    var skillsHtml = (d.skills || []).map(function(s) {
+      return '<span class="bg-[#471A70]/10 text-[#471A70] px-3 py-1 rounded-full text-label-sm font-semibold">' + s + '</span>';
+    }).join('');
+    return `
+      <div class="glass-panel rounded-2xl p-8 flex flex-col hover:shadow-2xl transition-all duration-300 group">
+        <div class="flex justify-between items-start mb-6">
+          <div class="px-3 py-1 bg-on-surface-variant/10 backdrop-blur-md rounded-full text-label-sm text-on-surface-variant flex items-center gap-1">
+            <span class="material-symbols-outlined text-sm">edit_note</span> Draft
+          </div>
+          <span class="text-label-sm text-on-surface-variant/60">${d.savedAt || 'Recently'}</span>
+        </div>
+        <h3 class="font-headline-sm text-headline-sm text-[#471A70] mb-1 group-hover:text-primary transition-colors">${d.title}</h3>
+        <p class="text-primary font-label-md text-label-md mb-4 uppercase tracking-wider">${d.dept}</p>
+        <div class="flex items-center gap-2 mb-6 text-on-surface-variant">
+          <span class="material-symbols-outlined">payments</span>
+          <span class="font-body-md text-body-md">${d.salary || 'PKR negotiable'}</span>
+        </div>
+        <div class="flex flex-wrap gap-2 mb-8">${skillsHtml}</div>
+        <div class="mt-auto flex gap-3">
+          <button class="flex-1 bg-[#471A70] text-white py-3 rounded-xl font-label-md text-label-md hover:opacity-90 transition-colors shadow-md publish-btn" data-idx="${i}">Publish Now</button>
+          <button class="px-4 py-3 border border-outline-variant rounded-xl text-on-surface-variant hover:bg-red-50 hover:text-red-600 hover:border-red-300 transition-all delete-btn" data-idx="${i}">
+            <span class="material-symbols-outlined">delete</span>
+          </button>
+        </div>
+      </div>`;
+  }).join('');
+
+  // Wire publish & delete
+  document.querySelectorAll('.publish-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var idx = parseInt(this.dataset.idx);
+      var drafts = JSON.parse(localStorage.getItem('jobDrafts') || '[]');
+      var draft = drafts[idx];
+      if (draft) {
+        var pub = JSON.parse(localStorage.getItem('publishedJobs') || '[]');
+        draft.status = 'published';
+        draft.publishedAt = new Date().toLocaleDateString('en-US', {month:'short', day:'numeric', year:'numeric'});
+        pub.unshift(draft);
+        drafts.splice(idx, 1);
+        localStorage.setItem('publishedJobs', JSON.stringify(pub));
+        localStorage.setItem('jobDrafts', JSON.stringify(drafts));
+        renderDrafts();
+        if (window.parent && window.parent.App) setTimeout(function(){ window.parent.App.navigate('jobboard'); }, 800);
+      }
+    });
+  });
+  document.querySelectorAll('.delete-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var idx = parseInt(this.dataset.idx);
+      var drafts = JSON.parse(localStorage.getItem('jobDrafts') || '[]');
+      drafts.splice(idx, 1);
+      localStorage.setItem('jobDrafts', JSON.stringify(drafts));
+      renderDrafts();
+    });
+  });
+}
+renderDrafts();
+</script>
+</body></html>
+
+
+
+
+
+
+
+
+
+
+
+

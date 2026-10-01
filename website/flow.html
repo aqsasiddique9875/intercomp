@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EliteHire Desktop Portal Screen Connection Flow</title>
+  <!-- Google Fonts Outfit & Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
+  <!-- Remix Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+  <!-- Mermaid JS -->
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+  <style>
+    :root {
+      --primary: #8731a3;
+      --primary-light: #a34cbe;
+      --secondary: #0060ab;
+      --background: #0b0e15;
+      --panel-bg: rgba(17, 19, 27, 0.7);
+      --glass-border: rgba(255, 255, 255, 0.08);
+      --text-light: #e1e2ed;
+      --text-muted: #8b91a0;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--background);
+      color: var(--text-light);
+      font-family: 'Inter', sans-serif;
+      overflow: hidden;
+      height: 100vh;
+      width: 100vw;
+      display: flex;
+    }
+
+    /* Glow overlays */
+    .glow {
+      position: absolute;
+      width: 500px;
+      height: 500px;
+      border-radius: 50%;
+      filter: blur(120px);
+      opacity: 0.25;
+      z-index: 0;
+      pointer-events: none;
+    }
+    .glow-1 {
+      background: #0060ab;
+      top: -100px;
+      left: 20%;
+    }
+    .glow-2 {
+      background: #8731a3;
+      bottom: -150px;
+      right: 20%;
+    }
+
+    .flow-container {
+      display: flex;
+      width: 100%;
+      height: 100%;
+      position: relative;
+      z-index: 1;
+    }
+
+    .diagram-canvas {
+      flex: 1;
+      height: 100%;
+      overflow: auto;
+      padding: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .diagram-inner {
+      min-width: 1100px;
+    }
+
+    .details-panel {
+      width: 420px;
+      height: 100%;
+      background: var(--panel-bg);
+      backdrop-filter: blur(35px);
+      border-left: 1px solid var(--glass-border);
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      box-shadow: -10px 0 40px rgba(0, 0, 0, 0.4);
+    }
+
+    .panel-header h2 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 24px;
+      font-weight: 800;
+      background: linear-gradient(135deg, #e1e2ed 0%, #a34cbe 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 6px;
+    }
+
+    .panel-subtitle {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--text-muted);
+    }
+
+    .screen-details-box {
+      flex: 1;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--glass-border);
+      border-radius: 20px;
+      padding: 24px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .empty-state {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      height: 100%;
+      color: var(--text-muted);
+      gap: 12px;
+    }
+
+    .empty-state i {
+      font-size: 48px;
+      color: var(--primary-light);
+    }
+
+    .detail-section-title {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+
+    .detail-value {
+      font-size: 13.5px;
+      line-height: 1.6;
+      color: #c0c6d6;
+    }
+
+    .connection-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(0, 96, 171, 0.15);
+      border: 1px solid rgba(0, 96, 171, 0.3);
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-size: 11px;
+      font-weight: 600;
+      color: #9ac9ff;
+    }
+
+    .action-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      text-decoration: none;
+      padding: 14px;
+      border-radius: 12px;
+      font-size: 13.5px;
+      font-weight: 600;
+      background: linear-gradient(135deg, #0060ab 0%, #8731a3 100%);
+      color: white;
+      transition: all 0.2s;
+      box-shadow: 0 4px 15px rgba(135, 49, 163, 0.25);
+    }
+
+    .action-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(135, 49, 163, 0.35);
+    }
+
+    .node {
+      cursor: pointer;
+    }
+    .node:hover {
+      filter: drop-shadow(0 0 12px rgba(0, 96, 171, 0.5));
+    }
+  </style>
+</head>
+<body>
+  <div class="glow glow-1"></div>
+  <div class="glow glow-2"></div>
+
+  <div class="flow-container">
+    <div class="diagram-canvas">
+      <div class="diagram-inner">
+        <pre class="mermaid">
+graph LR
+  %% Gateway / Roles
+  Splash(Desktop Splash Screen) --> Onboard(Web Onboarding)
+  Onboard --> Gateway(Role selection Gateway)
+  Gateway --> StudentReg(Student Register Wizard)
+  Gateway --> CompanyReg(Company Registration)
+  Gateway --> Login(Login Screen)
+  Login --> MFA(MFA Verification)
+
+  %% Student Flow
+  MFA --> StudentDash(Student Habit Dashboard)
+  StudentDash --> Tests(Weekly Tests Hub)
+  Tests --> Guidelines(Test Guidelines)
+  Guidelines --> Player(Anti-Cheat Test Player)
+  StudentDash --> MockInterviews(Mock Interviews Hub)
+  MockInterviews --> Player
+  StudentDash --> Courses(Course Catalog)
+  Courses --> Video(Advanced Video Player)
+  StudentDash --> Assign(Assignments Dashboard)
+  Assign --> Submit(Assignment Submit)
+  StudentDash --> Premium(Premium Membership Hub)
+
+  %% Recruiter Flow
+  Gateway --> RecDash(Company Dashboard)
+  RecDash --> Talent(Talent Candidate Database)
+  Talent --> ProfileViewer(Student Profile Viewer)
+  RecDash --> Kanban(Applicant Tracking Kanban)
+  RecDash --> JobCreator(Job Creator & Editor)
+  RecDash --> AdCampaign(Ad Campaign Creator)
+  AdCampaign --> AdStore(Advertisement System Store)
+  RecDash --> Scheduler(Interview Scheduler)
+  RecDash --> VerifyQueue(Company Verification Queue)
+  VerifyQueue --> DocVerify(Document Verification Viewer)
+
+  classDef gateway fill:#181326,stroke:#8731a3,stroke-width:2px,color:#e1e2ed;
+  classDef student fill:#0a1e36,stroke:#0060ab,stroke-width:2px,color:#e1e2ed;
+  classDef recruiter fill:#112a21,stroke:#30d158,stroke-width:2px,color:#e1e2ed;
+
+  class Splash,Onboard,Gateway,Login,StudentReg,CompanyReg,MFA gateway;
+  class StudentDash,Tests,Guidelines,Player,MockInterviews,Courses,Video,Assign,Submit,Premium student;
+  class RecDash,Talent,ProfileViewer,Kanban,JobCreator,AdCampaign,AdStore,Scheduler,VerifyQueue,DocVerify recruiter;
+        </pre>
+      </div>
+    </div>
+
+    <aside class="details-panel">
+      <div class="panel-header">
+        <span class="panel-subtitle">Desktop Portal Flow</span>
+        <h2>Workspace Connections</h2>
+      </div>
+
+      <div class="screen-details-box" id="detailsBox">
+        <div class="empty-state">
+          <i class="ri-git-branch-line"></i>
+          <h4>Interactive Diagram</h4>
+          <p>Click on any screen node in the flow diagram to view its details and connections.</p>
+        </div>
+      </div>
+
+      <a href="../index.html" class="action-btn">
+        <i class="ri-arrow-left-line"></i>
+        <span>Back to Portal Entrance</span>
+      </a>
+    </aside>
+  </div>
+
+  <script>
+    const screenData = {
+      'Splash': {
+        title: 'Desktop Splash Screen',
+        id: '45bff8936a0044e694117e3b29aa5016',
+        desc: 'Displays the static high-fidelity Liquid Glass Elite logo to establish desktop branding.',
+        from: 'Application Startup',
+        to: 'Web App Onboarding'
+      },
+      'Onboard': {
+        title: 'Web App Onboarding',
+        id: '92044a9e1c374317b32ccd3a24c085b0',
+        desc: 'Desktop slider carousel that details verified skill assessments, smart recommendations, and recruiter queues.',
+        from: 'Desktop Splash Screen',
+        to: 'Role Selection Gateway'
+      },
+      'Gateway': {
+        title: 'Gateway / Role Selection',
+        id: 'dbcbd25e2aad48aebc8aca14924256fe',
+        desc: 'Central entrance hub letting users choose their portal workspace (Student, Recruiter, Admin).',
+        from: 'Web App Onboarding',
+        to: 'Login Screen / Student Register Wizard / Recruiter Dashboard'
+      },
+      'Login': {
+        title: 'Login Screen (COM-04) - Desktop',
+        id: '2bb05765b3404d8aa183e003a445cb67',
+        desc: 'Premium glassmorphic login interface featuring multi-column inputs and verification prompts.',
+        from: 'Gateway / Role Selection',
+        to: 'MFA Verification'
+      },
+      'StudentReg': {
+        title: 'Student Registration Wizard (COM-05) - Desktop',
+        id: '8fbdc8acf6464e618391e06ace7f9fe0',
+        desc: 'Multi-step registration wizard on desktop capturing detailed skills, documents, and profile tags.',
+        from: 'Gateway / Role Selection',
+        to: 'Login Screen'
+      },
+      'CompanyReg': {
+        title: 'Company Registration & Doc Upload (Desktop)',
+        id: '8fc817f84f484d3887bce6dc5fe9d6ea',
+        desc: 'Secure portal for recruiters to verify company domain credentials and submit regulatory tax certificates.',
+        from: 'Gateway / Role Selection',
+        to: 'Company Verification Queue'
+      },
+      'MFA': {
+        title: 'Account Security (MFA) - Desktop',
+        id: '243f4482cdec478ca59fe6f217373a36',
+        desc: 'Applies Multi-Factor OTP checks to verify identity.',
+        from: 'Login Screen',
+        to: 'Student Habit Dashboard'
+      },
+      'StudentDash': {
+        title: 'Main Dashboard (The Habit Loop Hub)',
+        id: '652a4f60981b4e48aec1b1e58c75318c',
+        desc: 'The central student portal dashboard with multi-column widgets displaying active assessment schedules, course progress charts, and trust indicators.',
+        from: 'MFA Verification',
+        to: 'Weekly Tests Hub / Course Catalog / Assignments Dashboard'
+      },
+      'Tests': {
+        title: 'Weekly Tests Hub (STU-05) - Desktop',
+        id: '259e275b59144d80865c766dbc962bbc',
+        desc: 'Desktop hub organizing active logic, engineering, and aptitude tests schedule metrics.',
+        from: 'Student Dashboard',
+        to: 'Test Integrity & Guidelines'
+      },
+      'Guidelines': {
+        title: 'Test Integrity & Guidelines (STU-06)',
+        id: 'a20bf89f9c0143a491f14f4c9b800e3a',
+        desc: 'Integrity specifications and camera hardware validations screen before locking browser window focus.',
+        from: 'Weekly Tests Hub',
+        to: 'STU-07 Anti-Cheat Test Player'
+      },
+      'Player': {
+        title: 'STU-07 Anti-Cheat Test Player (Desktop)',
+        id: '6a6c6e2ffcec472cb8095585aae804cb',
+        desc: 'Desktop fullscreen examination board with proctor webcam scanning window and timed multi-choice questions.',
+        from: 'Test Guidelines',
+        to: 'Weekly Tests Hub'
+      },
+      'MockInterviews': {
+        title: 'Mock Interviews Hub (Liquid Glass Elite)',
+        id: 'desktop_mock_interviews',
+        desc: 'AI Live technical & behavioral interview simulators with speech analytics, code execution sandbox, and 1-on-1 expert mentor bookings.',
+        from: 'Student Dashboard / Weekly Tests',
+        to: 'STU-07 Anti-Cheat Test Player / Live Sandbox'
+      },
+      'Courses': {
+        title: 'Course Catalog (STU-10) - Desktop',
+        id: 'ccfeaf6a83cb45ab9794a18d3d7f3696',
+        desc: 'Wide grid view of all recommended technical modules and learning roadmaps.',
+        from: 'Student Dashboard',
+        to: 'Advanced Video Player'
+      },
+      'Video': {
+        title: 'Advanced UI/UX Video Player (STU-11)',
+        id: '1316e3c1e4bb47268887f9771fd569c3',
+        desc: 'Features lecture lists, text transcript panels, and streaming video.',
+        from: 'Course Catalog',
+        to: 'Course Catalog'
+      },
+      'Assign': {
+        title: 'Assignments Dashboard (STU-08)',
+        id: '46916bc37cc94ecca15651e955f0f6b2',
+        desc: 'Student console listing pending assignment briefs, guidelines, and grading metrics.',
+        from: 'Student Dashboard',
+        to: 'Assignment Submission'
+      },
+      'Submit': {
+        title: 'Assignment Submission (STU-09)',
+        id: 'ff2d2f5f212d4adbab98aa0c9df4f666',
+        desc: 'File upload console accepting project links and folders for evaluations.',
+        from: 'Assignments Dashboard',
+        to: 'Assignments Dashboard'
+      },
+      'Premium': {
+        title: 'Premium Membership Hub - Gold Elite',
+        id: 'eb8812503d9949feba810aba199f434c',
+        desc: 'Gold Elite portal offering mentorship schedulers and resume builder tools.',
+        from: 'Student Dashboard',
+        to: 'Career Mentorship Scheduler'
+      },
+      'RecDash': {
+        title: 'Company Dashboard - Command Center',
+        id: '8b4165aa923042888bc128ee52bfebe4',
+        desc: 'Recruiter analytics panel summarizing active postings, applicant counts, and verification status.',
+        from: 'Gateway / Role Selection',
+        to: 'Talent Search / Kanban / Job Creator / Verify Queue'
+      },
+      'Talent': {
+        title: 'Talent Search - Candidate Database',
+        id: 'ca20e9e2ae964a9cb4e2060d71f5cb93',
+        desc: 'Candidate directory with filtration filters matching rating scores and trust criteria.',
+        from: 'Company Dashboard',
+        to: 'Student Profile Viewer'
+      },
+      'ProfileViewer': {
+        title: 'Student Profile Viewer - Candidate Detail',
+        id: 'f842057dc6d044239356d9a94091271e',
+        desc: 'Examines candidate profiles, trust scores, verified test details, and portfolio documents.',
+        from: 'Talent Search / Kanban',
+        to: 'Talent Search'
+      },
+      'Kanban': {
+        title: 'Applicant Tracking Board - Kanban',
+        id: '8d906434847840c49b180d4b31856442',
+        desc: 'Drag-and-drop recruiter workflow management board organizing candidates.',
+        from: 'Company Dashboard',
+        to: 'Student Profile Viewer / Interview Scheduler'
+      },
+      'JobCreator': {
+        title: 'Job Creator & Editor - Split View',
+        id: '2b156034eeb94154ad5169f671aa646f',
+        desc: 'Dual-pane workspace creator form that shows real-time previews of job listings on the fly.',
+        from: 'Company Dashboard',
+        to: 'Company Dashboard'
+      },
+      'AdCampaign': {
+        title: 'Ad Campaign Creator & Live Preview',
+        id: '38d13a4151134b38ad31e1c9decf2071',
+        desc: 'Campaign creator panel letting recruiters design sponsored company listing banners.',
+        from: 'Company Dashboard',
+        to: 'Advertisement System Store'
+      },
+      'AdStore': {
+        title: 'Advertisement System Store',
+        id: '4035ff96780a4a6b975d8b66f0ca68d5',
+        desc: 'Purchase catalog for promotional slots and sponsored talent highlights.',
+        from: 'Ad Campaign Creator',
+        to: 'Company Dashboard'
+      },
+      'Scheduler': {
+        title: 'Interview Scheduler',
+        id: 'babc13b0b1e24ab38783e4441563f725',
+        desc: 'Calendar booking client integrating interview timelines and video link builders.',
+        from: 'Company Dashboard / Kanban',
+        to: 'Company Dashboard'
+      },
+      'VerifyQueue': {
+        title: 'Company Verification Queue - Admin Panel',
+        id: '02ef60e8cd50480eb342757ee5f80671',
+        desc: 'Administration audit board managing company verification documents.',
+        from: 'Company Dashboard / Admin Central Hub',
+        to: 'Document Verification Viewer'
+      },
+      'DocVerify': {
+        title: 'Document Verification Viewer - Admin Console',
+        id: '1d699cebc531409eaa607ec8fbdba8a7',
+        desc: 'Examines university and business tax certificates to approve trust flags.',
+        from: 'Company Verification Queue',
+        to: 'Company Verification Queue'
+      }
+    };
+
+    mermaid.initialize({ startOnLoad: true, theme: 'dark' });
+
+    document.addEventListener('DOMContentLoaded', () => {
+      setTimeout(attachEvents, 1000);
+    });
+
+    function attachEvents() {
+      const nodes = document.querySelectorAll('.node');
+      nodes.forEach(node => {
+        const textElement = node.querySelector('.nodeLabel');
+        if (!textElement) return;
+        
+        const labelText = textElement.textContent.trim();
+        let matchedKey = null;
+        for (const key in screenData) {
+          if (screenData[key].title.toLowerCase().startsWith(labelText.toLowerCase()) || 
+              labelText.toLowerCase().startsWith(screenData[key].title.toLowerCase()) ||
+              key.toLowerCase() === labelText.toLowerCase()) {
+            matchedKey = key;
+            break;
+          }
+        }
+
+        if (matchedKey) {
+          node.addEventListener('click', () => {
+            showScreenDetails(matchedKey);
+          });
+        }
+      });
+    }
+
+    function showScreenDetails(key) {
+      const data = screenData[key];
+      const detailsBox = document.getElementById('detailsBox');
+      
+      detailsBox.innerHTML = `
+        <div style="display:flex; flex-direction:column; gap: 14px;">
+          <div>
+            <span class="detail-section-title">Screen Name</span>
+            <h3 style="font-family:'Outfit', sans-serif; font-size:18px; font-weight:700; color:#fff;">${data.title}</h3>
+          </div>
+
+          <div>
+            <span class="detail-section-title">Resource ID</span>
+            <code style="font-size:11px; color:#9ac9ff; background:rgba(0,0,0,0.25); padding:2px 6px; border-radius:4px; display:inline-block; margin-top:3px;">${data.id}</code>
+          </div>
+
+          <div>
+            <span class="detail-section-title">Description</span>
+            <p class="detail-value">${data.desc}</p>
+          </div>
+
+          <div>
+            <span class="detail-section-title">Navigation Flow</span>
+            <div style="margin-top:6px; display: flex; flex-direction: column; gap: 4px;">
+              <span class="connection-tag"><i class="ri-arrow-right-line"></i> From: ${data.from}</span>
+              <span class="connection-tag"><i class="ri-arrow-left-line"></i> To: ${data.to}</span>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+  </script>
+</body>
+</html>

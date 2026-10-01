@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-panel {
+            backdrop-filter: blur(28px);
+            -webkit-backdrop-filter: blur(28px);
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: rgba(135, 49, 163, 0.2);
+            border-radius: 10px;
+        }
+        .liquid-bg {
+            background: linear-gradient(135deg, #f9f9ff 0%, #DCE4F7 100%);
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+        }
+        .orb {
+            position: absolute;
+            filter: blur(80px);
+            border-radius: 50%;
+            z-index: -1;
+            opacity: 0.5;
+            animation: float 20s infinite alternate ease-in-out;
+        }
+        @keyframes float {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(100px, 50px) scale(1.2); }
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary": "#8731a3",
+                        "surface-dim": "#d2daed",
+                        "secondary-container": "#54a3ff",
+                        "inverse-primary": "#f0b0ff",
+                        "on-primary-fixed": "#330044",
+                        "orange": "#FF9F0A",
+                        "tertiary-fixed-dim": "#47e266",
+                        "on-tertiary-fixed": "#002106",
+                        "surface-container-lowest": "#ffffff",
+                        "tertiary-container": "#00842f",
+                        "background": "#f9f9ff",
+                        "on-error-container": "#93000a",
+                        "on-tertiary": "#ffffff",
+                        "on-primary-container": "#fff5fb",
+                        "surface-bright": "#f9f9ff",
+                        "surface-container-highest": "#dbe3f6",
+                        "surface-container": "#e7eeff",
+                        "glass-thick": "rgba(255, 255, 255, 0.8)",
+                        "primary-fixed": "#fbd7ff",
+                        "on-secondary-fixed-variant": "#004883",
+                        "secondary-fixed-dim": "#a3c9ff",
+                        "on-primary": "#ffffff",
+                        "on-background": "#141c29",
+                        "on-tertiary-fixed-variant": "#00531a",
+                        "surface-variant": "#dbe3f6",
+                        "secondary": "#0060ab",
+                        "on-surface": "#141c29",
+                        "surface-container-high": "#e0e8fb",
+                        "inverse-on-surface": "#ecf1ff",
+                        "outline": "#817381",
+                        "on-secondary-fixed": "#001c39",
+                        "on-tertiary-container": "#e6ffe0",
+                        "primary-fixed-dim": "#f0b0ff",
+                        "error-container": "#ffdad6",
+                        "tertiary": "#006823",
+                        "glass-fill": "rgba(255, 255, 255, 0.35)",
+                        "tertiary-fixed": "#6cff82",
+                        "surface": "#f9f9ff",
+                        "primary-container": "#a34cbe",
+                        "on-primary-fixed-variant": "#72188f",
+                        "on-secondary-container": "#003868",
+                        "glass-border": "rgba(255, 255, 255, 0.6)",
+                        "error": "#FF453A",
+                        "inverse-surface": "#29313f",
+                        "outline-variant": "#d2c1d2",
+                        "on-surface-variant": "#4f4350",
+                        "card-gradient": "linear-gradient(135deg, #4D9EFA 0%, #BF7DF5 100%)",
+                        "on-secondary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "surface-tint": "#8d37a9",
+                        "secondary-fixed": "#d3e3ff",
+                        "gold": "#FFD60A",
+                        "surface-container-low": "#f0f3ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "safe-bottom": "34px",
+                        "desktop-gutter": "24px",
+                        "mobile-gutter": "16px",
+                        "max-width": "1280px",
+                        "desktop-margin": "64px",
+                        "safe-top": "44px",
+                        "base": "8px",
+                        "mobile-margin": "20px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "label-caps": ["Inter"],
+                        "display-xl": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                        "headline-lg": ["34px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                        "label-caps": ["13px", {"lineHeight": "1.0", "letterSpacing": "0.03em", "fontWeight": "600"}],
+                        "display-xl": ["56px", {"lineHeight": "1.1", "letterSpacing": "-0.03em", "fontWeight": "700"}]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-surface font-body-md overflow-hidden">
+<div class="liquid-bg"></div>
+<div class="orb bg-primary-container w-[500px] h-[500px] -top-48 -left-24"></div>
+<div class="orb bg-secondary-container w-[400px] h-[400px] bottom-0 right-0"></div>
+<!-- TopNavBar -->
+<nav class="flex items-center justify-between px-desktop-margin w-full sticky top-0 z-50 bg-glass-thick backdrop-blur-xl border-b border-glass-border shadow-[0_12px_40px_0_rgba(71,26,112,0.15)] h-16">
+<div class="flex items-center gap-8">
+<span class="font-headline-lg text-headline-lg font-bold text-primary">QuizStudio</span>
+<div class="hidden md:flex gap-6">
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors" href="#">Dashboard</a>
+<a class="font-body-md text-body-md text-primary font-bold border-b-2 border-primary" href="#">Question Bank</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors" href="#">Assessments</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors" href="#">Analytics</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-2">
+<button class="material-symbols-outlined p-2 text-on-surface-variant hover:bg-surface-container rounded-full transition-all">notifications</button>
+<button class="material-symbols-outlined p-2 text-on-surface-variant hover:bg-surface-container rounded-full transition-all">help</button>
+<button class="material-symbols-outlined p-2 text-on-surface-variant hover:bg-surface-container rounded-full transition-all">settings</button>
+</div>
+<button id="publish-btn" class="bg-primary text-on-primary px-6 py-2 rounded-full font-label-caps text-label-caps hover:scale-105 active:scale-95 transition-all shadow-md">Publish</button>
+<img alt="User profile avatar" class="w-10 h-10 rounded-full border-2 border-primary/20" data-alt="Close-up professional portrait of a software designer with a creative look, soft studio lighting, high-end digital agency environment in the background with a slight purple color grading to match the premium QuizStudio branding." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBD7CbR7h3zagvNbtBv-zu7Ezh8sVqBG6wQPJJfT79p63NqDxYTflFsApc7jS4OzW9Y7ZXfrPPwCpsFQiZRq9nEvoUiTipObKHmjC1dCt9hbOnk84j-kXtzObzLAybsuitsNl-gp_4bJwMT_0l5dFk3W8hNiuZbjoRFWmXBpqc6zxibzvigVdRtFd8zNSXJHA5JJ8s97wkjMu8JgJo5OQxkl0m5Wz3s6MYnMSW50yGAvjQnWLph1a7MKhYAwF8YPKcNHPedNeqVVarv"/>
+</div>
+</nav>
+<div class="flex h-[calc(100vh-64px)]">
+<!-- SideNavBar -->
+<aside class="h-screen w-64 fixed left-0 top-0 pt-16 bg-surface-container border-r border-glass-border shadow-md flex flex-col py-base gap-2 z-40">
+<div class="px-6 py-8">
+<div class="flex items-center gap-3 mb-6">
+<div class="w-10 h-10 rounded-xl bg-primary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-on-primary-container" style="font-variation-settings: 'FILL' 1;">admin_panel_settings</span>
+</div>
+<div>
+<p class="font-label-caps text-label-caps text-primary uppercase">Admin Controls</p>
+<p class="text-xs text-on-surface-variant">Manage workspace</p>
+</div>
+</div>
+<button class="w-full bg-secondary text-on-secondary py-3 rounded-xl font-label-caps text-label-caps flex items-center justify-center gap-2 mb-8 hover:scale-[1.02] transition-transform active:scale-95">
+<span class="material-symbols-outlined text-sm">add</span> New Collection
+                </button>
+</div>
+<nav class="flex-1 px-2 space-y-1 overflow-y-auto custom-scrollbar">
+<a class="flex items-center gap-3 px-4 py-3 bg-primary-container text-on-primary-container rounded-xl mx-2 font-label-caps text-label-caps transition-transform hover:scale-[1.02]" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">edit_note</span> Editor
+                </a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high mx-2 rounded-xl font-label-caps text-label-caps transition-transform hover:scale-[1.02]" href="#">
+<span class="material-symbols-outlined">description</span> Templates
+                </a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high mx-2 rounded-xl font-label-caps text-label-caps transition-transform hover:scale-[1.02]" href="#">
+<span class="material-symbols-outlined">perm_media</span> Media Library
+                </a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high mx-2 rounded-xl font-label-caps text-label-caps transition-transform hover:scale-[1.02]" href="#">
+<span class="material-symbols-outlined">tune</span> Settings
+                </a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high mx-2 rounded-xl font-label-caps text-label-caps transition-transform hover:scale-[1.02]" href="#">
+<span class="material-symbols-outlined">admin_panel_settings</span> User Roles
+                </a>
+</nav>
+<div class="mt-auto p-4 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high mx-2 rounded-xl font-label-caps text-label-caps" href="#">
+<span class="material-symbols-outlined text-tertiary">analytics</span> System Status
+                </a>
+<a class="flex items-center gap-3 px-4 py-3 text-error hover:bg-error/5 mx-2 rounded-xl font-label-caps text-label-caps" href="#">
+<span class="material-symbols-outlined">logout</span> Logout
+                </a>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="ml-64 w-full flex overflow-hidden">
+<!-- Left Panel: Question Editor -->
+<section class="w-1/2 h-full p-desktop-gutter overflow-y-auto custom-scrollbar flex flex-col gap-6">
+<div class="flex items-center justify-between">
+<h1 class="font-headline-lg text-headline-lg text-primary">Question Editor</h1>
+<span class="px-4 py-1 bg-surface-container-high text-on-surface-variant rounded-full text-xs font-semibold">Editing: Quiz_104_A</span>
+</div>
+<div class="flex flex-col gap-2">
+<label class="font-label-caps text-label-caps text-primary">Quiz Name</label>
+<input id="quiz-title-input" type="text" placeholder="Enter Quiz Name..." class="w-full p-3 bg-glass-thick border border-glass-border rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all shadow-sm font-body-md font-semibold text-primary" />
+</div>
+<div class="flex flex-col gap-4">
+<label class="font-label-caps text-label-caps text-primary">Question Text</label>
+<textarea class="w-full h-32 p-4 bg-glass-thick border border-glass-border rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all resize-none shadow-sm font-body-md" id="question-input" placeholder="Type your question here...">How many planets in our solar system have rings?</textarea>
+</div>
+<div class="space-y-4">
+<label class="font-label-caps text-label-caps text-primary">Options</label>
+<div class="grid gap-3">
+<!-- Option A -->
+<div class="flex items-center gap-3">
+<label class="flex items-center justify-center w-10 h-10 rounded-full bg-primary text-on-primary font-bold shadow-sm">A</label>
+<input class="option-input flex-1 p-3 bg-glass-thick border border-glass-border rounded-xl focus:ring-2 focus:ring-primary outline-none transition-all" data-id="0" type="text" value="Two"/>
+<input checked="" class="w-6 h-6 text-primary border-glass-border focus:ring-primary" name="correct" type="radio"/>
+</div>
+<!-- Option B -->
+<div class="flex items-center gap-3">
+<label class="flex items-center justify-center w-10 h-10 rounded-full bg-surface-container-highest text-on-surface-variant font-bold shadow-sm">B</label>
+<input class="option-input flex-1 p-3 bg-glass-thick border border-glass-border rounded-xl focus:ring-2 focus:ring-primary outline-none transition-all" data-id="1" type="text" value="Four"/>
+<input class="w-6 h-6 text-primary border-glass-border focus:ring-primary" name="correct" type="radio"/>
+</div>
+<!-- Option C -->
+<div class="flex items-center gap-3">
+<label class="flex items-center justify-center w-10 h-10 rounded-full bg-surface-container-highest text-on-surface-variant font-bold shadow-sm">C</label>
+<input class="option-input flex-1 p-3 bg-glass-thick border border-glass-border rounded-xl focus:ring-2 focus:ring-primary outline-none transition-all" data-id="2" type="text" value="Eight"/>
+<input class="w-6 h-6 text-primary border-glass-border focus:ring-primary" name="correct" type="radio"/>
+</div>
+<!-- Option D -->
+<div class="flex items-center gap-3">
+<label class="flex items-center justify-center w-10 h-10 rounded-full bg-surface-container-highest text-on-surface-variant font-bold shadow-sm">D</label>
+<input class="option-input flex-1 p-3 bg-glass-thick border border-glass-border rounded-xl focus:ring-2 focus:ring-primary outline-none transition-all" data-id="3" type="text" value="Six"/>
+<input class="w-6 h-6 text-primary border-glass-border focus:ring-primary" name="correct" type="radio"/>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-6 pt-4">
+<div class="space-y-4">
+<label class="font-label-caps text-label-caps text-primary">Difficulty</label>
+<input class="w-full h-2 bg-surface-container-highest rounded-lg appearance-none cursor-pointer accent-primary" max="4" min="1" type="range" value="2"/>
+<div class="flex justify-between text-[10px] text-on-surface-variant font-bold uppercase tracking-wider">
+<span>Easy</span>
+<span>Medium</span>
+<span>Hard</span>
+<span>Expert</span>
+</div>
+</div>
+<div class="space-y-4">
+<label class="font-label-caps text-label-caps text-primary">Tags</label>
+<div id="tags-container" class="flex flex-wrap gap-2 items-center">
+<span class="tag-badge px-3 py-1 bg-secondary/10 text-secondary border border-secondary/20 rounded-full text-xs font-semibold flex items-center gap-1" data-tag="Astronomy">Astronomy <span class="remove-tag-btn material-symbols-outlined text-[14px] cursor-pointer">close</span></span>
+<span class="tag-badge px-3 py-1 bg-secondary/10 text-secondary border border-secondary/20 rounded-full text-xs font-semibold flex items-center gap-1" data-tag="Science">Science <span class="remove-tag-btn material-symbols-outlined text-[14px] cursor-pointer">close</span></span>
+<input id="tag-input" type="text" placeholder="+ Add Tag" class="px-3 py-1 bg-white/60 border border-glass-border rounded-full text-xs font-semibold text-on-surface-variant w-24 focus:w-32 focus:ring-1 focus:ring-primary focus:border-transparent outline-none transition-all" />
+</div>
+</div>
+</div>
+<!-- Next and Back Question Controls -->
+<div class="flex justify-between items-center pt-6 mt-auto border-t border-glass-border">
+  <button id="back-question-btn" class="px-6 py-3 rounded-full border border-primary text-primary font-bold hover:bg-primary/5 active:scale-95 transition-all text-sm flex items-center gap-2">
+    <span class="material-symbols-outlined">arrow_back</span>
+    Back
+  </button>
+  <div class="flex items-center gap-2">
+    <span class="text-xs text-on-surface-variant font-bold" id="question-index-display">Question 1 of 1</span>
+  </div>
+  <div class="flex items-center gap-3">
+    <button id="next-question-btn" class="px-8 py-3 rounded-full bg-primary text-white font-bold shadow-lg shadow-primary/20 hover:shadow-primary/40 active:scale-95 transition-all flex items-center gap-2">
+      Next
+      <span class="material-symbols-outlined">arrow_forward</span>
+    </button>
+    <button id="footer-publish-btn" class="px-8 py-3 rounded-full bg-secondary text-white font-bold shadow-lg shadow-secondary/20 hover:shadow-secondary/40 active:scale-95 transition-all flex items-center gap-2">
+      Publish
+      <span class="material-symbols-outlined">publish</span>
+    </button>
+  </div>
+</div>
+</section>
+<!-- Right Panel: Live Student Preview -->
+<section class="w-1/2 h-full bg-surface-dim/40 relative flex flex-col items-center justify-center p-desktop-gutter gap-4">
+  <!-- Right Side Top Header with Draft and Publish Buttons -->
+  <div class="flex justify-between items-center w-full max-w-2xl">
+    <div class="flex items-center gap-2">
+      <span class="px-3 py-1 bg-surface-container-high text-on-surface-variant rounded-full text-xs font-semibold">Live Preview Mode</span>
+    </div>
+    <div class="flex items-center gap-3">
+      <button id="right-draft-btn" class="px-5 py-2 rounded-full border border-primary text-primary font-bold hover:bg-primary/5 active:scale-95 transition-all text-xs flex items-center gap-2">
+        <span class="material-symbols-outlined text-[16px]">drafts</span>
+        Save Draft
+      </button>
+      <button id="right-publish-btn" class="px-5 py-2 rounded-full bg-primary text-white font-bold shadow-md hover:shadow-lg active:scale-95 transition-all text-xs flex items-center gap-2">
+        <span class="material-symbols-outlined text-[16px]">publish</span>
+        Publish
+      </button>
+    </div>
+  </div>
+  <!-- Anti-cheat Player Container -->
+  <div class="w-full max-w-2xl h-[85%] bg-[#0f172a] rounded-[2rem] shadow-2xl relative overflow-hidden border-4 border-slate-800 flex flex-col">
+<!-- Top Bar of Player -->
+<div class="h-14 bg-slate-900 flex items-center justify-between px-6 border-b border-slate-800 flex-shrink-0">
+<div class="flex items-center gap-4">
+<span class="w-3 h-3 rounded-full bg-red-500 animate-pulse"></span>
+<span class="text-slate-400 font-label-caps text-[11px] uppercase tracking-[0.2em]">Secure Session Active</span>
+</div>
+<div class="flex items-center gap-4 text-slate-300">
+<span class="material-symbols-outlined text-sm">timer</span>
+<span class="font-bold text-sm">45:00</span>
+</div>
+</div>
+<!-- Content of Player -->
+<div id="player-content-wrapper" class="p-5 md:p-6 flex-1 min-h-0 flex flex-col justify-between">
+<p id="preview-question-number" class="text-slate-500 font-bold text-xs uppercase mb-2">Question 12 of 25</p>
+<!-- Question Display -->
+<div class="text-white font-headline-lg text-xl mb-4 leading-relaxed" id="preview-question">
+                            How many planets in our solar system have rings?
+                        </div>
+<!-- Options Preview -->
+<div class="space-y-2 overflow-y-auto custom-scrollbar flex-1 min-h-0 pr-1" id="preview-options">
+<button class="w-full py-2.5 px-4 glass-panel bg-white/10 border border-white/20 rounded-xl flex items-center gap-3 hover:bg-white/20 transition-all text-left text-white text-sm group">
+<span class="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center font-bold group-hover:bg-primary transition-colors">A</span>
+<span class="option-text">Two</span>
+</button>
+<button class="w-full py-2.5 px-4 glass-panel bg-white/10 border border-white/20 rounded-xl flex items-center gap-3 hover:bg-white/20 transition-all text-left text-white text-sm group">
+<span class="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center font-bold group-hover:bg-primary transition-colors">B</span>
+<span class="option-text">Four</span>
+</button>
+<button class="w-full py-2.5 px-4 glass-panel bg-white/10 border border-white/20 rounded-xl flex items-center gap-3 hover:bg-white/20 transition-all text-left text-white text-sm group">
+<span class="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center font-bold group-hover:bg-primary transition-colors">C</span>
+<span class="option-text">Eight</span>
+</button>
+<button class="w-full py-2.5 px-4 glass-panel bg-white/10 border border-white/20 rounded-xl flex items-center gap-3 hover:bg-white/20 transition-all text-left text-white text-sm group">
+<span class="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center font-bold group-hover:bg-primary transition-colors">D</span>
+<span class="option-text">Six</span>
+</button>
+</div>
+<div class="mt-auto pt-4 flex justify-between">
+<button class="px-8 py-2.5 rounded-full border border-slate-700 text-slate-400 hover:text-white transition-colors text-sm">Skip</button>
+<button class="px-10 py-2.5 rounded-full bg-primary text-white font-bold shadow-lg shadow-primary/20 text-sm">Next Question</button>
+</div>
+</div>
+<!-- Side HUD indicators -->
+<div class="absolute right-4 top-24 flex flex-col gap-4">
+<div class="w-10 h-10 rounded-full bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 cursor-help" title="Anti-cheat face tracking">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">face</span>
+</div>
+<div class="w-10 h-10 rounded-full bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400">
+<span class="material-symbols-outlined text-sm">lock</span>
+</div>
+</div>
+</div>
+<div class="absolute bottom-10 text-on-surface-variant text-[10px] uppercase font-bold tracking-widest opacity-60">
+                    Live Rendering Preview • Adaptive Layout
+                </div>
+</section>
+</main>
+</div>
+<script>
+        // Memory state array for authoring multiple questions
+        let questions = [
+            {
+                text: "How many planets in our solar system have rings?",
+                options: ["Two", "Four", "Eight", "Six"],
+                correctIndex: 0,
+                difficulty: 2,
+                tags: ["Astronomy", "Science"]
+            }
+        ];
+        let currentQuestionIndex = 0;
+
+        // Elements
+        const questionInput = document.getElementById('question-input');
+        let previewQuestion = document.getElementById('preview-question');
+        const optionInputs = document.querySelectorAll('.option-input');
+        const correctRadios = document.querySelectorAll('input[name="correct"]');
+        const difficultyInput = document.querySelector('input[type="range"]');
+        const tagsContainer = document.getElementById('tags-container');
+        const tagInput = document.getElementById('tag-input');
+        const backBtn = document.getElementById('back-question-btn');
+        const nextBtn = document.getElementById('next-question-btn');
+        const questionIndexDisplay = document.getElementById('question-index-display');
+        let previewQuestionNumber = document.getElementById('preview-question-number');
+        let previewOptionsContainer = document.getElementById('preview-options');
+        const publishBtn = document.getElementById('publish-btn');
+
+        // Initializer
+        function initEditor() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const queryTitle = urlParams.get('title');
+            const queryGroup = urlParams.get('group');
+            const queryDuration = urlParams.get('duration');
+
+            let draftTitle = 'Quiz_104_A';
+            let draftGroup = 'All'; // Default to All Groups
+            let draftDuration = '45 mins';
+
+            // Check if loading a draft
+            const draftIdx = urlParams.get('draft_idx');
+            if (draftIdx !== null) {
+                let drafts = JSON.parse(localStorage.getItem('quizDrafts') || '[]');
+                let draft = drafts[parseInt(draftIdx)];
+                if (draft) {
+                    questions = draft.questions;
+                    draftTitle = draft.title || "Untitled";
+                    draftGroup = draft.group || "All";
+                    draftDuration = draft.duration || "45 mins";
+                }
+            } else if (queryTitle) {
+                draftTitle = queryTitle;
+                draftGroup = queryGroup || 'All';
+                draftDuration = queryDuration || '45 mins';
+                
+                // For new quiz, start with 1 blank question
+                questions = [{
+                    text: "",
+                    options: ["", "", "", ""],
+                    correctIndex: 0,
+                    difficulty: 2,
+                    tags: []
+                }];
+            }
+
+            window.activeQuizMeta = {
+                title: draftTitle,
+                group: draftGroup,
+                duration: draftDuration
+            };
+
+            const quizTitleInput = document.getElementById('quiz-title-input');
+            if (quizTitleInput) {
+                quizTitleInput.value = draftTitle;
+                quizTitleInput.addEventListener('input', (e) => {
+                    const newTitle = e.target.value.trim();
+                    window.activeQuizMeta.title = newTitle || 'Untitled Quiz';
+                    const titleBadge = document.querySelector('.px-4.py-1.bg-surface-container-high');
+                    if (titleBadge) {
+                        titleBadge.textContent = "Editing: " + (newTitle || 'Untitled Quiz');
+                    }
+                });
+            }
+
+            const titleBadge = document.querySelector('.px-4.py-1.bg-surface-container-high');
+            if (titleBadge) {
+                titleBadge.textContent = "Editing: " + draftTitle;
+            }
+
+            // Setup input events for real-time preview sync
+            questionInput.addEventListener('input', (e) => {
+                questions[currentQuestionIndex].text = e.target.value;
+                updateLivePreview();
+            });
+
+            optionInputs.forEach((input, index) => {
+                input.addEventListener('input', (e) => {
+                    questions[currentQuestionIndex].options[index] = e.target.value;
+                    updateLivePreview();
+                });
+            });
+
+            correctRadios.forEach((radio, index) => {
+                radio.addEventListener('change', () => {
+                    if (radio.checked) {
+                        questions[currentQuestionIndex].correctIndex = index;
+                        updateCorrectOptionStyling();
+                        updateLivePreview();
+                    }
+                });
+            });
+
+            // Make option labels clickable to select correct index
+            const optionRows = document.querySelectorAll('.grid.gap-3 > div');
+            optionRows.forEach((row, index) => {
+                const label = row.querySelector('label');
+                const radio = row.querySelector('input[type="radio"]');
+                if (label && radio) {
+                    label.style.cursor = 'pointer';
+                    label.addEventListener('click', () => {
+                        radio.checked = true;
+                        radio.dispatchEvent(new Event('change'));
+                    });
+                }
+            });
+
+            if (difficultyInput) {
+                difficultyInput.addEventListener('input', (e) => {
+                    questions[currentQuestionIndex].difficulty = parseInt(e.target.value);
+                });
+            }
+
+            // Tag input handling
+            if (tagInput && tagsContainer) {
+                tagInput.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter') {
+                        e.preventDefault();
+                        const val = tagInput.value.trim();
+                        if (val) {
+                            const currentTags = questions[currentQuestionIndex].tags;
+                            if (!currentTags.includes(val)) {
+                                currentTags.push(val);
+                                renderTags();
+                            }
+                            tagInput.value = '';
+                        }
+                    }
+                });
+
+                tagsContainer.addEventListener('click', (e) => {
+                    const removeBtn = e.target.closest('.remove-tag-btn');
+                    if (removeBtn) {
+                        const badge = removeBtn.closest('.tag-badge');
+                        if (badge) {
+                            const tagText = badge.getAttribute('data-tag');
+                            const currentTags = questions[currentQuestionIndex].tags;
+                            const idx = currentTags.indexOf(tagText);
+                            if (idx > -1) {
+                                currentTags.splice(idx, 1);
+                            }
+                            badge.remove();
+                        }
+                    }
+                });
+            }
+
+            // Pagination button handling
+            if (backBtn && nextBtn) {
+                backBtn.addEventListener('click', () => {
+                    if (currentQuestionIndex > 0) {
+                        saveCurrentQuestionData();
+                        loadQuestion(currentQuestionIndex - 1);
+                    }
+                });
+
+                nextBtn.addEventListener('click', () => {
+                    saveCurrentQuestionData();
+                    if (currentQuestionIndex === questions.length - 1) {
+                        // Append a new empty question template
+                        questions.push({
+                            text: "",
+                            options: ["", "", "", ""],
+                            correctIndex: 0,
+                            difficulty: 2,
+                            tags: []
+                        });
+                    }
+                    loadQuestion(currentQuestionIndex + 1);
+                });
+            }
+
+            // Backup original player HTML and add helpers for previewing all published questions
+            let originalPlayerHTML = '';
+            const playerContent = document.getElementById('player-content-wrapper');
+            if (playerContent) {
+                originalPlayerHTML = playerContent.innerHTML;
+            }
+
+            function reCachePlayerElements() {
+                previewQuestion = document.getElementById('preview-question');
+                previewQuestionNumber = document.getElementById('preview-question-number');
+                previewOptionsContainer = document.getElementById('preview-options');
+            }
+
+            function restoreOriginalPlayerContent() {
+                const playerContent = document.getElementById('player-content-wrapper');
+                if (playerContent && originalPlayerHTML) {
+                    playerContent.innerHTML = originalPlayerHTML;
+                    reCachePlayerElements();
+                    updateLivePreview();
+                }
+            }
+
+            function showPublishedQuestionsReview() {
+                const playerContent = document.getElementById('player-content-wrapper');
+                if (!playerContent) return;
+
+                let questionsHtml = '';
+                questions.forEach((q, qIdx) => {
+                    let optionsHtml = '';
+                    q.options.forEach((opt, oIdx) => {
+                        const label = String.fromCharCode(65 + oIdx);
+                        const isCorrect = (oIdx === q.correctIndex);
+                        optionsHtml += `
+                            <div class="flex items-center gap-2 text-[11px] p-2 rounded-lg ${isCorrect ? 'bg-green-500/10 border border-green-500/20 text-green-400' : 'bg-white/5 text-slate-300'}">
+                                <span class="w-5 h-5 rounded flex items-center justify-center font-bold text-[9px] ${isCorrect ? 'bg-green-500 text-white' : 'bg-white/10'}">${label}</span>
+                                <span class="truncate">${opt || "Option " + label}</span>
+                            </div>
+                        `;
+                    });
+
+                    questionsHtml += `
+                        <div class="bg-white/5 border border-white/10 rounded-xl p-3 space-y-2">
+                            <p class="text-white font-semibold text-xs">${qIdx + 1}. ${q.text || "Untitled Question"}</p>
+                            <div class="grid grid-cols-2 gap-2">
+                                ${optionsHtml}
+                            </div>
+                        </div>
+                    `;
+                });
+
+                playerContent.innerHTML = `
+                    <div class="flex flex-col h-full justify-between">
+                        <div class="flex justify-between items-center mb-2 flex-shrink-0">
+                            <h3 class="text-white font-bold text-sm">Published Questions (${questions.length})</h3>
+                            <span class="px-2 py-0.5 bg-green-500/20 text-green-400 border border-green-500/30 rounded-full text-[9px] font-bold">Live on Server</span>
+                        </div>
+                        <div class="space-y-2 overflow-y-auto custom-scrollbar flex-1 pr-1 mb-3">
+                            ${questionsHtml}
+                        </div>
+                        <div class="pt-2 border-t border-slate-800 flex justify-between flex-shrink-0">
+                            <button id="close-review-btn" class="px-5 py-2 rounded-full border border-slate-700 text-slate-400 hover:text-white transition-colors text-xs">
+                                Back to Editor
+                            </button>
+                            <button id="dash-nav-btn" class="px-5 py-2 rounded-full bg-primary text-white font-bold text-xs hover:bg-primary/80 active:scale-95 transition-all">
+                                Go to Dashboard
+                            </button>
+                        </div>
+                    </div>
+                `;
+
+                // Wire review controls
+                const closeReviewBtn = document.getElementById('close-review-btn');
+                if (closeReviewBtn) {
+                    closeReviewBtn.addEventListener('click', restoreOriginalPlayerContent);
+                }
+                const dashNavBtn = document.getElementById('dash-nav-btn');
+                if (dashNavBtn) {
+                    dashNavBtn.addEventListener('click', () => {
+                        if (window.parent && window.parent.App && typeof window.parent.App.navigate === 'function') {
+                            window.parent.App.navigate('quiz-dashboard');
+                        } else {
+                            window.location.reload();
+                        }
+                    });
+                }
+            }
+
+            // Publish Button handling
+            const handlePublish = () => {
+                saveCurrentQuestionData();
+                
+                // Clean trailing empty questions
+                let cleanedQuestions = [...questions];
+                while (cleanedQuestions.length > 0 && (!cleanedQuestions[cleanedQuestions.length - 1].text || !cleanedQuestions[cleanedQuestions.length - 1].text.trim())) {
+                    cleanedQuestions.pop();
+                }
+                if (cleanedQuestions.length === 0) {
+                    cleanedQuestions = [questions[0]]; // fallback to first
+                }
+                
+                // Save to local storage for integration
+                localStorage.setItem('created_quiz_questions', JSON.stringify(cleanedQuestions));
+
+                const meta = window.activeQuizMeta || { title: 'Quiz_104_A', group: 'All', duration: '45 mins' };
+
+                // Send POST request to backend API
+                const testPayload = {
+                    title: meta.title,
+                    duration: meta.duration,
+                    questions: cleanedQuestions.length,
+                    group: meta.group,
+                    questionsList: cleanedQuestions
+                };
+
+                fetch('/api/tests/create', {
+                    method: 'POST',
+                    headers: { 
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Bearer mock_token'
+                    },
+                    body: JSON.stringify(testPayload)
+                })
+                .then(res => {
+                    if (res.ok) {
+                        return res.json();
+                    } else {
+                        throw new Error("Failed to create test");
+                    }
+                })
+                .then(data => {
+                    if (data.success && data.test) {
+                        const newTest = data.test;
+                        // Save questions for this test ID
+                        localStorage.setItem(`questions_test_${newTest.id}`, JSON.stringify(cleanedQuestions));
+                        
+                        let publishedQuestionsMap = JSON.parse(localStorage.getItem('published_questions_map') || '{}');
+                        publishedQuestionsMap[newTest.id] = cleanedQuestions;
+                        localStorage.setItem('published_questions_map', JSON.stringify(publishedQuestionsMap));
+
+                        showToast(`Quiz "${newTest.title}" with ${cleanedQuestions.length} question(s) published successfully!`, "success");
+                        
+                        // If editing a draft, remove it from draft list
+                        const urlParams = new URLSearchParams(window.location.search);
+                        const draftIdx = urlParams.get('draft_idx');
+                        if (draftIdx !== null) {
+                            let drafts = JSON.parse(localStorage.getItem('quizDrafts') || '[]');
+                            const idx = parseInt(draftIdx);
+                            if (drafts[idx]) {
+                                drafts.splice(idx, 1);
+                                localStorage.setItem('quizDrafts', JSON.stringify(drafts));
+                            }
+                        }
+                        
+                        // Render all published questions inside the student preview frame
+                        showPublishedQuestionsReview();
+                    } else {
+                        throw new Error("Failed to parse created test");
+                    }
+                })
+                .catch(err => {
+                    console.error(err);
+                    showToast("Error publishing test. Please ensure backend is running.", "error");
+                });
+            };
+
+            if (publishBtn) {
+                publishBtn.addEventListener('click', handlePublish);
+            }
+            const footerPublishBtn = document.getElementById('footer-publish-btn');
+            if (footerPublishBtn) {
+                footerPublishBtn.addEventListener('click', handlePublish);
+            }
+            const rightPublishBtn = document.getElementById('right-publish-btn');
+            if (rightPublishBtn) {
+                rightPublishBtn.addEventListener('click', handlePublish);
+            }
+            const rightDraftBtn = document.getElementById('right-draft-btn');
+            if (rightDraftBtn) {
+                rightDraftBtn.addEventListener('click', () => {
+                    saveCurrentQuestionData();
+                    const urlParams = new URLSearchParams(window.location.search);
+                    const draftIdx = urlParams.get('draft_idx');
+                    
+                    const titleBadge = document.querySelector('.px-4.py-1.bg-surface-container-high');
+                    const titleText = titleBadge ? titleBadge.textContent.replace('Editing: ', '').replace('Editing Draft: ', '').trim() : 'Quiz_104_A';
+
+                    const draftData = {
+                        title: titleText,
+                        questions: questions,
+                        savedAt: new Date().toLocaleString()
+                    };
+                    
+                    localStorage.setItem('created_quiz_draft', JSON.stringify(draftData));
+                    
+                    let drafts = JSON.parse(localStorage.getItem('quizDrafts') || '[]');
+                    if (draftIdx !== null && drafts[parseInt(draftIdx)]) {
+                        drafts[parseInt(draftIdx)] = draftData;
+                    } else {
+                        drafts.push(draftData);
+                    }
+                    localStorage.setItem('quizDrafts', JSON.stringify(drafts));
+                    
+                    showToast("Draft saved successfully!", "success");
+                });
+            }
+
+            // Load first question
+            loadQuestion(0);
+        }
+
+        function saveCurrentQuestionData() {
+            const q = questions[currentQuestionIndex];
+            q.text = questionInput.value.trim();
+            optionInputs.forEach((input, index) => {
+                q.options[index] = input.value.trim();
+            });
+            correctRadios.forEach((radio, index) => {
+                if (radio.checked) q.correctIndex = index;
+            });
+            if (difficultyInput) {
+                q.difficulty = parseInt(difficultyInput.value);
+            }
+            const badges = tagsContainer.querySelectorAll('.tag-badge');
+            q.tags = Array.from(badges).map(b => b.getAttribute('data-tag'));
+        }
+
+        function loadQuestion(index) {
+            currentQuestionIndex = index;
+            const q = questions[currentQuestionIndex];
+
+            questionInput.value = q.text || "";
+            optionInputs.forEach((input, idx) => {
+                input.value = q.options[idx] || "";
+            });
+
+            correctRadios.forEach((radio, idx) => {
+                radio.checked = (idx === q.correctIndex);
+            });
+
+            if (difficultyInput) {
+                difficultyInput.value = q.difficulty || 2;
+            }
+
+            renderTags();
+            updateCorrectOptionStyling();
+            updateLivePreview();
+
+            // Style Back button
+            if (currentQuestionIndex === 0) {
+                backBtn.disabled = true;
+                backBtn.classList.add('opacity-40', 'cursor-not-allowed');
+            } else {
+                backBtn.disabled = false;
+                backBtn.classList.remove('opacity-40', 'cursor-not-allowed');
+            }
+        }
+
+        function renderTags() {
+            if (!tagsContainer || !tagInput) return;
+            // Remove existing badges
+            tagsContainer.querySelectorAll('.tag-badge').forEach(b => b.remove());
+            // Insert current badges before the input field
+            const currentTags = questions[currentQuestionIndex].tags || [];
+            currentTags.forEach(tag => {
+                const span = document.createElement('span');
+                span.className = "tag-badge tag-badge px-3 py-1 bg-secondary/10 text-secondary border border-secondary/20 rounded-full text-xs font-semibold flex items-center gap-1";
+                span.setAttribute('data-tag', tag);
+                span.innerHTML = `${tag} <span class="remove-tag-btn material-symbols-outlined text-[14px] cursor-pointer">close</span>`;
+                tagsContainer.insertBefore(span, tagInput);
+            });
+        }
+
+        function updateCorrectOptionStyling() {
+            const q = questions[currentQuestionIndex];
+            const optionRows = document.querySelectorAll('.grid.gap-3 > div');
+            optionRows.forEach((row, index) => {
+                const label = row.querySelector('label');
+                if (!label) return;
+                if (index === q.correctIndex) {
+                    label.className = "flex items-center justify-center w-10 h-10 rounded-full bg-primary text-on-primary font-bold shadow-sm transition-all";
+                } else {
+                    label.className = "flex items-center justify-center w-10 h-10 rounded-full bg-surface-container-highest text-on-surface-variant font-bold shadow-sm transition-all";
+                }
+            });
+        }
+
+        function updateLivePreview() {
+            const q = questions[currentQuestionIndex];
+            previewQuestion.textContent = q.text || "Your question will appear here...";
+            
+            previewOptionsContainer.innerHTML = '';
+            q.options.forEach((opt, index) => {
+                const label = String.fromCharCode(65 + index);
+                const isCorrect = (index === q.correctIndex);
+                
+                const btn = document.createElement('button');
+                btn.className = `w-full py-2.5 px-4 glass-panel rounded-xl flex items-center gap-3 hover:bg-white/20 transition-all text-left text-white text-sm group ${isCorrect ? 'border-green-500 bg-green-500/10 shadow-[0_0_15px_rgba(34,197,94,0.15)]' : 'bg-white/10 border-white/20'}`;
+                
+                btn.innerHTML = `
+                    <span class="w-8 h-8 rounded-lg ${isCorrect ? 'bg-green-500 text-white' : 'bg-white/10 group-hover:bg-primary'} flex items-center justify-center font-bold text-sm transition-colors">${label}</span>
+                    <span class="option-text flex-grow">${opt || "Option " + label}</span>
+                    ${isCorrect ? '<span class="material-symbols-outlined text-green-500 text-lg font-bold" style="font-variation-settings: \'FILL\' 1;">check_circle</span>' : ''}
+                `;
+                previewOptionsContainer.appendChild(btn);
+            });
+
+            if (previewQuestionNumber) {
+                previewQuestionNumber.textContent = `Question ${currentQuestionIndex + 1} of ${questions.length}`;
+            }
+            if (questionIndexDisplay) {
+                questionIndexDisplay.textContent = `Question ${currentQuestionIndex + 1} of ${questions.length}`;
+            }
+        }
+
+        function showToast(message, type = 'success') {
+            if (window.parent && window.parent.App && typeof window.parent.App.showToast === 'function') {
+                window.parent.App.showToast(message, type);
+            } else {
+                let container = document.getElementById('local-toast-container');
+                if (!container) {
+                    container = document.createElement('div');
+                    container.id = 'local-toast-container';
+                    container.className = 'fixed bottom-5 right-5 z-50 flex flex-col gap-3 pointer-events-none';
+                    document.body.appendChild(container);
+                }
+                const toast = document.createElement('div');
+                toast.className = `pointer-events-auto flex items-center gap-3 px-6 py-4 rounded-2xl shadow-xl transition-all duration-300 transform translate-y-10 opacity-0 ${
+                    type === 'error' ? 'bg-red-500 text-white' : 'bg-primary text-white font-semibold'
+                }`;
+                toast.innerHTML = `<span class="material-symbols-outlined">${type === 'error' ? 'error' : 'check_circle'}</span><span class="text-sm font-semibold">${message}</span>`;
+                container.appendChild(toast);
+                toast.offsetHeight;
+                toast.classList.remove('translate-y-10', 'opacity-0');
+                setTimeout(() => {
+                    toast.classList.add('translate-y-10', 'opacity-0');
+                    setTimeout(() => toast.remove(), 300);
+                }, 3000);
+            }
+        }
+
+        // Initialize editor
+        document.addEventListener('DOMContentLoaded', initEditor);
+        // Fallback if DOMContentLoaded already fired
+        if (document.readyState === 'interactive' || document.readyState === 'complete') {
+            initEditor();
+        }
+    </script>
+</body></html>

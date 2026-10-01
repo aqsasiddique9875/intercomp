@@ -1,0 +1,1097 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+  <script>
+    if (window.self !== window.top) {
+      const style = document.createElement('style');
+      style.innerHTML = `
+        header, nav, aside, 
+        .SideNavBar, .TopNavBar, 
+        #SideNavBar, #TopNavBar {
+          display: none !important;
+        }
+        main, .main-content {
+          margin-left: 0 !important;
+          padding-top: 1.5rem !important;
+        }
+        main.ml-64, main.lg\\:ml-64 {
+          margin-left: 0 !important;
+          padding-top: 2rem !important;
+        }
+      `;
+      document.documentElement.appendChild(style);
+    }
+  </script>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>JobFlow | Assignments Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-high": "#e0e8fb",
+                        "on-surface": "#141c29",
+                        "primary": "#8731a3",
+                        "surface": "#f9f9ff",
+                        "on-error-container": "#93000a",
+                        "surface-variant": "#dbe3f6",
+                        "on-primary": "#ffffff",
+                        "tertiary-fixed": "#6cff82",
+                        "surface-container": "#e7eeff",
+                        "on-tertiary-fixed-variant": "#00531a",
+                        "background": "#f9f9ff",
+                        "secondary-fixed": "#d3e3ff",
+                        "on-tertiary-fixed": "#002106",
+                        "surface-container-low": "#f0f3ff",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary": "#ffffff",
+                        "inverse-surface": "#29313f",
+                        "gold": "#FFD60A",
+                        "primary-fixed-dim": "#f0b0ff",
+                        "on-secondary-container": "#003868",
+                        "surface-dim": "#d2daed",
+                        "on-primary-container": "#fff5fb",
+                        "on-background": "#471A70",
+                        "surface-tint": "#8d37a9",
+                        "on-tertiary-container": "#e6ffe0",
+                        "on-error": "#ffffff",
+                        "inverse-on-surface": "#ecf1ff",
+                        "tertiary-fixed-dim": "#47e266",
+                        "outline": "#817381",
+                        "secondary-container": "#54a3ff",
+                        "on-secondary": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "inverse-primary": "#f0b0ff",
+                        "on-secondary-fixed": "#001c39",
+                        "glass-fill": "rgba(255, 255, 255, 0.35)",
+                        "secondary": "#0060ab",
+                        "error": "#FF453A",
+                        "orange": "#FF9F0A",
+                        "primary-container": "#a34cbe",
+                        "primary-fixed": "#fbd7ff",
+                        "outline-variant": "#d2c1d2",
+                        "on-primary-fixed-variant": "#72188f",
+                        "surface-bright": "#f9f9ff",
+                        "card-gradient": "linear-gradient(135deg, #4D9EFA 0%, #BF7DF5 100%)",
+                        "glass-thick": "rgba(255, 255, 255, 0.8)",
+                        "tertiary": "#006823",
+                        "tertiary-container": "#00842f",
+                        "glass-border": "rgba(255, 255, 255, 0.6)",
+                        "on-surface-variant": "#4f4350",
+                        "on-secondary-fixed-variant": "#004883",
+                        "surface-container-highest": "#dbe3f6",
+                        "on-primary-fixed": "#330044",
+                        "secondary-fixed-dim": "#a3c9ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "2xl": "1rem",
+                        "3xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "desktop-margin": "64px",
+                        "base": "8px",
+                        "mobile-gutter": "16px",
+                        "safe-top": "44px",
+                        "max-width": "1280px",
+                        "mobile-margin": "20px",
+                        "desktop-gutter": "24px",
+                        "safe-bottom": "34px"
+                    },
+                    "fontFamily": {
+                        "headline-lg": ["Inter", "sans-serif"],
+                        "display-xl": ["Inter", "sans-serif"],
+                        "body-md": ["Inter", "sans-serif"],
+                        "label-caps": ["Inter", "sans-serif"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background: radial-gradient(circle at 0% 0%, #fbd7ff 0%, #f9f9ff 50%, #d3e3ff 100%);
+            overflow-x: hidden;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.35);
+            backdrop-filter: blur(28px);
+            -webkit-backdrop-filter: blur(28px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 12px 40px 0 rgba(71, 26, 112, 0.15);
+        }
+        .glass-thick {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(28px);
+            -webkit-backdrop-filter: blur(28px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .active-pill {
+            background: linear-gradient(135deg, #8731a3 0%, #a34cbe 100%);
+        }
+    </style>
+</head>
+<body class="min-h-screen text-on-surface">
+<!-- SideNavBar -->
+<aside class="h-screen w-64 fixed left-0 top-0 flex flex-col p-6 gap-6 backdrop-blur-xl border-r border-glass-border bg-glass-fill shadow-[0_12px_40px_0_rgba(71,26,112,0.15)] z-50 hidden lg:flex">
+<div class="flex items-center gap-3 mb-4">
+<div class="w-10 h-10 rounded-xl bg-primary flex items-center justify-center text-white">
+<span class="material-symbols-outlined">work_history</span>
+</div>
+<div>
+<h1 class="font-display-xl text-[24px] font-bold text-primary leading-tight">JobFlow</h1>
+<p class="text-[12px] text-on-surface-variant font-medium opacity-70">Student Portal</p>
+</div>
+</div>
+<nav class="flex flex-col gap-1 overflow-y-auto no-scrollbar flex-grow">
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:bg-glass-thick rounded-xl transition-all duration-300 hover:scale-[1.02]" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-body-md text-body-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:bg-glass-thick rounded-xl transition-all duration-300 hover:scale-[1.02]" href="#">
+<span class="material-symbols-outlined">school</span>
+<span class="font-body-md text-body-md">Courses</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 bg-primary text-on-primary rounded-xl transition-all duration-300 hover:scale-[1.02]" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">assignment</span>
+<span class="font-body-md text-body-md font-bold">Assignments</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:bg-glass-thick rounded-xl transition-all duration-300 hover:scale-[1.02]" href="#">
+<span class="material-symbols-outlined">grade</span>
+<span class="font-body-md text-body-md">Grades</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:bg-glass-thick rounded-xl transition-all duration-300 hover:scale-[1.02]" href="#">
+<span class="material-symbols-outlined">calendar_today</span>
+<span class="font-body-md text-body-md">Schedule</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:bg-glass-thick rounded-xl transition-all duration-300 hover:scale-[1.02]" href="#">
+<span class="material-symbols-outlined">work</span>
+<span class="font-body-md text-body-md">Opportunities</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:bg-glass-thick rounded-xl transition-all duration-300 hover:scale-[1.02]" href="#">
+<span class="material-symbols-outlined">insights</span>
+<span class="font-body-md text-body-md">analytics</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:bg-glass-thick rounded-xl transition-all duration-300 hover:scale-[1.02]" href="#">
+<span class="material-symbols-outlined">library_books</span>
+<span class="font-body-md text-body-md">Library</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:bg-glass-thick rounded-xl transition-all duration-300 hover:scale-[1.02]" href="#">
+<span class="material-symbols-outlined">mail</span>
+<span class="font-body-md text-body-md">Messages</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:bg-glass-thick rounded-xl transition-all duration-300 hover:scale-[1.02]" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="font-body-md text-body-md">Mentors</span>
+</a>
+</nav>
+<div class="mt-auto flex flex-col gap-2 border-t border-glass-border pt-4">
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:bg-glass-thick rounded-xl transition-all duration-300" href="#">
+<span class="material-symbols-outlined">logout</span>
+<span class="font-body-md text-body-md">Logout</span>
+</a>
+</div>
+</aside>
+<!-- TopNavBar -->
+<header class="h-16 fixed top-0 right-0 left-0 lg:left-64 z-40 flex justify-between items-center px-8 backdrop-blur-lg border-b border-glass-border bg-glass-thick shadow-sm">
+<div class="flex items-center gap-8">
+<div class="flex gap-6">
+<a class="font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-opacity" href="#">Overview</a>
+<a class="font-label-caps text-label-caps text-primary border-b-2 border-primary font-bold" href="#">Calendar</a>
+<a class="font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-opacity" href="#">Resources</a>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="relative group">
+<input id="assignmentsSearchInput" class="w-64 h-10 pl-10 pr-4 rounded-full bg-surface-container border-none focus:ring-2 focus:ring-primary/20 text-sm transition-all group-hover:w-80" placeholder="Search assignments..." type="text"/>
+<span class="material-symbols-outlined absolute left-3 top-2.5 text-on-surface-variant text-[20px]">search</span>
+</div>
+<div class="flex gap-4">
+<button class="p-2 text-on-surface-variant hover:opacity-80 active:scale-95 transition-all">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:opacity-80 active:scale-95 transition-all">
+<span class="material-symbols-outlined" data-icon="help_outline">help_outline</span>
+</button>
+</div>
+<div class="flex items-center gap-3 pl-4 border-l border-glass-border">
+<img alt="Student Profile Picture" class="w-10 h-10 rounded-full border-2 border-white object-cover" data-alt="A professional close-up portrait of a young college student with a friendly expression. The student is set against a brightly lit, blurred library background with warm wooden textures and soft bokeh. The lighting is clean and modern, following the premium digital portal aesthetic with high-key whites and subtle purple accents from the environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuARsuoWHjLwch_C9GufAt9munPqRNfnBD6Bs8QhRXwgMDF70ZODagDtgea8-uPiP4xcGI6PBrM5ZdJ-gnPsJcEXlWsvxPQGsKDPg4tWOZF107_re9JD4I2D_ialmm5ZoVwuTHYx5ShYZvG2GiTFigz1ZWz39z9f2qC0AwBtyiMhNwDf4pffjEZgpZPAbfi8uvdvxMu44mtjhSwHgEQ-yR3cBZu26QutPGKvsBm4wwdSgq9iBJtN2tkrJby600G2g3Cv3Z6Tbs66y5Mw"/>
+</div>
+</div>
+</header>
+<!-- Main Content -->
+<main class="ml-64 pt-24 px-desktop-margin pb-12 relative">
+<!-- Background Animation -->
+<div class="fixed inset-0 -z-10 opacity-30 pointer-events-none">
+
+</div>
+<section class="max-w-max-width mx-auto">
+<!-- Header & Indicator Cards -->
+<div class="flex flex-col gap-8 mb-12">
+<div>
+<h2 class="font-display-xl text-display-xl text-on-background font-extrabold tracking-tight">Assignments Dashboard</h2>
+<p class="text-on-surface-variant font-body-md text-body-md mt-2 max-w-2xl" id="assignmentsDashboardDesc">Manage your academic progress and track upcoming deadlines with real-time feedback and grading analysis.</p>
+<div class="mt-4 inline-flex items-center gap-2 px-4 py-2 bg-primary/10 text-primary border border-primary/20 rounded-2xl font-bold text-sm" id="activeCourseBadge">
+<span class="material-symbols-outlined text-base">school</span>
+<span id="activeCourseBadgeText">Active Course: User Interface Design</span>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<!-- Remaining Card -->
+<div class="glass-card p-6 rounded-3xl flex items-center justify-between group cursor-pointer hover:scale-[1.01] transition-all duration-300">
+<div class="flex items-center gap-4">
+<div class="w-14 h-14 rounded-2xl bg-orange/10 flex items-center justify-center text-orange group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined !text-[30px]" style="font-variation-settings: 'FILL' 1;">assignment_late</span>
+</div>
+<div>
+<h3 class="text-on-surface-variant font-label-caps text-[11px] uppercase tracking-widest mb-1">Remaining Tasks</h3>
+<p id="remainingTasksCount" class="font-display-xl text-[36px] font-black text-on-background leading-none">05</p>
+</div>
+</div>
+<div class="text-right">
+<span class="inline-flex items-center px-3 py-1 rounded-full bg-orange text-white font-bold text-[10px]">TO-DO</span>
+</div>
+</div>
+<!-- Submitted Card (Awaiting Evaluation) -->
+<div class="glass-card p-6 rounded-3xl flex items-center justify-between group cursor-pointer hover:scale-[1.01] transition-all duration-300">
+<div class="flex items-center gap-4">
+<div class="w-14 h-14 rounded-2xl bg-secondary/10 flex items-center justify-center text-secondary group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined !text-[30px]" style="font-variation-settings: 'FILL' 1;">pending_actions</span>
+</div>
+<div>
+<h3 class="text-on-surface-variant font-label-caps text-[11px] uppercase tracking-widest mb-1">Pending Evaluation</h3>
+<p id="submittedTasksCount" class="font-display-xl text-[36px] font-black text-on-background leading-none">02</p>
+</div>
+</div>
+<div class="text-right">
+<span class="inline-flex items-center px-3 py-1 rounded-full bg-secondary text-white font-bold text-[10px]">SUBMITTED</span>
+</div>
+</div>
+<!-- Graded Card -->
+<div class="glass-card p-6 rounded-3xl flex items-center justify-between group cursor-pointer hover:scale-[1.01] transition-all duration-300">
+<div class="flex items-center gap-4">
+<div class="w-14 h-14 rounded-2xl bg-tertiary/10 flex items-center justify-center text-tertiary group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined !text-[30px]" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+</div>
+<div>
+<h3 class="text-on-surface-variant font-label-caps text-[11px] uppercase tracking-widest mb-1">Graded Tasks</h3>
+<p id="gradedTasksCount" class="font-display-xl text-[36px] font-black text-on-background leading-none">10</p>
+</div>
+</div>
+<div class="text-right">
+<span class="inline-flex items-center px-3 py-1 rounded-full bg-tertiary text-white font-bold text-[10px]">EVALUATED</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Table Container -->
+<div class="glass-card rounded-3xl overflow-hidden mb-12">
+<div class="px-8 py-6 border-b border-glass-border flex justify-between items-center bg-white/10">
+<h4 class="font-headline-lg text-[20px] font-bold text-on-background">Weekly Assignment Schedule</h4>
+<div class="flex gap-4">
+<div class="relative">
+<button id="filterBtn" onclick="toggleFilterMenu(event)" class="flex items-center gap-2 px-4 py-2 rounded-xl bg-glass-thick border border-glass-border font-label-caps text-xs font-bold hover:bg-surface-container transition-all">
+<span class="material-symbols-outlined text-[18px]">filter_list</span>
+Filter
+</button>
+<div id="filterMenu" class="hidden absolute right-0 mt-2 w-48 rounded-2xl glass-thick shadow-xl border border-glass-border z-50 p-3 space-y-2 text-left">
+<div>
+<p class="text-[10px] font-bold text-on-surface-variant uppercase tracking-widest px-2 mb-1">Subject</p>
+<select id="filterSubject" onchange="applyFilters()" class="w-full text-xs rounded-lg border-glass-border bg-white/50 p-1.5 focus:ring-primary focus:border-primary text-on-surface">
+<option value="all">All Subjects</option>
+<option value="Design">Design</option>
+<option value="Computing">Computing</option>
+<option value="Economics">Economics</option>
+<option value="Mathematics">Mathematics</option>
+</select>
+</div>
+<div>
+<p class="text-[10px] font-bold text-on-surface-variant uppercase tracking-widest px-2 mb-1">Status</p>
+<select id="filterStatus" onchange="applyFilters()" class="w-full text-xs rounded-lg border-glass-border bg-white/50 p-1.5 focus:ring-primary focus:border-primary text-on-surface">
+<option value="all">All Statuses</option>
+<option value="Pending">Pending</option>
+<option value="Approved">Approved</option>
+<option value="Submitted">Submitted</option>
+</select>
+</div>
+<div>
+<p class="text-[10px] font-bold text-on-surface-variant uppercase tracking-widest px-2 mb-1">Difficulty</p>
+<select id="filterDifficulty" onchange="applyFilters()" class="w-full text-xs rounded-lg border-glass-border bg-white/50 p-1.5 focus:ring-primary focus:border-primary text-on-surface">
+<option value="all">All Difficulties</option>
+<option value="Easy">Easy</option>
+<option value="Medium">Medium</option>
+<option value="Hard">Hard</option>
+</select>
+</div>
+</div>
+</div>
+<div class="relative">
+<button id="sortBtn" onclick="toggleSortMenu(event)" class="flex items-center gap-2 px-4 py-2 rounded-xl bg-glass-thick border border-glass-border font-label-caps text-xs font-bold hover:bg-surface-container transition-all">
+<span class="material-symbols-outlined text-[18px]">sort</span>
+Sort
+</button>
+<div id="sortMenu" class="hidden absolute right-0 mt-2 w-48 rounded-2xl glass-thick shadow-xl border border-glass-border z-50 p-3 space-y-1 text-left">
+<button onclick="applySort('deadline')" class="w-full text-left text-xs font-medium text-on-surface hover:bg-white/40 p-2 rounded-lg transition-all flex justify-between items-center">
+Deadline <span id="sortCheck-deadline" class="material-symbols-outlined text-xs hidden">check</span>
+</button>
+<button onclick="applySort('difficulty')" class="w-full text-left text-xs font-medium text-on-surface hover:bg-white/40 p-2 rounded-lg transition-all flex justify-between items-center">
+Difficulty <span id="sortCheck-difficulty" class="material-symbols-outlined text-xs hidden">check</span>
+</button>
+<button onclick="applySort('title')" class="w-full text-left text-xs font-medium text-on-surface hover:bg-white/40 p-2 rounded-lg transition-all flex justify-between items-center">
+Title (A-Z) <span id="sortCheck-title" class="material-symbols-outlined text-xs hidden">check</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low/50">
+<th class="px-8 py-4 font-label-caps text-label-caps text-on-surface-variant uppercase opacity-70">Assignment Specification</th>
+<th class="px-6 py-4 font-label-caps text-label-caps text-on-surface-variant uppercase opacity-70">Subject</th>
+<th class="px-6 py-4 font-label-caps text-label-caps text-on-surface-variant uppercase opacity-70">Deadline</th>
+<th class="px-6 py-4 font-label-caps text-label-caps text-on-surface-variant uppercase opacity-70 text-center">Difficulty</th>
+<th class="px-6 py-4 font-label-caps text-label-caps text-on-surface-variant uppercase opacity-70">Status</th>
+<th class="px-8 py-4 font-label-caps text-label-caps text-on-surface-variant uppercase opacity-70 text-right">Grade/Report</th>
+</tr>
+</thead>
+<tbody id="assignmentsTableBody" class="divide-y divide-glass-border">
+</tbody>
+</table>
+</div>
+<div class="px-8 py-4 bg-surface-container-low/30 border-t border-glass-border flex justify-between items-center">
+<p id="paginationInfo" class="text-xs text-on-surface-variant font-medium">Showing 1-4 of 17 assignments</p>
+<div id="paginationButtons" class="flex gap-2">
+</div>
+</div>
+</div>
+<!-- Bento Grid - Extras -->
+<div class="grid grid-cols-12 gap-6 pb-24">
+<div class="col-span-12 md:col-span-4 glass-card p-6 rounded-3xl">
+<h5 class="font-headline-lg text-[18px] font-bold text-on-background mb-4">Grade Distribution</h5>
+<div class="h-40 flex items-end justify-between px-4 pb-2 relative">
+<div class="absolute inset-0 flex flex-col justify-between py-2 opacity-10 pointer-events-none">
+<div class="border-t border-on-background w-full"></div>
+<div class="border-t border-on-background w-full"></div>
+<div class="border-t border-on-background w-full"></div>
+</div>
+<div class="w-12 bg-primary/40 rounded-t-lg h-[60%] hover:bg-primary transition-colors cursor-help" title="A: 60%"></div>
+<div class="w-12 bg-primary/40 rounded-t-lg h-[85%] hover:bg-primary transition-colors cursor-help" title="B: 85%"></div>
+<div class="w-12 bg-primary/40 rounded-t-lg h-[40%] hover:bg-primary transition-colors cursor-help" title="C: 40%"></div>
+<div class="w-12 bg-primary/40 rounded-t-lg h-[20%] hover:bg-primary transition-colors cursor-help" title="D: 20%"></div>
+</div>
+<div class="flex justify-between mt-2 text-[10px] font-bold text-on-surface-variant uppercase tracking-widest px-4">
+<span>A</span><span>B</span><span>C</span><span>D</span>
+</div>
+</div>
+<div class="col-span-12 md:col-span-8 glass-card p-6 rounded-3xl flex items-center justify-between overflow-hidden relative group">
+<div class="relative z-10 flex flex-col justify-center h-full">
+<span class="inline-flex px-3 py-1 rounded-full bg-gold/20 text-gold font-bold text-[10px] uppercase mb-4 w-fit border border-gold/30">Top Performer</span>
+<h5 class="font-headline-lg text-[22px] font-black text-on-background leading-tight">Keep it up, Alex!<br/>You're in the top 5% of your class.</h5>
+<p class="text-on-surface-variant font-body-md text-sm mt-2">Finish your User Research report today to maintain your streak.</p>
+</div>
+<div class="w-48 h-48 relative overflow-hidden rounded-full flex-shrink-0 group-hover:scale-105 transition-transform duration-700">
+<img class="w-full h-full object-cover" data-alt="A clean, minimalist 3D rendering of a growth chart with glowing neon purple lines on a translucent glass surface. The background features a soft, atmospheric blur of a modern office space, emphasizing professional achievement and data-driven success in a high-fidelity digital environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAns0wg88Fc9otgmHo5SL82Ut-nWaig0MTIg5BUFdQuwTuWyw8hmS8BT_QK9Drt6hGoka_RaTyG9U0cHhBilufkPzYnopase45anvEz_pCW5ob7r-QsVdM2u8Vjnb_KwYZcOUOBvW8uyYcnZOjWEc0qqODZrB0sajkelZLSkSyVOpQUEPQcnrxaOGA9l4H1eZnsVQY4FDhaKrYd5xX9VqDK4RAK7jD_IrZ0EHH7Xro-Lc4oMxebHm9yRGrFeckix58-qPjhsjeBKVjw"/>
+<div class="absolute inset-0 bg-primary/20 mix-blend-overlay"></div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<script>
+    const initialAssignments = [
+      {
+        id: "assign1",
+        title: "User Research Report",
+        subtitle: "UX Design 101 - Phase 2 Qualitative Analysis",
+        subject: "Design",
+        icon: "brush",
+        deadline: "Oct 24, 2023",
+        deadlineStatus: "11:59 PM (Today)",
+        deadlineIsRed: true,
+        difficulty: "Hard",
+        difficultyBg: "bg-error/10 text-error border-error/20",
+        status: "Pending",
+        grade: null,
+        isQuiz: false
+      },
+      {
+        id: "assign2",
+        title: "Database Schema Architecture",
+        subtitle: "Software Eng - Normalization & Relationships",
+        subject: "Computing",
+        icon: "database",
+        deadline: "Oct 20, 2023",
+        deadlineStatus: "Submitted Early",
+        deadlineIsRed: false,
+        difficulty: "Medium",
+        difficultyBg: "bg-secondary/10 text-secondary border-secondary/20",
+        status: "Approved",
+        grade: "94/100",
+        isQuiz: false
+      },
+      {
+        id: "assign3",
+        title: "Market Research Overview",
+        subtitle: "Business Fundamentals - SWOT Analysis",
+        subject: "Economics",
+        icon: "payments",
+        deadline: "Oct 18, 2023",
+        deadlineStatus: "Graded",
+        deadlineIsRed: false,
+        difficulty: "Easy",
+        difficultyBg: "bg-tertiary/10 text-tertiary border-tertiary/20",
+        status: "Approved",
+        grade: "A",
+        isQuiz: false
+      },
+      {
+        id: "assign4",
+        title: "Statistical Inference Quiz",
+        subtitle: "Mathematics II - Hypothesis Testing",
+        subject: "Mathematics",
+        icon: "calculate",
+        deadline: "Oct 28, 2023",
+        deadlineStatus: "11:59 PM",
+        deadlineIsRed: false,
+        difficulty: "Medium",
+        difficultyBg: "bg-secondary/10 text-secondary border-secondary/20",
+        status: "Pending",
+        grade: null,
+        isQuiz: true
+      },
+      {
+        id: "assign5",
+        title: "Interaction Design Wireframes",
+        subtitle: "UX Design 102 - Low-Fidelity Screen Flows",
+        subject: "Design",
+        icon: "brush",
+        deadline: "Nov 02, 2023",
+        deadlineStatus: "11:59 PM",
+        deadlineIsRed: false,
+        difficulty: "Easy",
+        difficultyBg: "bg-tertiary/10 text-tertiary border-tertiary/20",
+        status: "Pending",
+        grade: null,
+        isQuiz: false
+      },
+      {
+        id: "assign6",
+        title: "RESTful API Integration",
+        subtitle: "Software Eng - Express Server Mock Testing",
+        subject: "Computing",
+        icon: "database",
+        deadline: "Oct 12, 2023",
+        deadlineStatus: "Submitted Early",
+        deadlineIsRed: false,
+        difficulty: "Hard",
+        difficultyBg: "bg-error/10 text-error border-error/20",
+        status: "Approved",
+        grade: "88/100",
+        isQuiz: false
+      },
+      {
+        id: "assign7",
+        title: "Macroeconomics Essay",
+        subtitle: "Global Markets - Inflation Dynamics",
+        subject: "Economics",
+        icon: "payments",
+        deadline: "Oct 15, 2023",
+        deadlineStatus: "Graded",
+        deadlineIsRed: false,
+        difficulty: "Medium",
+        difficultyBg: "bg-secondary/10 text-secondary border-secondary/20",
+        status: "Approved",
+        grade: "B+",
+        isQuiz: false
+      },
+      {
+        id: "assign8",
+        title: "Calculus Limits & Continuity Quiz",
+        subtitle: "Mathematics I - Continuous Functions",
+        subject: "Mathematics",
+        icon: "calculate",
+        deadline: "Sep 30, 2023",
+        deadlineStatus: "Graded",
+        deadlineIsRed: false,
+        difficulty: "Easy",
+        difficultyBg: "bg-tertiary/10 text-tertiary border-tertiary/20",
+        status: "Approved",
+        grade: "98/100",
+        isQuiz: true
+      },
+      {
+        id: "assign9",
+        title: "Cognitive Load Evaluation",
+        subtitle: "UX Design 101 - Fitts's Law Heuristics",
+        subject: "Design",
+        icon: "brush",
+        deadline: "Nov 10, 2023",
+        deadlineStatus: "11:59 PM",
+        deadlineIsRed: false,
+        difficulty: "Hard",
+        difficultyBg: "bg-error/10 text-error border-error/20",
+        status: "Pending",
+        grade: null,
+        isQuiz: false
+      },
+      {
+        id: "assign10",
+        title: "SQL Query Optimization",
+        subtitle: "Software Eng - Indexing & Execution Plans",
+        subject: "Computing",
+        icon: "database",
+        deadline: "Nov 05, 2023",
+        deadlineStatus: "11:59 PM",
+        deadlineIsRed: false,
+        difficulty: "Medium",
+        difficultyBg: "bg-secondary/10 text-secondary border-secondary/20",
+        status: "Pending",
+        grade: null,
+        isQuiz: false
+      },
+      {
+        id: "assign11",
+        title: "Corporate Finance Case Study",
+        subtitle: "Business Fundamentals - Capital Budgeting",
+        subject: "Economics",
+        icon: "payments",
+        deadline: "Oct 05, 2023",
+        deadlineStatus: "Graded",
+        deadlineIsRed: false,
+        difficulty: "Hard",
+        difficultyBg: "bg-error/10 text-error border-error/20",
+        status: "Approved",
+        grade: "A-",
+        isQuiz: false
+      },
+      {
+        id: "assign12",
+        title: "Linear Algebra Vectors Quiz",
+        subtitle: "Mathematics II - Eigenspaces",
+        subject: "Mathematics",
+        icon: "calculate",
+        deadline: "Oct 10, 2023",
+        deadlineStatus: "Submitted Early",
+        deadlineIsRed: false,
+        difficulty: "Hard",
+        difficultyBg: "bg-error/10 text-error border-error/20",
+        status: "Approved",
+        grade: "91/100",
+        isQuiz: true
+      },
+      {
+        id: "assign13",
+        title: "Design System Tokens Creation",
+        subtitle: "UX Design 102 - HSL Palette Integration",
+        subject: "Design",
+        icon: "brush",
+        deadline: "Nov 15, 2023",
+        deadlineStatus: "11:59 PM",
+        deadlineIsRed: false,
+        difficulty: "Easy",
+        difficultyBg: "bg-tertiary/10 text-tertiary border-tertiary/20",
+        status: "Pending",
+        grade: null,
+        isQuiz: false
+      },
+      {
+        id: "assign14",
+        title: "Express Middleware Routing",
+        subtitle: "Software Eng - CORS & Security Headers",
+        subject: "Computing",
+        icon: "database",
+        deadline: "Oct 08, 2023",
+        deadlineStatus: "Graded",
+        deadlineIsRed: false,
+        difficulty: "Medium",
+        difficultyBg: "bg-secondary/10 text-secondary border-secondary/20",
+        status: "Approved",
+        grade: "85/100",
+        isQuiz: false
+      },
+      {
+        id: "assign15",
+        title: "Supply & Demand Synthesis",
+        subtitle: "Global Markets - Equilibrium Modeling",
+        subject: "Economics",
+        icon: "payments",
+        deadline: "Oct 01, 2023",
+        deadlineStatus: "Graded",
+        deadlineIsRed: false,
+        difficulty: "Easy",
+        difficultyBg: "bg-tertiary/10 text-tertiary border-tertiary/20",
+        status: "Approved",
+        grade: "A+",
+        isQuiz: false
+      },
+      {
+        id: "assign16",
+        title: "Differential Equations Quiz",
+        subtitle: "Mathematics I - Second Order Systems",
+        subject: "Mathematics",
+        icon: "calculate",
+        deadline: "Nov 20, 2023",
+        deadlineStatus: "11:59 PM",
+        deadlineIsRed: false,
+        difficulty: "Hard",
+        difficultyBg: "bg-error/10 text-error border-error/20",
+        status: "Pending",
+        grade: null,
+        isQuiz: true
+      },
+      {
+        id: "assign17",
+        title: "Heuristic Principles Report",
+        subtitle: "UX Design 101 - Usability Audits",
+        subject: "Design",
+        icon: "brush",
+        deadline: "Sep 25, 2023",
+        deadlineStatus: "Graded",
+        deadlineIsRed: false,
+        difficulty: "Medium",
+        difficultyBg: "bg-secondary/10 text-secondary border-secondary/20",
+        status: "Approved",
+        grade: "95/100",
+        isQuiz: false
+      }
+    ];
+
+    let assignments = [];
+
+    function loadBackendAssignments() {
+      const token = localStorage.getItem('supabase_access_token') || 'mock_token_student';
+      fetch('/api/assignments', {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      })
+      .then(res => {
+        if (!res.ok) throw new Error('Failed to fetch assignments');
+        return res.json();
+      })
+      .then(backendList => {
+        console.log("Fetched backend assignments: ", backendList);
+        const initial = JSON.parse(localStorage.getItem('assignments_list')) || initialAssignments;
+        
+        backendList.forEach(ba => {
+          if (!initial.some(a => a.id === ba.id || a.title === ba.title)) {
+            initial.unshift({
+              id: ba.id,
+              title: ba.title,
+              subtitle: ba.tag || "Course Assignment",
+              subject: ba.tag || "Computing",
+              icon: "assignment",
+              deadline: ba.deadline || "Nov 30, 2026",
+              deadlineStatus: "11:59 PM",
+              deadlineIsRed: false,
+              difficulty: "Medium",
+              difficultyBg: "bg-secondary/10 text-secondary border-secondary/20",
+              status: "Pending",
+              grade: null,
+              isQuiz: false
+            });
+          }
+        });
+        
+        assignments = initial;
+        localStorage.setItem('assignments_list', JSON.stringify(assignments));
+        updateCounters();
+        renderTable();
+      })
+      .catch(err => {
+        console.error(err);
+        assignments = JSON.parse(localStorage.getItem('assignments_list')) || initialAssignments;
+        localStorage.setItem('assignments_list', JSON.stringify(assignments));
+        updateCounters();
+        renderTable();
+      });
+    }
+
+    let currentPage = 1;
+    const itemsPerPage = 4;
+    let activeFilters = { subject: 'all', status: 'all', difficulty: 'all' };
+    let activeSort = 'deadline';
+    let activeSearch = '';
+
+    function updateCounters() {
+      // Filter counters based on the active course's subject context to reflect the course specific metrics!
+      const activeCourse = JSON.parse(localStorage.getItem('selectedCourse'));
+      let subjFilter = 'all';
+      if (activeCourse) {
+        const name = activeCourse.name.toLowerCase();
+        if (name.includes('design') || name.includes('ui') || name.includes('ux') || name.includes('graphic') || name.includes('interaction')) {
+          subjFilter = 'Design';
+        } else if (name.includes('engineering') || name.includes('web') || name.includes('computing') || name.includes('react') || name.includes('api') || name.includes('database')) {
+          subjFilter = 'Computing';
+        } else if (name.includes('business') || name.includes('economics') || name.includes('finance') || name.includes('market')) {
+          subjFilter = 'Economics';
+        } else if (name.includes('math') || name.includes('calculus') || name.includes('algebra') || name.includes('statistical')) {
+          subjFilter = 'Mathematics';
+        }
+      }
+      
+      const courseAssignments = assignments.filter(a => a.statusState !== 'Draft').filter(a => subjFilter === 'all' || a.subject === subjFilter);
+      
+      const remainingCount = courseAssignments.filter(a => a.status === 'Pending').length;
+      const submittedCount = courseAssignments.filter(a => a.status === 'Submitted').length;
+      const gradedCount = courseAssignments.filter(a => a.status === 'Approved').length;
+
+      document.getElementById('remainingTasksCount').textContent = remainingCount.toString().padStart(2, '0');
+      document.getElementById('submittedTasksCount').textContent = submittedCount.toString().padStart(2, '0');
+      document.getElementById('gradedTasksCount').textContent = gradedCount.toString().padStart(2, '0');
+    }
+
+    function renderTable() {
+      const tbody = document.getElementById('assignmentsTableBody');
+      if (!tbody) return;
+      tbody.innerHTML = '';
+
+      let filtered = assignments.filter(a => a.statusState !== 'Draft').filter(a => {
+        const matchesSearch = a.title.toLowerCase().includes(activeSearch.toLowerCase()) || 
+                             a.subtitle.toLowerCase().includes(activeSearch.toLowerCase());
+        const matchesSubject = activeFilters.subject === 'all' || a.subject === activeFilters.subject;
+        const matchesStatus = activeFilters.status === 'all' || a.status === activeFilters.status;
+        const matchesDifficulty = activeFilters.difficulty === 'all' || a.difficulty === activeFilters.difficulty;
+
+        return matchesSearch && matchesSubject && matchesStatus && matchesDifficulty;
+      });
+
+      filtered.sort((a, b) => {
+        if (activeSort === 'title') {
+          return a.title.localeCompare(b.title);
+        } else if (activeSort === 'difficulty') {
+          const diffMap = { 'Easy': 1, 'Medium': 2, 'Hard': 3 };
+          return diffMap[b.difficulty] - diffMap[a.difficulty];
+        } else {
+          const dateA = new Date(a.deadline);
+          const dateB = new Date(b.deadline);
+          return dateA - dateB;
+        }
+      });
+
+      const startIndex = (currentPage - 1) * itemsPerPage;
+      const endIndex = startIndex + itemsPerPage;
+      const sliced = filtered.slice(startIndex, endIndex);
+
+      if (sliced.length === 0) {
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="6" class="px-8 py-12 text-center text-on-surface-variant italic text-sm">
+              No assignments found matching criteria.
+            </td>
+          </tr>
+        `;
+        document.getElementById('paginationInfo').textContent = 'Showing 0 of 0 assignments';
+        document.getElementById('paginationButtons').innerHTML = '';
+        return;
+      }
+
+      sliced.forEach(a => {
+        const tr = document.createElement('tr');
+        tr.className = "group hover:bg-white/20 transition-colors";
+
+        let statusBadge = '';
+        if (a.status === 'Pending') {
+          statusBadge = `
+            <div class="flex items-center gap-2 text-orange">
+              <span class="w-2 h-2 rounded-full bg-orange animate-pulse"></span>
+              <span class="font-bold text-xs uppercase">Pending</span>
+            </div>`;
+        } else if (a.status === 'Submitted') {
+          statusBadge = `
+            <div class="flex items-center gap-2 text-primary">
+              <span class="w-2 h-2 rounded-full bg-primary"></span>
+              <span class="font-bold text-xs uppercase">Submitted</span>
+            </div>`;
+        } else if (a.status === 'Approved') {
+          statusBadge = `
+            <div class="flex items-center gap-2 text-tertiary">
+              <span class="w-2 h-2 rounded-full bg-tertiary"></span>
+              <span class="font-bold text-xs uppercase">Approved</span>
+            </div>`;
+        }
+
+        let actionContent = '';
+        if (a.status === 'Pending') {
+          if (a.isQuiz) {
+            actionContent = `<button onclick="launchQuiz('${a.id}')" class="px-4 py-2 rounded-xl bg-glass-thick border border-glass-border text-on-background font-bold text-xs hover:bg-white transition-all active:scale-95">Launch Quiz</button>`;
+          } else {
+            actionContent = `<button onclick="submitAssignment('${a.id}')" class="px-4 py-2 rounded-xl bg-primary text-white font-bold text-xs hover:shadow-lg transition-all active:scale-95">Submit Now</button>`;
+          }
+        } else if (a.status === 'Submitted') {
+          actionContent = `<span class="text-xs text-on-surface-variant font-bold italic py-2 block">Pending Review</span>`;
+        } else if (a.status === 'Approved') {
+          actionContent = `
+            <div class="flex flex-col items-end">
+              <span class="font-display-xl text-[18px] font-black text-tertiary">${a.grade}</span>
+              <button onclick="viewReport('${a.id}')" class="text-primary font-bold text-[10px] uppercase underline mt-1 hover:opacity-70 transition-opacity focus:outline-none">View Report</button>
+            </div>`;
+        }
+
+        let subjColorClass = '';
+        if (a.subject === 'Design') subjColorClass = 'bg-primary/10 text-primary';
+        else if (a.subject === 'Computing') subjColorClass = 'bg-secondary/10 text-secondary';
+        else if (a.subject === 'Economics') subjColorClass = 'bg-tertiary/10 text-tertiary';
+        else if (a.subject === 'Mathematics') subjColorClass = 'bg-orange/10 text-orange';
+
+        tr.innerHTML = `
+          <td class="px-8 py-6">
+            <div>
+              <p class="font-headline-lg text-[16px] font-bold text-on-background">${a.title}</p>
+              <p class="text-on-surface-variant font-body-md text-sm mt-0.5">${a.subtitle}</p>
+            </div>
+          </td>
+          <td class="px-6 py-6">
+            <div class="flex items-center gap-2">
+              <div class="w-8 h-8 rounded-lg ${subjColorClass} flex items-center justify-center">
+                <span class="material-symbols-outlined text-[18px]">${a.icon}</span>
+              </div>
+              <span class="font-body-md text-sm font-medium">${a.subject}</span>
+            </div>
+          </td>
+          <td class="px-6 py-6">
+            <div class="flex flex-col">
+              <span class="font-bold text-sm text-on-background">${a.deadline}</span>
+              <span class="text-xs ${a.deadlineIsRed && a.status === 'Pending' ? 'text-error font-semibold' : 'text-on-surface-variant opacity-60'}">${a.deadlineStatus}</span>
+            </div>
+          </td>
+          <td class="px-6 py-6 text-center">
+            <span class="px-3 py-1 rounded-full ${a.difficultyBg} font-bold text-[10px] uppercase tracking-wider border">
+              ${a.difficulty}
+            </span>
+          </td>
+          <td class="px-6 py-6">
+            ${statusBadge}
+          </td>
+          <td class="px-8 py-6 text-right">
+            ${actionContent}
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+
+      const totalItems = filtered.length;
+      const rangeStart = startIndex + 1;
+      const rangeEnd = Math.min(endIndex, totalItems);
+      document.getElementById('paginationInfo').textContent = `Showing ${rangeStart}-${rangeEnd} of ${totalItems} assignments`;
+
+      const totalPages = Math.ceil(totalItems / itemsPerPage);
+      renderPaginationButtons(totalPages);
+    }
+
+    function renderPaginationButtons(totalPages) {
+      const container = document.getElementById('paginationButtons');
+      if (!container) return;
+      container.innerHTML = '';
+
+      if (totalPages <= 1) return;
+
+      const leftBtn = document.createElement('button');
+      leftBtn.className = `w-8 h-8 rounded-lg flex items-center justify-center bg-white border border-glass-border ${currentPage === 1 ? 'opacity-50 cursor-not-allowed' : 'hover:bg-surface-container active:scale-95 transition-all'}`;
+      leftBtn.innerHTML = '<span class="material-symbols-outlined text-sm">chevron_left</span>';
+      leftBtn.onclick = () => {
+        if (currentPage > 1) {
+          currentPage--;
+          renderTable();
+        }
+      };
+      container.appendChild(leftBtn);
+
+      for (let p = 1; p <= totalPages; p++) {
+        const btn = document.createElement('button');
+        const isActive = p === currentPage;
+        btn.className = `w-8 h-8 rounded-lg flex items-center justify-center font-bold text-xs ${isActive ? 'bg-primary text-white' : 'bg-white border border-glass-border hover:bg-surface-container active:scale-95 transition-all'}`;
+        btn.textContent = p;
+        btn.onclick = () => {
+          currentPage = p;
+          renderTable();
+        };
+        container.appendChild(btn);
+      }
+
+      const rightBtn = document.createElement('button');
+      rightBtn.className = `w-8 h-8 rounded-lg flex items-center justify-center bg-white border border-glass-border ${currentPage === totalPages ? 'opacity-50 cursor-not-allowed' : 'hover:bg-surface-container active:scale-95 transition-all'}`;
+      rightBtn.innerHTML = '<span class="material-symbols-outlined text-sm">chevron_right</span>';
+      rightBtn.onclick = () => {
+        if (currentPage < totalPages) {
+          currentPage++;
+          renderTable();
+        }
+      };
+      container.appendChild(rightBtn);
+    }
+
+    window.toggleFilterMenu = function(e) {
+      e.stopPropagation();
+      document.getElementById('filterMenu').classList.toggle('hidden');
+      document.getElementById('sortMenu').classList.add('hidden');
+    };
+
+    window.toggleSortMenu = function(e) {
+      e.stopPropagation();
+      document.getElementById('sortMenu').classList.toggle('hidden');
+      document.getElementById('filterMenu').classList.add('hidden');
+    };
+
+    window.applyFilters = function() {
+      activeFilters.subject = document.getElementById('filterSubject').value;
+      activeFilters.status = document.getElementById('filterStatus').value;
+      activeFilters.difficulty = document.getElementById('filterDifficulty').value;
+      currentPage = 1;
+      renderTable();
+    };
+
+    window.applySort = function(field) {
+      activeSort = field;
+      currentPage = 1;
+      
+      ['deadline', 'difficulty', 'title'].forEach(f => {
+        const check = document.getElementById(`sortCheck-${f}`);
+        if (check) {
+          if (f === field) check.classList.remove('hidden');
+          else check.classList.add('hidden');
+        }
+      });
+
+      renderTable();
+      document.getElementById('sortMenu').classList.add('hidden');
+    };
+
+    window.submitAssignment = function(id) {
+      const a = assignments.find(item => item.id === id);
+      if (a) {
+        a.status = 'Submitted';
+        localStorage.setItem('assignments_list', JSON.stringify(assignments));
+
+        if (window.parent && window.parent.App && typeof window.parent.App.showToast === 'function') {
+          window.parent.App.showToast(`Assignment "${a.title}" submitted successfully!`, "success");
+        } else {
+          alert(`Assignment "${a.title}" submitted successfully!`);
+        }
+
+        updateCounters();
+        renderTable();
+      }
+    };
+
+    window.launchQuiz = function(id) {
+      const a = assignments.find(item => item.id === id);
+      if (a) {
+        if (window.parent && window.parent.App) {
+          window.parent.App.navigate('player');
+        } else {
+          window.location.hash = '#/student/test/player';
+        }
+      }
+    };
+
+    window.viewReport = function(id) {
+      const a = assignments.find(item => item.id === id);
+      if (a) {
+        if (window.parent && window.parent.App && typeof window.parent.App.showToast === 'function') {
+          window.parent.App.showToast(`Opening feedback report for "${a.title}"...`, "info");
+        } else {
+          alert(`Opening feedback report for "${a.title}"...`);
+        }
+      }
+    };
+
+    // Close menus on body click
+    document.addEventListener('click', () => {
+      const filter = document.getElementById('filterMenu');
+      const sort = document.getElementById('sortMenu');
+      if (filter) filter.classList.add('hidden');
+      if (sort) sort.classList.add('hidden');
+    });
+
+    // Stop propagation inside filter menu
+    const filterMenu = document.getElementById('filterMenu');
+    if (filterMenu) {
+      filterMenu.addEventListener('click', (e) => {
+        e.stopPropagation();
+      });
+    }
+
+    // Bind search input filter
+    const searchInput = document.getElementById('assignmentsSearchInput');
+    if (searchInput) {
+      searchInput.addEventListener('input', (e) => {
+        activeSearch = e.target.value;
+        currentPage = 1;
+        renderTable();
+      });
+    }
+
+    // Expose search API globally for top nav bar search
+    window.renderAssignments = function(query) {
+      const localInput = document.getElementById('assignmentsSearchInput');
+      if (localInput && query !== undefined) {
+        localInput.value = query;
+      }
+      activeSearch = query || '';
+      currentPage = 1;
+      renderTable();
+    };
+
+    // Micro-interactions and hover effects
+    document.querySelectorAll('.glass-card').forEach(card => {
+      card.addEventListener('mousedown', () => {
+        card.style.transform = 'scale(0.98)';
+      });
+      card.addEventListener('mouseup', () => {
+        card.style.transform = 'scale(1.01)';
+      });
+    });
+
+    // Initialize page data with course-specific context
+    const activeCourse = JSON.parse(localStorage.getItem('selectedCourse'));
+    if (activeCourse) {
+      document.getElementById('activeCourseBadgeText').textContent = `Active Course: ${activeCourse.name}`;
+      document.getElementById('assignmentsDashboardDesc').textContent = `Manage your progress for ${activeCourse.name}. Track submitted and graded assignments in real time.`;
+      
+      // Determine default subject filter based on active course
+      const name = activeCourse.name.toLowerCase();
+      let defaultSubject = 'all';
+      if (name.includes('design') || name.includes('ui') || name.includes('ux') || name.includes('graphic') || name.includes('interaction')) {
+        defaultSubject = 'Design';
+      } else if (name.includes('engineering') || name.includes('web') || name.includes('computing') || name.includes('react') || name.includes('api') || name.includes('database')) {
+        defaultSubject = 'Computing';
+      } else if (name.includes('business') || name.includes('economics') || name.includes('finance') || name.includes('market')) {
+        defaultSubject = 'Economics';
+      } else if (name.includes('math') || name.includes('calculus') || name.includes('algebra') || name.includes('statistical')) {
+        defaultSubject = 'Mathematics';
+      }
+      
+      activeFilters.subject = defaultSubject;
+      const filterSubjectSelect = document.getElementById('filterSubject');
+      if (filterSubjectSelect) {
+        filterSubjectSelect.value = defaultSubject;
+      }
+    } else {
+      document.getElementById('activeCourseBadgeText').textContent = `Active Course: User Interface Design`;
+      activeFilters.subject = 'Design';
+      const filterSubjectSelect = document.getElementById('filterSubject');
+      if (filterSubjectSelect) {
+        filterSubjectSelect.value = 'Design';
+      }
+    }
+
+    applySort('deadline');
+    loadBackendAssignments();
+  </script>
+</body></html>

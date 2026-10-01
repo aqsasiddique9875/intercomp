@@ -1,0 +1,1430 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>COM-05 Student Registration</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary": "#0060ab",
+                        "primary": "#8731a3",
+                        "surface-variant": "#dbe3f6",
+                        "card-gradient": "linear-gradient(135deg, #4D9EFA 0%, #BF7DF5 100%)",
+                        "secondary-container": "#54a3ff",
+                        "background": "#f9f9ff",
+                        "primary-fixed-dim": "#f0b0ff",
+                        "on-surface": "#141c29",
+                        "error": "#FF453A",
+                        "on-primary": "#ffffff",
+                        "on-secondary-fixed": "#001c39",
+                        "on-primary-fixed-variant": "#72188f",
+                        "glass-thick": "rgba(255, 255, 255, 0.8)",
+                        "on-secondary-fixed-variant": "#004883",
+                        "surface": "#f9f9ff",
+                        "on-surface-variant": "#4f4350",
+                        "outline": "#817381",
+                        "tertiary-fixed": "#6cff82",
+                        "on-tertiary-fixed-variant": "#00531a",
+                        "inverse-surface": "#29313f",
+                        "on-background": "#471A70",
+                        "on-tertiary": "#ffffff",
+                        "tertiary-container": "#00842f",
+                        "surface-container-lowest": "#ffffff",
+                        "tertiary": "#006823",
+                        "surface-container-low": "#f0f3ff",
+                        "orange": "#FF9F0A",
+                        "on-secondary-container": "#003868",
+                        "on-primary-container": "#fff5fb",
+                        "surface-container-high": "#e0e8fb",
+                        "error-container": "#ffdad6",
+                        "glass-border": "rgba(255, 255, 255, 0.6)",
+                        "glass-fill": "rgba(255, 255, 255, 0.35)",
+                        "secondary-fixed-dim": "#a3c9ff",
+                        "surface-tint": "#8d37a9",
+                        "surface-container-highest": "#dbe3f6",
+                        "gold": "#FFD60A",
+                        "secondary-fixed": "#d3e3ff",
+                        "on-tertiary-fixed": "#002106",
+                        "tertiary-fixed-dim": "#47e266",
+                        "surface-container": "#e7eeff",
+                        "surface-dim": "#d2daed",
+                        "on-tertiary-container": "#e6ffe0",
+                        "outline-variant": "#d2c1d2",
+                        "on-error-container": "#93000a",
+                        "inverse-on-surface": "#ecf1ff",
+                        "on-primary-fixed": "#330044",
+                        "inverse-primary": "#f0b0ff",
+                        "on-secondary": "#ffffff",
+                        "primary-fixed": "#fbd7ff",
+                        "on-error": "#ffffff",
+                        "surface-bright": "#f9f9ff",
+                        "primary-container": "#a34cbe"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "16px",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "safe-top": "44px",
+                        "safe-bottom": "34px",
+                        "max-width": "1280px",
+                        "desktop-gutter": "24px",
+                        "mobile-margin": "20px",
+                        "desktop-margin": "64px",
+                        "base": "8px",
+                        "mobile-gutter": "16px"
+                    },
+                    "fontFamily": {
+                        "label-caps": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "display-xl": ["Inter"],
+                        "body-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-caps": ["13px", {"lineHeight": "1.0", "letterSpacing": "0.03em", "fontWeight": "600"}],
+                        "headline-lg": ["34px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                        "display-xl": ["56px", {"lineHeight": "1.1", "letterSpacing": "-0.03em", "fontWeight": "700"}],
+                        "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        html, body {
+            background-color: #DCE4F7;
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(163, 76, 190, 0.15) 0px, transparent 50%),
+                radial-gradient(at 100% 0%, rgba(77, 158, 250, 0.1) 0px, transparent 50%);
+            min-height: 100vh;
+            overflow-x: hidden;
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        html::-webkit-scrollbar, body::-webkit-scrollbar {
+            display: none;
+        }
+        .glass-panel {
+            backdrop-filter: blur(28px);
+            -webkit-backdrop-filter: blur(28px);
+            background: rgba(255, 255, 255, 0.35);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+        }
+        .skill-chip {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .skill-chip:hover {
+            box-shadow: 0 0 15px rgba(163, 76, 190, 0.4);
+            transform: translateY(-2px);
+        }
+        .skill-chip.active {
+            background: #8731a3;
+            color: white;
+            box-shadow: 0 0 20px rgba(163, 76, 190, 0.6);
+        }
+        .progress-indicator {
+            transition: width 0.6s cubic-bezier(0.65, 0, 0.35, 1);
+        }
+    </style>
+</head>
+<body class="font-body-md text-on-surface">
+<div class="flex min-h-screen">
+<!-- SideNavBar - Identity & Step Tracker -->
+<aside class="h-screen w-64 sticky top-0 left-0 bg-glass-fill backdrop-blur-2xl border-r border-glass-border shadow-[0_12px_40px_0_rgba(71,26,112,0.15)] flex flex-col p-6 gap-base z-40">
+<nav class="flex-1 space-y-4 mt-8">
+<!-- Step 1: Active -->
+<div id="studentInfoStep" class="text-primary font-bold bg-white/40 rounded-xl p-4 flex items-center gap-4 transition-all duration-300 cursor-pointer">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">person</span>
+<span class="font-label-caps text-label-caps">Student Info</span>
+</div>
+<!-- Inactive Steps -->
+<div id="academicRecordStep" class="text-on-surface-variant hover:bg-glass-thick/20 transition-all duration-300 rounded-xl p-4 flex items-center gap-4 cursor-pointer">
+<span class="material-symbols-outlined">school</span>
+<span class="font-label-caps text-label-caps">Academic Record</span>
+</div>
+<div id="courseSelectionStep" class="text-on-surface-variant hover:bg-glass-thick/20 transition-all duration-300 rounded-xl p-4 flex items-center gap-4 cursor-pointer">
+<span class="material-symbols-outlined">import_contacts</span>
+<span class="font-label-caps text-label-caps">Course Selection</span>
+</div>
+<div id="docUploadStep" class="text-on-surface-variant hover:bg-glass-thick/20 transition-all duration-300 rounded-xl p-4 flex items-center gap-4 cursor-pointer">
+<span class="material-symbols-outlined">cloud_upload</span>
+<span class="font-label-caps text-label-caps">Document Upload</span>
+</div>
+<div id="reviewSubmitStep" class="text-on-surface-variant hover:bg-glass-thick/20 transition-all duration-300 rounded-xl p-4 flex items-center gap-4 cursor-pointer">
+<span class="material-symbols-outlined">verified</span>
+<span class="font-label-caps text-label-caps">Review &amp; Submit</span>
+</div>
+</nav>
+<button id="saveDraftBtn" class="mt-auto py-3 px-6 rounded-full glass-panel hover:bg-white/50 transition-all font-semibold text-primary active:scale-95">
+                Save Draft
+            </button>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 relative">
+<!-- TopAppBar -->
+<header class="hidden full-width sticky top-0 z-50 bg-white/10 backdrop-blur-lg border-b border-glass-border shadow-sm flex justify-between items-center px-desktop-margin h-14">
+<div class="font-headline-lg text-lg font-bold text-on-background">Wizard Portal</div>
+<div class="flex items-center gap-6">
+<span class="material-symbols-outlined text-primary cursor-pointer hover:scale-110 transition-transform">help</span>
+<span class="material-symbols-outlined text-primary cursor-pointer hover:scale-110 transition-transform">notifications</span>
+<div class="w-8 h-8 rounded-full overflow-hidden border-2 border-primary">
+<img alt="Student Portrait" class="w-full h-full object-cover" data-alt="A close-up portrait of a professional-looking university student with a warm, friendly expression. The lighting is soft and cinematic, with a clean bokeh background that suggests a modern campus setting. The image is crisp, high-fidelity, and perfectly fits a premium light-mode digital interface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBLK_QX8X-a2frXC_jnBbLG_gWr8v3ZhK59J8zxFUXQ0if3M-Lz0KYf5wrCIOKeWlWWgpVIg24LocPKZa-o7XqJgRaw7p86A1NH_7g32lgGf7yFlTHFsjdiSQPf7i5EVfMtanwIq9DmNnfMoi9aYdFEuLssDZuraoJFO5S-IBnZzU2VvZG5UaAz9TTnO1tfId45zvXO2hq7TaHCPe2L0s7NZsEkVMHR8qdgIF65aLjyF1MQ_HxD9fum7g5kO0hBb3IjFyYxvU4Bclu4"/>
+</div>
+</div>
+</header>
+<div class="max-w-[950px] mx-auto py-4 px-6">
+<!-- Progress Bar Container -->
+<div class="mb-6">
+<div class="flex justify-between mb-2">
+<span class="font-label-caps text-label-caps text-primary uppercase">Current Progress</span>
+<span id="progressLabel" class="font-label-caps text-label-caps text-primary">0% Complete</span>
+</div>
+<div class="h-2 w-full bg-white/30 rounded-full overflow-hidden backdrop-blur-sm border border-white/20">
+<div id="progressIndicator" class="progress-indicator h-full bg-primary shadow-[0_0_15px_rgba(135,49,163,0.5)]" style="width: 0%"></div>
+</div>
+</div>
+<!-- Form Section: Multi-Step containers -->
+<div id="stepContainers" class="w-full">
+  <!-- Step 1 Container: Student Info -->
+  <div id="step1Container" class="step-container grid grid-cols-12 gap-6 w-full">
+    <!-- Login Credentials Section -->
+    <section class="col-span-12 md:col-span-6 glass-panel rounded-xl p-5 shadow-[0_12px_40px_0_rgba(71,26,112,0.05)]">
+      <div class="flex items-center justify-between mb-4">
+        <div class="flex items-center gap-3">
+          <span class="w-7 h-7 rounded-full bg-primary text-white flex items-center justify-center font-bold text-sm">1</span>
+          <h2 class="font-headline-lg text-lg text-on-background">Login Credentials</h2>
+        </div>
+        <a href="#/student/login" id="signinlink" class="text-xs text-primary hover:underline font-bold transition-all">Sign In</a>
+      </div>
+      <div class="space-y-4">
+        <div class="space-y-1">
+          <label class="font-label-caps text-xs text-on-surface-variant block ml-1">Academic Email</label>
+          <input id="emailInput" class="w-full bg-glass-thick border-glass-border rounded-xl px-4 py-2.5 text-on-surface placeholder-on-surface-variant/50 focus:ring-2 focus:ring-primary focus:border-transparent transition-all outline-none" placeholder="student@university.edu" type="email"/>
+        </div>
+        <div class="space-y-1">
+          <div class="flex justify-between items-center ml-1">
+            <label class="font-label-caps text-xs text-on-surface-variant block">Password</label>
+            <a href="#/forgot" id="forgotPasswordLink" class="text-xs text-primary hover:underline font-semibold transition-all">Forgot Password?</a>
+          </div>
+          <div class="relative">
+            <input id="passwordInput" class="w-full bg-glass-thick border-glass-border rounded-xl pl-4 pr-12 py-2.5 text-on-surface placeholder-on-surface-variant/50 focus:ring-2 focus:ring-primary focus:border-transparent transition-all outline-none" placeholder="••••••••" type="password"/>
+            <span id="togglePassword" class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-on-surface-variant cursor-pointer hover:text-primary transition-colors select-none">visibility</span>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- University Information -->
+    <section class="col-span-12 md:col-span-6 glass-panel rounded-xl p-5 shadow-[0_12px_40px_0_rgba(71,26,112,0.05)]">
+      <div class="flex items-center gap-3 mb-4">
+        <span class="w-7 h-7 rounded-full bg-primary text-white flex items-center justify-center font-bold text-sm">2</span>
+        <h2 class="font-headline-lg text-lg text-on-background">University Information</h2>
+      </div>
+      <div class="space-y-4 relative">
+        <div class="relative group">
+          <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant group-focus-within:text-primary transition-colors">search</span>
+          <input id="uniInput" class="w-full bg-glass-thick border-glass-border rounded-xl pl-12 pr-4 py-3 text-on-surface placeholder-on-surface-variant/50 focus:ring-2 focus:ring-primary focus:border-transparent transition-all outline-none" placeholder="Search for your institution..." type="text" autocomplete="off"/>
+          <div id="uniSuggestions" class="absolute left-0 w-full mt-2 bg-white/95 backdrop-blur-2xl border border-glass-border rounded-xl shadow-xl max-h-40 overflow-y-auto hidden z-50"></div>
+        </div>
+        <div class="flex flex-wrap gap-2">
+          <span class="text-xs font-semibold px-3 py-1 bg-secondary-fixed text-on-secondary-fixed rounded-full cursor-pointer hover:opacity-80" onclick="selectUni('NUST')">Top: NUST</span>
+          <span class="text-xs font-semibold px-3 py-1 bg-secondary-fixed text-on-secondary-fixed rounded-full cursor-pointer hover:opacity-80" onclick="selectUni('FAST-NUCES')">FAST-NUCES</span>
+          <span class="text-xs font-semibold px-3 py-1 bg-secondary-fixed text-on-secondary-fixed rounded-full cursor-pointer hover:opacity-80" onclick="selectUni('LUMS')">LUMS</span>
+        </div>
+      </div>
+    </section>
+    <!-- Skills Selection -->
+    <section class="col-span-12 glass-panel rounded-xl p-5 shadow-[0_12px_40px_0_rgba(71,26,112,0.05)]">
+      <div class="flex items-center gap-3 mb-2">
+        <span class="w-7 h-7 rounded-full bg-primary text-white flex items-center justify-center font-bold text-sm">3</span>
+        <h2 class="font-headline-lg text-lg text-on-background">Skills Selection (Max 3)</h2>
+      </div>
+      <p class="text-on-surface-variant mb-4 text-xs">Select or type up to 3 primary areas of focus/skills.</p>
+      <div class="flex gap-4 mb-4">
+        <input id="customSkillInput" class="flex-1 bg-glass-thick border-glass-border rounded-xl px-4 py-2.5 text-on-surface placeholder-on-surface-variant/50 focus:ring-2 focus:ring-primary focus:border-transparent transition-all outline-none" placeholder="Write custom skill..." type="text"/>
+        <button id="addSkillBtn" class="bg-primary text-white px-6 py-2.5 rounded-xl font-bold font-label-caps hover:bg-[#913caa] transition-colors">Add</button>
+      </div>
+      <div id="skillsContainer" class="flex flex-wrap gap-3">
+        <button class="skill-chip glass-thick px-5 py-2 rounded-full border border-glass-border font-label-caps text-label-caps">Machine Learning</button>
+        <button class="skill-chip glass-thick px-5 py-2 rounded-full border border-glass-border font-label-caps text-label-caps">Software Engineering</button>
+        <button class="skill-chip glass-thick px-5 py-2 rounded-full border border-glass-border font-label-caps text-label-caps">UI/UX Design</button>
+        <button class="skill-chip glass-thick px-5 py-2 rounded-full border border-glass-border font-label-caps text-label-caps">Web Development</button>
+        <button class="skill-chip glass-thick px-5 py-2 rounded-full border border-glass-border font-label-caps text-label-caps">Data Science</button>
+      </div>
+    </section>
+  </div>
+
+  <!-- Step 2 Container: Academic Record -->
+  <div id="step2Container" class="step-container hidden grid grid-cols-12 gap-6 w-full">
+    <!-- Degree & Major -->
+    <section class="col-span-12 md:col-span-6 glass-panel rounded-xl p-5 shadow-[0_12px_40px_0_rgba(71,26,112,0.05)]">
+      <div class="flex items-center gap-3 mb-4">
+        <span class="w-7 h-7 rounded-full bg-primary text-white flex items-center justify-center font-bold text-sm">2A</span>
+        <h2 class="font-headline-lg text-lg text-on-background">Degree &amp; Major</h2>
+      </div>
+      <div class="space-y-4">
+        <div class="space-y-1">
+          <label class="font-label-caps text-xs text-on-surface-variant block ml-1">Degree Title</label>
+          <input id="degreeInput" class="w-full bg-glass-thick border-glass-border rounded-xl px-4 py-2.5 text-on-surface placeholder-on-surface-variant/50 focus:ring-2 focus:ring-primary focus:border-transparent transition-all outline-none" placeholder="e.g. BS Computer Science" type="text"/>
+        </div>
+        <div class="space-y-1">
+          <label class="font-label-caps text-xs text-on-surface-variant block ml-1">Major Specialization</label>
+          <input id="majorInput" class="w-full bg-glass-thick border-glass-border rounded-xl px-4 py-2.5 text-on-surface placeholder-on-surface-variant/50 focus:ring-2 focus:ring-primary focus:border-transparent transition-all outline-none" placeholder="e.g. Software Engineering" type="text"/>
+        </div>
+      </div>
+    </section>
+    <!-- Standings & Graduation -->
+    <section class="col-span-12 md:col-span-6 glass-panel rounded-xl p-5 shadow-[0_12px_40px_0_rgba(71,26,112,0.05)]">
+      <div class="flex items-center gap-3 mb-4">
+        <span class="w-7 h-7 rounded-full bg-primary text-white flex items-center justify-center font-bold text-sm">2B</span>
+        <h2 class="font-headline-lg text-lg text-on-background">Academic Standings</h2>
+      </div>
+      <div class="space-y-4">
+        <div class="space-y-1">
+          <label class="font-label-caps text-xs text-on-surface-variant block ml-1">Current CGPA (out of 4.0)</label>
+          <input id="cgpaInput" class="w-full bg-glass-thick border-glass-border rounded-xl px-4 py-2.5 text-on-surface placeholder-on-surface-variant/50 focus:ring-2 focus:ring-primary focus:border-transparent transition-all outline-none" placeholder="e.g. 3.75" type="text"/>
+        </div>
+        <div class="space-y-1">
+          <label class="font-label-caps text-xs text-on-surface-variant block ml-1">Expected Graduation Year</label>
+          <input id="gradYearInput" class="w-full bg-glass-thick border-glass-border rounded-xl px-4 py-2.5 text-on-surface placeholder-on-surface-variant/50 focus:ring-2 focus:ring-primary focus:border-transparent transition-all outline-none" placeholder="e.g. 2026" type="text"/>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- Step 3 Container: Course Selection -->
+  <div id="step3Container" class="step-container hidden grid grid-cols-12 gap-6 w-full">
+    <section class="col-span-12 glass-panel rounded-xl p-5 shadow-[0_12px_40px_0_rgba(71,26,112,0.05)]">
+      <div class="flex items-center gap-3 mb-2">
+        <span class="w-7 h-7 rounded-full bg-primary text-white flex items-center justify-center font-bold text-sm">3</span>
+        <h2 class="font-headline-lg text-lg text-on-background">Academic Tracks &amp; Electives</h2>
+      </div>
+      <p class="text-on-surface-variant mb-4 text-xs">Select your learning path and corresponding coursework modules.</p>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+        <!-- Full-stack Card -->
+        <div id="trackFullstack" class="track-card glass-panel p-4 rounded-xl cursor-pointer border-2 border-primary bg-white/40 transition-all flex items-start gap-3" onclick="selectTrack('fullstack')">
+          <span class="material-symbols-outlined text-primary text-2xl">code</span>
+          <div>
+            <h4 class="font-semibold text-sm text-on-background">Full-Stack Software Engineering</h4>
+            <p class="text-xs text-on-surface-variant">Web systems, databases, architecture, cloud pipelines.</p>
+          </div>
+        </div>
+        <!-- AI/ML Card -->
+        <div id="trackAiml" class="track-card glass-panel p-4 rounded-xl cursor-pointer border border-glass-border hover:bg-white/40 transition-all flex items-start gap-3" onclick="selectTrack('aiml')">
+          <span class="material-symbols-outlined text-primary text-2xl">neurology</span>
+          <div>
+            <h4 class="font-semibold text-sm text-on-background">AI &amp; Machine Learning</h4>
+            <p class="text-xs text-on-surface-variant">Neural networks, data analytics, predictive modeling.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="space-y-2">
+        <label class="font-label-caps text-xs text-on-surface-variant block ml-1">Included Modules</label>
+        <div id="modulesContainer" class="grid grid-cols-1 md:grid-cols-2 gap-2 text-sm text-on-surface">
+          <!-- Populated dynamically -->
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- Step 4 Container: Document Upload -->
+  <div id="step4Container" class="step-container hidden grid grid-cols-12 gap-6 w-full">
+    <section class="col-span-12 glass-panel rounded-xl p-5 shadow-[0_12px_40px_0_rgba(71,26,112,0.05)]">
+      <div class="flex items-center gap-3 mb-2">
+        <span class="w-7 h-7 rounded-full bg-primary text-white flex items-center justify-center font-bold text-sm">4</span>
+        <h2 class="font-headline-lg text-lg text-on-background">Verify Credentials &amp; Uploads</h2>
+      </div>
+      <p class="text-on-surface-variant mb-4 text-xs">Upload your resume and transcripts for automated trust-score rating.</p>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Hidden Inputs for Files -->
+        <input type="file" id="resumeFileInput" class="hidden" accept=".pdf,.docx" onchange="handleFileSelected(this, 'resume')">
+        <input type="file" id="transcriptFileInput" class="hidden" accept=".pdf" onchange="handleFileSelected(this, 'transcript')">
+
+        <!-- Resume Upload -->
+        <div class="upload-box glass-panel p-6 rounded-xl border-2 border-dashed border-primary/30 flex flex-col items-center justify-center text-center cursor-pointer hover:bg-white/30 transition-all relative overflow-hidden" onclick="document.getElementById('resumeFileInput').click()">
+          <span class="material-symbols-outlined text-primary text-4xl mb-2">description</span>
+          <h4 class="font-semibold text-sm text-on-background" id="resumeStatus">Upload CV / Resume</h4>
+          <p class="text-xs text-on-surface-variant mt-1">PDF or DOCX format (Max 5MB)</p>
+          <div class="w-4/5 bg-white/20 h-1.5 rounded-full mt-3 overflow-hidden hidden" id="resumeProgress">
+            <div class="progress-fill bg-primary h-full transition-all duration-300" style="width: 0%"></div>
+          </div>
+        </div>
+        
+        <!-- Transcript Upload -->
+        <div class="upload-box glass-panel p-6 rounded-xl border-2 border-dashed border-primary/30 flex flex-col items-center justify-center text-center cursor-pointer hover:bg-white/30 transition-all relative overflow-hidden" onclick="document.getElementById('transcriptFileInput').click()">
+          <span class="material-symbols-outlined text-primary text-4xl mb-2">article</span>
+          <h4 class="font-semibold text-sm text-on-background" id="transcriptStatus">Academic Transcript</h4>
+          <p class="text-xs text-on-surface-variant mt-1">PDF format (Official Transcript)</p>
+          <div class="w-4/5 bg-white/20 h-1.5 rounded-full mt-3 overflow-hidden hidden" id="transcriptProgress">
+            <div class="progress-fill bg-primary h-full transition-all duration-300" style="width: 0%"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- Step 5 Container: Review & Submit -->
+  <div id="step5Container" class="step-container hidden grid grid-cols-12 gap-6 w-full">
+    <!-- Summary Review -->
+    <section class="col-span-12 md:col-span-8 glass-panel rounded-xl p-5 shadow-[0_12px_40px_0_rgba(71,26,112,0.05)]">
+      <div class="flex items-center gap-3 mb-4">
+        <span class="w-7 h-7 rounded-full bg-primary text-white flex items-center justify-center font-bold text-sm">5A</span>
+        <h2 class="font-headline-lg text-lg text-on-background">Profile Verification Review</h2>
+      </div>
+      <div class="grid grid-cols-2 gap-4 text-sm text-on-surface" id="reviewSummaryGrid">
+        <!-- Populated dynamically -->
+      </div>
+    </section>
+    <!-- Trust Score Indicator -->
+    <section class="col-span-12 md:col-span-4 glass-panel rounded-xl p-5 shadow-[0_12px_40px_0_rgba(71,26,112,0.05)] flex flex-col items-center justify-center text-center">
+      <div class="flex items-center gap-3 mb-4 w-full justify-start">
+        <span class="w-7 h-7 rounded-full bg-primary text-white flex items-center justify-center font-bold text-sm">5B</span>
+        <h2 class="font-headline-lg text-lg text-on-background">Proctor Trust Score</h2>
+      </div>
+      <div class="relative w-32 h-32 flex items-center justify-center mb-4">
+        <svg class="w-full h-full transform -rotate-90">
+          <circle cx="64" cy="64" r="50" stroke="rgba(135,49,163,0.1)" stroke-width="8" fill="transparent"/>
+          <circle cx="64" cy="64" r="50" stroke="#8731a3" stroke-width="8" fill="transparent" stroke-dasharray="314" stroke-dashoffset="0" id="trustCircle"/>
+        </svg>
+        <div class="absolute inset-0 flex flex-col items-center justify-center">
+          <span class="text-2xl font-bold text-on-background" id="trustPercentText">100%</span>
+          <span class="text-[10px] uppercase font-bold text-primary tracking-wider">Trusted</span>
+        </div>
+      </div>
+      <p class="text-xs text-on-surface-variant">AI Integrity Score verified. Anti-cheat monitoring configuration established.</p>
+    </section>
+  </div>
+</div>
+<!-- Bottom Actions -->
+<div class="mt-6 flex justify-between items-center">
+<button id="backBtn" class="glass-panel px-8 py-3 rounded-full font-bold text-on-surface hover:bg-white/50 transition-all active:scale-95 flex items-center gap-2">
+<span class="material-symbols-outlined">arrow_back</span>
+                        Back
+                    </button>
+<button id="nextStepBtn" class="bg-[#4D9EFA] text-white px-12 py-4 rounded-full font-bold hover:translate-y-[-2px] transition-all active:scale-95 flex items-center gap-2 border-0 outline-none focus:outline-none focus:ring-0 shadow-none">
+                        Next Step
+                        <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Ambient Atmospheric Elements -->
+<div class="fixed top-1/4 -right-20 w-96 h-96 bg-primary/10 rounded-full blur-[120px] pointer-events-none"></div>
+<div class="fixed bottom-10 left-1/4 w-[500px] h-[500px] bg-secondary/10 rounded-full blur-[150px] pointer-events-none"></div>
+</main>
+</div>
+
+<!-- Glassmorphic OTP Verification Modal -->
+<div id="otpModal" class="fixed inset-0 bg-black/40 backdrop-blur-md flex items-center justify-center hidden z-50">
+    <div class="glass-panel w-full max-w-[400px] rounded-[2rem] p-8 text-center space-y-6">
+        <h3 class="font-headline-lg text-2xl text-on-background font-bold">Enter Verification Code</h3>
+        <p class="text-on-surface-variant text-sm">We have sent a 6-digit verification code to your email.</p>
+        <div id="otpCodePlaceholder" class="text-lg font-bold text-primary bg-primary/10 py-2 rounded-xl"></div>
+        <input id="otpInput" class="w-full bg-glass-thick border-glass-border rounded-xl px-4 py-3 text-center text-xl font-bold tracking-widest placeholder-on-surface-variant/30 focus:ring-2 focus:ring-primary focus:border-transparent outline-none" placeholder="123456" type="text" maxlength="6"/>
+        <div id="otpErrorMsg" class="text-sm font-semibold text-error hidden"></div>
+        <div class="flex gap-4">
+            <button id="cancelOtpBtn" class="flex-1 py-3 border border-glass-border rounded-xl font-bold text-on-surface hover:bg-white/20 transition-all">Cancel</button>
+            <button id="confirmOtpBtn" class="flex-1 py-3 bg-[#4D9EFA] text-white rounded-xl font-bold hover:opacity-95 transition-opacity">Confirm</button>
+        </div>
+    </div>
+</div>
+
+<script>
+        // Pakistan Top 50 Universities list
+        const pakUniversities = [
+            "National University of Sciences and Technology (NUST)",
+            "FAST National University of Computer and Emerging Sciences (FAST-NUCES)",
+            "Lahore University of Management Sciences (LUMS)",
+            "Ghulam Ishaq Khan Institute (GIKI)",
+            "Quaid-e-Azam University (QAU)",
+            "Institute of Business Administration (IBA) Karachi",
+            "COMSATS University Islamabad",
+            "University of the Punjab",
+            "Government College University (GCU) Lahore",
+            "Pakistan Institute of Engineering and Applied Sciences (PIEAS)",
+            "NED University of Engineering and Technology",
+            "University of Engineering and Technology (UET) Lahore",
+            "University of Engineering and Technology (UET) Peshawar",
+            "Bahria University",
+            "Air University",
+            "Iqra University",
+            "Riphah International University",
+            "SZABIST",
+            "National Defence University (NDU)",
+            "Information Technology University (ITU) Lahore",
+            "University of Karachi",
+            "Aga Khan University (AKU)",
+            "University of Agriculture Faisalabad",
+            "King Edward Medical University (KEMU)",
+            "Dow University of Health Sciences",
+            "Peshawar University",
+            "Bahauddin Zakariya University (BZU)",
+            "Islamia University Bahawalpur",
+            "National University of Modern Languages (NUML)",
+            "University of Gujrat",
+            "GCU Faisalabad",
+            "University of Sargodha",
+            "International Islamic University Islamabad (IIUI)",
+            "University of Veterinary and Animal Sciences (UVAS)",
+            "National Textile University (NTU)",
+            "University of Malakand",
+            "Hazara University",
+            "Kohat University of Science and Technology (KUST)",
+            "Gomal University",
+            "Shah Abdul Latif University",
+            "Mehran University of Engineering and Technology (MUET)",
+            "Sindh University Jamshoro",
+            "Liaquat University of Medical and Health Sciences (LUMHS)",
+            "Balochistan University of Information Technology, Engineering and Management Sciences (BUITEMS)",
+            "University of Balochistan",
+            "Karakoram International University",
+            "University of Azad Jammu and Kashmir",
+            "Mirpur University of Science and Technology (MUST)",
+            "University of Poonch Rawalakot",
+            "Habib University"
+        ];
+
+        // Autocomplete search institution Logic
+        const uniInput = document.getElementById('uniInput');
+        const uniSuggestions = document.getElementById('uniSuggestions');
+        let activeSuggestionIndex = -1;
+
+        function updateSuggestionHighlight() {
+            const items = uniSuggestions.querySelectorAll('div');
+            items.forEach((item, index) => {
+                if (index === activeSuggestionIndex) {
+                    item.classList.add('bg-primary/20', 'text-primary');
+                    item.scrollIntoView({ block: 'nearest' });
+                } else {
+                    item.classList.remove('bg-primary/20', 'text-primary');
+                }
+            });
+        }
+
+        function selectUni(name) {
+            uniInput.value = name;
+            uniSuggestions.classList.add('hidden');
+            activeSuggestionIndex = -1;
+            updateProgress();
+        }
+        window.selectUni = selectUni;
+
+        uniInput.addEventListener('input', () => {
+            const query = uniInput.value.toLowerCase().trim();
+            uniSuggestions.innerHTML = '';
+            activeSuggestionIndex = -1;
+            if (!query) {
+                uniSuggestions.classList.add('hidden');
+                updateProgress();
+                return;
+            }
+            const filtered = pakUniversities.filter(u => u.toLowerCase().includes(query));
+            if (filtered.length === 0) {
+                uniSuggestions.classList.add('hidden');
+                updateProgress();
+                return;
+            }
+            filtered.forEach(u => {
+                const item = document.createElement('div');
+                item.className = 'px-4 py-3 hover:bg-primary/10 cursor-pointer text-sm font-semibold transition-colors duration-200';
+                item.textContent = u;
+                item.addEventListener('click', () => {
+                    selectUni(u);
+                });
+                uniSuggestions.appendChild(item);
+            });
+            uniSuggestions.classList.remove('hidden');
+            updateProgress();
+        });
+
+        uniInput.addEventListener('keydown', (e) => {
+            const items = uniSuggestions.querySelectorAll('div');
+            if (items.length === 0) return;
+
+            if (e.key === 'PageDown' || e.key === 'ArrowDown') {
+                e.preventDefault();
+                activeSuggestionIndex = (activeSuggestionIndex + 1) % items.length;
+                updateSuggestionHighlight();
+            } else if (e.key === 'PageUp' || e.key === 'ArrowUp') {
+                e.preventDefault();
+                activeSuggestionIndex = (activeSuggestionIndex - 1 + items.length) % items.length;
+                updateSuggestionHighlight();
+            } else if (e.key === 'Enter') {
+                if (activeSuggestionIndex >= 0 && activeSuggestionIndex < items.length) {
+                    e.preventDefault();
+                    items[activeSuggestionIndex].click();
+                }
+            }
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!uniInput.contains(e.target) && !uniSuggestions.contains(e.target)) {
+                uniSuggestions.classList.add('hidden');
+                activeSuggestionIndex = -1;
+            }
+        });
+
+        let currentStep = 1;
+        let selectedTrack = 'fullstack';
+        let uploadedDocs = {
+            resume: false,
+            transcript: false
+        };
+        let registrationPayload = {};
+
+        const trackModules = {
+            fullstack: [
+                { id: "fs_web", name: "Web Systems Architecture", selected: true },
+                { id: "fs_db", name: "Advanced Database Engineering", selected: true },
+                { id: "fs_cloud", name: "Cloud Pipelines & CI/CD", selected: true },
+                { id: "fs_ui", name: "Responsive UI/UX Design", selected: false }
+            ],
+            aiml: [
+                { id: "ml_nn", name: "Neural Networks & Deep Learning", selected: true },
+                { id: "ml_foundations", name: "Machine Learning Foundations", selected: true },
+                { id: "ml_data", name: "Big Data Pipelines", selected: false },
+                { id: "ml_predictive", name: "Predictive Analytics Models", selected: true }
+            ]
+        };
+
+        // Dynamic Progress updates based on filled fields (Email, Password, University, Skills)
+        function updateProgress() {
+            if (currentStep > 1) {
+                const progressPercentage = currentStep * 20;
+                const indicator = document.getElementById('progressIndicator');
+                const label = document.getElementById('progressLabel');
+                if (indicator) indicator.style.width = progressPercentage + '%';
+                if (label) label.textContent = progressPercentage + '% Complete';
+                return;
+            }
+
+            // If Step 1
+            let completedCount = 0;
+            const email = document.getElementById('emailInput') ? document.getElementById('emailInput').value.trim() : '';
+            const password = document.getElementById('passwordInput') ? document.getElementById('passwordInput').value.trim() : '';
+            const university = document.getElementById('uniInput') ? document.getElementById('uniInput').value.trim() : '';
+            const skillsCount = document.querySelectorAll('.skill-chip.active').length;
+
+            if (email) completedCount++;
+            if (password) completedCount++;
+            if (university) completedCount++;
+            if (skillsCount > 0) completedCount++;
+
+            // Step 1 progress goes from 0% to 20% (each field contributes 5%)
+            const percentage = completedCount * 5;
+            const indicator = document.getElementById('progressIndicator');
+            const label = document.getElementById('progressLabel');
+
+            if (indicator) {
+                indicator.style.width = percentage + '%';
+            }
+            if (label) {
+                label.textContent = percentage + '% Complete';
+            }
+        }
+
+        // Initialize progress events
+        const emailInp = document.getElementById('emailInput');
+        const pwdInp = document.getElementById('passwordInput');
+        if (emailInp) emailInp.addEventListener('input', updateProgress);
+        if (pwdInp) pwdInp.addEventListener('input', updateProgress);
+
+        // Premium Toast Notification helper
+        function showToast(message, type = 'error') {
+            const existing = document.getElementById('customToast');
+            if (existing) existing.remove();
+
+            const toast = document.createElement('div');
+            toast.id = 'customToast';
+            toast.className = `fixed top-6 right-6 z-50 px-6 py-4 rounded-2xl glass-panel shadow-xl flex items-center gap-3 transition-all duration-500 transform translate-y-[-20px] opacity-0 text-sm font-semibold ${type === 'error' ? 'text-[#FF453A] border-[#FF453A]/30' : 'text-primary border-primary/30'}`;
+            toast.innerHTML = `
+                <span class="material-symbols-outlined">${type === 'error' ? 'error' : 'check_circle'}</span>
+                <span>${message}</span>
+            `;
+            document.body.appendChild(toast);
+            
+            setTimeout(() => {
+                toast.classList.remove('translate-y-[-20px]', 'opacity-0');
+            }, 50);
+
+            setTimeout(() => {
+                toast.classList.add('translate-y-[-20px]', 'opacity-0');
+                setTimeout(() => toast.remove(), 500);
+            }, 4000);
+        }
+
+        // Skills logic (max 3 selection)
+        const skillsContainer = document.getElementById('skillsContainer');
+        const customSkillInput = document.getElementById('customSkillInput');
+        const addSkillBtn = document.getElementById('addSkillBtn');
+
+        function bindSkillChipEvents(chip) {
+            chip.addEventListener('click', () => {
+                const activeCount = document.querySelectorAll('.skill-chip.active').length;
+                if (!chip.classList.contains('active') && activeCount >= 3) {
+                    showToast("You can select up to 3 skills only.", "error");
+                    return;
+                }
+                chip.classList.toggle('active');
+                chip.classList.toggle('glass-thick');
+                updateProgress();
+            });
+        }
+
+        document.querySelectorAll('.skill-chip').forEach(bindSkillChipEvents);
+
+        addSkillBtn.addEventListener('click', () => {
+            const val = customSkillInput.value.trim();
+            if (!val) return;
+            const activeCount = document.querySelectorAll('.skill-chip.active').length;
+            if (activeCount >= 3) {
+                showToast("You can select up to 3 skills only.", "error");
+                return;
+            }
+            const chip = document.createElement('button');
+            chip.className = 'skill-chip active px-5 py-2.5 rounded-full border border-glass-border font-label-caps text-label-caps';
+            chip.textContent = val;
+            bindSkillChipEvents(chip);
+            skillsContainer.appendChild(chip);
+            customSkillInput.value = '';
+            updateProgress();
+        });
+
+        // Trigger Add button on Enter press in input field
+        customSkillInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                addSkillBtn.click();
+            }
+        });
+
+        // Toggle Password visibility
+        const togglePassword = document.getElementById('togglePassword');
+        const passwordInput = document.getElementById('passwordInput');
+        togglePassword.addEventListener('click', () => {
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+            togglePassword.textContent = type === 'password' ? 'visibility' : 'visibility_off';
+        });
+
+        // Forgot Password navigation handler
+        const forgotPasswordLink = document.getElementById('forgotPasswordLink');
+        if (forgotPasswordLink) {
+            forgotPasswordLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                if (window.parent && window.parent.App) {
+                    window.parent.App.navigate('forgot', true, 'left');
+                }
+            });
+        }
+
+        // Hover effect for side nav
+        const navItems = document.querySelectorAll('aside nav > div');
+        navItems.forEach(item => {
+            item.addEventListener('mouseenter', () => {
+                if (!item.classList.contains('text-primary')) {
+                    item.style.transform = 'translateX(8px)';
+                }
+            });
+            item.addEventListener('mouseleave', () => {
+                item.style.transform = 'translateX(0)';
+            });
+        });
+
+        // Wizard Multi-Step Navigation Logic
+        function showStep(stepNum) {
+            // Hide all step containers
+            document.querySelectorAll('.step-container').forEach(container => {
+                container.classList.add('hidden');
+            });
+            // Show target step container
+            const targetContainer = document.getElementById(`step${stepNum}Container`);
+            if (targetContainer) {
+                targetContainer.classList.remove('hidden');
+            }
+
+            // Update sidebar state
+            const stepsMap = [
+                { id: 'studentInfoStep', icon: 'person' },
+                { id: 'academicRecordStep', icon: 'school' },
+                { id: 'courseSelectionStep', icon: 'import_contacts' },
+                { id: 'docUploadStep', icon: 'cloud_upload' },
+                { id: 'reviewSubmitStep', icon: 'verified' }
+            ];
+
+            stepsMap.forEach((stepInfo, idx) => {
+                const stepEl = document.getElementById(stepInfo.id);
+                if (stepEl) {
+                    const iconEl = stepEl.querySelector('.material-symbols-outlined');
+                    if (idx + 1 === stepNum) {
+                        stepEl.className = "text-primary font-bold bg-white/40 rounded-xl p-4 flex items-center gap-4 transition-all duration-300 cursor-pointer";
+                        if (iconEl) iconEl.style.fontVariationSettings = "'FILL' 1";
+                    } else {
+                        stepEl.className = "text-on-surface-variant hover:bg-glass-thick/20 transition-all duration-300 rounded-xl p-4 flex items-center gap-4 cursor-pointer";
+                        if (iconEl) iconEl.style.fontVariationSettings = "";
+                    }
+                }
+            });
+
+            currentStep = stepNum;
+            updateProgress();
+
+            const nextStepBtn = document.getElementById('nextStepBtn');
+            if (stepNum === 5) {
+                nextStepBtn.innerHTML = `
+                    Submit Registration
+                    <span class="material-symbols-outlined">check_circle</span>
+                `;
+            } else {
+                nextStepBtn.innerHTML = `
+                    Next Step
+                    <span class="material-symbols-outlined">arrow_forward</span>
+                `;
+            }
+
+            if (stepNum === 3) {
+                selectTrack(selectedTrack);
+            } else if (stepNum === 5) {
+                renderReviewSummary();
+            }
+        }
+
+        function validateStep(stepNum) {
+            if (stepNum === 1) {
+                const email = document.getElementById('emailInput').value.trim();
+                const password = document.getElementById('passwordInput').value.trim();
+                const university = document.getElementById('uniInput').value.trim();
+                const skillsCount = document.querySelectorAll('.skill-chip.active').length;
+
+                if (!email) {
+                    showToast("Please enter your academic email.", "error");
+                    return false;
+                }
+                if (!email.includes('@') || !email.includes('.')) {
+                    showToast("Please enter a valid email address.", "error");
+                    return false;
+                }
+                if (!password) {
+                    showToast("Please enter a password.", "error");
+                    return false;
+                }
+                if (password.length < 6) {
+                    showToast("Password must be at least 6 characters.", "error");
+                    return false;
+                }
+                if (!university) {
+                    showToast("Please select your university.", "error");
+                    return false;
+                }
+                if (skillsCount === 0) {
+                    showToast("Please select at least 1 skill.", "error");
+                    return false;
+                }
+                return true;
+            }
+
+            if (stepNum === 2) {
+                const degree = document.getElementById('degreeInput').value.trim();
+                const major = document.getElementById('majorInput').value.trim();
+                const cgpaVal = document.getElementById('cgpaInput').value.trim();
+                const gradYearVal = document.getElementById('gradYearInput').value.trim();
+
+                if (!degree) {
+                    showToast("Please enter your degree title.", "error");
+                    return false;
+                }
+                if (!major) {
+                    showToast("Please enter your major/specialization.", "error");
+                    return false;
+                }
+                if (!cgpaVal) {
+                    showToast("Please enter your CGPA.", "error");
+                    return false;
+                }
+                const cgpa = parseFloat(cgpaVal);
+                if (isNaN(cgpa) || cgpa < 0 || cgpa > 4.0) {
+                    showToast("Please enter a valid CGPA between 0.0 and 4.0.", "error");
+                    return false;
+                }
+                if (!gradYearVal) {
+                    showToast("Please enter your expected graduation year.", "error");
+                    return false;
+                }
+                const gradYear = parseInt(gradYearVal);
+                if (isNaN(gradYear) || gradYear < 2000 || gradYear > 2100) {
+                    showToast("Please enter a valid graduation year.", "error");
+                    return false;
+                }
+                return true;
+            }
+
+            if (stepNum === 3) {
+                const selectedModules = trackModules[selectedTrack].filter(m => m.selected);
+                if (selectedModules.length === 0) {
+                    showToast("Please select at least 1 course module.", "error");
+                    return false;
+                }
+                return true;
+            }
+
+            if (stepNum === 4) {
+                if (!uploadedDocs.resume) {
+                    showToast("Please upload your CV/Resume to proceed.", "error");
+                    return false;
+                }
+                return true;
+            }
+
+            return true;
+        }
+
+        function tryNavigateToStep(targetStep) {
+            for (let s = 1; s < targetStep; s++) {
+                if (!validateStep(s)) {
+                    return;
+                }
+            }
+            showStep(targetStep);
+        }
+
+        // Sidebar click triggers
+        document.getElementById('studentInfoStep').addEventListener('click', () => tryNavigateToStep(1));
+        document.getElementById('academicRecordStep').addEventListener('click', () => tryNavigateToStep(2));
+        document.getElementById('courseSelectionStep').addEventListener('click', () => tryNavigateToStep(3));
+        document.getElementById('docUploadStep').addEventListener('click', () => tryNavigateToStep(4));
+        document.getElementById('reviewSubmitStep').addEventListener('click', () => tryNavigateToStep(5));
+
+        document.getElementById('saveDraftBtn').addEventListener('click', () => {
+            saveDraft();
+        });
+
+        // Step 3 track selector helper
+        function selectTrack(track) {
+            selectedTrack = track;
+            const fullstackCard = document.getElementById('trackFullstack');
+            const aimlCard = document.getElementById('trackAiml');
+
+            if (track === 'fullstack') {
+                fullstackCard.className = "track-card glass-panel p-4 rounded-xl cursor-pointer border-2 border-primary bg-white/40 transition-all flex items-start gap-3 shadow-md";
+                aimlCard.className = "track-card glass-panel p-4 rounded-xl cursor-pointer border border-glass-border hover:bg-white/40 transition-all flex items-start gap-3";
+            } else {
+                aimlCard.className = "track-card glass-panel p-4 rounded-xl cursor-pointer border-2 border-primary bg-white/40 transition-all flex items-start gap-3 shadow-md";
+                fullstackCard.className = "track-card glass-panel p-4 rounded-xl cursor-pointer border border-glass-border hover:bg-white/40 transition-all flex items-start gap-3";
+            }
+
+            renderModules();
+        }
+        window.selectTrack = selectTrack;
+
+        function renderModules() {
+            const container = document.getElementById('modulesContainer');
+            if (!container) return;
+            container.innerHTML = '';
+
+            const modules = trackModules[selectedTrack];
+            modules.forEach(m => {
+                const label = document.createElement('label');
+                label.className = "flex items-center gap-3 p-3 glass-panel rounded-xl cursor-pointer hover:bg-white/30 transition-all select-none border border-glass-border/40";
+                label.innerHTML = `
+                    <input type="checkbox" id="${m.id}" class="rounded text-primary focus:ring-primary focus:border-transparent bg-glass-thick border-glass-border" ${m.selected ? 'checked' : ''}>
+                    <span class="font-semibold text-xs text-on-background">${m.name}</span>
+                `;
+                const checkbox = label.querySelector('input');
+                checkbox.addEventListener('change', () => {
+                    m.selected = checkbox.checked;
+                });
+                container.appendChild(label);
+            });
+        }
+
+        // Step 4 document upload handler & simulator
+        function handleFileSelected(input, docType) {
+            if (!input.files || input.files.length === 0) return;
+            const file = input.files[0];
+            
+            // Check file size (5MB = 5 * 1024 * 1024 bytes)
+            const maxSize = 5 * 1024 * 1024;
+            if (file.size > maxSize) {
+                showToast("File size exceeds 5MB limit. Please upload a smaller file.", "error");
+                input.value = ''; // clear input
+                return;
+            }
+
+            // Check file format
+            const filename = file.name;
+            const extension = filename.split('.').pop().toLowerCase();
+            if (docType === 'resume') {
+                if (extension !== 'pdf' && extension !== 'docx') {
+                    showToast("Invalid file format. Please upload a PDF or DOCX file.", "error");
+                    input.value = ''; // clear input
+                    return;
+                }
+            } else if (docType === 'transcript') {
+                if (extension !== 'pdf') {
+                    showToast("Invalid file format. Please upload a PDF file.", "error");
+                    input.value = ''; // clear input
+                    return;
+                }
+            }
+
+            const progressContainer = document.getElementById(docType + 'Progress');
+            const statusText = document.getElementById(docType + 'Status');
+            if (!progressContainer || !statusText) return;
+
+            progressContainer.classList.remove('hidden');
+            const progressFill = progressContainer.querySelector('.progress-fill');
+            if (progressFill) progressFill.style.width = '0%';
+
+            statusText.textContent = `Uploading ${filename}...`;
+
+            let progress = 0;
+            const interval = setInterval(() => {
+                progress += 10;
+                if (progressFill) progressFill.style.width = progress + '%';
+
+                if (progress >= 100) {
+                    clearInterval(interval);
+                    uploadedDocs[docType] = filename;
+                    statusText.textContent = `${filename} Uploaded ✓`;
+                    showToast(`${filename} uploaded successfully!`, "success");
+                    
+                    const uploadBox = progressContainer.closest('.upload-box');
+                    if (uploadBox) {
+                        uploadBox.className = "upload-box glass-panel p-6 rounded-xl border-2 border-primary/60 bg-white/20 flex flex-col items-center justify-center text-center cursor-pointer hover:bg-white/30 transition-all relative overflow-hidden";
+                    }
+                }
+            }, 100);
+        }
+        window.handleFileSelected = handleFileSelected;
+
+        function simulateUpload(docType) {
+            const inputId = docType === 'resume' ? 'resumeFileInput' : 'transcriptFileInput';
+            const mockInput = document.getElementById(inputId);
+            if (mockInput) mockInput.click();
+        }
+        window.simulateUpload = simulateUpload;
+
+        // Step 5 summary compilation and trust indicator rendering
+        function renderReviewSummary() {
+            const container = document.getElementById('reviewSummaryGrid');
+            if (!container) return;
+
+            const email = document.getElementById('emailInput').value.trim();
+            const university = document.getElementById('uniInput').value.trim();
+            const activeChips = document.querySelectorAll('.skill-chip.active');
+            const skills = Array.from(activeChips).map(chip => chip.textContent.trim());
+
+            const degree = document.getElementById('degreeInput').value.trim();
+            const major = document.getElementById('majorInput').value.trim();
+            const cgpa = document.getElementById('cgpaInput').value.trim();
+            const gradYear = document.getElementById('gradYearInput').value.trim();
+
+            const trackName = selectedTrack === 'fullstack' ? 'Full-Stack Software Engineering' : 'AI & Machine Learning';
+            const selectedModules = trackModules[selectedTrack].filter(m => m.selected).map(m => m.name);
+
+            container.innerHTML = `
+                <div class="col-span-2 md:col-span-1 glass-panel p-4 rounded-xl border border-glass-border/40 space-y-2">
+                    <div class="flex items-center gap-2 text-primary font-bold text-xs uppercase tracking-wider">
+                        <span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1">person</span>
+                        Student Profile
+                    </div>
+                    <div class="text-xs text-on-surface-variant">Email: <span class="font-semibold text-on-background">${email}</span></div>
+                    <div class="text-xs text-on-surface-variant">University: <span class="font-semibold text-on-background">${university}</span></div>
+                    <div class="text-xs text-on-surface-variant flex flex-wrap gap-1 mt-1">
+                        Skills: 
+                        ${skills.map(s => `<span class="px-2 py-0.5 bg-primary/10 text-primary rounded-full text-[10px] font-semibold">${s}</span>`).join('')}
+                    </div>
+                </div>
+                <div class="col-span-2 md:col-span-1 glass-panel p-4 rounded-xl border border-glass-border/40 space-y-2">
+                    <div class="flex items-center gap-2 text-primary font-bold text-xs uppercase tracking-wider">
+                        <span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1">school</span>
+                        Academic Record
+                    </div>
+                    <div class="text-xs text-on-surface-variant">Degree: <span class="font-semibold text-on-background">${degree}</span></div>
+                    <div class="text-xs text-on-surface-variant">Major: <span class="font-semibold text-on-background">${major}</span></div>
+                    <div class="text-xs text-on-surface-variant">CGPA: <span class="font-semibold text-on-background">${cgpa} / 4.0</span></div>
+                    <div class="text-xs text-on-surface-variant">Graduation: <span class="font-semibold text-on-background">${gradYear}</span></div>
+                </div>
+                <div class="col-span-2 md:col-span-1 glass-panel p-4 rounded-xl border border-glass-border/40 space-y-2">
+                    <div class="flex items-center gap-2 text-primary font-bold text-xs uppercase tracking-wider">
+                        <span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1">import_contacts</span>
+                        Course Specialization
+                    </div>
+                    <div class="text-xs text-on-surface-variant">Track: <span class="font-semibold text-on-background">${trackName}</span></div>
+                    <div class="text-xs text-on-surface-variant mt-1">
+                        Modules:
+                        <ul class="list-disc pl-4 space-y-0.5 mt-1 text-[11px]">
+                            ${selectedModules.map(m => `<li>${m}</li>`).join('')}
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-span-2 md:col-span-1 glass-panel p-4 rounded-xl border border-glass-border/40 space-y-2">
+                    <div class="flex items-center gap-2 text-primary font-bold text-xs uppercase tracking-wider">
+                        <span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1">cloud_upload</span>
+                        Verified Credentials
+                    </div>
+                    <div class="text-xs text-on-surface-variant flex items-center gap-1.5">
+                        Resume: 
+                        <span class="flex items-center gap-1 font-semibold ${uploadedDocs.resume ? 'text-primary' : 'text-error'}">
+                            <span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1">${uploadedDocs.resume ? 'check_circle' : 'pending'}</span>
+                            ${uploadedDocs.resume ? (typeof uploadedDocs.resume === 'string' ? uploadedDocs.resume : 'Uploaded') : 'Pending'}
+                        </span>
+                    </div>
+                    <div class="text-xs text-on-surface-variant flex items-center gap-1.5">
+                        Transcript: 
+                        <span class="flex items-center gap-1 font-semibold ${uploadedDocs.transcript ? 'text-primary' : 'text-error'}">
+                            <span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1">${uploadedDocs.transcript ? 'check_circle' : 'pending'}</span>
+                            ${uploadedDocs.transcript ? (typeof uploadedDocs.transcript === 'string' ? uploadedDocs.transcript : 'Uploaded') : 'Pending'}
+                        </span>
+                    </div>
+                </div>
+            `;
+
+            let score = 50;
+            if (uploadedDocs.resume) score += 25;
+            if (uploadedDocs.transcript) score += 25;
+
+            const trustCircle = document.getElementById('trustCircle');
+            const trustPercentText = document.getElementById('trustPercentText');
+            if (trustCircle) {
+                const offset = 314 - (314 * score / 100);
+                trustCircle.style.strokeDashoffset = offset;
+            }
+            if (trustPercentText) {
+                trustPercentText.textContent = score + '%';
+            }
+        }
+
+        // Actions & Signup Logic Integration
+        const nextStepBtn = document.getElementById('nextStepBtn');
+        nextStepBtn.addEventListener('click', async (e) => {
+            e.stopPropagation();
+            if (currentStep < 5) {
+                if (validateStep(currentStep)) {
+                    showStep(currentStep + 1);
+                }
+            } else {
+                const email = document.getElementById('emailInput').value.trim();
+                const password = document.getElementById('passwordInput').value.trim();
+                const university = document.getElementById('uniInput').value.trim();
+                const activeChips = document.querySelectorAll('.skill-chip.active');
+                const skills = Array.from(activeChips).map(chip => chip.textContent.trim());
+
+                const degree = document.getElementById('degreeInput').value.trim();
+                const major = document.getElementById('majorInput').value.trim();
+                const cgpa = document.getElementById('cgpaInput').value.trim();
+                const gradYear = document.getElementById('gradYearInput').value.trim();
+
+                const username = email.split('@')[0];
+                registrationPayload = {
+                    username,
+                    email,
+                    password,
+                    university,
+                    skills,
+                    role: 'student',
+                    degree,
+                    major,
+                    cgpa,
+                    graduationYear: gradYear,
+                    track: selectedTrack,
+                    modules: trackModules[selectedTrack].filter(m => m.selected).map(m => m.name),
+                    trustScore: uploadedDocs.resume && uploadedDocs.transcript ? 100 : (uploadedDocs.resume || uploadedDocs.transcript ? 75 : 50)
+                };
+
+                try {
+                    nextStepBtn.disabled = true;
+                    nextStepBtn.style.opacity = '0.7';
+                    const signupResponse = await fetch('http://localhost:8080/api/signup', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(registrationPayload)
+                    });
+                    const signupData = await signupResponse.json();
+                    
+                    if (signupResponse.ok && signupData.success) {
+                        showToast("Registration Successful! Logging in...", "success");
+                        localStorage.setItem('isLoggedIn', 'true');
+                        localStorage.setItem('hasAccount', 'true');
+                        localStorage.setItem('currentUser', JSON.stringify({
+                            email: email,
+                            token: 'mock_token',
+                            role: 'student',
+                            username: username
+                        }));
+                        localStorage.removeItem('student_registration_draft');
+                        setTimeout(() => {
+                            if (window.parent && window.parent.App) {
+                                const pending = localStorage.getItem('pendingQuickApply');
+                                if (pending) {
+                                    localStorage.removeItem('pendingQuickApply');
+                                    try {
+                                        const data = JSON.parse(pending);
+                                        if (data.type === 'job') {
+                                            window.parent.App.navigate('checkout');
+                                            window.parent.App.showToast("Account created. Redirecting to job application checkout...", "success");
+                                        } else if (data.link) {
+                                            window.open(data.link, '_blank');
+                                            window.parent.App.navigate('student-dash');
+                                            window.parent.App.showToast("Account created. Course opened in a new tab.", "success");
+                                        } else {
+                                            window.parent.App.navigate('student-dash');
+                                        }
+                                    } catch (e) {
+                                        window.parent.App.navigate('student-dash');
+                                    }
+                                } else {
+                                    window.parent.App.navigate('student-dash');
+                                }
+                            }
+                        }, 1000);
+                    } else if (signupData.error && (signupData.error === "User already exists" || signupData.error.includes("exists"))) {
+                        showToast("User already exists. Logging in...", "success");
+                        localStorage.setItem('isLoggedIn', 'true');
+                        localStorage.setItem('hasAccount', 'true');
+                        localStorage.setItem('currentUser', JSON.stringify({
+                            email: email,
+                            token: 'mock_token',
+                            role: 'student',
+                            username: username
+                        }));
+                        localStorage.removeItem('student_registration_draft');
+                        setTimeout(() => {
+                            if (window.parent && window.parent.App) {
+                                const pending = localStorage.getItem('pendingQuickApply');
+                                if (pending) {
+                                    localStorage.removeItem('pendingQuickApply');
+                                    try {
+                                        const data = JSON.parse(pending);
+                                        if (data.type === 'job') {
+                                            window.parent.App.navigate('checkout');
+                                            window.parent.App.showToast("Logged in. Redirecting to job application checkout...", "success");
+                                        } else if (data.link) {
+                                            window.open(data.link, '_blank');
+                                            window.parent.App.navigate('student-dash');
+                                            window.parent.App.showToast("Logged in. Course opened in a new tab.", "success");
+                                        } else {
+                                            window.parent.App.navigate('student-dash');
+                                        }
+                                    } catch (e) {
+                                        window.parent.App.navigate('student-dash');
+                                    }
+                                } else {
+                                    window.parent.App.navigate('student-dash');
+                                }
+                            }
+                        }, 1000);
+                    } else {
+                        showToast(signupData.error || "Signup failed.", "error");
+                        nextStepBtn.disabled = false;
+                        nextStepBtn.style.opacity = '1';
+                    }
+                } catch (err) {
+                    console.error("Signup error:", err);
+                    showToast("Connection Error. Signup could not be completed.", "error");
+                    nextStepBtn.disabled = false;
+                    nextStepBtn.style.opacity = '1';
+                }
+            }
+        });
+
+        const backBtn = document.getElementById('backBtn');
+        backBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (currentStep === 1) {
+                if (window.parent && window.parent.App) {
+                    window.parent.App.navigate('gateway', true, 'right');
+                }
+            } else {
+                showStep(currentStep - 1);
+            }
+        });
+
+        // Save Draft Logic
+        function saveDraft() {
+            try {
+                const email = document.getElementById('emailInput').value.trim();
+                const password = document.getElementById('passwordInput').value.trim();
+                const university = document.getElementById('uniInput').value.trim();
+                
+                const activeChips = document.querySelectorAll('.skill-chip.active');
+                const skills = Array.from(activeChips).map(chip => chip.textContent.trim());
+
+                const degree = document.getElementById('degreeInput').value.trim();
+                const major = document.getElementById('majorInput').value.trim();
+                const cgpa = document.getElementById('cgpaInput').value.trim();
+                const gradYear = document.getElementById('gradYearInput').value.trim();
+
+                const draft = {
+                    currentStep: currentStep,
+                    email: email,
+                    password: password,
+                    university: university,
+                    skills: skills,
+                    degree: degree,
+                    major: major,
+                    cgpa: cgpa,
+                    gradYear: gradYear,
+                    selectedTrack: selectedTrack,
+                    trackModules: trackModules,
+                    uploadedDocs: uploadedDocs
+                };
+
+                localStorage.setItem('student_registration_draft', JSON.stringify(draft));
+                showToast("Draft saved successfully!", "success");
+            } catch (err) {
+                console.error("Error saving draft:", err);
+                showToast("Failed to save draft.", "error");
+            }
+        }
+
+        // Restore Draft Logic
+        function loadDraft() {
+            const draftStr = localStorage.getItem('student_registration_draft');
+            if (!draftStr) return;
+
+            try {
+                const draft = JSON.parse(draftStr);
+                if (!draft) return;
+
+                // Restore Step 1 inputs
+                if (draft.email !== undefined) document.getElementById('emailInput').value = draft.email;
+                if (draft.password !== undefined) document.getElementById('passwordInput').value = draft.password;
+                if (draft.university !== undefined) document.getElementById('uniInput').value = draft.university;
+
+                // Restore skills selection
+                if (draft.skills && Array.isArray(draft.skills)) {
+                    // First deactivate all default chips
+                    document.querySelectorAll('.skill-chip').forEach(chip => {
+                        chip.classList.remove('active');
+                        chip.classList.add('glass-thick');
+                    });
+
+                    // For each saved skill, either activate existing chip or create a new custom chip
+                    draft.skills.forEach(skillName => {
+                        let found = false;
+                        document.querySelectorAll('.skill-chip').forEach(chip => {
+                            if (chip.textContent.trim() === skillName) {
+                                chip.classList.add('active');
+                                chip.classList.remove('glass-thick');
+                                found = true;
+                            }
+                        });
+
+                        if (!found) {
+                            const chip = document.createElement('button');
+                            chip.className = 'skill-chip active px-5 py-2.5 rounded-full border border-glass-border font-label-caps text-label-caps';
+                            chip.textContent = skillName;
+                            bindSkillChipEvents(chip);
+                            document.getElementById('skillsContainer').appendChild(chip);
+                        }
+                    });
+                }
+
+                // Restore Step 2 inputs
+                if (draft.degree !== undefined) document.getElementById('degreeInput').value = draft.degree;
+                if (draft.major !== undefined) document.getElementById('majorInput').value = draft.major;
+                if (draft.cgpa !== undefined) document.getElementById('cgpaInput').value = draft.cgpa;
+                if (draft.gradYear !== undefined) document.getElementById('gradYearInput').value = draft.gradYear;
+
+                // Restore Step 3 track & modules
+                if (draft.selectedTrack !== undefined) {
+                    selectedTrack = draft.selectedTrack;
+                }
+                if (draft.trackModules !== undefined) {
+                    // Merge/restore selected modules
+                    for (const track in draft.trackModules) {
+                        if (trackModules[track]) {
+                            draft.trackModules[track].forEach((savedMod, idx) => {
+                                if (trackModules[track][idx]) {
+                                    trackModules[track][idx].selected = savedMod.selected;
+                                }
+                            });
+                        }
+                    }
+                }
+
+                // Restore Step 4 uploaded documents
+                if (draft.uploadedDocs !== undefined) {
+                    uploadedDocs = draft.uploadedDocs;
+                    
+                    // Restore visual upload boxes status for resume & transcript
+                    ['resume', 'transcript'].forEach(docType => {
+                        if (uploadedDocs[docType]) {
+                            const progressContainer = document.getElementById(docType + 'Progress');
+                            const statusText = document.getElementById(docType + 'Status');
+                            if (progressContainer && statusText) {
+                                progressContainer.classList.remove('hidden');
+                                const progressFill = progressContainer.querySelector('.progress-fill');
+                                if (progressFill) progressFill.style.width = '100%';
+                                statusText.textContent = typeof uploadedDocs[docType] === 'string' ? `${uploadedDocs[docType]} Uploaded ✓` : `${docType === 'resume' ? 'CV / Resume' : 'Transcript'} Uploaded ✓`;
+                                
+                                const uploadBox = progressContainer.closest('.upload-box');
+                                if (uploadBox) {
+                                    uploadBox.className = "upload-box glass-panel p-6 rounded-xl border-2 border-primary/60 bg-white/20 flex flex-col items-center justify-center text-center cursor-pointer hover:bg-white/30 transition-all relative overflow-hidden";
+                                }
+                            }
+                        }
+                    });
+                }
+
+                // Restore current step & progress
+                if (draft.currentStep !== undefined) {
+                    showStep(draft.currentStep);
+                } else {
+                    showStep(1);
+                }
+                
+                updateProgress();
+                showToast("Draft restored successfully!", "success");
+            } catch (err) {
+                console.error("Error restoring draft:", err);
+            }
+        }
+
+        // Global Enter Key Keydown Listener
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                const target = e.target;
+                if (target && target.tagName === 'INPUT') {
+                    // Check if it's the custom skills input
+                    if (target.id === 'customSkillInput') {
+                        // Let its own listener handle it (add skill)
+                        return;
+                    }
+                    // Check if it's the university autocomplete input
+                    if (target.id === 'uniInput') {
+                        const items = uniSuggestions.querySelectorAll('div');
+                        // If autocomplete suggestions list is open and has items, let the specific keydown listener handle it
+                        if (!uniSuggestions.classList.contains('hidden') && items.length > 0) {
+                            return;
+                        }
+                    }
+                    
+                    // Otherwise, trigger the Next Step button click
+                    e.preventDefault();
+                    const nextStepBtn = document.getElementById('nextStepBtn');
+                    if (nextStepBtn && !nextStepBtn.disabled) {
+                        nextStepBtn.click();
+                    }
+                }
+            }
+        });
+
+        // Initialize progress and load draft if exists
+        showStep(1);
+        loadDraft();
+    </script>
+</body></html>

@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/>
+<title>GradeFlow Admin - Submission Review</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Shared Components & Theme Configuration -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                "surface-bright": "#f9f9ff",
+                "on-primary-fixed-variant": "#72188f",
+                "outline": "#817381",
+                "inverse-primary": "#f0b0ff",
+                "glass-fill": "rgba(255, 255, 255, 0.35)",
+                "on-tertiary": "#ffffff",
+                "tertiary-fixed": "#6cff82",
+                "surface-dim": "#d2daed",
+                "secondary-fixed": "#d3e3ff",
+                "card-gradient": "linear-gradient(135deg, #4D9EFA 0%, #BF7DF5 100%)",
+                "on-surface-variant": "#4f4350",
+                "on-secondary-fixed-variant": "#004883",
+                "on-primary": "#ffffff",
+                "gold": "#FFD60A",
+                "surface-container-lowest": "#ffffff",
+                "glass-thick": "rgba(255, 255, 255, 0.8)",
+                "secondary": "#0060ab",
+                "on-tertiary-fixed": "#002106",
+                "on-error": "#ffffff",
+                "tertiary": "#006823",
+                "secondary-fixed-dim": "#a3c9ff",
+                "on-secondary-fixed": "#001c39",
+                "surface": "#f9f9ff",
+                "on-secondary": "#ffffff",
+                "surface-container-low": "#f0f3ff",
+                "primary-fixed": "#fbd7ff",
+                "surface-tint": "#8d37a9",
+                "surface-container-highest": "#dbe3f6",
+                "tertiary-container": "#00842f",
+                "on-tertiary-fixed-variant": "#00531a",
+                "error-container": "#ffdad6",
+                "on-primary-fixed": "#330044",
+                "surface-container": "#e7eeff",
+                "primary": "#8731a3",
+                "on-background": "#141c29",
+                "surface-container-high": "#e0e8fb",
+                "on-secondary-container": "#003868",
+                "on-surface": "#141c29",
+                "on-primary-container": "#fff5fb",
+                "glass-border": "rgba(255, 255, 255, 0.6)",
+                "inverse-surface": "#29313f",
+                "error": "#FF453A",
+                "primary-fixed-dim": "#f0b0ff",
+                "on-error-container": "#93000a",
+                "orange": "#FF9F0A",
+                "secondary-container": "#54a3ff",
+                "inverse-on-surface": "#ecf1ff",
+                "surface-variant": "#dbe3f6",
+                "primary-container": "#a34cbe",
+                "on-tertiary-container": "#e6ffe0",
+                "tertiary-fixed-dim": "#47e266",
+                "outline-variant": "#d2c1d2",
+                "background": "#f9f9ff"
+            },
+            "borderRadius": {
+                "DEFAULT": "0.25rem",
+                "lg": "0.5rem",
+                "xl": "0.75rem",
+                "full": "9999px"
+            },
+            "spacing": {
+                "mobile-margin": "20px",
+                "desktop-margin": "64px",
+                "max-width": "1280px",
+                "desktop-gutter": "24px",
+                "base": "8px",
+                "safe-top": "44px",
+                "safe-bottom": "34px",
+                "mobile-gutter": "16px"
+            },
+            "fontFamily": {
+                "label-caps-mobile": ["Inter"],
+                "label-caps": ["Inter"],
+                "headline-lg": ["Inter"],
+                "display-xl-mobile": ["Inter"],
+                "headline-lg-mobile": ["Inter"],
+                "body-md-mobile": ["Inter"],
+                "display-xl": ["Inter"],
+                "body-md": ["Inter"]
+            },
+            "fontSize": {
+                "label-caps-mobile": ["12px", {"lineHeight": "1.0", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                "label-caps": ["13px", {"lineHeight": "1.0", "letterSpacing": "0.03em", "fontWeight": "600"}],
+                "headline-lg": ["34px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                "display-xl-mobile": ["34px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                "headline-lg-mobile": ["28px", {"lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                "body-md-mobile": ["15px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                "display-xl": ["56px", {"lineHeight": "1.1", "letterSpacing": "-0.03em", "fontWeight": "700"}],
+                "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        .glass-card {
+            background: rgba(255, 255, 255, 0.35);
+            backdrop-filter: blur(28px);
+            -webkit-backdrop-filter: blur(28px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 12px 40px 0 rgba(71, 26, 112, 0.15);
+        }
+        .code-block {
+            background: rgba(20, 28, 41, 0.9);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        input[type='range'] {
+            -webkit-appearance: none;
+            width: 100%;
+            background: transparent;
+        }
+        input[type='range']::-webkit-slider-runnable-track {
+            width: 100%;
+            height: 6px;
+            cursor: pointer;
+            background: rgba(135, 49, 163, 0.2);
+            border-radius: 3px;
+        }
+        input[type='range']::-webkit-slider-thumb {
+            height: 24px;
+            width: 24px;
+            border-radius: 50%;
+            background: #8731a3;
+            cursor: pointer;
+            -webkit-appearance: none;
+            margin-top: -9px;
+            box-shadow: 0 0 10px rgba(135, 49, 163, 0.4);
+            border: 2px solid white;
+        }
+        .ios-spring {
+            transition: transform 0.35s cubic-bezier(0.35, 0, 0.15, 1);
+        }
+        .ios-spring:active {
+            transform: scale(0.96);
+        }
+        body {
+            background: radial-gradient(circle at top right, #fbd7ff 0%, #f9f9ff 50%, #e7eeff 100%);
+            min-height: 100vh;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="font-body-md-mobile text-on-surface antialiased overflow-x-hidden pb-32">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-glass-thick backdrop-blur-[28px] border-b border-glass-border shadow-[0_12px_40px_0_rgba(71,26,112,0.15)] h-safe-top flex justify-between items-center px-mobile-margin">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center overflow-hidden border border-glass-border">
+<img alt="Alex Rivera" class="w-full h-full object-cover" data-alt="A close-up high-fidelity studio portrait of a young professional male student with a focused expression, softly lit against a blurred academic background. The lighting is clean and modern, following the purple and white color scheme of the app's brand identity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAN1VY3Ki-AuEMm0aL0WZ-4baEZ4Am_3CDx5nlSze5-7UJ7gfha-h5r0wmwWcQS4OTpElmkzmIqpA26YXGy1dAloMHzr17eNXewBgxsdMmiCGbERl4t6hUN6q_9-IooGbxyRdUE9bw0LBoYj6qLGDbQ8XHHDINlmO4VRd2wkcSOSDWlRqEKOw_h6pK5nDiU9wxOzzddvOJZznxonwnFq0YXHH_YiUy4bn58XzwZTHKEhH6yP2-fVDdblqBq1UGQ71LOAvG3zwwrheMG"/>
+</div>
+<div>
+<p class="font-label-caps-mobile text-label-caps-mobile text-primary leading-tight">Alex Rivera</p>
+<p class="text-[10px] text-on-surface-variant font-bold uppercase tracking-wider">SUB-9921</p>
+</div>
+</div>
+<h1 class="font-display-xl-mobile text-[18px] font-extrabold text-primary absolute left-1/2 -translate-x-1/2">GradeFlow</h1>
+<button class="material-symbols-outlined text-primary hover:scale-105 transition-transform">security</button>
+</header>
+<!-- Main Content Canvas -->
+<main class="mt-[80px] px-mobile-margin space-y-mobile-gutter">
+<!-- Submission Header -->
+<section class="glass-card rounded-3xl p-5 flex flex-col gap-2 relative overflow-hidden">
+<div class="absolute -top-10 -right-10 w-32 h-32 bg-primary/10 rounded-full blur-3xl"></div>
+<div class="flex justify-between items-start">
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface leading-tight max-w-[70%]">Binary Search Optimization</h2>
+<span class="bg-tertiary text-on-tertiary px-3 py-1 rounded-full font-label-caps-mobile text-[10px] uppercase tracking-widest shadow-sm">On-time</span>
+</div>
+<p class="text-on-surface-variant text-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">calendar_today</span>
+                Submitted Oct 24, 2023 • 2:14 PM
+            </p>
+</section>
+<!-- Code Preview -->
+<section class="code-block rounded-2xl overflow-hidden shadow-2xl">
+<div class="px-4 py-2 border-b border-white/10 flex justify-between items-center bg-white/5">
+<div class="flex gap-1.5">
+<div class="w-2.5 h-2.5 rounded-full bg-error/50"></div>
+<div class="w-2.5 h-2.5 rounded-full bg-orange/50"></div>
+<div class="w-2.5 h-2.5 rounded-full bg-tertiary-fixed-dim/50"></div>
+</div>
+<span class="text-[10px] font-mono text-outline-variant uppercase tracking-widest">solution.py</span>
+</div>
+<div class="p-4 font-mono text-xs overflow-x-auto leading-relaxed whitespace-pre">
+<div class="flex gap-4">
+<div class="text-outline text-right select-none opacity-40">1<br/>2<br/>3<br/>4<br/>5<br/>6<br/>7<br/>8<br/>9</div>
+<div class="text-white/90">
+<span class="text-primary-fixed-dim">def</span> <span class="text-secondary-fixed-dim">binary_search</span>(arr, low, high, x):
+    <span class="text-tertiary-fixed-dim">if</span> high &gt;= low:
+        mid = (high + low) // <span class="text-orange">2</span>
+<span class="text-tertiary-fixed-dim">if</span> arr[mid] == x:
+            <span class="text-tertiary-fixed-dim">return</span> mid
+        <span class="text-tertiary-fixed-dim">elif</span> arr[mid] &gt; x:
+            <span class="text-tertiary-fixed-dim">return</span> binary_search(arr, low, mid - <span class="text-orange">1</span>, x)
+        <span class="text-tertiary-fixed-dim">else</span>:
+            <span class="text-tertiary-fixed-dim">return</span> binary_search(arr, mid + <span class="text-orange">1</span>, high, x)
+    <span class="text-tertiary-fixed-dim">return</span> -<span class="text-orange">1</span></div>
+</div>
+</div>
+</section>
+<!-- Grading Rubric -->
+<section class="space-y-4">
+<h3 class="font-label-caps-mobile text-label-caps-mobile text-on-surface-variant px-1 uppercase tracking-widest">Evaluation Rubric</h3>
+<!-- Technical Accuracy -->
+<div class="glass-card rounded-2xl p-5 space-y-4">
+<div class="flex justify-between items-center">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">precision_manufacturing</span>
+<span class="font-semibold">Technical Accuracy</span>
+</div>
+<span class="text-primary font-bold text-lg"><span id="score-accuracy">38</span>/40</span>
+</div>
+<input class="h-11" max="40" min="0" oninput="document.getElementById('score-accuracy').innerText = this.value" step="1" type="range" value="38"/>
+</div>
+<!-- Visual Fidelity -->
+<div class="glass-card rounded-2xl p-5 space-y-4">
+<div class="flex justify-between items-center">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">palette</span>
+<span class="font-semibold">Visual Fidelity</span>
+</div>
+<span class="text-primary font-bold text-lg"><span id="score-visual">32</span>/40</span>
+</div>
+<input class="h-11" max="40" min="0" oninput="document.getElementById('score-visual').innerText = this.value" step="1" type="range" value="32"/>
+</div>
+<!-- Documentation -->
+<div class="glass-card rounded-2xl p-5 space-y-4">
+<div class="flex justify-between items-center">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">description</span>
+<span class="font-semibold">Documentation</span>
+</div>
+<span class="text-primary font-bold text-lg"><span id="score-docs">40</span>/40</span>
+</div>
+<input class="h-11" max="40" min="0" oninput="document.getElementById('score-docs').innerText = this.value" step="1" type="range" value="40"/>
+</div>
+</section>
+<!-- Evaluator Feedback -->
+<section class="space-y-3">
+<h3 class="font-label-caps-mobile text-label-caps-mobile text-on-surface-variant px-1 uppercase tracking-widest">Evaluator Feedback</h3>
+<textarea class="w-full glass-card rounded-2xl p-4 text-body-md-mobile focus:ring-2 focus:ring-primary/50 outline-none transition-all placeholder:text-on-surface-variant/40" placeholder="Enter detailed observation notes here..." rows="5" style="min-height: 120px;"></textarea>
+</section>
+<!-- Primary Action -->
+<section class="pt-4">
+<button class="w-full h-[56px] bg-primary text-on-primary rounded-full font-bold text-lg shadow-xl shadow-primary/20 ios-spring active:brightness-95 flex items-center justify-center gap-2">
+<span>Complete Evaluation</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</button>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full bg-glass-fill backdrop-blur-[28px] border-t border-glass-border shadow-[0_-12px_40px_0_rgba(71,26,112,0.15)] h-[84px] flex justify-around items-center px-mobile-margin pb-safe-bottom z-50">
+<a class="flex flex-col items-center justify-center bg-primary text-on-primary rounded-full px-4 py-1 ios-spring" href="#">
+<span class="material-symbols-outlined">view_list</span>
+<span class="font-label-caps-mobile text-label-caps-mobile">Queue</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-glass-thick transition-colors p-2 rounded-xl" href="#">
+<span class="material-symbols-outlined">history</span>
+<span class="font-label-caps-mobile text-label-caps-mobile">History</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-glass-thick transition-colors p-2 rounded-xl" href="#">
+<span class="material-symbols-outlined">analytics</span>
+<span class="font-label-caps-mobile text-label-caps-mobile">Insights</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-glass-thick transition-colors p-2 rounded-xl" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-caps-mobile text-label-caps-mobile">Settings</span>
+</a>
+</nav>
+<!-- Visual Polish: Subtle Background Gradients -->
+<div class="fixed top-1/4 -left-20 w-64 h-64 bg-secondary/10 rounded-full blur-[100px] -z-10 pointer-events-none"></div>
+<div class="fixed bottom-1/4 -right-20 w-80 h-80 bg-primary/10 rounded-full blur-[120px] -z-10 pointer-events-none"></div>
+<script>
+        // Simple micro-interaction for button spring bounce simulation
+        const actionBtn = document.querySelector('.ios-spring');
+        actionBtn.addEventListener('touchstart', () => {
+            actionBtn.style.transform = 'scale(0.96)';
+        });
+        actionBtn.addEventListener('touchend', () => {
+            actionBtn.style.transform = 'scale(1)';
+        });
+    </script>
+</body></html>

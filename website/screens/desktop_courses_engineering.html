@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="en"><head>
+  <script>
+    if (window.self !== window.top) {
+      const style = document.createElement('style');
+      style.innerHTML = `
+        header, nav, aside, 
+        .SideNavBar, .TopNavBar, 
+        #SideNavBar, #TopNavBar {
+          display: none !important;
+        }
+        main, .main-content {
+          margin-left: 0 !important;
+          padding-top: 1.5rem !important;
+        }
+        main.ml-64, main.lg\\:ml-64 {
+          margin-left: 0 !important;
+          padding-top: 2rem !important;
+        }
+      `;
+      document.documentElement.appendChild(style);
+    }
+  </script>
+
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Engineering Courses | Elite Scholar Portal</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "inverse-primary": "#f0b0ff",
+            "secondary-fixed-dim": "#bec7d9",
+            "primary-container": "#a34cbe",
+            "outline-variant": "#d2c1d2",
+            "primary-fixed-dim": "#f0b0ff",
+            "on-primary-container": "#fff5fb",
+            "on-surface": "#181c20",
+            "tertiary-fixed": "#f0dbff",
+            "surface-container-lowest": "#ffffff",
+            "surface": "#f7f9fe",
+            "tertiary": "#70459a",
+            "tertiary-container": "#8a5eb5",
+            "on-primary": "#ffffff",
+            "surface-container": "#eceef3",
+            "on-background": "#181c20",
+            "inverse-on-surface": "#eff1f6",
+            "surface-bright": "#f7f9fe",
+            "secondary": "#565f6e",
+            "secondary-fixed": "#dbe3f6",
+            "on-secondary": "#ffffff",
+            "inverse-surface": "#2d3135",
+            "tertiary-fixed-dim": "#ddb7ff",
+            "on-error": "#ffffff",
+            "error": "#ba1a1a",
+            "surface-tint": "#8d37a9",
+            "outline": "#817381",
+            "on-tertiary-container": "#fff5ff",
+            "surface-container-high": "#e6e8ed",
+            "on-tertiary-fixed": "#2c0050",
+            "on-secondary-fixed-variant": "#3f4756",
+            "on-tertiary-fixed-variant": "#5d3186",
+            "on-secondary-fixed": "#141c29",
+            "on-primary-fixed": "#330044",
+            "surface-container-low": "#f1f4f9",
+            "surface-container-highest": "#e0e2e7",
+            "primary-fixed": "#fbd7ff",
+            "surface-dim": "#d8dadf",
+            "error-container": "#ffdad6",
+            "primary": "#8731a3",
+            "on-secondary-container": "#5c6575",
+            "on-error-container": "#93000a",
+            "on-primary-fixed-variant": "#72188f",
+            "secondary-container": "#dbe3f6",
+            "on-surface-variant": "#4f4350",
+            "surface-variant": "#e0e2e7",
+            "on-tertiary": "#ffffff",
+            "background": "#f7f9fe"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "margin-desktop": "64px",
+            "gutter": "24px",
+            "margin-tablet": "32px",
+            "container-max-width": "1280px",
+            "unit": "8px",
+            "margin-mobile": "16px"
+          },
+          "fontFamily": {
+            "label-md": ["Inter"],
+            "display-lg": ["Plus Jakarta Sans"],
+            "body-lg": ["Inter"],
+            "headline-md": ["Plus Jakarta Sans"],
+            "headline-lg": ["Plus Jakarta Sans"],
+            "display-lg-mobile": ["Plus Jakarta Sans"],
+            "label-sm": ["Inter"],
+            "body-md": ["Inter"]
+          },
+          "fontSize": {
+            "label-md": ["14px", {"lineHeight": "1.4", "letterSpacing": "0.01em", "fontWeight": "500"}],
+            "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+            "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+            "headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}],
+            "headline-lg": ["32px", {"lineHeight": "1.2", "fontWeight": "600"}],
+            "display-lg-mobile": ["36px", {"lineHeight": "1.1", "fontWeight": "700"}],
+            "label-sm": ["12px", {"lineHeight": "1.4", "fontWeight": "600"}],
+            "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    .glass-card {
+      background: rgba(255, 255, 255, 0.35);
+      backdrop-filter: blur(28px);
+      -webkit-backdrop-filter: blur(28px);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      box-shadow: 0 8px 32px 0 rgba(163, 76, 190, 0.05);
+    }
+    
+    .spring-hover {
+      transition: all 0.3s cubic-bezier(0.12, 0, 0.39, 0);
+    }
+    
+    .spring-hover:hover {
+      transform: scale(1.02);
+      box-shadow: 0 20px 40px rgba(163, 76, 190, 0.2);
+    }
+
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+
+    .primary-glow:hover {
+      box-shadow: 0 0 15px rgba(163, 76, 190, 0.6);
+    }
+    
+    .deep-purple-text {
+      color: #471A70;
+    }
+
+    body {
+      background-color: #DCE4F7;
+    }
+  </style>
+</head>
+<body class="font-body-md text-on-surface">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-surface/40 backdrop-blur-[28px] border-b border-white/20 h-20 flex justify-between items-center px-margin-desktop shadow-none">
+<div class="flex items-center gap-8">
+<span class="font-headline-md text-headline-md font-bold text-primary">Elite Scholar Portal</span>
+<div class="hidden md:flex items-center gap-6">
+<a class="font-label-md text-label-md text-on-surface-variant font-medium hover:scale-[1.02] transition-transform duration-300" href="#">Home</a>
+<a class="font-label-md text-label-md text-primary font-bold border-b-2 border-primary hover:scale-[1.02] transition-transform duration-300" href="#">Courses</a>
+<a class="font-label-md text-label-md text-on-surface-variant font-medium hover:scale-[1.02] transition-transform duration-300" href="#">Resources</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative group">
+<span class="material-symbols-outlined text-secondary hover:text-primary cursor-pointer p-2 rounded-full hover:bg-white/10 transition-colors">notifications</span>
+<div class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full border border-white"></div>
+</div>
+<span class="material-symbols-outlined text-secondary hover:text-primary cursor-pointer p-2 rounded-full hover:bg-white/10 transition-colors">settings</span>
+<div class="flex items-center gap-3 pl-4 border-l border-white/20">
+<div class="w-10 h-10 rounded-full bg-primary-fixed border-2 border-white overflow-hidden">
+<img alt="Student Profile Avatar" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCUtK5IZLGB1WsDgRp10sZYPHv8uhoh0ATz9vGRiWV8zUG5CQiqvJ-Il_uX7eLYFwfkUWLg9ArfI2VSun147Lp6-zZ9iQer5qiw5SWrwOpQ57CwQSKkMTg-2ZJkjq3uLFjKtlK7s3Q0yFGdkqlsDauH0XACSGM36ocapMfuycklfZhf9QHWnl9Hg_jpMwhG8u8FMjNhIk-vFhOTjQQnFX8i7SJTI4NO2R6-FxlkVWjHSGEJK0I0tQYYE5i12CACbIhNyVUZLOARpgun"/>
+</div>
+</div>
+</div>
+</nav>
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-0 h-full w-64 z-40 bg-surface/30 backdrop-blur-[28px] border-r border-white/20 pt-24 flex flex-col p-6 space-y-4">
+<div class="mb-8 px-2">
+<h3 class="font-headline-md text-headline-md text-primary font-bold">Ivy Global</h3>
+<p class="font-label-sm text-label-sm text-secondary">Academic Excellence</p>
+</div>
+<div class="space-y-2 flex-1">
+<a class="flex items-center gap-3 px-4 py-3 text-secondary hover:bg-white/10 rounded-xl transition-all duration-300" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-md text-label-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 bg-primary text-on-primary rounded-xl shadow-[0_0_20px_rgba(163,76,190,0.3)] scale-105 transition-transform" href="#">
+<span class="material-symbols-outlined">school</span>
+<span class="font-label-md text-label-md">Courses</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-secondary hover:bg-white/10 rounded-xl transition-all duration-300" href="#">
+<span class="material-symbols-outlined">assignment</span>
+<span class="font-label-md text-label-md">Assignments</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-secondary hover:bg-white/10 rounded-xl transition-all duration-300" href="#">
+<span class="material-symbols-outlined">grade</span>
+<span class="font-label-md text-label-md">Grades</span>
+</a>
+</div>
+<div class="pt-6 border-t border-white/10">
+<button class="w-full py-3 px-4 bg-white/40 backdrop-blur-md rounded-xl text-primary font-bold hover:bg-white/60 transition-colors mb-4">
+        Support
+      </button>
+<a class="flex items-center gap-3 px-4 py-3 text-secondary hover:bg-white/10 rounded-xl transition-all" href="#">
+<span class="material-symbols-outlined">logout</span>
+<span class="font-label-md text-label-md">Logout</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="ml-64 pt-20 px-margin-desktop pb-24">
+<!-- Breadcrumbs -->
+<nav aria-label="Breadcrumb" class="flex py-8">
+<ol class="inline-flex items-center space-x-1 md:space-x-3 font-label-md text-label-md">
+<li class="inline-flex items-center">
+<a class="text-secondary hover:text-primary" href="#">Home</a>
+</li>
+<li>
+<div class="flex items-center">
+<span class="material-symbols-outlined text-outline mx-1">chevron_right</span>
+<a class="text-secondary hover:text-primary" href="#">Courses</a>
+</div>
+</li>
+<li aria-current="page">
+<div class="flex items-center">
+<span class="material-symbols-outlined text-outline mx-1">chevron_right</span>
+<span class="deep-purple-text font-bold">Engineering</span>
+</div>
+</li>
+</ol>
+</nav>
+<!-- Header Section -->
+<header class="mb-12">
+<h1 class="font-display-lg text-display-lg deep-purple-text mb-4">Engineering Courses</h1>
+<p class="font-body-lg text-body-lg text-secondary max-w-2xl">
+        Build scalable software, cloud infrastructure, and advanced applications with our core engineering modules designed for future industry leaders.
+      </p>
+</header>
+<!-- Bento-ish Course Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-gutter">
+<!-- Card 1: Software Engineering Essentials -->
+<div class="glass-card spring-hover rounded-[32px] overflow-hidden group">
+<div class="h-56 w-full overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAKoRH6ix2P-W25i194gLkbO0RyxuqSSQKX4YvYe0z6wdc5OAE43b5yKxaTQ31ScbYbRhXkv6ZrosTASi3Ky6iuBjm2ca287r-DMWPCcGIUX3372I7ndUTmABiAOWtadpj06ZF7qT1UDp5WKmukI4qXv4Sknj6UvTjmfHg6ottNXZdV49TLCAtcONEMIWKUsQ7PrxMqO1QsfpNkkef0NSqK2upwQTNQB1pMD-Taha9wwOfXTIb1Un3EGW19j8yEC5gLBBWg4VBPUmBM"/>
+</div>
+<div class="p-8">
+<div class="flex justify-between items-start mb-4">
+<h3 class="font-headline-md text-headline-md deep-purple-text leading-tight pr-4">Software Engineering Essentials</h3>
+<div class="flex items-center gap-1 bg-white/50 backdrop-blur-md px-3 py-1 rounded-full">
+<span class="material-symbols-outlined text-amber-400 text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-label-md text-label-md deep-purple-text">4.9</span>
+</div>
+</div>
+<div class="flex items-center justify-between mt-8">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-secondary">Course Fee</span>
+<span class="font-headline-md text-headline-md deep-purple-text font-bold">Rs. 249.00</span>
+</div>
+<button onclick="handleQuickApply(event)" data-link="https://www.coursera.org/learn/introduction-to-software-engineering" class="bg-primary text-on-primary px-8 py-3 rounded-full font-label-md text-label-md font-bold primary-glow active:scale-95 transition-all">Apply</button>
+</div>
+</div>
+</div>
+<!-- Card 2: Cloud Architecture & Patterns -->
+<div class="glass-card spring-hover rounded-[32px] overflow-hidden group">
+<div class="h-56 w-full overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA0MmCVZPML1iN4xJ2yCLg_2G9fGoqkfCqw6q2diDGqpMrLrirBqHOFv6HKf-S3gVJw1GsiypNUCQHGTqXc3xLLl1ecPDpwbmbiYRQ7lXH-tNdawbgpgmkMmGTnd74KrCQgeOPYjU5KFVGIuaTugx_T5tG03JHBeXJrtZk35NJitxLVRmpEhjzAw-uQ5wnjeRoHtVf6Mi8Vvq31ItNp_inPL7ZHkEhiEr0o4KwaG7RTM5h9lFv-3xLo_hGaDFUMpApRnIZRuN5SFZnh"/>
+</div>
+<div class="p-8">
+<div class="flex justify-between items-start mb-4">
+<h3 class="font-headline-md text-headline-md deep-purple-text leading-tight pr-4">Cloud Architecture &amp; Patterns</h3>
+<div class="flex items-center gap-1 bg-white/50 backdrop-blur-md px-3 py-1 rounded-full">
+<span class="material-symbols-outlined text-amber-400 text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-label-md text-label-md deep-purple-text">4.8</span>
+</div>
+</div>
+<div class="flex items-center justify-between mt-8">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-secondary">Course Fee</span>
+<span class="font-headline-md text-headline-md deep-purple-text font-bold">Rs. 299.00</span>
+</div>
+<button onclick="handleQuickApply(event)" data-link="https://www.edx.org/course/cloud-architecture" class="bg-primary text-on-primary px-8 py-3 rounded-full font-label-md text-label-md font-bold primary-glow active:scale-95 transition-all">Apply</button>
+</div>
+</div>
+</div>
+<!-- Card 3: DevOps & CI/CD Pipelines -->
+<div class="glass-card spring-hover rounded-[32px] overflow-hidden group">
+<div class="h-56 w-full overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCHbQadcJqDITfrvRTBcIILescLcSsjwTjScbjVrSNMrf5DZ5MF0-TAiUkMCRMbMmZu8FXr-L_XCNZEs7ryLYsz6RlkUp82ZhdcJMrgWOj-q_3dO2aD33igFlLoWCrto0im17BqgaAkQh0U7Gq_2ApOSaDn1WfqeGGQnVnCB9iwCLKtLkSXxT8itcPRZhRLIHBClsrRxi-eg7K7Wv3R4s7C8OFwFn6OuqJNXyHvxp7bv8bLlcnxL381wi86tIzRbf5lA2v3SzR4efC7"/>
+</div>
+<div class="p-8">
+<div class="flex justify-between items-start mb-4">
+<h3 class="font-headline-md text-headline-md deep-purple-text leading-tight pr-4">DevOps &amp; CI/CD Pipelines</h3>
+<div class="flex items-center gap-1 bg-white/50 backdrop-blur-md px-3 py-1 rounded-full">
+<span class="material-symbols-outlined text-amber-400 text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-label-md text-label-md deep-purple-text">4.7</span>
+</div>
+</div>
+<div class="flex items-center justify-between mt-8">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-secondary">Course Fee</span>
+<span class="font-headline-md text-headline-md deep-purple-text font-bold">Rs. 249.00</span>
+</div>
+<button onclick="handleQuickApply(event)" data-link="https://www.coursera.org/learn/intro-devops" class="bg-primary text-on-primary px-8 py-3 rounded-full font-label-md text-label-md font-bold primary-glow active:scale-95 transition-all">Apply</button>
+</div>
+</div>
+</div>
+<!-- Card 4: Advanced Data Structures -->
+<div class="glass-card spring-hover rounded-[32px] overflow-hidden group">
+<div class="h-56 w-full overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDFjy3qxP_yynrTAvp8J9AbInI1EJjh8rXh2awVsu3HM-6xLGYGc0gX7NGbls4RZClc_xirhdmvccvNdaL1HLRUExkVOzXjgIjm0TpQV_xKa-T7fGyB8LMIvtWezBNaPxOegCmW9mLoxhnw-CO9sYA00pALrGdd9sZhAWpnxov-pfFz2QlZ763w_CPQ6fgZjwSDTDmnvC75Geg2YXf2wiqCIUpWwT_qzZc01o25Wxqey6z6XiPTeEO9frc_F8rDRfX74HzGkOejOY1R"/>
+</div>
+<div class="p-8">
+<div class="flex justify-between items-start mb-4">
+<h3 class="font-headline-md text-headline-md deep-purple-text leading-tight pr-4">Advanced Data Structures &amp; Algorithms</h3>
+<div class="flex items-center gap-1 bg-white/50 backdrop-blur-md px-3 py-1 rounded-full">
+<span class="material-symbols-outlined text-amber-400 text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-label-md text-label-md deep-purple-text">5.0</span>
+</div>
+</div>
+<div class="flex items-center justify-between mt-8">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-secondary">Course Fee</span>
+<span class="font-headline-md text-headline-md deep-purple-text font-bold">Rs. 299.00</span>
+</div>
+<button onclick="handleQuickApply(event)" data-link="https://www.coursera.org/specializations/data-structures-algorithms" class="bg-primary text-on-primary px-8 py-3 rounded-full font-label-md text-label-md font-bold primary-glow active:scale-95 transition-all">Apply</button>
+</div>
+</div>
+</div>
+<!-- Card 5: Full-Stack Web Development -->
+<div class="glass-card spring-hover rounded-[32px] overflow-hidden group">
+<div class="h-56 w-full overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBdnHFhMg6RNkCvie79K_ZIogYzrHwkRSvHeQaKWUO8QcFvXTfD3K0bTk0z5Fzk74P1bB1e3Ho2OwwuiITqGdHHzhpVpsPAwjiBgAyALItOsq_b7pdX2Ca5iAVBA5OUVds5t42ivyEcug62_xULpR5oIbNacoPQK9NfX43HFhufe4wlETAZldGbKqcPNyFpBY-mIQqYiRdRGYBL9xhhsoMh4uGaxdwsBCqOemE0WFNl_ZnvLo-cXK5Qiwh9Fy-Bu4cLqXegQ-UPt0nt"/>
+</div>
+<div class="p-8">
+<div class="flex justify-between items-start mb-4">
+<h3 class="font-headline-md text-headline-md deep-purple-text leading-tight pr-4">Full-Stack Web Development</h3>
+<div class="flex items-center gap-1 bg-white/50 backdrop-blur-md px-3 py-1 rounded-full">
+<span class="material-symbols-outlined text-amber-400 text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-label-md text-label-md deep-purple-text">4.9</span>
+</div>
+</div>
+<div class="flex items-center justify-between mt-8">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-secondary">Course Fee</span>
+<span class="font-headline-md text-headline-md deep-purple-text font-bold">Rs. 249.00</span>
+</div>
+<button onclick="handleQuickApply(event)" data-link="https://www.coursera.org/specializations/full-stack-react" class="bg-primary text-on-primary px-8 py-3 rounded-full font-label-md text-label-md font-bold primary-glow active:scale-95 transition-all">Apply</button>
+</div>
+</div>
+</div>
+<!-- Card 6: Mobile App Engineering -->
+<div class="glass-card spring-hover rounded-[32px] overflow-hidden group">
+<div class="h-56 w-full overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCcESVQPWihQiKVmC9Bmij3oxdy0lbU97u1aUVFZ6HWGszRauayH026O-0_ePZK-5f21XRVdGomON520FJOhGnCvitlx9cCnGSi9TPU5DiYuVMJr-152M4W1joAHIBAvNeKPp1i6jwOzvGM0ZXMViIidgsxXCaRcuKw7zncSNVS3Y5UO9sTgMn99P1mV7r141gtpTQiZcfqAk7dM8mfcY-vqeTzWnw2SweAQmAQFDrHW4_7ozJS4WEg7ccNenPw4LjljrtMjWkOtKxb"/>
+</div>
+<div class="p-8">
+<div class="flex justify-between items-start mb-4">
+<h3 class="font-headline-md text-headline-md deep-purple-text leading-tight pr-4">Mobile App Engineering</h3>
+<div class="flex items-center gap-1 bg-white/50 backdrop-blur-md px-3 py-1 rounded-full">
+<span class="material-symbols-outlined text-amber-400 text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-label-md text-label-md deep-purple-text">4.8</span>
+</div>
+</div>
+<div class="flex items-center justify-between mt-8">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-secondary">Course Fee</span>
+<span class="font-headline-md text-headline-md deep-purple-text font-bold">Rs. 249.00</span>
+</div>
+<button onclick="handleQuickApply(event)" data-link="https://www.coursera.org/specializations/android-app-development" class="bg-primary text-on-primary px-8 py-3 rounded-full font-label-md text-label-md font-bold primary-glow active:scale-95 transition-all">Apply</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+<script>
+    // Lightweight parallax effect on cards
+    document.addEventListener('mousemove', (e) => {
+      const cards = document.querySelectorAll('.glass-card');
+      const mouseX = e.clientX;
+      const mouseY = e.clientY;
+
+      cards.forEach(card => {
+        const rect = card.getBoundingClientRect();
+        const cardX = rect.left + rect.width / 2;
+        const cardY = rect.top + rect.height / 2;
+
+        const angleX = (mouseY - cardY) / 100;
+        const angleY = (cardX - mouseX) / 100;
+
+        card.style.transform = `perspective(1000px) rotateX(${angleX}deg) rotateY(${angleY}deg) scale(1)`;
+      });
+    });
+
+    // Reset transform on mouse leave
+    document.addEventListener('mouseleave', () => {
+      const cards = document.querySelectorAll('.glass-card');
+      cards.forEach(card => {
+        card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)`;
+      });
+    });
+  
+        window.handleQuickApply = function(event) {
+            if (event) event.preventDefault();
+            event.stopPropagation();
+            const target = event.currentTarget || event.target;
+            const link = target.getAttribute('data-link');
+            
+            const card = target.closest('.glass-card');
+            let courseName = "Full Stack Web Engineering";
+            let coursePrice = "Rs. 249.00";
+            if (card) {
+                const titleEl = card.querySelector('h3');
+                const priceEl = card.querySelector('.deep-purple-text.font-bold');
+                if (titleEl) courseName = titleEl.innerText.trim();
+                if (priceEl) coursePrice = priceEl.innerText.trim();
+            }
+            
+            // Store selected course details
+            localStorage.setItem('selectedCourse', JSON.stringify({ name: courseName, price: coursePrice }));
+
+            if (window.parent && window.parent.App && typeof window.parent.App.handleQuickApply === 'function') {
+                window.parent.App.handleQuickApply('course', link);
+            } else {
+                const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+                if (isLoggedIn) {
+                    window.location.hash = '#/student/checkout';
+                } else {
+                    localStorage.setItem('pendingQuickApply', JSON.stringify({ type: 'course', link: link, view: 'courses-engineering' }));
+                    window.location.hash = '#/student/login';
+                }
+            }
+        };
+</script>
+</body></html>

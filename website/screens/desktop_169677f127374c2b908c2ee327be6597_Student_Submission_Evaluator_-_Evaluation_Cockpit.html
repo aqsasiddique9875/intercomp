@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Lumina Academy | Evaluation Hub</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-surface-variant": "#4f4350",
+                        "glass-border": "rgba(255, 255, 255, 0.6)",
+                        "secondary-fixed-dim": "#a3c9ff",
+                        "surface-container": "#e7eeff",
+                        "on-background": "#471A70",
+                        "on-tertiary-fixed-variant": "#00531a",
+                        "on-error-container": "#93000a",
+                        "surface-container-highest": "#dbe3f6",
+                        "gold": "#FFD60A",
+                        "primary": "#8731a3",
+                        "on-secondary-fixed-variant": "#004883",
+                        "inverse-surface": "#29313f",
+                        "primary-fixed": "#fbd7ff",
+                        "glass-thick": "rgba(255, 255, 255, 0.8)",
+                        "tertiary-container": "#00842f",
+                        "primary-fixed-dim": "#f0b0ff",
+                        "card-gradient": "linear-gradient(135deg, #4D9EFA 0%, #BF7DF5 100%)",
+                        "outline-variant": "#d2c1d2",
+                        "on-surface": "#141c29",
+                        "on-secondary-fixed": "#001c39",
+                        "surface-variant": "#dbe3f6",
+                        "surface": "#f9f9ff",
+                        "surface-bright": "#f9f9ff",
+                        "secondary": "#0060ab",
+                        "inverse-on-surface": "#ecf1ff",
+                        "tertiary-fixed": "#6cff82",
+                        "secondary-fixed": "#d3e3ff",
+                        "on-tertiary-container": "#e6ffe0",
+                        "orange": "#FF9F0A",
+                        "on-primary-container": "#fff5fb",
+                        "primary-container": "#a34cbe",
+                        "on-secondary": "#ffffff",
+                        "on-primary": "#ffffff",
+                        "background": "#f9f9ff",
+                        "on-tertiary": "#ffffff",
+                        "surface-tint": "#8d37a9",
+                        "surface-container-lowest": "#ffffff",
+                        "outline": "#817381",
+                        "surface-container-low": "#f0f3ff",
+                        "on-secondary-container": "#003868",
+                        "secondary-container": "#54a3ff",
+                        "error": "#FF453A",
+                        "on-primary-fixed-variant": "#72188f",
+                        "on-primary-fixed": "#330044",
+                        "on-tertiary-fixed": "#002106",
+                        "surface-container-high": "#e0e8fb",
+                        "surface-dim": "#d2daed",
+                        "inverse-primary": "#f0b0ff",
+                        "error-container": "#ffdad6",
+                        "on-error": "#ffffff",
+                        "glass-fill": "rgba(255, 255, 255, 0.35)",
+                        "tertiary-fixed-dim": "#47e266",
+                        "tertiary": "#006823"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "base": "8px",
+                        "safe-bottom": "34px",
+                        "safe-top": "44px",
+                        "mobile-margin": "20px",
+                        "max-width": "1280px",
+                        "desktop-gutter": "24px",
+                        "mobile-gutter": "16px",
+                        "desktop-margin": "64px"
+                    },
+                    "fontFamily": {
+                        "label-caps": ["Inter", "sans-serif"],
+                        "headline-lg": ["Inter", "sans-serif"],
+                        "body-md": ["Inter", "sans-serif"],
+                        "display-xl": ["Inter", "sans-serif"]
+                    },
+                    "fontSize": {
+                        "label-caps": ["13px", {"lineHeight": "1.0", "letterSpacing": "0.03em", "fontWeight": "600"}],
+                        "headline-lg": ["34px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                        "display-xl": ["56px", {"lineHeight": "1.1", "letterSpacing": "-0.03em", "fontWeight": "700"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            background-color: #DCE4F7;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.35);
+            backdrop-filter: blur(28px);
+            -webkit-backdrop-filter: blur(28px);
+            border: 0.5px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 12px 40px 0 rgba(71, 26, 112, 0.15);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            height: 16px;
+            width: 16px;
+            border-radius: 50%;
+            background: #8731a3;
+            cursor: pointer;
+            border: 2px solid white;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body class="text-on-background min-h-screen">
+<!-- TopNavBar -->
+<nav class="fixed top-0 left-0 right-0 z-50 flex justify-between items-center bg-glass-fill backdrop-blur-[28px] w-full h-16 px-desktop-margin border-b border-glass-border shadow-[0_12px_40px_0_rgba(71,26,112,0.15)]">
+<div class="flex items-center gap-12">
+<span class="font-display-xl text-[24px] tracking-tighter text-primary">Lumina Academy</span>
+<div class="hidden md:flex space-x-8">
+<a class="font-label-caps text-label-caps text-on-surface-variant hover:scale-95 transition-transform duration-300" href="#">Dashboard</a>
+<a class="font-label-caps text-label-caps text-primary border-b-2 border-primary pb-1" href="#">Curriculum</a>
+<a class="font-label-caps text-label-caps text-on-surface-variant hover:scale-95 transition-transform duration-300" href="#">Faculty</a>
+<a class="font-label-caps text-label-caps text-on-surface-variant hover:scale-95 transition-transform duration-300" href="#">Insights</a>
+</div>
+</div>
+<div class="flex items-center space-x-6">
+<span class="material-symbols-outlined text-primary cursor-pointer hover:scale-95 transition-transform">notifications</span>
+<span class="material-symbols-outlined text-primary cursor-pointer hover:scale-95 transition-transform">settings</span>
+<div class="w-8 h-8 rounded-full overflow-hidden border-2 border-primary">
+<img alt="Administrator Profile" class="w-full h-full object-cover" data-alt="Close-up portrait of a professional female academic administrator in a modern office. She is smiling confidently, wearing a tailored navy blazer, with soft natural light highlighting her features. The background is a blurred, high-end educational environment with soft pastel lavender and purple tones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBhgaMXKporwoB0q7QjoKTbCioK4IGQklfBNlb_rleimfFrh816jpVLFj10cBFFIT4l3xSORe4Fzbl3mtx3-RwX9pi_ofXa5fBVbhWaLmSuysw3nS75EDr7wptGtuyXTSzG1_kAfFHDadD6Ko0YqkGOOrnNg1jW9bq-2wcEZgxTLAMV_tCXGz31kdCu8rXN37UnLh4E1Nsfp_NYQ7vuCzrRW1o7ahRxW2R1jvhTMqJLGQIst2GZ-JA1iIxSJCDjP38AM-nnWTKdvnc7"/>
+</div>
+</div>
+</nav>
+<!-- Evaluation Hub SideNav -->
+<aside class="w-64 h-full fixed left-0 top-16 border-r border-glass-border bg-glass-thick flex flex-col py-8 px-4 space-y-4 z-40 hidden xl:flex">
+<div class="flex items-center gap-3 px-2 mb-4">
+<div class="w-10 h-10 rounded-xl bg-primary-container flex items-center justify-center text-on-primary-container">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">analytics</span>
+</div>
+<div>
+<h3 class="font-label-caps text-primary text-sm">Evaluation Hub</h3>
+<p class="text-[10px] uppercase tracking-widest text-on-surface-variant">V3.0 Elite</p>
+</div>
+</div>
+<nav class="space-y-2">
+<div class="flex items-center gap-3 p-3 text-on-surface-variant hover:bg-glass-fill rounded-xl transition-colors cursor-pointer">
+<span class="material-symbols-outlined">analytics</span>
+<span class="font-label-caps text-label-caps">Overview</span>
+</div>
+<div class="flex items-center gap-3 p-3 bg-primary-container text-on-primary-container rounded-xl cursor-pointer">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">rule</span>
+<span class="font-label-caps text-label-caps">Rubrics</span>
+</div>
+<div class="flex items-center gap-3 p-3 text-on-surface-variant hover:bg-glass-fill rounded-xl transition-colors cursor-pointer">
+<span class="material-symbols-outlined">folder_open</span>
+<span class="font-label-caps text-label-caps">Student Files</span>
+</div>
+<div class="flex items-center gap-3 p-3 text-on-surface-variant hover:bg-glass-fill rounded-xl transition-colors cursor-pointer">
+<span class="material-symbols-outlined">edit_note</span>
+<span class="font-label-caps text-label-caps">Internal Notes</span>
+</div>
+<div class="flex items-center gap-3 p-3 text-on-surface-variant hover:bg-glass-fill rounded-xl transition-colors cursor-pointer">
+<span class="material-symbols-outlined">verified</span>
+<span class="font-label-caps text-label-caps">Final Grade</span>
+</div>
+</nav>
+<div class="mt-auto pt-8 border-t border-glass-border space-y-2">
+<div class="flex items-center gap-3 p-3 text-on-surface-variant hover:bg-glass-fill rounded-xl transition-colors cursor-pointer">
+<span class="material-symbols-outlined">help</span>
+<span class="font-label-caps text-label-caps">Help</span>
+</div>
+<div class="flex items-center gap-3 p-3 text-on-surface-variant hover:bg-glass-fill rounded-xl transition-colors cursor-pointer">
+<span class="material-symbols-outlined">logout</span>
+<span class="font-label-caps text-label-caps">Logout</span>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="xl:pl-64 pt-24 px-base pb-safe-bottom min-h-screen">
+<div class="max-w-[1440px] mx-auto px-4 lg:px-8 grid grid-cols-1 lg:grid-cols-12 gap-8">
+<!-- Left Panel (65%) - File Previewer -->
+<div class="lg:col-span-8 space-y-6">
+<!-- Metadata Header -->
+<div class="flex justify-between items-end">
+<div>
+<h1 class="font-headline-lg text-headline-lg text-on-background">Student Submission</h1>
+<div class="flex items-center gap-3 mt-2">
+<img alt="Student Profile" class="w-10 h-10 rounded-full border-2 border-white shadow-sm" data-alt="Close-up profile photo of a young male university student with a friendly expression. He is wearing a clean white t-shirt, appearing focused and intelligent. The lighting is bright and modern with a soft-focus library or campus background in shades of light blue and lavender." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAoQxVoQSLSlxdDMDUNhbMj5CyF-jiaMLNqmFJXBgxTqsNubJsT01v2TL-TC41HQEH_2jyZwu8dzSx2O5TsWVG8jakGSBrR5E5G9QYxsD5h9gy3qCHfa9kprt4AfXJud71amTSpX-gR2dxZ6boS7lK59VWo2xKm6LO4hlLmbLoFdJD9CXkbLhuBO9xYBkXIf0Al-1Cbzwb9BLibnY2sq4XYgoSVTFPO6hhTxh-iLGEnByz4UjPN_Q9vaqL-kDgDpTMyLIhqMBmOHfww"/>
+<div>
+<p class="font-bold text-on-background">Alex Sterling</p>
+<p class="text-xs text-on-surface-variant font-medium">B.S. Computer Science • CS302 Data Structures</p>
+</div>
+</div>
+</div>
+<div class="text-right">
+<span class="px-3 py-1 bg-tertiary-container/20 text-tertiary border border-tertiary/20 rounded-full text-xs font-bold">On-time</span>
+<p class="text-[11px] text-on-surface-variant mt-2 font-medium">Submitted Oct 24, 2023 at 11:42 PM</p>
+</div>
+</div>
+<!-- Previewer Card -->
+<div class="glass-card rounded-[24px] overflow-hidden flex flex-col h-[700px] group transition-all duration-500">
+<!-- Previewer Toolbar -->
+<div class="p-4 flex items-center justify-between border-b border-glass-border">
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-2 px-3 py-1.5 bg-on-background/5 rounded-lg border border-white/40">
+<span class="material-symbols-outlined text-sm text-primary">description</span>
+<span class="text-sm font-semibold">user_research_final_report.pdf</span>
+</div>
+<span class="text-xs text-on-surface-variant">Page 1 of 12</span>
+</div>
+<div class="flex items-center gap-3">
+<button class="p-2 hover:bg-white/40 rounded-full transition-colors text-on-background">
+<span class="material-symbols-outlined">zoom_in</span>
+</button>
+<button class="p-2 hover:bg-white/40 rounded-full transition-colors text-on-background">
+<span class="material-symbols-outlined">zoom_out</span>
+</button>
+<button class="p-2 hover:bg-white/40 rounded-full transition-colors text-on-background">
+<span class="material-symbols-outlined">download</span>
+</button>
+<div class="w-px h-6 bg-glass-border mx-1"></div>
+<button class="p-2 hover:bg-white/40 rounded-full transition-colors text-on-background">
+<span class="material-symbols-outlined">fullscreen</span>
+</button>
+</div>
+</div>
+<!-- Main Preview Surface -->
+<div class="flex-grow bg-white/40 p-8 overflow-y-auto relative">
+<div class="max-w-2xl mx-auto bg-white shadow-2xl rounded-sm p-12 min-h-full">
+<h2 class="text-3xl font-extrabold text-slate-900 border-b-4 border-primary w-24 pb-2 mb-8">User Research Report</h2>
+<p class="text-xs text-slate-500 mb-8 tracking-widest font-bold uppercase">Technical Documentation | System Architecture</p>
+<div class="space-y-6 text-slate-800 leading-relaxed font-serif">
+<h3 class="text-xl font-bold font-sans text-slate-900">1. Executive Summary</h3>
+<p>The following report outlines the binary search optimization protocols implemented within the legacy data retrieval engine. Our findings indicate a 40% reduction in latency when applying tailored algorithmic sorting pre-execution.</p>
+<div class="bg-slate-50 p-4 border-l-4 border-slate-300 my-8">
+<pre class="font-mono text-sm overflow-x-auto text-primary"><code>def binary_search(arr, low, high, x):
+    if high &gt;= low:
+        mid = (high + low) // 2
+        if arr[mid] == x:
+            return mid
+        elif arr[mid] &gt; x:
+            return binary_search(arr, low, mid - 1, x)
+        else:
+            return binary_search(arr, mid + 1, high, x)
+    else:
+        return -1</code></pre>
+</div>
+<h3 class="text-xl font-bold font-sans text-slate-900">2. Implementation Strategy</h3>
+<p>Using recursive methodology allows for cleaner state management across distributed nodes. The O(log n) time complexity ensures scalability as Lumina Academy's student database expands towards the 2025 target metrics.</p>
+<p>The primary hurdle remains documentation clarity for peer-review cycles. This submission addresses those specific rubrics via detailed annotation and visual mapping of logic flows.</p>
+</div>
+</div>
+<!-- Floating Annotation Interaction (Visual Detail) -->
+<div class="absolute right-12 top-24 w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white shadow-lg cursor-pointer animate-pulse">
+<span class="material-symbols-outlined">add_comment</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Panel (35%) - Grading Sidebar -->
+<aside class="lg:col-span-4 h-fit sticky top-24">
+<div class="glass-card rounded-[24px] p-8 space-y-8">
+<div class="flex justify-between items-center">
+<h2 class="font-headline-lg text-2xl text-on-background">Grading Rubric</h2>
+<span class="text-primary font-bold text-lg" id="totalScore">0/100</span>
+</div>
+<!-- Scoring Sliders -->
+<div class="space-y-6">
+<div class="space-y-2">
+<div class="flex justify-between">
+<label class="font-label-caps text-xs text-on-surface-variant">Technical Accuracy</label>
+<span class="text-xs font-bold text-on-background" id="techVal">0</span>
+</div>
+<input class="w-full h-1.5 bg-white/50 rounded-lg appearance-none cursor-pointer" max="40" min="0" oninput="updateScore('tech', this.value)" type="range" value="0"/>
+<p class="text-[10px] text-on-surface-variant italic">Weight: 40%</p>
+</div>
+<div class="space-y-2">
+<div class="flex justify-between">
+<label class="font-label-caps text-xs text-on-surface-variant">Clarity &amp; Presentation</label>
+<span class="text-xs font-bold text-on-background" id="clarityVal">0</span>
+</div>
+<input class="w-full h-1.5 bg-white/50 rounded-lg appearance-none cursor-pointer" max="30" min="0" oninput="updateScore('clarity', this.value)" type="range" value="0"/>
+<p class="text-[10px] text-on-surface-variant italic">Weight: 30%</p>
+</div>
+<div class="space-y-2">
+<div class="flex justify-between">
+<label class="font-label-caps text-xs text-on-surface-variant">Documentation</label>
+<span class="text-xs font-bold text-on-background" id="docVal">0</span>
+</div>
+<input class="w-full h-1.5 bg-white/50 rounded-lg appearance-none cursor-pointer" max="30" min="0" oninput="updateScore('doc', this.value)" type="range" value="0"/>
+<p class="text-[10px] text-on-surface-variant italic">Weight: 30%</p>
+</div>
+</div>
+<!-- Feedback Text Area -->
+<div class="space-y-3">
+<label class="font-label-caps text-xs text-on-surface-variant">Instructor Feedback</label>
+<textarea class="w-full h-40 p-4 bg-white/80 border border-white focus:ring-2 focus:ring-primary/20 focus:border-primary/40 rounded-xl text-sm text-on-surface-variant outline-none transition-all placeholder:text-on-surface-variant/40" placeholder="Provide constructive criticism or commendations here..."></textarea>
+</div>
+<!-- Submit Button -->
+<button class="w-full bg-primary text-white font-label-caps py-5 rounded-full shadow-[0_12px_32px_rgba(135,49,163,0.3)] hover:scale-[0.98] active:scale-95 transition-all duration-300 flex items-center justify-center gap-3">
+                        Submit Final Grade
+                        <span class="material-symbols-outlined text-lg">send</span>
+</button>
+<p class="text-center text-[10px] text-on-surface-variant uppercase tracking-widest font-bold">Lumina Elite Grading Standard Applied</p>
+</div>
+<!-- Secondary Quick Actions -->
+<div class="mt-6 flex gap-4">
+<button class="flex-1 py-3 px-4 glass-card rounded-2xl flex items-center justify-center gap-2 text-xs font-bold text-on-surface-variant hover:bg-white/60 transition-colors">
+<span class="material-symbols-outlined text-sm">mail</span> Email Student
+                    </button>
+<button class="flex-1 py-3 px-4 glass-card rounded-2xl flex items-center justify-center gap-2 text-xs font-bold text-on-surface-variant hover:bg-white/60 transition-colors">
+<span class="material-symbols-outlined text-sm">schedule</span> Request Revision
+                    </button>
+</div>
+</aside>
+</div>
+</main>
+<!-- Liquid Background Elements -->
+<div class="fixed -z-10 top-0 left-0 w-full h-full pointer-events-none opacity-40">
+<div class="absolute top-[10%] right-[5%] w-[600px] h-[600px] bg-gradient-to-br from-primary-fixed to-secondary-fixed blur-[100px] rounded-full mix-blend-multiply animate-[pulse_10s_infinite_alternate]"></div>
+<div class="absolute bottom-[20%] left-[10%] w-[400px] h-[400px] bg-gradient-to-tr from-secondary-container to-tertiary-fixed blur-[120px] rounded-full mix-blend-multiply animate-[pulse_12s_infinite_alternate-reverse]"></div>
+</div>
+<script>
+        let scores = { tech: 0, clarity: 0, doc: 0 };
+
+        function updateScore(type, value) {
+            scores[type] = parseInt(value);
+            document.getElementById(type + 'Val').innerText = value;
+            
+            const total = scores.tech + scores.clarity + scores.doc;
+            const totalEl = document.getElementById('totalScore');
+            totalEl.innerText = total + '/100';
+
+            // Visual feedback on the total score
+            if (total > 90) totalEl.className = 'text-tertiary font-bold text-lg';
+            else if (total > 70) totalEl.className = 'text-primary font-bold text-lg';
+            else totalEl.className = 'text-on-background font-bold text-lg';
+        }
+
+        // Simple smooth scrolling for the internal note anchor
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body></html>

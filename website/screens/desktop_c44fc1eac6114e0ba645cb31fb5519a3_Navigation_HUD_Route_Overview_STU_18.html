@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>STU-18 Dashboard - Live Navigation</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.35);
+            backdrop-filter: blur(28px);
+            -webkit-backdrop-filter: blur(28px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 12px 40px 0 rgba(71, 26, 112, 0.15);
+        }
+        .glass-thick {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(28px);
+            -webkit-backdrop-filter: blur(28px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+        }
+        .neon-route-glow {
+            filter: drop-shadow(0 0 8px rgba(77, 158, 250, 0.8));
+        }
+        body {
+            background-color: #f9f9ff;
+            overflow: hidden;
+        }
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(135, 49, 163, 0.2);
+            border-radius: 10px;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "outline": "#817381",
+                      "on-primary-fixed-variant": "#72188f",
+                      "card-gradient": "linear-gradient(135deg, #4D9EFA 0%, #BF7DF5 100%)",
+                      "on-tertiary-fixed-variant": "#00531a",
+                      "surface-bright": "#f9f9ff",
+                      "primary-fixed-dim": "#f0b0ff",
+                      "on-background": "#471A70",
+                      "primary-container": "#a34cbe",
+                      "tertiary-fixed": "#6cff82",
+                      "secondary-container": "#54a3ff",
+                      "on-surface-variant": "#4f4350",
+                      "on-primary-fixed": "#330044",
+                      "on-secondary": "#ffffff",
+                      "inverse-on-surface": "#ecf1ff",
+                      "tertiary-fixed-dim": "#47e266",
+                      "outline-variant": "#d2c1d2",
+                      "surface-tint": "#8d37a9",
+                      "on-surface": "#141c29",
+                      "surface": "#f9f9ff",
+                      "on-secondary-fixed-variant": "#004883",
+                      "on-secondary-fixed": "#001c39",
+                      "on-primary": "#ffffff",
+                      "on-tertiary-container": "#e6ffe0",
+                      "gold": "#FFD60A",
+                      "on-error-container": "#93000a",
+                      "surface-container-low": "#f0f3ff",
+                      "secondary-fixed": "#d3e3ff",
+                      "error": "#FF453A",
+                      "primary": "#8731a3",
+                      "surface-container-lowest": "#ffffff",
+                      "error-container": "#ffdad6",
+                      "primary-fixed": "#fbd7ff",
+                      "on-tertiary": "#ffffff",
+                      "surface-container": "#e7eeff",
+                      "on-primary-container": "#fff5fb",
+                      "secondary": "#0060ab",
+                      "surface-variant": "#dbe3f6",
+                      "glass-thick": "rgba(255, 255, 255, 0.8)",
+                      "surface-container-highest": "#dbe3f6",
+                      "tertiary": "#006823",
+                      "inverse-surface": "#29313f",
+                      "surface-container-high": "#e0e8fb",
+                      "orange": "#FF9F0A",
+                      "glass-fill": "rgba(255, 255, 255, 0.35)",
+                      "secondary-fixed-dim": "#a3c9ff",
+                      "inverse-primary": "#f0b0ff",
+                      "on-error": "#ffffff",
+                      "tertiary-container": "#00842f",
+                      "surface-dim": "#d2daed",
+                      "on-tertiary-fixed": "#002106",
+                      "background": "#f9f9ff",
+                      "on-secondary-container": "#003868",
+                      "glass-border": "rgba(255, 255, 255, 0.6)"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "mobile-gutter": "16px",
+                      "desktop-margin": "64px",
+                      "desktop-gutter": "24px",
+                      "mobile-margin": "20px",
+                      "safe-bottom": "34px",
+                      "base": "8px",
+                      "safe-top": "44px",
+                      "max-width": "1280px"
+              },
+              "fontFamily": {
+                      "headline-lg": ["Inter"],
+                      "display-xl": ["Inter"],
+                      "headline-lg-mobile": ["Inter"],
+                      "label-caps-mobile": ["Inter"],
+                      "label-caps": ["Inter"],
+                      "display-xl-mobile": ["Inter"],
+                      "body-md-mobile": ["Inter"],
+                      "body-md": ["Inter"]
+              },
+              "fontSize": {
+                      "headline-lg": ["34px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                      "display-xl": ["56px", {"lineHeight": "1.1", "letterSpacing": "-0.03em", "fontWeight": "700"}],
+                      "headline-lg-mobile": ["28px", {"lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                      "label-caps-mobile": ["12px", {"lineHeight": "1.0", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                      "label-caps": ["13px", {"lineHeight": "1.0", "letterSpacing": "0.03em", "fontWeight": "600"}],
+                      "display-xl-mobile": ["34px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                      "body-md-mobile": ["15px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                      "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}]
+              }
+            },
+          },
+        }
+    </script>
+</head>
+<body class="font-body-md text-on-surface">
+<!-- TopNavBar -->
+<nav class="fixed top-0 left-0 w-full z-50 flex items-center justify-between px-desktop-margin h-20 bg-glass-thick backdrop-blur-[28px] border-b border-glass-border shadow-sm">
+<div class="flex items-center gap-8">
+<span class="font-headline-lg text-headline-lg font-bold text-primary tracking-tight">STU-18 Dashboard</span>
+<div class="hidden md:flex items-center gap-6">
+<a class="text-on-surface-variant hover:text-primary transition-colors font-body-md text-body-md" href="#">Fleet</a>
+<a class="text-primary border-b-2 border-primary font-bold pb-1 font-body-md text-body-md" href="#">Routes</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-body-md text-body-md" href="#">Telemetry</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-body-md text-body-md" href="#">Analytics</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative group">
+<button class="p-2 rounded-full hover:bg-glass-fill transition-all duration-300">
+<span class="material-symbols-outlined text-primary">notifications</span>
+</button>
+</div>
+<button class="p-2 rounded-full hover:bg-glass-fill transition-all duration-300">
+<span class="material-symbols-outlined text-primary">settings</span>
+</button>
+<div class="w-10 h-10 rounded-full overflow-hidden border-2 border-primary-container">
+<img alt="User profile" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDkniBqVZGVesukIoiTofjRrSAbB07xSVEXiOd-LFT1-_9Dei4a4INMigydmFwZ8IdPCZLERZYOFiZtPDPi4x_85jXpaoLZDnViFscz8yQ4AYOLqnzHtqaaBrjDkTKWQawsRcMPn0AU51XXVDFcoV-3JwmQt333YXzulBUaiXTcV-_NFFdzEmCfWZ7JDVvs1akGTPZZpBEskBzePjmZmxHI37ne2Ax9-Ncf57n3OAvLFcew53ZMPkegtauGPwhGhoFxVmEU2D-wdKo5"/>
+</div>
+</div>
+</nav>
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-20 bottom-0 w-72 bg-glass-fill backdrop-blur-[28px] border-r border-glass-border shadow-lg flex flex-col p-6 space-y-4 z-40">
+<div class="mb-6">
+<div class="flex items-center gap-3 mb-1">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">terminal</span>
+<h3 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface">Navigation</h3>
+</div>
+<p class="font-label-caps text-label-caps text-on-surface-variant">Active Route: Alpha-9</p>
+</div>
+<nav class="flex-1 space-y-2">
+<a class="flex items-center gap-3 bg-primary-container text-on-primary-container rounded-xl p-4 shadow-md transition-all" href="#">
+<span class="material-symbols-outlined">navigation</span>
+<span class="font-label-caps text-label-caps">Live View</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant p-4 hover:bg-glass-thick rounded-xl transition-all hover:translate-x-1" href="#">
+<span class="material-symbols-outlined">history</span>
+<span class="font-label-caps text-label-caps">History</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant p-4 hover:bg-glass-thick rounded-xl transition-all hover:translate-x-1" href="#">
+<span class="material-symbols-outlined">local_shipping</span>
+<span class="font-label-caps text-label-caps">Fleet Map</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant p-4 hover:bg-glass-thick rounded-xl transition-all hover:translate-x-1" href="#">
+<span class="material-symbols-outlined">security</span>
+<span class="font-label-caps text-label-caps">Safety</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant p-4 hover:bg-glass-thick rounded-xl transition-all hover:translate-x-1" href="#">
+<span class="material-symbols-outlined">assessment</span>
+<span class="font-label-caps text-label-caps">Reports</span>
+</a>
+</nav>
+<button class="w-full py-4 bg-primary text-on-primary rounded-full font-bold shadow-lg hover:scale-105 active:scale-95 transition-all duration-300">
+            New Dispatch
+        </button>
+</aside>
+<!-- Main Content Area -->
+<main class="ml-72 pt-20 h-screen w-[calc(100%-288px)] flex">
+<!-- Left: Navigation Instructions -->
+<section class="w-1/3 h-full p-8 flex flex-col gap-6 overflow-y-auto z-10 bg-surface/50 backdrop-blur-md">
+<!-- Route Status Card -->
+<div class="glass-card rounded-[2rem] p-6 flex flex-col gap-4">
+<div class="flex justify-between items-start">
+<div>
+<h2 class="text-on-background font-headline-lg-mobile text-headline-lg-mobile font-bold">Tech District</h2>
+<p class="text-on-surface-variant font-body-md text-body-md">Optimized Path Alpha-9</p>
+</div>
+<div class="bg-primary/10 px-3 py-1 rounded-full border border-primary/20">
+<span class="text-primary font-label-caps text-label-caps">ACTIVE</span>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-4 mt-2">
+<div class="flex flex-col">
+<span class="text-on-surface-variant font-label-caps text-label-caps uppercase opacity-60">ETA</span>
+<span class="text-on-background font-headline-lg-mobile text-headline-lg-mobile font-extrabold">18<span class="text-body-md font-medium ml-1">mins</span></span>
+</div>
+<div class="flex flex-col">
+<span class="text-on-surface-variant font-label-caps text-label-caps uppercase opacity-60">Distance</span>
+<span class="text-on-background font-headline-lg-mobile text-headline-lg-mobile font-extrabold">5.4<span class="text-body-md font-medium ml-1">km</span></span>
+</div>
+</div>
+</div>
+<!-- Step by Step Instructions -->
+<div class="space-y-4">
+<div class="glass-thick rounded-3xl p-5 border-l-4 border-primary flex items-center gap-4 hover:scale-[1.02] transition-transform cursor-pointer">
+<div class="w-12 h-12 rounded-2xl bg-primary flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-3xl">turn_right</span>
+</div>
+<div class="flex-1">
+<p class="text-on-background font-bold text-body-md">Turn right onto Tech Park Drive</p>
+<p class="text-on-surface-variant text-sm">in 250m</p>
+</div>
+</div>
+<div class="glass-card rounded-3xl p-5 flex items-center gap-4 opacity-80 hover:opacity-100 hover:scale-[1.02] transition-all cursor-pointer">
+<div class="w-12 h-12 rounded-2xl bg-secondary flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-3xl">straight</span>
+</div>
+<div class="flex-1">
+<p class="text-on-background font-bold text-body-md">Continue straight for 1.2 km</p>
+<p class="text-on-surface-variant text-sm">Passing Central Station</p>
+</div>
+</div>
+<div class="glass-card rounded-3xl p-5 flex items-center gap-4 opacity-60 hover:opacity-100 hover:scale-[1.02] transition-all cursor-pointer">
+<div class="w-12 h-12 rounded-2xl bg-on-surface-variant/20 flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined text-3xl">turn_left</span>
+</div>
+<div class="flex-1">
+<p class="text-on-background font-bold text-body-md">Left turn onto Innovation Blvd</p>
+<p class="text-on-surface-variant text-sm">Estimated in 4 mins</p>
+</div>
+</div>
+<div class="glass-card rounded-3xl p-5 flex items-center gap-4 opacity-40 hover:opacity-100 hover:scale-[1.02] transition-all cursor-pointer">
+<div class="w-12 h-12 rounded-2xl bg-on-surface-variant/20 flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined text-3xl">directions_run</span>
+</div>
+<div class="flex-1">
+<p class="text-on-background font-bold text-body-md">Arrive at STU-18 Hub</p>
+<p class="text-on-surface-variant text-sm">Destination on left</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Right: Immersive Map HUD -->
+<section class="flex-1 relative overflow-hidden bg-surface-container">
+<!-- Map Background Placeholder -->
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-[10s] hover:scale-110" data-alt="A cinematic, high-angle aerial view of a futuristic smart city tech district at dusk. The architecture is characterized by sleek glass skyscrapers and glowing bioluminescent green spaces. A vibrant neon blue laser-like line carves a route path through the complex grid of streets, creating a high-contrast futuristic navigation aesthetic. The lighting is moody with purple and blue atmospheric hazes, conveying a sense of advanced urban telemetry." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDsW0WqrgaqJJm6FN9xty5ZgWmdoINxC_xvFqoitRKPlPK4mwWGM-3gZDTnTYAuU77OZ_q5duIc8_FDdzoOzgfIvjyyIzPO38E9QzatBsVIMPPxYG04WYiO_cE68bmhQdDhbfY87ZSu-uKAK-dVD4WdSlFA9DbgS7FXic_i2nOvQZmJhED0MWGW8JgfN0An6iyBt6lfvluKNm_fFKovqOgkecmuG8_yODYAcbU3iD9oFaXn4On2VEaghbhIgaGLyJBMchmXyLxXWIym');">
+<!-- Map Overlay: Neon Route (SVG simulation) -->
+<svg class="absolute inset-0 w-full h-full pointer-events-none" viewbox="0 0 1000 1000">
+<path class="neon-route-glow animate-pulse" d="M 200,800 L 400,600 L 450,400 L 700,350 L 850,150" fill="none" stroke="#4D9EFA" stroke-linecap="round" stroke-width="8" style="stroke-dasharray: 2000; stroke-dashoffset: 2000; animation: dash 10s linear infinite;">
+<animate attributename="stroke-dashoffset" dur="10s" from="2000" repeatcount="indefinite" to="0"></animate>
+</path>
+<!-- Current Position Marker -->
+<circle class="animate-ping" cx="200" cy="800" fill="#4D9EFA" opacity="0.6" r="12"></circle>
+<circle cx="200" cy="800" fill="#4D9EFA" r="6"></circle>
+</svg>
+</div>
+<!-- HUD Overlay: Top Right -->
+<div class="absolute top-8 right-8 flex flex-col gap-4">
+<div class="glass-thick rounded-2xl px-6 py-4 flex items-center gap-4 shadow-xl border border-white/60">
+<div class="flex items-center justify-center w-10 h-10 rounded-full bg-tertiary-container/20">
+<span class="material-symbols-outlined text-tertiary">traffic</span>
+</div>
+<div>
+<p class="text-on-surface-variant font-label-caps text-label-caps">Live Traffic</p>
+<p class="text-on-background font-bold text-body-md">Normal Flow</p>
+</div>
+</div>
+<div class="glass-thick rounded-2xl px-6 py-4 flex items-center gap-4 shadow-xl border border-white/60">
+<div class="flex items-center justify-center w-10 h-10 rounded-full bg-secondary-container/20">
+<span class="material-symbols-outlined text-secondary">person_search</span>
+</div>
+<div>
+<p class="text-on-surface-variant font-label-caps text-label-caps">Nearby Candidates</p>
+<p class="text-on-background font-bold text-body-md">4 Active</p>
+</div>
+</div>
+</div>
+<!-- HUD Overlay: Bottom Center Telemetry -->
+<div class="absolute bottom-8 left-1/2 -translate-x-1/2 w-4/5 max-w-2xl">
+<div class="glass-card rounded-full px-12 py-6 flex items-center justify-between shadow-2xl border border-white/60">
+<div class="text-center">
+<p class="text-on-surface-variant font-label-caps text-label-caps uppercase mb-1">Signal</p>
+<div class="flex gap-1 justify-center">
+<div class="w-1.5 h-3 bg-primary rounded-full"></div>
+<div class="w-1.5 h-4 bg-primary rounded-full"></div>
+<div class="w-1.5 h-5 bg-primary rounded-full"></div>
+<div class="w-1.5 h-6 bg-primary rounded-full"></div>
+</div>
+</div>
+<div class="h-10 w-[1px] bg-white/30"></div>
+<div class="text-center">
+<p class="text-on-surface-variant font-label-caps text-label-caps uppercase mb-1">Battery</p>
+<div class="flex items-center gap-2">
+<span class="text-on-background font-bold">88%</span>
+<span class="material-symbols-outlined text-tertiary text-lg">battery_charging_full</span>
+</div>
+</div>
+<div class="h-10 w-[1px] bg-white/30"></div>
+<div class="text-center">
+<p class="text-on-surface-variant font-label-caps text-label-caps uppercase mb-1">Speed</p>
+<span class="text-on-background font-bold text-xl">42<span class="text-sm font-normal ml-1">km/h</span></span>
+</div>
+<div class="h-10 w-[1px] bg-white/30"></div>
+<div class="flex items-center gap-3 bg-primary rounded-full px-6 py-2 text-white cursor-pointer hover:bg-on-primary-fixed-variant transition-colors">
+<span class="material-symbols-outlined">center_focus_strong</span>
+<span class="font-label-caps text-label-caps">Recenter</span>
+</div>
+</div>
+</div>
+<!-- Map Interactive Elements -->
+<div class="absolute inset-0 pointer-events-none">
+<!-- Floating Labels on Map -->
+<div class="absolute top-[40%] left-[45%] glass-thick rounded-xl px-3 py-1 shadow-md pointer-events-auto cursor-help border border-white/40">
+<span class="text-xs font-bold text-on-surface">Tech Hub Alpha</span>
+</div>
+<div class="absolute top-[60%] left-[25%] glass-thick rounded-xl px-3 py-1 shadow-md pointer-events-auto cursor-help border border-white/40">
+<span class="text-xs font-bold text-on-surface">Central Grid</span>
+</div>
+</div>
+</section>
+</main>
+<!-- Micro-interaction Scripts -->
+<script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const cards = document.querySelectorAll('.glass-card, .glass-thick');
+            
+            cards.forEach(card => {
+                card.addEventListener('mousedown', () => {
+                    card.style.transform = 'scale(0.96)';
+                });
+                card.addEventListener('mouseup', () => {
+                    card.style.transform = 'scale(1)';
+                });
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = 'scale(1)';
+                });
+            });
+
+            // Smooth entrance animation
+            const main = document.querySelector('main');
+            main.style.opacity = '0';
+            main.style.transform = 'translateY(20px)';
+            main.style.transition = 'all 0.8s cubic-bezier(0.16, 1, 0.3, 1)';
+            
+            setTimeout(() => {
+                main.style.opacity = '1';
+                main.style.transform = 'translateY(0)';
+            }, 100);
+        });
+    </script>
+</body></html>

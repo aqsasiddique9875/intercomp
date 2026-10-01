@@ -1,0 +1,1077 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
+<title>JobPath - Student Profile</title>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Theme Configuration -->
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "on-secondary": "#ffffff",
+            "glass-border": "rgba(255, 255, 255, 0.6)",
+            "primary-fixed": "#fbd7ff",
+            "on-tertiary-fixed": "#002106",
+            "tertiary-container": "#00842f",
+            "primary": "#8731a3",
+            "on-tertiary": "#ffffff",
+            "background": "#f9f9ff",
+            "on-error": "#ffffff",
+            "on-primary-container": "#fff5fb",
+            "secondary-fixed-dim": "#a3c9ff",
+            "outline": "#817381",
+            "secondary-fixed": "#d3e3ff",
+            "primary-container": "#a34cbe",
+            "on-secondary-container": "#003868",
+            "orange": "#FF9F0A",
+            "card-gradient": "linear-gradient(135deg, #4D9EFA 0%, #BF7DF5 100%)",
+            "primary-fixed-dim": "#f0b0ff",
+            "error": "#FF453A",
+            "on-tertiary-container": "#e6ffe0",
+            "surface-dim": "#d2daed",
+            "glass-thick": "rgba(255, 255, 255, 0.8)",
+            "on-tertiary-fixed-variant": "#00531a",
+            "tertiary": "#006823",
+            "surface-container-high": "#e0e8fb",
+            "inverse-surface": "#29313f",
+            "secondary": "#0060ab",
+            "on-error-container": "#93000a",
+            "on-background": "#471A70",
+            "surface-container-lowest": "#ffffff",
+            "surface-container-highest": "#dbe3f6",
+            "inverse-primary": "#f0b0ff",
+            "tertiary-fixed": "#6cff82",
+            "surface-container": "#e7eeff",
+            "on-primary-fixed-variant": "#72188f",
+            "inverse-on-surface": "#ecf1ff",
+            "surface-bright": "#f9f9ff",
+            "tertiary-fixed-dim": "#47e266",
+            "surface-tint": "#8d37a9",
+            "glass-fill": "rgba(255, 255, 255, 0.35)",
+            "secondary-container": "#54a3ff",
+            "error-container": "#ffdad6",
+            "on-secondary-fixed": "#001c39",
+            "outline-variant": "#d2c1d2",
+            "on-surface": "#141c29",
+            "surface": "#f9f9ff",
+            "surface-variant": "#dbe3f6",
+            "on-primary-fixed": "#330044",
+            "on-surface-variant": "#4f4350",
+            "on-secondary-fixed-variant": "#004883",
+            "surface-container-low": "#f0f3ff",
+            "on-primary": "#ffffff",
+            "gold": "#FFD60A"
+          },
+          "spacing": {
+            "base": "8px",
+            "mobile-gutter": "16px",
+            "max-width": "1280px",
+            "safe-bottom": "34px",
+            "safe-top": "44px",
+            "desktop-gutter": "24px",
+            "desktop-margin": "64px",
+            "mobile-margin": "20px"
+          },
+          "fontFamily": {
+            "headline-lg": ["Inter", "sans-serif"],
+            "label-caps": ["Inter", "sans-serif"],
+            "label-caps-mobile": ["Inter", "sans-serif"],
+            "headline-lg-mobile": ["Inter", "sans-serif"],
+            "body-md": ["Inter", "sans-serif"],
+            "display-xl": ["Inter", "sans-serif"],
+            "display-xl-mobile": ["Inter", "sans-serif"],
+            "body-md-mobile": ["Inter", "sans-serif"]
+          },
+          "fontSize": {
+            "headline-lg": ["34px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+            "label-caps": ["13px", {"lineHeight": "1.0", "letterSpacing": "0.03em", "fontWeight": "600"}],
+            "label-caps-mobile": ["12px", {"lineHeight": "1.0", "letterSpacing": "0.05em", "fontWeight": "600"}],
+            "headline-lg-mobile": ["28px", {"lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+            "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+            "display-xl": ["56px", {"lineHeight": "1.1", "letterSpacing": "-0.03em", "fontWeight": "700"}],
+            "display-xl-mobile": ["34px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+            "body-md-mobile": ["15px", {"lineHeight": "1.5", "fontWeight": "400"}]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    body {
+      background-color: #DCE4F7;
+      overflow-x: hidden;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .glass-card {
+      background: rgba(255, 255, 255, 0.35);
+      backdrop-filter: blur(28px);
+      -webkit-backdrop-filter: blur(28px);
+      border: 1px solid rgba(255, 255, 255, 0.6);
+      box-shadow: 0 12px 40px 0 rgba(71, 26, 112, 0.15);
+    }
+
+    .glass-tab {
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .active-tab {
+      background: rgba(255, 255, 255, 0.6);
+      box-shadow: 0 4px 12px rgba(71, 26, 112, 0.1);
+    }
+
+    .animated-bg-sphere {
+      position: fixed;
+      width: 400px;
+      height: 400px;
+      border-radius: 50%;
+      filter: blur(80px);
+      z-index: -1;
+      opacity: 0.6;
+      animation: float 20s infinite ease-in-out;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      33% { transform: translate(100px, -50px) scale(1.1); }
+      66% { transform: translate(-50px, 100px) scale(0.9); }
+    }
+
+    .spring-press {
+      transition: transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    .spring-press:active {
+      transform: scale(0.96);
+    }
+
+    .custom-scroll::-webkit-scrollbar {
+      display: none;
+    }
+  </style>
+</head>
+<body class="font-body-md-mobile text-on-background selection:bg-primary-fixed selection:text-on-primary-fixed">
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const hours = new Date().getHours();
+        let greeting = "Hello, Studentone!";
+        if (hours < 12) greeting = "Good Morning, Studentone!";
+        else if (hours < 18) greeting = "Good Afternoon, Studentone!";
+        else greeting = "Good Evening, Studentone!";
+        document.getElementById('greeting-text').textContent = greeting;
+    });
+</script>
+<!-- Animated Spheres -->
+<div class="animated-bg-sphere bg-primary-container" style="top: -100px; left: -100px; animation-delay: 0s;"></div>
+<div class="animated-bg-sphere bg-secondary-container" style="bottom: -150px; right: -50px; animation-delay: -5s;"></div>
+<div class="animated-bg-sphere bg-tertiary-fixed-dim" style="top: 40%; left: 60%; width: 300px; height: 300px; animation-delay: -10s;"></div>
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-glass-fill backdrop-blur-xl border-b border-glass-border shadow-sm flex items-center justify-center h-16 shrink-0">
+<div class="max-w-6xl w-full flex items-center justify-between px-5">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full overflow-hidden border-2 border-primary p-0.5">
+<img alt="User Avatar" class="w-full h-full rounded-full object-cover" src="https://lh3.googleusercontent.com/aida/AP1WRLso_htihnJ33V7q5zYbt8u-NfoB3ZJISVs-vTicj-4qC5ECtS5f1-4w6YV4027sl6FECnMGNFL4Eze2hGxzE5ViYe1GBC8aDxIr22IBxwvOTBnY5DdP0lr1Mr2oLjdLDQEY0cdp3BV6_eqpLSJsYhE7rCzOhJ8HUy0EsOj0u-xBNtknhbc6cEOMP7n10QkRNTVn5eQUKTTbb4EwqYmkzCf2khW3fWkeIqVSOMA4d6uGGMlKakT_BMt5YDQ"/>
+</div>
+<h1 id="greeting-text" class="text-sm font-bold text-[#471A70]">Hello, Studentone!</h1>
+</div>
+<div class="flex items-center gap-3">
+<button class="w-10 h-10 rounded-full bg-white/40 border border-white/60 flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-primary text-[22px]">notifications</span>
+</button>
+<button class="w-10 h-10 rounded-full bg-white/40 border border-white/60 flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-primary text-[22px]">settings</span>
+</button>
+</div>
+</div>
+</header>
+<main class="pt-20 pb-32 px-mobile-margin space-y-6 max-w-6xl w-full mx-auto md:px-8 custom-scroll">
+<!-- Search Bar -->
+<section class="mb-6">
+  <div class="relative flex items-center glass-card rounded-full px-4 h-12">
+    <span class="material-symbols-outlined text-[#726580] mr-2">search</span>
+    <input id="profileSearchInput" class="bg-transparent border-none focus:ring-0 text-sm w-full placeholder:text-[#726580]/70 text-[#471A70]" placeholder="Search skills, documents, courses..." type="text"/>
+  </div>
+</section>
+<!-- Profile Header -->
+<section class="flex flex-col items-center text-center mb-8">
+<div class="relative mb-6">
+<div class="w-32 h-32 rounded-full glass-card p-1">
+<img alt="Alex Rivers" class="w-full h-full rounded-full object-cover" data-alt="A professional and modern headshot of a young male creative director with a warm smile, wearing a minimalist black turtleneck. The portrait is captured with shallow depth of field against a soft, sunlit studio background. The lighting is diffused and airy, matching a premium light-mode digital portfolio aesthetic with soft lavender and white tones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDSvLQs4XhwfnhGlt4XwaD5DAI3IiCdpaKVQa37e8Jf5w55P5M2bRb6DdwUyJjSPhhXgjkck9EY86A_4r7Y27I1gO8EfsmmOvSa7AmAV02IFJoa9kKlPB0flso3wZ4lfHFSk-kl_QMmptv7LIkuhDDecZ1hokOYRMse96k2Lfn4GkxpL8fQdqR4Zgve0fDKtLZQZ0f0zBUk2ODWH99er7rZIGvrlUsM0imPr5sXTSJpXGcuah_RUZleLD4P4S9Gsirzay_S64LoEb94"/>
+</div>
+<div class="absolute bottom-1 right-1 bg-tertiary-container text-on-tertiary w-8 h-8 rounded-full flex items-center justify-center border-2 border-white">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">verified</span>
+</div>
+</div>
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-on-background mb-1">Alex Rivers</h2>
+<p class="text-primary font-medium mb-1">Senior Product Design Student</p>
+<div class="flex items-center gap-1 text-outline">
+<span class="material-symbols-outlined text-[16px]">location_on</span>
+<span class="text-label-caps-mobile">San Francisco, CA</span>
+</div>
+</section>
+<!-- Stats Row -->
+<section class="grid grid-cols-3 gap-3 mb-8">
+<div class="glass-card rounded-2xl p-4 flex flex-col items-center justify-center spring-press">
+<span class="text-headline-lg-mobile font-bold text-on-background">85</span>
+<span class="text-[10px] uppercase tracking-wider text-outline font-bold">Trust Score</span>
+</div>
+<div class="glass-card rounded-2xl p-4 flex flex-col items-center justify-center spring-press">
+<span class="text-headline-lg-mobile font-bold text-on-background">12</span>
+<span class="text-[10px] uppercase tracking-wider text-outline font-bold">Applied</span>
+</div>
+<div class="glass-card rounded-2xl p-4 flex flex-col items-center justify-center spring-press" onclick="switchTab('saved')">
+<span id="analytic-saved-count" class="text-headline-lg-mobile font-bold text-on-background">0</span>
+<span class="text-[10px] uppercase tracking-wider text-outline font-bold">Saved</span>
+</div>
+</section>
+<!-- Tabbed Navigation -->
+<section class="mb-6">
+<div class="glass-tab p-1 rounded-2xl flex items-center overflow-x-auto no-scrollbar whitespace-nowrap gap-1">
+<button class="flex-shrink-0 px-4 py-2 rounded-xl text-label-caps-mobile font-bold text-outline transition-all duration-300" id="tab-stats" onclick="switchTab('stats')">Analytics</button>
+<button class="flex-shrink-0 px-4 py-2 rounded-xl text-label-caps-mobile font-bold active-tab text-primary transition-all duration-300" id="tab-skills" onclick="switchTab('skills')">Skills</button>
+<button class="flex-shrink-0 px-4 py-2 rounded-xl text-label-caps-mobile font-bold text-outline transition-all duration-300" id="tab-documents" onclick="switchTab('documents')">Documents</button>
+<button class="flex-shrink-0 px-4 py-2 rounded-xl text-label-caps-mobile font-bold text-outline transition-all duration-300" id="tab-courses" onclick="switchTab('courses')">Courses</button>
+<button class="flex-shrink-0 px-4 py-2 rounded-xl text-label-caps-mobile font-bold text-outline transition-all duration-300" id="tab-saved" onclick="switchTab('saved')">Saved</button>
+</div>
+</section>
+<!-- Content Area: Skills Tab -->
+<section class="grid grid-cols-2 gap-4" id="content-skills">
+<!-- Skill Badge 1 -->
+<div class="glass-card rounded-2xl p-4 flex flex-col items-center gap-3 spring-press group">
+<div class="w-12 h-12 flex items-center justify-center rounded-xl bg-primary-container/10">
+<img alt="Design Icon" class="w-10 h-10 object-contain" src="https://lh3.googleusercontent.com/aida/AP1WRLtpXp5mWvxViaRIKiOffUlKkPsoRIJERiE0pwYYr0E7g5P6UpLM3SeVJ7Wv0bR9JCsvvrZp7mrp3nHQG2W95pT-vgFRFiMgWo79UFZ2pO9mGuBoY4myNtK_1xYoPFWKPt86OmB91HKlQpSZ1Qneqm_b-S7Fbm-s71ixmnS9fngXtRsk4F4pCbyw_tIqIYjU_zdHxO7b_ylNWONBrmKFUpudqQY5PnYpV4YQ7ItSP7mG-H0nYo74ht_hfO6s" style="filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1));"/>
+</div>
+<div class="text-center">
+<p class="font-bold text-on-background text-sm">UI/UX Design</p>
+<div class="flex items-center justify-center gap-1 mt-1">
+<span class="material-symbols-outlined text-tertiary text-[14px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="text-[10px] text-tertiary font-bold uppercase">Verified</span>
+</div>
+</div>
+</div>
+<!-- Skill Badge 2 -->
+<div class="glass-card rounded-2xl p-4 flex flex-col items-center gap-3 spring-press">
+<div class="w-12 h-12 flex items-center justify-center rounded-xl bg-secondary-container/10">
+<span class="material-symbols-outlined text-secondary text-3xl">layers</span>
+</div>
+<div class="text-center">
+<p class="font-bold text-on-background text-sm">Prototyping</p>
+<div class="flex items-center justify-center gap-1 mt-1">
+<span class="material-symbols-outlined text-tertiary text-[14px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="text-[10px] text-tertiary font-bold uppercase">Verified</span>
+</div>
+</div>
+</div>
+<!-- Skill Badge 3 -->
+<div class="glass-card rounded-2xl p-4 flex flex-col items-center gap-3 spring-press">
+<div class="w-12 h-12 flex items-center justify-center rounded-xl bg-tertiary-container/10">
+<span class="material-symbols-outlined text-tertiary text-3xl">query_stats</span>
+</div>
+<div class="text-center">
+<p class="font-bold text-on-background text-sm">Research</p>
+<div class="flex items-center justify-center gap-1 mt-1">
+<span class="material-symbols-outlined text-tertiary text-[14px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="text-[10px] text-tertiary font-bold uppercase">Verified</span>
+</div>
+</div>
+</div>
+<!-- Skill Badge 4 -->
+<div class="glass-card rounded-2xl p-4 flex flex-col items-center gap-3 spring-press">
+<div class="w-12 h-12 flex items-center justify-center rounded-xl bg-orange/10">
+<span class="material-symbols-outlined text-orange text-3xl">code</span>
+</div>
+<div class="text-center">
+<p class="font-bold text-on-background text-sm">Frontend</p>
+<div class="flex items-center justify-center gap-1 mt-1">
+<span class="material-symbols-outlined text-tertiary text-[14px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="text-[10px] text-tertiary font-bold uppercase">Verified</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Content Area: Documents Tab (Hidden Initially) -->
+<section class="hidden flex flex-col gap-3" id="content-documents">
+<div class="glass-card p-4 rounded-2xl flex items-center justify-between spring-press">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-error/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-error">picture_as_pdf</span>
+</div>
+<div>
+<p class="font-bold text-on-background">Resume.pdf</p>
+<p class="text-xs text-outline">Uploaded Sep 12, 2023</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline">download</span>
+</div>
+<div class="glass-card p-4 rounded-2xl flex items-center justify-between spring-press">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-secondary/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-secondary">link</span>
+</div>
+<div>
+<p class="font-bold text-on-background">Portfolio_Link</p>
+<p class="text-xs text-outline">alexrivers.design</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline">open_in_new</span>
+</div>
+<div class="glass-card p-4 rounded-2xl flex items-center justify-between spring-press">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-gold/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-gold">verified_user</span>
+</div>
+<div>
+<p class="font-bold text-on-background">Certification.jpg</p>
+<p class="text-xs text-outline">Google UX Certificate</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline">visibility</span>
+</div>
+</section>
+<!-- Content Area: Courses Tab (Hidden Initially) -->
+<section class="hidden flex flex-col gap-3" id="content-courses">
+</section>
+<!-- Content Area: Saved Tab (Hidden Initially) -->
+<section class="hidden flex flex-col gap-4 text-left" id="content-saved">
+</section>
+<!-- Stats/Analytics Tab Content -->
+<section class="hidden flex flex-col gap-4" id="content-stats">
+  
+  <!-- 2x2 Metrics Grid -->
+  <div class="grid grid-cols-2 gap-3">
+    <!-- Avg Test Score -->
+    <div class="glass-card rounded-2xl p-4 flex flex-col justify-between h-28 text-left relative">
+      <div class="flex justify-between items-start">
+        <span class="material-symbols-outlined text-primary text-[20px]">assignment</span>
+        <span class="text-[10px] font-bold text-green-600 bg-green-50 px-1.5 py-0.5 rounded-full flex items-center gap-0.5">
+          <span class="material-symbols-outlined text-[10px]">trending_up</span>+2.5%
+        </span>
+      </div>
+      <div>
+        <p class="text-[10px] uppercase tracking-wider text-outline font-bold">Avg. Test Score</p>
+        <p class="text-xl font-extrabold text-[#471A70] mt-0.5">94%</p>
+      </div>
+    </div>
+    
+    <!-- Course Completion -->
+    <div class="glass-card rounded-2xl p-4 flex flex-col justify-between h-28 text-left">
+      <div class="flex justify-between items-start">
+        <span class="material-symbols-outlined text-primary text-[20px]">menu_book</span>
+        <span class="text-[9px] font-bold text-primary bg-primary/10 px-2 py-0.5 rounded-full">Active Study</span>
+      </div>
+      <div>
+        <p class="text-[10px] uppercase tracking-wider text-outline font-bold">Course Completion</p>
+        <p class="text-xl font-extrabold text-[#471A70] mt-0.5">54%</p>
+      </div>
+    </div>
+
+    <!-- Assignment Grade -->
+    <div class="glass-card rounded-2xl p-4 flex flex-col justify-between h-28 text-left">
+      <div class="flex justify-between items-start">
+        <span class="material-symbols-outlined text-green-600 text-[20px]">check_box</span>
+        <span class="text-[9px] font-bold text-green-600 bg-green-50 px-2 py-0.5 rounded-full">10 Graded</span>
+      </div>
+      <div>
+        <p class="text-[10px] uppercase tracking-wider text-outline font-bold">Assignment Grade</p>
+        <p class="text-xl font-extrabold text-[#471A70] mt-0.5">A</p>
+      </div>
+    </div>
+
+    <!-- Weekly Streak -->
+    <div class="glass-card rounded-2xl p-4 flex flex-col justify-between h-28 text-left">
+      <div class="flex justify-between items-start">
+        <span class="material-symbols-outlined text-orange-500 text-[20px]" style="font-variation-settings: 'FILL' 1;">local_fire_department</span>
+        <span class="text-[9px] font-bold text-orange-600 bg-orange-50 px-2 py-0.5 rounded-full">Active Streak</span>
+      </div>
+      <div>
+        <p class="text-[10px] uppercase tracking-wider text-outline font-bold">Weekly Streak</p>
+        <p class="text-xl font-extrabold text-[#471A70] mt-0.5" id="analytic-streak-val">5 Days</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Learning Lifecycle (CSS Funnel Chart) -->
+  <div class="glass-card p-5 rounded-3xl space-y-4">
+    <h3 class="text-xs font-bold text-[#726580] uppercase tracking-wider text-left">Learning Lifecycle</h3>
+    <div class="flex flex-col items-center gap-1.5 py-2">
+      <!-- Level 1 -->
+      <div class="w-full bg-[#4D9EFA] text-white text-center py-2.5 rounded-xl shadow-sm font-bold text-xs relative" style="clip-path: polygon(0 0, 100% 0, 88% 100%, 12% 100%);">
+        COURSES ENROLLED: <span id="analytic-courses-count">4</span>
+      </div>
+      <!-- Level 2 -->
+      <div class="w-[88%] bg-[#8731a3] text-white text-center py-2.5 rounded-xl shadow-sm font-bold text-xs" style="clip-path: polygon(0 0, 100% 0, 85% 100%, 15% 100%);">
+        CHAPTERS COMPLETED: 13
+      </div>
+      <!-- Level 3 -->
+      <div class="w-[75%] bg-[#BF7DF5] text-white text-center py-2.5 rounded-xl shadow-sm font-bold text-xs" style="clip-path: polygon(0 0, 100% 0, 80% 100%, 20% 100%);">
+        PRACTICE TESTS PASSED: 15
+      </div>
+      <!-- Level 4 -->
+      <div class="w-[60%] bg-white/40 border border-white/60 text-[#471A70] text-center py-2 rounded-xl shadow-sm font-bold text-[10px]">
+        CERTIFICATES EARNED: 3
+      </div>
+    </div>
+    <div class="flex justify-between items-center text-[10px] text-outline font-medium">
+      <span>DATA UPDATED JUST NOW</span>
+      <button onclick="parent.App ? parent.App.navigate('student-dash') : (window.location.hash = '#/student/dashboard')" class="text-primary font-bold">Back to Dashboard</button>
+    </div>
+  </div>
+
+  <!-- Weekly Study Hours & Top Acquired Skills -->
+  <div class="space-y-4">
+    <!-- Weekly Study Hours (Bar Chart) -->
+    <div class="glass-card p-5 rounded-3xl space-y-4">
+      <h3 class="text-xs font-bold text-[#726580] uppercase tracking-wider text-left">Weekly Study Hours</h3>
+      <div class="h-32 flex items-end justify-between gap-2 px-1">
+        <div class="flex flex-col items-center gap-1 flex-1">
+          <div class="w-full bg-[#4D9EFA]/40 rounded-t-md h-12"></div>
+          <span class="text-[9px] text-[#726580] font-bold">M</span>
+        </div>
+        <div class="flex flex-col items-center gap-1 flex-1">
+          <div class="w-full bg-[#4D9EFA]/40 rounded-t-md h-24"></div>
+          <span class="text-[9px] text-[#726580] font-bold">T</span>
+        </div>
+        <div class="flex flex-col items-center gap-1 flex-1">
+          <div class="w-full bg-[#4D9EFA]/40 rounded-t-md h-16"></div>
+          <span class="text-[9px] text-[#726580] font-bold">W</span>
+        </div>
+        <div class="flex flex-col items-center gap-1 flex-1">
+          <div class="w-full bg-[#4D9EFA]/40 rounded-t-md h-28"></div>
+          <span class="text-[9px] text-[#726580] font-bold">T</span>
+        </div>
+        <div class="flex flex-col items-center gap-1 flex-1">
+          <div class="w-full bg-[#8731a3] rounded-t-md h-20 shadow-md"></div>
+          <span class="text-[9px] text-[#8731a3] font-bold">F</span>
+        </div>
+        <div class="flex flex-col items-center gap-1 flex-1">
+          <div class="w-full bg-[#4D9EFA]/40 rounded-t-md h-8"></div>
+          <span class="text-[9px] text-[#726580] font-bold">S</span>
+        </div>
+        <div class="flex flex-col items-center gap-1 flex-1">
+          <div class="w-full bg-[#4D9EFA]/40 rounded-t-md h-6"></div>
+          <span class="text-[9px] text-[#726580] font-bold">S</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Top Acquired Skills -->
+    <div class="glass-card p-4 rounded-2xl flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
+          <span class="material-symbols-outlined">palette</span>
+        </div>
+        <div class="text-left">
+          <h4 class="font-bold text-sm text-[#471A70]">UI/UX Design</h4>
+          <p class="text-xs text-primary font-bold">Expert (92%)</p>
+        </div>
+      </div>
+      <span class="text-[10px] font-bold text-outline uppercase tracking-wider">TOP ACQUIRED</span>
+    </div>
+
+    <!-- Next Milestone (Purple Card) -->
+    <div class="bg-[#9c42c2] text-white p-5 rounded-3xl space-y-3 shadow-lg relative overflow-hidden">
+      <div class="absolute -right-6 -bottom-6 w-24 h-24 bg-white/10 rounded-full"></div>
+      <div class="flex justify-between items-start">
+        <span class="material-symbols-outlined text-white text-2xl">workspace_premium</span>
+        <span class="text-[9px] font-bold uppercase tracking-widest bg-white/20 px-2 py-0.5 rounded-full">Next Milestone</span>
+      </div>
+      <div class="text-left">
+        <h4 class="font-extrabold text-lg">Frontend Architect</h4>
+        <p class="text-xs text-white/90 mt-1 leading-relaxed">You are only 120 XP away from earning your 'Frontend Architect' Skill Badge! Complete your next course test.</p>
+      </div>
+      <button onclick="parent.App ? parent.App.navigate('courses') : (window.location.hash = '#/student/courses')" class="w-full bg-white text-primary font-bold py-2.5 rounded-xl text-xs active:scale-95 transition-transform">
+        Go to Test Hub
+      </button>
+    </div>
+  </div>
+
+  <!-- Recent Activity Log -->
+  <div class="glass-card p-5 rounded-3xl space-y-4">
+    <div class="flex justify-between items-center">
+      <h3 class="text-xs font-bold text-[#726580] uppercase tracking-wider">Recent Activity Log</h3>
+      <span class="material-symbols-outlined text-outline text-lg">more_horiz</span>
+    </div>
+    <div class="flex items-start gap-3 text-left">
+      <div class="w-8 h-8 rounded-full bg-orange-50 flex items-center justify-center text-orange-500 shrink-0">
+        <span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">local_fire_department</span>
+      </div>
+      <div class="flex-grow">
+        <h4 class="font-bold text-xs text-[#471A70]">Daily Streak Check-in</h4>
+        <p class="text-[10px] text-outline mt-0.5">Day 5 streak checked successfully</p>
+      </div>
+      <span class="text-[10px] text-outline">10m ago</span>
+    </div>
+  </div>
+
+</section>
+</section>
+<!-- Content Area: Messages Tab (Hidden Initially, styled as full-screen overlay) -->
+<section class="hidden fixed inset-0 z-[60] bg-[#DCE4F7] pt-[90px] px-5 pb-6 overflow-y-auto" id="content-messages">
+  
+  <!-- Atmospheric Spheres for Inbox Overlay -->
+  <div class="animated-bg-sphere bg-primary-container" style="top: -100px; left: -100px; animation-delay: 0s; z-index: -1;"></div>
+  <div class="animated-bg-sphere bg-secondary-container" style="bottom: -150px; right: -50px; animation-delay: -5s; z-index: -1;"></div>
+
+  <!-- Chat List View -->
+  <div id="chat-list-view" class="space-y-4">
+    <div class="flex items-center gap-3 mb-2">
+      <button onclick="closeInboxModal()" class="w-9 h-9 rounded-full bg-white/40 border border-white/60 flex items-center justify-center shadow-sm active:scale-90 transition-transform">
+        <span class="material-symbols-outlined text-primary text-[20px]">arrow_back</span>
+      </button>
+      <h3 class="font-extrabold text-[#471A70] text-lg">Student Inbox</h3>
+    </div>
+    <div class="relative flex items-center glass-card rounded-full px-4 h-11">
+      <span class="material-symbols-outlined text-outline text-[18px] mr-2">search</span>
+      <input id="chatSearchInput" class="bg-transparent border-none focus:ring-0 text-xs w-full placeholder:text-outline/60 text-on-background" placeholder="Search chats..." type="text" oninput="filterChats(this.value)"/>
+    </div>
+    <div id="chat-items-container" class="space-y-3">
+      <!-- Chat items will be injected by JS -->
+    </div>
+  </div>
+
+  <!-- Chat Thread View (Hidden Initially) -->
+  <div id="chat-thread-view" class="hidden flex flex-col h-[calc(100vh-120px)] glass-card rounded-3xl overflow-hidden relative">
+    <!-- Thread Header -->
+    <div class="p-4 border-b border-white/50 bg-white/25 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <button onclick="closeChatThread()" class="w-8 h-8 rounded-full bg-white/40 flex items-center justify-center shadow-sm active:scale-90 transition-transform">
+          <span class="material-symbols-outlined text-primary text-[20px]">arrow_back</span>
+        </button>
+        <div class="relative">
+          <div class="w-9 h-9 rounded-full overflow-hidden" id="thread-avatar-container"></div>
+          <span class="absolute bottom-0 right-0 w-2.5 h-2.5 bg-green-500 border-2 border-white rounded-full"></span>
+        </div>
+        <div class="text-left">
+          <h4 class="font-bold text-sm text-[#471A70] leading-tight" id="thread-name">EliteRecruit HR Team</h4>
+          <p class="text-[10px] text-outline" id="thread-subtitle">Talent Acquisition</p>
+        </div>
+      </div>
+      <div class="flex items-center gap-2">
+        <button class="w-8 h-8 rounded-full bg-white/40 flex items-center justify-center text-primary shadow-sm"><span class="material-symbols-outlined text-[18px]">phone</span></button>
+        <button class="w-8 h-8 rounded-full bg-white/40 flex items-center justify-center text-primary shadow-sm"><span class="material-symbols-outlined text-[18px]">videocam</span></button>
+      </div>
+    </div>
+
+    <!-- Messages Container -->
+    <div id="thread-messages" class="flex-grow overflow-y-auto p-4 space-y-4 custom-scroll">
+      <!-- Messages injected here -->
+    </div>
+
+    <!-- Input Bar -->
+    <div class="p-3 border-t border-white/50 bg-white/25 flex items-center gap-2">
+      <button class="w-9 h-9 rounded-full bg-white/40 flex items-center justify-center text-outline shadow-sm"><span class="material-symbols-outlined text-[18px]">attach_file</span></button>
+      <input id="message-input" type="text" class="bg-white/60 border border-white/80 focus:ring-1 focus:ring-primary rounded-full px-4 h-9 text-xs w-full placeholder:text-outline/60 text-on-background" placeholder="Type your message here..." onkeypress="handleMessageKeyPress(event)"/>
+      <button onclick="sendChatMessage()" class="w-9 h-9 rounded-full bg-primary flex items-center justify-center text-white shadow-md active:scale-90 transition-transform flex-shrink-0"><span class="material-symbols-outlined text-[18px]">send</span></button>
+    </div>
+  </div>
+
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full z-50 rounded-t-xl backdrop-blur-2xl bg-glass-thick border-t border-glass-border shadow-[0_-8px_32px_0_rgba(71,21,112,0.1)] flex justify-around items-center px-4 pb-safe-bottom h-20">
+<a class="flex flex-col items-center justify-center text-outline hover:text-primary-container transition-all" href="#">
+<span class="material-symbols-outlined">explore</span>
+<span class="font-label-caps-mobile text-label-caps-mobile mt-1">Discover</span>
+</a>
+<a class="flex flex-col items-center justify-center text-outline hover:text-primary-container transition-all" href="#">
+<span class="material-symbols-outlined">assignment_turned_in</span>
+<span class="font-label-caps-mobile text-label-caps-mobile mt-1">Applied</span>
+</a>
+<a class="flex flex-col items-center justify-center text-outline hover:text-primary-container transition-all" href="#">
+<span class="material-symbols-outlined">bookmark</span>
+<span class="font-label-caps-mobile text-label-caps-mobile mt-1">Saved</span>
+</a>
+<a class="flex flex-col items-center justify-center text-primary font-bold scale-110 transition-all" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">person</span>
+<span class="font-label-caps-mobile text-label-caps-mobile mt-1">Profile</span>
+</a>
+</nav>
+<script>
+    function switchTab(tabId) {
+      // Content visibility
+      const skillContent = document.getElementById('content-skills');
+      const docContent = document.getElementById('content-documents');
+      const statContent = document.getElementById('content-stats');
+      const courseContent = document.getElementById('content-courses');
+      const savedContent = document.getElementById('content-saved');
+      
+      skillContent.classList.add('hidden');
+      docContent.classList.add('hidden');
+      statContent.classList.add('hidden');
+      if (courseContent) courseContent.classList.add('hidden');
+      if (savedContent) savedContent.classList.add('hidden');
+      
+      document.getElementById('content-' + tabId).classList.remove('hidden');
+
+      // Tab styling
+      const tabs = ['stats', 'skills', 'documents', 'courses', 'saved'];
+      tabs.forEach(t => {
+        const btn = document.getElementById('tab-' + t);
+        if (btn) {
+          btn.classList.remove('active-tab', 'text-primary');
+          btn.classList.add('text-outline');
+        }
+      });
+      
+      const activeBtn = document.getElementById('tab-' + tabId);
+      if (activeBtn) {
+        activeBtn.classList.add('active-tab', 'text-primary');
+        activeBtn.classList.remove('text-outline');
+      }
+      
+      if (tabId === 'saved') {
+        loadSavedJobs();
+      }
+      
+      // Haptic feedback feel
+      if (window.navigator.vibrate) {
+        window.navigator.vibrate(5);
+      }
+    }
+
+    // Modal controls for Inbox
+    function openInboxModal() {
+      document.getElementById('content-messages').classList.remove('hidden');
+      renderChatsList();
+    }
+
+    function closeInboxModal() {
+      document.getElementById('content-messages').classList.add('hidden');
+      closeChatThread();
+    }
+
+    // ===================== INBOX & CHAT SYSTEM =====================
+    let chatsData = JSON.parse(localStorage.getItem('student_chats'));
+    if (!chatsData) {
+      chatsData = [
+      {
+        id: "hr_team",
+        name: "EliteRecruit HR Team",
+        subtitle: "Interview Scheduling & Talent Acquisition",
+        avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=200",
+        lastMsg: "Dear Alex Sterling, We are pleased to invite you for an interview for the po...",
+        time: "3d ago",
+        unread: 0,
+        messages: [
+          {
+            sender: "them",
+            isCard: true,
+            title: "Interview Scheduled: Senior UX Designer",
+            body: "Dear Alex Sterling,\n\nWe are pleased to invite you for an interview for the position of Senior UX Designer.\n\nDate: Saturday, 27 Jun 2026\nTime: 8:00 AM - 8:45 AM (45 minutes)\nFormat: Video Interview (Google Meet)\n\nPlease confirm your availability by replying to this message. A meeting link will be shared 30 minutes before the interview.\n\nBest regards,\nEliteRecruit HR Team",
+            dateTime: "Saturday, 27 Jun 2026 - 8:00 AM - 8:45 AM",
+            duration: "45 minutes"
+          }
+        ]
+      },
+      {
+        id: "sarah_j",
+        name: "Sarah Jenkins",
+        subtitle: "UI/UX Instructor",
+        avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=200",
+        lastMsg: "Yes, definitely. Ensure the contrast ratio is 4.5:1. Let's align on our next men...",
+        time: "10:35 AM",
+        unread: 0,
+        messages: [
+          { sender: "them", text: "Hi Alex, did you check the feedback on your design project?" },
+          { sender: "me", text: "Yes, Sarah! I've updated the backdrop blurs and purple shadows." },
+          { sender: "them", text: "Yes, definitely. Ensure the contrast ratio is 4.5:1. Let's align on our next mentor session." }
+        ]
+      },
+      {
+        id: "systems_ltd",
+        name: "Systems Ltd Recruitment",
+        subtitle: "Talent Acquisition",
+        avatar: "https://lh3.googleusercontent.com/aida-public/AB6AXuCqH5p9zl9NhSbGzlW4Fzu38_yXCqCmwPjZUVzuQ6eEEo1RWZ8JKnQoJogNRuFETL4FIZVlGWNNaqO1GXIm28t_n5Iy8GH1hxsKq0ou1KNNNM69G9vNhGlweP-w9idt_c66j0AB669Mk77t2bpcperTn1ZK0An31cC9LDVou4y1KG8Y4j__QZlqX1asdLn70a8U63wTRS2cUT35PXVCdM4OM4CygsTvHpwO0ToCFQqASud8Dp3Pe7cmP2pixM15biBFkBawnr5bEEvG",
+        lastMsg: "Please login to the secure proctor room tomorrow at 10:00 AM using the st...",
+        time: "Yesterday",
+        unread: 2,
+        messages: [
+          { sender: "them", text: "Hello Alex, you have been shortlisted for our Technical Assessment." },
+          { sender: "them", text: "Please login to the secure proctor room tomorrow at 10:00 AM using the student portal." }
+        ]
+      },
+      {
+        id: "david_k",
+        name: "David K. (Study Group)",
+        subtitle: "Co-learner",
+        avatar: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=200",
+        lastMsg: "Check out the LeetCode 75 cheat sheet in the Library resource section! It h...",
+        time: "1 hour ago",
+        unread: 0,
+        messages: [
+          { sender: "them", text: "Hey! Are you studying for the DSA test tomorrow?" },
+          { sender: "me", text: "Yes, focusing on trees and dynamic programming." },
+          { sender: "them", text: "Check out the LeetCode 75 cheat sheet in the Library resource section! It helped me a lot." }
+        ]
+      },
+      {
+        id: "ai_agent",
+        name: "EliteHire AI Agent",
+        subtitle: "AI Assistant",
+        avatar: "https://lh3.googleusercontent.com/aida/AP1WRLtHSlvHQm1XNZ4vaeue1GiJtF1j680ovYDsV1bz1IH37RWIQlHCDhIMbTh8QwjysUr_9axMNLFk7d5MtN1sRrdkCEgDdsjpU6S18_eICdCZ5ObBXpk8IMqmy52sfrJsOQaMvz7hk48gtvML_dmfwlaY-1QmOzz74jRWaBViW4SbLXgO-jIKC3LPueU0Wmini7A--bmI3LnC19bd8jueIoFhpwFhp4dCzG3gBDdCSwoekhL8nTJD3FWqr2Qs",
+        lastMsg: "Hello! I am your EliteHire AI Assistant. I can guide you through the active sc...",
+        time: "Just now",
+        unread: 0,
+        messages: [
+          { sender: "them", text: "Hello! I am your EliteHire AI Assistant. I can guide you through the active job postings, test schedules, or help you refine your resume portfolio." }
+        ]
+      ];
+      localStorage.setItem('student_chats', JSON.stringify(chatsData));
+    }
+
+    let activeChatId = null;
+
+    function renderChatsList(filterQuery = "") {
+      const container = document.getElementById('chat-items-container');
+      if (!container) return;
+
+      const query = filterQuery.toLowerCase().trim();
+      const filtered = chatsData.filter(chat => 
+        chat.name.toLowerCase().includes(query) || 
+        chat.lastMsg.toLowerCase().includes(query)
+      );
+
+      container.innerHTML = filtered.map(chat => `
+        <div onclick="openChatThread('${chat.id}')" class="glass-card p-4 rounded-2xl flex items-start gap-3 active:scale-[0.98] transition-transform duration-200 cursor-pointer">
+          <div class="relative flex-shrink-0">
+            <img class="w-11 h-11 rounded-full object-cover" src="${chat.avatar}"/>
+            <span class="absolute bottom-0 right-0 w-2.5 h-2.5 bg-green-500 border-2 border-white rounded-full"></span>
+          </div>
+          <div class="flex-grow min-w-0 text-left">
+            <div class="flex justify-between items-center mb-1">
+              <h4 class="font-bold text-sm text-[#471A70] truncate">${chat.name}</h4>
+              <span class="text-[10px] text-outline whitespace-nowrap">${chat.time}</span>
+            </div>
+            <p class="text-xs text-outline truncate leading-relaxed">${chat.lastMsg}</p>
+          </div>
+          ${chat.unread > 0 ? `
+            <div class="w-5 h-5 rounded-full bg-primary text-white text-[10px] font-bold flex items-center justify-center flex-shrink-0 mt-2">${chat.unread}</div>
+          ` : ''}
+        </div>
+      `).join('');
+    }
+
+    function filterChats(value) {
+      renderChatsList(value);
+    }
+
+    function openChatThread(chatId) {
+      activeChatId = chatId;
+      const chat = chatsData.find(c => c.id === chatId);
+      if (!chat) return;
+
+      // Mark as read
+      chat.unread = 0;
+      localStorage.setItem('student_chats', JSON.stringify(chatsData));
+
+      // Set Header Info
+      document.getElementById('thread-name').textContent = chat.name;
+      document.getElementById('thread-subtitle').textContent = chat.subtitle;
+      document.getElementById('thread-avatar-container').innerHTML = `
+        <img class="w-full h-full object-cover" src="${chat.avatar}"/>
+      `;
+
+      // Render Messages
+      renderThreadMessages();
+
+      // Switch views
+      document.getElementById('chat-list-view').classList.add('hidden');
+      document.getElementById('chat-thread-view').classList.remove('hidden');
+    }
+
+    function closeChatThread() {
+      activeChatId = null;
+      document.getElementById('chat-thread-view').classList.add('hidden');
+      document.getElementById('chat-list-view').classList.remove('hidden');
+      renderChatsList();
+    }
+
+    function renderThreadMessages() {
+      const container = document.getElementById('thread-messages');
+      if (!container) return;
+
+      const chat = chatsData.find(c => c.id === activeChatId);
+      if (!chat) return;
+
+      container.innerHTML = chat.messages.map(msg => {
+        if (msg.isCard) {
+          return `
+            <div class="glass-card rounded-2xl p-5 border border-[#8731a3]/30 text-left space-y-4">
+              <div class="flex items-center gap-2 text-primary">
+                <span class="material-symbols-outlined text-[20px]">calendar_today</span>
+                <span class="text-xs font-bold uppercase tracking-wider">${msg.title}</span>
+              </div>
+              <p class="text-xs leading-relaxed text-[#471A70] font-medium whitespace-pre-line">${msg.body}</p>
+              
+              <div class="grid grid-cols-2 gap-3 pt-2">
+                <div class="bg-white/40 border border-white/60 p-3 rounded-xl flex flex-col">
+                  <span class="text-[9px] text-outline font-bold uppercase tracking-wider">Date & Time</span>
+                  <span class="text-[11px] font-bold text-[#471A70] mt-0.5">${msg.dateTime}</span>
+                </div>
+                <div class="bg-white/40 border border-white/60 p-3 rounded-xl flex flex-col">
+                  <span class="text-[9px] text-outline font-bold uppercase tracking-wider">Duration</span>
+                  <span class="text-[11px] font-bold text-[#471A70] mt-0.5">${msg.duration}</span>
+                </div>
+              </div>
+
+              <div class="flex gap-2 pt-2">
+                <button id="btn-confirm-attendance" onclick="confirmAttendance(this)" class="flex-1 bg-primary text-white text-xs font-bold py-2.5 rounded-xl shadow-md active:scale-95 transition-transform flex items-center justify-center gap-1">
+                  <span>Confirm Attendance</span>
+                </button>
+                <button onclick="alert('Reschedule request sent.')" class="flex-grow bg-red-100 text-red-600 text-xs font-bold py-2.5 rounded-xl active:scale-95 transition-transform">
+                  Reschedule
+                </button>
+              </div>
+            </div>
+          `;
+        }
+
+        const isMe = msg.sender === "me";
+        const bubbleBg = isMe ? 'bg-primary text-white' : 'bg-white/50 text-[#471A70] border border-white/70';
+        const alignClass = isMe ? 'justify-end' : 'justify-start';
+        const roundedClass = isMe ? 'rounded-tl-2xl rounded-bl-2xl rounded-tr-2xl' : 'rounded-tr-2xl rounded-br-2xl rounded-tl-2xl';
+
+        return `
+          <div class="flex ${alignClass}">
+            <div class="max-w-[75%] p-3 ${roundedClass} ${bubbleBg} shadow-sm text-left">
+              <p class="text-xs leading-relaxed">${msg.text}</p>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      // Auto scroll to bottom
+      setTimeout(() => {
+        container.scrollTop = container.scrollHeight;
+      }, 50);
+    }
+
+    function confirmAttendance(btn) {
+      alert("Attendance Confirmed successfully!");
+      btn.innerHTML = `<span class="material-symbols-outlined text-sm">check</span><span>Attending</span>`;
+      btn.className = "flex-1 bg-green-600 text-white text-xs font-bold py-2.5 rounded-xl shadow-md pointer-events-none flex items-center justify-center gap-1";
+    }
+
+    function sendChatMessage() {
+      const input = document.getElementById('message-input');
+      if (!input) return;
+      const text = input.value.trim();
+      if (!text) return;
+
+      const chat = chatsData.find(c => c.id === activeChatId);
+      if (!chat) return;
+
+      chat.messages.push({ sender: "me", text: text });
+      chat.lastMsg = text;
+      chat.time = "Just now";
+      localStorage.setItem('student_chats', JSON.stringify(chatsData));
+
+      input.value = "";
+      renderThreadMessages();
+    }
+
+    function handleMessageKeyPress(e) {
+      if (e.key === 'Enter') {
+        sendChatMessage();
+      }
+    }
+
+    function loadEnrolledCourses() {
+      let enrolled = [];
+      try {
+        enrolled = JSON.parse(localStorage.getItem('enrolledCourses')) || [];
+      } catch(e){}
+
+      // Prepopulate with Advanced UI/UX Design by default
+      if (enrolled.length === 0) {
+        enrolled = [{
+          id: 'ux_design',
+          title: 'Advanced UI/UX Design',
+          image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCAF6cpXJ_IjiLDtHuBYRHofd1CRTEKbzSr8edd7c2bJm8Dh6lSyxzPOQFt3i5GlweBU3au8tTQn317L_X5mPF4CjJtLmF22PBlJ47VgL_FHZUvD4cgya4elqLm1X9CLWM7pePWG8iSpBM9VzBNON0pHbZrRM_wBUg3gY0nlv4uIw8o0kal22vMMzqZolJ_GCcllBe0V9gFe2VzRjtAMi3zOZjoHNb5r3hn6S-T4J06a5k_1HMpodRmeNKGMwyhwZvMlrp3G24ajiV4'
+        }];
+        localStorage.setItem('enrolledCourses', JSON.stringify(enrolled));
+      }
+
+      // Update Analytics Live Data
+      const coursesCountSpan = document.getElementById('analytic-courses-count');
+      if (coursesCountSpan) {
+        coursesCountSpan.textContent = enrolled.length;
+      }
+
+      const container = document.getElementById('content-courses');
+      if (!container) return;
+
+      container.innerHTML = enrolled.map(course => `
+        <div onclick="selectCourseForVideo('${course.id}', '${course.title.replace(/'/g, "\\'")}')" class="glass-card p-4 rounded-2xl flex items-center justify-between spring-press cursor-pointer">
+          <div class="flex items-center gap-3">
+            <div class="w-12 h-12 rounded-xl overflow-hidden bg-primary/10">
+              <img class="w-full h-full object-cover" src="${course.image || 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=600&auto=format&fit=crop'}"/>
+            </div>
+            <div>
+              <p class="font-bold text-on-background text-sm text-left">${course.title}</p>
+              <p class="text-xs text-outline font-medium text-left">Enrolled</p>
+            </div>
+          </div>
+          <button onclick="event.stopPropagation(); selectCourseForVideo('${course.id}', '${course.title.replace(/'/g, "\\'")}')" class="bg-primary text-white px-4 py-1.5 rounded-full text-xs font-bold shadow-md">Play</button>
+        </div>
+      `).join('');
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      loadEnrolledCourses();
+      updateSavedCountHeader();
+
+      // Dynamic greeting based on current logged in user
+      const storedUser = localStorage.getItem('currentUser');
+      if (storedUser) {
+        try {
+          const userObj = JSON.parse(storedUser);
+          const userName = userObj.username || userObj.email || 'Alex';
+          const capitalized = userName.charAt(0).toUpperCase() + userName.slice(1);
+          const greetingEl = document.querySelector('header h1');
+          if (greetingEl) {
+            greetingEl.textContent = `Hello, ${capitalized}!`;
+          }
+        } catch (err) {}
+      }
+
+      // Add profile search listener
+      const searchInput = document.getElementById('profileSearchInput');
+      if (searchInput) {
+        searchInput.addEventListener('input', (e) => {
+          const query = e.target.value.toLowerCase().trim();
+          filterProfileContent(query);
+        });
+      }
+    });
+
+    function filterProfileContent(query) {
+      // 1. Filter Skills
+      const skillCards = document.querySelectorAll('#content-skills > div');
+      skillCards.forEach(card => {
+        const text = card.textContent.toLowerCase();
+        card.style.display = text.includes(query) ? '' : 'none';
+      });
+
+      // 2. Filter Documents
+      const docCards = document.querySelectorAll('#content-documents > div');
+      docCards.forEach(card => {
+        const text = card.textContent.toLowerCase();
+        card.style.display = text.includes(query) ? '' : 'none';
+      });
+
+      // 3. Filter Enrolled Courses
+      const courseCards = document.querySelectorAll('#content-courses > div');
+      courseCards.forEach(card => {
+        const text = card.textContent.toLowerCase();
+        card.style.display = text.includes(query) ? '' : 'none';
+      });
+
+      // 4. Filter Saved Jobs
+      const savedCards = document.querySelectorAll('#content-saved > div');
+      savedCards.forEach(card => {
+        const text = card.textContent.toLowerCase();
+        card.style.display = text.includes(query) ? '' : 'none';
+      });
+    }
+
+    function updateSavedCountHeader() {
+      const savedCountSpan = document.getElementById('analytic-saved-count');
+      if (savedCountSpan) {
+        const savedIds = JSON.parse(localStorage.getItem('savedJobs') || '[]');
+        savedCountSpan.textContent = savedIds.length;
+      }
+    }
+
+    function loadSavedJobs() {
+      const container = document.getElementById('content-saved');
+      if (!container) return;
+
+      const savedIds = JSON.parse(localStorage.getItem('savedJobs') || '[]');
+      if (savedIds.length === 0) {
+        container.innerHTML = `
+          <div class="glass-card rounded-2xl p-6 text-center">
+            <span class="material-symbols-outlined text-outline text-3xl mb-2">bookmark_border</span>
+            <p class="text-xs text-outline font-medium">No saved jobs yet.</p>
+            <button onclick="parent.App ? parent.App.navigate('job-search') : (window.location.hash = '#/student/jobs')" class="bg-primary text-white text-xs font-bold px-4 py-2 rounded-full mt-3 shadow-md">Explore Jobs</button>
+          </div>
+        `;
+        return;
+      }
+
+      const token = localStorage.getItem('supabase_access_token') || 'mock_token_student';
+      fetch('/api/jobs', {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      })
+      .then(res => res.json())
+      .then(jobs => {
+        const savedList = jobs.filter(j => savedIds.includes(String(j.id)));
+        if (savedList.length === 0) {
+          container.innerHTML = `
+            <div class="glass-card rounded-2xl p-6 text-center">
+              <span class="material-symbols-outlined text-outline text-3xl mb-2">bookmark_border</span>
+              <p class="text-xs text-outline font-medium">No saved jobs yet.</p>
+              <button onclick="parent.App ? parent.App.navigate('job-search') : (window.location.hash = '#/student/jobs')" class="bg-primary text-white text-xs font-bold px-4 py-2 rounded-full mt-3 shadow-md">Explore Jobs</button>
+            </div>
+          `;
+          return;
+        }
+
+        container.innerHTML = savedList.map((job, idx) => {
+          const firstLetter = (job.company || 'A').charAt(0).toUpperCase();
+          const bgColors = ['bg-[#f0b0ff] text-primary', 'bg-secondary-fixed text-secondary', 'bg-tertiary-fixed text-tertiary', 'bg-[#fbd7ff] text-[#8d37a9]'];
+          const logoStyle = bgColors[idx % bgColors.length];
+
+          return `
+            <div class="glass-card rounded-3xl p-5 flex flex-col gap-4 active:scale-[0.98] transition-transform duration-300">
+              <div class="flex justify-between items-start">
+                <div class="flex gap-4">
+                  <div class="w-12 h-12 rounded-2xl ${logoStyle} flex items-center justify-center font-bold">${firstLetter}</div>
+                  <div>
+                    <h3 class="font-bold text-[#471A70] text-sm text-left">${job.title}</h3>
+                    <p class="text-on-surface-variant text-xs font-medium text-left">${job.company} • ${job.location || 'Remote'}</p>
+                  </div>
+                </div>
+                <button onclick="unsaveJobFromProfile(event, '${job.id}')" class="text-primary active:scale-90 transition-transform">
+                  <span class="material-symbols-outlined text-xl" style="font-variation-settings: 'FILL' 1;">bookmark</span>
+                </button>
+              </div>
+              <div class="flex flex-wrap gap-2">
+                <span class="px-2.5 py-0.5 rounded-full bg-primary-fixed/30 text-on-primary-fixed text-[10px] font-bold uppercase tracking-wider">${job.type || 'Full-time'}</span>
+                <span class="px-2.5 py-0.5 rounded-full bg-secondary-fixed/30 text-on-secondary-fixed-variant text-[10px] font-bold uppercase tracking-wider">${job.salary || 'Rs. 80k - Rs. 120k'}</span>
+              </div>
+              <div class="mt-2 flex items-center justify-between">
+                <p class="text-[10px] text-on-surface-variant/60">Saved</p>
+                <button onclick="parent.App ? parent.App.navigate('job-details') : (window.location.hash = '#/student/jobs/details')" class="bg-primary text-white px-5 py-1.5 rounded-full font-bold text-xs shadow-md active:scale-95 transition-transform">Details</button>
+              </div>
+            </div>
+          `;
+        }).join('');
+      })
+      .catch(err => {
+        console.error("Failed to load saved jobs:", err);
+      });
+    }
+
+    function unsaveJobFromProfile(event, jobId) {
+      event.stopPropagation();
+      let savedJobs = JSON.parse(localStorage.getItem('savedJobs') || '[]');
+      savedJobs = savedJobs.filter(id => id !== String(jobId));
+      localStorage.setItem('savedJobs', JSON.stringify(savedJobs));
+      loadSavedJobs();
+      updateSavedCountHeader();
+    }
+  </script>
+  <nav id="bottom-nav"></nav>
+</body></html>

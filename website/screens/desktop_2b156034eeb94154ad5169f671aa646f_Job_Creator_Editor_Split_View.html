@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Job Creator | EliteRecruit</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<!-- Shared Tailwind Configuration -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-tertiary-fixed": "#002106",
+                    "on-primary-fixed-variant": "#72188f",
+                    "gold": "#FFD60A",
+                    "glass-border": "rgba(255, 255, 255, 0.6)",
+                    "on-secondary-container": "#003868",
+                    "on-tertiary-fixed-variant": "#00531a",
+                    "background": "#f9f9ff",
+                    "tertiary-fixed": "#6cff82",
+                    "surface-container-high": "#e0e8fb",
+                    "on-primary": "#ffffff",
+                    "on-background": "#141c29",
+                    "secondary-fixed": "#d3e3ff",
+                    "on-surface-variant": "#4f4350",
+                    "surface-bright": "#f9f9ff",
+                    "on-error-container": "#93000a",
+                    "surface-container-lowest": "#ffffff",
+                    "error-container": "#ffdad6",
+                    "on-secondary-fixed-variant": "#004883",
+                    "surface": "#f9f9ff",
+                    "tertiary-container": "#00842f",
+                    "surface-tint": "#8d37a9",
+                    "on-primary-fixed": "#330044",
+                    "on-surface": "#141c29",
+                    "surface-variant": "#dbe3f6",
+                    "primary-fixed": "#fbd7ff",
+                    "glass-fill": "rgba(255, 255, 255, 0.35)",
+                    "glass-thick": "rgba(255, 255, 255, 0.8)",
+                    "orange": "#FF9F0A",
+                    "on-secondary": "#ffffff",
+                    "inverse-on-surface": "#ecf1ff",
+                    "error": "#FF453A",
+                    "on-primary-container": "#fff5fb",
+                    "surface-container-low": "#f0f3ff",
+                    "on-tertiary": "#ffffff",
+                    "surface-container-highest": "#dbe3f6",
+                    "tertiary": "#006823",
+                    "primary": "#8731a3",
+                    "outline-variant": "#d2c1d2",
+                    "tertiary-fixed-dim": "#47e266",
+                    "inverse-primary": "#f0b0ff",
+                    "secondary-container": "#54a3ff",
+                    "secondary-fixed-dim": "#a3c9ff",
+                    "inverse-surface": "#29313f",
+                    "outline": "#817381",
+                    "primary-container": "#a34cbe",
+                    "on-tertiary-container": "#e6ffe0",
+                    "surface-container": "#e7eeff",
+                    "card-gradient": "linear-gradient(135deg, #4D9EFA 0%, #BF7DF5 100%)",
+                    "primary-fixed-dim": "#f0b0ff",
+                    "on-secondary-fixed": "#001c39",
+                    "secondary": "#0060ab",
+                    "on-error": "#ffffff",
+                    "surface-dim": "#d2daed"
+            },
+            "spacing": {
+                    "mobile-gutter": "16px",
+                    "desktop-margin": "64px",
+                    "safe-top": "44px",
+                    "safe-bottom": "34px",
+                    "max-width": "1280px",
+                    "mobile-margin": "20px",
+                    "desktop-gutter": "24px",
+                    "base": "8px"
+            },
+            "fontFamily": {
+                    "label-caps": ["Inter", "sans-serif"],
+                    "body-md": ["Inter", "sans-serif"],
+                    "headline-lg": ["Inter", "sans-serif"],
+                    "display-xl": ["Inter", "sans-serif"]
+            },
+            "fontSize": {
+                    "label-caps": ["13px", {"lineHeight": "1.0", "letterSpacing": "0.03em", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                    "headline-lg": ["34px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #DCE4F7;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.35);
+            backdrop-filter: blur(28px);
+            -webkit-backdrop-filter: blur(28px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 12px 40px 0 rgba(71, 26, 112, 0.15);
+        }
+        .form-input-glass {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: rgba(135, 49, 163, 0.3);
+            border-radius: 10px;
+        }
+        .liquid-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: radial-gradient(circle at 20% 30%, #fbd7ff 0%, transparent 40%),
+                        radial-gradient(circle at 80% 70%, #d3e3ff 0%, transparent 40%);
+            filter: blur(60px);
+        }
+    </style>
+</head>
+<body class="text-on-surface">
+<!-- ===== SHARED COMMAND CENTER NAV ===== -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,300,0,0" rel="stylesheet" id="ms-font-link"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" id="inter-font-link"/>
+<style id="shared-nav-css">
+  @import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,300,0,0&display=block');
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+  html, body { background-color: #DCE4F7 !important; }
+  body > main { margin-left: 220px !important; padding-top: 78px !important; }
+  .snav-btn:hover { background: rgba(71,26,112,0.08) !important; }
+  .snav-btn-active:hover { background: #3d1660 !important; }
+  .snav-logout:hover { background: rgba(192,41,90,0.07) !important; }
+</style>
+<aside id="shared-sidebar" style="position:fixed;left:0;top:0;height:100vh;width:220px;background:#ffffff;display:flex;flex-direction:column;padding:28px 0 20px;z-index:99999;border-right:1px solid rgba(71,26,112,0.09);box-shadow:2px 0 14px rgba(71,26,112,0.07);">
+  <!-- Title -->
+  <div style="padding:0 20px;margin-bottom:26px;">
+    <div style="font-family:'Inter',sans-serif;font-size:19px;font-weight:900;color:#1a0533;letter-spacing:-0.4px;line-height:1.2;"><span style="color:#8731a3;">Intercomp</span></div>
+    <div style="font-family:'Inter',sans-serif;font-size:10px;color:rgba(71,26,112,0.6);margin-top:3px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;">Company Portal</div>
+  </div>
+  <!-- Nav Items -->
+  <nav style="display:flex;flex-direction:column;padding:0 10px;flex:1;gap:0;overflow-y:auto;">
+    <a href="#" id="snav-dashboard" class="snav-btn" style="display:flex;align-items:center;gap:12px;padding:11px 14px;border-radius:12px;color:#2d1152;text-decoration:none;font-family:'Inter',sans-serif;font-size:12px;font-weight:600;letter-spacing:0.07em;text-transform:uppercase;cursor:pointer;background:transparent;transition:background 0.15s ease;margin:1px 0;border:none;width:100%;text-align:left;">
+      <span style="font-family:'Material Symbols Outlined';font-size:20px;font-weight:normal;font-style:normal;line-height:1;letter-spacing:normal;text-transform:none;display:inline-block;white-space:nowrap;word-wrap:normal;direction:ltr;-webkit-font-feature-settings:'liga';font-feature-settings:'liga';-webkit-font-smoothing:antialiased;color:#2d1152;flex-shrink:0;width:22px;">dashboard</span><span>Dashboard</span>
+    </a>
+    <a href="#" id="snav-jobboard" class="snav-btn" style="display:flex;align-items:center;gap:12px;padding:11px 14px;border-radius:12px;color:#2d1152;text-decoration:none;font-family:'Inter',sans-serif;font-size:12px;font-weight:600;letter-spacing:0.07em;text-transform:uppercase;cursor:pointer;background:transparent;transition:background 0.15s ease;margin:1px 0;border:none;width:100%;text-align:left;">
+      <span style="font-family:'Material Symbols Outlined';font-size:20px;font-weight:normal;font-style:normal;line-height:1;letter-spacing:normal;text-transform:none;display:inline-block;white-space:nowrap;word-wrap:normal;direction:ltr;-webkit-font-feature-settings:'liga';font-feature-settings:'liga';-webkit-font-smoothing:antialiased;color:#2d1152;flex-shrink:0;width:22px;">assignment</span><span>Job Board</span>
+    </a>
+    <a href="#" id="snav-talent" class="snav-btn" style="display:flex;align-items:center;gap:12px;padding:11px 14px;border-radius:12px;color:#2d1152;text-decoration:none;font-family:'Inter',sans-serif;font-size:12px;font-weight:600;letter-spacing:0.07em;text-transform:uppercase;cursor:pointer;background:transparent;transition:background 0.15s ease;margin:1px 0;border:none;width:100%;text-align:left;">
+      <span style="font-family:'Material Symbols Outlined';font-size:20px;font-weight:normal;font-style:normal;line-height:1;letter-spacing:normal;text-transform:none;display:inline-block;white-space:nowrap;word-wrap:normal;direction:ltr;-webkit-font-feature-settings:'liga';font-feature-settings:'liga';-webkit-font-smoothing:antialiased;color:#2d1152;flex-shrink:0;width:22px;">person_search</span><span>Talent Pool</span>
+    </a>
+    <a href="#" id="snav-postings" class="snav-btn" style="display:flex;align-items:center;gap:12px;padding:11px 14px;border-radius:12px;color:#2d1152;text-decoration:none;font-family:'Inter',sans-serif;font-size:12px;font-weight:600;letter-spacing:0.07em;text-transform:uppercase;cursor:pointer;background:transparent;transition:background 0.15s ease;margin:1px 0;border:none;width:100%;text-align:left;">
+      <span style="font-family:'Material Symbols Outlined';font-size:20px;font-weight:normal;font-style:normal;line-height:1;letter-spacing:normal;text-transform:none;display:inline-block;white-space:nowrap;word-wrap:normal;direction:ltr;-webkit-font-feature-settings:'liga';font-feature-settings:'liga';-webkit-font-smoothing:antialiased;color:#2d1152;flex-shrink:0;width:22px;">work</span><span>Postings</span>
+    </a>
+    <a href="#" id="snav-kanban" class="snav-btn" style="display:flex;align-items:center;gap:12px;padding:11px 14px;border-radius:12px;color:#2d1152;text-decoration:none;font-family:'Inter',sans-serif;font-size:12px;font-weight:600;letter-spacing:0.07em;text-transform:uppercase;cursor:pointer;background:transparent;transition:background 0.15s ease;margin:1px 0;border:none;width:100%;text-align:left;">
+      <span style="font-family:'Material Symbols Outlined';font-size:20px;font-weight:normal;font-style:normal;line-height:1;letter-spacing:normal;text-transform:none;display:inline-block;white-space:nowrap;word-wrap:normal;direction:ltr;-webkit-font-feature-settings:'liga';font-feature-settings:'liga';-webkit-font-smoothing:antialiased;color:#2d1152;flex-shrink:0;width:22px;">groups</span><span>Applicants</span>
+    </a>
+    <a href="#" id="snav-scheduler" class="snav-btn" style="display:flex;align-items:center;gap:12px;padding:11px 14px;border-radius:12px;color:#2d1152;text-decoration:none;font-family:'Inter',sans-serif;font-size:12px;font-weight:600;letter-spacing:0.07em;text-transform:uppercase;cursor:pointer;background:transparent;transition:background 0.15s ease;margin:1px 0;border:none;width:100%;text-align:left;">
+      <span style="font-family:'Material Symbols Outlined';font-size:20px;font-weight:normal;font-style:normal;line-height:1;letter-spacing:normal;text-transform:none;display:inline-block;white-space:nowrap;word-wrap:normal;direction:ltr;-webkit-font-feature-settings:'liga';font-feature-settings:'liga';-webkit-font-smoothing:antialiased;color:#2d1152;flex-shrink:0;width:22px;">event_available</span><span>Interviews</span>
+    </a>
+    <a href="#" id="snav-analytics" class="snav-btn" style="display:flex;align-items:center;gap:12px;padding:11px 14px;border-radius:12px;color:#2d1152;text-decoration:none;font-family:'Inter',sans-serif;font-size:12px;font-weight:600;letter-spacing:0.07em;text-transform:uppercase;cursor:pointer;background:transparent;transition:background 0.15s ease;margin:1px 0;border:none;width:100%;text-align:left;">
+      <span style="font-family:'Material Symbols Outlined';font-size:20px;font-weight:normal;font-style:normal;line-height:1;letter-spacing:normal;text-transform:none;display:inline-block;white-space:nowrap;word-wrap:normal;direction:ltr;-webkit-font-feature-settings:'liga';font-feature-settings:'liga';-webkit-font-smoothing:antialiased;color:#2d1152;flex-shrink:0;width:22px;">monitoring</span><span>Analytics</span>
+    </a>
+    <a href="#" id="snav-saved-drafts" class="snav-btn" style="display:flex;align-items:center;gap:12px;padding:11px 14px;border-radius:12px;color:#2d1152;text-decoration:none;font-family:'Inter',sans-serif;font-size:12px;font-weight:600;letter-spacing:0.07em;text-transform:uppercase;cursor:pointer;background:transparent;transition:background 0.15s ease;margin:1px 0;border:none;width:100%;text-align:left;">
+      <span style="font-family:'Material Symbols Outlined';font-size:20px;font-weight:normal;font-style:normal;line-height:1;letter-spacing:normal;text-transform:none;display:inline-block;white-space:nowrap;word-wrap:normal;direction:ltr;-webkit-font-feature-settings:'liga';font-feature-settings:'liga';-webkit-font-smoothing:antialiased;color:#2d1152;flex-shrink:0;width:22px;">drafts</span><span>Save Draft</span>
+    </a>
+    <a href="#" id="snav-payment" class="snav-btn" style="display:flex;align-items:center;gap:12px;padding:11px 14px;border-radius:12px;color:#2d1152;text-decoration:none;font-family:'Inter',sans-serif;font-size:12px;font-weight:600;letter-spacing:0.07em;text-transform:uppercase;cursor:pointer;background:transparent;transition:background 0.15s ease;margin:1px 0;border:none;width:100%;text-align:left;">
+      <span style="font-family:'Material Symbols Outlined';font-size:20px;font-weight:normal;font-style:normal;line-height:1;letter-spacing:normal;text-transform:none;display:inline-block;white-space:nowrap;word-wrap:normal;direction:ltr;-webkit-font-feature-settings:'liga';font-feature-settings:'liga';-webkit-font-smoothing:antialiased;color:#2d1152;flex-shrink:0;width:22px;">payments</span><span>Payment</span>
+    </a>
+  </nav>
+  <!-- New Job Posting Button -->
+  <div style="padding:0 12px;margin-top:14px;">
+    <button id="snav-new-posting" style="width:100%;padding:13px 0;background:#471A70;color:#fff;border:none;border-radius:999px;font-family:'Inter',sans-serif;font-weight:700;font-size:13px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:7px;box-shadow:0 4px 16px rgba(71,26,112,0.28);transition:all 0.2s;letter-spacing:0.02em;">
+      <span style="font-family:'Material Symbols Outlined';font-size:18px;font-weight:normal;font-style:normal;line-height:1;letter-spacing:normal;text-transform:none;-webkit-font-feature-settings:'liga';font-feature-settings:'liga';-webkit-font-smoothing:antialiased;color:#fff;display:inline-block;">add</span>
+      New Job Posting
+    </button>
+  </div>
+  <!-- Bottom: Help + Logout -->
+  <div style="padding:12px 10px 0;margin-top:10px;border-top:1px solid rgba(71,26,112,0.08);">
+    <a href="#" id="snav-help" style="display:flex;align-items:center;gap:11px;padding:9px 12px;border-radius:10px;color:rgba(45,17,82,0.5);text-decoration:none;font-family:'Inter',sans-serif;font-size:11.5px;font-weight:600;letter-spacing:0.07em;text-transform:uppercase;cursor:pointer;background:transparent;transition:background 0.15s;margin-bottom:2px;" class="snav-btn">
+      <span style="font-family:'Material Symbols Outlined';font-size:18px;font-weight:normal;font-style:normal;line-height:1;letter-spacing:normal;text-transform:none;-webkit-font-feature-settings:'liga';font-feature-settings:'liga';-webkit-font-smoothing:antialiased;color:rgba(71,26,112,0.4);display:inline-block;">help_outline</span>
+      Help Center
+    </a>
+    <a href="#" id="snav-logout" class="snav-logout" style="display:flex;align-items:center;gap:11px;padding:9px 12px;border-radius:10px;color:#c0295a;text-decoration:none;font-family:'Inter',sans-serif;font-size:11.5px;font-weight:600;letter-spacing:0.07em;text-transform:uppercase;cursor:pointer;background:transparent;transition:background 0.15s;">
+      <span style="font-family:'Material Symbols Outlined';font-size:18px;font-weight:normal;font-style:normal;line-height:1;letter-spacing:normal;text-transform:none;-webkit-font-feature-settings:'liga';font-feature-settings:'liga';-webkit-font-smoothing:antialiased;color:#c0295a;display:inline-block;">logout</span>
+      Log Out
+    </a>
+  </div>
+</aside>
+<style id="topbar-search-styles">
+  #topbar-search {
+    width: 144px;
+    transition: width 0.3s ease;
+  }
+  @media (min-width: 768px) {
+    #topbar-search {
+      width: 192px;
+    }
+    #topbar-search:focus {
+      width: 240px;
+    }
+  }
+  @media (min-width: 1024px) {
+    #topbar-search {
+      width: 256px;
+    }
+    #topbar-search:focus {
+      width: 320px;
+    }
+  }
+</style>
+<!-- Shared Top Bar -->
+<header id="shared-topbar" style="position:fixed;top:0;left:220px;width:calc(100vw - 220px);height:56px;background:rgba(255,255,255,0.15);backdrop-filter:blur(28px);-webkit-backdrop-filter:blur(28px);display:flex;align-items:center;justify-content:flex-end;padding:0 32px;gap:24px;z-index:99998;border-bottom:1px solid rgba(255,255,255,0.6);box-shadow:0 12px 40px 0 rgba(71,26,112,0.08);">
+  <div style="display:flex;align-items:center;gap:8px;background:rgba(255,255,255,0.2);padding:6px 16px;border-radius:999px;border:1px solid rgba(255,255,255,0.6);box-shadow:0 2px 4px rgba(0,0,0,0.02);transition:all 0.3s;">
+    <span style="font-family:'Material Symbols Outlined';font-size:18px;font-weight:normal;font-style:normal;line-height:1;letter-spacing:normal;text-transform:none;-webkit-font-feature-settings:'liga';font-feature-settings:'liga';-webkit-font-smoothing:antialiased;color:#2d1152;display:inline-block;user-select:none;">search</span>
+    <input id="topbar-search" style="background:transparent;border:none;outline:none;color:#2d1152;font-size:12px;font-family:'Inter',sans-serif;padding:0;margin:0;height:20px;line-height:20px;box-shadow:none;" placeholder="Search candidates..." type="text"/>
+  </div>
+  <div style="position:relative;cursor:pointer;display:flex;align-items:center;justify-content:center;">
+    <span style="font-family:'Material Symbols Outlined';font-size:22px;font-weight:normal;font-style:normal;line-height:1;letter-spacing:normal;text-transform:none;-webkit-font-feature-settings:'liga';font-feature-settings:'liga';-webkit-font-smoothing:antialiased;color:#2d1152;display:inline-block;">notifications</span>
+    <span style="position:absolute;top:1.5px;right:1.5px;width:8px;height:8px;background:#ff453a;border-radius:50%;border:1.5px solid #ffffff;"></span>
+  </div>
+  <span style="font-family:'Material Symbols Outlined';font-size:22px;font-weight:normal;font-style:normal;line-height:1;letter-spacing:normal;text-transform:none;-webkit-font-feature-settings:'liga';font-feature-settings:'liga';-webkit-font-smoothing:antialiased;color:#2d1152;display:inline-block;cursor:pointer;">settings</span>
+  <div style="width:40px;height:40px;border-radius:50%;overflow:hidden;cursor:pointer;border:2px solid #8731a3;box-shadow:0 2px 8px rgba(135,49,163,0.15);transition:transform 0.2s;">
+    <img alt="Profile" style="width:100%;height:100%;object-fit:cover;" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA25J-RpNqe_ribsVF3fd4mnzE6ifwHeZuVNu5AMQU2EnYpClByPq7nwtb_OW8YWdE9zHhVr_myUbTkksryul6U1vE6tYcUe2Is_Ykf44A04yPQngjPdz5xvO59lZYpyYogiOT7fWRVG0OG2uYrLcYBA_hW8xxo8YeR57ryeTXbIvT3Ziwr5FLGpOpoVx-euTPcJedNNZFG0cab6QctiazShZ8qfEjAKNGvyzlC9_fl1G_pUaR0pvuTjw1ClquEYOqjrb_2RPHXuypu"/>
+  </div>
+</header>
+<!-- Nav Wiring -->
+<script id="shared-nav-wiring">
+(function() {
+  var ACTIVE_BG = '#471A70';
+  var ACTIVE_COLOR = '#ffffff';
+  var INACTIVE_BG = 'transparent';
+  var INACTIVE_COLOR = '#2d1152';
+  var ACTIVE_ICON_COLOR = '#ffffff';
+  var INACTIVE_ICON_COLOR = '#2d1152';
+  var BASE_STYLE = "display:flex;align-items:center;gap:12px;padding:11px 14px;border-radius:12px;text-decoration:none;font-family:'Inter',sans-serif;font-size:12px;font-weight:600;letter-spacing:0.07em;text-transform:uppercase;cursor:pointer;margin:1px 0;border:none;width:100%;text-align:left;transition:background 0.15s ease;";
+  var ICON_BASE = "font-family:'Material Symbols Outlined';font-size:20px;font-weight:normal;font-style:normal;line-height:1;letter-spacing:normal;text-transform:none;display:inline-block;white-space:nowrap;word-wrap:normal;direction:ltr;-webkit-font-feature-settings:'liga';font-feature-settings:'liga';-webkit-font-smoothing:antialiased;flex-shrink:0;width:22px;";
+
+  var routes = {
+    'snav-dashboard':    'recruiter-dash',
+    'snav-jobboard':     'jobboard',
+    'snav-talent':       'talent',
+    'snav-postings':     'postings',
+    'snav-kanban':       'kanban',
+    'snav-scheduler':    'scheduler',
+    'snav-analytics':    'recruiter-analytics',
+    'snav-saved-drafts': 'saved-drafts',
+    'snav-payment':      'payment'
+  };
+
+  function navigate(dest) {
+    if (window.parent && window.parent.App) window.parent.App.navigate(dest);
+  }
+
+  function setActive(route) {
+    var reverseMap = {};
+    Object.keys(routes).forEach(function(k) { reverseMap[routes[k]] = k; });
+    var activeId = reverseMap[route];
+    Object.keys(routes).forEach(function(id) {
+      var el = document.getElementById(id);
+      if (!el) return;
+      var icon = el.querySelector('span:first-child');
+      if (id === activeId) {
+        el.style.cssText = BASE_STYLE + 'background:' + ACTIVE_BG + ';color:' + ACTIVE_COLOR + ';font-weight:700;';
+        if (icon) icon.style.color = ACTIVE_ICON_COLOR;
+      } else {
+        el.style.cssText = BASE_STYLE + 'background:' + INACTIVE_BG + ';color:' + INACTIVE_COLOR + ';';
+        if (icon) icon.style.color = INACTIVE_ICON_COLOR;
+        el.onmouseover = function() { this.style.background = 'rgba(71,26,112,0.08)'; };
+        el.onmouseout  = function() { this.style.background = INACTIVE_BG; };
+      }
+    });
+  }
+
+  // Wire clicks
+  Object.keys(routes).forEach(function(id) {
+    var el = document.getElementById(id);
+    if (!el) return;
+    el.addEventListener('click', function(e) { e.preventDefault(); navigate(routes[id]); });
+  });
+
+  // New Job Posting button
+  var btn = document.getElementById('snav-new-posting');
+  if (btn) {
+    btn.addEventListener('click', function() { navigate('job-create'); });
+    btn.addEventListener('mouseenter', function() { btn.style.opacity='0.87'; btn.style.transform='translateY(-1px)'; });
+    btn.addEventListener('mouseleave', function() { btn.style.opacity='1'; btn.style.transform='translateY(0)'; });
+  }
+
+  // Log Out
+  var logout = document.getElementById('snav-logout');
+  if (logout) {
+    logout.addEventListener('click', function(e) {
+      e.preventDefault();
+      localStorage.removeItem('isLoggedIn');
+      if (window.parent && window.parent.App) window.parent.App.navigate('landing');
+    });
+  }
+
+  // Set active from parent App
+  function trySetActive() {
+    try {
+      if (window.parent && window.parent.App && window.parent.App.activeView) {
+        setActive(window.parent.App.activeView);
+      }
+    } catch(e) {}
+  }
+  trySetActive();
+  setTimeout(trySetActive, 200);
+  window.setNavActive = setActive;
+
+  // Fix main content offset
+  var mainEl = document.querySelector('body > main');
+  if (mainEl) {
+    mainEl.style.setProperty('margin-left', '220px', 'important');
+    mainEl.style.setProperty('padding-top', '60px', 'important');
+  }
+})();
+</script>
+<!-- ===== END SHARED NAV ===== -->
+
+
+
+
+<div class="liquid-bg"></div>
+<!-- TopNavBar (Shared Component Identity) -->
+
+<!-- Side Navigation Bar -->
+
+<!-- Main Workspace -->
+<main class="ml-[220px] pt-[60px] h-[100vh] flex overflow-hidden">
+<!-- Left Panel: Form Editor (50%) -->
+<section class="w-1/2 h-full overflow-y-auto px-desktop-margin py-8 custom-scrollbar">
+
+<form class="space-y-8 pb-12">
+<!-- Basic Info -->
+<div class="space-y-4">
+<label class="block font-label-caps text-label-caps text-primary">Job Title</label>
+<input id="jobTitleInput" class="w-full h-12 px-4 rounded-xl form-input-glass focus:ring-2 focus:ring-primary focus:outline-none transition-all font-body-md text-body-md text-on-surface" placeholder="e.g. Senior UX Designer" type="text" value="Senior UX Designer"/>
+</div>
+<div class="space-y-4">
+<label class="block font-label-caps text-label-caps text-primary">Department</label>
+<input id="deptInput" class="w-full h-12 px-4 rounded-xl form-input-glass focus:ring-2 focus:ring-primary focus:outline-none transition-all font-body-md text-body-md text-on-surface" placeholder="e.g. Design & Creative" type="text" value="Design & Creative"/>
+</div>
+
+<!-- Company Name Input -->
+<div class="space-y-4">
+<label class="block font-label-caps text-label-caps text-primary">Company Name</label>
+<input id="companyNameInput" class="w-full h-12 px-4 rounded-xl form-input-glass focus:ring-2 focus:ring-primary focus:outline-none transition-all font-body-md text-body-md text-on-surface" placeholder="e.g. TechFlow" type="text" value="TechFlow"/>
+</div>
+
+<!-- Company Address Input -->
+<div class="space-y-4">
+<label class="block font-label-caps text-label-caps text-primary">Company Address</label>
+<input id="companyAddressInput" class="w-full h-12 px-4 rounded-xl form-input-glass focus:ring-2 focus:ring-primary focus:outline-none transition-all font-body-md text-body-md text-on-surface" placeholder="e.g. Jail Road, Lahore, Pakistan" type="text" value="Lahore, Pakistan"/>
+</div>
+
+<!-- Company Link Input -->
+<div class="space-y-4">
+<label class="block font-label-caps text-label-caps text-primary">Company Website / Apply Link</label>
+<input id="companyLinkInput" class="w-full h-12 px-4 rounded-xl form-input-glass focus:ring-2 focus:ring-primary focus:outline-none transition-all font-body-md text-body-md text-on-surface" placeholder="e.g. https://techflow.io/careers" type="url" value="https://techflow.io/careers"/>
+</div>
+
+<!-- Location Map Container in Editor -->
+<div class="space-y-4">
+<label class="block font-label-caps text-label-caps text-primary">Location Map</label>
+<div class="h-44 rounded-2xl overflow-hidden relative border border-glass-border">
+  <div id="editorMap" class="absolute inset-0 bg-cover bg-center bg-no-repeat transition-all duration-500" style="background-image: url('https://images.unsplash.com/photo-1524661135-423995f22d0b?q=80&w=600');"></div>
+  <div class="absolute inset-0 bg-primary/10 backdrop-blur-[1px]"></div>
+  <div class="absolute inset-0 flex items-center justify-center">
+    <div class="bg-[#471A70] text-white px-4 py-2 rounded-full shadow-2xl flex items-center gap-2 border border-white/20">
+      <span class="material-symbols-outlined text-[20px] animate-bounce">location_on</span>
+      <span id="editorMapLabel" class="text-xs font-bold">Lahore, Pakistan</span>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- Salary Text Input -->
+<div class="space-y-4">
+<label class="block font-label-caps text-label-caps text-primary">Salary Range (Monthly)</label>
+<input id="salaryInput" class="w-full h-12 px-4 rounded-xl form-input-glass focus:ring-2 focus:ring-primary focus:outline-none transition-all font-body-md text-body-md text-on-surface" placeholder="e.g. Rs. 8,000 — Rs. 12,000" type="text" value="Rs. 8,000 — Rs. 12,000"/>
+</div>
+<!-- Description Markdown Editor -->
+<div class="space-y-4">
+<label class="block font-label-caps text-label-caps text-primary">Job Description</label>
+<div class="rounded-xl overflow-hidden border border-glass-border shadow-sm">
+<div class="flex gap-2 p-2 bg-glass-thick border-b border-glass-border">
+<button class="material-symbols-outlined p-2 hover:bg-surface-container rounded-lg text-on-surface-variant transition-colors" data-icon="format_bold" type="button">format_bold</button>
+<button class="material-symbols-outlined p-2 hover:bg-surface-container rounded-lg text-on-surface-variant transition-colors" data-icon="format_italic" type="button">format_italic</button>
+<button class="material-symbols-outlined p-2 hover:bg-surface-container rounded-lg text-on-surface-variant transition-colors" data-icon="format_list_bulleted" type="button">format_list_bulleted</button>
+<button class="material-symbols-outlined p-2 hover:bg-surface-container rounded-lg text-on-surface-variant transition-colors" data-icon="link" type="button">link</button>
+<div class="flex-grow"></div>
+<button class="material-symbols-outlined p-2 hover:bg-surface-container rounded-lg text-on-surface-variant transition-colors" data-icon="visibility" type="button">visibility</button>
+</div>
+<textarea id="jobDescTextarea" class="w-full p-4 form-input-glass focus:ring-0 focus:outline-none font-body-md text-body-md text-on-surface resize-none" rows="8">As a Senior UX Designer at TechFlow, you will lead the user experience strategy for our flagship fintech platform. You will work closely with product managers and engineers to craft seamless, accessible, and delightful interfaces for over 10 million users globally.</textarea>
+</div>
+</div>
+<!-- Skills Chips - Fully Editable -->
+<div class="space-y-4">
+  <label class="block font-label-caps text-label-caps text-primary">Required Skills</label>
+  <div class="flex flex-wrap gap-2 p-3 form-input-glass rounded-xl min-h-[56px] items-center" id="skillsContainer">
+    <input id="skillInput" class="bg-transparent border-none focus:ring-0 text-body-md font-body-md flex-1 min-w-[120px] outline-none" placeholder="Type skill and press Enter..." type="text"
+      onkeydown="handleSkillInput(event)"/>
+  </div>
+  <p class="text-xs text-on-surface-variant">Press Enter or comma to add a skill</p>
+</div>
+<!-- Questionnaire File Upload -->
+<div class="space-y-4">
+  <label class="block font-label-caps text-label-caps text-primary">Questionnaire Attachments</label>
+  <!-- Hidden real file input -->
+  <input type="file" id="questionnaireFileInput" accept="image/*,.pdf,.doc,.docx" multiple class="hidden" onchange="handleFileUpload(event)"/>
+  <div class="border-2 border-dashed border-primary/30 bg-glass-fill hover:bg-glass-thick transition-all rounded-2xl p-8 flex flex-col items-center justify-center gap-3 cursor-pointer group" onclick="document.getElementById('questionnaireFileInput').click()">
+    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
+      <span class="material-symbols-outlined" data-icon="upload_file">upload_file</span>
+    </div>
+    <div class="text-center">
+      <p class="font-body-md text-body-md text-primary font-bold">Click to upload or drag & drop</p>
+      <p class="text-label-caps font-label-caps text-on-surface-variant">Images, PDF, DOCX up to 10MB</p>
+    </div>
+  </div>
+  <div id="uploadedFilesList" class="space-y-2"></div>
+</div>
+<!-- Action Buttons: Only Save Draft on left -->
+<div class="flex gap-4 pt-6">
+  <button id="saveDraftBtn" class="px-8 bg-glass-thick border border-glass-border h-14 rounded-full font-bold text-body-md text-on-surface-variant hover:bg-surface-container-high transition-all active:scale-95" type="button" onclick="saveDraft()">
+    Save Draft
+  </button>
+</div>
+</form>
+</section>
+<!-- Right Panel: Live Preview (50%) -->
+<section class="w-1/2 h-full bg-surface-container-low flex flex-col items-center justify-start py-8 overflow-y-auto px-12 relative custom-scrollbar">
+<!-- Decorative Elements -->
+<div class="absolute -top-24 -right-24 w-96 h-96 bg-secondary-container/20 rounded-full blur-3xl"></div>
+<div class="absolute -bottom-24 -left-24 w-96 h-96 bg-primary-container/20 rounded-full blur-3xl"></div>
+<div class="z-10 w-full max-w-xl">
+<p class="text-label-caps font-label-caps text-primary mb-4 text-center opacity-70 tracking-widest uppercase">Live Preview</p>
+<!-- Glassmorphic Job Card (Mimicking SCREEN_4) -->
+<div class="glass-panel rounded-[32px] p-6 space-y-5 relative overflow-hidden group w-full">
+<!-- Subtle Glow -->
+<div class="absolute inset-0 bg-gradient-to-tr from-white/10 to-transparent pointer-events-none"></div>
+<div class="flex justify-between items-start">
+<div class="flex items-center gap-4">
+<div class="w-16 h-16 bg-white rounded-2xl flex items-center justify-center shadow-md border border-glass-border">
+<span class="material-symbols-outlined text-primary text-4xl" data-icon="bolt">bolt</span>
+</div>
+<div>
+<h2 id="previewJobTitle" class="text-2xl font-bold text-[#471A70]">Senior UX Designer</h2>
+<p id="previewSubtitle" class="text-on-surface-variant font-medium">TechFlow • Design & Creative (Hybrid)</p>
+</div>
+</div>
+<span class="bg-tertiary-container/10 text-tertiary-container px-3 py-1 rounded-full text-label-caps font-bold">New Post</span>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div class="bg-white/40 p-4 rounded-2xl border border-white/60">
+<p class="text-label-caps text-[#471A70] opacity-60 mb-1">STIPEND</p>
+<p id="previewStipend" class="font-bold text-xl text-[#471A70]">Rs. 8,000 — Rs. 12,000</p>
+</div>
+<div class="bg-white/40 p-4 rounded-2xl border border-white/60">
+<p class="text-label-caps text-[#471A70] opacity-60 mb-1">DURATION</p>
+<p class="font-bold text-xl text-[#471A70]">Permanent</p>
+</div>
+</div>
+<div class="space-y-3">
+<h3 class="font-bold text-[#471A70]">About the Role</h3>
+<p id="previewDescription" class="text-[#471A70] font-body-md text-sm leading-relaxed opacity-80">
+                            As a Senior UX Designer at TechFlow, you will lead the user experience strategy for our flagship fintech platform. You will work closely with product managers and engineers...
+                        </p>
+</div>
+<div class="space-y-3">
+<h3 class="font-bold text-[#471A70]">Required Skills</h3>
+<div class="flex flex-wrap gap-2" id="previewSkillsContainer">
+<span class="bg-white/60 px-3 py-1.5 rounded-xl text-xs font-bold text-[#471A70] border border-white">UI Design</span>
+<span class="bg-white/60 px-3 py-1.5 rounded-xl text-xs font-bold text-[#471A70] border border-white">Figma</span>
+<span class="bg-white/60 px-3 py-1.5 rounded-xl text-xs font-bold text-[#471A70] border border-white">Prototyping</span>
+<span class="bg-white/60 px-3 py-1.5 rounded-xl text-xs font-bold text-[#471A70] border border-white">Design Systems</span>
+</div>
+</div>
+
+<!-- Office Location Live Preview -->
+<div class="space-y-3" id="previewLocationSection">
+  <h3 class="font-bold text-[#471A70]">Office Location</h3>
+  <div class="h-32 rounded-2xl overflow-hidden relative border border-white/60">
+    <div id="previewMap" class="absolute inset-0 bg-cover bg-center bg-no-repeat transition-all duration-500" style="background-image: url('https://images.unsplash.com/photo-1524661135-423995f22d0b?q=80&w=600');"></div>
+    <div class="absolute inset-0 bg-primary/10 backdrop-blur-[1px]"></div>
+    <div class="absolute inset-0 flex items-center justify-center">
+      <div class="bg-white/95 px-3 py-1.5 rounded-full shadow-lg border border-primary/20 flex items-center gap-1.5">
+        <span class="material-symbols-outlined text-primary text-[18px]">location_on</span>
+        <span id="previewMapLabel" class="text-xs font-bold text-primary">Lahore, Pakistan</span>
+      </div>
+    </div>
+  </div>
+  <p id="previewAddress" class="text-xs text-on-surface-variant leading-relaxed opacity-80">Lahore, Pakistan</p>
+</div>
+<div class="pt-4 flex gap-3">
+  <button id="publishBtn" class="flex-1 bg-primary text-on-primary h-12 rounded-2xl font-bold shadow-lg hover:shadow-primary/40 active:scale-95 transition-all" onclick="publishJob()">Publish Job</button>
+  <button class="w-12 h-12 bg-white/60 flex items-center justify-center rounded-2xl text-[#471A70] border border-white/80 hover:bg-white transition-all">
+    <span class="material-symbols-outlined" data-icon="bookmark">bookmark</span>
+  </button>
+</div>
+</div>
+<!-- Floating Illustration/Abstract Element -->
+<div class="mt-12 flex justify-center">
+<div class="flex -space-x-4">
+<div class="w-12 h-12 rounded-full border-4 border-surface-container-low overflow-hidden bg-surface">
+<img alt="User 1" class="w-full h-full object-cover" data-alt="A close-up high-resolution portrait of a smiling professional woman with glowing skin, set against a blurred modern office background with soft bokeh. The lighting is warm and natural, suggesting a bright and inviting workspace in an elite recruitment application. The visual style is premium and high-fidelity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBCOSmMxROhvcNm9sYXuly4yQn0f0euYbsI_2v80BcpohZHD5Aku8_5jFBVsuP6xOE1uzjAfP5tcMSDfQ_EIM_FJ-L_wIRoh9aR9fpsB8wDFiN91N7svUJTacJgaU5tgOvsYtE_tZ20ALeVf33WMtl3YMDFcF966066mXgEhy37hSn5ZnofvFolX5T0qqUc8SdPCVB08ID5l7-kQ7XG7eGRdDYi-tk7T4IzMkjSsNGl0mxthqJfyP2PPcJrZU-4RfDnWGwy3l4b3b-R"/>
+</div>
+<div class="w-12 h-12 rounded-full border-4 border-surface-container-low overflow-hidden bg-surface">
+<img alt="User 2" class="w-full h-full object-cover" data-alt="A portrait of a confident male professional in a smart-casual blazer, illuminated by soft cinematic studio lighting. The background features a subtle gradient of lavender and blue, matching the liquid glass aesthetic of a modern UI design. The mood is sophisticated and approachable, representing top-tier talent." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDRd-03PWoEcjQsFNPCLCo_N4H1R_9hI6XPeEV8aPAjdO4dpu-jcAWtE3ovN2gyl2nn1q-28HImS3D-5pt0qIHl2zcoFT-6R08_3qLEUsampBUVROk_t9ZVJFHYjmy2u5pC-IHto7mVuYCsWYfDpyUvh30yw8YfeoaEOT86EWo7A7J49U7jA5Qti_7cZVmP9GgNzVOwtZ0D6x04xY47ZjG65oYWSHmPTTki8Rcu80tIaTCFnH3iJ8r-tB12IQqOV_A53reUs5D_8-05"/>
+</div>
+<div class="w-12 h-12 rounded-full border-4 border-surface-container-low overflow-hidden bg-surface">
+<img alt="User 3" class="w-full h-full object-cover" data-alt="A high-quality studio portrait of a young creative professional looking directly at the camera. The image has a clean, minimalist aesthetic with high-key lighting that emphasizes clarity and detail. The overall tone is professional and vibrant, integrated into a high-end recruitment platform for elite jobs." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCVO0gy_Rvy6A8czYToNjZJ6z8Iv3EC6YrlWUPFTl_gCZVgrl6RP5dC2iQeIyxmygFKQTEH5pB85-HLTsDdIhWUoFae86RilBewiCx590UvN6z1PBT2_nOME23rbeBAV5YnEMhP9mHzdqVGQlP4a35ec8a91_SXQF4-gFum9kFvifpbbvAZRgF8icJoqNa0xAcQZLXk2ihcJ8fMa9Xf99K6VdLR5-Zwh6j72jN-HQhfLUtMEeQnUQWusQiUR_W-x06dhD02n9uJ5bzh"/>
+</div>
+<div class="w-12 h-12 rounded-full border-4 border-surface-container-low bg-primary text-on-primary flex items-center justify-center font-bold text-sm">
+                            +12
+                        </div>
+</div>
+<p class="ml-4 flex items-center text-on-surface-variant text-sm font-medium">Applied in the last 24h</p>
+</div>
+</div>
+</section>
+</main>
+<script>
+// ========== SKILL CHIP MANAGEMENT ==========
+const defaultSkills = ['UI Design', 'Figma', 'Prototyping'];
+let skills = [...defaultSkills];
+
+function renderSkills() {
+  const container = document.getElementById('skillsContainer');
+  const input = document.getElementById('skillInput');
+  // Remove existing chips
+  container.querySelectorAll('.skill-chip').forEach(c => c.remove());
+  // Add chips before the input
+  skills.forEach(skill => {
+    const chip = document.createElement('div');
+    chip.className = 'skill-chip bg-primary-container text-on-primary-container px-3 py-1 rounded-full text-label-caps font-label-caps flex items-center gap-2';
+    chip.innerHTML = `${skill} <button type="button" class="material-symbols-outlined text-[16px] hover:text-error transition-colors" onclick="removeSkill('${skill}')">close</button>`;
+    container.insertBefore(chip, input);
+  });
+  // Update preview panel
+  renderPreviewSkills();
+}
+
+function removeSkill(skill) {
+  skills = skills.filter(s => s !== skill);
+  renderSkills();
+}
+
+function handleSkillInput(e) {
+  const input = e.target;
+  if (e.key === 'Enter' || e.key === ',') {
+    e.preventDefault();
+    const val = input.value.trim().replace(/,$/, '');
+    if (val && !skills.includes(val)) {
+      skills.push(val);
+      renderSkills();
+    }
+    input.value = '';
+  }
+}
+
+function renderPreviewSkills() {
+  const previewContainer = document.getElementById('previewSkillsContainer');
+  if (!previewContainer) return;
+  previewContainer.innerHTML = skills.map(s =>
+    `<span class="bg-white/60 px-3 py-1.5 rounded-xl text-xs font-bold text-[#471A70] border border-white">${s}</span>`
+  ).join('');
+}
+
+// ========== FILE UPLOAD ==========
+function handleFileUpload(e) {
+  const files = Array.from(e.target.files);
+  const list = document.getElementById('uploadedFilesList');
+  files.forEach(file => {
+    const item = document.createElement('div');
+    item.className = 'flex items-center gap-3 p-3 bg-glass-fill rounded-xl border border-glass-border';
+    item.innerHTML = `
+      <span class="material-symbols-outlined text-primary">attach_file</span>
+      <span class="flex-1 text-sm font-medium truncate">${file.name}</span>
+      <span class="text-xs text-on-surface-variant">${(file.size/1024).toFixed(0)}KB</span>
+      <button type="button" class="material-symbols-outlined text-error text-sm hover:scale-110 transition-transform" onclick="this.closest('div').remove()">close</button>
+    `;
+    list.appendChild(item);
+  });
+}
+
+// ========== SAVE DRAFT ==========
+function saveDraft() {
+  const title = document.getElementById('jobTitleInput').value || 'Untitled Job';
+  const dept = document.getElementById('deptSelect').value || 'General';
+  const desc = document.getElementById('jobDescTextarea').value || '';
+  const val = parseInt(document.getElementById('salarySlider').value);
+  const draft = {
+    id: Date.now(),
+    title,
+    dept,
+    desc,
+    skills: [...skills],
+    salary: `Rs. ${val.toLocaleString()} — Rs. ${(val + 4000).toLocaleString()}`,
+    salaryMin: val,
+    salaryMax: val + 4000,
+    savedAt: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
+    status: 'draft'
+  };
+  const existing = JSON.parse(localStorage.getItem('jobDrafts') || '[]');
+  existing.unshift(draft);
+  localStorage.setItem('jobDrafts', JSON.stringify(existing));
+  // Show toast then navigate
+  showJobToast('Draft saved successfully!', 'check_circle');
+  setTimeout(() => {
+    if (window.parent && window.parent.App) {
+      window.parent.App.navigate('saved-drafts');
+    }
+  }, 1200);
+}
+
+// ========== PUBLISH JOB ==========
+function publishJob() {
+  const title = document.getElementById('jobTitleInput').value || 'Untitled Job';
+  const deptInput = document.getElementById('deptInput');
+  const dept = deptInput ? deptInput.value : 'General';
+  const description = document.getElementById('jobDescTextarea').value || '';
+  const salaryInput = document.getElementById('salaryInput');
+  const salaryVal = salaryInput ? salaryInput.value : 'Rs. 8,000 — Rs. 12,000';
+  const compName = companyNameInput ? companyNameInput.value.trim() : 'TechFlow';
+  const addr = companyAddressInput ? companyAddressInput.value.trim() : 'Lahore, Pakistan';
+  const compLink = companyLinkInput ? companyLinkInput.value.trim() : 'https://techflow.io';
+  
+  const payload = {
+    title: title,
+    company: compName,
+    location: addr,
+    salary: salaryVal,
+    type: 'Permanent',
+    description: description,
+    skillsRequired: [...skills],
+    link: compLink
+  };
+
+  const token = localStorage.getItem('supabase_access_token') || 'mock_token_recruiter';
+
+  // Post to Backend Server
+  fetch('/api/jobs/create', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    },
+    body: JSON.stringify(payload)
+  })
+  .then(res => {
+    if (!res.ok) throw new Error('Failed to publish job');
+    return res.json();
+  })
+  .then(data => {
+    console.log("Backend job publish response: ", data);
+    
+    // Fallback: Also save to localStorage
+    const published = {
+      id: data.job ? data.job.id : Date.now(),
+      title,
+      company: compName,
+      location: addr,
+      dept,
+      type: 'Permanent',
+      skills: [...skills],
+      salary: payload.salary,
+      publishedAt: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
+      status: 'published',
+      link: compLink
+    };
+    const existing = JSON.parse(localStorage.getItem('publishedJobs') || '[]');
+    existing.unshift(published);
+    localStorage.setItem('publishedJobs', JSON.stringify(existing));
+
+    showJobToast('Job published to Job Board!', 'rocket_launch');
+    setTimeout(() => {
+      if (window.parent && window.parent.App) {
+        window.parent.App.navigate('jobboard');
+      }
+    }, 1400);
+  })
+  .catch(err => {
+    console.error(err);
+    showJobToast('Error publishing job', 'error');
+  });
+}
+
+// ========== TOAST ==========
+function showJobToast(msg, icon) {
+  let toast = document.getElementById('jobToast');
+  if (!toast) {
+    toast = document.createElement('div');
+    toast.id = 'jobToast';
+    toast.className = 'fixed bottom-8 left-1/2 -translate-x-1/2 z-[999] flex items-center gap-3 px-6 py-3 bg-primary text-white rounded-full shadow-2xl font-bold text-sm transition-all opacity-0 scale-90';
+    document.body.appendChild(toast);
+  }
+  toast.innerHTML = `<span class="material-symbols-outlined">${icon}</span> ${msg}`;
+  toast.style.opacity = '1'; toast.style.transform = 'translateX(-50%) scale(1)';
+  setTimeout(() => { toast.style.opacity = '0'; toast.style.transform = 'translateX(-50%) scale(0.9)'; }, 3000);
+}
+
+function updatePreview() {
+  // 1. Job Title
+  const titleInput = document.getElementById('jobTitleInput');
+  const previewTitle = document.getElementById('previewJobTitle');
+  if (titleInput && previewTitle) {
+    previewTitle.innerText = titleInput.value || 'Job Title';
+  }
+
+  // 2. Subtitle (Department & Location)
+  const deptInput = document.getElementById('deptInput');
+  const previewSubtitle = document.getElementById('previewSubtitle');
+  if (deptInput && previewSubtitle) {
+    const dept = deptInput.value;
+    previewSubtitle.innerText = `TechFlow • ${dept} (Hybrid)`;
+  }
+
+  // 3. Stipend
+  const previewStipend = document.getElementById('previewStipend');
+  const salaryInput = document.getElementById('salaryInput');
+  if (salaryInput && previewStipend) {
+    previewStipend.innerText = salaryInput.value || 'Rs. 8,000 — Rs. 12,000';
+  }
+
+  // 4. Job Description
+  const descTextarea = document.getElementById('jobDescTextarea');
+  const previewDesc = document.getElementById('previewDescription');
+  if (descTextarea && previewDesc) {
+    let text = descTextarea.value || 'No description provided.';
+    if (text.length > 180) {
+      text = text.substring(0, 180) + '...';
+    }
+    previewDesc.innerText = text;
+  }
+}
+
+// Bind text inputs to update preview
+const titleInput = document.getElementById('jobTitleInput');
+if (titleInput) titleInput.addEventListener('input', updatePreview);
+
+const deptInput = document.getElementById('deptInput');
+if (deptInput) deptInput.addEventListener('input', updatePreview);
+
+const salaryInput = document.getElementById('salaryInput');
+if (salaryInput) salaryInput.addEventListener('input', updatePreview);
+
+const descTextarea = document.getElementById('jobDescTextarea');
+if (descTextarea) descTextarea.addEventListener('input', updatePreview);
+
+// ========== DYNAMIC COMPANY & MAP BINDINGS ==========
+const companyNameInput = document.getElementById('companyNameInput');
+const companyAddressInput = document.getElementById('companyAddressInput');
+const companyLinkInput = document.getElementById('companyLinkInput');
+const previewSubtitle = document.getElementById('previewSubtitle');
+const previewAddress = document.getElementById('previewAddress');
+const previewMapLabel = document.getElementById('previewMapLabel');
+const editorMapLabel = document.getElementById('editorMapLabel');
+const editorMap = document.getElementById('editorMap');
+const previewMap = document.getElementById('previewMap');
+
+function updateCompanyDetails() {
+  const compName = companyNameInput ? companyNameInput.value.trim() : 'Company';
+  const addr = companyAddressInput ? companyAddressInput.value.trim() : 'Location';
+  const dept = deptInput ? deptInput.value : 'Design & Creative';
+  
+  if (previewSubtitle) {
+    previewSubtitle.textContent = `${compName} • ${dept} (Hybrid)`;
+  }
+  if (previewAddress) {
+    previewAddress.textContent = addr;
+  }
+  if (previewMapLabel) {
+    previewMapLabel.textContent = addr;
+  }
+  if (editorMapLabel) {
+    editorMapLabel.textContent = addr;
+  }
+  
+  // Dynamic Map Background choice
+  let mapUrl = 'https://images.unsplash.com/photo-1524661135-423995f22d0b?q=80&w=600'; // Lahore default
+  if (addr.toLowerCase().includes('karachi')) {
+    mapUrl = 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=600';
+  } else if (addr.toLowerCase().includes('islamabad')) {
+    mapUrl = 'https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?q=80&w=600';
+  } else if (addr.toLowerCase().includes('san francisco') || addr.toLowerCase().includes('usa')) {
+    mapUrl = 'https://images.unsplash.com/photo-1501594907352-04cda38ebc29?q=80&w=600';
+  }
+  
+  if (editorMap) editorMap.style.backgroundImage = `url('${mapUrl}')`;
+  if (previewMap) previewMap.style.backgroundImage = `url('${mapUrl}')`;
+}
+
+if (companyNameInput) companyNameInput.addEventListener('input', updateCompanyDetails);
+if (companyAddressInput) companyAddressInput.addEventListener('input', updateCompanyDetails);
+if (companyLinkInput) companyLinkInput.addEventListener('input', updateCompanyDetails);
+
+// Modify saveDraft
+saveDraft = function() {
+  const compName = companyNameInput ? companyNameInput.value.trim() : 'TechFlow';
+  const addr = companyAddressInput ? companyAddressInput.value.trim() : 'Lahore, Pakistan';
+  const compLink = companyLinkInput ? companyLinkInput.value.trim() : '';
+  const title = document.getElementById('jobTitleInput').value || 'Untitled Job';
+  const dept = deptInput ? deptInput.value : 'General';
+  const desc = document.getElementById('jobDescTextarea').value || '';
+  const salaryVal = salaryInput ? salaryInput.value : 'Rs. 8,000 — Rs. 12,000';
+  const draft = {
+    id: Date.now(),
+    title,
+    company: compName,
+    location: addr,
+    dept,
+    desc,
+    skills: [...skills],
+    salary: salaryVal,
+    savedAt: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
+    status: 'draft',
+    link: compLink
+  };
+  const existing = JSON.parse(localStorage.getItem('jobDrafts') || '[]');
+  existing.unshift(draft);
+  localStorage.setItem('jobDrafts', JSON.stringify(existing));
+  showJobToast('Draft saved successfully!', 'check_circle');
+  setTimeout(() => {
+    if (window.parent && window.parent.App) {
+      window.parent.App.navigate('saved-drafts');
+    }
+  }, 1200);
+};
+
+// ========== INIT ==========
+renderSkills();
+updatePreview();
+updateCompanyDetails();
+</script>
+
+
+
+</body></html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

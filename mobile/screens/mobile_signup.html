@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/>
+    <title>JobFlow - Sign Up</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+    <script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-container-highest": "#dbe3f6",
+                      "on-primary-fixed-variant": "#72188f",
+                      "glass-thick": "rgba(255, 255, 255, 0.8)",
+                      "background": "#f9f9ff",
+                      "inverse-surface": "#29313f",
+                      "surface-container": "#e7eeff",
+                      "surface-container-lowest": "#ffffff",
+                      "surface": "#f9f9ff",
+                      "outline-variant": "#d2c1d2",
+                      "on-primary-container": "#fff5fb",
+                      "error-container": "#ffdad6",
+                      "secondary-fixed": "#d3e3ff",
+                      "surface-variant": "#dbe3f6",
+                      "on-error-container": "#93000a",
+                      "inverse-on-surface": "#ecf1ff",
+                      "on-secondary-container": "#003868",
+                      "on-primary-fixed": "#330044",
+                      "tertiary-fixed-dim": "#47e266",
+                      "tertiary-fixed": "#6cff82",
+                      "outline": "#817381",
+                      "on-background": "#471A70",
+                      "secondary-fixed-dim": "#a3c9ff",
+                      "gold": "#FFD60A",
+                      "on-tertiary-fixed": "#002106",
+                      "on-tertiary-container": "#e6ffe0",
+                      "orange": "#FF9F0A",
+                      "on-surface-variant": "#4f4350",
+                      "on-surface": "#141c29",
+                      "on-secondary-fixed-variant": "#004883",
+                      "glass-border": "rgba(255, 255, 255, 0.6)",
+                      "surface-bright": "#f9f9ff",
+                      "surface-dim": "#d2daed",
+                      "surface-container-low": "#f0f3ff",
+                      "secondary": "#0060ab",
+                      "on-tertiary-fixed-variant": "#00531a",
+                      "on-secondary-fixed": "#001c39",
+                      "glass-fill": "rgba(255, 255, 255, 0.35)",
+                      "inverse-primary": "#f0b0ff",
+                      "primary": "#8731a3",
+                      "primary-fixed": "#fbd7ff",
+                      "primary-container": "#a34cbe",
+                      "tertiary-container": "#00842f",
+                      "surface-tint": "#8d37a9",
+                      "on-tertiary": "#ffffff",
+                      "secondary-container": "#54a3ff",
+                      "tertiary": "#006823",
+                      "on-secondary": "#ffffff",
+                      "on-primary": "#ffffff",
+                      "error": "#FF453A",
+                      "primary-fixed-dim": "#f0b0ff",
+                      "on-error": "#ffffff",
+                      "surface-container-high": "#e0e8fb"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "base": "8px",
+                      "desktop-gutter": "24px",
+                      "mobile-gutter": "16px",
+                      "safe-bottom": "34px",
+                      "mobile-margin": "20px",
+                      "safe-top": "44px",
+                      "max-width": "1280px",
+                      "desktop-margin": "64px"
+              },
+              "fontFamily": {
+                      "display-xl-mobile": ["Inter"],
+                      "label-caps": ["Inter"],
+                      "headline-lg": ["Inter"],
+                      "body-md-mobile": ["Inter"],
+                      "label-caps-mobile": ["Inter"],
+                      "headline-lg-mobile": ["Inter"],
+                      "body-md": ["Inter"],
+                      "display-xl": ["Inter"]
+              },
+              "fontSize": {
+                      "display-xl-mobile": ["34px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                      "label-caps": ["13px", {"lineHeight": "1.0", "letterSpacing": "0.03em", "fontWeight": "600"}],
+                      "headline-lg": ["34px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                      "body-md-mobile": ["15px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                      "label-caps-mobile": ["12px", {"lineHeight": "1.0", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                      "headline-lg-mobile": ["28px", {"lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                      "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                      "display-xl": ["56px", {"lineHeight": "1.1", "letterSpacing": "-0.03em", "fontWeight": "700"}]
+              }
+            },
+          },
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: #DCE4F7;
+            overflow-x: hidden;
+            overflow-y: auto;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.45);
+            backdrop-filter: blur(28px);
+            -webkit-backdrop-filter: blur(28px);
+            border: 0.5px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 12px 40px 0 rgba(71, 26, 112, 0.15);
+        }
+
+        .input-glass {
+            background: rgba(255, 255, 255, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        .input-glass:focus-within {
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 0 0 3px rgba(163, 76, 190, 0.2);
+            border-color: #a34cbe;
+        }
+
+        .floating-label-input:focus ~ label,
+        .floating-label-input:not(:placeholder-shown) ~ label {
+            transform: translateY(-24px) scale(0.85);
+            color: #a34cbe;
+            font-weight: 600;
+        }
+
+        .spring-active:active {
+            transform: scale(0.96);
+            transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        .social-btn {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(10px);
+            border: 0.5px solid rgba(255, 255, 255, 0.8);
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        .shimmer-effect::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            animation: shimmer 2s infinite;
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center min-h-screen p-mobile-margin">
+    <div class="fixed inset-0 z-0"></div>
+
+    <main class="relative z-10 w-full max-w-[400px] flex flex-col items-center py-6">
+        <!-- Logo Section -->
+        <div class="mb-6 spring-active cursor-pointer">
+            <img alt="JobFlow Glassmorphic Logo" class="w-20 h-20 drop-shadow-xl" src="https://lh3.googleusercontent.com/aida/AP1WRLtHSlvHQm1XNZ4vaeue1GiJtF1j680ovYDsV1bz1IH37RWIQlHCDhIMbTh8QwjysUr_9axMNLFk7d5MtN1sRrdkCEgDdsjpU6S18_eICdCZ5ObBXpk8IMqmy52sfrJsOQaMvz7hk48gtvML_dmfwlaY-1QmOzz74jRWaBViW4SbLXgO-jIKC3LPueU0Wmini7A--bmI3LnC19bd8jueIoFhpwFhp4dCzG3gBDdCSwoekhL8nTJD3FWqr2Qs"/>
+        </div>
+
+        <!-- Floating Glass Sign Up Card -->
+        <div class="glass-card w-full rounded-[32px] p-6 flex flex-col space-y-6 animate-in fade-in zoom-in duration-700">
+            <header class="text-center">
+                <h1 class="font-headline-lg-mobile text-headline-lg-mobile text-on-background mb-1">Create Account</h1>
+                <p class="text-on-surface-variant text-body-md-mobile opacity-80">Join JobFlow to start your journey</p>
+            </header>
+
+            <!-- Form Container -->
+            <form class="space-y-4" id="signUpForm" onsubmit="event.preventDefault()">
+                
+                <!-- Username Input Group -->
+                <div class="relative flex flex-col">
+                    <div class="input-glass h-14 w-full rounded-2xl relative flex items-center px-4">
+                        <input class="floating-label-input w-full bg-transparent border-none focus:ring-0 text-on-surface font-body-md-mobile pt-2" id="username" name="username" placeholder=" " required type="text"/>
+                        <label class="absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant opacity-60 font-body-md-mobile pointer-events-none transition-all duration-300 origin-left" for="username">
+                            Username
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Email Input Group -->
+                <div class="relative flex flex-col">
+                    <div class="input-glass h-14 w-full rounded-2xl relative flex items-center px-4">
+                        <input class="floating-label-input w-full bg-transparent border-none focus:ring-0 text-on-surface font-body-md-mobile pt-2" id="email" name="email" placeholder=" " required type="email"/>
+                        <label class="absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant opacity-60 font-body-md-mobile pointer-events-none transition-all duration-300 origin-left" for="email">
+                            Email Address
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Password Input Group -->
+                <div class="relative flex flex-col">
+                    <div class="input-glass h-14 w-full rounded-2xl relative flex items-center px-4">
+                        <input class="floating-label-input w-full bg-transparent border-none focus:ring-0 text-on-surface font-body-md-mobile pt-2" id="password" name="password" placeholder=" " required type="password"/>
+                        <label class="absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant opacity-60 font-body-md-mobile pointer-events-none transition-all duration-300 origin-left" for="password">
+                            Password
+                        </label>
+                        <button class="text-primary opacity-60 hover:opacity-100 transition-opacity" type="button" onclick="togglePassword('password', this)">
+                            <span class="material-symbols-outlined text-[20px]">visibility</span>
+                        </button>
+                    </div>
+                    <!-- Password strength indicator -->
+                    <div class="mt-1 px-1 flex gap-1 items-center">
+                        <div class="h-1 flex-1 rounded bg-black/10 transition-colors" id="strengthBar1"></div>
+                        <div class="h-1 flex-1 rounded bg-black/10 transition-colors" id="strengthBar2"></div>
+                        <div class="h-1 flex-1 rounded bg-black/10 transition-colors" id="strengthBar3"></div>
+                        <span class="text-[11px] text-on-surface-variant/60 ml-2" id="strengthText">Weak</span>
+                    </div>
+                </div>
+
+                <!-- Confirm Password Input Group -->
+                <div class="relative flex flex-col">
+                    <div class="input-glass h-14 w-full rounded-2xl relative flex items-center px-4">
+                        <input class="floating-label-input w-full bg-transparent border-none focus:ring-0 text-on-surface font-body-md-mobile pt-2" id="confirmPassword" name="confirmPassword" placeholder=" " required type="password"/>
+                        <label class="absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant opacity-60 font-body-md-mobile pointer-events-none transition-all duration-300 origin-left" for="confirmPassword">
+                            Confirm Password
+                        </label>
+                        <button class="text-primary opacity-60 hover:opacity-100 transition-opacity" type="button" onclick="togglePassword('confirmPassword', this)">
+                            <span class="material-symbols-outlined text-[20px]">visibility</span>
+                        </button>
+                    </div>
+                    <p class="text-[11px] text-error mt-1 hidden" id="passwordMatchError">Passwords do not match</p>
+                </div>
+
+                <!-- Sign Up Button -->
+                <button class="w-full h-14 bg-primary text-on-primary font-bold text-[17px] rounded-full shadow-lg shadow-primary/20 spring-active flex items-center justify-center transition-all duration-300 hover:brightness-110 active:brightness-95 overflow-hidden relative" type="submit" id="submitBtn">
+                    <span class="relative z-10">Sign Up</span>
+                </button>
+            </form>
+
+            <!-- Divider -->
+            <div class="flex items-center space-x-4">
+                <div class="h-[0.5px] flex-1 bg-on-surface-variant opacity-20"></div>
+                <span class="text-[12px] font-semibold text-on-surface-variant opacity-40 uppercase tracking-widest">or continue with</span>
+                <div class="h-[0.5px] flex-1 bg-on-surface-variant opacity-20"></div>
+            </div>
+
+            <!-- Social Logins -->
+            <div class="flex justify-center space-x-6">
+                <!-- Apple (Mac) -->
+                <button class="social-btn w-14 h-14 rounded-full flex items-center justify-center spring-active hover:bg-white/80 transition-colors" id="appleBtn" type="button">
+                    <svg class="w-6 h-6 fill-on-surface" viewbox="0 0 24 24">
+                        <path d="M17.05 20.28c-.98.95-2.05 1.74-3.15 1.74-1.07 0-1.39-.64-2.61-.64-1.23 0-1.6.63-2.6.63-1.08 0-2.12-.76-3.13-1.74-2.05-2.01-3.64-5.67-3.64-8.8 0-3.11 1.63-4.75 3.19-4.75 1.15 0 1.93.63 2.76.63.82 0 1.55-.63 2.7-.63 1.19 0 2.25.54 2.94 1.43-2.39 1.4-1.99 4.39.42 5.37-.89 2.14-1.76 4.37-3.08 6.76M12.03 7.25c-.15-2.23 1.66-4.07 3.27-4.25.21 2.24-1.78 4.21-3.27 4.25"></path>
+                    </svg>
+                </button>
+                <!-- Google -->
+                <button class="social-btn w-14 h-14 rounded-full flex items-center justify-center spring-active hover:bg-white/80 transition-colors" id="googleBtn" type="button">
+                    <svg class="w-6 h-6" viewbox="0 0 24 24">
+                        <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"></path>
+                        <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"></path>
+                        <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"></path>
+                        <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"></path>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Login Footer -->
+            <footer class="text-center pt-1">
+                <p class="text-body-md-mobile text-on-surface-variant">
+                    Already have an account? 
+                    <a class="text-primary font-bold hover:underline" href="mobile_73c01c0c980a45af8f3fe8eac02040d2_Login_Screen_COM-04.html" id="loginLink">Login</a>
+                </p>
+            </footer>
+        </div>
+
+        <!-- Modern OAuth Interactive Popup Container (Glassmorphic Modal) -->
+        <div id="oauthModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-md hidden transition-all duration-300">
+            <div class="glass-card w-full max-w-[340px] rounded-3xl p-6 flex flex-col items-center space-y-6 scale-95 opacity-0 transition-all duration-300" id="oauthCard">
+                <div class="w-12 h-12 rounded-full bg-white flex items-center justify-center shadow-md" id="oauthLogo">
+                    <!-- Dynamic Logo -->
+                </div>
+                <div class="text-center">
+                    <h3 class="font-bold text-[18px]" id="oauthTitle">Sign in with Google</h3>
+                    <p class="text-[13px] text-on-surface-variant opacity-80 mt-1">to continue to JobFlow</p>
+                </div>
+                <div class="w-full flex flex-col space-y-3">
+                    <button class="w-full py-3 px-4 rounded-xl bg-white/80 hover:bg-white border border-white/50 flex items-center gap-3 transition-colors text-left spring-active" onclick="chooseOAuthAccount('Aria Sterling', 'aria.sterling@university.edu')">
+                        <div class="w-8 h-8 rounded-full bg-primary/20 text-primary font-bold flex items-center justify-center text-[12px]">AS</div>
+                        <div>
+                            <p class="text-[13px] font-bold">Aria Sterling</p>
+                            <p class="text-[11px] text-on-surface-variant opacity-70">aria.sterling@university.edu</p>
+                        </div>
+                    </button>
+                    <button class="w-full py-3 px-4 rounded-xl bg-white/80 hover:bg-white border border-white/50 flex items-center gap-3 transition-colors text-left spring-active" onclick="chooseOAuthAccount('Use another account', '')">
+                        <span class="material-symbols-outlined text-[20px] text-on-surface-variant p-1 bg-black/5 rounded-full">person_add</span>
+                        <span class="text-[13px] font-semibold">Use another account</span>
+                    </button>
+                </div>
+                <button class="text-[13px] text-on-surface-variant hover:underline" onclick="closeOAuth()">Cancel</button>
+            </div>
+        </div>
+
+        <!-- Success Toast Notification -->
+        <div id="toast" class="fixed bottom-10 left-1/2 -translate-x-1/2 z-50 bg-inverse-surface text-inverse-on-surface py-3 px-6 rounded-full shadow-2xl flex items-center gap-2 transform translate-y-20 opacity-0 transition-all duration-300">
+            <span class="material-symbols-outlined text-green-400" id="toastIcon">check_circle</span>
+            <span class="text-[14px] font-medium" id="toastMsg">Account created successfully!</span>
+        </div>
+
+        <!-- Safe Area Spacer -->
+        <div class="h-safe-bottom"></div>
+    </main>
+
+    <script>
+        function togglePassword(inputId, btn) {
+            const input = document.getElementById(inputId);
+            const icon = btn.querySelector('.material-symbols-outlined');
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.textContent = 'visibility_off';
+            } else {
+                input.type = 'password';
+                icon.textContent = 'visibility';
+            }
+        }
+
+        // DOM Elements
+        const form = document.getElementById('signUpForm');
+        const passInput = document.getElementById('password');
+        const confirmInput = document.getElementById('confirmPassword');
+        const passError = document.getElementById('passwordMatchError');
+        const submitBtn = document.getElementById('submitBtn');
+        const toast = document.getElementById('toast');
+        const toastMsg = document.getElementById('toastMsg');
+        const toastIcon = document.getElementById('toastIcon');
+
+        // Password Strength Checker
+        passInput.addEventListener('input', () => {
+            const val = passInput.value;
+            let score = 0;
+            if (val.length >= 6) score++;
+            if (/[A-Z]/.test(val) && /[0-9]/.test(val)) score++;
+            if (/[^A-Za-z0-9]/.test(val)) score++;
+
+            const bars = [document.getElementById('strengthBar1'), document.getElementById('strengthBar2'), document.getElementById('strengthBar3')];
+            const text = document.getElementById('strengthText');
+
+            bars.forEach(b => b.className = 'h-1 flex-1 rounded bg-black/10 transition-colors');
+
+            if (val.length === 0) {
+                text.textContent = 'Weak';
+            } else if (score === 1) {
+                bars[0].classList.replace('bg-black/10', 'bg-error');
+                text.textContent = 'Weak';
+                text.className = 'text-[11px] text-error ml-2 font-bold';
+            } else if (score === 2) {
+                bars[0].classList.replace('bg-black/10', 'bg-orange');
+                bars[1].classList.replace('bg-black/10', 'bg-orange');
+                text.textContent = 'Medium';
+                text.className = 'text-[11px] text-orange ml-2 font-bold';
+            } else if (score === 3) {
+                bars[0].classList.replace('bg-black/10', 'bg-green-500');
+                bars[1].classList.replace('bg-black/10', 'bg-green-500');
+                bars[2].classList.replace('bg-black/10', 'bg-green-500');
+                text.textContent = 'Strong';
+                text.className = 'text-[11px] text-green-500 ml-2 font-bold';
+            }
+        });
+
+        // Validate confirm password
+        confirmInput.addEventListener('input', () => {
+            if (confirmInput.value === passInput.value) {
+                passError.classList.add('hidden');
+            } else {
+                passError.classList.remove('hidden');
+            }
+        });
+
+        // Sign Up submission simulation
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const userVal = document.getElementById('username').value;
+            const emailVal = document.getElementById('email').value;
+            const passVal = document.getElementById('password').value;
+
+            if (passInput.value !== confirmInput.value) {
+                passError.classList.remove('hidden');
+                return;
+            }
+
+            // Visual feedback
+            submitBtn.innerHTML = '<span class="material-symbols-outlined animate-spin text-[20px]">progress_activity</span>';
+            submitBtn.disabled = true;
+
+            fetch('http://localhost:8080/api/signup', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ username: userVal, email: emailVal, password: passVal, role: 'student' })
+            })
+            .then(res => {
+                if (!res.ok) throw new Error('Username or email already registered');
+                return res.json();
+            })
+            .then(data => {
+                localStorage.setItem('currentUser', JSON.stringify(data.user));
+                
+                submitBtn.innerHTML = '<span class="material-symbols-outlined text-[20px]">check_circle</span>';
+                submitBtn.classList.replace('bg-primary', 'bg-green-500');
+
+                showToast('Account created successfully!', 'check_circle', 'text-green-400');
+
+                // Redirect after success
+                setTimeout(() => {
+                    const fallbackPath = 'mobile_73c01c0c980a45af8f3fe8eac02040d2_Login_Screen_COM-04.html';
+                    if (window.parent && typeof window.parent.App !== 'undefined') {
+                        window.parent.App.navigate('login');
+                    } else {
+                        window.location.href = fallbackPath;
+                    }
+                }, 1500);
+            })
+            .catch(err => {
+                alert(err.message);
+                submitBtn.innerHTML = 'Sign Up';
+                submitBtn.disabled = false;
+                submitBtn.classList.replace('bg-green-500', 'bg-primary');
+            });
+        });
+
+        // Toast Helper
+        function showToast(msg, iconName, iconColorClass) {
+            toastMsg.textContent = msg;
+            toastIcon.textContent = iconName;
+            toastIcon.className = `material-symbols-outlined ${iconColorClass}`;
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            toast.classList.add('translate-y-0', 'opacity-100');
+            
+            setTimeout(() => {
+                toast.classList.replace('translate-y-0', 'translate-y-20');
+                toast.classList.replace('opacity-100', 'opacity-0');
+            }, 3000);
+        }
+
+        // OAuth Handling
+        const oauthModal = document.getElementById('oauthModal');
+        const oauthCard = document.getElementById('oauthCard');
+        const googleBtn = document.getElementById('googleBtn');
+        const appleBtn = document.getElementById('appleBtn');
+
+        googleBtn.addEventListener('click', () => {
+            openOAuth('Google', `<svg class="w-6 h-6" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>`);
+        });
+
+        appleBtn.addEventListener('click', () => {
+            openOAuth('Apple', `<svg class="w-6 h-6 fill-on-surface" viewBox="0 0 24 24"><path d="M17.05 20.28c-.98.95-2.05 1.74-3.15 1.74-1.07 0-1.39-.64-2.61-.64-1.23 0-1.6.63-2.6.63-1.08 0-2.12-.76-3.13-1.74-2.05-2.01-3.64-5.67-3.64-8.8 0-3.11 1.63-4.75 3.19-4.75 1.15 0 1.93.63 2.76.63.82 0 1.55-.63 2.7-.63 1.19 0 2.25.54 2.94 1.43-2.39 1.4-1.99 4.39.42 5.37-.89 2.14-1.76 4.37-3.08 6.76M12.03 7.25c-.15-2.23 1.66-4.07 3.27-4.25.21 2.24-1.78 4.21-3.27 4.25"></path></svg>`);
+        });
+
+        function openOAuth(provider, svgIcon) {
+            document.getElementById('oauthTitle').textContent = `Sign Up with ${provider}`;
+            document.getElementById('oauthLogo').innerHTML = svgIcon;
+            oauthModal.classList.remove('hidden');
+            setTimeout(() => {
+                oauthCard.classList.remove('scale-95', 'opacity-0');
+                oauthCard.classList.add('scale-100', 'opacity-100');
+            }, 10);
+        }
+
+        function closeOAuth() {
+            oauthCard.classList.remove('scale-100', 'opacity-100');
+            oauthCard.classList.add('scale-95', 'opacity-0');
+            setTimeout(() => {
+                oauthModal.classList.add('hidden');
+            }, 300);
+        }
+
+        function chooseOAuthAccount(name, email) {
+            closeOAuth();
+            if (!email) {
+                showToast('Feature coming soon!', 'info', 'text-blue-400');
+                return;
+            }
+            
+            showToast(`Authenticating as ${name}...`, 'hourglass_empty', 'text-yellow-500 animate-spin');
+
+            setTimeout(() => {
+                showToast('Authentication Successful!', 'check_circle', 'text-green-400');
+                
+                setTimeout(() => {
+                    // Navigate to Dashboard / MFA
+                    if (window.parent && typeof window.parent.App !== 'undefined') {
+                        window.parent.App.navigate('student-dash');
+                    } else {
+                        window.location.href = 'mobile_f6816511fb8a498b9f32199700db9876_Weekly_Tests_Hub.html';
+                    }
+                }, 1000);
+            }, 1500);
+        }
+
+        // Taptic feedback
+        const interactiveElements = document.querySelectorAll('.spring-active');
+        interactiveElements.forEach(el => {
+            el.addEventListener('touchstart', () => {
+                if (window.navigator.vibrate) window.navigator.vibrate(10);
+            });
+        });
+
+        // Local Fallback Routing support
+        document.getElementById('loginLink').addEventListener('click', (e) => {
+            if (window.parent && typeof window.parent.App !== 'undefined') {
+                e.preventDefault();
+                window.parent.App.navigate('login');
+            }
+        });
+    </script>
+</body>
+</html>

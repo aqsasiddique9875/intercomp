@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>HireFlow Pro | Interview Scheduler</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-card {
+            backdrop-filter: blur(28px);
+            background: rgba(255, 255, 255, 0.35);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 12px 40px 0 rgba(71, 26, 112, 0.15);
+        }
+        .liquid-bg {
+            background: linear-gradient(135deg, #DCE4F7 0%, #E7EEFF 50%, #F9F9FF 100%);
+            min-height: 100vh;
+        }
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: 80px repeat(5, 1fr);
+            grid-template-rows: auto repeat(9, 60px);
+        }
+        .spring-interaction {
+            transition: transform 0.35s cubic-bezier(0.35, 0, 0.25, 1);
+        }
+        .spring-interaction:active {
+            transform: scale(0.96);
+        }
+        .drag-hint {
+            animation: pulse 2s infinite ease-in-out;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 0.6; }
+            50% { opacity: 1; }
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface": "#f9f9ff",
+                        "on-secondary": "#ffffff",
+                        "glass-thick": "rgba(255, 255, 255, 0.8)",
+                        "secondary-fixed": "#d3e3ff",
+                        "surface-bright": "#f9f9ff",
+                        "surface-container-high": "#e0e8fb",
+                        "secondary": "#0060ab",
+                        "tertiary": "#006823",
+                        "surface-container-lowest": "#ffffff",
+                        "on-surface": "#141c29",
+                        "outline-variant": "#d2c1d2",
+                        "inverse-surface": "#29313f",
+                        "surface-container-highest": "#dbe3f6",
+                        "on-primary": "#ffffff",
+                        "error": "#FF453A",
+                        "background": "#f9f9ff",
+                        "on-tertiary-fixed-variant": "#00531a",
+                        "orange": "#FF9F0A",
+                        "inverse-primary": "#f0b0ff",
+                        "surface-variant": "#dbe3f6",
+                        "on-surface-variant": "#4f4350",
+                        "primary-fixed-dim": "#f0b0ff",
+                        "primary-container": "#a34cbe",
+                        "on-secondary-fixed": "#001c39",
+                        "secondary-container": "#54a3ff",
+                        "primary": "#8731a3",
+                        "on-secondary-fixed-variant": "#004883",
+                        "on-primary-fixed-variant": "#72188f",
+                        "surface-tint": "#8d37a9",
+                        "secondary-fixed-dim": "#a3c9ff",
+                        "inverse-on-surface": "#ecf1ff",
+                        "card-gradient": "linear-gradient(135deg, #4D9EFA 0%, #BF7DF5 100%)",
+                        "on-primary-container": "#fff5fb",
+                        "surface-container": "#e7eeff",
+                        "glass-fill": "rgba(255, 255, 255, 0.35)",
+                        "on-error-container": "#93000a",
+                        "on-secondary-container": "#003868",
+                        "on-background": "#471A70",
+                        "on-tertiary-fixed": "#002106",
+                        "on-primary-fixed": "#330044",
+                        "tertiary-container": "#00842f",
+                        "surface-dim": "#d2daed",
+                        "surface-container-low": "#f0f3ff",
+                        "on-error": "#ffffff",
+                        "primary-fixed": "#fbd7ff",
+                        "tertiary-fixed": "#6cff82",
+                        "glass-border": "rgba(255, 255, 255, 0.6)",
+                        "on-tertiary-container": "#e6ffe0",
+                        "gold": "#FFD60A",
+                        "outline": "#817381",
+                        "tertiary-fixed-dim": "#47e266",
+                        "error-container": "#ffdad6",
+                        "on-tertiary": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "base": "8px",
+                        "safe-top": "44px",
+                        "mobile-gutter": "16px",
+                        "desktop-margin": "64px",
+                        "max-width": "1280px",
+                        "mobile-margin": "20px",
+                        "safe-bottom": "34px",
+                        "desktop-gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "display-xl-mobile": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "label-caps-mobile": ["Inter"],
+                        "display-xl": ["Inter"],
+                        "body-md-mobile": ["Inter"],
+                        "label-caps": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "body-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "display-xl-mobile": ["34px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "headline-lg": ["34px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                        "label-caps-mobile": ["12px", {"lineHeight": "1.0", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "display-xl": ["56px", {"lineHeight": "1.1", "letterSpacing": "-0.03em", "fontWeight": "700"}],
+                        "body-md-mobile": ["15px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                        "label-caps": ["13px", {"lineHeight": "1.0", "letterSpacing": "0.03em", "fontWeight": "600"}],
+                        "headline-lg-mobile": ["28px", {"lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="liquid-bg font-body-md text-on-background selection:bg-primary/20">
+<!-- TopNavBar -->
+<header class="fixed top-0 left-0 md:left-64 w-full md:w-[calc(100vw-16rem)] z-50 flex justify-between items-center px-6 md:px-8 h-14 bg-white/10 backdrop-blur-[28px] border-b border-glass-border shadow-[0_12px_40px_0_rgba(71,26,112,0.08)]">
+<div class="flex items-center gap-4">
+</div>
+<div class="flex items-center gap-6">
+<div class="hidden md:flex items-center bg-white/20 px-4 py-1.5 rounded-full border border-glass-border">
+<span class="material-symbols-outlined text-purple-950 mr-2 text-sm">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-purple-950 placeholder-purple-950/50 text-xs w-64 py-0 outline-none" placeholder="Search candidates..." type="text"/>
+</div>
+<div class="flex items-center gap-4">
+<button class="hover:scale-110 active:scale-95 transition-all text-on-background">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="hover:scale-110 active:scale-95 transition-all text-on-background">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<div class="w-10 h-10 rounded-full overflow-hidden border-2 border-white shadow-sm cursor-pointer hover:ring-2 hover:ring-primary transition-all">
+<img alt="HR Manager" class="w-full h-full object-cover" data-alt="A professional headshot of a middle-aged HR manager with a warm, confident expression. He is wearing a tailored charcoal suit and a crisp white shirt, set against a softly blurred modern office interior. The lighting is bright and natural, reflecting a high-end corporate aesthetic consistent with a premium SaaS dashboard environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCTQblcTNv-M1585wIeKVdiF8-dMwfCGc2wR9m7LF_6IdeRMD1b3RKduRLyQWQjkTZW6Be-VZSS62OkQ96d-ejQPnRK24NLKOBeueGaKHQd7_7jJ1husg5p0v1NmHt00i2w0r42Ht_hZcZdiQlmbvoY76kFau6Bfxo4hAtfqw7GJhiFyYIpRt6-IK4pjNqEYL_e7iaRepXkSxk2VzYoUB1p46lWKf2TDosBe5rLlRxy8uieKWYKuKO9JcZtOaA0tTUrlIU0OMHLNf_D"/>
+</div>
+</div>
+</div>
+</header>
+<div>
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-0 h-screen w-64 bg-glass-fill backdrop-blur-3xl border-r border-glass-border flex flex-col pt-8 pb-6 gap-2 z-40 hidden md:flex shadow-sm">
+<div class="px-6 mb-8">
+<h2 class="text-primary font-headline-lg text-[22px] font-black tracking-tight">Intercomp</h2>
+<p class="text-primary/70 font-label-caps text-label-caps uppercase tracking-wider font-bold">Company Portal</p>
+</div>
+<nav class="flex flex-col gap-1">
+<a class="flex items-center gap-4 py-3 px-6 text-on-surface-variant hover:bg-surface-container-low hover:translate-x-1 rounded-xl mx-2 transition-all duration-200" href="#" id="nav-dashboard">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-caps text-label-caps uppercase tracking-wider">Dashboard</span>
+</a>
+<a class="flex items-center gap-4 py-3 px-6 text-on-surface-variant hover:bg-surface-container-low hover:translate-x-1 rounded-xl mx-2 transition-all duration-200" href="#" id="nav-jobboard">
+<span class="material-symbols-outlined">assignment</span>
+<span class="font-label-caps text-label-caps uppercase tracking-wider">Job Board</span>
+</a>
+<a class="flex items-center gap-4 py-3 px-6 text-on-surface-variant hover:bg-surface-container-low hover:translate-x-1 rounded-xl mx-2 transition-all duration-200" href="#" id="nav-talent">
+<span class="material-symbols-outlined">person_search</span>
+<span class="font-label-caps text-label-caps uppercase tracking-wider">Talent Pool</span>
+</a>
+<a class="flex items-center gap-4 py-3 px-6 text-on-surface-variant hover:bg-surface-container-low hover:translate-x-1 rounded-xl mx-2 transition-all duration-200" href="#" id="nav-postings">
+<span class="material-symbols-outlined">work</span>
+<span class="font-label-caps text-label-caps uppercase tracking-wider">Postings</span>
+</a>
+<a class="flex items-center gap-4 py-3 px-6 text-on-surface-variant hover:bg-surface-container-low hover:translate-x-1 rounded-xl mx-2 transition-all duration-200" href="#" id="nav-applicants">
+<span class="material-symbols-outlined">groups</span>
+<span class="font-label-caps text-label-caps uppercase tracking-wider">Applicants</span>
+</a>
+<a class="flex items-center gap-4 py-3 px-6 bg-primary text-on-primary rounded-xl mx-2 shadow-lg transition-all duration-200" href="#" id="nav-interviews">
+<span class="material-symbols-outlined">event_available</span>
+<span class="font-label-caps text-label-caps uppercase tracking-wider">Interviews</span>
+</a>
+<a class="flex items-center gap-4 py-3 px-6 text-on-surface-variant hover:bg-surface-container-low hover:translate-x-1 rounded-xl mx-2 transition-all duration-200" href="#" id="nav-analytics">
+<span class="material-symbols-outlined">monitoring</span>
+<span class="font-label-caps text-label-caps uppercase tracking-wider">Analytics</span>
+</a>
+</nav>
+<div class="mt-auto px-4">
+<button class="w-full py-4 bg-primary text-on-primary rounded-2xl font-bold flex items-center justify-center gap-2 shadow-xl hover:scale-[1.02] active:scale-95 transition-all">
+<span class="material-symbols-outlined">add</span>
+                New Job Posting
+            </button>
+</div>
+<div class="mt-4 border-t border-glass-border pt-4 flex flex-col gap-1">
+<a class="flex items-center gap-4 py-2 px-6 text-on-surface-variant hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">help</span>
+<span class="font-label-caps text-label-caps uppercase tracking-wider">Help Center</span>
+</a>
+<a class="flex items-center gap-4 py-2 px-6 text-error hover:opacity-80 transition-opacity" href="#">
+<span class="material-symbols-outlined">logout</span>
+<span class="font-label-caps text-label-caps uppercase tracking-wider">Log Out</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="flex-1 ml-0 md:ml-64 pt-24 px-4 py-8 md:px-8 overflow-x-hidden">
+<div class="max-w-max-width mx-auto flex gap-desktop-gutter">
+<!-- Left Sidebar (Pending Scheduling) -->
+<section class="w-80 flex flex-col gap-6">
+<div class="glass-card rounded-3xl p-6">
+<h2 class="font-headline-lg text-2xl text-on-background mb-4">Pending Scheduling</h2>
+<div class="mb-6">
+<label class="font-label-caps uppercase text-[11px] text-on-surface-variant mb-2 block">Interview Duration</label>
+<div class="relative">
+<select class="w-full bg-glass-thick border-glass-border rounded-xl px-4 py-3 appearance-none focus:ring-2 focus:ring-primary/20 outline-none">
+<option>30 minutes</option>
+<option selected="">45 minutes</option>
+<option>60 minutes</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-on-surface-variant">expand_more</span>
+</div>
+</div>
+<div class="space-y-3">
+<div class="spring-interaction cursor-grab active:cursor-grabbing p-4 rounded-2xl bg-white/50 border border-glass-border group">
+<div class="flex items-center gap-3">
+<img class="w-10 h-10 rounded-full object-cover" data-alt="Professional headshot of Alex Sterling, a male tech professional with a friendly expression, soft studio lighting, high-end photography style against a neutral office background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBQQSHtXSd1Az2qpafyiLQlgYo-t-QmWi-Nj0G9gC9eR1u4avHNZ329vM6YkffP1ktFMOfxBK2dRB6TWy48pfJuo3NUtZmonwn7xdmMqlllO-zbkj3iYyawx6qhywPi85zURp_4m2iX9z1d9OFBg7naJMF1My4rfXODnGkkD6cEKxSFPyiFBodWehMWYB5CjAdjYx9GOGMLy1_W0GhDI1jEHT6P3IQvOdFF_9FeHs6b_SziI1S9F0XGt-Yjb1bys597G31P0WKb6qgG"/>
+<div class="flex-1">
+<p class="font-bold text-on-background">Alex Sterling</p>
+<p class="text-xs text-on-surface-variant">Senior UX Designer</p>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant/30 group-hover:text-primary transition-colors">drag_indicator</span>
+</div>
+<p class="mt-3 text-[10px] uppercase font-bold text-primary flex items-center gap-1 drag-hint">
+<span class="material-symbols-outlined text-[14px]">touch_app</span> Drag to schedule
+                                </p>
+</div>
+<div class="spring-interaction cursor-grab active:cursor-grabbing p-4 rounded-2xl bg-white/50 border border-glass-border group">
+<div class="flex items-center gap-3">
+<img class="w-10 h-10 rounded-full object-cover" data-alt="Portrait of Maya Chen, a creative female candidate, smiling warmly, soft morning lighting, clean aesthetic, depth of field, vibrant but professional colors." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAMcGnxa_L9qtH7loDyRyceL1CmssoLxgE7AS-4qp_X5DYZMguPCih5A6ed7EZpv6GZmoCjUFOJ2zlBJMnJ9RQr99ExDJje_-QIQMo9_cIhRU5xvT64bYChB0--sGPnfDKMPxeQJjjTtZpCLBOn4-q6KMARvSgwa6xGP5XAn2FnDNvqd4tpPtj8qt3D1zTj-TBXn7v6XfWVYI98Q7F2Lcd-YuwUw39lQ2pApIOrlijwocoM-Lseu3-e2QvyiZZfpG8njkxBuZFtC1qZ"/>
+<div class="flex-1">
+<p class="font-bold text-on-background">Maya Chen</p>
+<p class="text-xs text-on-surface-variant">Product Manager</p>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant/30 group-hover:text-primary transition-colors">drag_indicator</span>
+</div>
+<p class="mt-3 text-[10px] uppercase font-bold text-primary flex items-center gap-1 drag-hint">
+<span class="material-symbols-outlined text-[14px]">touch_app</span> Drag to schedule
+                                </p>
+</div>
+<div class="spring-interaction cursor-grab active:cursor-grabbing p-4 rounded-2xl bg-white/50 border border-glass-border group">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container font-bold">JW</div>
+<div class="flex-1">
+<p class="font-bold text-on-background">Jordan Wade</p>
+<p class="text-xs text-on-surface-variant">Frontend Lead</p>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant/30 group-hover:text-primary transition-colors">drag_indicator</span>
+</div>
+<p class="mt-3 text-[10px] uppercase font-bold text-primary flex items-center gap-1 drag-hint">
+<span class="material-symbols-outlined text-[14px]">touch_app</span> Drag to schedule
+                                </p>
+</div>
+</div>
+</div>
+<div class="glass-card rounded-3xl p-6 bg-primary/5 border-primary/20">
+<div class="flex items-center gap-3 text-primary mb-2">
+<span class="material-symbols-outlined">auto_awesome</span>
+<p class="font-bold">Smart Match Pro</p>
+</div>
+<p class="text-sm text-on-background/70 leading-relaxed">AI suggests Tuesday at 10 AM as the best slot for Alex Sterling and the Interview Panel.</p>
+</div>
+</section>
+<!-- Center: Weekly Calendar Grid -->
+<section class="flex-1 glass-card rounded-[40px] p-8">
+<div class="flex justify-between items-center mb-8">
+<div>
+<h1 class="font-headline-lg text-3xl text-on-background">Interview Calendar</h1>
+<p class="text-on-surface-variant">October 14 – 18, 2024</p>
+</div>
+<div class="flex gap-2 bg-glass-fill p-1.5 rounded-2xl border border-glass-border">
+<button class="px-4 py-2 bg-white rounded-xl shadow-sm font-bold text-sm">Week</button>
+<button class="px-4 py-2 hover:bg-white/50 rounded-xl transition-all text-sm">Month</button>
+<button class="px-4 py-2 hover:bg-white/50 rounded-xl transition-all text-sm">Day</button>
+</div>
+</div>
+<div class="calendar-grid relative overflow-hidden">
+<!-- Header Days -->
+<div class="bg-transparent h-12"></div>
+<div class="flex flex-col items-center justify-center h-12 border-b border-glass-border">
+<span class="text-[10px] uppercase font-bold tracking-widest text-on-surface-variant">Mon</span>
+<span class="text-lg font-bold">14</span>
+</div>
+<div class="flex flex-col items-center justify-center h-12 border-b border-glass-border">
+<span class="text-[10px] uppercase font-bold tracking-widest text-on-surface-variant">Tue</span>
+<span class="text-lg font-bold">15</span>
+</div>
+<div class="flex flex-col items-center justify-center h-12 border-b border-glass-border">
+<span class="text-[10px] uppercase font-bold tracking-widest text-on-surface-variant">Wed</span>
+<span class="text-lg font-bold">16</span>
+</div>
+<div class="flex flex-col items-center justify-center h-12 border-b border-glass-border">
+<span class="text-[10px] uppercase font-bold tracking-widest text-on-surface-variant">Thu</span>
+<span class="text-lg font-bold">17</span>
+</div>
+<div class="flex flex-col items-center justify-center h-12 border-b border-glass-border">
+<span class="text-[10px] uppercase font-bold tracking-widest text-on-surface-variant">Fri</span>
+<span class="text-lg font-bold">18</span>
+</div>
+<!-- Time Slots Grid -->
+<!-- 9 AM -->
+<div class="flex items-start justify-end pr-4 text-xs font-bold text-on-surface-variant/50 pt-2">9 AM</div>
+<div class="border-b border-r border-glass-border"></div>
+<div class="border-b border-r border-glass-border relative">
+<!-- Available Slot Example -->
+<div class="absolute inset-1 bg-secondary-container/10 border-2 border-dashed border-secondary-container/30 rounded-xl flex items-center justify-center group cursor-pointer hover:bg-secondary-container/20 transition-all">
+<span class="material-symbols-outlined text-secondary-container opacity-0 group-hover:opacity-100 transition-opacity">add</span>
+</div>
+</div>
+<div class="border-b border-r border-glass-border"></div>
+<div class="border-b border-r border-glass-border"></div>
+<div class="border-b border-glass-border"></div>
+<!-- 10 AM -->
+<div class="flex items-start justify-end pr-4 text-xs font-bold text-on-surface-variant/50 pt-2">10 AM</div>
+<div class="border-b border-r border-glass-border relative">
+<!-- Scheduled Event -->
+<div class="absolute inset-1 p-2 rounded-xl bg-primary-container/20 border border-primary/30 flex flex-col justify-between z-10 backdrop-blur-md shadow-lg spring-interaction cursor-pointer">
+<div>
+<p class="text-[10px] font-bold text-primary uppercase">Interview: Sarah L.</p>
+<p class="text-[9px] text-on-background/70">10:00 - 11:00 AM</p>
+</div>
+<a class="text-[10px] font-bold text-primary flex items-center gap-1 hover:underline" href="#">
+<span class="material-symbols-outlined text-[14px]">link</span> Join Meeting
+                                </a>
+</div>
+</div>
+<div class="border-b border-r border-glass-border"></div>
+<div class="border-b border-r border-glass-border"></div>
+<div class="border-b border-r border-glass-border"></div>
+<div class="border-b border-glass-border"></div>
+<!-- 11 AM -->
+<div class="flex items-start justify-end pr-4 text-xs font-bold text-on-surface-variant/50 pt-2">11 AM</div>
+<div class="border-b border-r border-glass-border"></div>
+<div class="border-b border-r border-glass-border"></div>
+<div class="border-b border-r border-glass-border"></div>
+<div class="border-b border-r border-glass-border relative">
+<div class="absolute inset-1 p-2 rounded-xl bg-secondary-container/20 border border-secondary/30 flex flex-col justify-between z-10 backdrop-blur-md">
+<div>
+<p class="text-[10px] font-bold text-secondary uppercase">Interview: David G.</p>
+<p class="text-[9px] text-on-background/70">11:15 - 12:00 PM</p>
+</div>
+<a class="text-[10px] font-bold text-secondary flex items-center gap-1" href="#">
+<span class="material-symbols-outlined text-[14px]">video_call</span> Launch Call
+                                </a>
+</div>
+</div>
+<div class="border-b border-glass-border"></div>
+<!-- 12 PM - Lunch/Break -->
+<div class="flex items-start justify-end pr-4 text-xs font-bold text-on-surface-variant/50 pt-2">12 PM</div>
+<div class="col-span-5 bg-on-surface-variant/5 border-b border-glass-border flex items-center justify-center" colspan="5">
+<span class="text-[10px] uppercase tracking-widest text-on-surface-variant/40 font-bold">Lunch Break • No Availability</span>
+</div>
+<!-- 1 PM -->
+<div class="flex items-start justify-end pr-4 text-xs font-bold text-on-surface-variant/50 pt-2">1 PM</div>
+<div class="border-b border-r border-glass-border"></div>
+<div class="border-b border-r border-glass-border relative">
+<div class="absolute inset-1 bg-secondary-container/10 border-2 border-dashed border-secondary-container/30 rounded-xl"></div>
+</div>
+<div class="border-b border-r border-glass-border"></div>
+<div class="border-b border-r border-glass-border"></div>
+<div class="border-b border-glass-border"></div>
+<!-- 2 PM -->
+<div class="flex items-start justify-end pr-4 text-xs font-bold text-on-surface-variant/50 pt-2">2 PM</div>
+<div class="border-b border-r border-glass-border"></div>
+<div class="border-b border-r border-glass-border"></div>
+<div class="border-b border-r border-glass-border relative">
+<div class="absolute inset-1 p-2 rounded-xl bg-primary-container/20 border border-primary/30 flex flex-col justify-between z-10 backdrop-blur-md shadow-lg">
+<div>
+<p class="text-[10px] font-bold text-primary uppercase">Interview: Leo K.</p>
+<p class="text-[9px] text-on-background/70">2:00 - 3:00 PM</p>
+</div>
+<a class="text-[10px] font-bold text-primary flex items-center gap-1" href="#">
+<span class="material-symbols-outlined text-[14px]">link</span> Join Meeting
+                                </a>
+</div>
+</div>
+<div class="border-b border-r border-glass-border"></div>
+<div class="border-b border-glass-border"></div>
+<!-- 3 PM -->
+<div class="flex items-start justify-end pr-4 text-xs font-bold text-on-surface-variant/50 pt-2">3 PM</div>
+<div class="border-b border-r border-glass-border"></div>
+<div class="border-b border-r border-glass-border"></div>
+<div class="border-b border-r border-glass-border"></div>
+<div class="border-b border-r border-glass-border"></div>
+<div class="border-b border-glass-border relative">
+<div class="absolute inset-1 bg-secondary-container/10 border-2 border-dashed border-secondary-container/30 rounded-xl"></div>
+</div>
+<!-- 4 PM -->
+<div class="flex items-start justify-end pr-4 text-xs font-bold text-on-surface-variant/50 pt-2">4 PM</div>
+<div class="border-b border-r border-glass-border"></div>
+<div class="border-b border-r border-glass-border relative">
+<div class="absolute inset-1 bg-secondary-container/10 border-2 border-dashed border-secondary-container/30 rounded-xl"></div>
+</div>
+<div class="border-b border-r border-glass-border"></div>
+<div class="border-b border-r border-glass-border"></div>
+<div class="border-b border-glass-border"></div>
+<!-- 5 PM -->
+<div class="flex items-start justify-end pr-4 text-xs font-bold text-on-surface-variant/50 pt-2">5 PM</div>
+<div class="border-r border-glass-border"></div>
+<div class="border-r border-glass-border"></div>
+<div class="border-r border-glass-border relative">
+<div class="absolute inset-1 bg-secondary-container/10 border-2 border-dashed border-secondary-container/30 rounded-xl"></div>
+</div>
+<div class="border-r border-glass-border"></div>
+<div class=""></div>
+</div>
+<!-- Subtle Liquid Background Elements within Calendar -->
+<div class="absolute -top-24 -right-24 w-64 h-64 bg-primary/5 rounded-full blur-3xl pointer-events-none"></div>
+<div class="absolute -bottom-24 -left-24 w-64 h-64 bg-secondary/5 rounded-full blur-3xl pointer-events-none"></div>
+</section>
+</div>
+</main>
+</div>
+<!-- Floating Micro-Action -->
+<div class="fixed bottom-desktop-margin right-desktop-margin">
+<button class="w-16 h-16 rounded-2xl bg-primary shadow-2xl flex items-center justify-center text-white spring-interaction hover:scale-110">
+<span class="material-symbols-outlined text-3xl">add</span>
+</button>
+</div>
+<script>
+        // Simple Interaction logic for drag hints or visual feedback
+        document.querySelectorAll('.spring-interaction').forEach(el => {
+            el.addEventListener('mousedown', () => {
+                el.style.zIndex = '50';
+            });
+            el.addEventListener('mouseup', () => {
+                el.style.zIndex = '';
+            });
+        });
+    </script>
+</body></html>

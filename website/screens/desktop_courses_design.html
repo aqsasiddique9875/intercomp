@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+  <script>
+    if (window.self !== window.top) {
+      const style = document.createElement('style');
+      style.innerHTML = `
+        header, nav, aside, 
+        .SideNavBar, .TopNavBar, 
+        #SideNavBar, #TopNavBar {
+          display: none !important;
+        }
+        main, .main-content {
+          margin-left: 0 !important;
+          padding-top: 1.5rem !important;
+        }
+        main.ml-64, main.lg\\:ml-64 {
+          margin-left: 0 !important;
+          padding-top: 2rem !important;
+        }
+      `;
+      document.documentElement.appendChild(style);
+    }
+  </script>
+
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Design Courses | Design Portal</title>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "inverse-primary": "#f0b0ff",
+                        "primary-container": "#a34cbe",
+                        "secondary-container": "#dbe3f6",
+                        "on-surface": "#181c20",
+                        "surface-container-lowest": "#ffffff",
+                        "primary-fixed": "#fbd7ff",
+                        "on-surface-variant": "#4f4350",
+                        "on-background": "#181c20",
+                        "surface-tint": "#8d37a9",
+                        "on-tertiary-container": "#fff5ff",
+                        "on-error": "#ffffff",
+                        "outline": "#817381",
+                        "surface-dim": "#d8dadf",
+                        "secondary": "#565f6e",
+                        "secondary-fixed-dim": "#bec7d9",
+                        "tertiary": "#70459a",
+                        "on-primary-fixed": "#330044",
+                        "surface-container-high": "#e6e8ed",
+                        "surface-container-low": "#f1f4f9",
+                        "outline-variant": "#d2c1d2",
+                        "primary": "#8731a3",
+                        "on-tertiary-fixed": "#2c0050",
+                        "on-secondary": "#ffffff",
+                        "surface-container": "#eceef3",
+                        "on-primary": "#ffffff",
+                        "background": "#f7f9fe",
+                        "surface-bright": "#f7f9fe",
+                        "surface-variant": "#e0e2e7",
+                        "on-primary-container": "#fff5fb",
+                        "on-tertiary-fixed-variant": "#5d3186",
+                        "on-error-container": "#93000a",
+                        "on-secondary-container": "#5c6575",
+                        "tertiary-fixed-dim": "#ddb7ff",
+                        "primary-fixed-dim": "#f0b0ff",
+                        "on-tertiary": "#ffffff",
+                        "on-secondary-fixed": "#141c29",
+                        "inverse-surface": "#2d3135",
+                        "secondary-fixed": "#dbe3f6",
+                        "on-secondary-fixed-variant": "#3f4756",
+                        "tertiary-fixed": "#f0dbff",
+                        "error-container": "#ffdad6",
+                        "on-primary-fixed-variant": "#72188f",
+                        "error": "#ba1a1a",
+                        "tertiary-container": "#8a5eb5",
+                        "surface": "#f7f9fe",
+                        "surface-container-highest": "#e0e2e7",
+                        "inverse-on-surface": "#eff1f6"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-mobile": "16px",
+                        "container-max-width": "1280px",
+                        "margin-desktop": "64px",
+                        "gutter": "24px",
+                        "unit": "8px",
+                        "margin-tablet": "32px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "headline-lg": ["Plus Jakarta Sans"],
+                        "display-lg": ["Plus Jakarta Sans"],
+                        "body-lg": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "body-md": ["Inter"],
+                        "display-lg-mobile": ["Plus Jakarta Sans"],
+                        "label-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                        "headline-lg": ["32px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                        "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "label-sm": ["12px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "display-lg-mobile": ["36px", {"lineHeight": "1.1", "fontWeight": "700"}],
+                        "label-md": ["14px", {"lineHeight": "1.4", "letterSpacing": "0.01em", "fontWeight": "500"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            background-color: #DCE4F7; /* Overriding for specific requested background */
+            color: #181c20;
+            overflow-x: hidden;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.35);
+            backdrop-filter: blur(28px);
+            -webkit-backdrop-filter: blur(28px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .glass-card:hover {
+            transform: scale(1.02);
+            box-shadow: 0 0 40px rgba(163, 76, 190, 0.15);
+            border-color: rgba(163, 76, 190, 0.3);
+        }
+
+        .inner-glow {
+            box-shadow: inset 0.5px 0.5px 0px 0px rgba(255, 255, 255, 0.8);
+        }
+
+        .spring-animation {
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .deep-purple-text {
+            color: #471A70;
+        }
+
+        .primary-purple-bg {
+            background-color: #A34CBE;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #A34CBE;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="font-body-md text-on-surface">
+<!-- TopNavBar -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-64 h-20 bg-white/35 backdrop-blur-[28px] border-b border-white/20">
+<div class="flex items-center gap-2">
+<span class="font-headline-md text-headline-md font-bold text-primary dark:text-inverse-primary">Design Portal</span>
+</div>
+<nav class="hidden md:flex items-center gap-8">
+<a class="font-label-md text-label-md text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-inverse-primary hover:scale-[1.02] transition-transform duration-300 ease-[cubic-bezier(0.175,0.885,0.32,1.275)]" href="#">Dashboard</a>
+<a class="font-label-md text-label-md text-primary dark:text-inverse-primary border-b-2 border-primary dark:border-inverse-primary pb-1 hover:scale-[1.02] transition-transform duration-300 ease-[cubic-bezier(0.175,0.885,0.32,1.275)]" href="#">Courses</a>
+<a class="font-label-md text-label-md text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-inverse-primary hover:scale-[1.02] transition-transform duration-300 ease-[cubic-bezier(0.175,0.885,0.32,1.275)]" href="#">Schedule</a>
+<a class="font-label-md text-label-md text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-inverse-primary hover:scale-[1.02] transition-transform duration-300 ease-[cubic-bezier(0.175,0.885,0.32,1.275)]" href="#">Resources</a>
+</nav>
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-primary hover:scale-110 transition-transform">notifications</button>
+<button class="material-symbols-outlined text-primary hover:scale-110 transition-transform">settings</button>
+<div class="w-10 h-10 rounded-full overflow-hidden border-2 border-primary/20">
+<img class="w-full h-full object-cover" data-alt="A professional student profile portrait, high-end photography, soft studio lighting, focused on a young adult designer, warm and approachable, clean modern background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDwevzM9m9b8ImZGybAIVkQ9ulkyPXLBjA5PJDvrKvVcC-v1VPUeCotzWFbfSWXPk55fGQRpUagKpJp1eFsKKNETF8WcGDaXVIlh-UwVzXsNfXXwGtiWhK6vWhtVh9XjpjU6u2Z4dqIPKk5EOq3bYzqLo3g8Mfav9qBeyIiVlG1-XL05U823dhyX5lTsR1QCY_rYlifC69UuKbwzagacNTEUrLPUP6gZ2vBGLSeCx0yGRgvQwPCYN8droYqYCKzibzTxwKH1ySZhB9U"/>
+</div>
+</div>
+</header>
+<!-- Sidebar Navigation -->
+<aside class="fixed left-0 top-20 h-[calc(100vh-80px)] p-6 z-40 hidden lg:flex flex-col w-64 bg-white/20 backdrop-blur-[28px] border-r border-white/10">
+<div class="flex flex-col gap-2 mb-10">
+<div class="w-12 h-12 rounded-2xl overflow-hidden bg-primary/10 mb-2">
+<img class="w-full h-full object-cover" data-alt="A stylized 3D avatar icon for a designer, high-fidelity glassmorphism style, purple and teal accents, soft reflections, clean white background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBgbVb7XLYqjZpND8Nn7LRf4aAVwP6utULn6yOqf_ESPJxgYqb7uLba6VYwzH25Gji4nMRsOM-Bv6H53tjIKwEbIZz0qSdV3OvpCFT_0SY-guqrLSFMI0rz-raD_8_S01_iC57CAYlyjLzDgPPAmsKHLjs86RHGhAIVQgkrEzmzZN4DzkMOO2GN6c87s1rFtr2amJfY7ZtfTcfVSjVrG9jZuO2DkVZdc-Ylhi2V8k95IOLrCtq93NZNAgks2uMwn82A_RkvdFM7SyrM"/>
+</div>
+<div>
+<p class="font-label-md text-label-md font-bold text-primary">Alex Rivers</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Design Student</p>
+</div>
+</div>
+<nav class="flex flex-col gap-2 flex-grow">
+<a class="flex items-center gap-3 text-on-surface-variant dark:text-surface-variant px-4 py-3 hover:bg-white/10 rounded-full hover:scale-[1.02] transition-all duration-300" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="font-label-md text-label-md">Home</span>
+</a>
+<a class="flex items-center gap-3 bg-primary text-on-primary rounded-full px-4 py-3 scale-[1.02] transition-all duration-300" href="#">
+<span class="material-symbols-outlined">school</span>
+<span class="font-label-md text-label-md">My Courses</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant dark:text-surface-variant px-4 py-3 hover:bg-white/10 rounded-full hover:scale-[1.02] transition-all duration-300" href="#">
+<span class="material-symbols-outlined">palette</span>
+<span class="font-label-md text-label-md">Portfolio</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant dark:text-surface-variant px-4 py-3 hover:bg-white/10 rounded-full hover:scale-[1.02] transition-all duration-300" href="#">
+<span class="material-symbols-outlined">grade</span>
+<span class="font-label-md text-label-md">Grades</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant dark:text-surface-variant px-4 py-3 hover:bg-white/10 rounded-full hover:scale-[1.02] transition-all duration-300" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="font-label-md text-label-md">Community</span>
+</a>
+</nav>
+<div class="mt-auto">
+<button class="w-full py-4 bg-primary text-on-primary rounded-full font-label-md text-label-md hover:brightness-110 transition-all shadow-lg shadow-primary/20">
+                Upgrade to Pro
+            </button>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="lg:pl-64 pt-20 min-h-screen">
+<div class="max-w-[1280px] mx-auto px-16 py-12">
+<!-- Breadcrumbs -->
+<nav class="flex items-center gap-2 text-on-surface-variant mb-6 font-label-sm text-label-sm">
+<a href="#" class="hover:text-primary transition-colors cursor-pointer">Home</a>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+<a href="#" class="hover:text-primary transition-colors cursor-pointer">Course Catalog</a>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+<span class="text-primary font-bold">Design</span>
+</nav>
+<!-- Title Section -->
+<section class="mb-12">
+<h1 class="font-display-lg text-display-lg deep-purple-text mb-4">Design Courses</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">
+                    Master the craft of digital materiality and high-fidelity interfaces with our expert-led design modules.
+                </p>
+</section>
+<!-- Course Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
+<!-- Course Card 1 -->
+<div class="glass-card rounded-[32px] p-6 flex flex-col inner-glow">
+<div class="w-full aspect-[4/3] rounded-2xl overflow-hidden mb-6">
+<img class="w-full h-full object-cover" data-alt="A vibrant abstract 3D design render featuring fluid translucent ribbons in electric purple and cyan, high-fidelity glass textures, cinematic lighting, ultra-modern aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAetpSjPe4hKotLVJhShjoVO-yzT8oKpRzqb0pi_S49yIzdtb7N9Q0gaEzkY0lICyq-PfgBLqcKy15Yi_-VBohN-dG62OLQpCmobypc7DZBQcFy9JJiodyi0mCM5lN2Y1LhO5D8zqp0DnKNa9H8104DVB5dwT_KnGbXOzf3PIw9zs_-KPxoR4HbHDo-eOyARZRs9c7hwaJa_3zMWQD4FEUiPs6W2_ZIqSsL2WyJjPz-BJRZjMTh-ERWQtwBEKfWfLr21iCwjMHOiO9j"/>
+</div>
+<div class="flex-grow">
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-headline-md text-headline-md deep-purple-text">User Interface Design</h3>
+<div class="flex items-center gap-1 text-primary">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-label-md text-label-md">4.9</span>
+</div>
+</div>
+<p class="text-on-surface-variant font-body-md mb-6">Master visual principles and layout.</p>
+</div>
+<div class="flex items-center justify-between mt-auto">
+<span class="font-headline-md text-headline-md deep-purple-text">Rs. 199.00</span>
+<button onclick="handleQuickApply(event)" data-link="https://www.coursera.org/specializations/ui-ux-design" class="px-6 py-3 primary-purple-bg text-white rounded-full font-label-md text-label-md hover:scale-105 active:scale-95 transition-all">Apply</button>
+</div>
+</div>
+<!-- Course Card 2 -->
+<div class="glass-card rounded-[32px] p-6 flex flex-col inner-glow">
+<div class="w-full aspect-[4/3] rounded-2xl overflow-hidden mb-6">
+<img class="w-full h-full object-cover" data-alt="Digital art representing UX research with glowing data nodes and interconnected glass spheres in shades of lavender and deep blue, soft atmospheric glow, premium tech feel." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCQA9RMpZsEsz4lCKIVJnhrSjIB-1BSsfLEVH9bcCgdUOZN5oEO6ZdxC-Y6iKY2ud3UKAJGWT9ikfx71EQ-qQJEceIEtutBN-jYBguXHYn7WCHVMfg9OYLWFtedndvXR3JH10-HpTvSyopli4Mm_5zFUMYvJCL5c0Z-HMZnUu4QIiVyh8M_JNjdOS4BvQN_DYWkcaLh9CnqfB9xZ4LRsbArKJtnd2-lp87z4zFDwLcdKKfuOpD9xTqpC2TbTTNIdMlevF7qI85mEtgl"/>
+</div>
+<div class="flex-grow">
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-headline-md text-headline-md deep-purple-text">UX Research &amp; Analytics</h3>
+<div class="flex items-center gap-1 text-primary">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-label-md text-label-md">4.8</span>
+</div>
+</div>
+<p class="text-on-surface-variant font-body-md mb-6">Learn data-driven design methods.</p>
+</div>
+<div class="flex items-center justify-between mt-auto">
+<span class="font-headline-md text-headline-md deep-purple-text">Rs. 199.00</span>
+<button onclick="handleQuickApply(event)" data-link="https://www.coursera.org/learn/ux-research" class="px-6 py-3 primary-purple-bg text-white rounded-full font-label-md text-label-md hover:scale-105 active:scale-95 transition-all">Apply</button>
+</div>
+</div>
+<!-- Course Card 3 -->
+<div class="glass-card rounded-[32px] p-6 flex flex-col inner-glow">
+<div class="w-full aspect-[4/3] rounded-2xl overflow-hidden mb-6">
+<img class="w-full h-full object-cover" data-alt="Abstract composition of geometric glass blocks refracting vibrant gradients of magenta and light blue, clean minimalist background, professional graphic design aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCXpsmNDK-CuO1YxOWyO_N1LXXWCfTK-y4wSg8B4ycvgkJ4L9Zf9a3UFfxJjJSKjzBzDmoYdLgM_MmFo-BpVS_mx19HDjqriYGxZtZpIjr6jFHk_wnDk_g-sn-LuRi7zVjhVy2EM5_PlUMGbfaFt4pNukwC-IMHtaMxSkE8USUWog0aqEBzgQqiYZCvWA2e_hGCh245BYDMlX_KGNrNQ55zIIOiz3H1eSiweRBJyJD0qIjN4zaOzebs32f3wo_9tSc0qM0IROZOY95X"/>
+</div>
+<div class="flex-grow">
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-headline-md text-headline-md deep-purple-text">Graphic Design Fundamentals</h3>
+<div class="flex items-center gap-1 text-primary">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-label-md text-label-md">5.0</span>
+</div>
+</div>
+<p class="text-on-surface-variant font-body-md mb-6">Core principles of visual communication.</p>
+</div>
+<div class="flex items-center justify-between mt-auto">
+<span class="font-headline-md text-headline-md deep-purple-text">Rs. 199.00</span>
+<button onclick="handleQuickApply(event)" data-link="https://www.coursera.org/specializations/graphic-design" class="px-6 py-3 primary-purple-bg text-white rounded-full font-label-md text-label-md hover:scale-105 active:scale-95 transition-all">Apply</button>
+</div>
+</div>
+<!-- Course Card 4 -->
+<div class="glass-card rounded-[32px] p-6 flex flex-col inner-glow">
+<div class="w-full aspect-[4/3] rounded-2xl overflow-hidden mb-6">
+<img class="w-full h-full object-cover" data-alt="Dynamic 3D illustration of a futuristic interface button being pressed, with glass refraction effects and glowing light trails, ethereal purple color palette, high fidelity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCVbRwcEsE7VFr1VOHQHSjBQ4rRgEpCmTcTrN_Cq0bW0kRo9IjPVjWPGHg5icB5aH8LZLqpWjAJBlVxUpyqx1kTYJedBaf6kwYtVJF3MJB9cWzaKfNySXow8jt0HmXlJtJnSoNKM3t1ZjhVHQOhAzzsncYtKDQG6ZUKvF5AKU4N3gZxqrQCX_xhAeKzWrxjKRIzjDklaTEZjA2UL4MeFro2jZGyqu4ksx7xGf8hB-3BcZOCWEFtjAAlWSxqBZZU_x8GLp4GBJdu93b9"/>
+</div>
+<div class="flex-grow">
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-headline-md text-headline-md deep-purple-text">Advanced Interaction Design</h3>
+<div class="flex items-center gap-1 text-primary">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-label-md text-label-md">4.9</span>
+</div>
+</div>
+<p class="text-on-surface-variant font-body-md mb-6">Creating fluid motion and feedback.</p>
+</div>
+<div class="flex items-center justify-between mt-auto">
+<span class="font-headline-md text-headline-md deep-purple-text">Rs. 199.00</span>
+<button onclick="handleQuickApply(event)" data-link="https://www.coursera.org/learn/interaction-design" class="px-6 py-3 primary-purple-bg text-white rounded-full font-label-md text-label-md hover:scale-105 active:scale-95 transition-all">Apply</button>
+</div>
+</div>
+<!-- Course Card 5 -->
+<div class="glass-card rounded-[32px] p-6 flex flex-col inner-glow">
+<div class="w-full aspect-[4/3] rounded-2xl overflow-hidden mb-6">
+<img class="w-full h-full object-cover" data-alt="A minimalist 3D rendering of a glass crystalline logo shape floating in a soft pastel gradient environment, representing brand identity and visual strategy, professional lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBbGx1aC9CZoU1NFAqXrbJgM6oFdweEv_HWABkuIGANIgBnErgpEqD90C6VJEsss3I14WAHhiJeKxLCThmWyqwBYRGJIhGLKlsX0RfpjBovP3zYCouTMjgLMQsBiZKO8fcJehE33rvjS2HnjXaE1auAsaeT6pP_qkvtIujnnBtIwAQC8eaceq8Ch5NhIVMwEU9kiuBt6YWi_S75ClduMfzmiJ-SQFhtmqxyAbtTxilrOe5qJmkCSB6WCDaw-tUCZgKKhvpYYF424J99"/>
+</div>
+<div class="flex-grow">
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-headline-md text-headline-md deep-purple-text">Visual Strategy &amp; Branding</h3>
+<div class="flex items-center gap-1 text-primary">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-label-md text-label-md">4.7</span>
+</div>
+</div>
+<p class="text-on-surface-variant font-body-md mb-6">Build cohesive and memorable brands.</p>
+</div>
+<div class="flex items-center justify-between mt-auto">
+<span class="font-headline-md text-headline-md deep-purple-text">Rs. 199.00</span>
+<button onclick="handleQuickApply(event)" data-link="https://www.coursera.org/learn/brand-management" class="px-6 py-3 primary-purple-bg text-white rounded-full font-label-md text-label-md hover:scale-105 active:scale-95 transition-all">Apply</button>
+</div>
+</div>
+<!-- Course Card 6 -->
+<div class="glass-card rounded-[32px] p-6 flex flex-col inner-glow">
+<div class="w-full aspect-[4/3] rounded-2xl overflow-hidden mb-6">
+<img class="w-full h-full object-cover" data-alt="A macro shot of a sleek glass mobile device showing a series of design components like buttons and toggles in a systematic layout, purple and white theme, architectural feel." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAZGNzFwxqdHzn4L04zX8ErGdit7NksS2LHl2NJbinNBywKNw7IceCEk0dwUtLvVsTnmuo3QM6rYHjOKt8QyT1G051c-mRhEdQl2_vHsI7Gqea8rgnCrH4jF82vbieKxh8FvKO53d3V_GYiHy25e7ZY1IJ2NIlTUYCTUEJ3w9RxPhstLHCIL5SpJK2ArOitkQT-ZH-zjiTxHX9I4wYnfELbp3zd63bvtkDmC-xErrU2saRJL0g_6qPSWgBs260ibl7n9hahabwv24oF"/>
+</div>
+<div class="flex-grow">
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-headline-md text-headline-md deep-purple-text">Mobile App Design Systems</h3>
+<div class="flex items-center gap-1 text-primary">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-label-md text-label-md">5.0</span>
+</div>
+</div>
+<p class="text-on-surface-variant font-body-md mb-6">Designing scalable mobile frameworks.</p>
+</div>
+<div class="flex items-center justify-between mt-auto">
+<span class="font-headline-md text-headline-md deep-purple-text">Rs. 199.00</span>
+<button onclick="handleQuickApply(event)" data-link="https://www.coursera.org/learn/mobile-app-design" class="px-6 py-3 primary-purple-bg text-white rounded-full font-label-md text-label-md hover:scale-105 active:scale-95 transition-all">Apply</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+
+<!-- Micro-interaction Scripts -->
+<script>
+        document.querySelectorAll('.glass-card').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                card.style.setProperty('--mouse-x', `${x}px`);
+                card.style.setProperty('--mouse-y', `${y}px`);
+            });
+        });
+    
+        window.handleQuickApply = function(event) {
+            if (event) event.preventDefault();
+            event.stopPropagation();
+            const target = event.currentTarget || event.target;
+            const link = target.getAttribute('data-link');
+            
+            const card = target.closest('.glass-card');
+            let courseName = "User Interface Design";
+            let coursePrice = "Rs. 199.00";
+            if (card) {
+                const titleEl = card.querySelector('h3');
+                const priceEl = card.querySelector('span.font-headline-md');
+                if (titleEl) courseName = titleEl.innerText.trim();
+                if (priceEl) coursePrice = priceEl.innerText.trim();
+            }
+            
+            // Store selected course details
+            localStorage.setItem('selectedCourse', JSON.stringify({ name: courseName, price: coursePrice }));
+
+            if (window.parent && window.parent.App && typeof window.parent.App.handleQuickApply === 'function') {
+                window.parent.App.handleQuickApply('course', link);
+            } else {
+                const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+                if (isLoggedIn) {
+                    window.location.hash = '#/student/checkout';
+                } else {
+                    localStorage.setItem('pendingQuickApply', JSON.stringify({ type: 'course', link: link, view: 'courses-design' }));
+                    window.location.hash = '#/student/login';
+                }
+            }
+        };
+</script>
+</body></html>

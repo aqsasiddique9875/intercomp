@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>JobPath | Recruiter Help Center</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container-highest": "#dbe3f6",
+                    "on-primary-fixed": "#330044",
+                    "surface-bright": "#f9f9ff",
+                    "primary": "#6c1089",
+                    "error-bright": "#FF453A",
+                    "glass-border": "rgba(255, 255, 255, 0.6)",
+                    "surface-dim": "#d2daed",
+                    "gold": "#FFD60A",
+                    "on-background": "#141c29",
+                    "inverse-surface": "#29313f",
+                    "on-tertiary-fixed": "#002106",
+                    "inverse-on-surface": "#ecf1ff",
+                    "error": "#ba1a1a",
+                    "glass-thick": "rgba(255, 255, 255, 0.8)",
+                    "tertiary-fixed": "#9df7a0",
+                    "on-surface": "#141c29",
+                    "background": "#f9f9ff",
+                    "secondary-fixed": "#d3e3ff",
+                    "orange": "#FF9F0A",
+                    "secondary-container": "#54a3ff",
+                    "surface-tint": "#8d37a9",
+                    "primary-fixed": "#fbd7ff",
+                    "on-tertiary-container": "#8be590",
+                    "on-error": "#ffffff",
+                    "outline-variant": "#d2c1d2",
+                    "on-primary-fixed-variant": "#72198f",
+                    "error-container": "#ffdad6",
+                    "secondary": "#0060ab",
+                    "on-secondary": "#ffffff",
+                    "on-secondary-fixed": "#001c39",
+                    "tertiary-fixed-dim": "#81da86",
+                    "outline": "#817381",
+                    "tertiary": "#004d18",
+                    "on-error-container": "#93000a",
+                    "surface-container-lowest": "#ffffff",
+                    "primary-fixed-dim": "#f0b0ff",
+                    "surface-container-low": "#f0f3ff",
+                    "on-surface-variant": "#4f4350",
+                    "on-tertiary-fixed-variant": "#00531a",
+                    "tertiary-container": "#006823",
+                    "surface-container-high": "#e0e8fb",
+                    "inverse-primary": "#f0b0ff",
+                    "on-secondary-fixed-variant": "#004883",
+                    "on-tertiary": "#ffffff",
+                    "glass-fill": "rgba(255, 255, 255, 0.35)",
+                    "on-primary": "#ffffff",
+                    "on-primary-container": "#f4beff",
+                    "secondary-fixed-dim": "#a3c9ff",
+                    "primary-container": "#8731a3",
+                    "card-gradient": "linear-gradient(135deg, #4D9EFA 0%, #BF7DF5 100%)",
+                    "surface-container": "#e7eeff",
+                    "surface-variant": "#dbe3f6",
+                    "surface": "#f9f9ff",
+                    "brand-deep": "#471A70"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "2xl": "1rem",
+                    "3xl": "1.5rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "mobile-gutter": "16px",
+                    "mobile-margin": "20px",
+                    "desktop-gutter": "24px",
+                    "base": "8px",
+                    "max-width": "1280px",
+                    "desktop-margin": "64px"
+            },
+            "fontFamily": {
+                    "label-caps": ["Inter"],
+                    "display-xl": ["Inter"],
+                    "body-md": ["Inter"],
+                    "headline-lg": ["Inter"]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background: radial-gradient(circle at top right, #f4beff 0%, #f9f9ff 40%, #e7eeff 100%);
+            color: #141c29;
+            overflow-x: hidden;
+        }
+
+        .glass-thick-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(28px);
+            -webkit-backdrop-filter: blur(28px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 12px 40px 0 rgba(71, 26, 112, 0.08);
+        }
+
+        .glass-fill-element {
+            background: rgba(255, 255, 255, 0.35);
+            backdrop-filter: blur(28px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+        }
+
+        .liquid-shadow {
+            box-shadow: 0 20px 50px -10px rgba(71, 26, 112, 0.15);
+        }
+
+        .primary-gradient {
+            background: linear-gradient(135deg, #8731a3 0%, #6c1089 100%);
+        }
+
+        .faq-transition {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out, opacity 0.3s ease-out;
+            opacity: 0;
+        }
+
+        .faq-item.active .faq-transition {
+            max-height: 200px;
+            opacity: 1;
+            margin-top: 1rem;
+        }
+
+        .faq-item.active .icon-rotate {
+            transform: rotate(180deg);
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="min-h-screen py-12 px-6 md:px-desktop-margin">
+<!-- Background Atmospheric Element -->
+
+<main class="max-w-[1280px] mx-auto space-y-12">
+<!-- Header Section -->
+<header class="text-center space-y-8 py-8">
+<div class="space-y-4">
+<h1 class="font-headline-lg text-headline-lg font-bold text-brand-deep tracking-tight">Help Center &amp; Support</h1>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-xl mx-auto">
+                    Search our knowledge base or connect with our support team to optimize your recruitment workflow.
+                </p>
+</div>
+<!-- Glass Search Bar -->
+<div class="max-w-2xl mx-auto relative group">
+<div class="absolute inset-y-0 left-6 flex items-center pointer-events-none text-brand-deep/50 group-focus-within:text-primary transition-colors">
+<span class="material-symbols-outlined">search</span>
+</div>
+<input class="w-full pl-16 pr-6 py-5 rounded-full glass-thick-card border-none focus:ring-2 focus:ring-primary/20 text-body-md font-body-md shadow-xl transition-all outline-none" placeholder="How can we help you today?" type="text"/>
+</div>
+</header>
+<!-- 3-Column Categories Grid -->
+<section class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<!-- Getting Started -->
+<div class="glass-thick-card p-8 rounded-3xl flex flex-col hover:scale-[1.02] transition-transform duration-300">
+<div class="w-12 h-12 rounded-2xl glass-fill-element flex items-center justify-center mb-6 text-primary">
+<span class="material-symbols-outlined">rocket_launch</span>
+</div>
+<h3 class="font-headline-lg text-[22px] font-bold text-brand-deep mb-6">Getting Started</h3>
+<ul class="space-y-4 flex-grow">
+<li><a class="flex items-center gap-3 text-on-surface-variant hover:text-primary transition-colors font-body-md text-body-md" href="#">
+<span class="material-symbols-outlined text-[18px]">article</span> Account Setup</a></li>
+<li><a class="flex items-center gap-3 text-on-surface-variant hover:text-primary transition-colors font-body-md text-body-md" href="#">
+<span class="material-symbols-outlined text-[18px]">verified</span> Verification Guide</a></li>
+<li><a class="flex items-center gap-3 text-on-surface-variant hover:text-primary transition-colors font-body-md text-body-md" href="#">
+<span class="material-symbols-outlined text-[18px]">business</span> Company Profile</a></li>
+</ul>
+<button class="mt-8 text-primary font-label-caps text-label-caps flex items-center gap-2 group">
+                    View all 12 articles <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</button>
+</div>
+<!-- Job Postings -->
+<div class="glass-thick-card p-8 rounded-3xl flex flex-col hover:scale-[1.02] transition-transform duration-300">
+<div class="w-12 h-12 rounded-2xl glass-fill-element flex items-center justify-center mb-6 text-primary">
+<span class="material-symbols-outlined">work</span>
+</div>
+<h3 class="font-headline-lg text-[22px] font-bold text-brand-deep mb-6">Job Postings &amp; Applicants</h3>
+<ul class="space-y-4 flex-grow">
+<li><a class="flex items-center gap-3 text-on-surface-variant hover:text-primary transition-colors font-body-md text-body-md" href="#">
+<span class="material-symbols-outlined text-[18px]">add_circle</span> Creating Your First Job</a></li>
+<li><a class="flex items-center gap-3 text-on-surface-variant hover:text-primary transition-colors font-body-md text-body-md" href="#">
+<span class="material-symbols-outlined text-[18px]">group</span> Managing Applications</a></li>
+<li><a class="flex items-center gap-3 text-on-surface-variant hover:text-primary transition-colors font-body-md text-body-md" href="#">
+<span class="material-symbols-outlined text-[18px]">grade</span> Verified Skills 101</a></li>
+</ul>
+<button class="mt-8 text-primary font-label-caps text-label-caps flex items-center gap-2 group">
+                    View all 18 articles <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</button>
+</div>
+<!-- Billing -->
+<div class="glass-thick-card p-8 rounded-3xl flex flex-col hover:scale-[1.02] transition-transform duration-300">
+<div class="w-12 h-12 rounded-2xl glass-fill-element flex items-center justify-center mb-6 text-primary">
+<span class="material-symbols-outlined">payments</span>
+</div>
+<h3 class="font-headline-lg text-[22px] font-bold text-brand-deep mb-6">Billing &amp; Account</h3>
+<ul class="space-y-4 flex-grow">
+<li><a class="flex items-center gap-3 text-on-surface-variant hover:text-primary transition-colors font-body-md text-body-md" href="#">
+<span class="material-symbols-outlined text-[18px]">loyalty</span> Subscription Tiers</a></li>
+<li><a class="flex items-center gap-3 text-on-surface-variant hover:text-primary transition-colors font-body-md text-body-md" href="#">
+<span class="material-symbols-outlined text-[18px]">receipt_long</span> Invoicing &amp; VAT</a></li>
+<li><a class="flex items-center gap-3 text-on-surface-variant hover:text-primary transition-colors font-body-md text-body-md" href="#">
+<span class="material-symbols-outlined text-[18px]">credit_card</span> Payment Methods</a></li>
+</ul>
+<button class="mt-8 text-primary font-label-caps text-label-caps flex items-center gap-2 group">
+                    View all 8 articles <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</button>
+</div>
+</section>
+<!-- Lower Section: FAQ & Contact -->
+<section class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+<!-- FAQ Accordion -->
+<div class="lg:col-span-7 space-y-6">
+<h2 class="font-headline-lg text-headline-lg font-bold text-brand-deep">Common Questions</h2>
+<div class="space-y-4">
+<!-- FAQ Item 1 -->
+<div class="faq-item glass-thick-card rounded-2xl p-6 cursor-pointer group active" onclick="toggleFaq(this)">
+<div class="flex justify-between items-center">
+<h4 class="font-body-md text-body-md font-bold text-brand-deep">How does AI matching work?</h4>
+<span class="material-symbols-outlined icon-rotate transition-transform text-primary">expand_more</span>
+</div>
+<div class="faq-transition">
+<p class="text-on-surface-variant font-body-md text-body-md leading-relaxed">
+                                Our LiquidMatch engine analyzes 42 discrete data points from both job descriptions and candidate profiles, prioritizing verified skills and behavioral indicators over simple keyword matching.
+                            </p>
+</div>
+</div>
+<!-- FAQ Item 2 -->
+<div class="faq-item glass-thick-card rounded-2xl p-6 cursor-pointer group" onclick="toggleFaq(this)">
+<div class="flex justify-between items-center">
+<h4 class="font-body-md text-body-md font-bold text-brand-deep">What are Verified Trust Scores?</h4>
+<span class="material-symbols-outlined icon-rotate transition-transform text-primary">expand_more</span>
+</div>
+<div class="faq-transition">
+<p class="text-on-surface-variant font-body-md text-body-md leading-relaxed">
+                                Trust Scores are composite ratings derived from previous employer endorsements, completed skill assessments, and profile completeness. High scores guarantee higher visibility in recruiter searches.
+                            </p>
+</div>
+</div>
+<!-- FAQ Item 3 -->
+<div class="faq-item glass-thick-card rounded-2xl p-6 cursor-pointer group" onclick="toggleFaq(this)">
+<div class="flex justify-between items-center">
+<h4 class="font-body-md text-body-md font-bold text-brand-deep">Can I pause my recruitment subscription?</h4>
+<span class="material-symbols-outlined icon-rotate transition-transform text-primary">expand_more</span>
+</div>
+<div class="faq-transition">
+<p class="text-on-surface-variant font-body-md text-body-md leading-relaxed">
+                                Yes, you can pause your monthly subscription for up to 90 days. Your job data and candidate pipelines will be safely stored until you're ready to resume hiring.
+                            </p>
+</div>
+</div>
+</div>
+</div>
+<!-- Contact Support Form Card -->
+<div class="lg:col-span-5">
+<div class="glass-thick-card p-8 rounded-3xl space-y-6 liquid-shadow border-white/80">
+<div class="space-y-2">
+<h3 class="font-headline-lg text-[24px] font-bold text-brand-deep">Need more help?</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Submit a ticket and our team will get back to you within 24 hours.</p>
+</div>
+<form class="space-y-4" onsubmit="event.preventDefault(); alert('Ticket Submitted Successfully!')">
+<div class="space-y-1">
+<label class="font-label-caps text-label-caps text-brand-deep/70 ml-2">Email Address</label>
+<input class="w-full px-5 py-3.5 rounded-2xl glass-fill-element border-none focus:ring-2 focus:ring-primary/20 text-body-md font-body-md outline-none transition-all" placeholder="admin@company.com" required="" type="email"/>
+</div>
+<div class="space-y-1">
+<label class="font-label-caps text-label-caps text-brand-deep/70 ml-2">Subject</label>
+<select class="w-full px-5 py-3.5 rounded-2xl glass-fill-element border-none focus:ring-2 focus:ring-primary/20 text-body-md font-body-md outline-none transition-all appearance-none">
+<option>Technical Issue</option>
+<option>Billing Inquiry</option>
+<option>Feature Request</option>
+<option>Other</option>
+</select>
+</div>
+<div class="space-y-1">
+<label class="font-label-caps text-label-caps text-brand-deep/70 ml-2">Message</label>
+<textarea class="w-full px-5 py-3.5 rounded-2xl glass-fill-element border-none focus:ring-2 focus:ring-primary/20 text-body-md font-body-md outline-none transition-all resize-none" placeholder="How can we assist you?" required="" rows="4"></textarea>
+</div>
+<button class="w-full primary-gradient text-white py-4 rounded-2xl font-label-caps text-label-caps tracking-wider shadow-lg shadow-primary/30 hover:scale-[1.02] active:scale-[0.98] transition-all duration-200" type="submit">
+                            Submit Ticket
+                        </button>
+</form>
+<div class="pt-6 border-t border-glass-border flex justify-around">
+<div class="text-center">
+<p class="font-label-caps text-[10px] text-on-surface-variant mb-1">CALL US</p>
+<p class="font-body-md text-body-md font-bold text-brand-deep">+1 (888) JOB-PATH</p>
+</div>
+<div class="text-center">
+<p class="font-label-caps text-[10px] text-on-surface-variant mb-1">LIVE CHAT</p>
+<p class="font-body-md text-body-md font-bold text-primary">Online Now</p>
+</div>
+</div>
+</div>
+<!-- Atmospheric Secondary Card -->
+<div class="mt-8 relative overflow-hidden rounded-3xl h-48 group">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110" data-alt="A futuristic recruitment office with high-end glass partitions and soft ambient purple lighting. Professional individuals are seen working collaboratively in a minimalist, high-tech workspace that reflects a premium, optimistic brand identity. The lighting is bright and clear, emphasizing transparency and modern design." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuATtUwAwKZYKwLNU0LysWr2vZIx98zWodh0uLJqahU9wvJQLQG35F8upoCjXvYHDRrE2iRCQS4vfk08nrTwOIfzURiGnKlItBROpTxQd5xXYlWD4QRtZHfBZkyifr6Dwj_hx2pe_eQJ-82M9LRwD1JQy1QT-rxviCKPbYB0I5tkO3EflMkhHSD7dG9SrK6UubRKm0AOkmX2If2POw6KUL52Q9aU6_0J_5T5l72ECTh_F4dsApElC-DKSRRHQoRPgPpPm48e86kKmzsv')">
+</div>
+<div class="absolute inset-0 bg-gradient-to-t from-brand-deep/80 to-transparent flex items-end p-8">
+<div>
+<p class="text-white font-bold font-headline-lg text-[18px]">Recruiter Academy</p>
+<p class="text-white/80 font-body-md text-body-md">Join our masterclasses on hiring strategy.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<script>
+        function toggleFaq(element) {
+            // Close other items if desired - optional
+            // document.querySelectorAll('.faq-item').forEach(item => {
+            //     if(item !== element) item.classList.remove('active');
+            // });
+            
+            element.classList.toggle('active');
+        }
+
+        // Add subtle mouse-tracking glow to the form
+        const formCard = document.querySelector('.liquid-shadow');
+        if (formCard) {
+            formCard.addEventListener('mousemove', (e) => {
+                const rect = formCard.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                formCard.style.setProperty('--mouse-x', `${x}px`);
+                formCard.style.setProperty('--mouse-y', `${y}px`);
+            });
+        }
+    </script>
+</body></html>

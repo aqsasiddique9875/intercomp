@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+  <script>
+    if (window.self !== window.top) {
+      const style = document.createElement('style');
+      style.innerHTML = `
+        header, nav, aside, 
+        .SideNavBar, .TopNavBar, 
+        #SideNavBar, #TopNavBar {
+          display: none !important;
+        }
+        main, .main-content {
+          margin-left: 0 !important;
+          padding-top: 1.5rem !important;
+        }
+        main.ml-64, main.lg\\:ml-64 {
+          margin-left: 0 !important;
+          padding-top: 2rem !important;
+        }
+      `;
+      document.documentElement.appendChild(style);
+    }
+  </script>
+
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Business Courses | Elite Scholar Portal</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                "surface-dim": "#d8dadf",
+                "primary-fixed": "#fbd7ff",
+                "on-secondary-fixed": "#141c29",
+                "surface-container": "#eceef3",
+                "on-primary-fixed": "#330044",
+                "on-secondary-container": "#5c6575",
+                "on-secondary": "#ffffff",
+                "secondary-fixed": "#dbe3f6",
+                "on-background": "#181c20",
+                "primary-fixed-dim": "#f0b0ff",
+                "inverse-primary": "#f0b0ff",
+                "surface-tint": "#8d37a9",
+                "surface-container-lowest": "#ffffff",
+                "surface-container-low": "#f1f4f9",
+                "primary": "#8731a3",
+                "secondary": "#565f6e",
+                "inverse-on-surface": "#eff1f6",
+                "on-tertiary-fixed": "#2c0050",
+                "surface-variant": "#e0e2e7",
+                "on-tertiary": "#ffffff",
+                "background": "#f7f9fe",
+                "on-primary-fixed-variant": "#72188f",
+                "primary-container": "#a34cbe",
+                "tertiary-container": "#8a5eb5",
+                "secondary-container": "#dbe3f6",
+                "on-primary-container": "#fff5fb",
+                "secondary-fixed-dim": "#bec7d9",
+                "error": "#ba1a1a",
+                "error-container": "#ffdad6",
+                "on-surface-variant": "#4f4350",
+                "outline": "#817381",
+                "on-secondary-fixed-variant": "#3f4756",
+                "on-error": "#ffffff",
+                "on-error-container": "#93000a",
+                "surface-bright": "#f7f9fe",
+                "surface-container-high": "#e6e8ed",
+                "on-tertiary-fixed-variant": "#5d3186",
+                "surface-container-highest": "#e0e2e7",
+                "inverse-surface": "#2d3135",
+                "tertiary-fixed-dim": "#ddb7ff",
+                "on-tertiary-container": "#fff5ff",
+                "surface": "#f7f9fe",
+                "tertiary": "#70459a",
+                "tertiary-fixed": "#f0dbff",
+                "on-surface": "#181c20",
+                "on-primary": "#ffffff",
+                "outline-variant": "#d2c1d2"
+            },
+            "borderRadius": {
+                "DEFAULT": "0.25rem",
+                "lg": "0.5rem",
+                "xl": "0.75rem",
+                "full": "9999px"
+            },
+            "spacing": {
+                "margin-tablet": "32px",
+                "container-max-width": "1280px",
+                "margin-desktop": "64px",
+                "unit": "8px",
+                "margin-mobile": "16px",
+                "gutter": "24px"
+            },
+            "fontFamily": {
+                "headline-lg": ["Plus Jakarta Sans"],
+                "display-lg": ["Plus Jakarta Sans"],
+                "label-md": ["Inter"],
+                "headline-md": ["Plus Jakarta Sans"],
+                "display-lg-mobile": ["Plus Jakarta Sans"],
+                "label-sm": ["Inter"],
+                "body-md": ["Inter"],
+                "body-lg": ["Inter"]
+            },
+            "fontSize": {
+                "headline-lg": ["32px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                "label-md": ["14px", {"lineHeight": "1.4", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                "headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                "display-lg-mobile": ["36px", {"lineHeight": "1.1", "fontWeight": "700"}],
+                "label-sm": ["12px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #DCE4F7;
+            color: #471A70;
+            overflow-x: hidden;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.35);
+            backdrop-filter: blur(28px);
+            -webkit-backdrop-filter: blur(28px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            box-shadow: inset 0.5px 0.5px 0px 0px rgba(255, 255, 255, 0.5);
+            transition: all 0.5s cubic-bezier(0.12, 0, 0.39, 0);
+        }
+
+        .glass-card:hover {
+            transform: scale(1.02) translateY(-4px);
+            background: rgba(255, 255, 255, 0.45);
+        }
+
+        .primary-button {
+            background-color: #A34CBE;
+            color: white;
+            transition: all 0.3s cubic-bezier(0.12, 0, 0.39, 0);
+            box-shadow: 0 4px 12px rgba(163, 76, 190, 0.2);
+        }
+
+        .primary-button:hover {
+            background-color: #8731a3;
+            box-shadow: 0 0 20px rgba(163, 76, 190, 0.4);
+            transform: scale(1.05);
+        }
+
+        .primary-button:active {
+            transform: scale(0.95);
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+
+        .nav-active {
+            background-color: #8731a3;
+            color: white;
+            box-shadow: 0 0 20px rgba(163, 76, 190, 0.3);
+            border-radius: 0.75rem;
+        }
+        
+        .nav-inactive {
+            color: #565f6e;
+        }
+
+        .nav-inactive:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 0.75rem;
+        }
+
+        /* Spring Curve Utility */
+        .spring-transition {
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+    </style>
+</head>
+<body class="font-body-md text-body-md antialiased">
+<!-- TopNavBar -->
+<header class="fixed top-0 w-full z-50 bg-surface/40 backdrop-blur-[28px] border-b border-white/20 h-20 flex justify-between items-center px-margin-desktop shadow-none">
+<div class="flex items-center gap-8">
+<span class="font-headline-md text-headline-md font-bold text-primary">Elite Scholar Portal</span>
+<div class="hidden md:flex items-center bg-white/20 rounded-full px-4 py-2 border border-white/30">
+<span class="material-symbols-outlined text-primary mr-2">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-label-md font-label-md placeholder-on-surface-variant/50 w-64" placeholder="Search courses..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<button class="relative hover:scale-[1.02] transition-transform duration-300 ease-[cubic-bezier(0.12,0,0.39,0)] active:scale-95">
+<span class="material-symbols-outlined text-primary text-2xl">notifications</span>
+<span class="absolute -top-1 -right-1 bg-error w-2 h-2 rounded-full"></span>
+</button>
+<button class="hover:scale-[1.02] transition-transform duration-300 ease-[cubic-bezier(0.12,0,0.39,0)] active:scale-95">
+<span class="material-symbols-outlined text-primary text-2xl">settings</span>
+</button>
+<div class="w-10 h-10 rounded-full overflow-hidden border-2 border-primary/20 cursor-pointer hover:scale-[1.05] transition-transform">
+<img class="w-full h-full object-cover" data-alt="A professional student profile portrait, high-end photography, soft cinematic lighting, clean minimalist academic background, premium lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBTVLnsuqFNugweV65bGG7LKLuATX9SFB5gQYHeAdciHnYMzVPPVcig89Cbe43IU61Vw6cXKC4TnavWouW2xkCnV_SBPSGeyVc0wnVzfwyYtuPOy1tLaDqWYDlvFldQnh4K7nCTbgHAUUHWJVYvtJ9rJwezUQXEfBlW_C-HLmvajdnZl7DfzfUN7AZP2w0q2tuGVWFrLxHr256RJ9949omHDj78iHUy590-BkYUzJcAzkJxTv1wOyCSaUgp-hl3hhPC_mIJsXRQIjZP"/>
+</div>
+</div>
+</header>
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-0 h-full w-64 z-40 bg-surface/30 backdrop-blur-[28px] border-r border-white/20 flex flex-col p-6 space-y-4 pt-24 hidden md:flex">
+<div class="flex items-center gap-3 px-2 mb-8">
+<div class="w-10 h-10 bg-primary/10 rounded-xl flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">school</span>
+</div>
+<div>
+<h3 class="font-headline-md text-[18px] text-primary leading-tight">Ivy Global</h3>
+<p class="text-[10px] text-secondary font-medium tracking-wider uppercase">Academic Excellence</p>
+</div>
+</div>
+<nav class="space-y-1 flex-grow">
+<a class="flex items-center gap-3 p-3 nav-inactive transition-all duration-300" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-md text-label-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 p-3 nav-active transition-all duration-300" href="#">
+<span class="material-symbols-outlined">school</span>
+<span class="font-label-md text-label-md">Courses</span>
+</a>
+<a class="flex items-center gap-3 p-3 nav-inactive transition-all duration-300" href="#">
+<span class="material-symbols-outlined">assignment</span>
+<span class="font-label-md text-label-md">Assignments</span>
+</a>
+<a class="flex items-center gap-3 p-3 nav-inactive transition-all duration-300" href="#">
+<span class="material-symbols-outlined">grade</span>
+<span class="font-label-md text-label-md">Grades</span>
+</a>
+</nav>
+<div class="pt-6 border-t border-white/10 space-y-1">
+<button class="w-full flex items-center gap-3 p-3 text-secondary hover:bg-white/10 rounded-xl transition-all mb-4">
+<span class="material-symbols-outlined">help_center</span>
+<span class="font-label-md text-label-md text-left">Support</span>
+</button>
+<a class="flex items-center gap-3 p-3 text-error hover:bg-error/10 rounded-xl transition-all" href="#">
+<span class="material-symbols-outlined">logout</span>
+<span class="font-label-md text-label-md">Logout</span>
+</a>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="md:ml-64 pt-28 px-margin-mobile md:px-margin-desktop pb-20 max-w-container-max-width mx-auto">
+        <!-- Breadcrumbs -->
+        <nav class="flex items-center gap-2 text-on-surface-variant mb-6 font-label-sm text-label-sm">
+            <a href="#" class="hover:text-primary transition-colors cursor-pointer">Home</a>
+            <span class="material-symbols-outlined text-[14px]">chevron_right</span>
+            <a href="#" class="hover:text-primary transition-colors cursor-pointer">Course Catalog</a>
+            <span class="material-symbols-outlined text-[14px]">chevron_right</span>
+            <span class="text-primary font-bold">Business</span>
+        </nav>
+<!-- Header Section -->
+<div class="mb-12">
+<h1 class="font-display-lg text-display-lg-mobile md:text-display-lg text-[#471A70] mb-4">Business Courses</h1>
+<p class="font-body-lg text-body-lg text-[#471A70]/70 max-w-2xl leading-relaxed">
+                Develop business acumen, product leadership, and strategy with our elite modules.
+            </p>
+</div>
+<!-- Bento Grid / Course List -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter">
+<!-- Course 1 -->
+<div class="glass-card rounded-[32px] overflow-hidden flex flex-col h-full group">
+<div class="h-48 w-full overflow-hidden relative">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCuAxkz7D3nGmbxxX5xvZ9wcP9kbKZSsGgJFU2rqJHKs_ViO9hDAQ7YB9cAU39slHBkwzQdJIb_ejcJqQjJtZ4QDeshkAHM1LbjOxXgiUMQlIou4V35EU9qi7owQokMQNNKXg1Kw8RGj8ZMF8EMBTjucoysS3ikekI71JTMy1amy5ZSjiSwMXMQWL7LYr4i53DuHl8Qq7YtHpQS5J2I6RsGGuRO2e45MtrdS-YxWJ0a-bZ4rnQAV7oj6oRF2oPH2cw_HI-KS0jhrGoV"/>
+<div class="absolute top-4 right-4 bg-white/80 backdrop-blur-md px-3 py-1 rounded-full flex items-center gap-1 shadow-sm">
+<span class="material-symbols-outlined text-yellow-500 text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-label-sm font-label-sm text-on-surface">4.9</span>
+</div>
+</div>
+<div class="p-6 flex flex-col flex-grow">
+<div class="flex-grow">
+<span class="text-primary font-label-sm text-label-sm tracking-wider uppercase mb-2 block">Management</span>
+<h3 class="font-headline-md text-headline-md text-[#471A70] mb-3 leading-tight">Business Management Essentials</h3>
+<p class="text-body-md text-body-md text-[#471A70]/60 line-clamp-2">Master the core principles of organizational management and leadership in a modern ecosystem.</p>
+</div>
+<div class="mt-6 flex items-center justify-between">
+<span class="text-headline-md font-bold text-[#471A70]">Rs. 199.00</span>
+<button onclick="handleQuickApply(event)" data-link="https://www.coursera.org/specializations/wharton-business-foundations" class="primary-button px-6 py-2.5 rounded-full font-label-md text-label-md">Apply</button>
+</div>
+</div>
+</div>
+<!-- Course 2 -->
+<div class="glass-card rounded-[32px] overflow-hidden flex flex-col h-full group">
+<div class="h-48 w-full overflow-hidden relative">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCjFm9V3SHJ_sqvzRKn8GiQbpIXkF6ZvvIqA0aoaeomNK4V-iSbA70o94VAtHLQvMRM7v8WBEaYWMSp_nXYx3S1FhWY_srGjrLg9IXoSTNJfnH_MLTo6UlszFz0E3IceZOdX2sv6UoWboD0rAFOmibAdyaamjo9QLS4HuEk9DtaN23rhSRWezhrJ9bsiOrUaE9sJAJL8jr7rpbf9zcZGmG46h7sSAfiQV2X3vxO6nMqKHWyCXg3nUvu0WxqMvpP-fjbBycOCqxVLAOr"/>
+<div class="absolute top-4 right-4 bg-white/80 backdrop-blur-md px-3 py-1 rounded-full flex items-center gap-1 shadow-sm">
+<span class="material-symbols-outlined text-yellow-500 text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-label-sm font-label-sm text-on-surface">4.8</span>
+</div>
+</div>
+<div class="p-6 flex flex-col flex-grow">
+<div class="flex-grow">
+<span class="text-primary font-label-sm text-label-sm tracking-wider uppercase mb-2 block">Product</span>
+<h3 class="font-headline-md text-headline-md text-[#471A70] mb-3 leading-tight">Product Management Foundations</h3>
+<p class="text-body-md text-body-md text-[#471A70]/60 line-clamp-2">Learn the product lifecycle from ideation to launch with industry-standard frameworks.</p>
+</div>
+<div class="mt-6 flex items-center justify-between">
+<span class="text-headline-md font-bold text-[#471A70]">Rs. 199.00</span>
+<button onclick="handleQuickApply(event)" data-link="https://www.coursera.org/specializations/product-management" class="primary-button px-6 py-2.5 rounded-full font-label-md text-label-md">Apply</button>
+</div>
+</div>
+</div>
+<!-- Course 3 -->
+<div class="glass-card rounded-[32px] overflow-hidden flex flex-col h-full group">
+<div class="h-48 w-full overflow-hidden relative">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB_5RSsa-SrzYlI8tYBOCI1xvAt4oxzcGeTynDaUfY7KfEVraiMi4reuEh7TFSkPC0_MTIOY8vja9WdY8nVfR-56lJa-Ytobk4OgAyA4hgOF25QhZp94OA628szHJDKFMxcNXEkLdHJOB3sdWOjHCnc-uTLzcCfUsau-w7RuljaFtSa6vD9BDpGS1r_gfiFkUqW8IwrjPTqslNpeAP-HdKZ6fXK1tILnEtSg-yF_HLrBgEUIN2y6Bg1csLtYtVr3--nkvArgha3o-Fi"/>
+<div class="absolute top-4 right-4 bg-white/80 backdrop-blur-md px-3 py-1 rounded-full flex items-center gap-1 shadow-sm">
+<span class="material-symbols-outlined text-yellow-500 text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-label-sm font-label-sm text-on-surface">5.0</span>
+</div>
+</div>
+<div class="p-6 flex flex-col flex-grow">
+<div class="flex-grow">
+<span class="text-primary font-label-sm text-label-sm tracking-wider uppercase mb-2 block">Startups</span>
+<h3 class="font-headline-md text-headline-md text-[#471A70] mb-3 leading-tight">Scaling Startups &amp; Strategy</h3>
+<p class="text-body-md text-body-md text-[#471A70]/60 line-clamp-2">Tactical advice on how to scale operations, culture, and revenue for hyper-growth companies.</p>
+</div>
+<div class="mt-6 flex items-center justify-between">
+<span class="text-headline-md font-bold text-[#471A70]">Rs. 199.00</span>
+<button onclick="handleQuickApply(event)" data-link="https://www.coursera.org/learn/startup-growth" class="primary-button px-6 py-2.5 rounded-full font-label-md text-label-md">Apply</button>
+</div>
+</div>
+</div>
+<!-- Course 4 -->
+<div class="glass-card rounded-[32px] overflow-hidden flex flex-col h-full group">
+<div class="h-48 w-full overflow-hidden relative">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDmtvTFX3-1k7_ASsIC-h1KcKzYGVnSge-ZDFhBKnRcp32t-QBMD3mUPHmtFMwAWaaD-Vndx93j7MfEsbFQx2IWljICy98LygW5rnMojOcin-2YyEJMOyu6UQ9sAFD4xJ6nzuE_U6zPTl5Segbedo4cDDEzlptwgm_J9ZqIGh5BkzWLHUa_jW4zkRbVoh8XS_-bpu3EqL25JvRe3QTw5kD_OhHK0chpYlgpg8Av4XD5TQhTpl1s2628y-WQA0ibORpZ320Kna7dYXqI"/>
+<div class="absolute top-4 right-4 bg-white/80 backdrop-blur-md px-3 py-1 rounded-full flex items-center gap-1 shadow-sm">
+<span class="material-symbols-outlined text-yellow-500 text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-label-sm font-label-sm text-on-surface">4.9</span>
+</div>
+</div>
+<div class="p-6 flex flex-col flex-grow">
+<div class="flex-grow">
+<span class="text-primary font-label-sm text-label-sm tracking-wider uppercase mb-2 block">Finance</span>
+<h3 class="font-headline-md text-headline-md text-[#471A70] mb-3 leading-tight">Venture Capital &amp; Funding</h3>
+<p class="text-body-md text-body-md text-[#471A70]/60 line-clamp-2">Understand the mechanics of VC, cap tables, and successful fundraising strategies.</p>
+</div>
+<div class="mt-6 flex items-center justify-between">
+<span class="text-headline-md font-bold text-[#471A70]">Rs. 199.00</span>
+<button onclick="handleQuickApply(event)" data-link="https://www.coursera.org/learn/venture-capital" class="primary-button px-6 py-2.5 rounded-full font-label-md text-label-md">Apply</button>
+</div>
+</div>
+</div>
+<!-- Course 5 -->
+<div class="glass-card rounded-[32px] overflow-hidden flex flex-col h-full group">
+<div class="h-48 w-full overflow-hidden relative">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDJn7QHxphFEKVv3riw957rrD2tPCSXfFmD8aQjuwqScpxnBZ6-_pTicoG7fHTbLHgXnDYRVejJ3bPoqL6FvjBfvr5yYj6EyzWMQc9e1153U11lYatRVALqVum3kK3UvBzbVWjeGNSTcNlcC2f3Xx_3UXHY5ky9WyzTPoq6ZHf5wDoqcucCITrL9eh9FkYBR8SazIgN6MAq2GOvynuHSG948cOkGKNa9Y7hiM-1sMa_RhZX_g5AD3oS_GFajiQDA8C7Jf6vz8O5gc9c"/>
+<div class="absolute top-4 right-4 bg-white/80 backdrop-blur-md px-3 py-1 rounded-full flex items-center gap-1 shadow-sm">
+<span class="material-symbols-outlined text-yellow-500 text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-label-sm font-label-sm text-on-surface">4.7</span>
+</div>
+</div>
+<div class="p-6 flex flex-col flex-grow">
+<div class="flex-grow">
+<span class="text-primary font-label-sm text-label-sm tracking-wider uppercase mb-2 block">Marketing</span>
+<h3 class="font-headline-md text-headline-md text-[#471A70] mb-3 leading-tight">Marketing Strategy &amp; Brand Growth</h3>
+<p class="text-body-md text-body-md text-[#471A70]/60 line-clamp-2">Harness the power of digital marketing and brand storytelling to drive sustainable growth.</p>
+</div>
+<div class="mt-6 flex items-center justify-between">
+<span class="text-headline-md font-bold text-[#471A70]">Rs. 199.00</span>
+<button onclick="handleQuickApply(event)" data-link="https://www.coursera.org/specializations/market-strategy" class="primary-button px-6 py-2.5 rounded-full font-label-md text-label-md">Apply</button>
+</div>
+</div>
+</div>
+<!-- Course 6 -->
+<div class="glass-card rounded-[32px] overflow-hidden flex flex-col h-full group">
+<div class="h-48 w-full overflow-hidden relative">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAtbRETssk1I_U9fzesPk68jKKAMWDWY62wlaEH2W_eNgAcyvf38wzMDu9fEGR4glHr0CbyTsBpAbPEtzrVGNZrj5hWI4bF1W6I0UsU6_KA0K2iKhYHzb75rmCzAxlKkK7QzzNMjQS9KmXTCdZMBmcPORW3LFrGWy2O8t_bptGrgYYHhZ8Ai4ZNP65J7270k0C7eZ6jVeOqZenqEW8w1Vqc76Xydjw_FsGB9WH_aSvDXPzD0UobaPZGdRyJztUuD52IxPo5uJI-Jshp"/>
+<div class="absolute top-4 right-4 bg-white/80 backdrop-blur-md px-3 py-1 rounded-full flex items-center gap-1 shadow-sm">
+<span class="material-symbols-outlined text-yellow-500 text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-label-sm font-label-sm text-on-surface">4.9</span>
+</div>
+</div>
+<div class="p-6 flex flex-col flex-grow">
+<div class="flex-grow">
+<span class="text-primary font-label-sm text-label-sm tracking-wider uppercase mb-2 block">Innovation</span>
+<h3 class="font-headline-md text-headline-md text-[#471A70] mb-3 leading-tight">Entrepreneurship &amp; Innovation</h3>
+<p class="text-body-md text-body-md text-[#471A70]/60 line-clamp-2">Develop a founder's mindset and learn techniques for fostering innovation in any organization.</p>
+</div>
+<div class="mt-6 flex items-center justify-between">
+<span class="text-headline-md font-bold text-[#471A70]">Rs. 199.00</span>
+<button onclick="handleQuickApply(event)" data-link="https://www.coursera.org/specializations/entrepreneurship" class="primary-button px-6 py-2.5 rounded-full font-label-md text-label-md">Apply</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Pagination/Footer Context -->
+<div class="mt-16 flex justify-center">
+<nav class="flex items-center gap-2">
+<button class="w-10 h-10 flex items-center justify-center rounded-full glass-card hover:bg-primary hover:text-white transition-colors">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-full bg-primary text-white shadow-lg">1</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-full glass-card hover:bg-primary hover:text-white transition-colors">2</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-full glass-card hover:bg-primary hover:text-white transition-colors">3</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-full glass-card hover:bg-primary hover:text-white transition-colors">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</nav>
+</div>
+</main>
+<!-- Interactive Micro-Interactions -->
+<script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const cards = document.querySelectorAll('.glass-card');
+            
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', () => {
+                    // Soft parallax effect could be added here
+                });
+                
+                card.addEventListener('mousemove', (e) => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+                    
+                    const rotateX = (y - centerY) / 25;
+                    const rotateY = (centerX - x) / 25;
+                    
+                    card.style.transform = `perspective(1000px) scale(1.02) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-4px)`;
+                });
+                
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = `perspective(1000px) scale(1) rotateX(0deg) rotateY(0deg) translateY(0)`;
+                });
+            });
+
+            // Apply Animation
+            const buttons = document.querySelectorAll('.primary-button');
+            buttons.forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    let x = e.clientX - e.target.offsetLeft;
+                    let y = e.clientY - e.target.offsetTop;
+                    
+                    let ripples = document.createElement('span');
+                    ripples.style.left = x + 'px';
+                    ripples.style.top = y + 'px';
+                    ripples.classList.add('ripple');
+                    // Ripple effect styles (simplified for inline)
+                    // this.appendChild(ripples);
+                });
+            });
+        });
+    
+        window.handleQuickApply = function(event) {
+            if (event) event.preventDefault();
+            event.stopPropagation();
+            const target = event.currentTarget || event.target;
+            const link = target.getAttribute('data-link');
+            
+            const card = target.closest('.glass-card');
+            let courseName = "Business Fundamentals";
+            let coursePrice = "Rs. 199.00";
+            if (card) {
+                const titleEl = card.querySelector('h3');
+                const priceEl = card.querySelector('span.text-headline-md, span.font-headline-md');
+                if (titleEl) courseName = titleEl.innerText.trim();
+                if (priceEl) coursePrice = priceEl.innerText.trim();
+            }
+            
+            // Store selected course details
+            localStorage.setItem('selectedCourse', JSON.stringify({ name: courseName, price: coursePrice }));
+
+            if (window.parent && window.parent.App && typeof window.parent.App.handleQuickApply === 'function') {
+                window.parent.App.handleQuickApply('course', link);
+            } else {
+                const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+                if (isLoggedIn) {
+                    window.location.hash = '#/student/checkout';
+                } else {
+                    localStorage.setItem('pendingQuickApply', JSON.stringify({ type: 'course', link: link, view: 'courses-business' }));
+                    window.location.hash = '#/student/login';
+                }
+            }
+        };
+</script>
+</body></html>

@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<title>Weekly Tests Hub</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Shared Components Logic & Tailwind Config -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                "tertiary-container": "#00842f",
+                "surface-tint": "#8d37a9",
+                "on-primary-fixed": "#330044",
+                "secondary-fixed": "#d3e3ff",
+                "on-surface-variant": "#4f4350",
+                "surface-bright": "#f9f9ff",
+                "on-error-container": "#93000a",
+                "surface-container-lowest": "#ffffff",
+                "error-container": "#ffdad6",
+                "on-secondary-fixed-variant": "#004883",
+                "surface": "#f9f9ff",
+                "on-secondary-container": "#003868",
+                "on-tertiary-fixed-variant": "#00531a",
+                "background": "#f9f9ff",
+                "tertiary-fixed": "#6cff82",
+                "surface-container-high": "#e0e8fb",
+                "on-primary": "#ffffff",
+                "on-background": "#141c29",
+                "on-tertiary-fixed": "#002106",
+                "on-primary-fixed-variant": "#72188f",
+                "gold": "#FFD60A",
+                "glass-border": "rgba(255, 255, 255, 0.6)",
+                "card-gradient": "linear-gradient(135deg, #4D9EFA 0%, #BF7DF5 100%)",
+                "primary-fixed-dim": "#f0b0ff",
+                "on-secondary-fixed": "#001c39",
+                "secondary": "#0060ab",
+                "on-error": "#ffffff",
+                "surface-dim": "#d2daed",
+                "secondary-container": "#54a3ff",
+                "secondary-fixed-dim": "#a3c9ff",
+                "inverse-surface": "#29313f",
+                "outline": "#817381",
+                "primary-container": "#a34cbe",
+                "on-tertiary-container": "#e6ffe0",
+                "surface-container": "#e7eeff",
+                "on-tertiary": "#ffffff",
+                "surface-container-highest": "#dbe3f6",
+                "tertiary": "#006823",
+                "primary": "#8731a3",
+                "outline-variant": "#d2c1d2",
+                "tertiary-fixed-dim": "#47e266",
+                "inverse-primary": "#f0b0ff",
+                "on-surface": "#141c29",
+                "surface-variant": "#dbe3f6",
+                "primary-fixed": "#fbd7ff",
+                "glass-fill": "rgba(255, 255, 255, 0.35)",
+                "glass-thick": "rgba(255, 255, 255, 0.8)",
+                "orange": "#FF9F0A",
+                "on-secondary": "#ffffff",
+                "inverse-on-surface": "#ecf1ff",
+                "error": "#FF453A",
+                "on-primary-container": "#fff5fb",
+                "surface-container-low": "#f0f3ff"
+            },
+            "borderRadius": {
+                "DEFAULT": "0.25rem",
+                "lg": "0.5rem",
+                "xl": "16px",
+                "2xl": "24px",
+                "3xl": "32px",
+                "full": "9999px"
+            },
+            "spacing": {
+                "mobile-margin": "20px",
+                "desktop-gutter": "24px",
+                "base": "8px",
+                "max-width": "1280px",
+                "safe-top": "44px",
+                "safe-bottom": "34px",
+                "mobile-gutter": "16px",
+                "desktop-margin": "64px"
+            },
+            "fontFamily": {
+                "label-caps": ["Inter"],
+                "display-xl-mobile": ["Inter"],
+                "label-caps-mobile": ["Inter"],
+                "headline-lg-mobile": ["Inter"],
+                "display-xl": ["Inter"],
+                "headline-lg": ["Inter"],
+                "body-md-mobile": ["Inter"],
+                "body-md": ["Inter"]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        body {
+            background-color: #DCE4F7;
+            color: #471A70;
+            font-family: 'Inter', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+            overflow-x: hidden;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.35);
+            backdrop-filter: blur(28px);
+            -webkit-backdrop-filter: blur(28px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 12px 40px 0 rgba(71, 26, 112, 0.15);
+        }
+
+        .shimmer {
+            background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0) 100%);
+            background-size: 200% 100%;
+            animation: shimmer 2s infinite linear;
+        }
+
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+
+        .orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(80px);
+            z-index: -1;
+            opacity: 0.6;
+        }
+
+        .orb-lavender {
+            width: 300px;
+            height: 300px;
+            background: #BF7DF5;
+            top: -50px;
+            right: -50px;
+            animation: float 10s infinite ease-in-out;
+        }
+
+        .orb-blue {
+            width: 400px;
+            height: 400px;
+            background: #4D9EFA;
+            bottom: 100px;
+            left: -100px;
+            animation: float 15s infinite ease-in-out reverse;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(20px, 40px); }
+        }
+
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="min-h-screen pb-32">
+<!-- Background Orbs -->
+<div class="orb orb-lavender"></div>
+<div class="orb orb-blue"></div>
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-glass-fill backdrop-blur-2xl border-b border-glass-border shadow-[0_12px_40px_0_rgba(71,26,112,0.15)] flex justify-between items-center px-mobile-margin h-safe-top">
+<div class="flex items-center gap-3 active:scale-95 duration-350 ease-[cubic-bezier(0.35,0,0.15,1)] cursor-pointer">
+<div class="w-10 h-10 rounded-full overflow-hidden border-2 border-white shadow-sm">
+<img alt="Student Profile" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDngU8rql-eiPMWPn-Q7q910oiH6c4Up6lb_BeJ5qeCXUr7k5XWQub8Xjoy5413RAdl5ar9i0oa_j7nfX_EzFt-liKTKjjKp81PHRoGWHNeFXkq7WhaO4pm2VwNPKGIlczdsndhpB128piFWLIPA-UC6mEUpcB4Kz-ywJsLdMou9Tu5GiT9ErHGS6SoY4a26TpXEUJZS32ELno1yFbYAQzvy2VXESTllyT9LSS_14Ua3H7XjJQ01gvhH2gBFnlaMVdeWyiC1glDEfTU"/>
+</div>
+<h1 class="font-display-xl-mobile text-display-xl-mobile text-primary font-bold">Test Hub</h1>
+</div>
+<button class="material-symbols-outlined text-primary p-2 hover:opacity-80 transition-opacity active:scale-95">
+            calendar_month
+        </button>
+</header>
+<main class="mt-safe-top px-mobile-margin pt-6 space-y-8">
+<!-- Weekly Calendar Row -->
+<section class="space-y-4">
+<div class="flex justify-between items-end">
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-primary">This Week</h2>
+<span class="font-label-caps-mobile text-on-surface-variant">OCT 12-18</span>
+</div>
+<div class="flex overflow-x-auto gap-3 pb-2 hide-scrollbar">
+<!-- Day Items -->
+<div class="flex-shrink-0 flex flex-col items-center justify-center w-14 h-20 rounded-2xl glass-card bg-white/20">
+<span class="text-[10px] font-bold opacity-60">MON</span>
+<span class="text-lg font-extrabold">12</span>
+</div>
+<div class="flex-shrink-0 flex flex-col items-center justify-center w-14 h-20 rounded-2xl bg-primary text-white shadow-lg shadow-primary/30 ring-2 ring-white/50">
+<span class="text-[10px] font-bold">TUE</span>
+<span class="text-lg font-extrabold">13</span>
+</div>
+<div class="flex-shrink-0 flex flex-col items-center justify-center w-14 h-20 rounded-2xl glass-card">
+<span class="text-[10px] font-bold opacity-60">WED</span>
+<span class="text-lg font-extrabold">14</span>
+</div>
+<div class="flex-shrink-0 flex flex-col items-center justify-center w-14 h-20 rounded-2xl glass-card">
+<span class="text-[10px] font-bold opacity-60">THU</span>
+<span class="text-lg font-extrabold">15</span>
+</div>
+<div class="flex-shrink-0 flex flex-col items-center justify-center w-14 h-20 rounded-2xl glass-card">
+<span class="text-[10px] font-bold opacity-60">FRI</span>
+<span class="text-lg font-extrabold">16</span>
+</div>
+<div class="flex-shrink-0 flex flex-col items-center justify-center w-14 h-20 rounded-2xl glass-card opacity-50">
+<span class="text-[10px] font-bold opacity-60">SAT</span>
+<span class="text-lg font-extrabold">17</span>
+</div>
+<div class="flex-shrink-0 flex flex-col items-center justify-center w-14 h-20 rounded-2xl glass-card opacity-50">
+<span class="text-[10px] font-bold opacity-60">SUN</span>
+<span class="text-lg font-extrabold">18</span>
+</div>
+</div>
+</section>
+<!-- Filter Chips -->
+<section class="flex gap-2">
+<button class="px-5 py-2 rounded-full bg-primary text-white font-label-caps-mobile shadow-md">Group A</button>
+<button class="px-5 py-2 rounded-full glass-card text-primary font-label-caps-mobile">Group B</button>
+<button class="px-5 py-2 rounded-full glass-card text-primary font-label-caps-mobile">Group C</button>
+</section>
+<!-- Active Tests Section -->
+<section class="space-y-4">
+<div class="flex items-center justify-between">
+<h3 class="font-headline-lg-mobile text-[20px] text-primary">Active Tests</h3>
+<span class="flex items-center gap-1 text-[12px] font-bold text-tertiary">
+<span class="w-2 h-2 bg-tertiary rounded-full animate-pulse"></span> 2 Running
+                </span>
+</div>
+<div class="space-y-4">
+<div class="glass-card rounded-3xl p-6 relative overflow-hidden group active:scale-[0.98] transition-transform duration-300">
+<div class="absolute top-0 right-0 w-32 h-32 bg-primary/10 rounded-full -mr-16 -mt-16 blur-2xl"></div>
+<div class="flex justify-between items-start mb-4">
+<div>
+<span class="font-label-caps-mobile text-primary tracking-widest block mb-1">MATHEMATICS II</span>
+<h4 class="text-2xl font-bold text-on-surface leading-tight">Advanced Calculus Final</h4>
+</div>
+<div class="px-3 py-1 bg-tertiary/10 text-tertiary rounded-full text-[10px] font-black tracking-tighter">LIVE</div>
+</div>
+<div class="flex items-center gap-4 mb-6">
+<div class="flex items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px]">timer</span>
+<span class="text-sm font-semibold">45m left</span>
+</div>
+<div class="flex items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px]">group</span>
+<span class="text-sm font-semibold">Group A</span>
+</div>
+</div>
+<button class="w-full py-4 bg-primary text-white rounded-2xl font-bold flex items-center justify-center gap-2 shadow-lg shadow-primary/25 hover:opacity-90 active:scale-95 transition-all">
+                        Join Now
+                        <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+<div class="glass-card rounded-3xl p-6 active:scale-[0.98] transition-transform duration-300">
+<div class="flex justify-between items-start mb-4">
+<div>
+<span class="font-label-caps-mobile text-primary block mb-1">PHYSICS</span>
+<h4 class="text-2xl font-bold text-on-surface">Quantum Mechanics</h4>
+</div>
+</div>
+<div class="w-full bg-white/20 h-2 rounded-full mb-6 overflow-hidden">
+<div class="bg-primary h-full w-[65%]" style="box-shadow: 0 0 10px rgba(135, 49, 163, 0.4)"></div>
+</div>
+<button class="w-full py-4 glass-card bg-white/40 text-primary border-primary/20 rounded-2xl font-bold flex items-center justify-center gap-2 hover:bg-white/50 active:scale-95 transition-all">
+                        Resume Assessment
+                        <span class="material-symbols-outlined">play_circle</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Upcoming Tests Section -->
+<section class="space-y-4">
+<h3 class="font-headline-lg-mobile text-[20px] text-primary">Upcoming</h3>
+<div class="space-y-3">
+<div class="glass-card rounded-2xl p-4 flex items-center gap-4">
+<div class="w-12 h-12 rounded-xl bg-secondary-container/20 flex flex-col items-center justify-center text-secondary">
+<span class="text-[10px] font-bold">OCT</span>
+<span class="text-lg font-black leading-none">15</span>
+</div>
+<div class="flex-1">
+<h5 class="font-bold text-on-surface">Digital Logic Circuits</h5>
+<p class="text-xs text-on-surface-variant">10:30 AM • Group B</p>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant/40">more_vert</span>
+</div>
+<div class="glass-card rounded-2xl p-4 flex items-center gap-4">
+<div class="w-12 h-12 rounded-xl bg-orange/10 flex flex-col items-center justify-center text-orange">
+<span class="text-[10px] font-bold">OCT</span>
+<span class="text-lg font-black leading-none">16</span>
+</div>
+<div class="flex-1">
+<h5 class="font-bold text-on-surface">Ethics &amp; Law</h5>
+<p class="text-xs text-on-surface-variant">02:00 PM • All Groups</p>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant/40">more_vert</span>
+</div>
+<!-- Shimmer Loader Placeholder -->
+<div class="glass-card rounded-2xl p-4 flex items-center gap-4 overflow-hidden relative">
+<div class="w-12 h-12 rounded-xl bg-white/20 shimmer"></div>
+<div class="flex-1 space-y-2">
+<div class="h-4 w-2/3 bg-white/20 rounded shimmer"></div>
+<div class="h-3 w-1/3 bg-white/20 rounded shimmer"></div>
+</div>
+</div>
+</div>
+</section>
+<!-- Completed Section -->
+<section class="space-y-4">
+<h3 class="font-headline-lg-mobile text-[20px] text-primary">Recently Completed</h3>
+<div class="grid grid-cols-2 gap-3">
+<div class="glass-card rounded-2xl p-4 space-y-3">
+<div class="flex justify-between items-center">
+<span class="px-2 py-0.5 bg-tertiary-container/10 text-tertiary-container text-[10px] font-bold rounded">GRADED</span>
+</div>
+<p class="text-sm font-bold text-on-surface leading-tight">History of Modern Art</p>
+<div class="flex items-end gap-1">
+<span class="text-2xl font-black text-primary">94</span>
+<span class="text-[10px] font-bold text-on-surface-variant pb-1">/100</span>
+</div>
+</div>
+<div class="glass-card rounded-2xl p-4 space-y-3">
+<div class="flex justify-between items-center">
+<span class="px-2 py-0.5 bg-on-surface-variant/10 text-on-surface-variant text-[10px] font-bold rounded">REVIEWING</span>
+</div>
+<p class="text-sm font-bold text-on-surface leading-tight">Intro to Python</p>
+<div class="flex items-center gap-2">
+<div class="flex -space-x-2">
+<div class="w-6 h-6 rounded-full bg-white/40 border border-white flex items-center justify-center">
+<span class="material-symbols-outlined text-[14px]">checklist</span>
+</div>
+</div>
+<span class="text-[10px] font-bold text-on-surface-variant">Pending</span>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full z-50 rounded-t-3xl bg-glass-thick backdrop-blur-2xl border-t border-glass-border shadow-[0_-8px_30px_0_rgba(71,26,112,0.1)] pt-2 pb-safe-bottom px-mobile-margin flex justify-around items-center">
+<!-- Schedule - Active -->
+<a class="flex flex-col items-center justify-center text-primary font-bold bg-primary-container/20 rounded-full px-4 py-1 active:scale-90 duration-350 ease-[cubic-bezier(0.35,0,0.15,1)]" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">event_note</span>
+<span class="font-label-caps-mobile text-label-caps-mobile mt-0.5">Schedule</span>
+</a>
+<!-- Groups -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-glass-fill rounded-full p-2 active:scale-90 duration-350 ease-[cubic-bezier(0.35,0,0.15,1)]" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="font-label-caps-mobile text-label-caps-mobile mt-0.5">Groups</span>
+</a>
+<!-- Results -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-glass-fill rounded-full p-2 active:scale-90 duration-350 ease-[cubic-bezier(0.35,0,0.15,1)]" href="#">
+<span class="material-symbols-outlined">grade</span>
+<span class="font-label-caps-mobile text-label-caps-mobile mt-0.5">Results</span>
+</a>
+<!-- Settings -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-glass-fill rounded-full p-2 active:scale-90 duration-350 ease-[cubic-bezier(0.35,0,0.15,1)]" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-caps-mobile text-label-caps-mobile mt-0.5">Settings</span>
+</a>
+</nav>
+<script>
+        // Simple micro-interaction for chips
+        document.querySelectorAll('section.flex button').forEach(button => {
+            button.addEventListener('click', function() {
+                document.querySelectorAll('section.flex button').forEach(b => {
+                    b.classList.remove('bg-primary', 'text-white', 'shadow-md');
+                    b.classList.add('glass-card', 'text-primary');
+                });
+                this.classList.remove('glass-card', 'text-primary');
+                this.classList.add('bg-primary', 'text-white', 'shadow-md');
+            });
+        });
+
+        // Day click interaction
+        document.querySelectorAll('.flex-shrink-0.flex-col').forEach(day => {
+            day.addEventListener('click', function() {
+                document.querySelectorAll('.flex-shrink-0.flex-col').forEach(d => {
+                    d.classList.remove('bg-primary', 'text-white', 'shadow-lg', 'shadow-primary/30', 'ring-2', 'ring-white/50');
+                    d.classList.add('glass-card', 'bg-white/20');
+                    d.querySelector('span:first-child').classList.add('opacity-60');
+                    d.querySelector('span:first-child').classList.remove('opacity-100');
+                });
+                this.classList.add('bg-primary', 'text-white', 'shadow-lg', 'shadow-primary/30', 'ring-2', 'ring-white/50');
+                this.classList.remove('glass-card', 'bg-white/20');
+                this.querySelector('span:first-child').classList.remove('opacity-60');
+                this.querySelector('span:first-child').classList.add('opacity-100');
+            });
+        });
+    </script>
+</body></html>

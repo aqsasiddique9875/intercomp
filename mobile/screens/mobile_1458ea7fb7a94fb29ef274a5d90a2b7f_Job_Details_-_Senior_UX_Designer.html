@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+  <title>Job Details | JobFlow</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+  <style>
+    body {
+      background-color: #E7EEFF;
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+      -webkit-tap-highlight-color: transparent;
+    }
+  </style>
+</head>
+<body class="antialiased text-[#471A70]">
+
+  <!-- TopAppBar -->
+  <header class="fixed top-0 w-full z-50 bg-glass-fill backdrop-blur-xl border-b border-glass-border shadow-sm flex items-center justify-center h-16 shrink-0">
+    <div class="max-w-6xl w-full flex items-center justify-between px-5">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-full overflow-hidden border-2 border-primary p-0.5">
+          <img alt="User Avatar" class="w-full h-full rounded-full object-cover" src="https://lh3.googleusercontent.com/aida/AP1WRLso_htihnJ33V7q5zYbt8u-NfoB3ZJISVs-vTicj-4qC5ECtS5f1-4w6YV4027sl6FECnMGNFL4Eze2hGxzE5ViYe1GBC8aDxIr22IBxwvOTBnY5DdP0lr1Mr2oLjdLDQEY0cdp3BV6_eqpLSJsYhE7rCzOhJ8HUy0EsOj0u-xBNtknhbc6cEOMP7n10QkRNTVn5eQUKTTbb4EwqYmkzCf2khW3fWkeIqVSOMA4d6uGGMlKakT_BMt5YDQ"/>
+        </div>
+        <h1 class="text-sm font-bold text-[#471A70]">Hello, Studentone!</h1>
+      </div>
+      <div class="flex items-center gap-3">
+        <button class="w-10 h-10 rounded-full bg-white/40 border border-white/60 flex items-center justify-center shadow-sm">
+          <span class="material-symbols-outlined text-primary text-[22px]">notifications</span>
+        </button>
+        <button class="w-10 h-10 rounded-full bg-white/40 border border-white/60 flex items-center justify-center shadow-sm">
+          <span class="material-symbols-outlined text-primary text-[22px]">settings</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content Layout Area -->
+  <main class="pt-20 pb-28 px-4 flex justify-center items-center min-h-screen">
+    
+    <!-- Job Details Card Container -->
+    <div class="w-full max-w-md bg-[#EDF2FE] rounded-[32px] shadow-lg border border-white/80 p-6 flex flex-col gap-6 relative">
+      
+      <!-- Top Header section of card -->
+      <div class="flex justify-between items-start">
+        <div class="flex gap-4">
+          <!-- Logo container -->
+          <div id="details-logo-container" class="w-14 h-14 rounded-2xl bg-white border border-white/80 flex items-center justify-center flex-shrink-0 shadow-sm overflow-hidden">
+            <img id="details-logo-img" alt="Company Logo" class="w-10 h-10 object-contain" src="https://lh3.googleusercontent.com/aida/AP1WRLtHSlvHQm1XNZ4vaeue1GiJtF1j680ovYDsV1bz1IH37RWIQlHCDhIMbTh8QwjysUr_9axMNLFk7d5MtN1sRrdkCEgDdsjpU6S18_eICdCZ5ObBXpk8IMqmy52sfrJsOQaMvz7hk48gtvML_dmfwlaY-1QmOzz74jRWaBViW4SbLXgO-jIKC3LPueU0Wmini7A--bmI3LnC19bd8jueIoFhpwFhp4dCzG3gBDdCSwoekhL8nTJD3FWqr2Qs"/>
+          </div>
+          <div>
+            <!-- Title & Verification tick -->
+            <div class="flex items-center gap-1.5 flex-wrap">
+              <h2 id="details-title" class="font-extrabold text-[#471A70] text-xl text-left">AI developer</h2>
+              <span class="material-symbols-outlined text-green-600 text-[18px] font-bold" style="font-variation-settings: 'FILL' 1;">verified</span>
+            </div>
+            <p id="details-company-location" class="text-[#726580] text-sm font-semibold text-left">TechFlow • Lahore, Pakistan</p>
+          </div>
+        </div>
+        <!-- Close button navigating back to job-search -->
+        <button onclick="goBack()" class="w-8 h-8 rounded-full bg-white/60 border border-white flex items-center justify-center text-[#726580] active:scale-90 transition-transform">
+          <span class="material-symbols-outlined text-[20px] font-bold">close</span>
+        </button>
+      </div>
+
+      <!-- Quick Info Cards (3 Columns) -->
+      <div class="grid grid-cols-3 gap-3">
+        <!-- Card 1: Type -->
+        <div class="bg-white/40 border border-white/60 rounded-2xl p-3 flex flex-col items-center text-center gap-1.5">
+          <span class="material-symbols-outlined text-[#8731a3] text-[20px]">schedule</span>
+          <div class="flex flex-col">
+            <span class="text-[10px] font-bold uppercase tracking-widest text-[#726580]">Type</span>
+            <span id="details-type" class="text-xs font-extrabold text-[#471A70] mt-0.5">Permanent</span>
+          </div>
+        </div>
+        <!-- Card 2: Salary -->
+        <div class="bg-white/40 border border-white/60 rounded-2xl p-3 flex flex-col items-center text-center gap-1.5">
+          <span class="material-symbols-outlined text-[#8731a3] text-[20px]">payments</span>
+          <div class="flex flex-col">
+            <span class="text-[10px] font-bold uppercase tracking-widest text-[#726580]">Salary</span>
+            <span id="details-salary" class="text-xs font-extrabold text-[#471A70] mt-0.5 truncate max-w-[90px]">Rs. 23k - 27k</span>
+          </div>
+        </div>
+        <!-- Card 3: Match Score -->
+        <div class="bg-white/40 border border-white/60 rounded-2xl p-3 flex flex-col items-center text-center gap-1.5">
+          <span class="material-symbols-outlined text-[#8731a3] text-[20px]">stars</span>
+          <div class="flex flex-col">
+            <span class="text-[10px] font-bold uppercase tracking-widest text-[#726580]">Match Score</span>
+            <span class="text-xs font-extrabold text-[#471A70] mt-0.5">88% Match</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Job Description Section -->
+      <div class="flex flex-col gap-2">
+        <h3 class="text-[11px] font-bold uppercase tracking-widest text-[#726580] text-left">Job Description</h3>
+        <p id="details-description" class="text-sm font-medium text-[#726580] text-left leading-relaxed">No description provided.</p>
+      </div>
+
+      <!-- Key Responsibilities Section -->
+      <div class="flex flex-col gap-3" id="responsibilities-section">
+        <h3 class="text-[11px] font-bold uppercase tracking-widest text-[#726580] text-left">Key Responsibilities</h3>
+        <ul id="details-responsibilities" class="space-y-2.5">
+          <li class="flex items-start gap-2.5 text-left">
+            <span class="material-symbols-outlined text-[#8731a3] text-[18px] mt-0.5">chevron_right</span>
+            <p class="text-sm font-semibold text-[#726580] leading-relaxed">Develop and maintain robust, reusable, and efficient code components.</p>
+          </li>
+          <li class="flex items-start gap-2.5 text-left">
+            <span class="material-symbols-outlined text-[#8731a3] text-[18px] mt-0.5">chevron_right</span>
+            <p class="text-sm font-semibold text-[#726580] leading-relaxed">Optimize application performance for maximum speed and scalability.</p>
+          </li>
+          <li class="flex items-start gap-2.5 text-left">
+            <span class="material-symbols-outlined text-[#8731a3] text-[18px] mt-0.5">chevron_right</span>
+            <p class="text-sm font-semibold text-[#726580] leading-relaxed">Participate in code reviews and collaborate with backend developers.</p>
+          </li>
+          <li class="flex items-start gap-2.5 text-left">
+            <span class="material-symbols-outlined text-[#8731a3] text-[18px] mt-0.5">chevron_right</span>
+            <p class="text-sm font-semibold text-[#726580] leading-relaxed">Write clean, comprehensive unit tests to ensure software reliability.</p>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Requirements Section -->
+      <div class="flex flex-col gap-3" id="requirements-section">
+        <h3 class="text-[11px] font-bold uppercase tracking-widest text-[#726580] text-left">Requirements</h3>
+        <ul id="details-requirements" class="space-y-2.5">
+          <li class="flex items-start gap-2.5 text-left">
+            <span class="material-symbols-outlined text-[#8731a3] text-[18px] mt-0.5">chevron_right</span>
+            <p class="text-sm font-semibold text-[#726580] leading-relaxed">Proficient in the required technologies.</p>
+          </li>
+          <li class="flex items-start gap-2.5 text-left">
+            <span class="material-symbols-outlined text-[#8731a3] text-[18px] mt-0.5">chevron_right</span>
+            <p class="text-sm font-semibold text-[#726580] leading-relaxed">Strong communication and teamwork skills.</p>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Metadata Details Section -->
+      <div class="flex flex-col gap-1.5 border-t border-white/30 pt-4 text-left text-sm font-semibold text-[#726580]">
+        <div class="flex gap-2">
+          <span class="font-extrabold text-[#471A70]">Stipend:</span>
+          <span id="meta-stipend">Rs. 23,500 - 27,500</span>
+        </div>
+        <div class="flex gap-2">
+          <span class="font-extrabold text-[#471A70]">Duration:</span>
+          <span id="meta-duration">Permanent</span>
+        </div>
+        <div class="flex gap-2">
+          <span class="font-extrabold text-[#471A70]">Location:</span>
+          <span id="meta-location">Lahore (On-site)</span>
+        </div>
+      </div>
+
+      <!-- Skills Required Section -->
+      <div class="flex flex-col gap-3 border-t border-white/30 pt-4 text-left">
+        <h3 class="text-[11px] font-bold uppercase tracking-widest text-[#726580]">Skills Required</h3>
+        <div id="details-skills-container" class="flex flex-wrap gap-2">
+          <span class="px-4 py-1.5 rounded-full bg-[#E5D5FA] text-[#8731a3] text-xs font-bold shadow-sm">UI Design</span>
+          <span class="px-4 py-1.5 rounded-full bg-[#E5D5FA] text-[#8731a3] text-xs font-bold shadow-sm">Figma</span>
+          <span class="px-4 py-1.5 rounded-full bg-[#E5D5FA] text-[#8731a3] text-xs font-bold shadow-sm">Prototyping</span>
+        </div>
+      </div>
+
+      <!-- Office Location Map Section -->
+      <div class="flex flex-col gap-3 border-t border-white/30 pt-4 text-left">
+        <h3 class="text-[11px] font-bold uppercase tracking-widest text-[#726580]">Office Location</h3>
+        <div class="relative w-full h-40 rounded-2xl overflow-hidden shadow-inner border border-white/80">
+          <!-- Floating maps button -->
+          <a href="https://maps.google.com" id="details-maps-link" target="_blank" class="absolute top-3 left-3 bg-white/95 border border-white/85 text-xs font-extrabold px-3 py-1.5 rounded-xl shadow-md flex items-center gap-1 active:scale-95 transition-transform z-10 text-primary">
+            <span>Maps</span>
+            <span class="material-symbols-outlined text-[13px]">open_in_new</span>
+          </a>
+          <div id="details-map-frame-wrapper" class="w-full h-full">
+            <img alt="Office Map" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCk6A_8loi2EkdvUrrh0_suRsMR_gCqgm4aHXQ-JdRUq5JmikZa7PzqiJGHK620S76xtY5T8K3dyboqb1e4-gFDFcr8XoPiRqrrdkpHqfcZ5EBUhSgdm4bmcw9FokDI9fokbJOA2RORpkU9OQKadyxk3qtHhN3N0NGdKyjvV6bHLYyskcoW4FGy9IpZPhGzkgvJR0k7zA317vhBpAZ-ZsU0NEkKwckFxqIKLVDKIL2CqAFgqEuwvHbZfgYzrByK4x-acX8fdGFgni_d"/>
+          </div>
+        </div>
+        <!-- Map details footer -->
+        <div class="flex justify-between items-center mt-1">
+          <span id="details-address" class="text-xs font-bold text-[#726580]">Address: Lahore, Pakistan</span>
+          <span class="px-3 py-1 rounded-full bg-[#E5D5FA]/70 text-[#8731a3] text-[10px] font-extrabold shadow-sm uppercase tracking-wider">Within 5 km Radius</span>
+        </div>
+      </div>
+
+      <!-- Action Buttons Row -->
+      <div class="flex gap-4 mt-2">
+        <button onclick="goBack()" class="flex-1 py-3.5 bg-white/60 border border-white/80 rounded-2xl font-bold text-sm text-[#471A70] active:scale-95 transition-transform shadow-sm">Cancel</button>
+        <button onclick="applyJob()" id="apply-btn" class="flex-grow-[1.5] py-3.5 bg-[#8731a3] rounded-2xl font-bold text-sm text-white active:scale-95 transition-transform shadow-md">Apply Now</button>
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- Fixed Bottom Navigation Container -->
+  <nav id="bottom-nav"></nav>
+
+  <script>
+    function goBack() {
+      window.parent.postMessage({ type: 'NAVIGATE', view: 'job-search' }, '*');
+    }
+
+    function applyJob() {
+      const applyBtn = document.getElementById('apply-btn');
+      if (applyBtn) {
+        applyBtn.textContent = 'Applying...';
+        applyBtn.disabled = true;
+        
+        let selected = localStorage.getItem('selectedJob');
+        if (selected) {
+          try {
+            const job = JSON.parse(selected);
+            const token = localStorage.getItem('supabase_access_token') || 'mock_token_student';
+            
+            fetch('/api/jobs/apply', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+              },
+              body: JSON.stringify({ jobId: job.id })
+            })
+            .then(res => res.json())
+            .then(data => {
+              console.log("Applied status response:", data);
+              applyBtn.textContent = 'Applied!';
+              applyBtn.classList.remove('bg-[#8731a3]');
+              applyBtn.classList.add('bg-green-600');
+              
+              let applied = JSON.parse(localStorage.getItem('appliedJobs')) || [];
+              if (!applied.includes(job.id)) {
+                applied.push(job.id);
+                localStorage.setItem('appliedJobs', JSON.stringify(applied));
+              }
+
+              // Open company link from backend database
+              const targetLink = job.link || `https://www.google.com/search?q=${encodeURIComponent(job.company + ' website')}`;
+              window.open(targetLink, '_blank');
+
+              setTimeout(() => {
+                goBack();
+              }, 1200);
+            })
+            .catch(err => {
+              console.error("Apply request failed:", err);
+              // Fallback local support
+              applyBtn.textContent = 'Applied!';
+              applyBtn.classList.remove('bg-[#8731a3]');
+              applyBtn.classList.add('bg-green-600');
+              
+              let applied = JSON.parse(localStorage.getItem('appliedJobs')) || [];
+              if (!applied.includes(job.id)) {
+                applied.push(job.id);
+                localStorage.setItem('appliedJobs', JSON.stringify(applied));
+              }
+              
+              const targetLink = job.link || `https://www.google.com/search?q=${encodeURIComponent(job.company + ' website')}`;
+              window.open(targetLink, '_blank');
+
+              setTimeout(() => {
+                goBack();
+              }, 1200);
+            });
+
+          } catch(e){
+            applyBtn.textContent = 'Apply Now';
+            applyBtn.disabled = false;
+          }
+        }
+      }
+    }
+
+    // Hydrate job details dynamically
+    document.addEventListener('DOMContentLoaded', () => {
+      // Dynamic greeting based on current logged in user
+      const storedUser = localStorage.getItem('currentUser');
+      if (storedUser) {
+        try {
+          const userObj = JSON.parse(storedUser);
+          const userName = userObj.username || userObj.email || 'Alex';
+          const capitalized = userName.charAt(0).toUpperCase() + userName.slice(1);
+          const greetingEl = document.querySelector('header h1');
+          if (greetingEl) {
+            greetingEl.textContent = `Hello, ${capitalized}!`;
+          }
+        } catch (err) {}
+      }
+
+      const stored = localStorage.getItem('selectedJob');
+      if (stored) {
+        try {
+          const job = JSON.parse(stored);
+          console.log("Details hydrating Selected Job: ", job);
+
+          // Title
+          const titleEl = document.getElementById('details-title');
+          if (titleEl) titleEl.textContent = job.title;
+
+          // Company & Location
+          const compLocEl = document.getElementById('details-company-location');
+          if (compLocEl) compLocEl.textContent = `${job.company} • ${job.location || 'Remote'}`;
+
+          // Quick Info: Type
+          const typeEl = document.getElementById('details-type');
+          if (typeEl) typeEl.textContent = job.type || 'Full Time';
+
+          // Quick Info: Salary
+          const salaryEl = document.getElementById('details-salary');
+          if (salaryEl) {
+            // Trim or make it fit
+            let sal = job.salary || 'Competitive';
+            // E.g. "Rs. 120,000 - 180,000 / mo" -> "Rs. 120k - 180k"
+            sal = sal.replace(/,000/g, 'k').replace(/000/g, 'k');
+            salaryEl.textContent = sal;
+          }
+
+          // Description
+          const descEl = document.getElementById('details-description');
+          if (descEl) {
+            descEl.textContent = job.description || 'No description provided.';
+          }
+
+          // Responsibilities Section (Dynamic or hide)
+          const respSection = document.getElementById('responsibilities-section');
+          const respList = document.getElementById('details-responsibilities');
+          if (respSection && respList) {
+            if (job.responsibilities && Array.isArray(job.responsibilities) && job.responsibilities.length > 0) {
+              respSection.style.display = '';
+              respList.innerHTML = job.responsibilities.map(r => `
+                <li class="flex items-start gap-2.5 text-left">
+                  <span class="material-symbols-outlined text-[#8731a3] text-[18px] mt-0.5">chevron_right</span>
+                  <p class="text-sm font-semibold text-[#726580] leading-relaxed">${r}</p>
+                </li>
+              `).join('');
+            } else if (job.responsibilities && typeof job.responsibilities === 'string' && job.responsibilities.trim()) {
+              respSection.style.display = '';
+              respList.innerHTML = `
+                <li class="flex items-start gap-2.5 text-left">
+                  <span class="material-symbols-outlined text-[#8731a3] text-[18px] mt-0.5">chevron_right</span>
+                  <p class="text-sm font-semibold text-[#726580] leading-relaxed">${job.responsibilities}</p>
+                </li>
+              `;
+            } else {
+              respSection.style.display = 'none';
+            }
+          }
+
+          // Requirements Section (Dynamic or hide)
+          const reqSection = document.getElementById('requirements-section');
+          const reqList = document.getElementById('details-requirements');
+          if (reqSection && reqList) {
+            if (job.requirements && Array.isArray(job.requirements) && job.requirements.length > 0) {
+              reqSection.style.display = '';
+              reqList.innerHTML = job.requirements.map(r => `
+                <li class="flex items-start gap-2.5 text-left">
+                  <span class="material-symbols-outlined text-[#8731a3] text-[18px] mt-0.5">chevron_right</span>
+                  <p class="text-sm font-semibold text-[#726580] leading-relaxed">${r}</p>
+                </li>
+              `).join('');
+            } else if (job.requirements && typeof job.requirements === 'string' && job.requirements.trim()) {
+              reqSection.style.display = '';
+              reqList.innerHTML = `
+                <li class="flex items-start gap-2.5 text-left">
+                  <span class="material-symbols-outlined text-[#8731a3] text-[18px] mt-0.5">chevron_right</span>
+                  <p class="text-sm font-semibold text-[#726580] leading-relaxed">${job.requirements}</p>
+                </li>
+              `;
+            } else {
+              reqSection.style.display = 'none';
+            }
+          }
+
+          // Metadata stipend / duration / location
+          const metaStipend = document.getElementById('meta-stipend');
+          if (metaStipend) {
+            metaStipend.textContent = job.salary || 'Competitive';
+          }
+          const metaDuration = document.getElementById('meta-duration');
+          if (metaDuration) {
+            metaDuration.textContent = job.type || 'Permanent';
+          }
+          const metaLocation = document.getElementById('meta-location');
+          if (metaLocation) {
+            metaLocation.textContent = job.location || 'Remote';
+          }
+
+          // Skills required badges
+          const skillsContainer = document.getElementById('details-skills-container');
+          if (skillsContainer && job.skillsRequired) {
+            skillsContainer.innerHTML = job.skillsRequired.map(skill => `
+              <span class="px-4 py-1.5 rounded-full bg-[#E5D5FA] text-[#8731a3] text-xs font-bold shadow-sm">${skill}</span>
+            `).join('');
+          }
+
+          // Address text
+          const addressEl = document.getElementById('details-address');
+          if (addressEl) {
+            addressEl.textContent = `Address: ${job.location || 'Remote'}`;
+          }
+
+          // Update map and external Maps link
+          const mapLink = document.getElementById('details-maps-link');
+          const loc = job.location || 'Remote';
+          if (mapLink) {
+            mapLink.href = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(loc)}`;
+          }
+
+          const mapFrameWrapper = document.getElementById('details-map-frame-wrapper');
+          if (mapFrameWrapper && !loc.toLowerCase().includes('remote')) {
+            mapFrameWrapper.innerHTML = `<iframe 
+              class="w-full h-full border-none animate-fade-in"
+              src="https://maps.google.com/maps?q=${encodeURIComponent(loc)}&t=&z=13&ie=UTF8&iwloc=&output=embed"
+              allowfullscreen="" 
+              loading="lazy">
+            </iframe>`;
+          }
+
+          // Company Logo fallback
+          const logoImg = document.getElementById('details-logo-img');
+          const logoContainer = document.getElementById('details-logo-container');
+          if (logoContainer && job.company) {
+            const firstLetter = job.company.charAt(0).toUpperCase();
+            logoContainer.innerHTML = `<div class="w-full h-full bg-[#E5D5FA] text-[#8731a3] flex items-center justify-center font-bold text-2xl">${firstLetter}</div>`;
+          }
+
+        } catch (e) {
+          console.error("Hydration error:", e);
+        }
+      }
+    });
+  </script>
+</body>
+</html>

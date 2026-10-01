@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+  <script>
+    if (window.self !== window.top) {
+      const style = document.createElement('style');
+      style.innerHTML = `
+        header, nav, aside, 
+        .SideNavBar, .TopNavBar, 
+        #SideNavBar, #TopNavBar {
+          display: none !important;
+        }
+        main, .main-content {
+          margin-left: 0 !important;
+          padding-top: 1.5rem !important;
+        }
+        main.ml-64, main.lg\\:ml-64 {
+          margin-left: 0 !important;
+          padding-top: 2rem !important;
+        }
+      `;
+      document.documentElement.appendChild(style);
+    }
+  </script>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Success Showcase | JobFlow</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.35);
+            backdrop-filter: blur(28px);
+            -webkit-backdrop-filter: blur(28px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+        }
+        .liquid-bg {
+            background: linear-gradient(135deg, #f9f9ff 0%, #DCE4F7 100%);
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+        }
+        .masonry-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            grid-auto-rows: 20px;
+            gap: 24px;
+        }
+        .masonry-item-sm { grid-row-end: span 15; }
+        .masonry-item-md { grid-row-end: span 22; }
+        .masonry-item-lg { grid-row-end: span 28; }
+        
+        .play-button-pulse {
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(163, 76, 190, 0.4); }
+            70% { transform: scale(1.1); box-shadow: 0 0 0 15px rgba(163, 76, 190, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(163, 76, 190, 0); }
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-fixed": "#6cff82",
+                        "on-surface-variant": "#4f4350",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container": "#e7eeff",
+                        "secondary": "#0060ab",
+                        "error": "#FF453A",
+                        "on-secondary": "#ffffff",
+                        "inverse-primary": "#f0b0ff",
+                        "tertiary-container": "#00842f",
+                        "on-secondary-fixed": "#001c39",
+                        "primary-container": "#a34cbe",
+                        "glass-thick": "rgba(255, 255, 255, 0.8)",
+                        "secondary-fixed-dim": "#a3c9ff",
+                        "on-tertiary-fixed": "#002106",
+                        "on-primary-container": "#fff5fb",
+                        "on-primary": "#ffffff",
+                        "surface-container-low": "#f0f3ff",
+                        "on-tertiary": "#ffffff",
+                        "on-secondary-container": "#003868",
+                        "glass-fill": "rgba(255, 255, 255, 0.35)",
+                        "tertiary": "#006823",
+                        "on-surface": "#141c29",
+                        "on-primary-fixed": "#330044",
+                        "surface-tint": "#8d37a9",
+                        "surface-container-highest": "#dbe3f6",
+                        "outline-variant": "#d2c1d2",
+                        "secondary-container": "#54a3ff",
+                        "on-tertiary-fixed-variant": "#00531a",
+                        "on-tertiary-container": "#e6ffe0",
+                        "surface-container-high": "#e0e8fb",
+                        "surface": "#f9f9ff",
+                        "tertiary-fixed-dim": "#47e266",
+                        "primary-fixed-dim": "#f0b0ff",
+                        "primary-fixed": "#fbd7ff",
+                        "on-error": "#ffffff",
+                        "inverse-on-surface": "#ecf1ff",
+                        "surface-bright": "#f9f9ff",
+                        "card-gradient": "linear-gradient(135deg, #4D9EFA 0%, #BF7DF5 100%)",
+                        "error-container": "#ffdad6",
+                        "glass-border": "rgba(255, 255, 255, 0.6)",
+                        "surface-dim": "#d2daed",
+                        "inverse-surface": "#29313f",
+                        "secondary-fixed": "#d3e3ff",
+                        "on-error-container": "#93000a",
+                        "background": "#f9f9ff",
+                        "primary": "#8731a3",
+                        "on-background": "#471A70",
+                        "surface-variant": "#dbe3f6",
+                        "outline": "#817381",
+                        "on-primary-fixed-variant": "#72188f",
+                        "gold": "#FFD60A",
+                        "orange": "#FF9F0A",
+                        "on-secondary-fixed-variant": "#004883"
+                    },
+                    "spacing": {
+                        "mobile-gutter": "16px",
+                        "base": "8px",
+                        "max-width": "1280px",
+                        "safe-top": "44px",
+                        "safe-bottom": "34px",
+                        "desktop-margin": "64px",
+                        "desktop-gutter": "24px",
+                        "mobile-margin": "20px"
+                    },
+                    "fontFamily": {
+                        "display-xl": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "body-md": ["Inter"],
+                        "label-caps": ["Inter"]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-surface selection:bg-primary-container selection:text-white">
+<div class="liquid-bg"></div>
+
+<!-- Top Navigation Bar -->
+<header class="w-full top-0 sticky z-50 bg-glass-fill backdrop-blur-[28px] border-b border-glass-border shadow-[0_12px_40px_0_rgba(71,26,112,0.15)]">
+<nav class="flex justify-between items-center px-desktop-margin max-w-max-width mx-auto h-20">
+<div class="flex items-center gap-12">
+<span class="font-display-xl text-[32px] font-bold tracking-tighter text-primary">JobFlow</span>
+<div class="hidden md:flex items-center gap-8">
+<a class="font-body-md text-on-surface-variant hover:scale-105 hover:text-primary transition-transform duration-300" href="#">Dashboard</a>
+<a class="font-body-md text-on-surface-variant hover:scale-105 hover:text-primary transition-transform duration-300" href="#">Scholarships</a>
+<a class="font-body-md text-on-surface-variant hover:scale-105 hover:text-primary transition-transform duration-300" href="#">Rewards</a>
+<a class="font-body-md text-on-surface-variant hover:scale-105 hover:text-primary transition-transform duration-300" href="#">Mentors</a>
+<a class="font-body-md text-primary border-b-2 border-primary pb-1" href="#">Communities</a>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<button class="bg-primary text-white px-6 py-2.5 rounded-full font-label-caps hover:scale-[1.05] active:scale-[0.96] transition-all duration-300">Claim Points</button>
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:text-primary transition-colors">notifications</span>
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:text-primary transition-colors">account_circle</span>
+</div>
+</div>
+</nav>
+</header>
+<main class="max-w-max-width mx-auto px-desktop-margin py-16">
+<!-- Hero Header -->
+<section class="text-center mb-16">
+<h1 class="font-display-xl text-primary mb-4">Success Showcase</h1>
+<p class="font-body-md text-on-surface-variant max-w-2xl mx-auto">Discover the inspiring journeys of JobFlow students who transformed their dreams into reality at the world's leading tech companies.</p>
+</section>
+<!-- Multi-column Masonry Grid -->
+<div class="masonry-grid">
+<!-- Video Testimonial 1 -->
+<div class="masonry-item-lg glass-card rounded-3xl overflow-hidden relative group cursor-pointer shadow-[0_12px_40px_0_rgba(71,26,112,0.15)] flex flex-col">
+<div class="relative h-full w-full">
+<img class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="A cinematic portrait of a smiling female software engineering intern in a high-tech office environment. The lighting is soft and professional with a bokeh background of a modern workspace. The overall aesthetic is premium, clean, and optimistic, featuring soft lavender and purple tones in the reflections." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDvP9HtAGz78rwtfMIeWe5BE-U7LU1PJDlJ2E75bazjwnYmaewbB8qNW2ENBR1SO_FLxx4b6IxfpyBI0MiBnTBqfBebhIHA2C5NfAsRjwo_9Jq7M7CKVcoR9xhWMG9wczTl0AwIWz5zV11sWmfDMX1orU8vjH2BqC5tQThsum-5ye-ImjJb8oAXOLsD2VOnjDtENyuIUnP-3iGfQaFgQpzM2Id1LzMHdDeyjbAoPWPbiUlfMD-NV4BKy57v3UwnnMlDVFB6dnQ3byOC"/>
+<div class="absolute inset-0 bg-gradient-to-t from-on-background/80 via-on-background/20 to-transparent"></div>
+<div class="absolute inset-0 flex items-center justify-center">
+<div class="w-16 h-16 bg-primary rounded-full flex items-center justify-center play-button-pulse text-white">
+<span class="material-symbols-outlined !text-3xl" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</div>
+</div>
+</div>
+<div class="absolute bottom-0 left-0 p-6 w-full text-white">
+<div class="flex items-center gap-3 mb-2">
+<img class="w-8 h-8 rounded-lg" data-alt="Corporate logo of a leading tech company, clean white minimalist icon on a dark background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDWHNdYykXPC6zaFFQZEJ5iacp6CHiI3QDcEe2ssdsxz3p0JWIoHwoVPohqjMGRnOEIWFpXGWhmICdE4scBdFhFiAzSeCJH8XE5Vj4JinbQ2UTG8m4fbL4fj-ejO8RtoKMiBuvgoytUpfI46uHEldRL99HCzTeQ82wGy6vYVQLYvuEjFMqbzgOJ_RHY9Fl_ib0V4XPQUaqZi_8YcwnrgmnNqR6quXAIOoby_pzwgHWLjKPdRzDZuiLKca-q014AHsZgXoLJVRYeLLG7"/>
+<span class="font-label-caps opacity-80">Hired by Google</span>
+</div>
+<p class="font-headline-lg text-[24px] mb-1">Maya Chen</p>
+<p class="font-label-caps text-primary-fixed">UX Design Intern</p>
+</div>
+</div>
+<!-- Written Testimonial 1 -->
+<div class="masonry-item-sm glass-card rounded-3xl p-8 shadow-[0_12px_40px_0_rgba(71,26,112,0.15)] flex flex-col justify-between">
+<div>
+<div class="flex items-center gap-4 mb-6">
+<img class="w-14 h-14 rounded-full border-2 border-white object-cover" data-alt="Portrait of a young male student looking confident, wearing professional casual attire. Soft studio lighting with a neutral clean background, embodying a successful career-ready persona." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCCQ3YC4kYmssv0RbY4hLUL2rGPU0jYfULTbVKjGhM1q38jg4TJ-mWxrPz6fA4AS_6N5Ffvd46BkLeLs1Xlg-6Zuq0EZCF_7dANBmisj3SkDbXyqvr86OPZftzGJ3KGyKxJskMgzUsMl1wXwdNrdX6QGfY_yDG-hC9R1oVtCHhaGsTTs0UHoVWouHE437uobWJWza164z0sXfGzx41gYkk8lpBre3dy-0eFCp0Jv9TeZjW85sbrSvJbHR8Gcay-mvqU8rd_oZa4fAIa"/>
+<div>
+<h4 class="font-headline-lg text-[18px] text-on-surface">Alex Rivera</h4>
+<p class="font-label-caps text-primary">Backend Intern @ Netflix</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-primary-container opacity-40 !text-4xl block mb-2">format_quote</span>
+<p class="font-body-md text-on-background italic leading-relaxed">"JobFlow didn't just help me find a job; they helped me build the confidence to excel in a world-class engineering team."</p>
+</div>
+<div class="mt-6 pt-4 border-t border-glass-border">
+<span class="text-gold material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">smart_assistant</span>
+</div>
+</div>
+<!-- Written Testimonial 2 -->
+<div class="masonry-item-md glass-card rounded-3xl p-8 shadow-[0_12px_40px_0_rgba(71,26,112,0.15)] flex flex-col">
+<div class="flex items-center gap-4 mb-6">
+<img class="w-14 h-14 rounded-full border-2 border-white object-cover" data-alt="Professional portrait of a young female professional with a bright smile. The lighting is ethereal and soft, emphasizing a premium high-fidelity look. Background has hints of pastel lavender." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDzGU2aPYMhIVVLTCXhR7sfheQahfm8J_nF6cG5k1uOycZ5FekOSlYw3XDBBBjDDXlgoejhYl8weX5CwUbkG9j5m1fXqfHDuErQUaaJiEJYaFd_k2SLziPOSsv7YyFrE6xcWC1xwxn0lu35h2GFr-oaIMvCBV9JzwGGOoNxPgqEWIprEwGn2Qud0_ubsOFLlWpP348oXtoO_s_Z__YFqYwFkj7eytmbgUQJZDGrmlbkVs5jPbY29buxd-y0UlB48ryUmn5w6i2VsbxB"/>
+<div>
+<h4 class="font-headline-lg text-[18px] text-on-surface">Sarah Jenkins</h4>
+<p class="font-label-caps text-primary">Product Analyst @ Figma</p>
+</div>
+</div>
+<p class="font-body-md text-on-background italic leading-relaxed mb-6">"The mentorship program was the turning point. Having someone from the industry guide my portfolio development was exactly what I needed to stand out."</p>
+<img class="rounded-2xl h-32 w-full object-cover mt-auto" data-alt="Abstract colorful light waves in shades of purple and blue, representing digital energy and progress. The style is soft, blurred, and atmospheric, perfectly matching a premium glassmorphic interface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDkefaP0ClySUM98bTwJRyEhT6FVizez445ETRjiRYaZg2G-m3bBvg_81GLKD4H1XS5LEiHGuPANagUF68_K8po3cdQTA1dp-P-rCTBr6rOtE1itNmngsUrgbFmJ-V0BFQUS2S053uQ-e_piDNRPb02S5TVUeeLZafgm9XBywPYoemSd84RF2BSEEezeDNyzdirSWGwVD34pUrAPzcNyLwhAy2zaYN2XqMoIq6ZgHwIPyeaVNgUMgLa7Xr8AG5fyNUWNM9FZyMUiIG9"/>
+</div>
+<!-- Video Testimonial 2 -->
+<div class="masonry-item-md glass-card rounded-3xl overflow-hidden relative group cursor-pointer shadow-[0_12px_40px_0_rgba(71,26,112,0.15)]">
+<img class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="A candid shot of a group of diverse young interns collaborating around a glass table in a sunlit, modern tech office. The mood is energetic and collaborative, with warm natural light and cool shadows. Cinematic composition with high detail." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDatKKrH693-xxbB-_-hu5eXsQoCEbn_1zGdF5WBfQldyWw2LNfm7jzW7sYwIOSMknMMGTBRryP-WFLFR3auarrkubcCaLc_CH1pHcgJLIVFfwBW5xDrXVFZ_7b5GeQZGbfS1b2LAx7r4I9cnlFYS-OrxpwsxKNZkkHJyk0OiaDhc5Yku3wl0Dw5jgW-Xk-fqdakmRGa9wnNXQ6EATJCm5moi4t1BbxQq8KFCN9Xsibx03F_FNmTH4b2zFtTZ1tmQObWKRcBglXT8vL"/>
+<div class="absolute inset-0 bg-on-background/40 group-hover:bg-on-background/20 transition-colors"></div>
+<div class="absolute inset-0 flex items-center justify-center">
+<div class="w-16 h-16 bg-white/20 backdrop-blur-md border border-white/40 rounded-full flex items-center justify-center text-white group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined !text-3xl" style="font-variation-settings: 'FILL' 1;">play_circle</span>
+</div>
+</div>
+<div class="absolute top-4 left-4 glass-thick px-3 py-1 rounded-full">
+<span class="font-label-caps text-primary text-[10px]">SUCCESS STORY</span>
+</div>
+<div class="absolute bottom-0 left-0 p-6 w-full bg-gradient-to-t from-black/60 to-transparent text-white">
+<p class="font-headline-lg text-[20px]">Internship Life @ Adobe</p>
+<p class="font-label-caps opacity-80">Featuring James Wilson</p>
+</div>
+</div>
+<!-- Written Testimonial 3 -->
+<div class="masonry-item-lg glass-card rounded-3xl p-8 shadow-[0_12px_40px_0_rgba(71,26,112,0.15)]">
+<div class="mb-8">
+<img class="w-full h-48 object-cover rounded-2xl mb-6 shadow-sm" data-alt="Minimalist architectural shot of a modern glass building reflecting a soft pink and purple sunset sky. The lines are clean and sharp, representing structural success and clarity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA_VOkApAYGjrExw1mWwguWRfAdULckU-v1wVZXyyf0vuA5o6cV1LhnPjvUIZSGJ-DruhuMYl_MdwZKCr9TgfD0CrOWJjw8GBwJ07y0lg0zw1c4jakaXr8_zU6kK8ECjQ36sPDb9FiPW7XStNFA6jjhsyrODunnjPAS0XxGzXftupkC1veWOEXLm4OgOUoh65r0yYhYoqSVbD9rcYRuf0bdcc3mDBAd37uqMAwnqEPCQ09oQcDYJdStcjTHkf2g7ECsR57eRXUQA3io"/>
+<div class="flex items-center gap-3 mb-4">
+<span class="material-symbols-outlined text-primary">verified</span>
+<span class="font-label-caps text-on-surface-variant">COMMUNITY HIGHLIGHT</span>
+</div>
+<p class="font-body-md text-on-background italic leading-relaxed text-[18px]">"The reward system actually kept me motivated during the long hours of prep. Earning points while learning felt like a game where the ultimate prize was my dream job at Microsoft."</p>
+</div>
+<div class="flex items-center gap-4 mt-8">
+<img class="w-12 h-12 rounded-full border-2 border-primary/20 object-cover" data-alt="Portrait of a female student in a modern workspace environment. High resolution, professional color grading with subtle hints of corporate blue and purple." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDsgqyO2aoZJhepMhbSma0Yqn_vaywXKt45fpqWE8NFtbWk9vrIrytx-Unqy_mk68qgEjsJVCwuzRZDwyL_OzMXhTCAsH89Gz5e13uvnHBE23O3HSYELcrGC0--M4IoGso4o4CDdEKpnPnyfhtyoP92XhIkfciV01AmBU3qlU_mngLqbZ_tyoO6ocCl1Ut_IL1xBiOmjxhFs6ZVBhlVhoOu016uc7dKd_rdvTmEbjCRJrZEVAUHil7q6p1qcZT9wfBXl2VFb10P76SF"/>
+<div>
+<h4 class="font-headline-lg text-[16px] text-on-surface">Priya Sharma</h4>
+<p class="font-label-caps text-on-surface-variant">Cloud Intern @ Microsoft</p>
+</div>
+</div>
+</div>
+<!-- Written Testimonial 4 -->
+<div class="masonry-item-sm glass-card rounded-3xl p-8 shadow-[0_12px_40px_0_rgba(71,26,112,0.15)]">
+<h4 class="font-headline-lg text-[18px] text-on-surface mb-2">Marcus Thorne</h4>
+<p class="font-label-caps text-primary mb-4">Growth Intern @ Shopify</p>
+<p class="font-body-md text-on-background italic">"JobFlow's community is unlike any other. The peer-to-peer support made the internship application process feel less lonely."</p>
+</div>
+</div>
+<!-- CTA Section -->
+<section class="mt-24 text-center glass-card rounded-[40px] py-16 px-8 relative overflow-hidden">
+
+<h2 class="font-display-xl text-primary mb-6 relative z-10">Start Your Own Story</h2>
+<p class="font-body-md text-on-surface-variant max-w-xl mx-auto mb-10 relative z-10">Join thousands of students building their futures with JobFlow. Your success card is waiting.</p>
+<div class="flex flex-col md:flex-row justify-center gap-4 relative z-10">
+<button class="bg-primary text-white px-10 py-4 rounded-full font-label-caps text-[16px] shadow-lg shadow-primary/20 hover:scale-[1.05] active:scale-[0.96] transition-all duration-300">Browse Scholarships</button>
+<button class="bg-glass-thick text-primary border border-primary/20 px-10 py-4 rounded-full font-label-caps text-[16px] hover:bg-white transition-colors">Join Community</button>
+</div>
+</section>
+</main>
+
+<script>
+        // Micro-interactions and hover effects
+        document.querySelectorAll('.glass-card').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                card.style.setProperty('--mouse-x', `${x}px`);
+                card.style.setProperty('--mouse-y', `${y}px`);
+            });
+        });
+
+        // Simple scale on scroll effect for cards
+        const observerOptions = {
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = "1";
+                    entry.target.style.transform = "translateY(0)";
+                }
+            });
+        }, observerOptions);
+
+        function applyObserveToAll() {
+            document.querySelectorAll('.masonry-item-sm, .masonry-item-md, .masonry-item-lg').forEach(el => {
+                if (el.style.opacity === "") {
+                    el.style.opacity = "0";
+                    el.style.transform = "translateY(20px)";
+                    el.style.transition = "all 0.6s cubic-bezier(0.35, 0, 0.15, 1)";
+                }
+                observer.observe(el);
+            });
+        }
+
+        // Dynamic stories loader
+        function loadDynamicStories() {
+            const grid = document.querySelector('.masonry-grid');
+            if (!grid) return;
+            
+            // Read from local storage (synced via sharing origin)
+            const localStories = JSON.parse(localStorage.getItem('success_stories_list') || '[]');
+            
+            // Fetch from backend API
+            fetch('/api/success-showcase')
+                .then(res => res.json())
+                .then(apiStories => {
+                    const allStories = [...apiStories];
+                    localStories.forEach(ls => {
+                        if (!allStories.some(as => as.id === ls.id)) {
+                            allStories.push(ls);
+                        }
+                    });
+
+                    // Exclude drafts and initial DB stories to avoid duplicates
+                    const publishedStories = allStories.filter(s => s.statusState !== 'Draft');
+
+                    publishedStories.forEach(story => {
+                        // Skip rendering if it's already one of the default stories ('1' or '2')
+                        if (story.id === '1' || story.id === '2') return;
+
+                        const card = document.createElement('div');
+                        card.className = "masonry-item-md glass-card rounded-3xl p-8 shadow-[0_12px_40px_0_rgba(71,26,112,0.15)] flex flex-col justify-between";
+                        
+                        const avatarUrl = story.avatar || 'https://lh3.googleusercontent.com/aida-public/AB6AXuCCQ3YC4kYmssv0RbY4hLUL2rGPU0jYfULTbVKjGhM1q38jg4TJ-mWxrPz6fA4AS_6N5Ffvd46BkLeLs1Xlg-6Zuq0EZCF_7dANBmisj3SkDbXyqvr86OPZftzGJ3KGyKxJskMgzUsMl1wXwdNrdX6QGfY_yDG-hC9R1oVtCHhaGsTTs0UHoVWouHE437uobWJWza164z0sXfGzx41gYkk8lpBre3dy-0eFCp0Jv9TeZjW85sbrSvJbHR8Gcay-mvqU8rd_oZa4fAIa';
+                        
+                        const logoIconHtml = story.logo ? 
+                            `<img class="w-8 h-8 rounded-lg object-contain" src="${story.logo}"/>` :
+                            `<span class="material-symbols-outlined text-primary/30">domain</span>`;
+
+                        card.innerHTML = `
+                            <div>
+                                <div class="flex items-center gap-4 mb-6">
+                                    <img class="w-14 h-14 rounded-full border-2 border-white object-cover" src="${avatarUrl}"/>
+                                    <div>
+                                        <h4 class="font-headline-lg text-[18px] text-on-surface">${story.studentName}</h4>
+                                        <p class="font-label-caps text-primary">${story.role || 'Success Intern'}</p>
+                                    </div>
+                                </div>
+                                <span class="material-symbols-outlined text-primary-container opacity-40 !text-4xl block mb-2">format_quote</span>
+                                <p class="font-body-md text-on-background italic leading-relaxed">${story.story}</p>
+                            </div>
+                            <div class="mt-6 pt-4 border-t border-glass-border flex items-center justify-between">
+                                <span class="text-gold material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">smart_assistant</span>
+                                <div class="w-12 h-12 bg-white/60 backdrop-blur-md rounded-xl p-2 shadow-sm border border-white/50 flex items-center justify-center overflow-hidden">
+                                    ${logoIconHtml}
+                                </div>
+                            </div>
+                        `;
+                        
+                        grid.appendChild(card);
+                    });
+
+                    // Re-apply hover effect and observer
+                    applyObserveToAll();
+                    document.querySelectorAll('.glass-card').forEach(card => {
+                        card.addEventListener('mousemove', (e) => {
+                            const rect = card.getBoundingClientRect();
+                            const x = e.clientX - rect.left;
+                            const y = e.clientY - rect.top;
+                            
+                            card.style.setProperty('--mouse-x', `${x}px`);
+                            card.style.setProperty('--mouse-y', `${y}px`);
+                        });
+                    });
+                })
+                .catch(err => {
+                    console.error("Error loading dynamic stories:", err);
+                    applyObserveToAll();
+                });
+        }
+
+        // Run
+        loadDynamicStories();
+    </script>
+</body></html>

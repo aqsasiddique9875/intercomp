@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Security Verification | MFA</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #DCE4F7;
+            overflow: hidden;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.35);
+            backdrop-filter: blur(28px);
+            -webkit-backdrop-filter: blur(28px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 12px 40px 0 rgba(71, 26, 112, 0.15);
+        }
+
+        .glass-input {
+            background: rgba(255, 255, 255, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .glass-input:focus {
+            outline: none;
+            border-color: #54a3ff;
+            box-shadow: 0 0 15px rgba(84, 163, 255, 0.5);
+            transform: scale(1.05);
+        }
+
+        @keyframes pulse-glow {
+            0% { box-shadow: 0 0 0 0 rgba(84, 163, 255, 0.4); }
+            70% { box-shadow: 0 0 0 10px rgba(84, 163, 255, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(84, 163, 255, 0); }
+        }
+
+        .active-glow {
+            animation: pulse-glow 2s infinite;
+        }
+
+        .liquid-bg {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            filter: blur(80px);
+            opacity: 0.6;
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 48;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-container": "#e6ffe0",
+                        "on-secondary-fixed": "#001c39",
+                        "error-container": "#ffdad6",
+                        "primary-fixed-dim": "#f0b0ff",
+                        "inverse-on-surface": "#ecf1ff",
+                        "on-background": "#471A70",
+                        "surface-variant": "#dbe3f6",
+                        "secondary": "#0060ab",
+                        "on-surface": "#141c29",
+                        "surface-container-high": "#e0e8fb",
+                        "outline": "#817381",
+                        "on-surface-variant": "#4f4350",
+                        "on-secondary": "#ffffff",
+                        "inverse-surface": "#29313f",
+                        "outline-variant": "#d2c1d2",
+                        "surface-tint": "#8d37a9",
+                        "secondary-fixed": "#d3e3ff",
+                        "gold": "#FFD60A",
+                        "surface-container-low": "#f0f3ff",
+                        "on-error": "#ffffff",
+                        "tertiary-fixed": "#6cff82",
+                        "surface": "#f9f9ff",
+                        "primary-container": "#a34cbe",
+                        "on-primary-fixed-variant": "#72188f",
+                        "on-secondary-container": "#003868",
+                        "tertiary": "#006823",
+                        "glass-fill": "rgba(255, 255, 255, 0.35)",
+                        "glass-border": "rgba(255, 255, 255, 0.6)",
+                        "error": "#FF453A",
+                        "surface-container-lowest": "#ffffff",
+                        "tertiary-fixed-dim": "#47e266",
+                        "on-tertiary-fixed": "#002106",
+                        "tertiary-container": "#00842f",
+                        "primary": "#8731a3",
+                        "secondary-container": "#54a3ff",
+                        "inverse-primary": "#f0b0ff",
+                        "on-primary-fixed": "#330044",
+                        "orange": "#FF9F0A",
+                        "surface-dim": "#d2daed",
+                        "secondary-fixed-dim": "#a3c9ff",
+                        "on-primary": "#ffffff",
+                        "on-secondary-fixed-variant": "#004883",
+                        "on-tertiary-fixed-variant": "#00531a",
+                        "on-tertiary": "#ffffff",
+                        "background": "#f9f9ff",
+                        "on-error-container": "#93000a",
+                        "surface-container-highest": "#dbe3f6",
+                        "surface-container": "#e7eeff",
+                        "glass-thick": "rgba(255, 255, 255, 0.8)",
+                        "primary-fixed": "#fbd7ff",
+                        "on-primary-container": "#fff5fb",
+                        "surface-bright": "#f9f9ff"
+                    },
+                    "spacing": {
+                        "base": "8px",
+                        "mobile-margin": "20px",
+                        "safe-bottom": "34px",
+                        "desktop-gutter": "24px",
+                        "mobile-gutter": "16px",
+                        "max-width": "1280px",
+                        "desktop-margin": "64px",
+                        "safe-top": "44px"
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="flex items-center justify-center min-h-screen p-6">
+<!-- Atmospheric Liquid Background -->
+<div class="liquid-bg">
+<div class="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] rounded-full bg-primary-fixed blur-3xl opacity-40"></div>
+<div class="absolute bottom-[-10%] right-[-10%] w-[60%] h-[60%] rounded-full bg-secondary-container blur-3xl opacity-30"></div>
+</div>
+<!-- Top AppBar (JSON Component Mapping) -->
+<header class="fixed top-0 w-full flex items-center px-desktop-margin h-16 bg-transparent z-50">
+<div class="flex items-center gap-2 cursor-pointer hover:opacity-80 transition-opacity active:scale-95 duration-200">
+<span class="material-symbols-outlined text-primary font-headline-lg text-headline-lg">arrow_back</span>
+<span class="font-headline-lg text-headline-lg font-bold text-on-background">Security Check</span>
+</div>
+</header>
+<main class="w-full max-w-xl z-10">
+<!-- Main Verification Card -->
+<div class="glass-card rounded-[32px] p-10 md:p-14 flex flex-col items-center text-center">
+<!-- 3D Glassmorphic Security Icon -->
+<div class="relative w-24 h-24 mb-8 group">
+<div class="absolute inset-0 bg-primary/20 rounded-full blur-xl group-hover:bg-primary/30 transition-all"></div>
+<div class="relative flex items-center justify-center w-full h-full glass-thick rounded-3xl border border-glass-border shadow-lg">
+<span class="material-symbols-outlined text-[48px] text-primary" style="font-variation-settings: 'FILL' 1;">shield_person</span>
+</div>
+</div>
+<!-- Title & Subtitle -->
+<h1 class="font-headline-lg text-headline-lg text-on-background mb-4">Security Verification</h1>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-sm mb-10">
+                We've sent a 6-digit verification code to your registered device.
+            </p>
+<!-- OTP Input Group -->
+<div class="flex gap-3 md:gap-4 mb-10" id="otp-container">
+<input autofocus="" class="otp-input w-12 h-14 md:w-16 md:h-20 text-center text-2xl font-bold rounded-2xl glass-input text-on-background active-glow" maxlength="1" type="text"/>
+<input class="otp-input w-12 h-14 md:w-16 md:h-20 text-center text-2xl font-bold rounded-2xl glass-input text-on-background" maxlength="1" type="text"/>
+<input class="otp-input w-12 h-14 md:w-16 md:h-20 text-center text-2xl font-bold rounded-2xl glass-input text-on-background" maxlength="1" type="text"/>
+<input class="otp-input w-12 h-14 md:w-16 md:h-20 text-center text-2xl font-bold rounded-2xl glass-input text-on-background" maxlength="1" type="text"/>
+<input class="otp-input w-12 h-14 md:w-16 md:h-20 text-center text-2xl font-bold rounded-2xl glass-input text-on-background" maxlength="1" type="text"/>
+<input class="otp-input w-12 h-14 md:w-16 md:h-20 text-center text-2xl font-bold rounded-2xl glass-input text-on-background" maxlength="1" type="text"/>
+</div>
+<!-- Action Buttons -->
+<div class="flex flex-col w-full gap-4">
+<button class="w-full h-14 bg-primary text-on-primary rounded-full font-label-caps text-label-caps tracking-widest hover:opacity-90 active:scale-95 transition-all shadow-lg">
+                    VERIFY
+                </button>
+<button class="w-full h-14 bg-glass-fill border border-glass-border text-on-background rounded-full font-label-caps text-label-caps tracking-widest hover:bg-glass-thick active:scale-95 transition-all">
+                    BACK TO LOGIN
+                </button>
+</div>
+<!-- Footer -->
+<div class="mt-10">
+<p class="font-body-md text-body-md text-on-surface-variant">
+                    Didn't receive code? 
+                    <button class="text-primary font-bold hover:underline ml-1">Resend</button>
+</p>
+</div>
+</div>
+</main>
+<!-- Bottom Navigation (JSON Component Mapping) -->
+<!-- Hidden on Desktop as per Platform Pivot rules in instructions -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-safe-bottom h-20 bg-glass-thick backdrop-blur-2xl rounded-t-xl shadow-[0_12px_40px_0_rgba(71,26,112,0.15)]">
+<div class="flex flex-col items-center justify-center text-outline p-2 hover:bg-glass-fill transition-colors">
+<span class="material-symbols-outlined">home</span>
+</div>
+<div class="flex flex-col items-center justify-center text-outline p-2 hover:bg-glass-fill transition-colors">
+<span class="material-symbols-outlined">work</span>
+</div>
+<div class="flex flex-col items-center justify-center bg-primary-container/20 text-primary rounded-full p-2">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">shield_with_heart</span>
+</div>
+<div class="flex flex-col items-center justify-center text-outline p-2 hover:bg-glass-fill transition-colors">
+<span class="material-symbols-outlined">person</span>
+</div>
+</nav>
+<script>
+        // OTP Interaction Logic
+        const inputs = document.querySelectorAll('.otp-input');
+
+        inputs.forEach((input, index) => {
+            input.addEventListener('input', (e) => {
+                const value = e.target.value;
+                
+                // Clear active glow from all
+                inputs.forEach(i => i.classList.remove('active-glow'));
+                
+                if (value.length === 1 && index < inputs.length - 1) {
+                    inputs[index + 1].focus();
+                    inputs[index + 1].classList.add('active-glow');
+                } else if (value.length === 1 && index === inputs.length - 1) {
+                    input.classList.add('active-glow');
+                }
+            });
+
+            input.addEventListener('keydown', (e) => {
+                if (e.key === 'Backspace' && !input.value && index > 0) {
+                    inputs[index - 1].focus();
+                    inputs.forEach(i => i.classList.remove('active-glow'));
+                    inputs[index - 1].classList.add('active-glow');
+                }
+            });
+
+            // Focus handler for styling
+            input.addEventListener('focus', () => {
+                inputs.forEach(i => i.classList.remove('active-glow'));
+                input.classList.add('active-glow');
+            });
+        });
+
+        // Initialize first focus
+        window.onload = () => {
+            inputs[0].focus();
+        };
+
+        // Micro-interaction: Mouse move atmospheric shift
+        document.addEventListener('mousemove', (e) => {
+            const moveX = (e.clientX - window.innerWidth / 2) / 100;
+            const moveY = (e.clientY - window.innerHeight / 2) / 100;
+            document.querySelector('.liquid-bg').style.transform = `translate(${moveX}px, ${moveY}px)`;
+        });
+    </script>
+</body></html>

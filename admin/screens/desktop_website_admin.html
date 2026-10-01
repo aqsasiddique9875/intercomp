@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Website Builder | Content Administration</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=Inter:wght@400;500;600;700&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.45);
+            backdrop-filter: blur(28px);
+            -webkit-backdrop-filter: blur(28px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 8px 32px 0 rgba(163, 76, 190, 0.08);
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.35);
+            backdrop-filter: blur(28px);
+            -webkit-backdrop-filter: blur(28px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 8px 32px 0 rgba(163, 76, 190, 0.05);
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .glass-card:hover {
+            transform: translateY(-2px);
+            background: rgba(255, 255, 255, 0.45);
+            box-shadow: 0 12px 40px 0 rgba(71, 26, 112, 0.1);
+        }
+        .active-tab-btn {
+            background: rgba(163, 76, 190, 0.18) !important;
+            box-shadow: inset 0 0 0 1px rgba(163, 76, 190, 0.3) !important;
+            color: #8731a3 !important;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: rgba(135, 49, 163, 0.2);
+            border-radius: 10px;
+        }
+        .liquid-bg {
+            background: linear-gradient(135deg, #f9f9ff 0%, #DCE4F7 100%);
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+        }
+    </style>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#8731a3",
+                        "primary-container": "#a34cbe",
+                        "on-primary-container": "#fff5fb",
+                        "on-surface-variant": "#4f4350",
+                        "glass-border": "rgba(255, 255, 255, 0.6)",
+                        "glass-thick": "rgba(255, 255, 255, 0.8)",
+                        "glass-fill": "rgba(255, 255, 255, 0.35)",
+                        background: "#DCE4F7",
+                        "on-surface": "#141c29"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "2xl": "16px",
+                        "3xl": "24px"
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-transparent text-on-surface font-sans p-6 overflow-y-auto min-h-screen">
+    <div class="max-w-[1200px] mx-auto flex gap-6">
+        
+        <!-- Module Internal Navigation Sidebar (Flex-based to bypass fixed/aside constraints) -->
+        <nav class="w-60 shrink-0 flex flex-col gap-2 bg-white/35 backdrop-blur-xl border border-white/50 p-4 rounded-3xl h-fit shadow-[0_8px_32px_0_rgba(163,76,190,0.06)]" id="moduleSidebar">
+            <div class="px-3 py-2 mb-3">
+                <span class="text-[9px] font-extrabold uppercase tracking-widest text-[#726580]">MODULE NAVIGATION</span>
+                <h3 class="font-extrabold text-base text-[#471A70] mt-0.5">Content Builder</h3>
+            </div>
+            
+            <button onclick="switchTab('blog')" id="tab-btn-blog" class="active-tab-btn flex items-center gap-3 w-full text-[#471A70]/70 px-4 py-3 rounded-2xl font-bold text-xs hover:bg-white/40 hover:text-primary transition-all active:scale-95 duration-150">
+                <span class="material-symbols-outlined text-lg">rss_feed</span> Blog Posts
+            </button>
+            <button onclick="switchTab('seo')" id="tab-btn-seo" class="flex items-center gap-3 w-full text-[#471A70]/70 px-4 py-3 rounded-2xl font-bold text-xs hover:bg-white/40 hover:text-primary transition-all active:scale-95 duration-150">
+                <span class="material-symbols-outlined text-lg">language</span> SEO Settings
+            </button>
+            <button onclick="switchTab('pages')" id="tab-btn-pages" class="flex items-center gap-3 w-full text-[#471A70]/70 px-4 py-3 rounded-2xl font-bold text-xs hover:bg-white/40 hover:text-primary transition-all active:scale-95 duration-150">
+                <span class="material-symbols-outlined text-lg">web</span> Pages Manager
+            </button>
+        </nav>
+
+        <!-- Right Content Panels Panel -->
+        <div class="flex-1 min-w-0 space-y-6">
+
+            <!-- ================= BLOG TAB PANEL ================= -->
+            <div id="panel-blog" class="space-y-6">
+                <!-- Summary cards row -->
+                <div class="grid grid-cols-3 gap-4">
+                    <div class="glass-card p-5 rounded-3xl text-left flex justify-between items-center">
+                        <div>
+                            <span class="text-[10px] font-extrabold text-[#726580] uppercase tracking-wider">Active Posts</span>
+                            <h3 class="text-2xl font-extrabold text-[#471A70] mt-1">14</h3>
+                            <p class="text-[10px] text-green-600 font-bold mt-1">+2 this week</p>
+                        </div>
+                        <div class="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center text-primary">
+                            <span class="material-symbols-outlined text-xl">article</span>
+                        </div>
+                    </div>
+                    <div class="glass-card p-5 rounded-3xl text-left flex justify-between items-center">
+                        <div>
+                            <span class="text-[10px] font-extrabold text-[#726580] uppercase tracking-wider">Drafts</span>
+                            <h3 class="text-2xl font-extrabold text-[#471A70] mt-1">3</h3>
+                            <p class="text-[10px] text-outline font-bold mt-1">Ready to publish</p>
+                        </div>
+                        <div class="w-12 h-12 rounded-2xl bg-amber-500/10 flex items-center justify-center text-amber-600">
+                            <span class="material-symbols-outlined text-xl">edit_note</span>
+                        </div>
+                    </div>
+                    <div class="glass-card p-5 rounded-3xl text-left flex justify-between items-center">
+                        <div>
+                            <span class="text-[10px] font-extrabold text-[#726580] uppercase tracking-wider">Comments</span>
+                            <h3 class="text-2xl font-extrabold text-[#471A70] mt-1">42</h3>
+                            <p class="text-[10px] text-primary font-bold mt-1">12 pending review</p>
+                        </div>
+                        <div class="w-12 h-12 rounded-2xl bg-blue-500/10 flex items-center justify-center text-blue-600">
+                            <span class="material-symbols-outlined text-xl">forum</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Blog listing list -->
+                <div class="glass-card p-6 rounded-3xl space-y-4">
+                    <div class="flex items-center justify-between">
+                        <div class="text-left">
+                            <h3 class="font-extrabold text-base text-[#471A70]">Blog Articles</h3>
+                            <p class="text-xs text-outline font-medium">Manage website articles and categories</p>
+                        </div>
+                        <button onclick="openNewPostModal()" class="h-9 px-4 bg-primary text-white rounded-full font-bold text-xs shadow-md shadow-primary/20 active:scale-95 transition-transform flex items-center gap-1.5">
+                            <span class="material-symbols-outlined text-sm font-bold">add</span> New Post
+                        </button>
+                    </div>
+
+                    <!-- Table wrapper -->
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left border-collapse">
+                            <thead>
+                                <tr class="border-b border-[#471A70]/10 text-[10px] font-extrabold text-[#726580] uppercase tracking-wider">
+                                    <th class="py-3 px-4">Title</th>
+                                    <th class="py-3 px-4">Author</th>
+                                    <th class="py-3 px-4">Category</th>
+                                    <th class="py-3 px-4">SEO Health</th>
+                                    <th class="py-3 px-4">Status</th>
+                                    <th class="py-3 px-4 text-right">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="blog-posts-tbody" class="text-xs font-semibold text-[#471A70]">
+                                <!-- Post 1 -->
+                                <tr class="border-b border-[#471A70]/5 hover:bg-[#a34cbe]/5 transition-colors">
+                                    <td class="py-3.5 px-4 font-bold max-w-[200px] truncate">How AI is Changing Recruitment in 2026</td>
+                                    <td class="py-3.5 px-4">RecruiterPro Team</td>
+                                    <td class="py-3.5 px-4"><span class="px-2.5 py-0.5 rounded-full bg-primary/10 text-primary font-bold text-[9px]">Technology</span></td>
+                                    <td class="py-3.5 px-4 flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-green-500"></span> 98/100</td>
+                                    <td class="py-3.5 px-4"><span class="px-2.5 py-0.5 rounded-full bg-green-500/10 text-green-700 font-extrabold text-[9px] uppercase tracking-wider">Published</span></td>
+                                    <td class="py-3.5 px-4 text-right space-x-1 shrink-0">
+                                        <button class="w-7 h-7 rounded-full hover:bg-white/40 flex items-center justify-center text-primary inline-flex active:scale-90 transition-transform"><span class="material-symbols-outlined text-sm">edit</span></button>
+                                        <button onclick="this.closest('tr').remove()" class="w-7 h-7 rounded-full hover:bg-red-50 flex items-center justify-center text-red-500 inline-flex active:scale-90 transition-transform"><span class="material-symbols-outlined text-sm">delete</span></button>
+                                    </td>
+                                </tr>
+                                <!-- Post 2 -->
+                                <tr class="border-b border-[#471A70]/5 hover:bg-[#a34cbe]/5 transition-colors">
+                                    <td class="py-3.5 px-4 font-bold max-w-[200px] truncate">5 Tips for Landing your Dream Internship</td>
+                                    <td class="py-3.5 px-4">Sarah Jenkins</td>
+                                    <td class="py-3.5 px-4"><span class="px-2.5 py-0.5 rounded-full bg-primary/10 text-primary font-bold text-[9px]">Career Advice</span></td>
+                                    <td class="py-3.5 px-4 flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-green-500"></span> 92/100</td>
+                                    <td class="py-3.5 px-4"><span class="px-2.5 py-0.5 rounded-full bg-green-500/10 text-green-700 font-extrabold text-[9px] uppercase tracking-wider">Published</span></td>
+                                    <td class="py-3.5 px-4 text-right space-x-1">
+                                        <button class="w-7 h-7 rounded-full hover:bg-white/40 flex items-center justify-center text-primary inline-flex active:scale-90 transition-transform"><span class="material-symbols-outlined text-sm">edit</span></button>
+                                        <button onclick="this.closest('tr').remove()" class="w-7 h-7 rounded-full hover:bg-red-50 flex items-center justify-center text-red-500 inline-flex active:scale-90 transition-transform"><span class="material-symbols-outlined text-sm">delete</span></button>
+                                    </td>
+                                </tr>
+                                <!-- Post 3 -->
+                                <tr class="border-b border-[#471A70]/5 hover:bg-[#a34cbe]/5 transition-colors">
+                                    <td class="py-3.5 px-4 font-bold max-w-[200px] truncate">Design System Best Practices for Web</td>
+                                    <td class="py-3.5 px-4">Alex Mercer</td>
+                                    <td class="py-3.5 px-4"><span class="px-2.5 py-0.5 rounded-full bg-primary/10 text-primary font-bold text-[9px]">Design</span></td>
+                                    <td class="py-3.5 px-4 flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-amber-500"></span> 84/100</td>
+                                    <td class="py-3.5 px-4"><span class="px-2.5 py-0.5 rounded-full bg-gray-200 text-gray-700 font-extrabold text-[9px] uppercase tracking-wider">Draft</span></td>
+                                    <td class="py-3.5 px-4 text-right space-x-1">
+                                        <button class="w-7 h-7 rounded-full hover:bg-white/40 flex items-center justify-center text-primary inline-flex active:scale-90 transition-transform"><span class="material-symbols-outlined text-sm">edit</span></button>
+                                        <button onclick="this.closest('tr').remove()" class="w-7 h-7 rounded-full hover:bg-red-50 flex items-center justify-center text-red-500 inline-flex active:scale-90 transition-transform"><span class="material-symbols-outlined text-sm">delete</span></button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ================= SEO TAB PANEL ================= -->
+            <div id="panel-seo" class="space-y-6 hidden">
+                <div class="grid grid-cols-3 gap-6">
+                    <!-- Health score and audits -->
+                    <div class="col-span-2 space-y-6">
+                        <!-- Main form inputs card -->
+                        <div class="glass-card p-6 rounded-3xl space-y-5 text-left">
+                            <div>
+                                <h3 class="font-extrabold text-base text-[#471A70]">Global SEO Meta Tags</h3>
+                                <p class="text-xs text-outline font-medium">Configure basic indexing keywords and search snippets</p>
+                            </div>
+                            
+                            <div class="space-y-4">
+                                <div class="flex flex-col gap-1.5">
+                                    <label class="text-[10px] font-extrabold uppercase tracking-wider text-[#726580]">Homepage Title</label>
+                                    <input type="text" id="seo-meta-title" value="EliteHire - Premium Internship & Job Platform" class="w-full bg-white/70 border border-white/80 rounded-2xl h-11 px-4 text-xs font-semibold text-[#471A70] focus:ring-primary focus:border-primary focus:bg-white" oninput="syncSeoSnippet()" />
+                                </div>
+                                <div class="flex flex-col gap-1.5">
+                                    <label class="text-[10px] font-extrabold uppercase tracking-wider text-[#726580]">Meta Description</label>
+                                    <textarea id="seo-meta-desc" rows="3" class="w-full bg-white/70 border border-white/80 rounded-2xl p-4 text-xs font-semibold text-[#726580] leading-relaxed focus:ring-primary focus:border-primary focus:bg-white" oninput="syncSeoSnippet()">Discover top-tier internships and job recommendations powered by advanced matching algorithms. Land your dream role with interactive skill tests and verification.</textarea>
+                                </div>
+                                <div class="flex flex-col gap-1.5">
+                                    <label class="text-[10px] font-extrabold uppercase tracking-wider text-[#726580]">Keywords (Comma separated)</label>
+                                    <input type="text" value="internships, job search, recruiter dashboard, skill assessments, student portfolio" class="w-full bg-white/70 border border-white/80 rounded-2xl h-11 px-4 text-xs font-semibold text-[#471A70] focus:ring-primary focus:border-primary focus:bg-white" />
+                                </div>
+                            </div>
+
+                            <div class="flex justify-end pt-2">
+                                <button onclick="saveMetaTags(this)" class="h-10 px-6 bg-primary text-white rounded-full font-bold text-xs shadow-md shadow-primary/20 active:scale-95 transition-transform flex items-center gap-1.5">
+                                    <span class="material-symbols-outlined text-sm">save</span> Save Meta Tags
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- SEO Audits / Checklist list -->
+                        <div class="glass-card p-6 rounded-3xl space-y-4 text-left">
+                            <div>
+                                <h3 class="font-extrabold text-base text-[#471A70]">Optimization Checklist</h3>
+                                <p class="text-xs text-outline font-medium">Auto audits recommendations for improving index visibility</p>
+                            </div>
+                            
+                            <div class="space-y-3">
+                                <div class="flex items-start gap-3 p-3 bg-green-500/10 rounded-2xl border border-green-500/20">
+                                    <span class="material-symbols-outlined text-green-600 font-bold mt-0.5">check_circle</span>
+                                    <div>
+                                        <h4 class="text-xs font-bold text-[#471A70]">Sitemap.xml configured</h4>
+                                        <p class="text-[10px] text-outline font-medium mt-0.5">Your indexing sitemap generated successfully and submitted to Google console.</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start gap-3 p-3 bg-green-500/10 rounded-2xl border border-green-500/20">
+                                    <span class="material-symbols-outlined text-green-600 font-bold mt-0.5">check_circle</span>
+                                    <div>
+                                        <h4 class="text-xs font-bold text-[#471A70]">SSL Certificate active</h4>
+                                        <p class="text-[10px] text-outline font-medium mt-0.5">Platform serving securely over HTTPS with correct HSTS configuration headers.</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start gap-3 p-3 bg-amber-500/10 rounded-2xl border border-amber-500/20">
+                                    <span class="material-symbols-outlined text-amber-600 font-bold mt-0.5">warning</span>
+                                    <div class="flex-1">
+                                        <h4 class="text-xs font-bold text-[#471A70]">3 Images missing alt text attributes</h4>
+                                        <p class="text-[10px] text-outline font-medium mt-0.5">Images without alt values degrade accessibility rankings on Google Search.</p>
+                                    </div>
+                                    <button class="px-3 py-1 bg-white border border-amber-500/30 text-amber-600 font-extrabold text-[9px] rounded-full active:scale-95 transition-all">Fix Alt</button>
+                                </div>
+                                <div class="flex items-start gap-3 p-3 bg-amber-500/10 rounded-2xl border border-amber-500/20">
+                                    <span class="material-symbols-outlined text-amber-600 font-bold mt-0.5">warning</span>
+                                    <div class="flex-1">
+                                        <h4 class="text-xs font-bold text-[#471A70]">H1 heading tag missing on /about page</h4>
+                                        <p class="text-[10px] text-outline font-medium mt-0.5">Make sure every core user-facing route has a single H1 tag for search spiders.</p>
+                                    </div>
+                                    <button class="px-3 py-1 bg-white border border-amber-500/30 text-amber-600 font-extrabold text-[9px] rounded-full active:scale-95 transition-all">Fix Tags</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Search preview side card -->
+                    <div class="space-y-6">
+                        <!-- Score meter card -->
+                        <div class="glass-card p-6 rounded-3xl text-center flex flex-col justify-center items-center gap-4">
+                            <h3 class="font-extrabold text-xs text-[#726580] uppercase tracking-wider">SEO Health Score</h3>
+                            <!-- Circle gauge -->
+                            <div class="relative w-32 h-32 flex items-center justify-center">
+                                <svg class="w-full h-full transform -rotate-90">
+                                    <circle cx="64" cy="64" r="54" class="stroke-[#471A70]/10 fill-none" stroke-width="10"></circle>
+                                    <circle cx="64" cy="64" r="54" class="stroke-primary fill-none" stroke-width="10" stroke-dasharray="339" stroke-dashoffset="20"></circle>
+                                </svg>
+                                <span class="absolute text-3xl font-extrabold text-[#471A70]">94%</span>
+                            </div>
+                            <span class="px-3 py-1 rounded-full bg-green-500/10 text-green-700 text-[10px] font-extrabold uppercase tracking-wider">EXCELLENT</span>
+                        </div>
+
+                        <!-- Snippet preview card -->
+                        <div class="glass-card p-6 rounded-3xl text-left space-y-4">
+                            <h3 class="font-extrabold text-xs text-[#726580] uppercase tracking-wider">Search Snippet Preview</h3>
+                            
+                            <div class="space-y-1.5 p-4 bg-white/60 rounded-2xl border border-white/80">
+                                <p class="text-[10px] text-outline flex items-center gap-1 font-semibold">https://elitehire.com <span class="material-symbols-outlined text-[10px]">arrow_drop_down</span></p>
+                                <h4 id="google-preview-title" class="text-sm font-extrabold text-blue-800 leading-tight cursor-pointer hover:underline">EliteHire - Premium Internship & Job Platform</h4>
+                                <p id="google-preview-desc" class="text-[10px] text-outline font-medium leading-relaxed">Discover top-tier internships and job recommendations powered by advanced matching algorithms. Land your dream role with interactive skill tests and verification.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ================= PAGES TAB PANEL ================= -->
+            <div id="panel-pages" class="space-y-6 hidden">
+                
+                <!-- Quick actions row -->
+                <div class="flex items-center justify-between">
+                    <div class="text-left">
+                        <h3 class="font-extrabold text-base text-[#471A70]">Web Pages</h3>
+                        <p class="text-xs text-outline font-medium">Manage global website hierarchy and individual page layouts</p>
+                    </div>
+                    <button onclick="openNewPageModal()" class="h-9 px-4 bg-primary text-white rounded-full font-bold text-xs shadow-md shadow-primary/20 active:scale-95 transition-transform flex items-center gap-1.5">
+                        <span class="material-symbols-outlined text-sm font-bold">add</span> Create Page
+                    </button>
+                </div>
+
+                <!-- Pages Grid -->
+                <div class="grid grid-cols-2 gap-4" id="pages-grid-container">
+                    
+                    <!-- Page Card 1 -->
+                    <div class="glass-card p-5 rounded-3xl text-left flex flex-col justify-between min-h-[160px] gap-4">
+                        <div class="flex items-start justify-between">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
+                                    <span class="material-symbols-outlined text-lg">home</span>
+                                </div>
+                                <div>
+                                    <h4 class="font-extrabold text-sm text-[#471A70]">Home Page</h4>
+                                    <span class="text-[9px] text-outline font-bold flex items-center gap-0.5"><span class="material-symbols-outlined text-[10px]">link</span>/</span>
+                                </div>
+                            </div>
+                            <span class="px-2.5 py-0.5 rounded-full bg-green-500/10 text-green-700 font-extrabold text-[8px] uppercase tracking-wider">Active</span>
+                        </div>
+                        
+                        <div class="flex items-center justify-between border-t border-purple-950/5 pt-4">
+                            <span class="text-[9px] text-[#726580] font-bold">Modified 2 hours ago</span>
+                            <div class="flex gap-1.5">
+                                <button class="h-7 px-3 bg-white/40 border border-purple-500/10 text-primary rounded-full font-bold text-[9px] active:scale-95 transition-all">Edit Layout</button>
+                                <button class="w-7 h-7 rounded-full hover:bg-white/40 flex items-center justify-center text-[#726580] active:scale-90 transition-transform"><span class="material-symbols-outlined text-sm">settings</span></button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Page Card 2 -->
+                    <div class="glass-card p-5 rounded-3xl text-left flex flex-col justify-between min-h-[160px] gap-4">
+                        <div class="flex items-start justify-between">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
+                                    <span class="material-symbols-outlined text-lg">info</span>
+                                </div>
+                                <div>
+                                    <h4 class="font-extrabold text-sm text-[#471A70]">About Us</h4>
+                                    <span class="text-[9px] text-outline font-bold flex items-center gap-0.5"><span class="material-symbols-outlined text-[10px]">link</span>/about</span>
+                                </div>
+                            </div>
+                            <span class="px-2.5 py-0.5 rounded-full bg-green-500/10 text-green-700 font-extrabold text-[8px] uppercase tracking-wider">Active</span>
+                        </div>
+                        
+                        <div class="flex items-center justify-between border-t border-purple-950/5 pt-4">
+                            <span class="text-[9px] text-[#726580] font-bold">Modified 3 days ago</span>
+                            <div class="flex gap-1.5">
+                                <button class="h-7 px-3 bg-white/40 border border-purple-500/10 text-primary rounded-full font-bold text-[9px] active:scale-95 transition-all">Edit Layout</button>
+                                <button class="w-7 h-7 rounded-full hover:bg-white/40 flex items-center justify-center text-[#726580] active:scale-90 transition-transform"><span class="material-symbols-outlined text-sm">settings</span></button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Page Card 3 -->
+                    <div class="glass-card p-5 rounded-3xl text-left flex flex-col justify-between min-h-[160px] gap-4">
+                        <div class="flex items-start justify-between">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
+                                    <span class="material-symbols-outlined text-lg">work</span>
+                                </div>
+                                <div>
+                                    <h4 class="font-extrabold text-sm text-[#471A70]">Careers</h4>
+                                    <span class="text-[9px] text-outline font-bold flex items-center gap-0.5"><span class="material-symbols-outlined text-[10px]">link</span>/careers</span>
+                                </div>
+                            </div>
+                            <span class="px-2.5 py-0.5 rounded-full bg-green-500/10 text-green-700 font-extrabold text-[8px] uppercase tracking-wider">Active</span>
+                        </div>
+                        
+                        <div class="flex items-center justify-between border-t border-purple-950/5 pt-4">
+                            <span class="text-[9px] text-[#726580] font-bold">Modified Yesterday</span>
+                            <div class="flex gap-1.5">
+                                <button class="h-7 px-3 bg-white/40 border border-purple-500/10 text-primary rounded-full font-bold text-[9px] active:scale-95 transition-all">Edit Layout</button>
+                                <button class="w-7 h-7 rounded-full hover:bg-white/40 flex items-center justify-center text-[#726580] active:scale-90 transition-transform"><span class="material-symbols-outlined text-sm">settings</span></button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Page Card 4 -->
+                    <div class="glass-card p-5 rounded-3xl text-left flex flex-col justify-between min-h-[160px] gap-4">
+                        <div class="flex items-start justify-between">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
+                                    <span class="material-symbols-outlined text-lg">contact_mail</span>
+                                </div>
+                                <div>
+                                    <h4 class="font-extrabold text-sm text-[#471A70]">Contact Us</h4>
+                                    <span class="text-[9px] text-outline font-bold flex items-center gap-0.5"><span class="material-symbols-outlined text-[10px]">link</span>/contact</span>
+                                </div>
+                            </div>
+                            <span class="px-2.5 py-0.5 rounded-full bg-green-500/10 text-green-700 font-extrabold text-[8px] uppercase tracking-wider">Active</span>
+                        </div>
+                        
+                        <div class="flex items-center justify-between border-t border-purple-950/5 pt-4">
+                            <span class="text-[9px] text-[#726580] font-bold">Modified 1 week ago</span>
+                            <div class="flex gap-1.5">
+                                <button class="h-7 px-3 bg-white/40 border border-purple-500/10 text-primary rounded-full font-bold text-[9px] active:scale-95 transition-all">Edit Layout</button>
+                                <button class="w-7 h-7 rounded-full hover:bg-white/40 flex items-center justify-center text-[#726580] active:scale-90 transition-transform"><span class="material-symbols-outlined text-sm">settings</span></button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ================= MODALS OVERLAYS ================= -->
+    
+    <!-- New Post Modal -->
+    <div id="modal-post" class="fixed inset-0 z-50 flex items-center justify-center bg-[#471A70]/60 backdrop-blur-sm hidden">
+        <div class="glass-card max-w-[500px] w-full p-6 rounded-3xl space-y-4 text-left border border-white/50 shadow-2xl">
+            <div class="flex justify-between items-center border-b border-purple-950/5 pb-3">
+                <h3 class="font-extrabold text-base text-[#471A70]">Create Blog Post</h3>
+                <button onclick="closeNewPostModal()" class="w-8 h-8 rounded-full bg-white/40 flex items-center justify-center text-[#471A70] active:scale-90 transition-transform">
+                    <span class="material-symbols-outlined text-sm font-bold">close</span>
+                </button>
+            </div>
+            
+            <div class="space-y-3.5">
+                <div class="flex flex-col gap-1">
+                    <label class="text-[10px] font-extrabold uppercase tracking-wider text-[#726580]">Post Title</label>
+                    <input type="text" id="post-title" class="w-full bg-white/70 border border-white/80 rounded-2xl h-10 px-4 text-xs font-semibold text-[#471A70]" placeholder="Enter title..." />
+                </div>
+                <div class="flex flex-col gap-1">
+                    <label class="text-[10px] font-extrabold uppercase tracking-wider text-[#726580]">Category</label>
+                    <select id="post-cat" class="w-full bg-white/70 border border-white/80 rounded-2xl h-10 px-4 text-xs font-semibold text-[#471A70] outline-none">
+                        <option value="Technology">Technology</option>
+                        <option value="Career Advice">Career Advice</option>
+                        <option value="Design">Design</option>
+                    </select>
+                </div>
+                <div class="flex flex-col gap-1">
+                    <label class="text-[10px] font-extrabold uppercase tracking-wider text-[#726580]">Author Name</label>
+                    <input type="text" id="post-author" value="RecruiterPro Team" class="w-full bg-white/70 border border-white/80 rounded-2xl h-10 px-4 text-xs font-semibold text-[#471A70]" />
+                </div>
+            </div>
+
+            <div class="flex justify-end gap-3 pt-3">
+                <button onclick="closeNewPostModal()" class="h-10 px-5 bg-white border border-white/80 text-[#471A70] font-bold text-xs rounded-full active:scale-95 transition-all">Cancel</button>
+                <button onclick="submitNewPost()" class="h-10 px-5 bg-primary text-white font-bold text-xs rounded-full shadow-md shadow-primary/20 active:scale-95 transition-all">Publish</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- New Page Modal -->
+    <div id="modal-page" class="fixed inset-0 z-50 flex items-center justify-center bg-[#471A70]/60 backdrop-blur-sm hidden">
+        <div class="glass-card max-w-[450px] w-full p-6 rounded-3xl space-y-4 text-left border border-white/50 shadow-2xl">
+            <div class="flex justify-between items-center border-b border-purple-950/5 pb-3">
+                <h3 class="font-extrabold text-base text-[#471A70]">Create New Page</h3>
+                <button onclick="closeNewPageModal()" class="w-8 h-8 rounded-full bg-white/40 flex items-center justify-center text-[#471A70] active:scale-90 transition-transform">
+                    <span class="material-symbols-outlined text-sm font-bold">close</span>
+                </button>
+            </div>
+            
+            <div class="space-y-3.5">
+                <div class="flex flex-col gap-1">
+                    <label class="text-[10px] font-extrabold uppercase tracking-wider text-[#726580]">Page Name</label>
+                    <input type="text" id="page-name" class="w-full bg-white/70 border border-white/80 rounded-2xl h-10 px-4 text-xs font-semibold text-[#471A70]" placeholder="e.g. Services" />
+                </div>
+                <div class="flex flex-col gap-1">
+                    <label class="text-[10px] font-extrabold uppercase tracking-wider text-[#726580]">URL Path</label>
+                    <input type="text" id="page-url" class="w-full bg-white/70 border border-white/80 rounded-2xl h-10 px-4 text-xs font-semibold text-[#471A70]" placeholder="e.g. /services" />
+                </div>
+            </div>
+
+            <div class="flex justify-end gap-3 pt-3">
+                <button onclick="closeNewPageModal()" class="h-10 px-5 bg-white border border-white/80 text-[#471A70] font-bold text-xs rounded-full active:scale-95 transition-all">Cancel</button>
+                <button onclick="submitNewPage()" class="h-10 px-5 bg-primary text-white font-bold text-xs rounded-full shadow-md shadow-primary/20 active:scale-95 transition-all">Create Page</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script handlers -->
+    <script>
+        function switchTab(tabName) {
+            // Hide all panels
+            ['blog', 'seo', 'pages'].forEach(tab => {
+                document.getElementById('panel-' + tab).classList.add('hidden');
+                document.getElementById('tab-btn-' + tab).classList.remove('active-tab-btn');
+            });
+
+            // Show target panel
+            document.getElementById('panel-' + tabName).classList.remove('hidden');
+            document.getElementById('tab-btn-' + tabName).classList.add('active-tab-btn');
+        }
+
+        // Blog modal control
+        function openNewPostModal() {
+            document.getElementById('modal-post').classList.remove('hidden');
+        }
+        function closeNewPostModal() {
+            document.getElementById('modal-post').classList.add('hidden');
+            document.getElementById('post-title').value = '';
+        }
+        function submitNewPost() {
+            const title = document.getElementById('post-title').value.trim();
+            const category = document.getElementById('post-cat').value;
+            const author = document.getElementById('post-author').value.trim();
+
+            if (!title) {
+                alert("Please enter a post title.");
+                return;
+            }
+
+            const tbody = document.getElementById('blog-posts-tbody');
+            const tr = document.createElement('tr');
+            tr.className = "border-b border-[#471A70]/5 hover:bg-[#a34cbe]/5 transition-colors";
+            tr.innerHTML = `
+                <td class="py-3.5 px-4 font-bold max-w-[200px] truncate">${title}</td>
+                <td class="py-3.5 px-4">${author}</td>
+                <td class="py-3.5 px-4"><span class="px-2.5 py-0.5 rounded-full bg-primary/10 text-primary font-bold text-[9px]">${category}</span></td>
+                <td class="py-3.5 px-4 flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-green-500"></span> 95/100</td>
+                <td class="py-3.5 px-4"><span class="px-2.5 py-0.5 rounded-full bg-green-500/10 text-green-700 font-extrabold text-[9px] uppercase tracking-wider">Published</span></td>
+                <td class="py-3.5 px-4 text-right space-x-1">
+                    <button class="w-7 h-7 rounded-full hover:bg-white/40 flex items-center justify-center text-primary inline-flex active:scale-90 transition-transform"><span class="material-symbols-outlined text-sm">edit</span></button>
+                    <button onclick="this.closest('tr').remove()" class="w-7 h-7 rounded-full hover:bg-red-50 flex items-center justify-center text-red-500 inline-flex active:scale-90 transition-transform"><span class="material-symbols-outlined text-sm">delete</span></button>
+                </td>
+            `;
+            tbody.insertBefore(tr, tbody.firstChild);
+            
+            if (parent && parent.App && typeof parent.App.showToast === 'function') {
+                parent.App.showToast("Blog post published successfully!", "success");
+            }
+            closeNewPostModal();
+        }
+
+        // SEO dynamic preview synchronization
+        function syncSeoSnippet() {
+            const titleVal = document.getElementById('seo-meta-title').value;
+            const descVal = document.getElementById('seo-meta-desc').value;
+
+            document.getElementById('google-preview-title').textContent = titleVal || 'Empty title tag';
+            document.getElementById('google-preview-desc').textContent = descVal || 'Empty meta description tag';
+        }
+
+        function saveMetaTags(btn) {
+            const originalContent = btn.innerHTML;
+            btn.innerHTML = `<span class="animate-spin material-symbols-outlined text-sm">progress_activity</span> Saving...`;
+            
+            setTimeout(() => {
+                btn.innerHTML = originalContent;
+                if (parent && parent.App && typeof parent.App.showToast === 'function') {
+                    parent.App.showToast("SEO global meta tags saved!", "success");
+                }
+            }, 1200);
+        }
+
+        // Pages modal control
+        function openNewPageModal() {
+            document.getElementById('modal-page').classList.remove('hidden');
+        }
+        function closeNewPageModal() {
+            document.getElementById('modal-page').classList.add('hidden');
+            document.getElementById('page-name').value = '';
+            document.getElementById('page-url').value = '';
+        }
+        function submitNewPage() {
+            const name = document.getElementById('page-name').value.trim();
+            const url = document.getElementById('page-url').value.trim();
+
+            if (!name || !url) {
+                alert("Please enter both Page Name and URL Path.");
+                return;
+            }
+
+            const grid = document.getElementById('pages-grid-container');
+            const card = document.createElement('div');
+            card.className = "glass-card p-5 rounded-3xl text-left flex flex-col justify-between min-h-[160px] gap-4";
+            card.innerHTML = `
+                <div class="flex items-start justify-between">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
+                            <span class="material-symbols-outlined text-lg">web</span>
+                        </div>
+                        <div>
+                            <h4 class="font-extrabold text-sm text-[#471A70]">${name}</h4>
+                            <span class="text-[9px] text-outline font-bold flex items-center gap-0.5"><span class="material-symbols-outlined text-[10px]">link</span>${url}</span>
+                        </div>
+                    </div>
+                    <span class="px-2.5 py-0.5 rounded-full bg-green-500/10 text-green-700 font-extrabold text-[8px] uppercase tracking-wider">Active</span>
+                </div>
+                
+                <div class="flex items-center justify-between border-t border-purple-950/5 pt-4">
+                    <span class="text-[9px] text-[#726580] font-bold">Created just now</span>
+                    <div class="flex gap-1.5">
+                        <button class="h-7 px-3 bg-white/40 border border-purple-500/10 text-primary rounded-full font-bold text-[9px] active:scale-95 transition-all">Edit Layout</button>
+                        <button class="w-7 h-7 rounded-full hover:bg-white/40 flex items-center justify-center text-[#726580] active:scale-90 transition-transform"><span class="material-symbols-outlined text-sm">settings</span></button>
+                    </div>
+                </div>
+            `;
+            grid.insertBefore(card, grid.firstChild);
+
+            if (parent && parent.App && typeof parent.App.showToast === 'function') {
+                parent.App.showToast("Page created successfully!", "success");
+            }
+            closeNewPageModal();
+        }
+    </script>
+</body>
+</html>

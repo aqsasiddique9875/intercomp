@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>JobFlow | Rewards &amp; Scholarships Hub</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "on-background": "#471A70",
+            "glass-thick": "rgba(255, 255, 255, 0.8)",
+            "primary": "#8731a3",
+            "surface-variant": "#dbe3f6",
+            "surface-container-lowest": "#ffffff",
+            "card-gradient": "linear-gradient(135deg, #4D9EFA 0%, #BF7DF5 100%)",
+            "tertiary-container": "#00842f",
+            "on-error": "#ffffff",
+            "on-primary-fixed-variant": "#72188f",
+            "tertiary-fixed": "#6cff82",
+            "surface-tint": "#8d37a9",
+            "error-container": "#ffdad6",
+            "primary-container": "#a34cbe",
+            "on-tertiary": "#ffffff",
+            "inverse-primary": "#f0b0ff",
+            "error": "#FF453A",
+            "on-primary": "#ffffff",
+            "on-secondary-fixed-variant": "#004883",
+            "tertiary": "#006823",
+            "secondary-fixed": "#d3e3ff",
+            "surface-bright": "#f9f9ff",
+            "background": "#f9f9ff",
+            "surface-dim": "#d2daed",
+            "secondary-fixed-dim": "#a3c9ff",
+            "outline-variant": "#d2c1d2",
+            "primary-fixed": "#fbd7ff",
+            "glass-border": "rgba(255, 255, 255, 0.6)",
+            "secondary-container": "#54a3ff",
+            "on-secondary-container": "#003868",
+            "on-secondary": "#ffffff",
+            "on-tertiary-container": "#e6ffe0",
+            "on-surface-variant": "#4f4350",
+            "on-primary-container": "#fff5fb",
+            "tertiary-fixed-dim": "#47e266",
+            "surface-container-high": "#e0e8fb",
+            "on-error-container": "#93000a",
+            "on-surface": "#141c29",
+            "on-secondary-fixed": "#001c39",
+            "surface-container": "#e7eeff",
+            "orange": "#FF9F0A",
+            "outline": "#817381",
+            "gold": "#FFD60A",
+            "inverse-on-surface": "#ecf1ff",
+            "inverse-surface": "#29313f",
+            "primary-fixed-dim": "#f0b0ff",
+            "on-tertiary-fixed": "#002106",
+            "secondary": "#0060ab",
+            "on-tertiary-fixed-variant": "#00531a",
+            "surface": "#f9f9ff",
+            "on-primary-fixed": "#330044",
+            "glass-fill": "rgba(255, 255, 255, 0.35)",
+            "surface-container-highest": "#dbe3f6",
+            "surface-container-low": "#f0f3ff"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "desktop-margin": "64px",
+            "max-width": "1280px",
+            "mobile-margin": "20px",
+            "desktop-gutter": "24px",
+            "safe-top": "44px",
+            "safe-bottom": "34px",
+            "mobile-gutter": "16px",
+            "base": "8px"
+          },
+          "fontFamily": {
+            "display-xl": ["Inter"],
+            "headline-lg": ["Inter"],
+            "label-caps": ["Inter"],
+            "body-md": ["Inter"]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+    body {
+      background: linear-gradient(135deg, #DCE4F7 0%, #f9f9ff 100%);
+      min-height: 100vh;
+      color: #471A70;
+    }
+    .glass-card {
+      background: rgba(255, 255, 255, 0.35);
+      backdrop-filter: blur(28px);
+      -webkit-backdrop-filter: blur(28px);
+      border: 1px solid rgba(255, 255, 255, 0.6);
+      box-shadow: 0 12px 40px 0 rgba(71, 26, 112, 0.15);
+    }
+    .unlocked-glow {
+      border: 2px solid #4D9EFA;
+      box-shadow: 0 0 20px rgba(77, 158, 250, 0.4);
+    }
+    .node-connector {
+      background: linear-gradient(90deg, #4D9EFA 0%, #BF7DF5 100%);
+      height: 4px;
+      z-index: 0;
+    }
+    .node-connector-locked {
+      background: rgba(129, 115, 129, 0.2);
+      height: 4px;
+      z-index: 0;
+    }
+    .spring-press {
+      transition: transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    .spring-press:active {
+      transform: scale(0.96);
+    }
+    .confetti-piece {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background: #A34CBE;
+      top: -10px;
+      z-index: 50;
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body class="font-body-md overflow-x-hidden">
+<!-- TopNavBar Implementation -->
+<nav class="bg-glass-fill backdrop-blur-[28px] dark:bg-glass-fill w-full top-0 sticky border-b border-glass-border shadow-[0_12px_40px_0_rgba(71,26,112,0.15)] z-50">
+<div class="flex justify-between items-center px-desktop-margin max-w-max-width mx-auto h-20">
+<div class="flex items-center gap-base">
+<img alt="JobFlow Logo" class="w-10 h-10 object-contain" src="https://lh3.googleusercontent.com/aida/AP1WRLtHSlvHQm1XNZ4vaeue1GiJtF1j680ovYDsV1bz1IH37RWIQlHCDhIMbTh8QwjysUr_9axMNLFk7d5MtN1sRrdkCEgDdsjpU6S18_eICdCZ5ObBXpk8IMqmy52sfrJsOQaMvz7hk48gtvML_dmfwlaY-1QmOzz74jRWaBViW4SbLXgO-jIKC3LPueU0Wmini7A--bmI3LnC19bd8jueIoFhpwFhp4dCzG3gBDdCSwoekhL8nTJD3FWqr2Qs"/>
+<span class="font-display-xl text-[28px] font-bold tracking-tighter text-primary">JobFlow</span>
+</div>
+<div class="hidden md:flex items-center gap-8">
+<a class="font-body-md text-on-surface-variant hover:scale-105 hover:text-primary transition-transform duration-300 active:scale-[0.96]" href="#">Dashboard</a>
+<a class="font-body-md text-on-surface-variant hover:scale-105 hover:text-primary transition-transform duration-300 active:scale-[0.96]" href="#">Scholarships</a>
+<a class="font-body-md text-primary border-b-2 border-primary pb-1" href="#">Rewards</a>
+<a class="font-body-md text-on-surface-variant hover:scale-105 hover:text-primary transition-transform duration-300 active:scale-[0.96]" href="#">Mentors</a>
+<a class="font-body-md text-on-surface-variant hover:scale-105 hover:text-primary transition-transform duration-300 active:scale-[0.96]" href="#">Communities</a>
+</div>
+<div class="flex items-center gap-6">
+<button class="bg-primary-container text-on-primary-container px-6 py-2.5 rounded-full font-label-caps hover:scale-105 transition-all duration-300 spring-press">Claim Points</button>
+<div class="flex items-center gap-4 text-on-surface-variant">
+<span class="material-symbols-outlined cursor-pointer hover:text-primary transition-colors">notifications</span>
+<span class="material-symbols-outlined cursor-pointer hover:text-primary transition-colors">account_circle</span>
+</div>
+</div>
+</div>
+</nav>
+<main class="max-w-max-width mx-auto px-desktop-margin py-12">
+<div class="grid grid-cols-1 md:grid-cols-12 gap-desktop-gutter items-start">
+<!-- Left Sidebar/Panel -->
+<aside class="md:col-span-3 space-y-6">
+<div class="glass-card p-8 rounded-3xl text-center space-y-6">
+<div class="space-y-1">
+<p class="font-label-caps text-on-surface-variant uppercase tracking-widest text-[11px]">Total Balance</p>
+<h2 class="font-display-xl text-[42px] font-bold text-primary">12,450</h2>
+<p class="font-body-md text-on-surface-variant">Job Points Earned</p>
+</div>
+<div class="h-px bg-glass-border w-full"></div>
+<div class="flex flex-col items-center gap-3">
+<div class="w-16 h-16 rounded-full bg-gradient-to-tr from-primary to-secondary flex items-center justify-center text-white shadow-lg">
+<span class="material-symbols-outlined text-3xl" style="font-variation-settings: 'FILL' 1;">workspace_premium</span>
+</div>
+<div>
+<p class="font-headline-lg text-xl font-bold">Platinum Scholar</p>
+<p class="font-label-caps text-on-surface-variant">Tier 4 of 5</p>
+</div>
+</div>
+<div class="bg-primary-container/10 p-4 rounded-2xl flex justify-between items-center">
+<span class="font-body-md font-semibold">Global Rank</span>
+<span class="font-display-xl text-2xl font-bold text-primary">#12</span>
+</div>
+</div>
+<div class="glass-card p-6 rounded-3xl space-y-4">
+<h3 class="font-headline-lg text-lg font-bold">Quick Missions</h3>
+<div class="space-y-3">
+<div class="flex items-center gap-4 p-3 hover:bg-white/20 rounded-xl transition-colors cursor-pointer group">
+<span class="material-symbols-outlined text-primary group-hover:scale-110 transition-transform">auto_stories</span>
+<span class="font-body-md text-sm">Read AI Resume Tips</span>
+</div>
+<div class="flex items-center gap-4 p-3 hover:bg-white/20 rounded-xl transition-colors cursor-pointer group">
+<span class="material-symbols-outlined text-secondary group-hover:scale-110 transition-transform">groups</span>
+<span class="font-body-md text-sm">Join Tech Mentorship</span>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content Area: Progression Map -->
+<section class="md:col-span-9 glass-card rounded-[40px] p-10 relative overflow-hidden flex flex-col min-h-[700px]">
+<div class="flex justify-between items-start mb-12">
+<div>
+<h1 class="font-display-xl text-4xl font-extrabold tracking-tight">Reward Roadmap</h1>
+<p class="text-on-surface-variant font-body-md mt-2">Unlock career-boosting milestones as you grow.</p>
+</div>
+<div class="flex items-center gap-3 bg-white/40 px-4 py-2 rounded-full border border-glass-border">
+<div class="w-3 h-3 rounded-full bg-primary animate-pulse"></div>
+<span class="font-label-caps text-xs">Path Level: Senior Aspirant</span>
+</div>
+</div>
+<!-- Progress Map Visualization -->
+<div class="flex-grow flex items-center justify-center py-20 relative">
+<!-- Connectors (Simplified linear path for design clarity) -->
+<div class="absolute w-[80%] left-[10%] h-1 bg-glass-border top-1/2 -translate-y-1/2 z-0 overflow-hidden rounded-full">
+<div class="h-full bg-gradient-to-r from-secondary-container via-primary-container to-transparent w-[55%]"></div>
+</div>
+<div class="relative z-10 w-full flex justify-between items-center px-4">
+<!-- Node 1: Unlocked -->
+<div class="group flex flex-col items-center gap-6">
+<div class="glass-card w-32 h-32 rounded-3xl flex items-center justify-center unlocked-glow transition-all duration-500 group-hover:-translate-y-2 cursor-pointer">
+<span class="material-symbols-outlined text-5xl text-secondary-container" style="font-variation-settings: 'FILL' 1;">featured_seasonal_and_gifts</span>
+</div>
+<div class="text-center">
+<p class="font-headline-lg text-sm font-bold">Amazon Card</p>
+<p class="font-label-caps text-[10px] text-secondary-container font-extrabold uppercase">Claimed</p>
+</div>
+</div>
+<!-- Node 2: Unlocked/Current -->
+<div class="group flex flex-col items-center gap-6">
+<div class="glass-card w-40 h-40 rounded-[2.5rem] flex items-center justify-center unlocked-glow transition-all duration-500 group-hover:-translate-y-2 cursor-pointer relative">
+<div class="absolute -top-4 -right-4 bg-primary text-white text-[10px] font-bold px-3 py-1 rounded-full shadow-lg">READY</div>
+<span class="material-symbols-outlined text-6xl text-primary" style="font-variation-settings: 'FILL' 1;">school</span>
+</div>
+<div class="text-center">
+<p class="font-headline-lg text-base font-bold">Google UX Funding</p>
+<p class="font-label-caps text-[10px] text-primary font-extrabold uppercase">Unlocked</p>
+</div>
+</div>
+<!-- Node 3: Locked -->
+<div class="group flex flex-col items-center gap-6">
+<div class="glass-card w-32 h-32 rounded-3xl flex items-center justify-center opacity-70 transition-all duration-500 hover:opacity-100 relative overflow-hidden bg-white/10">
+<img alt="Locked Icon Overlay" class="absolute inset-0 w-full h-full object-cover opacity-60 mix-blend-overlay" src="https://lh3.googleusercontent.com/aida/AP1WRLtdkDp0V4i8TJXTgYQ_BqCVtB0f8UVW_SHDL1iSpRxi2XHma3U3yoFJ0gNwGsnfAL4FRricvnEjpE9wmMpXIplUHtU2l9ZKdYto1Q27fEUpe5DhR_hZgAXznHR9ZIBBlcaRprAaX4v0f6hhk6YUKIdLw552RDcWtoWIRUcjgkDEjIzlQOkCS-f4gp6dlkf4ouuCpPqKGPIiO2EBmhDEid1mOIsr09xUWqj2cuWLGHOkcTIeAApBQ_iQ04Rk"/>
+<span class="material-symbols-outlined text-4xl text-on-surface-variant/40">lock</span>
+</div>
+<div class="text-center">
+<p class="font-headline-lg text-sm font-bold text-on-surface-variant">Senior Mentorship</p>
+<p class="font-label-caps text-[10px] text-on-surface-variant font-bold">Locked</p>
+</div>
+</div>
+<!-- Node 4: Locked -->
+<div class="group flex flex-col items-center gap-6">
+<div class="glass-card w-32 h-32 rounded-3xl flex items-center justify-center opacity-70 transition-all duration-500 hover:opacity-100 relative overflow-hidden bg-white/10">
+<img alt="Locked Icon Overlay" class="absolute inset-0 w-full h-full object-cover opacity-60 mix-blend-overlay" src="https://lh3.googleusercontent.com/aida/AP1WRLtdkDp0V4i8TJXTgYQ_BqCVtB0f8UVW_SHDL1iSpRxi2XHma3U3yoFJ0gNwGsnfAL4FRricvnEjpE9wmMpXIplUHtU2l9ZKdYto1Q27fEUpe5DhR_hZgAXznHR9ZIBBlcaRprAaX4v0f6hhk6YUKIdLw552RDcWtoWIRUcjgkDEjIzlQOkCS-f4gp6dlkf4ouuCpPqKGPIiO2EBmhDEid1mOIsr09xUWqj2cuWLGHOkcTIeAApBQ_iQ04Rk"/>
+<span class="material-symbols-outlined text-4xl text-on-surface-variant/40">workspace_premium</span>
+</div>
+<div class="text-center">
+<p class="font-headline-lg text-sm font-bold text-on-surface-variant">U. Scholarship</p>
+<p class="font-label-caps text-[10px] text-on-surface-variant font-bold">Locked</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer Area of Main Panel -->
+<div class="mt-auto pt-10 flex flex-col md:flex-row items-center justify-between gap-6 border-t border-glass-border/30">
+<div class="flex items-center gap-6">
+<div class="flex flex-col">
+<span class="font-label-caps text-[11px] text-on-surface-variant">Celebration Mode</span>
+<div class="flex items-center mt-2">
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" id="confettiToggle" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-container-highest peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+<span class="ml-3 text-sm font-medium">Active</span>
+</div>
+</div>
+<div class="w-px h-10 bg-glass-border"></div>
+<div class="flex flex-col">
+<span class="font-label-caps text-[11px] text-on-surface-variant">Available Rewards</span>
+<span class="font-headline-lg text-lg font-bold">2 Major Grants</span>
+</div>
+</div>
+<button class="w-full md:w-auto bg-primary text-white px-12 py-5 rounded-full font-headline-lg text-lg hover:shadow-[0_20px_50px_rgba(163,76,190,0.4)] transition-all duration-300 active:scale-95 group flex items-center justify-center gap-3" id="claimBtn">
+<span>Claim Rewards</span>
+<span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">celebration</span>
+</button>
+</div>
+</section>
+</div>
+</main>
+
+<div class="fixed inset-0 pointer-events-none z-[100]" id="confettiContainer"></div>
+<script>
+    const claimBtn = document.getElementById('claimBtn');
+    const confettiToggle = document.getElementById('confettiToggle');
+    const container = document.getElementById('confettiContainer');
+
+    function createConfetti() {
+      if (!confettiToggle.checked) return;
+      
+      for (let i = 0; i < 50; i++) {
+        const piece = document.createElement('div');
+        piece.classList.add('confetti-piece');
+        
+        // Randomize
+        const left = Math.random() * 100;
+        const duration = (Math.random() * 3) + 2;
+        const delay = Math.random() * 2;
+        const color = ['#A34CBE', '#4D9EFA', '#BF7DF5', '#FFD60A'][Math.floor(Math.random() * 4)];
+        
+        piece.style.left = left + 'vw';
+        piece.style.backgroundColor = color;
+        piece.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
+        piece.style.transform = `rotate(${Math.random() * 360}deg)`;
+        
+        container.appendChild(piece);
+        
+        piece.animate([
+          { transform: `translateY(0) rotate(0deg)`, opacity: 1 },
+          { transform: `translateY(110vh) rotate(${720}deg)`, opacity: 0 }
+        ], {
+          duration: duration * 1000,
+          delay: delay * 1000,
+          easing: 'cubic-bezier(.37,0,.63,1)'
+        }).onfinish = () => piece.remove();
+      }
+    }
+
+    claimBtn.addEventListener('click', () => {
+      createConfetti();
+      const originalText = claimBtn.innerHTML;
+      claimBtn.innerHTML = 'Processing...';
+      setTimeout(() => {
+        claimBtn.innerHTML = 'Success!';
+        setTimeout(() => {
+          claimBtn.innerHTML = originalText;
+        }, 2000);
+      }, 1000);
+    });
+
+    // Subtle parallax effect on cards
+    document.addEventListener('mousemove', (e) => {
+      const cards = document.querySelectorAll('.glass-card');
+      const mouseX = e.clientX / window.innerWidth - 0.5;
+      const mouseY = e.clientY / window.innerHeight - 0.5;
+      
+      cards.forEach(card => {
+        const speed = 10;
+        const x = mouseX * speed;
+        const y = mouseY * speed;
+        card.style.transform = `translate(${x}px, ${y}px)`;
+      });
+    });
+  </script>
+</body></html>

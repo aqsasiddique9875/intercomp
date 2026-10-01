@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>COM-05 Student Registration</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary": "#0060ab",
+                        "primary": "#8731a3",
+                        "surface-variant": "#dbe3f6",
+                        "card-gradient": "linear-gradient(135deg, #4D9EFA 0%, #BF7DF5 100%)",
+                        "secondary-container": "#54a3ff",
+                        "background": "#f9f9ff",
+                        "primary-fixed-dim": "#f0b0ff",
+                        "on-surface": "#141c29",
+                        "error": "#FF453A",
+                        "on-primary": "#ffffff",
+                        "on-secondary-fixed": "#001c39",
+                        "on-primary-fixed-variant": "#72188f",
+                        "glass-thick": "rgba(255, 255, 255, 0.8)",
+                        "on-secondary-fixed-variant": "#004883",
+                        "surface": "#f9f9ff",
+                        "on-surface-variant": "#4f4350",
+                        "outline": "#817381",
+                        "tertiary-fixed": "#6cff82",
+                        "on-tertiary-fixed-variant": "#00531a",
+                        "inverse-surface": "#29313f",
+                        "on-background": "#471A70",
+                        "on-tertiary": "#ffffff",
+                        "tertiary-container": "#00842f",
+                        "surface-container-lowest": "#ffffff",
+                        "tertiary": "#006823",
+                        "surface-container-low": "#f0f3ff",
+                        "orange": "#FF9F0A",
+                        "on-secondary-container": "#003868",
+                        "on-primary-container": "#fff5fb",
+                        "surface-container-high": "#e0e8fb",
+                        "error-container": "#ffdad6",
+                        "glass-border": "rgba(255, 255, 255, 0.6)",
+                        "glass-fill": "rgba(255, 255, 255, 0.35)",
+                        "secondary-fixed-dim": "#a3c9ff",
+                        "surface-tint": "#8d37a9",
+                        "surface-container-highest": "#dbe3f6",
+                        "gold": "#FFD60A",
+                        "secondary-fixed": "#d3e3ff",
+                        "on-tertiary-fixed": "#002106",
+                        "tertiary-fixed-dim": "#47e266",
+                        "surface-container": "#e7eeff",
+                        "surface-dim": "#d2daed",
+                        "on-tertiary-container": "#e6ffe0",
+                        "outline-variant": "#d2c1d2",
+                        "on-error-container": "#93000a",
+                        "inverse-on-surface": "#ecf1ff",
+                        "on-primary-fixed": "#330044",
+                        "inverse-primary": "#f0b0ff",
+                        "on-secondary": "#ffffff",
+                        "primary-fixed": "#fbd7ff",
+                        "on-error": "#ffffff",
+                        "surface-bright": "#f9f9ff",
+                        "primary-container": "#a34cbe"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "16px",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "safe-top": "44px",
+                        "safe-bottom": "34px",
+                        "max-width": "1280px",
+                        "desktop-gutter": "24px",
+                        "mobile-margin": "20px",
+                        "desktop-margin": "64px",
+                        "base": "8px",
+                        "mobile-gutter": "16px"
+                    },
+                    "fontFamily": {
+                        "label-caps": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "display-xl": ["Inter"],
+                        "body-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-caps": ["13px", {"lineHeight": "1.0", "letterSpacing": "0.03em", "fontWeight": "600"}],
+                        "headline-lg": ["34px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                        "display-xl": ["56px", {"lineHeight": "1.1", "letterSpacing": "-0.03em", "fontWeight": "700"}],
+                        "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            background-color: #DCE4F7;
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(163, 76, 190, 0.15) 0px, transparent 50%),
+                radial-gradient(at 100% 0%, rgba(77, 158, 250, 0.1) 0px, transparent 50%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        .glass-panel {
+            backdrop-filter: blur(28px);
+            -webkit-backdrop-filter: blur(28px);
+            background: rgba(255, 255, 255, 0.35);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+        }
+        .skill-chip {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .skill-chip:hover {
+            box-shadow: 0 0 15px rgba(163, 76, 190, 0.4);
+            transform: translateY(-2px);
+        }
+        .skill-chip.active {
+            background: #8731a3;
+            color: white;
+            box-shadow: 0 0 20px rgba(163, 76, 190, 0.6);
+        }
+        .progress-indicator {
+            transition: width 0.6s cubic-bezier(0.65, 0, 0.35, 1);
+        }
+    </style>
+</head>
+<body class="font-body-md text-on-surface">
+<div class="flex min-h-screen">
+<!-- SideNavBar - Identity & Step Tracker -->
+<aside class="h-screen w-80 sticky top-0 left-0 bg-glass-fill backdrop-blur-2xl border-r border-glass-border shadow-[0_12px_40px_0_rgba(71,26,112,0.15)] flex flex-col p-desktop-gutter gap-base z-40">
+<div class="mb-12">
+<h1 class="font-display-xl text-[42px] leading-tight text-primary font-bold">COM-05</h1>
+<p class="text-on-background font-semibold text-sm opacity-70">Academic Year 2024-25</p>
+</div>
+<nav class="flex-1 space-y-4">
+<!-- Step 1: Active -->
+<div class="text-primary font-bold bg-white/40 rounded-xl p-4 flex items-center gap-4 transition-all duration-300">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">person</span>
+<span class="font-label-caps text-label-caps">Student Info</span>
+</div>
+<!-- Inactive Steps -->
+<div class="text-on-surface-variant hover:bg-glass-thick/20 transition-all duration-300 rounded-xl p-4 flex items-center gap-4 cursor-pointer">
+<span class="material-symbols-outlined">school</span>
+<span class="font-label-caps text-label-caps">Academic Record</span>
+</div>
+<div class="text-on-surface-variant hover:bg-glass-thick/20 transition-all duration-300 rounded-xl p-4 flex items-center gap-4 cursor-pointer">
+<span class="material-symbols-outlined">import_contacts</span>
+<span class="font-label-caps text-label-caps">Course Selection</span>
+</div>
+<div class="text-on-surface-variant hover:bg-glass-thick/20 transition-all duration-300 rounded-xl p-4 flex items-center gap-4 cursor-pointer">
+<span class="material-symbols-outlined">cloud_upload</span>
+<span class="font-label-caps text-label-caps">Document Upload</span>
+</div>
+<div class="text-on-surface-variant hover:bg-glass-thick/20 transition-all duration-300 rounded-xl p-4 flex items-center gap-4 cursor-pointer">
+<span class="material-symbols-outlined">verified</span>
+<span class="font-label-caps text-label-caps">Review &amp; Submit</span>
+</div>
+</nav>
+<button class="mt-auto py-3 px-6 rounded-full glass-panel hover:bg-white/50 transition-all font-semibold text-primary active:scale-95">
+                Save Draft
+            </button>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 relative">
+<!-- TopAppBar -->
+<header class="full-width sticky top-0 z-50 bg-glass-thick backdrop-blur-md border-b border-glass-border shadow-sm flex justify-between items-center px-desktop-margin h-20">
+<div class="font-headline-lg text-headline-lg font-bold text-on-background">Wizard Portal</div>
+<div class="flex items-center gap-6">
+<span class="material-symbols-outlined text-primary cursor-pointer hover:scale-110 transition-transform">help</span>
+<span class="material-symbols-outlined text-primary cursor-pointer hover:scale-110 transition-transform">notifications</span>
+<div class="w-10 h-10 rounded-full overflow-hidden border-2 border-primary">
+<img alt="Student Portrait" class="w-full h-full object-cover" data-alt="A close-up portrait of a professional-looking university student with a warm, friendly expression. The lighting is soft and cinematic, with a clean bokeh background that suggests a modern campus setting. The image is crisp, high-fidelity, and perfectly fits a premium light-mode digital interface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBLK_QX8X-a2frXC_jnBbLG_gWr8v3ZhK59J8zxFUXQ0if3M-Lz0KYf5wrCIOKeWlWWgpVIg24LocPKZa-o7XqJgRaw7p86A1NH_7g32lgGf7yFlTHFsjdiSQPf7i5EVfMtanwIq9DmNnfMoi9aYdFEuLssDZuraoJFO5S-IBnZzU2VvZG5UaAz9TTnO1tfId45zvXO2hq7TaHCPe2L0s7NZsEkVMHR8qdgIF65aLjyF1MQ_HxD9fum7g5kO0hBb3IjFyYxvU4Bclu4"/>
+</div>
+</div>
+</header>
+<div class="max-w-[800px] mx-auto py-12 px-8">
+<!-- Progress Bar Container -->
+<div class="mb-16">
+<div class="flex justify-between mb-4">
+<span class="font-label-caps text-label-caps text-primary uppercase">Current Progress</span>
+<span class="font-label-caps text-label-caps text-primary">25% Complete</span>
+</div>
+<div class="h-3 w-full bg-white/30 rounded-full overflow-hidden backdrop-blur-sm border border-white/20">
+<div class="progress-indicator h-full bg-primary shadow-[0_0_15px_rgba(135,49,163,0.5)]" style="width: 25%"></div>
+</div>
+</div>
+<!-- Form Section Step 1 & 2 & 3 Combined in a flowing Bento Layout -->
+<div class="grid grid-cols-12 gap-8">
+<!-- Login Credentials Section -->
+<section class="col-span-12 glass-panel rounded-xl p-8 shadow-[0_12px_40px_0_rgba(71,26,112,0.05)]">
+<div class="flex items-center gap-3 mb-6">
+<span class="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center font-bold">1</span>
+<h2 class="font-headline-lg text-2xl text-on-background">Login Credentials</h2>
+</div>
+<div class="grid grid-cols-2 gap-6">
+<div class="space-y-2">
+<label class="font-label-caps text-label-caps text-on-surface-variant block ml-1">Academic Email</label>
+<input class="w-full bg-glass-thick border-glass-border rounded-xl px-4 py-3 text-on-surface placeholder-on-surface-variant/50 focus:ring-2 focus:ring-primary focus:border-transparent transition-all outline-none" placeholder="student@university.edu" type="email"/>
+</div>
+<div class="space-y-2">
+<label class="font-label-caps text-label-caps text-on-surface-variant block ml-1">Password</label>
+<input class="w-full bg-glass-thick border-glass-border rounded-xl px-4 py-3 text-on-surface placeholder-on-surface-variant/50 focus:ring-2 focus:ring-primary focus:border-transparent transition-all outline-none" placeholder="••••••••" type="password"/>
+</div>
+</div>
+</section>
+<!-- University Information -->
+<section class="col-span-12 glass-panel rounded-xl p-8 shadow-[0_12px_40px_0_rgba(71,26,112,0.05)]">
+<div class="flex items-center gap-3 mb-6">
+<span class="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center font-bold">2</span>
+<h2 class="font-headline-lg text-2xl text-on-background">University Information</h2>
+</div>
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant group-focus-within:text-primary transition-colors">search</span>
+<input class="w-full bg-glass-thick border-glass-border rounded-xl pl-12 pr-4 py-4 text-on-surface placeholder-on-surface-variant/50 focus:ring-2 focus:ring-primary focus:border-transparent transition-all outline-none" placeholder="Search for your institution..." type="text"/>
+</div>
+<div class="mt-4 flex gap-2">
+<span class="text-xs font-semibold px-3 py-1 bg-secondary-fixed text-on-secondary-fixed rounded-full">Top Pick: Stanford University</span>
+<span class="text-xs font-semibold px-3 py-1 bg-secondary-fixed text-on-secondary-fixed rounded-full">MIT</span>
+<span class="text-xs font-semibold px-3 py-1 bg-secondary-fixed text-on-secondary-fixed rounded-full">Oxford</span>
+</div>
+</section>
+<!-- Skills Selection -->
+<section class="col-span-12 glass-panel rounded-xl p-8 shadow-[0_12px_40px_0_rgba(71,26,112,0.05)]">
+<div class="flex items-center gap-3 mb-6">
+<span class="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center font-bold">3</span>
+<h2 class="font-headline-lg text-2xl text-on-background">Skills Selection</h2>
+</div>
+<p class="text-on-surface-variant mb-6 text-sm">Select your primary areas of academic focus and expertise.</p>
+<div class="flex flex-wrap gap-3">
+<button class="skill-chip active px-5 py-2.5 rounded-full border border-glass-border font-label-caps text-label-caps">Quantum Physics</button>
+<button class="skill-chip glass-thick px-5 py-2.5 rounded-full border border-glass-border font-label-caps text-label-caps">Machine Learning</button>
+<button class="skill-chip active px-5 py-2.5 rounded-full border border-glass-border font-label-caps text-label-caps">Biotechnology</button>
+<button class="skill-chip glass-thick px-5 py-2.5 rounded-full border border-glass-border font-label-caps text-label-caps">Architecture</button>
+<button class="skill-chip glass-thick px-5 py-2.5 rounded-full border border-glass-border font-label-caps text-label-caps">Economics</button>
+<button class="skill-chip glass-thick px-5 py-2.5 rounded-full border border-glass-border font-label-caps text-label-caps">Digital Arts</button>
+<button class="skill-chip glass-thick px-5 py-2.5 rounded-full border border-glass-border font-label-caps text-label-caps">Cybersecurity</button>
+</div>
+</section>
+</div>
+<!-- Bottom Actions -->
+<div class="mt-16 flex justify-between items-center">
+<button class="glass-panel px-10 py-4 rounded-full font-bold text-on-surface hover:bg-white/50 transition-all active:scale-95 flex items-center gap-2">
+<span class="material-symbols-outlined">arrow_back</span>
+                        Back
+                    </button>
+<button class="bg-[#4D9EFA] text-white px-12 py-4 rounded-full font-bold shadow-lg shadow-secondary/30 hover:shadow-xl hover:translate-y-[-2px] transition-all active:scale-95 flex items-center gap-2">
+                        Next Step
+                        <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Ambient Atmospheric Elements -->
+<div class="fixed top-1/4 -right-20 w-96 h-96 bg-primary/10 rounded-full blur-[120px] pointer-events-none"></div>
+<div class="fixed bottom-10 left-1/4 w-[500px] h-[500px] bg-secondary/10 rounded-full blur-[150px] pointer-events-none"></div>
+</main>
+</div>
+<script>
+        // Micro-interactions for skill chips
+        document.querySelectorAll('.skill-chip').forEach(chip => {
+            chip.addEventListener('click', () => {
+                chip.classList.toggle('active');
+                chip.classList.toggle('glass-thick');
+            });
+        });
+
+        // Hover effect for side nav
+        const navItems = document.querySelectorAll('aside nav > div');
+        navItems.forEach(item => {
+            item.addEventListener('mouseenter', () => {
+                if (!item.classList.contains('text-primary')) {
+                    item.style.transform = 'translateX(8px)';
+                }
+            });
+            item.addEventListener('mouseleave', () => {
+                item.style.transform = 'translateX(0)';
+            });
+        });
+    </script>
+</body></html>

@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/>
+<title>Elite Admin Dashboard</title>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Google Fonts Inter for SF Pro feel -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-fixed": "#002106",
+                        "on-secondary-container": "#003868",
+                        "background": "#f9f9ff",
+                        "primary": "#8731a3",
+                        "surface": "#f9f9ff",
+                        "secondary-fixed": "#d3e3ff",
+                        "on-background": "#141c29",
+                        "on-primary-container": "#fff5fb",
+                        "surface-container-high": "#e0e8fb",
+                        "on-tertiary": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "primary-container": "#a34cbe",
+                        "primary-fixed-dim": "#f0b0ff",
+                        "on-tertiary-fixed-variant": "#00531a",
+                        "tertiary": "#006823",
+                        "outline-variant": "#d2c1d2",
+                        "inverse-surface": "#29313f",
+                        "on-surface": "#141c29",
+                        "secondary-container": "#54a3ff",
+                        "orange": "#FF9F0A",
+                        "surface-tint": "#8d37a9",
+                        "on-surface-variant": "#4f4350",
+                        "surface-variant": "#dbe3f6",
+                        "glass-fill": "rgba(255, 255, 255, 0.35)",
+                        "inverse-on-surface": "#ecf1ff",
+                        "on-secondary": "#ffffff",
+                        "on-primary-fixed": "#330044",
+                        "gold": "#FFD60A",
+                        "card-gradient": "linear-gradient(135deg, #4D9EFA 0%, #BF7DF5 100%)",
+                        "surface-container-highest": "#dbe3f6",
+                        "error-container": "#ffdad6",
+                        "primary-fixed": "#fbd7ff",
+                        "error": "#FF453A",
+                        "surface-container-low": "#f0f3ff",
+                        "surface-bright": "#f9f9ff",
+                        "tertiary-fixed": "#6cff82",
+                        "on-error": "#ffffff",
+                        "secondary-fixed-dim": "#a3c9ff",
+                        "glass-border": "rgba(255, 255, 255, 0.6)",
+                        "tertiary-fixed-dim": "#47e266",
+                        "tertiary-container": "#00842f",
+                        "secondary": "#0060ab",
+                        "glass-thick": "rgba(255, 255, 255, 0.8)",
+                        "surface-container": "#e7eeff",
+                        "on-secondary-fixed-variant": "#004883",
+                        "on-primary-fixed-variant": "#72188f",
+                        "surface-dim": "#d2daed",
+                        "inverse-primary": "#f0b0ff",
+                        "on-secondary-fixed": "#001c39",
+                        "surface-container-lowest": "#ffffff",
+                        "on-primary": "#ffffff",
+                        "outline": "#817381",
+                        "on-tertiary-container": "#e6ffe0"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "mobile-gutter": "16px",
+                        "desktop-margin": "64px",
+                        "safe-bottom": "34px",
+                        "safe-top": "44px",
+                        "desktop-gutter": "24px",
+                        "max-width": "1280px",
+                        "mobile-margin": "20px",
+                        "base": "8px"
+                    },
+                    "fontFamily": {
+                        "headline-lg": ["Inter"],
+                        "display-xl-mobile": ["Inter"],
+                        "body-md": ["Inter"],
+                        "body-md-mobile": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "label-caps-mobile": ["Inter"],
+                        "display-xl": ["Inter"],
+                        "label-caps": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-lg": ["34px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+                        "display-xl-mobile": ["34px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+                        "body-md": ["16px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "body-md-mobile": ["15px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "label-caps-mobile": ["12px", { "lineHeight": "1.0", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "display-xl": ["56px", { "lineHeight": "1.1", "letterSpacing": "-0.03em", "fontWeight": "700" }],
+                        "label-caps": ["13px", { "lineHeight": "1.0", "letterSpacing": "0.03em", "fontWeight": "600" }]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            background-color: #DCE4F7;
+            -webkit-tap-highlight-color: transparent;
+            font-family: 'Inter', sans-serif;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.35);
+            backdrop-filter: blur(28px);
+            -webkit-backdrop-filter: blur(28px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 12px 40px 0 rgba(71, 26, 112, 0.15);
+        }
+        .liquid-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(120deg, #DCE4F7 0%, #F0B0FF22 50%, #DCE4F7 100%);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .fill-icon {
+            font-variation-settings: 'FILL' 1;
+        }
+        .safe-area-bottom {
+            padding-bottom: env(safe-area-inset-bottom, 34px);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="min-h-screen text-on-background">
+<!-- Fluid Background Animation Placeholder -->
+<div class="liquid-bg"></div>
+
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-glass-fill backdrop-blur-xl border-b border-glass-border shadow-[0_12px_40px_0_rgba(71,26,112,0.15)] flex items-center justify-between px-mobile-margin h-16">
+<div class="flex items-center gap-3">
+<button class="w-10 h-10 flex items-center justify-center rounded-full bg-primary-container/10 active:scale-95 transition-all">
+<span class="material-symbols-outlined text-primary" data-icon="grid_view">grid_view</span>
+</button>
+<h1 class="font-display-xl-mobile text-display-xl-mobile font-bold text-primary">Elite Admin</h1>
+</div>
+<div class="w-10 h-10 rounded-full overflow-hidden border-2 border-primary-container p-0.5 hover:scale-105 transition-transform duration-300 cursor-pointer">
+<img alt="Admin Avatar" class="w-full h-full rounded-full object-cover" data-alt="A high-quality 3D rendered profile avatar of a professional administrator with a sleek, minimalist aesthetic. The character is set against a soft lavender background, wearing modern business-casual attire in shades of deep purple. The lighting is bright and atmospheric, consistent with a high-end SaaS dashboard environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCqH5p9zl9NhSbGzlW4Fzu38_yXCqCmwPjZUVzuQ6eEEo1RWZ8JKnQoJogNRuFETL4FIZVlGWNNaqO1GXIm28t_n5Iy8GH1hxsKq0ou1KNNNM69G9vNhGlweP-w9idt_c66j0AB669Mk77t2bpcperTn1ZK0An31cC9LDVou4y1KG8Y4j__QZlqX1asdLn70a8U63wTRS2cUT35PXVCdM4OM4CygsTvHpwO0ToCFQqASud8Dp3Pe7cmP2pixM15biBFkBawnr5bEEvG"/>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="pt-24 px-mobile-margin pb-32 max-w-md mx-auto">
+<!-- Welcome Header -->
+<section class="mb-8">
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-on-background mb-1">Good morning, Admin</h2>
+<p class="font-body-md-mobile text-body-md-mobile text-on-surface-variant flex items-center gap-2">
+<span id="current-date">October 24, 2023</span>
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span>
+<span class="text-tertiary font-semibold uppercase tracking-wider text-[10px]">System Online</span>
+</p>
+</section>
+<!-- Metrics Grid (2x2) -->
+<section class="grid grid-cols-2 gap-4 mb-8">
+<!-- Online Users -->
+<div class="glass-card rounded-3xl p-4 flex flex-col justify-between h-36 active:scale-95 transition-all">
+<div>
+<div class="flex justify-between items-start mb-2">
+<span class="material-symbols-outlined text-primary text-[20px]" data-icon="group">group</span>
+<span class="text-[10px] font-bold text-tertiary bg-tertiary/10 px-1.5 py-0.5 rounded-full">+12%</span>
+</div>
+<p class="font-label-caps-mobile text-label-caps-mobile text-on-surface-variant mb-1 uppercase tracking-tighter">Online Users</p>
+<p class="text-2xl font-bold text-primary">1,248</p>
+</div>
+<div class="w-full h-8 flex items-end gap-0.5">
+<div class="flex-1 bg-primary/20 rounded-t h-3 animate-pulse"></div>
+<div class="flex-1 bg-primary/20 rounded-t h-5"></div>
+<div class="flex-1 bg-primary/20 rounded-t h-4"></div>
+<div class="flex-1 bg-primary/30 rounded-t h-6"></div>
+<div class="flex-1 bg-primary/20 rounded-t h-5"></div>
+<div class="flex-1 bg-primary/40 rounded-t h-8"></div>
+</div>
+</div>
+<!-- Open Reports -->
+<div class="glass-card rounded-3xl p-4 flex flex-col justify-between h-36 active:scale-95 transition-all">
+<div>
+<div class="flex justify-between items-start mb-2">
+<span class="material-symbols-outlined text-error text-[20px]" data-icon="assessment">assessment</span>
+<span class="text-[10px] font-bold text-on-error bg-error px-1.5 py-0.5 rounded-full">URGENT</span>
+</div>
+<p class="font-label-caps-mobile text-label-caps-mobile text-on-surface-variant mb-1 uppercase tracking-tighter">Open Reports</p>
+<p class="text-2xl font-bold text-primary">14</p>
+</div>
+<div class="text-[11px] text-on-surface-variant italic">Next review: 20m</div>
+</div>
+<!-- Verification Queue -->
+<div class="glass-card rounded-3xl p-4 flex flex-col justify-between h-36 active:scale-95 transition-all">
+<div>
+<div class="flex justify-between items-start mb-2">
+<span class="material-symbols-outlined text-secondary text-[20px]" data-icon="queue">queue</span>
+</div>
+<p class="font-label-caps-mobile text-label-caps-mobile text-on-surface-variant mb-1 uppercase tracking-tighter">Verification</p>
+<p class="text-2xl font-bold text-primary">28</p>
+</div>
+<p class="text-[11px] text-on-surface-variant font-medium">Pending items</p>
+</div>
+<!-- System Health -->
+<div class="glass-card rounded-3xl p-4 flex flex-col justify-between h-36 active:scale-95 transition-all">
+<div>
+<div class="flex justify-between items-start mb-2">
+<span class="material-symbols-outlined text-tertiary text-[20px]" data-icon="health_and_safety">health_and_safety</span>
+</div>
+<p class="font-label-caps-mobile text-label-caps-mobile text-on-surface-variant mb-1 uppercase tracking-tighter">System Health</p>
+<p class="text-2xl font-bold text-primary">98.4%</p>
+</div>
+<div class="w-full bg-surface-container rounded-full h-1.5">
+<div class="bg-tertiary h-full rounded-full w-[98.4%]"></div>
+</div>
+</div>
+</section>
+<!-- Active Stream Section -->
+<section>
+<div class="flex items-center justify-between mb-4 px-1">
+<h3 class="font-headline-lg-mobile text-headline-lg-mobile text-[20px]">Active Stream</h3>
+<button class="text-primary font-semibold text-sm">View All</button>
+</div>
+<div class="space-y-3">
+<!-- Notification 1 -->
+<div class="glass-card p-4 rounded-2xl flex items-start gap-4 transition-all active:scale-[0.98]">
+<div class="w-10 h-10 rounded-xl bg-error/10 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-error" data-icon="warning">warning</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-center mb-0.5">
+<span class="font-semibold text-primary text-sm">Security flag raised</span>
+<span class="text-[10px] text-on-surface-variant">2m ago</span>
+</div>
+<p class="text-[13px] text-on-surface-variant leading-relaxed">Multiple failed login attempts detected in Singapore region.</p>
+</div>
+</div>
+<!-- Notification 2 -->
+<div class="glass-card p-4 rounded-2xl flex items-start gap-4 transition-all active:scale-[0.98]">
+<div class="w-10 h-10 rounded-xl bg-tertiary/10 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-tertiary" data-icon="person_add">person_add</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-center mb-0.5">
+<span class="font-semibold text-primary text-sm">New moderator joined</span>
+<span class="text-[10px] text-on-surface-variant">15m ago</span>
+</div>
+<p class="text-[13px] text-on-surface-variant leading-relaxed">Alex Rivera has completed onboarding for Central Ops.</p>
+</div>
+</div>
+<!-- Notification 3 -->
+<div class="glass-card p-4 rounded-2xl flex items-start gap-4 transition-all active:scale-[0.98]">
+<div class="w-10 h-10 rounded-xl bg-secondary/10 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-secondary" data-icon="update">update</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-center mb-0.5">
+<span class="font-semibold text-primary text-sm">Deployment successful</span>
+<span class="text-[10px] text-on-surface-variant">1h ago</span>
+</div>
+<p class="text-[13px] text-on-surface-variant leading-relaxed">System v2.4.1 is now live across all edge servers.</p>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full z-50 bg-glass-fill backdrop-blur-[28px] border-t border-glass-border shadow-[0_-8px_32px_0_rgba(71,26,112,0.1)] rounded-t-xl">
+<div class="flex justify-around items-center h-20 px-4 pb-safe-bottom">
+<!-- Queue -->
+<button class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-secondary-container/20 transition-colors w-16 h-12 rounded-full">
+<span class="material-symbols-outlined" data-icon="queue">queue</span>
+<span class="font-label-caps-mobile text-[10px] mt-1">Queue</span>
+</button>
+<!-- Reports (Active) -->
+<button class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-4 py-1 h-12 shadow-lg scale-110">
+<span class="material-symbols-outlined fill-icon" data-icon="assessment">assessment</span>
+<span class="font-label-caps-mobile text-[10px] mt-0.5">Reports</span>
+</button>
+<!-- Security -->
+<button class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-secondary-container/20 transition-colors w-16 h-12 rounded-full">
+<span class="material-symbols-outlined" data-icon="security">security</span>
+<span class="font-label-caps-mobile text-[10px] mt-1">Security</span>
+</button>
+</div>
+</nav>
+<script>
+        // Update date dynamically
+        function updateDate() {
+            const options = { month: 'long', day: 'numeric', year: 'numeric' };
+            const today = new Date();
+            document.getElementById('current-date').textContent = today.toLocaleDateString('en-US', options);
+        }
+        updateDate();
+
+        // Haptic feedback simulation for buttons
+        document.querySelectorAll('button').forEach(btn => {
+            btn.addEventListener('touchstart', () => {
+                if (window.navigator.vibrate) {
+                    window.navigator.vibrate(5);
+                }
+            });
+        });
+    </script>
+</body></html>

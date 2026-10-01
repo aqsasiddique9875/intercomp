@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/>
+<title>ADM-07 Security Alert Board</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary-fixed": "#6cff82",
+                    "on-secondary": "#ffffff",
+                    "on-secondary-fixed-variant": "#004883",
+                    "on-background": "#471A70",
+                    "glass-thick": "rgba(255, 255, 255, 0.8)",
+                    "surface-bright": "#f9f9ff",
+                    "primary-fixed-dim": "#f0b0ff",
+                    "on-primary-fixed": "#330044",
+                    "tertiary": "#006823",
+                    "glass-fill": "rgba(255, 255, 255, 0.35)",
+                    "on-tertiary-fixed": "#002106",
+                    "on-primary": "#ffffff",
+                    "on-tertiary-container": "#e6ffe0",
+                    "on-secondary-container": "#003868",
+                    "on-tertiary": "#ffffff",
+                    "on-primary-container": "#fff5fb",
+                    "on-surface": "#141c29",
+                    "glass-border": "rgba(255, 255, 255, 0.6)",
+                    "card-gradient": "linear-gradient(135deg, #4D9EFA 0%, #BF7DF5 100%)",
+                    "surface-container-low": "#f0f3ff",
+                    "surface-container-lowest": "#ffffff",
+                    "secondary-container": "#54a3ff",
+                    "on-surface-variant": "#4f4350",
+                    "primary-container": "#a34cbe",
+                    "on-tertiary-fixed-variant": "#00531a",
+                    "surface-container-high": "#e0e8fb",
+                    "secondary-fixed": "#d3e3ff",
+                    "tertiary-fixed-dim": "#47e266",
+                    "surface-container-highest": "#dbe3f6",
+                    "surface-container": "#e7eeff",
+                    "on-primary-fixed-variant": "#72188f",
+                    "secondary-fixed-dim": "#a3c9ff",
+                    "error": "#FF453A",
+                    "surface": "#f9f9ff",
+                    "error-container": "#ffdad6",
+                    "primary": "#8731a3",
+                    "outline-variant": "#d2c1d2",
+                    "tertiary-container": "#00842f",
+                    "orange": "#FF9F0A",
+                    "background": "#f9f9ff",
+                    "surface-variant": "#dbe3f6",
+                    "inverse-on-surface": "#ecf1ff",
+                    "surface-tint": "#8d37a9",
+                    "inverse-surface": "#29313f",
+                    "gold": "#FFD60A",
+                    "primary-fixed": "#fbd7ff",
+                    "secondary": "#0060ab",
+                    "surface-dim": "#d2daed",
+                    "on-error": "#ffffff",
+                    "outline": "#817381",
+                    "on-secondary-fixed": "#001c39",
+                    "on-error-container": "#93000a",
+                    "inverse-primary": "#f0b0ff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "desktop-margin": "64px",
+                    "mobile-margin": "20px",
+                    "desktop-gutter": "24px",
+                    "base": "8px",
+                    "mobile-gutter": "16px",
+                    "safe-bottom": "34px",
+                    "safe-top": "44px",
+                    "max-width": "1280px"
+            },
+            "fontFamily": {
+                    "display-xl": ["Inter"],
+                    "label-caps": ["Inter"],
+                    "body-md": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "label-caps-mobile": ["Inter"],
+                    "headline-lg-mobile": ["Inter"],
+                    "display-xl-mobile": ["Inter"],
+                    "body-md-mobile": ["Inter"]
+            },
+            "fontSize": {
+                    "display-xl": ["56px", {"lineHeight": "1.1", "letterSpacing": "-0.03em", "fontWeight": "700"}],
+                    "label-caps": ["13px", {"lineHeight": "1.0", "letterSpacing": "0.03em", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                    "headline-lg": ["34px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                    "label-caps-mobile": ["12px", {"lineHeight": "1.0", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "display-xl-mobile": ["34px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "body-md-mobile": ["15px", {"lineHeight": "1.5", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            -webkit-tap-highlight-color: transparent;
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #DCE4F7 0%, #F9F9FF 100%);
+            min-height: 100vh;
+            color: #471A70;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.35);
+            backdrop-filter: blur(28px);
+            -webkit-backdrop-filter: blur(28px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 12px 40px 0 rgba(71, 26, 112, 0.15);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .press-effect:active {
+            transform: scale(0.96);
+            transition: transform 0.1s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="pb-32">
+<!-- Top App Bar -->
+<header class="fixed top-0 w-full z-50 flex items-center justify-between px-mobile-margin h-14 bg-glass-thick backdrop-blur-xl border-b border-glass-border shadow-[0_12px_40px_0_rgba(71,26,112,0.15)]">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary" data-icon="security">security</span>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile font-bold text-primary">Security Alerts</h1>
+</div>
+<div class="w-8 h-8 rounded-full overflow-hidden border border-primary/20">
+<img alt="Admin" class="w-full h-full object-cover" data-alt="A professional close-up headshot of a female security administrator with a confident expression. She is in a high-tech office environment with soft blue and violet ambient lighting, echoing a glassmorphic design aesthetic. The photography is sharp and modern, with a shallow depth of field focusing on her professional attire and determined look." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDafxtTpQjRMi6iVz0n8ebY9ct6tTjhSMHatY526DJvWRiinQLxNeSQjzZN-surgzlkdaii2k7CnfY-Seg5F_rbwxT9QxxtAleEqqi4Bui5G7Feaeu2F0Lo6S8t6rKCEdU6ai8mahGVhiapIGHDL3kMTsam1FnVVfJtdiwnAQbsF6YCeCKStskizu2TWoVFyNv5ZIVx_kBEYyjUBXXpaJhsCtLiM2hcXwtn6mz8Soyae66rzVGtO8ATOAP6O8IeN9e_emiz980rhbSi"/>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="pt-20 px-mobile-margin max-w-lg mx-auto">
+<!-- Dashboard Summary Stats -->
+<div class="grid grid-cols-2 gap-4 mb-8">
+<div class="glass-card p-4 rounded-xl flex flex-col gap-1">
+<span class="text-label-caps-mobile font-label-caps-mobile text-on-surface-variant uppercase tracking-wider">Active Monitoring</span>
+<span class="text-display-xl-mobile font-display-xl-mobile text-primary">124</span>
+</div>
+<div class="glass-card p-4 rounded-xl flex flex-col gap-1">
+<span class="text-label-caps-mobile font-label-caps-mobile text-on-surface-variant uppercase tracking-wider">Open Alerts</span>
+<span class="text-display-xl-mobile font-display-xl-mobile text-error">03</span>
+</div>
+</div>
+<section class="space-y-4">
+<div class="flex items-center justify-between">
+<h2 class="text-headline-lg-mobile font-headline-lg-mobile text-on-background">Live Stream</h2>
+<span class="bg-primary/10 text-primary px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-primary animate-ping"></span> Live
+                </span>
+</div>
+<!-- Urgent Alert Card -->
+<div class="glass-card rounded-2xl p-5 border-2 border-error animate-pulse shadow-[0_0_15px_rgba(255,69,58,0.3)] transition-all">
+<div class="flex justify-between items-start mb-4">
+<div class="flex gap-3">
+<div class="w-10 h-10 rounded-xl bg-error/10 flex items-center justify-center text-error">
+<span class="material-symbols-outlined" data-icon="videocam_off" style="font-variation-settings: 'FILL' 1;">videocam_off</span>
+</div>
+<div>
+<p class="font-bold text-on-surface text-body-md-mobile">Alex Rivera</p>
+<p class="text-on-surface-variant text-[12px]">Test: Advanced UI Design</p>
+</div>
+</div>
+<span class="text-error font-bold text-[11px] bg-error/10 px-2 py-1 rounded">2m ago</span>
+</div>
+<div class="mb-5">
+<div class="flex items-center gap-2 text-error mb-1">
+<span class="material-symbols-outlined text-[18px]" data-icon="warning">warning</span>
+<span class="text-label-caps-mobile font-bold uppercase tracking-tight">Urgent: Webcam Violation</span>
+</div>
+<p class="text-on-surface-variant text-[13px] leading-relaxed">Student disconnected the mandatory camera stream during the final layout exercise.</p>
+</div>
+<div class="flex gap-3">
+<button class="press-effect flex-1 h-[44px] rounded-full border border-outline-variant font-bold text-on-surface-variant text-label-caps-mobile flex items-center justify-center hover:bg-glass-fill transition-colors">
+                        Review Flag
+                    </button>
+<button class="press-effect flex-1 h-[44px] rounded-full bg-primary text-white font-bold text-label-caps-mobile flex items-center justify-center shadow-lg active:scale-95 duration-300 ease-in-out">
+                        Send Warning
+                    </button>
+</div>
+</div>
+<!-- Flagged: Copy-Paste Trigger -->
+<div class="glass-card rounded-2xl p-5 transition-all">
+<div class="flex justify-between items-start mb-4">
+<div class="flex gap-3">
+<div class="w-10 h-10 rounded-xl bg-secondary/10 flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined" data-icon="content_copy">content_copy</span>
+</div>
+<div>
+<p class="font-bold text-on-surface text-body-md-mobile">Sarah Chen</p>
+<p class="text-on-surface-variant text-[12px]">Test: Data Structures</p>
+</div>
+</div>
+<span class="text-on-surface-variant font-medium text-[11px] bg-glass-fill px-2 py-1 rounded">5m ago</span>
+</div>
+<div class="mb-5">
+<div class="flex items-center gap-2 text-primary mb-1">
+<span class="material-symbols-outlined text-[18px]" data-icon="info">info</span>
+<span class="text-label-caps-mobile font-bold uppercase tracking-tight">Flagged: Copy-Paste Trigger</span>
+</div>
+<p class="text-on-surface-variant text-[13px] leading-relaxed">External clipboard content detected during the algorithm implementation phase.</p>
+</div>
+<div class="flex gap-3">
+<button class="press-effect flex-1 h-[44px] rounded-full border border-outline-variant font-bold text-on-surface-variant text-label-caps-mobile flex items-center justify-center hover:bg-glass-fill transition-colors">
+                        Review Flag
+                    </button>
+<button class="press-effect flex-1 h-[44px] rounded-full bg-primary text-white font-bold text-label-caps-mobile flex items-center justify-center shadow-lg active:scale-95 duration-300 ease-in-out">
+                        Send Warning
+                    </button>
+</div>
+</div>
+<!-- Flagged: Tab Switch -->
+<div class="glass-card rounded-2xl p-5 transition-all shadow-sm">
+<div class="flex justify-between items-start mb-4">
+<div class="flex gap-3">
+<div class="w-10 h-10 rounded-xl bg-orange/10 flex items-center justify-center text-orange">
+<span class="material-symbols-outlined" data-icon="tab_unselected">tab_unselected</span>
+</div>
+<div>
+<p class="font-bold text-on-surface text-body-md-mobile">Julian Kim</p>
+<p class="text-on-surface-variant text-[12px]">Test: Product Strategy</p>
+</div>
+</div>
+<span class="text-on-surface-variant font-medium text-[11px] bg-glass-fill px-2 py-1 rounded">12m ago</span>
+</div>
+<div class="mb-5">
+<div class="flex items-center gap-2 text-orange mb-1">
+<span class="material-symbols-outlined text-[18px]" data-icon="visibility">visibility</span>
+<span class="text-label-caps-mobile font-bold uppercase tracking-tight">Flagged: Tab Switch Detected</span>
+</div>
+<p class="text-on-surface-variant text-[13px] leading-relaxed">Window focus lost for 4.2 seconds. Potentially browsing external resources.</p>
+</div>
+<div class="flex gap-3">
+<button class="press-effect flex-1 h-[44px] rounded-full border border-outline-variant font-bold text-on-surface-variant text-label-caps-mobile flex items-center justify-center hover:bg-glass-fill transition-colors">
+                        Review Flag
+                    </button>
+<button class="press-effect flex-1 h-[44px] rounded-full bg-primary text-white font-bold text-label-caps-mobile flex items-center justify-center shadow-lg active:scale-95 duration-300 ease-in-out">
+                        Send Warning
+                    </button>
+</div>
+</div>
+<!-- History Placeholder -->
+<div class="py-4 text-center">
+<button class="text-primary font-bold text-label-caps-mobile uppercase tracking-widest flex items-center justify-center gap-2 mx-auto press-effect">
+                    View Full Audit Log
+                    <span class="material-symbols-outlined text-[16px]" data-icon="arrow_forward_ios">arrow_forward_ios</span>
+</button>
+</div>
+</section>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 w-full z-50 flex justify-around items-center px-mobile-margin pb-safe-bottom pt-2 bg-glass-thick backdrop-blur-2xl border-t border-glass-border shadow-[0_-8px_30px_0_rgba(71,26,112,0.1)] rounded-t-xl">
+<!-- Dashboard -->
+<a class="active:scale-90 transition-transform duration-200 flex flex-col items-center justify-center text-on-surface-variant opacity-60" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="dashboard">dashboard</span>
+<span class="font-label-caps-mobile text-label-caps-mobile">Dashboard</span>
+</a>
+<!-- Verify -->
+<a class="active:scale-90 transition-transform duration-200 flex flex-col items-center justify-center text-on-surface-variant opacity-60" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="verified_user">verified_user</span>
+<span class="font-label-caps-mobile text-label-caps-mobile">Verify</span>
+</a>
+<!-- Security (ACTIVE) -->
+<a class="active:scale-90 transition-transform duration-200 flex flex-col items-center justify-center text-primary font-bold" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="gpp_maybe" style="font-variation-settings: 'FILL' 1;">gpp_maybe</span>
+<span class="font-label-caps-mobile text-label-caps-mobile">Security</span>
+</a>
+<!-- Settings -->
+<a class="active:scale-90 transition-transform duration-200 flex flex-col items-center justify-center text-on-surface-variant opacity-60" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="settings">settings</span>
+<span class="font-label-caps-mobile text-label-caps-mobile">Settings</span>
+</a>
+</nav>
+<!-- Background Subtle Glow Effect -->
+<div class="fixed top-[-10%] right-[-10%] w-[300px] h-[300px] rounded-full bg-primary/20 blur-[100px] pointer-events-none z-0"></div>
+<div class="fixed bottom-[-5%] left-[-10%] w-[250px] h-[250px] rounded-full bg-secondary/20 blur-[100px] pointer-events-none z-0"></div>
+<script>
+        // Micro-interaction: Tapping a card expands it slightly (visual feedback)
+        document.querySelectorAll('.glass-card').forEach(card => {
+            card.addEventListener('touchstart', function() {
+                this.classList.add('scale-[0.99]');
+            });
+            card.addEventListener('touchend', function() {
+                this.classList.remove('scale-[0.99]');
+            });
+        });
+
+        // Toggle Active State logic for demo
+        const navItems = document.querySelectorAll('nav a');
+        navItems.forEach(item => {
+            item.addEventListener('click', (e) => {
+                e.preventDefault();
+                navItems.forEach(i => {
+                    i.classList.remove('text-primary', 'font-bold');
+                    i.classList.add('text-on-surface-variant', 'opacity-60');
+                    i.querySelector('.material-symbols-outlined').style.fontVariationSettings = "'FILL' 0";
+                });
+                item.classList.add('text-primary', 'font-bold');
+                item.classList.remove('text-on-surface-variant', 'opacity-60');
+                item.querySelector('.material-symbols-outlined').style.fontVariationSettings = "'FILL' 1";
+            });
+        });
+    </script>
+</body></html>

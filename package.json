@@ -1,0 +1,28 @@
+{
+  "name": "intercomp",
+  "version": "1.0.0",
+  "description": "Intercomp - Next-Generation Liquid Glass Internship & Recruitment Platform",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "test": "node backend_test.js"
+  },
+  "keywords": [
+    "intercomp",
+    "internship",
+    "recruitment",
+    "liquid-glass",
+    "talent-acquisition",
+    "mock-interviews",
+    "student-portal"
+  ],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "docx": "^9.7.1",
+    "mammoth": "^1.12.0",
+    "nodemailer": "^9.0.1"
+  }
+}

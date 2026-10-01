@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="en"><head>
+  <script>
+    if (window.self !== window.top) {
+      const style = document.createElement('style');
+      style.innerHTML = `
+        header, nav, aside, 
+        .SideNavBar, .TopNavBar, 
+        #SideNavBar, #TopNavBar {
+          display: none !important;
+        }
+        main, .main-content {
+          margin-left: 0 !important;
+          padding-top: 1.5rem !important;
+        }
+        main.ml-64, main.lg\\:ml-64 {
+          margin-left: 0 !important;
+          padding-top: 2rem !important;
+        }
+      `;
+      document.documentElement.appendChild(style);
+    }
+  </script>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>JobFlow | Elite Membership Hub</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary": "#006823",
+                    "on-background": "#141c29",
+                    "on-tertiary-container": "#e6ffe0",
+                    "surface-bright": "#f9f9ff",
+                    "surface-container-highest": "#dbe3f6",
+                    "tertiary-container": "#00842f",
+                    "secondary-container": "#54a3ff",
+                    "on-secondary": "#ffffff",
+                    "on-primary-container": "#fff5fb",
+                    "on-surface": "#141c29",
+                    "background": "#f9f9ff",
+                    "on-primary": "#ffffff",
+                    "on-surface-variant": "#4f4350",
+                    "card-gradient": "linear-gradient(135deg, #4D9EFA 0%, #BF7DF5 100%)",
+                    "on-tertiary-fixed-variant": "#00531a",
+                    "on-tertiary": "#ffffff",
+                    "tertiary-fixed": "#6cff82",
+                    "primary-fixed-dim": "#f0b0ff",
+                    "primary-fixed": "#fbd7ff",
+                    "inverse-surface": "#29313f",
+                    "on-secondary-container": "#003868",
+                    "surface-tint": "#8d37a9",
+                    "inverse-primary": "#f0b0ff",
+                    "on-error-container": "#93000a",
+                    "primary-container": "#a34cbe",
+                    "outline": "#817381",
+                    "on-secondary-fixed": "#001c39",
+                    "surface-dim": "#d2daed",
+                    "surface": "#f9f9ff",
+                    "on-tertiary-fixed": "#002106",
+                    "glass-thick": "rgba(255, 255, 255, 0.8)",
+                    "orange": "#FF9F0A",
+                    "on-error": "#ffffff",
+                    "secondary-fixed-dim": "#a3c9ff",
+                    "on-primary-fixed": "#330044",
+                    "surface-variant": "#dbe3f6",
+                    "error": "#FF453A",
+                    "tertiary-fixed-dim": "#47e266",
+                    "surface-container-high": "#e0e8fb",
+                    "glass-fill": "rgba(255, 255, 255, 0.35)",
+                    "glass-border": "rgba(255, 255, 255, 0.6)",
+                    "secondary-fixed": "#d3e3ff",
+                    "secondary": "#0060ab",
+                    "on-primary-fixed-variant": "#72188f",
+                    "error-container": "#ffdad6",
+                    "surface-container": "#e7eeff",
+                    "on-secondary-fixed-variant": "#004883",
+                    "gold": "#FFD60A",
+                    "primary": "#8731a3",
+                    "surface-container-low": "#f0f3ff",
+                    "outline-variant": "#d2c1d2",
+                    "inverse-on-surface": "#ecf1ff",
+                    "surface-container-lowest": "#ffffff",
+                    "brand-deep-purple": "#471A70",
+                    "brand-pastel-bg": "#DCE4F7"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "safe-bottom": "34px",
+                    "max-width": "1280px",
+                    "mobile-margin": "20px",
+                    "base": "8px",
+                    "desktop-margin": "64px",
+                    "desktop-gutter": "24px",
+                    "safe-top": "44px",
+                    "mobile-gutter": "16px"
+            },
+            "fontFamily": {
+                    "label-caps": ["Inter", "sans-serif"],
+                    "display-xl": ["Inter", "sans-serif"],
+                    "headline-lg": ["Inter", "sans-serif"],
+                    "body-md": ["Inter", "sans-serif"]
+            },
+            "fontSize": {
+                    "label-caps": ["13px", { "lineHeight": "1.0", "letterSpacing": "0.03em", "fontWeight": "600" }],
+                    "display-xl": ["56px", { "lineHeight": "1.1", "letterSpacing": "-0.03em", "fontWeight": "700" }],
+                    "headline-lg": ["34px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+                    "body-md": ["16px", { "lineHeight": "1.5", "fontWeight": "400" }]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.35);
+            backdrop-filter: blur(28px);
+            -webkit-backdrop-filter: blur(28px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 12px 40px 0 rgba(71, 26, 112, 0.15);
+        }
+        .floating-animation {
+            animation: float 6s ease-in-out infinite;
+        }
+        @keyframes float {
+            0% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(2deg); }
+            100% { transform: translateY(0px) rotate(0deg); }
+        }
+        .bg-mesh {
+            background-color: #DCE4F7;
+            background-image: radial-gradient(at 0% 0%, hsla(253,16%,7%,1) 0, transparent 50%), 
+                              radial-gradient(at 50% 0%, hsla(225,39%,30%,1) 0, transparent 50%), 
+                              radial-gradient(at 100% 0%, hsla(339,49%,30%,1) 0, transparent 50%);
+            background-attachment: fixed;
+        }
+        .text-brand-gradient {
+            background: linear-gradient(to right, #8731a3, #0060ab);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .gold-border {
+            border: 2px solid #FFD60A;
+        }
+        .shimmer {
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            background-size: 200% 100%;
+            animation: shimmer 2.5s infinite;
+        }
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+    </style>
+</head>
+<body class="bg-brand-pastel-bg text-on-surface font-body-md overflow-x-hidden">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-glass-fill backdrop-blur-3xl border-b border-glass-border shadow-[0_12px_40px_0_rgba(71,26,112,0.15)] h-20 flex items-center transition-all duration-300">
+<div class="flex justify-between items-center px-desktop-margin h-full w-full max-w-max-width mx-auto">
+<div class="flex items-center gap-8">
+<span class="font-display-xl text-display-xl tracking-tighter bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary">JobFlow</span>
+<div class="hidden md:flex items-center gap-6">
+<a class="text-on-surface-variant font-medium hover:scale-105 hover:bg-glass-thick transition-all duration-350 ease-[cubic-bezier(0.35,0,0.2,1)] px-3 py-1 rounded-full font-label-caps text-label-caps" href="#">Explore</a>
+<a class="text-primary font-bold border-b-2 border-primary pb-1 font-label-caps text-label-caps" href="#">Memberships</a>
+<a class="text-on-surface-variant font-medium hover:scale-105 hover:bg-glass-thick transition-all duration-350 ease-[cubic-bezier(0.35,0,0.2,1)] px-3 py-1 rounded-full font-label-caps text-label-caps" href="#">Mentors</a>
+<a class="text-on-surface-variant font-medium hover:scale-105 hover:bg-glass-thick transition-all duration-350 ease-[cubic-bezier(0.35,0,0.2,1)] px-3 py-1 rounded-full font-label-caps text-label-caps" href="#">Success Stories</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-2">
+<button class="p-2 text-on-surface-variant hover:bg-glass-thick rounded-full transition-all active:scale-95">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:bg-glass-thick rounded-full transition-all active:scale-95">
+<span class="material-symbols-outlined">account_balance_wallet</span>
+</button>
+</div>
+<button class="bg-primary text-on-primary px-6 py-2.5 rounded-full font-semibold shadow-lg hover:scale-105 active:scale-95 transition-all">Upgrade to Gold</button>
+<div class="w-10 h-10 rounded-full border-2 border-primary overflow-hidden cursor-pointer hover:ring-4 ring-primary/20 transition-all">
+<img alt="User avatar" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBa_-LpTDACIOq4s5N3oNn1Y3COOnRlCuV4Nlj85ACLEI1TEZkJxQjj6fEK_gAU8KCST47dkV0nplhctHq1OsAcxI5tjDcvE8u7cMPasiHX-ZY2_WVlZkfc25PLDXULJo9au8REr117nuypKqLhHAFm_0qlKcVuY4QLFQ1dRWu_bKYnHTlOtAyoz_H0LsMAjip3h5vtKSzwdSlABjhErZuEE4K7IyWTUdthToVIA1IyU10yw2-5B3YKH1WUZN49IrxAGVCZXIaLMfc-"/>
+</div>
+</div>
+</div>
+</nav>
+<!-- Main Content Canvas -->
+<main class="pt-20 min-h-screen">
+<div class="max-w-max-width mx-auto px-desktop-margin py-12 flex flex-col lg:flex-row gap-16 items-center">
+<!-- Left Side: Elegant Card Showcase -->
+<div class="w-full lg:w-1/2 flex flex-col justify-center items-center relative py-12 lg:py-0">
+<div class="absolute -z-10 w-[120%] h-[120%] bg-gradient-to-tr from-primary/10 via-secondary/5 to-transparent blur-3xl opacity-60"></div>
+<div class="relative w-full max-w-[500px] aspect-[1.58/1] floating-animation">
+<div class="absolute inset-0 bg-gold/30 blur-[80px] rounded-full opacity-40 mix-blend-screen"></div>
+<img alt="Premium Gold Member Card" class="w-full h-full object-contain drop-shadow-[0_20px_60px_rgba(255,214,10,0.4)]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCdJ9ejB8eTwoUlFkRxNdBpQJxciWKWaOx1PTnGiXs0nN4144kw7WIDjWp9kfFjFCeLEuXmEipCgVdx5ms3BaK6GFnnOVu-RJm6WveUUqsKXD3o9eulYEiT-e0NUT61wDgggPBlqsH6b2HA7Y_55EAz2IfQh0tOoHDeTNxxcPRbfSysZrTP2US_HCUYveIE9O2mxdxULjYqEEgjJjAQTyXFDvB9RZ119xrsJ8HW7DaNq0fbg2dXggv1M9ZRlLqWSfK-_iemPwaLfpDK"/>
+</div>
+<div class="mt-12 text-center lg:text-left w-full space-y-4">
+<h1 class="font-display-xl text-display-xl text-brand-deep-purple">Unlock Elite Status</h1>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-lg mx-auto lg:mx-0">
+                        Join an exclusive community of high-achievers. Our Gold Tier offers unparalleled access to industry leaders and premium career optimization tools.
+                    </p>
+<div class="flex gap-4 pt-4 justify-center lg:justify-start">
+<div class="flex -space-x-3 overflow-hidden">
+<img alt="Student 1" class="inline-block h-10 w-10 rounded-full ring-2 ring-white" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAL5zMIC1-BLlXcSLWGC6lBiHQI0lKYePGvMPHyDNvrTqvuNVO8gog22R-5U8EDv1AG9FcMTA3h_domoOq8wx59nilURuxbz5iBNE4rFMyIFsX4ChR0jVv0bqaTkq-cd6cWTDXZTewQW513dYqrLahNEpnHs19ofLYJCYbHMD66vhHvAUp5sS97qktqynPOAcJR1od_YaucKddWaRVIr3wahqHOyZMCm1qhEexX46aY7r7hFYagZ4iNyZgGQOXPyB1xPYuaSW9biv8g"/>
+<img alt="Student 2" class="inline-block h-10 w-10 rounded-full ring-2 ring-white" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBdgpm2XvhL_0pw5EO-7JwRfhcrep-mBvx1WK5e-UTuIzFrKpIYlEf5_L7FLwltr1P26raGITFqGT91eQEsjcjYK3Wjbfx5Vbb_fSkfyyXWnWMCfbEjMKtz5wPPOF-JifzQOL4w-skRs0yCdMYdWutjb4MRMFh04lANlpNUpeAOe8OwZUe00WKOlMBy_yWrqGDS2fVQOSnm59rRRqJB8tzJB7tcS-QxML4Y_jmWl9J6DsfzGgi0FmXryO8XA7O27aRkr9LOHslIydgf"/>
+<img alt="Student 3" class="inline-block h-10 w-10 rounded-full ring-2 ring-white" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDIqPsn-08zEK6GogmQkw274AD6m11hC88LmQXYkbcsK7_rH_NvZMXoDRLlxWFcZbTrxA7GEk0MLZ9G5eOgj6emEbIEu0mOwvmharTUdbXfP4mwOzhYSeKu78AxGq4dGayCHjdqEx3zqsPyltr0idcNEgJoJT-d7yjx_jn1PEhm1DxRlzjjIDZUGIVC8o7EtCYZejzp0I3oa6tiHqAWGonVcPB1NCPgjXkTLbkf6Loj75jasn1e1UNgtx7fPGwk094fzYSeLiJmY7Qn"/>
+</div>
+<p class="text-sm font-medium text-on-surface-variant self-center"><span class="font-bold text-primary">12k+</span> students joined this week</p>
+</div>
+</div>
+</div>
+<!-- Right Side: Plan Selection Interface -->
+<div class="w-full lg:w-1/2 space-y-8">
+<h2 class="font-headline-lg text-headline-lg text-brand-deep-purple mb-8">Select Your Plan</h2>
+<div class="space-y-6">
+<!-- Standard Plan -->
+<div class="glass-card p-6 rounded-2xl flex items-center justify-between group hover:scale-[1.02] transition-all cursor-pointer">
+<div class="flex items-center gap-5">
+<div class="w-12 h-12 rounded-xl bg-surface-container-highest flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined">person</span>
+</div>
+<div>
+<h3 class="font-bold text-lg text-brand-deep-purple">Standard</h3>
+<p class="text-sm text-on-surface-variant">Core features for job search</p>
+</div>
+</div>
+<div class="text-right">
+<div class="font-bold text-xl">Rs. 0<span class="text-sm font-normal">/mo</span></div>
+<button class="mt-2 px-4 py-1.5 rounded-full border border-primary text-primary text-xs font-bold group-hover:bg-primary group-hover:text-white transition-all">Choose</button>
+</div>
+</div>
+<!-- Plus Plan -->
+<div class="glass-card p-6 rounded-2xl flex items-center justify-between group border-primary/20 hover:scale-[1.02] transition-all cursor-pointer">
+<div class="flex items-center gap-5">
+<div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">rocket_launch</span>
+</div>
+<div>
+<h3 class="font-bold text-lg text-brand-deep-purple">Plus</h3>
+<p class="text-sm text-on-surface-variant">Accelerate your applications</p>
+</div>
+</div>
+<div class="text-right">
+<div class="font-bold text-xl">Rs. 19<span class="text-sm font-normal">/mo</span></div>
+<button class="mt-2 px-4 py-1.5 rounded-full border border-primary text-primary text-xs font-bold group-hover:bg-primary group-hover:text-white transition-all">Choose</button>
+</div>
+</div>
+<!-- Gold Plan (Elite) -->
+<div class="relative overflow-hidden p-8 rounded-3xl bg-glass-thick border-2 border-gold shadow-[0_20px_50px_rgba(255,214,10,0.25)] hover:scale-[1.03] transition-all cursor-pointer group">
+<!-- Shimmer Effect -->
+<div class="absolute inset-0 shimmer opacity-10"></div>
+<div class="flex flex-col sm:flex-row justify-between gap-6 relative z-10">
+<div class="flex-1 space-y-4">
+<div class="flex items-center gap-3">
+<div class="bg-gold text-on-primary px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest shadow-sm">ELITE SELECTION</div>
+<span class="material-symbols-outlined text-gold" style="font-variation-settings: 'FILL' 1;">stars</span>
+</div>
+<h3 class="font-display-xl text-3xl text-brand-deep-purple">Gold Member</h3>
+<p class="text-on-surface-variant font-medium">The definitive career acceleration package for future industry leaders.</p>
+<ul class="space-y-3 pt-2">
+<li class="flex items-center gap-3 text-sm font-semibold text-brand-deep-purple">
+<span class="material-symbols-outlined text-tertiary-container text-lg" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                                        Human Expert Resume Review
+                                    </li>
+<li class="flex items-center gap-3 text-sm font-semibold text-brand-deep-purple">
+<span class="material-symbols-outlined text-tertiary-container text-lg" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                                        Priority "Elite" Profile Flag
+                                    </li>
+<li class="flex items-center gap-3 text-sm font-semibold text-brand-deep-purple">
+<span class="material-symbols-outlined text-tertiary-container text-lg" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                                        5 Mock Interview Credits / Month
+                                    </li>
+<li class="flex items-center gap-3 text-sm font-semibold text-brand-deep-purple">
+<span class="material-symbols-outlined text-tertiary-container text-lg" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                                        Direct Mentor DM Access
+                                    </li>
+</ul>
+</div>
+<div class="flex flex-col items-end justify-between min-w-[140px]">
+<div class="text-right">
+<div class="text-sm font-bold text-primary mb-1">BEST VALUE</div>
+<div class="font-black text-4xl text-brand-deep-purple">Rs. 49<span class="text-lg font-normal opacity-60">/mo</span></div>
+</div>
+<button class="w-full bg-primary text-on-primary py-4 rounded-2xl font-bold shadow-xl shadow-primary/20 hover:bg-brand-deep-purple transition-all flex items-center justify-center gap-2">
+                                    Checkout Now
+                                    <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<div class="pt-4 flex items-center justify-between px-2 opacity-60 grayscale hover:grayscale-0 transition-all cursor-default">
+<span class="text-xs font-bold uppercase tracking-widest text-on-surface-variant">Trusted By Top Recruiters From:</span>
+<div class="flex gap-6 items-center">
+<span class="font-black text-lg">G<span class="text-primary">oogle</span></span>
+<span class="font-black text-lg">M<span class="text-secondary">eta</span></span>
+<span class="font-black text-lg">A<span class="text-gold">irbnb</span></span>
+</div>
+</div>
+</div>
+</div>
+</main>
+
+<script>
+        // Micro-interaction for plan cards selection
+        document.querySelectorAll('.glass-card, .border-gold').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                // Subtle lift on hover
+            });
+            card.addEventListener('click', () => {
+                // Flash effect on selection
+                card.classList.add('ring-4', 'ring-primary/10');
+                setTimeout(() => card.classList.remove('ring-4', 'ring-primary/10'), 300);
+            });
+        });
+
+        // Sticky Navbar effect
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                nav.classList.add('h-16', 'shadow-2xl');
+                nav.classList.remove('h-20');
+            } else {
+                nav.classList.add('h-20');
+                nav.classList.remove('h-16', 'shadow-2xl');
+            }
+        });
+    </script>
+</body></html>

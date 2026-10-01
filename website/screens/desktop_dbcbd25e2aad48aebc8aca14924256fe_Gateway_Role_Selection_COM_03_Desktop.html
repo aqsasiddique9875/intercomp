@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>JobPath | Select Your Path</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-surface-variant": "#4f4350",
+                      "on-background": "#471A70",
+                      "orange": "#FF9F0A",
+                      "background": "#DCE4F7",
+                      "outline-variant": "#d2c1d2",
+                      "card-gradient": "linear-gradient(135deg, #4D9EFA 0%, #BF7DF5 100%)",
+                      "on-error": "#ffffff",
+                      "surface-tint": "#8d37a9",
+                      "surface": "#f9f9ff",
+                      "surface-variant": "#dbe3f6",
+                      "secondary-container": "#54a3ff",
+                      "glass-fill": "rgba(255, 255, 255, 0.35)",
+                      "on-error-container": "#93000a",
+                      "surface-container-low": "#f0f3ff",
+                      "on-secondary": "#ffffff",
+                      "on-tertiary-container": "#e6ffe0",
+                      "inverse-on-surface": "#ecf1ff",
+                      "secondary-fixed": "#d3e3ff",
+                      "primary-fixed": "#fbd7ff",
+                      "tertiary-fixed": "#6cff82",
+                      "surface-container-lowest": "#ffffff",
+                      "error-container": "#ffdad6",
+                      "primary-container": "#a34cbe",
+                      "on-primary": "#ffffff",
+                      "on-tertiary-fixed": "#002106",
+                      "tertiary-fixed-dim": "#47e266",
+                      "glass-thick": "rgba(255, 255, 255, 0.8)",
+                      "on-secondary-fixed": "#001c39",
+                      "secondary": "#0060ab",
+                      "on-primary-fixed": "#330044",
+                      "on-tertiary-fixed-variant": "#00531a",
+                      "outline": "#817381",
+                      "surface-container-highest": "#dbe3f6",
+                      "on-primary-container": "#fff5fb",
+                      "surface-container-high": "#e0e8fb",
+                      "error": "#FF453A",
+                      "tertiary-container": "#00842f",
+                      "on-secondary-container": "#003868",
+                      "primary-fixed-dim": "#f0b0ff",
+                      "on-surface": "#141c29",
+                      "inverse-surface": "#29313f",
+                      "glass-border": "rgba(255, 255, 255, 0.6)",
+                      "on-tertiary": "#ffffff",
+                      "gold": "#FFD60A",
+                      "secondary-fixed-dim": "#a3c9ff",
+                      "tertiary": "#006823",
+                      "primary": "#8731a3",
+                      "surface-bright": "#f9f9ff",
+                      "on-primary-fixed-variant": "#72188f",
+                      "surface-dim": "#d2daed",
+                      "on-secondary-fixed-variant": "#004883",
+                      "inverse-primary": "#f0b0ff",
+                      "surface-container": "#e7eeff"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "safe-bottom": "34px",
+                      "mobile-gutter": "16px",
+                      "max-width": "1280px",
+                      "desktop-margin": "64px",
+                      "desktop-gutter": "24px",
+                      "base": "8px",
+                      "mobile-margin": "20px",
+                      "safe-top": "44px"
+              },
+              "fontFamily": {
+                      "headline-lg": ["Inter", "sans-serif"],
+                      "body-md": ["Inter", "sans-serif"],
+                      "display-xl": ["Inter", "sans-serif"],
+                      "label-caps": ["Inter", "sans-serif"]
+              }
+            },
+          },
+        }
+    </script>
+<style>
+        body {
+            background-color: #DCE4F7;
+            overflow: hidden;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.35);
+            backdrop-filter: blur(28px);
+            -webkit-backdrop-filter: blur(28px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 12px 40px 0 rgba(71, 26, 112, 0.15);
+            transition: all 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        .glass-card:hover {
+            transform: scale(1.02);
+            border: 1.5px solid rgba(255, 255, 255, 0.85);
+            box-shadow: 0 16px 45px 0 rgba(71, 26, 112, 0.2);
+        }
+
+        .glass-card:active {
+            transform: scale(1.03);
+            border: 2px solid rgba(255, 255, 255, 1);
+            box-shadow: 0 20px 50px rgba(71, 26, 112, 0.25);
+        }
+
+        .animated-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            background: linear-gradient(-45deg, #DCE4F7, #f0f3ff, #e7eeff, #f9f9ff);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .glow-icon {
+            filter: drop-shadow(0 0 15px rgba(135, 49, 163, 0.4));
+        }
+
+        .glow-icon-blue {
+            filter: drop-shadow(0 0 15px rgba(0, 96, 171, 0.4));
+        }
+    </style>
+</head>
+<body class="flex flex-col items-center justify-center min-h-screen">
+<div class="animated-bg"></div>
+<main class="w-full max-w-max-width px-desktop-margin flex flex-col items-center gap-16 relative z-10">
+<!-- Header Section -->
+<header class="flex flex-col items-center text-center space-y-6">
+<img alt="JobPath Logo" class="w-32 h-32 object-contain drop-shadow-2xl" src="https://lh3.googleusercontent.com/aida/AP1WRLtHSlvHQm1XNZ4vaeue1GiJtF1j680ovYDsV1bz1IH37RWIQlHCDhIMbTh8QwjysUr_9axMNLFk7d5MtN1sRrdkCEgDdsjpU6S18_eICdCZ5ObBXpk8IMqmy52sfrJsOQaMvz7hk48gtvML_dmfwlaY-1QmOzz74jRWaBViW4SbLXgO-jIKC3LPueU0Wmini7A--bmI3LnC19bd8jueIoFhpwFhp4dCzG3gBDdCSwoekhL8nTJD3FWqr2Qs"/>
+<h1 class="font-display-xl text-display-xl text-on-background max-w-2xl">
+                Welcome to the Talent Ecosystem. Select your role.
+            </h1>
+</header>
+<!-- Role Selection Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-desktop-gutter w-full max-w-5xl">
+<!-- Candidate Card -->
+<button class="glass-card flex flex-col items-center p-12 rounded-[2rem] text-center group">
+<div class="w-24 h-24 mb-8 flex items-center justify-center bg-primary/10 rounded-3xl glow-icon group-hover:scale-110 transition-transform duration-500">
+<span class="material-symbols-outlined text-[48px] text-primary" style="font-variation-settings: 'FILL' 1;">
+                        grid_view
+                    </span>
+</div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-4">I am a Candidate</h2>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+                    Find premium internships and jobs tailored to your verified skills.
+                </p>
+<div class="mt-8 px-6 py-3 bg-primary text-on-primary rounded-full font-label-caps opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    GET STARTED
+                </div>
+</button>
+<!-- Recruiter Card -->
+<button class="glass-card flex flex-col items-center p-12 rounded-[2rem] text-center group">
+<div class="w-24 h-24 mb-8 flex items-center justify-center bg-secondary/10 rounded-3xl glow-icon-blue group-hover:scale-110 transition-transform duration-500">
+<span class="material-symbols-outlined text-[48px] text-secondary" style="font-variation-settings: 'FILL' 1;">
+                        hub
+                    </span>
+</div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-4">I am a Recruiter</h2>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+                    Source skill-verified talent and manage your assessment pipeline.
+                </p>
+<div class="mt-8 px-6 py-3 bg-secondary text-on-primary rounded-full font-label-caps opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    ENTER CONSOLE
+                </div>
+</button>
+</div>
+<!-- Decorative Footer Elements -->
+<footer class="mt-8 flex items-center gap-8 text-on-surface-variant/60 font-label-caps">
+<span class="flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">lock</span>
+                SECURE ACCESS
+            </span>
+<span class="w-1 h-1 bg-on-surface-variant/30 rounded-full"></span>
+<span class="flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">verified_user</span>
+                SKILL VERIFIED
+            </span>
+</footer>
+</main>
+<!-- Micro-interaction Script -->
+<script>
+        // Subtle parallax effect on mouse move
+        document.addEventListener('mousemove', (e) => {
+            const moveX = (e.clientX - window.innerWidth / 2) * 0.005;
+            const moveY = (e.clientY - window.innerHeight / 2) * 0.005;
+            
+            document.querySelectorAll('.glass-card').forEach(card => {
+                card.style.transform = `translate(${moveX}px, ${moveY}px)`;
+            });
+        });
+
+        // Click effects
+        document.querySelectorAll('.glass-card').forEach(card => {
+            card.addEventListener('mousedown', () => {
+                card.style.transform = 'scale(1.03)';
+            });
+            card.addEventListener('mouseup', () => {
+                card.style.transform = 'scale(1.02)';
+            });
+        });
+    </script>
+</body></html>

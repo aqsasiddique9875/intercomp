@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
+<title>JobPath Ad Store</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "primary": "#8731a3",
+                    "outline-variant": "#d2c1d2",
+                    "error": "#FF453A",
+                    "error-container": "#ffdad6",
+                    "surface": "#f9f9ff",
+                    "on-primary-fixed-variant": "#72188f",
+                    "secondary-fixed-dim": "#a3c9ff",
+                    "tertiary-fixed-dim": "#47e266",
+                    "surface-container-highest": "#dbe3f6",
+                    "surface-container": "#e7eeff",
+                    "secondary-fixed": "#d3e3ff",
+                    "primary-fixed": "#fbd7ff",
+                    "secondary": "#0060ab",
+                    "outline": "#817381",
+                    "on-secondary-fixed": "#001c39",
+                    "on-error-container": "#93000a",
+                    "inverse-primary": "#f0b0ff",
+                    "surface-dim": "#d2daed",
+                    "on-error": "#ffffff",
+                    "inverse-surface": "#29313f",
+                    "surface-tint": "#8d37a9",
+                    "gold": "#FFD60A",
+                    "surface-variant": "#dbe3f6",
+                    "inverse-on-surface": "#ecf1ff",
+                    "tertiary-container": "#00842f",
+                    "orange": "#FF9F0A",
+                    "background": "#f9f9ff",
+                    "on-tertiary-fixed": "#002106",
+                    "on-background": "#141c29",
+                    "tertiary": "#006823",
+                    "glass-fill": "rgba(255, 255, 255, 0.35)",
+                    "on-primary": "#ffffff",
+                    "primary-fixed-dim": "#f0b0ff",
+                    "surface-bright": "#f9f9ff",
+                    "on-primary-fixed": "#330044",
+                    "on-secondary-fixed-variant": "#004883",
+                    "glass-thick": "rgba(255, 255, 255, 0.8)",
+                    "on-secondary": "#ffffff",
+                    "tertiary-fixed": "#6cff82",
+                    "on-tertiary-fixed-variant": "#00531a",
+                    "primary-container": "#a34cbe",
+                    "surface-container-high": "#e0e8fb",
+                    "secondary-container": "#54a3ff",
+                    "on-surface-variant": "#4f4350",
+                    "on-surface": "#141c29",
+                    "surface-container-low": "#f0f3ff",
+                    "surface-container-lowest": "#ffffff",
+                    "glass-border": "rgba(255, 255, 255, 0.6)",
+                    "card-gradient": "linear-gradient(135deg, #4D9EFA 0%, #BF7DF5 100%)",
+                    "on-tertiary": "#ffffff",
+                    "on-primary-container": "#fff5fb",
+                    "on-tertiary-container": "#e6ffe0",
+                    "on-secondary-container": "#003868"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "desktop-margin": "64px",
+                    "mobile-margin": "20px",
+                    "desktop-gutter": "24px",
+                    "base": "8px",
+                    "mobile-gutter": "16px",
+                    "safe-bottom": "34px",
+                    "safe-top": "44px",
+                    "max-width": "1280px"
+            },
+            "fontFamily": {
+                    "headline-lg-mobile": ["Inter"],
+                    "display-xl-mobile": ["Inter"],
+                    "body-md-mobile": ["Inter"],
+                    "label-caps-mobile": ["Inter"]
+            },
+            "fontSize": {
+                    "headline-lg-mobile": ["28px", {"lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "display-xl-mobile": ["34px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "body-md-mobile": ["15px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                    "label-caps-mobile": ["12px", {"lineHeight": "1.0", "letterSpacing": "0.05em", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background: linear-gradient(180deg, #DCE4F7 0%, #F9F9FF 100%);
+            min-height: 100vh;
+            font-family: 'Inter', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.35);
+            backdrop-filter: blur(28px);
+            -webkit-backdrop-filter: blur(28px);
+            border: 0.5px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 12px 40px 0 rgba(71, 26, 112, 0.15);
+        }
+
+        .liquid-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .liquid-blob {
+            position: absolute;
+            filter: blur(80px);
+            opacity: 0.4;
+            border-radius: 50%;
+            animation: move 20s infinite alternate cubic-bezier(0.45, 0, 0.55, 1);
+        }
+
+        @keyframes move {
+            0% { transform: translate(-10%, -10%) scale(1); }
+            100% { transform: translate(20%, 20%) scale(1.2); }
+        }
+
+        .ios-active-state:active {
+            transform: scale(0.96);
+            transition: transform 0.35s cubic-bezier(0.35, 0, 0.15, 1);
+        }
+
+        .custom-shadow-purple {
+            box-shadow: 0 8px 30px 0 rgba(71, 26, 112, 0.1);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="antialiased text-on-background">
+<!-- Atmospheric Liquid Background -->
+<div class="liquid-bg">
+<div class="liquid-blob bg-primary-fixed w-[400px] h-[400px] -top-20 -left-20"></div>
+<div class="liquid-blob bg-secondary-fixed w-[500px] h-[500px] top-1/2 -right-40"></div>
+</div>
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-glass-thick backdrop-blur-3xl border-b border-glass-border shadow-[0_12px_40px_0_rgba(71,26,112,0.15)] h-14 flex items-center justify-between px-mobile-margin">
+<button class="active:scale-95 transition-all duration-[350ms] ease-[cubic-bezier(0.35,0,0.15,1)] flex items-center justify-center">
+<span class="material-symbols-outlined text-primary" data-icon="menu">menu</span>
+</button>
+<h1 class="font-display-xl-mobile text-display-xl-mobile font-bold text-primary tracking-tight" style="font-size: 20px;">JobPath</h1>
+<div class="active:scale-95 transition-all duration-[350ms] ease-[cubic-bezier(0.35,0,0.15,1)]">
+<img alt="Profile" class="w-8 h-8 rounded-full border border-primary/20" data-alt="A high-quality professional portrait of a modern corporate recruiter in a clean, brightly lit office environment. The lighting is soft and natural, emphasizing a professional yet approachable demeanor. The image follows a high-fidelity aesthetic with shallow depth of field, reflecting the JobPath app's premium purple and lavender-blue color palette." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDfMM8NI_NjjLgL2GA9E-dMbB7m-C1S2FNC1Q9YNiwW3Nktg3fdrSQGD0Y_Fy-H9WSUGPVYo8tcmOHrhWHU3-EibDeeA0zYbODVIsvNPhPj09VvRjnYtkdfpEKdNeodKC8QcWE_FpcNSGvBE7Xw68M5U-zrvPXhn8J8EqGYYuhNQowjeFac9dzMSpqXEg0p0KzMcZpUjfKNSZya6ZF4GxcL4u4Tl4Ukah4KEbsO4ax5ozNFyeOe7nXB4Dol3ffWruDOuibZm068LGeX"/>
+</div>
+</header>
+<!-- Main Content -->
+<main class="pt-20 pb-32 px-mobile-margin">
+<!-- Section Header -->
+<section class="mb-8">
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-[#471A70] mb-2">Premium Promotions</h2>
+<p class="font-body-md-mobile text-body-md-mobile text-on-surface-variant">Scale your recruitment reach instantly.</p>
+</section>
+<!-- Catalog Bento Grid / Vertical Scroll -->
+<div class="flex flex-col gap-mobile-gutter">
+<!-- Starter Pack -->
+<div class="glass-card rounded-3xl p-6 flex flex-col gap-4 ios-active-state">
+<div class="flex justify-between items-start">
+<div>
+<h3 class="font-headline-lg-mobile text-xl text-[#471A70]">Starter Pack</h3>
+<p class="text-primary font-bold text-lg">Rs. 0.50<span class="text-sm font-normal text-outline">/click</span></p>
+</div>
+<span class="material-symbols-outlined text-primary/40 text-3xl" data-icon="bolt">bolt</span>
+</div>
+<div class="bg-white/40 rounded-2xl p-4 border border-white/50">
+<div class="flex items-center gap-2 mb-2">
+<span class="material-symbols-outlined text-sm text-primary" data-icon="visibility">visibility</span>
+<span class="text-sm font-semibold text-[#471A70]">Forecast Reach: 12k</span>
+</div>
+<ul class="space-y-2">
+<li class="flex items-center gap-2 text-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px] text-tertiary" data-icon="check_circle">check_circle</span>
+                            Dashboard Banner
+                        </li>
+</ul>
+</div>
+<button class="h-12 w-full bg-primary text-white rounded-full font-bold shadow-lg shadow-primary/20 active:scale-95 transition-transform duration-200">
+                    Select Plan
+                </button>
+</div>
+<!-- Growth Pack (Best Value) -->
+<div class="glass-card rounded-3xl p-6 flex flex-col gap-4 relative overflow-hidden ios-active-state border-primary/30 border-[1.5px]">
+<div class="absolute top-0 right-0 bg-primary text-white px-4 py-1 rounded-bl-2xl text-[10px] font-bold tracking-widest uppercase">
+                    Best Value
+                </div>
+<div class="flex justify-between items-start">
+<div>
+<h3 class="font-headline-lg-mobile text-xl text-[#471A70]">Growth Pack</h3>
+<p class="text-primary font-bold text-lg">Rs. 0.35<span class="text-sm font-normal text-outline">/click</span></p>
+</div>
+<span class="material-symbols-outlined text-primary text-3xl" data-icon="trending_up">trending_up</span>
+</div>
+<div class="bg-primary/5 rounded-2xl p-4 border border-primary/10">
+<div class="flex items-center gap-2 mb-2">
+<span class="material-symbols-outlined text-sm text-primary" data-icon="groups">groups</span>
+<span class="text-sm font-semibold text-[#471A70]">Forecast Reach: 105k</span>
+</div>
+<ul class="space-y-2">
+<li class="flex items-center gap-2 text-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px] text-tertiary" data-icon="check_circle">check_circle</span>
+                            Dashboard Banner
+                        </li>
+<li class="flex items-center gap-2 text-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px] text-tertiary" data-icon="check_circle">check_circle</span>
+                            Active Feed Recommendation
+                        </li>
+</ul>
+</div>
+<button class="h-12 w-full bg-primary text-white rounded-full font-bold shadow-lg shadow-primary/20 active:scale-95 transition-transform duration-200">
+                    Select Plan
+                </button>
+</div>
+<!-- Enterprise Boost -->
+<div class="glass-card rounded-3xl p-6 flex flex-col gap-4 ios-active-state">
+<div class="flex justify-between items-start">
+<div>
+<h3 class="font-headline-lg-mobile text-xl text-[#471A70]">Enterprise Boost</h3>
+<p class="text-primary font-bold text-lg">Rs. 0.25<span class="text-sm font-normal text-outline">/click</span></p>
+</div>
+<span class="material-symbols-outlined text-primary text-3xl" data-icon="rocket_launch">rocket_launch</span>
+</div>
+<div class="bg-white/40 rounded-2xl p-4 border border-white/50">
+<div class="flex items-center gap-2 mb-2">
+<span class="material-symbols-outlined text-sm text-primary" data-icon="auto_graph">auto_graph</span>
+<span class="text-sm font-semibold text-[#471A70]">Forecast Reach: 750k+</span>
+</div>
+<ul class="space-y-2">
+<li class="flex items-center gap-2 text-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px] text-tertiary" data-icon="check_circle">check_circle</span>
+                            Dashboard Banner
+                        </li>
+<li class="flex items-center gap-2 text-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px] text-tertiary" data-icon="check_circle">check_circle</span>
+                            Active Feed Recommendation
+                        </li>
+<li class="flex items-center gap-2 text-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px] text-tertiary" data-icon="check_circle">check_circle</span>
+                            Priority Talent Email
+                        </li>
+</ul>
+</div>
+<button class="h-12 w-full bg-primary text-white rounded-full font-bold shadow-lg shadow-primary/20 active:scale-95 transition-transform duration-200">
+                    Select Plan
+                </button>
+</div>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full z-50 pb-safe bg-glass-thick backdrop-blur-2xl border-t border-glass-border shadow-[0_-8px_30px_0_rgba(71,26,112,0.1)] h-20 flex justify-around items-center px-2">
+<button class="flex flex-col items-center justify-center text-outline transition-all duration-200 active:scale-90">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-label-caps-mobile text-label-caps-mobile mt-1">Dashboard</span>
+</button>
+<button class="flex flex-col items-center justify-center bg-primary-container/20 text-primary rounded-xl px-4 py-1 transition-all duration-200 active:scale-90">
+<span class="material-symbols-outlined" data-icon="storefront" style="font-variation-settings: 'FILL' 1;">storefront</span>
+<span class="font-label-caps-mobile text-label-caps-mobile mt-1">Ad Store</span>
+</button>
+<button class="flex flex-col items-center justify-center text-outline transition-all duration-200 active:scale-90">
+<span class="material-symbols-outlined" data-icon="insights">insights</span>
+<span class="font-label-caps-mobile text-label-caps-mobile mt-1">Analytics</span>
+</button>
+<button class="flex flex-col items-center justify-center text-outline transition-all duration-200 active:scale-90">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-label-caps-mobile text-label-caps-mobile mt-1">Settings</span>
+</button>
+</nav>
+<script>
+        // Haptic-like feedback on interactions
+        document.querySelectorAll('button').forEach(button => {
+            button.addEventListener('touchstart', () => {
+                if ('vibrate' in navigator) {
+                    navigator.vibrate(10);
+                }
+            });
+        });
+
+        // Atmospheric background scroll effect
+        window.addEventListener('scroll', () => {
+            const blobs = document.querySelectorAll('.liquid-blob');
+            const scrolled = window.pageYOffset;
+            blobs.forEach((blob, index) => {
+                const speed = (index + 1) * 0.1;
+                blob.style.transform = `translateY(${scrolled * speed}px)`;
+            });
+        });
+    </script>
+</body></html>

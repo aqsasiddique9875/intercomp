@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<title>Lumina ADM-01 | Liquid Glass Admin</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-tint": "#8d37a9",
+                    "surface-bright": "#f9f9ff",
+                    "on-surface-variant": "#4f4350",
+                    "on-primary-container": "#fff5fb",
+                    "secondary-fixed-dim": "#a3c9ff",
+                    "glass-fill": "rgba(255, 255, 255, 0.35)",
+                    "surface-container-highest": "#dbe3f6",
+                    "on-background": "#141c29",
+                    "on-secondary-fixed-variant": "#004883",
+                    "orange": "#FF9F0A",
+                    "error-container": "#ffdad6",
+                    "outline": "#817381",
+                    "tertiary-fixed-dim": "#47e266",
+                    "card-gradient": "linear-gradient(135deg, #4D9EFA 0%, #BF7DF5 100%)",
+                    "outline-variant": "#d2c1d2",
+                    "on-error-container": "#93000a",
+                    "surface-variant": "#dbe3f6",
+                    "surface-container-lowest": "#ffffff",
+                    "secondary": "#0060ab",
+                    "glass-thick": "rgba(255, 255, 255, 0.8)",
+                    "secondary-container": "#54a3ff",
+                    "on-secondary-fixed": "#001c39",
+                    "secondary-fixed": "#d3e3ff",
+                    "on-secondary": "#ffffff",
+                    "primary-container": "#a34cbe",
+                    "gold": "#FFD60A",
+                    "surface-container-high": "#e0e8fb",
+                    "on-tertiary-fixed": "#002106",
+                    "on-primary-fixed-variant": "#72188f",
+                    "primary-fixed": "#fbd7ff",
+                    "inverse-on-surface": "#ecf1ff",
+                    "glass-border": "rgba(255, 255, 255, 0.6)",
+                    "surface-container": "#e7eeff",
+                    "on-tertiary": "#ffffff",
+                    "background": "#f9f9ff",
+                    "tertiary": "#006823",
+                    "on-surface": "#141c29",
+                    "tertiary-fixed": "#6cff82",
+                    "inverse-primary": "#f0b0ff",
+                    "on-primary": "#ffffff",
+                    "surface-container-low": "#f0f3ff",
+                    "on-tertiary-container": "#e6ffe0",
+                    "surface": "#f9f9ff",
+                    "surface-dim": "#d2daed",
+                    "error": "#FF453A",
+                    "on-secondary-container": "#003868",
+                    "tertiary-container": "#00842f",
+                    "primary": "#8731a3",
+                    "inverse-surface": "#29313f",
+                    "on-error": "#ffffff",
+                    "primary-fixed-dim": "#f0b0ff",
+                    "on-tertiary-fixed-variant": "#00531a",
+                    "on-primary-fixed": "#330044"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "mobile-margin": "20px",
+                    "safe-bottom": "34px",
+                    "base": "8px",
+                    "desktop-gutter": "24px",
+                    "max-width": "1280px",
+                    "desktop-margin": "64px",
+                    "safe-top": "44px",
+                    "mobile-gutter": "16px"
+            },
+            "fontFamily": {
+                    "headline-lg-mobile": ["Inter"],
+                    "label-caps": ["Inter"],
+                    "body-md-mobile": ["Inter"],
+                    "label-caps-mobile": ["Inter"],
+                    "display-xl": ["Inter"],
+                    "body-md": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "display-xl-mobile": ["Inter"]
+            },
+            "fontSize": {
+                    "headline-lg-mobile": ["28px", {"lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "label-caps": ["13px", {"lineHeight": "1.0", "letterSpacing": "0.03em", "fontWeight": "600"}],
+                    "body-md-mobile": ["15px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                    "label-caps-mobile": ["12px", {"lineHeight": "1.0", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "display-xl": ["56px", {"lineHeight": "1.1", "letterSpacing": "-0.03em", "fontWeight": "700"}],
+                    "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                    "headline-lg": ["34px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                    "display-xl-mobile": ["34px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "800"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #DCE4F7;
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        .liquid-glass {
+            background: rgba(255, 255, 255, 0.35);
+            backdrop-filter: blur(28px);
+            -webkit-backdrop-filter: blur(28px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 12px 40px 0 rgba(71, 26, 112, 0.15);
+        }
+
+        .tap-target {
+            min-height: 44px;
+            min-width: 44px;
+        }
+
+        .status-chip {
+            padding: 4px 12px;
+            border-radius: 9999px;
+            font-weight: 600;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        .shimmer-sweep {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .shimmer-sweep::after {
+            content: '';
+            position: absolute;
+            top: 0; right: 0; bottom: 0; left: 0;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            animation: shimmer 2.5s infinite;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="min-h-screen pb-32">
+<!-- Ambient Liquid Background Decoration -->
+<div class="fixed inset-0 z-[-1] pointer-events-none">
+<div class="absolute top-[-10%] right-[-5%] w-[400px] h-[400px] bg-primary opacity-20 rounded-full blur-[120px]"></div>
+<div class="absolute bottom-[5%] left-[-10%] w-[350px] h-[350px] bg-secondary opacity-20 rounded-full blur-[100px]"></div>
+</div>
+<!-- Top App Bar -->
+<header class="fixed top-0 w-full z-50 bg-glass-fill backdrop-blur-3xl border-b border-glass-border">
+<div class="flex items-center justify-between px-mobile-margin h-16 w-full max-w-max-width mx-auto">
+<div class="flex items-center gap-3">
+<button class="tap-target flex items-center justify-center text-primary active:scale-90 transition-all">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<span class="font-headline-lg-mobile text-headline-lg-mobile font-bold text-surface-tint">Lumina</span>
+</div>
+<div class="flex items-center gap-1">
+<button class="tap-target flex items-center justify-center text-primary active:scale-90 transition-all">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+</div>
+</div>
+</header>
+<main class="pt-24 px-mobile-margin max-w-max-width mx-auto">
+<!-- Header Section -->
+<section class="mb-8">
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface mb-1">Admin Overview</h1>
+<div class="flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-[20px]">group</span>
+<p class="font-body-md-mobile text-body-md-mobile">12,482 Total Registered Students</p>
+</div>
+</section>
+<!-- Metrics Bento Grid (Mobile 4-column fluid mapped to 2x2 for visuals) -->
+<div class="grid grid-cols-2 gap-mobile-gutter mb-10">
+<!-- Metric 1 -->
+<div class="liquid-glass rounded-3xl p-5 flex flex-col justify-between h-40 hover:scale-95 transition-transform duration-300">
+<div class="flex justify-between items-start">
+<div class="w-10 h-10 rounded-2xl bg-primary-container flex items-center justify-center text-on-primary-container">
+<span class="material-symbols-outlined text-xl">school</span>
+</div>
+<span class="text-tertiary font-bold text-xs flex items-center gap-1">
+                        +8% <span class="material-symbols-outlined text-xs">trending_up</span>
+</span>
+</div>
+<div>
+<p class="font-label-caps-mobile text-label-caps-mobile text-on-surface-variant mb-1">Students</p>
+<p class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface">12.4k</p>
+</div>
+</div>
+<!-- Metric 2 -->
+<div class="liquid-glass rounded-3xl p-5 flex flex-col justify-between h-40 hover:scale-95 transition-transform duration-300">
+<div class="flex justify-between items-start">
+<div class="w-10 h-10 rounded-2xl bg-secondary-container flex items-center justify-center text-on-secondary-container">
+<span class="material-symbols-outlined text-xl">business</span>
+</div>
+</div>
+<div>
+<p class="font-label-caps-mobile text-label-caps-mobile text-on-surface-variant mb-1">Pending Co.</p>
+<p class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface">128</p>
+</div>
+</div>
+<!-- Metric 3 -->
+<div class="liquid-glass rounded-3xl p-5 flex flex-col justify-between h-40 hover:scale-95 transition-transform duration-300">
+<div class="flex justify-between items-start">
+<div class="w-10 h-10 rounded-2xl bg-surface-container-highest flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-xl">verified_user</span>
+</div>
+<div class="px-2 py-0.5 bg-primary/10 text-primary rounded-full text-[10px] font-bold">ACTIVE</div>
+</div>
+<div>
+<p class="font-label-caps-mobile text-label-caps-mobile text-on-surface-variant mb-1">Verification Queue</p>
+<p class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface">28</p>
+</div>
+</div>
+<!-- Metric 4 -->
+<div class="liquid-glass rounded-3xl p-5 flex flex-col justify-between h-40 hover:scale-95 transition-transform duration-300">
+<div class="flex justify-between items-start">
+<div class="w-10 h-10 rounded-2xl bg-error-container flex items-center justify-center text-on-error-container">
+<span class="material-symbols-outlined text-xl" style="font-variation-settings: 'FILL' 1;">flag</span>
+</div>
+<span class="text-error font-bold text-xs">Urgent</span>
+</div>
+<div>
+<p class="font-label-caps-mobile text-label-caps-mobile text-on-surface-variant mb-1">Active Flags</p>
+<p class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface">14</p>
+</div>
+</div>
+</div>
+<!-- Recent Verifications List -->
+<section class="mb-12">
+<div class="flex items-center justify-between mb-4">
+<h2 class="font-label-caps text-label-caps text-on-surface-variant">Recent Verifications</h2>
+<button class="tap-target text-primary font-bold text-xs uppercase tracking-widest">View All</button>
+</div>
+<div class="space-y-4">
+<!-- List Item 1 -->
+<div class="liquid-glass rounded-2xl p-4 flex items-center justify-between tap-target active:scale-[0.98] transition-all">
+<div class="flex items-center gap-4">
+<img alt="Student Avatar" class="w-12 h-12 rounded-full object-cover border-2 border-glass-border" data-alt="A professional high-quality headshot of a young adult student looking confident, set against a soft blurred background with cool blue and purple lighting that matches a premium tech dashboard aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD8V8iKi-o7hpz4htvH2YH3zhDM4Rx-HlKdR-EdurevL2xudwx-ox8jsYxckiCDsr3YnFINyPA6EoNdpYIWJRwacDX-RshDYJiBDkkzHQK_nFhaV1hsD61QZ5Ft4VThgUH9QRYpq-GedijEHM7XNVqboKii-UqWTxV0jhDa27PNNtPpqtUnxCQ1DYNGyxJNALEHdwjf3FE_lXeARX8tCkaq-KBD62FiwFY1ZapxlGOKDiYYLSAK-2YdofYEZjwhw3RMD5caLOj5kDdu"/>
+<div>
+<p class="font-body-md font-semibold text-on-surface">Jordan Sterling</p>
+<p class="text-xs text-on-surface-variant">ID: 48920-SM</p>
+</div>
+</div>
+<div class="status-chip bg-tertiary-container text-on-tertiary-container">Completed</div>
+</div>
+<!-- List Item 2 -->
+<div class="liquid-glass rounded-2xl p-4 flex items-center justify-between tap-target active:scale-[0.98] transition-all">
+<div class="flex items-center gap-4">
+<img alt="Student Avatar" class="w-12 h-12 rounded-full object-cover border-2 border-glass-border" data-alt="A vibrant professional portrait of a young woman with a smart, approachable expression, illuminated by soft atmospheric light. The style is modern and clean, fitting a luxury digital verification interface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCZ6NhRMEphd_xH2XVd4Uk-HTFBFDE-TyebBTdip0FwX7R_fQr1NMhDfwJY1G6z69otC363lpFEmeq_dG_a3XwEB94hXwsstZXRxwHK7KjL5IfcwJSlilNGETHpqX0yNHMFr45XZtSnGYBODFk3ZWAbeQP6n7gE1qSGxb5I567ifyhFHIlrf6CPN75x5YZ5bCL4emibZyaaVPPuMq_E3jeHLebLMiBwu1bgGFRQAlDxqWIHya2I0H500rm4s2Eusw-fG70RVWup7il0"/>
+<div>
+<p class="font-body-md font-semibold text-on-surface">Elena Rodriguez</p>
+<p class="text-xs text-on-surface-variant">ID: 11204-TR</p>
+</div>
+</div>
+<div class="status-chip bg-primary-container text-on-primary-container">Reviewing</div>
+</div>
+<!-- List Item 3 -->
+<div class="liquid-glass rounded-2xl p-4 flex items-center justify-between tap-target active:scale-[0.98] transition-all">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-surface-container flex items-center justify-center text-primary border-2 border-glass-border">
+<span class="material-symbols-outlined">person</span>
+</div>
+<div>
+<p class="font-body-md font-semibold text-on-surface">Marcus Chen</p>
+<p class="text-xs text-on-surface-variant">ID: 99382-LK</p>
+</div>
+</div>
+<div class="status-chip bg-orange/20 text-orange">Pending</div>
+</div>
+</div>
+</section>
+<!-- CTA Action Section -->
+<section class="mb-8">
+<button class="w-full h-16 rounded-full bg-primary text-white font-bold flex items-center justify-center gap-3 shadow-lg hover:opacity-90 active:scale-95 transition-all shimmer-sweep">
+<span class="material-symbols-outlined">add_moderator</span>
+                Process Next in Queue
+            </button>
+</section>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 w-full z-50 bg-glass-fill dark:bg-glass-thick backdrop-blur-3xl border-t border-glass-border rounded-t-xl shadow-[0_-8px_30px_0_rgba(71,26,112,0.1)]">
+<div class="flex justify-around items-center px-4 pb-safe-bottom h-20 w-full">
+<button class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-4 py-1 active:scale-95 duration-200">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+<span class="font-label-caps-mobile text-[10px] mt-0.5">Home</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-glass-border transition-colors tap-target">
+<span class="material-symbols-outlined">verified_user</span>
+<span class="font-label-caps-mobile text-[10px] mt-0.5">Verifications</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-glass-border transition-colors tap-target">
+<span class="material-symbols-outlined">analytics</span>
+<span class="font-label-caps-mobile text-[10px] mt-0.5">Reports</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-glass-border transition-colors tap-target">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-caps-mobile text-[10px] mt-0.5">Settings</span>
+</button>
+</div>
+</nav>
+<script>
+        // Micro-interaction for metric cards
+        document.querySelectorAll('.liquid-glass').forEach(card => {
+            card.addEventListener('touchstart', () => {
+                card.style.transform = 'scale(0.96)';
+            });
+            card.addEventListener('touchend', () => {
+                card.style.transform = 'scale(1)';
+            });
+        });
+
+        // Simple check to ensure safe areas are respected
+        console.log("Lumina Admin Dashboard Initialized");
+    </script>
+</body></html>

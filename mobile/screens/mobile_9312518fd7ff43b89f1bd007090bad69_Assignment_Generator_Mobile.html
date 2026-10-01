@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<title>New Assignment - TaskCraft</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary": "#ffffff",
+                        "surface-container": "#e7eeff",
+                        "tertiary-fixed": "#6cff82",
+                        "inverse-primary": "#f0b0ff",
+                        "background": "#f9f9ff",
+                        "tertiary": "#006823",
+                        "on-surface": "#141c29",
+                        "on-primary": "#ffffff",
+                        "on-tertiary-container": "#e6ffe0",
+                        "surface-container-low": "#f0f3ff",
+                        "surface-dim": "#d2daed",
+                        "surface": "#f9f9ff",
+                        "tertiary-container": "#00842f",
+                        "error": "#FF453A",
+                        "on-secondary-container": "#003868",
+                        "inverse-surface": "#29313f",
+                        "primary": "#8731a3",
+                        "on-primary-fixed": "#330044",
+                        "on-error": "#ffffff",
+                        "primary-fixed-dim": "#f0b0ff",
+                        "on-tertiary-fixed-variant": "#00531a",
+                        "surface-bright": "#f9f9ff",
+                        "on-surface-variant": "#4f4350",
+                        "on-primary-container": "#fff5fb",
+                        "surface-tint": "#8d37a9",
+                        "surface-container-highest": "#dbe3f6",
+                        "on-background": "#141c29",
+                        "on-secondary-fixed-variant": "#004883",
+                        "secondary-fixed-dim": "#a3c9ff",
+                        "glass-fill": "rgba(255, 255, 255, 0.35)",
+                        "outline": "#817381",
+                        "orange": "#FF9F0A",
+                        "error-container": "#ffdad6",
+                        "outline-variant": "#d2c1d2",
+                        "on-error-container": "#93000a",
+                        "surface-variant": "#dbe3f6",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary": "#0060ab",
+                        "tertiary-fixed-dim": "#47e266",
+                        "card-gradient": "linear-gradient(135deg, #4D9EFA 0%, #BF7DF5 100%)",
+                        "secondary-container": "#54a3ff",
+                        "on-secondary-fixed": "#001c39",
+                        "glass-thick": "rgba(255, 255, 255, 0.8)",
+                        "primary-container": "#a34cbe",
+                        "gold": "#FFD60A",
+                        "secondary-fixed": "#d3e3ff",
+                        "on-secondary": "#ffffff",
+                        "surface-container-high": "#e0e8fb",
+                        "on-tertiary-fixed": "#002106",
+                        "on-primary-fixed-variant": "#72188f",
+                        "primary-fixed": "#fbd7ff",
+                        "inverse-on-surface": "#ecf1ff",
+                        "glass-border": "rgba(255, 255, 255, 0.6)"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "mobile-margin": "20px",
+                        "safe-bottom": "34px",
+                        "base": "8px",
+                        "desktop-gutter": "24px",
+                        "safe-top": "44px",
+                        "mobile-gutter": "16px",
+                        "max-width": "1280px",
+                        "desktop-margin": "64px"
+                    },
+                    "fontFamily": {
+                        "label-caps": ["Inter"],
+                        "body-md-mobile": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "display-xl-mobile": ["Inter"],
+                        "label-caps-mobile": ["Inter"],
+                        "display-xl": ["Inter"],
+                        "body-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-caps": ["13px", {"lineHeight": "1.0", "letterSpacing": "0.03em", "fontWeight": "600"}],
+                        "body-md-mobile": ["15px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                        "headline-lg-mobile": ["28px", {"lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "headline-lg": ["34px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                        "display-xl-mobile": ["34px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "label-caps-mobile": ["12px", {"lineHeight": "1.0", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "display-xl": ["56px", {"lineHeight": "1.1", "letterSpacing": "-0.03em", "fontWeight": "700"}],
+                        "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            background: #DCE4F7;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.35);
+            backdrop-filter: blur(28px);
+            -webkit-backdrop-filter: blur(28px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 12px 40px 0 rgba(71, 26, 112, 0.15);
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        .active-pill {
+            background: rgba(135, 49, 163, 0.15);
+            color: #8731a3;
+        }
+
+        /* Custom thumb for slider */
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            height: 20px;
+            width: 20px;
+            border-radius: 50%;
+            background: #8731a3;
+            box-shadow: 0 0 10px rgba(135, 49, 163, 0.4);
+            cursor: pointer;
+            margin-top: -8px;
+        }
+
+        input[type="range"]::-webkit-slider-runnable-track {
+            width: 100%;
+            height: 4px;
+            background: rgba(135, 49, 163, 0.2);
+            border-radius: 2px;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="font-body-md-mobile text-on-surface">
+<!-- TopAppBar (Small Center Aligned) -->
+<header class="fixed top-0 w-full z-50 bg-glass-thick backdrop-blur-[28px] border-b border-glass-border shadow-[0_12px_40px_0_rgba(71,26,112,0.15)] flex justify-between items-center px-mobile-margin py-base md:px-desktop-margin h-16">
+<button class="w-10 h-10 flex items-center justify-center hover:scale-95 transition-transform duration-300">
+<span class="material-symbols-outlined text-on-surface-variant">close</span>
+</button>
+<h1 class="font-headline-lg-mobile text-[20px] font-bold text-primary tracking-tight">New Assignment</h1>
+<div class="w-10"></div> <!-- Spacer for centering -->
+</header>
+<!-- Main Content Canvas -->
+<main class="pt-24 pb-40 px-mobile-margin max-w-2xl mx-auto">
+<!-- 1. Basics Section -->
+<section class="space-y-mobile-gutter mb-8">
+<div class="flex items-center space-x-2 px-1">
+<span class="material-symbols-outlined text-primary text-body-md" style="font-variation-settings: 'FILL' 1;">description</span>
+<h2 class="font-label-caps-mobile text-on-surface-variant">BASICS</h2>
+</div>
+<div class="glass-card p-5 rounded-2xl space-y-5">
+<!-- Title Input -->
+<div class="space-y-2">
+<label class="text-[12px] font-bold text-on-surface-variant px-1">Assignment Title</label>
+<input class="w-full bg-glass-thick border-none rounded-xl focus:ring-2 focus:ring-primary h-12 px-4 font-body-md-mobile text-on-surface placeholder-on-surface-variant/50" placeholder="e.g., Intro to UI Design" type="text"/>
+</div>
+<!-- Topic Dropdown -->
+<div class="space-y-2">
+<label class="text-[12px] font-bold text-on-surface-variant px-1">Select Topic</label>
+<div class="relative">
+<select class="w-full bg-glass-thick border-none rounded-xl appearance-none focus:ring-2 focus:ring-primary h-12 px-4 font-body-md-mobile text-on-surface cursor-pointer">
+<option>Design</option>
+<option>Programming</option>
+<option>Research</option>
+</select>
+<span class="material-symbols-outlined absolute right-4 top-3 pointer-events-none text-on-surface-variant">expand_more</span>
+</div>
+</div>
+<!-- Difficulty Selector -->
+<div class="space-y-2">
+<label class="text-[12px] font-bold text-on-surface-variant px-1">Difficulty</label>
+<div class="grid grid-cols-3 gap-2 bg-surface-container-low/40 p-1 rounded-xl">
+<button class="py-2.5 rounded-lg font-bold text-[13px] transition-all hover:bg-white/40">Easy</button>
+<button class="py-2.5 rounded-lg font-bold text-[13px] bg-white shadow-sm border border-glass-border text-primary">Medium</button>
+<button class="py-2.5 rounded-lg font-bold text-[13px] transition-all hover:bg-white/40">Hard</button>
+</div>
+</div>
+</div>
+</section>
+<!-- 2. Parameters Section -->
+<section class="space-y-mobile-gutter mb-8">
+<div class="flex items-center space-x-2 px-1">
+<span class="material-symbols-outlined text-primary text-body-md" style="font-variation-settings: 'FILL' 1;">tune</span>
+<h2 class="font-label-caps-mobile text-on-surface-variant">PARAMETERS</h2>
+</div>
+<div class="grid grid-cols-2 gap-mobile-gutter">
+<div class="glass-card p-4 rounded-2xl space-y-2">
+<label class="text-[11px] font-bold text-on-surface-variant block">Deadline</label>
+<div class="flex items-center justify-between">
+<span class="font-bold text-[15px]">Oct 28, 2024</span>
+<span class="material-symbols-outlined text-primary text-[20px]">calendar_today</span>
+</div>
+</div>
+<div class="glass-card p-4 rounded-2xl space-y-2">
+<label class="text-[11px] font-bold text-on-surface-variant block">Total Points</label>
+<div class="flex items-center justify-between">
+<input class="bg-transparent border-none p-0 focus:ring-0 font-bold text-[15px] w-12" type="number" value="100"/>
+<span class="material-symbols-outlined text-primary text-[20px]">star</span>
+</div>
+</div>
+</div>
+</section>
+<!-- 3. Attachments Section -->
+<section class="space-y-mobile-gutter mb-8">
+<div class="flex items-center space-x-2 px-1">
+<span class="material-symbols-outlined text-primary text-body-md" style="font-variation-settings: 'FILL' 1;">attach_file</span>
+<h2 class="font-label-caps-mobile text-on-surface-variant">ATTACHMENTS</h2>
+</div>
+<div class="glass-card rounded-2xl border-dashed border-2 border-primary/20 p-8 flex flex-col items-center justify-center text-center space-y-4 hover:bg-primary/5 transition-colors cursor-pointer group">
+<div class="w-16 h-16 bg-primary-container/20 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+<span class="material-symbols-outlined text-primary text-3xl">upload_file</span>
+</div>
+<div>
+<p class="font-bold text-on-surface">Tap to upload brief or assets</p>
+<p class="text-[13px] text-on-surface-variant">Max 25MB per file</p>
+</div>
+<div class="flex space-x-4 pt-2">
+<div class="flex flex-col items-center opacity-60">
+<span class="material-symbols-outlined text-[20px]">picture_as_pdf</span>
+<span class="text-[9px] font-bold mt-1">PDF</span>
+</div>
+<div class="flex flex-col items-center opacity-60">
+<span class="material-symbols-outlined text-[20px]">folder_zip</span>
+<span class="text-[9px] font-bold mt-1">ZIP</span>
+</div>
+<div class="flex flex-col items-center opacity-60">
+<span class="material-symbols-outlined text-[20px]">description</span>
+<span class="text-[9px] font-bold mt-1">DOCX</span>
+</div>
+</div>
+</div>
+</section>
+<!-- 4. Rubric Builder Section -->
+<section class="space-y-mobile-gutter mb-12">
+<div class="flex items-center space-x-2 px-1">
+<span class="material-symbols-outlined text-primary text-body-md" style="font-variation-settings: 'FILL' 1;">rule</span>
+<h2 class="font-label-caps-mobile text-on-surface-variant">RUBRIC BUILDER</h2>
+</div>
+<div class="space-y-3">
+<!-- Criteria Card 1 -->
+<div class="glass-card p-4 rounded-2xl flex flex-col space-y-3">
+<div class="flex justify-between items-center">
+<span class="font-bold text-[15px]">Technical Accuracy</span>
+<span class="text-primary font-bold">40%</span>
+</div>
+<input class="w-full accent-primary h-1" type="range" value="40"/>
+</div>
+<!-- Criteria Card 2 -->
+<div class="glass-card p-4 rounded-2xl flex flex-col space-y-3">
+<div class="flex justify-between items-center">
+<span class="font-bold text-[15px]">Visual Fidelity</span>
+<span class="text-primary font-bold">40%</span>
+</div>
+<input class="w-full accent-primary h-1" type="range" value="40"/>
+</div>
+<!-- Criteria Card 3 -->
+<div class="glass-card p-4 rounded-2xl flex flex-col space-y-3">
+<div class="flex justify-between items-center">
+<span class="font-bold text-[15px]">Documentation</span>
+<span class="text-primary font-bold">20%</span>
+</div>
+<input class="w-full accent-primary h-1" type="range" value="20"/>
+</div>
+<button class="w-full py-3 border-2 border-dashed border-primary/20 rounded-2xl text-[14px] font-bold text-primary hover:bg-primary/5 transition-colors">
+                    + Add New Criteria
+                </button>
+</div>
+</section>
+</main>
+<!-- Footer: FAB + BottomNavBar -->
+<div class="fixed bottom-0 w-full z-50">
+<!-- Floating Primary Button -->
+<div class="flex justify-center mb-6">
+<button class="bg-primary text-on-primary h-14 px-8 rounded-full shadow-[0_12px_40px_0_rgba(71,26,112,0.35)] flex items-center space-x-2 hover:scale-105 active:scale-95 transition-all duration-300">
+<span class="font-bold text-[16px]">Publish Assignment</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">rocket_launch</span>
+</button>
+</div>
+<!-- BottomNavBar -->
+<nav class="bg-glass-thick backdrop-blur-[28px] border-t border-glass-border shadow-[0_-12px_40px_0_rgba(71,26,112,0.15)] flex justify-around items-center h-20 pb-safe px-4 rounded-t-xl">
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:opacity-80 transition-opacity" href="#">
+<span class="material-symbols-outlined text-[24px]">home</span>
+<span class="font-label-caps-mobile text-label-caps-mobile mt-1">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-primary bg-primary-container/20 rounded-full px-4 py-1" href="#">
+<span class="material-symbols-outlined text-[24px]" style="font-variation-settings: 'FILL' 1;">add_circle</span>
+<span class="font-label-caps-mobile text-label-caps-mobile mt-1">Create</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:opacity-80 transition-opacity" href="#">
+<span class="material-symbols-outlined text-[24px]">folder_open</span>
+<span class="font-label-caps-mobile text-label-caps-mobile mt-1">Library</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:opacity-80 transition-opacity" href="#">
+<span class="material-symbols-outlined text-[24px]">person</span>
+<span class="font-label-caps-mobile text-label-caps-mobile mt-1">Profile</span>
+</a>
+</nav>
+</div>
+<!-- Micro-interaction Script -->
+<script>
+        // Simple haptic-like scale effect on all buttons
+        document.querySelectorAll('button, a').forEach(el => {
+            el.addEventListener('mousedown', () => {
+                el.style.transform = 'scale(0.96)';
+            });
+            el.addEventListener('mouseup', () => {
+                el.style.transform = '';
+            });
+            el.addEventListener('mouseleave', () => {
+                el.style.transform = '';
+            });
+        });
+
+        // Sync slider values to text (for demo purposes)
+        document.querySelectorAll('input[type="range"]').forEach(slider => {
+            slider.addEventListener('input', (e) => {
+                const val = e.target.value;
+                const display = e.target.previousElementSibling.querySelector('.text-primary');
+                if (display) display.textContent = val + '%';
+            });
+        });
+    </script>
+</body></html>

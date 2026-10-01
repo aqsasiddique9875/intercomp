@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Intercomp Portal - Liquid Glass Elite</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&amp;display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet" />
+  <script id="tailwind-config">
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#8731a3",
+            "glass-border": "rgba(255, 255, 255, 0.6)",
+            "glass-fill": "rgba(255, 255, 255, 0.35)"
+          }
+        }
+      }
+    };
+  </script>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: radial-gradient(circle at 0% 0%, rgba(245, 235, 255, 0.9) 0%, transparent 50%),
+                  radial-gradient(circle at 100% 0%, rgba(225, 235, 255, 0.9) 0%, transparent 50%),
+                  radial-gradient(circle at 100% 100%, rgba(240, 225, 255, 0.9) 0%, transparent 50%),
+                  radial-gradient(circle at 0% 100%, rgba(220, 240, 255, 0.9) 0%, transparent 50%),
+                  #dae1f5;
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+      font-family: 'Inter', sans-serif;
+    }
+    html::-webkit-scrollbar, body::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar::-webkit-scrollbar {
+      display: none !important;
+      width: 0 !important;
+      height: 0 !important;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none !important;
+      scrollbar-width: none !important;
+    }
+    
+    .glass-card {
+      background: rgba(255, 255, 255, 0.35);
+      backdrop-filter: blur(28px);
+      -webkit-backdrop-filter: blur(28px);
+      border: 1px solid rgba(255, 255, 255, 0.6);
+      box-shadow: 0 12px 40px 0 rgba(71, 26, 112, 0.15);
+    }
+    input:focus, textarea:focus, select:focus {
+      outline: none !important;
+      box-shadow: none !important;
+      border-color: transparent !important;
+      --tw-ring-color: transparent !important;
+    }
+    
+    #sharedSidebar, #sharedSidebar *, aside, aside * {
+      user-select: none !important;
+      -webkit-user-select: none !important;
+      -moz-user-select: none !important;
+      -ms-user-select: none !important;
+    }
+    
+    .material-symbols-outlined {
+      visibility: hidden;
+    }
+    
+    .fonts-loaded .material-symbols-outlined {
+      visibility: visible !important;
+    }
+    .active-nav {
+      background: rgba(163, 76, 190, 0.2);
+      box-shadow: inset 0 0 0 1px rgba(163, 76, 190, 0.3);
+      color: #8731a3 !important;
+      font-weight: bold;
+    }
+    
+    .slide-in-right {
+      animation: slideInFromRight 0.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+    }
+    .slide-in-left {
+      animation: slideInFromLeft 0.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+    }
+    @keyframes slideInFromRight {
+      from { transform: translateX(100%); opacity: 0.8; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+    @keyframes slideInFromLeft {
+      from { transform: translateX(-100%); opacity: 0.8; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+    
+    .loading-overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: rgba(220, 228, 247, 0.45);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      z-index: 9999;
+      opacity: 1;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+    }
+    .spinner {
+      width: 50px;
+      height: 50px;
+      border: 5px solid rgba(135, 49, 163, 0.1);
+      border-left-color: #8731a3;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body class="min-h-screen relative">
+  <!-- Loading overlay -->
+  <div class="loading-overlay" id="loadingOverlay">
+    <div class="spinner"></div>
+  </div>
+
+  <!-- Shared TopNavBar (Student Portal only, hidden by default) -->
+  <header id="sharedHeader" class="fixed top-0 left-0 lg:left-64 w-full lg:w-[calc(100vw-16rem)] z-50 flex justify-between items-center px-8 h-14 bg-white/10 backdrop-blur-[28px] border-b border-glass-border shadow-[0_12px_40px_0_rgba(71,26,112,0.08)] hidden">
+    <div class="flex items-center gap-4 lg:hidden">
+      <img alt="Intercomp Logo" class="h-8 w-auto" src="https://lh3.googleusercontent.com/aida/AP1WRLtHSlvHQm1XNZ4vaeue1GiJtF1j680ovYDsV1bz1IH37RWIQlHCDhIMbTh8QwjysUr_9axMNLFk7d5MtN1sRrdkCEgDdsjpU6S18_eICdCZ5ObBXpk8IMqmy52sfrJsOQaMvz7hk48gtvML_dmfwlaY-1QmOzz74jRWaBViW4SbLXgO-jIKC3LPueU0Wmini7A--bmI3LnC19bd8jueIoFhpwFhp4dCzG3gBDdCSwoekhL8nTJD3FWqr2Qs" />
+      <span class="font-extrabold text-lg text-primary">Intercomp</span>
+      <span class="text-xs font-semibold text-purple-950/70">Student</span>
+    </div>
+    <div class="flex items-center gap-6 ml-auto relative">
+      <div id="sharedSearchContainer" class="hidden md:flex items-center bg-white/20 px-4 py-1.5 rounded-full border border-glass-border transition-all duration-300 focus-within:bg-white/40 focus-within:border-primary/50 shadow-sm">
+        <span class="material-symbols-outlined text-purple-950 mr-2 text-sm select-none">search</span>
+        <input id="sharedSearchInput" class="bg-transparent border-none focus:ring-0 text-purple-950 placeholder-purple-950/60 text-xs w-36 md:w-48 lg:w-64 focus:w-44 md:focus:w-60 lg:focus:w-80 py-0 outline-none transition-all duration-300" placeholder="Search courses..." type="text" />
+      </div>
+      <div class="flex gap-3 relative">
+        <button id="sharedNotificationBtn" class="p-2 rounded-full hover:bg-white/25 transition-all duration-300 relative text-purple-950">
+          <span class="material-symbols-outlined text-xl">notifications</span>
+          <span id="sharedNotificationBadge" class="absolute top-1.5 right-1.5 w-2 h-2 bg-red-500 rounded-full border border-white"></span>
+        </button>
+        <!-- Notifications Dropdown -->
+        <div id="sharedNotificationDropdown" class="absolute right-0 top-12 w-80 rounded-2xl p-4 hidden z-50 shadow-2xl text-left border-2 border-primary/20" style="background-color: #f8f9fc !important; opacity: 1 !important; backdrop-filter: none !important;">
+          <div class="flex justify-between items-center mb-3 pb-2 border-b border-purple-950/10">
+            <h4 class="font-bold text-purple-950 text-sm">New Updates</h4>
+            <button id="sharedClearNotificationsBtn" class="text-xs text-primary hover:underline font-bold">Mark all read</button>
+          </div>
+          <div class="space-y-3 max-h-60 overflow-y-auto no-scrollbar">
+            <div class="p-2.5 rounded-lg border border-purple-950/10 shadow-sm flex gap-2.5 items-start" style="background-color: #ffffff !important; opacity: 1 !important;">
+              <span class="material-symbols-outlined text-primary text-lg mt-0.5" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+              <div>
+                <p class="text-xs font-bold text-purple-950">New AI Recommendation</p>
+                <p class="text-[10px] text-purple-950/70">"DevOps & CI/CD Pipelines" matches 91% of your profile skills.</p>
+              </div>
+            </div>
+            <div class="p-2.5 rounded-lg border border-purple-950/10 shadow-sm flex gap-2.5 items-start" style="background-color: #ffffff !important; opacity: 1 !important;">
+              <span class="material-symbols-outlined text-orange-500 text-lg mt-0.5" style="font-variation-settings: 'FILL' 1;">local_fire_department</span>
+              <div>
+                <p class="text-xs font-bold text-purple-950">Streak Milestone</p>
+                <p id="sharedNotificationStreakText" class="text-[10px] text-purple-950/70">You are on a 1-day streak! Only 4 days left until your next reward.</p>
+              </div>
+            </div>
+            <div class="p-2.5 rounded-lg border border-purple-950/10 shadow-sm flex gap-2.5 items-start" style="background-color: #ffffff !important; opacity: 1 !important;">
+              <span class="material-symbols-outlined text-green-600 text-lg mt-0.5" style="font-variation-settings: 'FILL' 1;">verified</span>
+              <div>
+                <p class="text-xs font-bold text-purple-950">Trust Score Active</p>
+                <p class="text-[10px] text-purple-950/70">Identity verification complete. Current trust score is 85/100.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <button class="p-2 rounded-full hover:bg-white/25 transition-all duration-300 text-purple-950">
+          <span class="material-symbols-outlined text-xl">settings</span>
+        </button>
+        <div id="sharedProfileBtn" class="h-10 w-10 rounded-full overflow-hidden border-2 border-primary shadow-sm cursor-pointer hover:scale-105 transition-transform">
+          <img alt="User profile" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA25J-RpNqe_ribsVF3fd4mnzE6ifwHeZuVNu5AMQU2EnYpClByPq7nwtb_OW8YWdE9zHhVr_myUbTkksryul6U1vE6tYcUe2Is_Ykf44A04yPQngjPdz5xvO59lZYpyYogiOT7fWRVG0OG2uYrLcYBA_hW8xxo8YeR57ryeTXbIvT3Ziwr5FLGpOpoVx-euTPcJedNNZFG0cab6QctiazShZ8qfEjAKNGvyzlC9_fl1G_pUaR0pvuTjw1ClquEYOqjrb_2RPHXuypu" />
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Shared SideNavBar (Student Portal only, hidden by default) -->
+  <nav id="sharedSidebar" class="fixed left-0 top-0 h-full pt-8 pb-10 flex flex-col z-40 w-64 bg-glass-fill backdrop-blur-[28px] border-r border-glass-border shadow-[0_12px_40px_0_rgba(71,26,112,0.15)] hidden">
+    <div class="px-6 mb-8">
+      <h2 class="font-black text-purple-950 text-2xl tracking-tight flex items-center gap-2">
+        <span class="text-primary">Intercomp</span>
+      </h2>
+      <p class="text-[11px] font-bold text-purple-950/60 uppercase tracking-widest mt-0.5">Student Portal</p>
+    </div>
+    <div class="flex flex-col gap-1 px-4 overflow-y-auto no-scrollbar flex-grow">
+      <a data-view="student-dash" class="flex items-center gap-3 text-purple-950/70 px-4 py-3 hover:bg-[#a34cbe]/10 hover:text-primary transition-all rounded-xl cursor-pointer">
+        <span class="material-symbols-outlined text-xl">dashboard</span>
+        <span class="text-xs font-semibold">Dashboard</span>
+      </a>
+      <a data-view="courses" class="flex items-center gap-3 text-purple-950/70 px-4 py-3 hover:bg-[#a34cbe]/10 hover:text-primary transition-all rounded-xl cursor-pointer">
+        <span class="material-symbols-outlined text-xl">school</span>
+        <span class="text-xs font-semibold">Courses</span>
+      </a>
+      <a data-view="assign" class="flex items-center gap-3 text-purple-950/70 px-4 py-3 hover:bg-[#a34cbe]/10 hover:text-primary transition-all rounded-xl cursor-pointer">
+        <span class="material-symbols-outlined text-xl">assignment</span>
+        <span class="text-xs font-semibold">Assignments</span>
+      </a>
+      <a data-view="tests" class="flex items-center gap-3 text-purple-950/70 px-4 py-3 hover:bg-[#a34cbe]/10 hover:text-primary transition-all rounded-xl cursor-pointer">
+        <span class="material-symbols-outlined text-xl">quiz</span>
+        <span class="text-xs font-semibold">Quiz</span>
+      </a>
+      <a data-view="mock-interviews" class="flex items-center gap-3 text-purple-950/70 px-4 py-3 hover:bg-[#a34cbe]/10 hover:text-primary transition-all rounded-xl cursor-pointer">
+        <span class="material-symbols-outlined text-xl">record_voice_over</span>
+        <span class="text-xs font-semibold">Mock Interviews</span>
+      </a>
+      <a data-view="leaderboard" class="flex items-center gap-3 text-purple-950/70 px-4 py-3 hover:bg-[#a34cbe]/10 hover:text-primary transition-all rounded-xl cursor-pointer">
+        <span class="material-symbols-outlined text-xl">grade</span>
+        <span class="text-xs font-semibold">Grades</span>
+      </a>
+      <a data-view="schedule" class="flex items-center gap-3 text-purple-950/70 px-4 py-3 hover:bg-[#a34cbe]/10 hover:text-primary transition-all rounded-xl cursor-pointer">
+        <span class="material-symbols-outlined text-xl">calendar_today</span>
+        <span class="text-xs font-semibold">Schedule</span>
+      </a>
+      <a data-view="opportunities" class="flex items-center gap-3 text-purple-950/70 px-4 py-3 hover:bg-[#a34cbe]/10 hover:text-primary transition-all rounded-xl cursor-pointer">
+        <span class="material-symbols-outlined text-xl">work</span>
+        <span class="text-xs font-semibold">Opportunities</span>
+      </a>
+      <a data-view="student-analytics" class="flex items-center gap-3 text-purple-950/70 px-4 py-3 hover:bg-[#a34cbe]/10 hover:text-primary transition-all rounded-xl cursor-pointer">
+        <span class="material-symbols-outlined text-xl">insights</span>
+        <span class="text-xs font-semibold">analytics</span>
+      </a>
+      <a data-view="library" class="flex items-center gap-3 text-purple-950/70 px-4 py-3 hover:bg-[#a34cbe]/10 hover:text-primary transition-all rounded-xl cursor-pointer">
+        <span class="material-symbols-outlined text-xl">library_books</span>
+        <span class="text-xs font-semibold">Library</span>
+      </a>
+      <a data-view="messages" class="flex items-center gap-3 text-purple-950/70 px-4 py-3 hover:bg-[#a34cbe]/10 hover:text-primary transition-all rounded-xl cursor-pointer">
+        <span class="material-symbols-outlined text-xl">mail</span>
+        <span class="text-xs font-semibold">Messages</span>
+      </a>
+      <a data-view="mentors" class="flex items-center gap-3 text-purple-950/70 px-4 py-3 hover:bg-[#a34cbe]/10 hover:text-primary transition-all rounded-xl cursor-pointer">
+        <span class="material-symbols-outlined text-xl">group</span>
+        <span class="text-xs font-semibold">Mentors</span>
+      </a>
+ 
+      <!-- Ambassador Section Divider -->
+      <div class="flex items-center gap-2 px-2 pt-3 pb-1">
+        <div class="flex-1 h-px bg-purple-950/10"></div>
+        <span class="text-[9px] font-bold uppercase tracking-widest text-yellow-600/80 flex items-center gap-1">
+          <span class="material-symbols-outlined text-[13px]" style="font-variation-settings:'FILL' 1;color:#ca8a04">star</span>
+          Ambassador
+        </span>
+        <div class="flex-1 h-px bg-purple-950/10"></div>
+      </div>
+      <a data-view="amb-hub" class="flex items-center gap-3 text-purple-950/70 px-4 py-3 hover:bg-[#a34cbe]/10 hover:text-primary transition-all rounded-xl cursor-pointer">
+        <span class="material-symbols-outlined text-xl">workspace_premium</span>
+        <span class="text-xs font-semibold">Ambassador Hub</span>
+      </a>
+      <a data-view="amb-referral" class="flex items-center gap-3 text-purple-950/70 px-4 py-3 hover:bg-[#a34cbe]/10 hover:text-primary transition-all rounded-xl cursor-pointer">
+        <span class="material-symbols-outlined text-xl">share</span>
+        <span class="text-xs font-semibold">Referral Center</span>
+      </a>
+      <a data-view="amb-missions" class="flex items-center gap-3 text-purple-950/70 px-4 py-3 hover:bg-[#a34cbe]/10 hover:text-primary transition-all rounded-xl cursor-pointer">
+        <span class="material-symbols-outlined text-xl">task_alt</span>
+        <span class="text-xs font-semibold">Missions & Tasks</span>
+      </a>
+      <a data-view="amb-leaderboard" class="flex items-center gap-3 text-purple-950/70 px-4 py-3 hover:bg-[#a34cbe]/10 hover:text-primary transition-all rounded-xl cursor-pointer">
+        <span class="material-symbols-outlined text-xl">emoji_events</span>
+        <span class="text-xs font-semibold">Leaderboard & Rewards</span>
+      </a>
+    </div>
+    <div class="px-6 mt-auto">
+      <button class="w-full bg-primary text-white py-3 rounded-full font-bold shadow-xl hover:scale-[1.02] active:scale-95 transition-all text-xs">
+        Upgrade Plan
+      </button>
+    </div>
+  </nav>
+
+  <!-- Content Frame container (adjusts dynamically based on view type) -->
+  <div id="frameContainer" class="fixed top-0 left-0 right-0 bottom-0 overflow-hidden">
+    <iframe id="portalFrame" class="w-full h-full border-none block" src="about:blank"></iframe>
+  </div>
+
+  <!-- Floating AI Agent Button -->
+  <button id="floatingAIAgentBtn" class="fixed bottom-6 right-6 w-14 h-14 rounded-full bg-primary shadow-2xl hover:scale-110 active:scale-95 transition-all duration-300 z-[9990] flex items-center justify-center border-2 border-white/85 cursor-pointer hidden">
+    <img src="assets/ai_agent_avatar.png" class="w-full h-full rounded-full object-cover" alt="AI Agent"/>
+    <span class="absolute -top-1 -right-1 w-3.5 h-3.5 bg-green-500 border-2 border-white rounded-full"></span>
+  </button>
+
+  <!-- Floating AI Chat Window -->
+  <div id="floatingAIChatWindow" class="fixed bottom-24 right-6 w-80 h-[420px] glass-card rounded-3xl flex flex-col z-[9990] hidden border border-white/60 shadow-2xl overflow-hidden">
+    <!-- Header -->
+    <div class="p-4 bg-white/20 border-b border-glass-border flex justify-between items-center backdrop-blur-md">
+      <div class="flex items-center gap-2">
+        <div class="relative">
+          <img src="assets/ai_agent_avatar.png" class="w-8 h-8 rounded-full object-cover border border-white" alt=""/>
+          <span class="absolute bottom-0 right-0 w-2.5 h-2.5 bg-green-500 border border-white rounded-full"></span>
+        </div>
+        <div>
+          <h3 class="text-xs font-bold text-purple-950">Intercomp AI Agent</h3>
+          <p class="text-[9px] text-primary font-semibold">Active Screen Assistant</p>
+        </div>
+      </div>
+      <button id="closeAIChatBtn" class="text-purple-950/60 hover:text-purple-950">
+        <span class="material-symbols-outlined text-sm">close</span>
+      </button>
+    </div>
+    
+    <!-- Messages Area -->
+    <div id="aiChatMessages" class="flex-grow p-4 space-y-3 overflow-y-auto no-scrollbar bg-slate-50/10">
+      <div class="flex gap-2 w-10/12">
+        <img src="assets/ai_agent_avatar.png" class="w-6 h-6 rounded-full object-cover border border-white flex-shrink-0" alt=""/>
+        <div class="bg-white/70 p-2.5 rounded-2xl rounded-tl-none text-[11px] text-purple-950 leading-relaxed shadow-sm border border-glass-border">
+          Hello! I am your Intercomp AI Assistant. I can guide you through the active screen you are currently viewing. Ask me anything about this page!
+        </div>
+      </div>
+    </div>
+
+    <!-- Typing Indicator -->
+    <div id="aiTypingIndicator" class="hidden px-4 py-1.5 flex items-center gap-1.5 text-purple-950/60 text-[10px] italic bg-white/5 border-t border-glass-border/20">
+      AI Agent is thinking
+      <div class="flex gap-0.5"><span class="w-1 h-1 bg-purple-950 rounded-full animate-bounce"></span><span class="w-1 h-1 bg-purple-950 rounded-full animate-bounce [animation-delay:0.2s]"></span><span class="w-1 h-1 bg-purple-950 rounded-full animate-bounce [animation-delay:0.4s]"></span></div>
+    </div>
+
+    <!-- Input -->
+    <div class="p-3 border-t border-glass-border bg-white/20 flex gap-2 items-center">
+      <input id="aiChatInput" type="text" placeholder="Ask about this screen..." class="flex-grow px-3 py-2 rounded-xl bg-white/60 border border-glass-border focus:border-primary focus:ring-1 focus:ring-primary text-[11px] text-purple-950 placeholder-purple-950/50 focus:outline-none" />
+      <button id="sendAIChatBtn" class="p-2 bg-primary hover:bg-primary-container text-white rounded-xl shadow-md transition-all active:scale-95 flex items-center justify-center">
+        <span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">send</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container (shifted up slightly to prevent overlap) -->
+  <div id="toastContainer" class="fixed bottom-24 right-6 z-[9999] flex flex-col gap-3 pointer-events-none"></div>
+
+  <script src="app.js?v=1.0.3"></script>
+</body>
+</html>
+

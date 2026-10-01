@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/>
+  <title>SuccessAdmin | Student Directory</title>
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+  <!-- Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            primary: "#8731a3",
+            secondary: "#4D9EFA",
+            background: "#fff7fb",
+            outline: "#817381",
+            "glass-fill": "rgba(255, 255, 255, 0.45)",
+            "glass-border": "rgba(255, 255, 255, 0.6)"
+          },
+          borderRadius: {
+            xxl: "24px"
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      background-color: #DCE4F7;
+      -webkit-tap-highlight-color: transparent;
+      font-family: 'Inter', sans-serif;
+      color: #471A70;
+    }
+    .glass-card {
+      background: rgba(255, 255, 255, 0.4);
+      backdrop-filter: blur(28px);
+      -webkit-backdrop-filter: blur(28px);
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      box-shadow: 0 8px 32px 0 rgba(163, 76, 190, 0.08);
+    }
+    .animated-bg-sphere {
+      position: fixed;
+      width: 350px;
+      height: 350px;
+      border-radius: 50%;
+      filter: blur(80px);
+      z-index: -1;
+      opacity: 0.5;
+      animation: float 20s infinite ease-in-out;
+    }
+    @keyframes float {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(50px, -50px) scale(1.1); }
+    }
+    /* Hide scrollbar */
+    .hide-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .hide-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+</head>
+<body class="antialiased overflow-x-hidden pb-32">
+  <!-- Animated Background Spheres -->
+  <div class="animated-bg-sphere bg-purple-300" style="top: -50px; left: -50px; animation-delay: 0s;"></div>
+  <div class="animated-bg-sphere bg-blue-200" style="bottom: -100px; right: -50px; animation-delay: -5s;"></div>
+
+  <!-- Top AppBar -->
+  <header class="fixed top-0 left-0 right-0 max-w-md mx-auto w-full z-50 bg-white/45 backdrop-blur-[28px] border-b border-white/50 shadow-[0_4px_20px_0_rgba(163,76,190,0.06)] flex justify-between items-center px-5 h-[64px]">
+    <div class="flex items-center gap-3">
+      <div onclick="window.parent.postMessage({ type: 'NAVIGATE', view: 'admin-revenue' }, '*')" class="w-9 h-9 rounded-full border border-white/80 overflow-hidden shadow-sm cursor-pointer active:scale-95 transition-transform">
+        <img alt="Admin Avatar" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAGOMLPlm6clUh9ZYYuUPueMCJObuk5uk36yXMyn8JKvA30bUU0uvzJcWbTuaApeW75-XrgAr1xG6g3MrXV3wR8d8lu6WrlkFSXvV_PkhSuTd96S6sBjjZqouQzfPn-MyTe53iOFML6QQkYSBRUS-GOZrOH7ePXI3qRcgUr4MX4JmX4u4eBDyhSrdClrb5sq50KxRq8kwbASFCJpD6V_yjFcr_7m5nY-16NT5dbaGq4rzZKkzjYZeJA8tug0yUD1nKgkhINbv94aGrX"/>
+      </div>
+      <h1 class="font-bold text-base text-primary">SuccessAdmin</h1>
+    </div>
+    <div class="flex items-center gap-2">
+      <button class="w-9 h-9 rounded-full bg-white/40 flex items-center justify-center text-primary shadow-sm active:scale-95 transition-transform"><span class="material-symbols-outlined text-[20px]">notifications</span></button>
+      <button class="w-9 h-9 rounded-full bg-white/40 flex items-center justify-center text-primary shadow-sm active:scale-95 transition-transform"><span class="material-symbols-outlined text-[20px]">settings</span></button>
+    </div>
+  </header>
+
+  <main class="mt-[84px] px-5 max-w-md mx-auto space-y-5 text-left">
+    
+    <!-- Title Area -->
+    <section class="py-1">
+      <h2 class="text-xl font-extrabold text-[#471A70] tracking-tight">Student Directory</h2>
+      <p class="text-xs text-outline font-medium mt-1">Manage and view all skill-verified students.</p>
+    </section>
+
+    <!-- Search and Filter Controls -->
+    <section class="space-y-3">
+      <!-- Search Bar & Batch Filter (Side-by-side) -->
+      <div class="flex gap-2">
+        <div class="relative flex-1">
+          <span class="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-outline text-lg">search</span>
+          <input id="searchInput" oninput="filterStudents()" type="text" placeholder="Search name or skill..." class="w-full h-11 pl-10 pr-4 rounded-xl border border-white/50 bg-white/30 backdrop-blur-md focus:border-primary focus:ring-1 focus:ring-primary text-xs font-medium placeholder:text-outline/50 text-[#471A70]"/>
+        </div>
+        
+        <div class="relative">
+          <select id="batchFilter" onchange="filterStudents()" class="h-11 px-3 pr-8 rounded-xl border border-white/50 bg-white/30 backdrop-blur-md focus:border-primary focus:ring-1 focus:ring-primary text-xs font-bold text-[#471A70] appearance-none cursor-pointer">
+            <option value="All">All Batches</option>
+            <option value="2023">Batch 2023</option>
+            <option value="2024">Batch 2024</option>
+            <option value="2025">Batch 2025</option>
+          </select>
+          <span class="material-symbols-outlined absolute right-2.5 top-1/2 -translate-y-1/2 text-outline text-base pointer-events-none">expand_more</span>
+        </div>
+      </div>
+
+      <!-- Skill Tag Quick Filters (Horizontal Scroll) -->
+      <div class="flex gap-2 overflow-x-auto hide-scrollbar pb-1">
+        <button onclick="selectSkillFilter('All', this)" class="skill-pill-btn shrink-0 px-3.5 py-1.5 rounded-full text-[10px] font-bold bg-primary text-white shadow-sm transition-all">All Skills</button>
+        <button onclick="selectSkillFilter('UI/UX Design', this)" class="skill-pill-btn shrink-0 px-3.5 py-1.5 rounded-full text-[10px] font-bold bg-white/40 text-outline border border-white/50 hover:bg-white/60 transition-all">UI/UX Design</button>
+        <button onclick="selectSkillFilter('React', this)" class="skill-pill-btn shrink-0 px-3.5 py-1.5 rounded-full text-[10px] font-bold bg-white/40 text-outline border border-white/50 hover:bg-white/60 transition-all">React</button>
+        <button onclick="selectSkillFilter('Node.js', this)" class="skill-pill-btn shrink-0 px-3.5 py-1.5 rounded-full text-[10px] font-bold bg-white/40 text-outline border border-white/50 hover:bg-white/60 transition-all">Node.js</button>
+        <button onclick="selectSkillFilter('Python', this)" class="skill-pill-btn shrink-0 px-3.5 py-1.5 rounded-full text-[10px] font-bold bg-white/40 text-outline border border-white/50 hover:bg-white/60 transition-all">Python</button>
+        <button onclick="selectSkillFilter('TailwindCSS', this)" class="skill-pill-btn shrink-0 px-3.5 py-1.5 rounded-full text-[10px] font-bold bg-white/40 text-outline border border-white/50 hover:bg-white/60 transition-all">TailwindCSS</button>
+      </div>
+    </section>
+
+    <!-- Student List -->
+    <section id="studentList" class="space-y-3">
+      <!-- Cards will be dynamically rendered here -->
+    </section>
+
+  </main>
+
+  <!-- Bottom Navigation Bar Placeholder -->
+  <nav id="bottom-nav"></nav>
+
+    const backendOrigin = window.location.origin.includes('localhost') 
+      ? 'http://localhost:8080' 
+      : window.location.origin;
+
+    let studentsData = [];
+    let currentSkillFilter = 'All';
+
+    // Fetch Students from Backend
+    async function loadStudents() {
+      try {
+        const res = await fetch(`${backendOrigin}/api/students`);
+        if (res.ok) {
+          const rawData = await res.json();
+          studentsData = rawData.map(u => ({
+            name: u.username || u.name || 'Anonymous Student',
+            batch: u.graduationYear || '2026',
+            skills: u.skills || [],
+            score: u.trustScore || 100,
+            avatar: u.avatar || `https://api.dicebear.com/7.x/adventurer/svg?seed=${encodeURIComponent(u.username || 'student')}`
+          }));
+          renderStudents(studentsData);
+        }
+      } catch (e) {
+        console.error("Failed to load students:", e);
+      }
+    }
+
+    // Render Student Cards
+    function renderStudents(list) {
+      const container = document.getElementById('studentList');
+      container.innerHTML = '';
+
+      if (list.length === 0) {
+        container.innerHTML = `
+          <div class="glass-card p-8 rounded-2xl text-center text-outline text-xs">
+            No students found matching the criteria.
+          </div>
+        `;
+        return;
+      }
+
+      list.forEach(student => {
+        const skillsHtml = student.skills.map(s => `
+          <span class="text-[9px] font-bold bg-primary/10 text-primary px-2 py-0.5 rounded-full">${s}</span>
+        `).join('');
+
+        const card = document.createElement('div');
+        card.className = "glass-card p-4 rounded-2xl flex items-start gap-3.5";
+        card.innerHTML = `
+          <img class="w-11 h-11 rounded-full object-cover border border-white shadow-sm" src="${student.avatar}" alt="${student.name}"/>
+          <div class="flex-1 min-w-0">
+            <div class="flex justify-between items-start">
+              <div>
+                <h4 class="font-extrabold text-xs text-[#471A70]">${student.name}</h4>
+                <p class="text-[9px] text-outline mt-0.5">Batch ${student.batch} &bull; Trust Score: ${student.score}%</p>
+              </div>
+              <span class="bg-green-100 text-green-700 text-[9px] font-bold px-2 py-0.5 rounded-full uppercase shrink-0">Verified</span>
+            </div>
+            <div class="flex flex-wrap gap-1.5 mt-2.5">
+              ${skillsHtml}
+            </div>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    // Filter Logic
+    function filterStudents() {
+      const search = document.getElementById('searchInput').value.toLowerCase().trim();
+      const batch = document.getElementById('batchFilter').value;
+
+      const filtered = studentsData.filter(student => {
+        const matchesSearch = student.name.toLowerCase().includes(search) || 
+                              student.skills.some(s => s.toLowerCase().includes(search));
+        
+        const matchesBatch = (batch === 'All') || (student.batch === batch);
+        
+        const matchesSkill = (currentSkillFilter === 'All') || student.skills.includes(currentSkillFilter);
+
+        return matchesSearch && matchesBatch && matchesSkill;
+      });
+
+      renderStudents(filtered);
+    }
+
+    // Skill Filter Pill Click
+    function selectSkillFilter(skill, btnElement) {
+      currentSkillFilter = skill;
+
+      // Update active style of pills
+      document.querySelectorAll('.skill-pill-btn').forEach(btn => {
+        btn.className = "skill-pill-btn shrink-0 px-3.5 py-1.5 rounded-full text-[10px] font-bold bg-white/40 text-outline border border-white/50 hover:bg-white/60 transition-all";
+      });
+      btnElement.className = "skill-pill-btn shrink-0 px-3.5 py-1.5 rounded-full text-[10px] font-bold bg-primary text-white shadow-sm transition-all";
+
+      filterStudents();
+    }
+
+    // Initial Load
+    loadStudents();
+
+    // Touch Feedback
+    document.querySelectorAll('.glass-card, button').forEach(el => {
+      el.addEventListener('touchstart', () => {
+        el.style.transform = 'scale(0.97)';
+        el.style.transition = 'transform 0.15s ease-in-out';
+      });
+      el.addEventListener('touchend', () => {
+        el.style.transform = 'scale(1)';
+      });
+    });
+  </script>
+</body>
+</html>

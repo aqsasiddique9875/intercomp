@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+    :root {
+      --apple-spring: cubic-bezier(0.17, 0.67, 0.2, 1.01);
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      -webkit-tap-highlight-color: transparent;
+      overflow-x: hidden;
+    }
+    .glass-card {
+      backdrop-filter: blur(28px);
+      -webkit-backdrop-filter: blur(28px);
+    }
+    .spring-bounce {
+      transition: transform 0.35s var(--apple-spring);
+    }
+    .spring-bounce:active {
+      transform: scale(0.96);
+    }
+    .neon-glow-purple {
+      box-shadow: 0 0 20px rgba(135, 49, 163, 0.4);
+    }
+    .confetti-canvas {
+      pointer-events: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 100;
+    }
+    .liquid-bg {
+      background: linear-gradient(135deg, #f9f9ff 0%, #e0e8fb 50%, #f0f3ff 100%);
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+    }
+    .liquid-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      z-index: -1;
+      opacity: 0.6;
+      animation: float 20s infinite alternate ease-in-out;
+    }
+    @keyframes float {
+      0% { transform: translate(0, 0) scale(1); }
+      100% { transform: translate(100px, 50px) scale(1.2); }
+    }
+  </style>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "tertiary-container": "#00842f",
+            "on-primary": "#ffffff",
+            "error": "#FF453A",
+            "secondary-container": "#54a3ff",
+            "on-background": "#471A70",
+            "inverse-surface": "#29313f",
+            "on-primary-fixed-variant": "#72188f",
+            "surface-bright": "#f9f9ff",
+            "glass-border": "rgba(255, 255, 255, 0.6)",
+            "surface-dim": "#d2daed",
+            "secondary": "#0060ab",
+            "surface-variant": "#dbe3f6",
+            "on-tertiary-fixed-variant": "#00531a",
+            "surface-container-lowest": "#ffffff",
+            "tertiary": "#006823",
+            "on-error": "#ffffff",
+            "on-tertiary-fixed": "#002106",
+            "inverse-on-surface": "#ecf1ff",
+            "on-tertiary": "#ffffff",
+            "outline": "#817381",
+            "on-primary-fixed": "#330044",
+            "surface-container": "#e7eeff",
+            "inverse-primary": "#f0b0ff",
+            "surface": "#f9f9ff",
+            "on-tertiary-container": "#e6ffe0",
+            "primary": "#8731a3",
+            "card-gradient": "linear-gradient(135deg, #4D9EFA 0%, #BF7DF5 100%)",
+            "glass-thick": "rgba(255, 255, 255, 0.8)",
+            "secondary-fixed-dim": "#a3c9ff",
+            "on-surface-variant": "#4f4350",
+            "primary-fixed": "#fbd7ff",
+            "on-secondary-fixed": "#001c39",
+            "gold": "#FFD60A",
+            "surface-container-low": "#f0f3ff",
+            "on-secondary-container": "#003868",
+            "background": "#f9f9ff",
+            "surface-tint": "#8d37a9",
+            "surface-container-high": "#e0e8fb",
+            "primary-fixed-dim": "#f0b0ff",
+            "tertiary-fixed": "#6cff82",
+            "on-secondary-fixed-variant": "#004883",
+            "outline-variant": "#d2c1d2",
+            "on-error-container": "#93000a",
+            "error-container": "#ffdad6",
+            "orange": "#FF9F0A",
+            "surface-container-highest": "#dbe3f6",
+            "primary-container": "#a34cbe",
+            "secondary-fixed": "#d3e3ff",
+            "on-surface": "#141c29",
+            "tertiary-fixed-dim": "#47e266",
+            "on-primary-container": "#fff5fb",
+            "glass-fill": "rgba(255, 255, 255, 0.35)",
+            "on-secondary": "#ffffff"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "safe-bottom": "34px",
+            "max-width": "1280px",
+            "base": "8px",
+            "mobile-margin": "20px",
+            "desktop-gutter": "24px",
+            "safe-top": "44px",
+            "mobile-gutter": "16px",
+            "desktop-margin": "64px"
+          },
+          "fontFamily": {
+            "label-caps": ["Inter"],
+            "headline-lg-mobile": ["Inter"],
+            "display-xl": ["Inter"],
+            "label-caps-mobile": ["Inter"],
+            "headline-lg": ["Inter"],
+            "body-md-mobile": ["Inter"],
+            "body-md": ["Inter"],
+            "display-xl-mobile": ["Inter"]
+          },
+          "fontSize": {
+            "label-caps": ["13px", {"lineHeight": "1.0", "letterSpacing": "0.03em", "fontWeight": "600"}],
+            "headline-lg-mobile": ["28px", {"lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+            "display-xl": ["56px", {"lineHeight": "1.1", "letterSpacing": "-0.03em", "fontWeight": "700"}],
+            "label-caps-mobile": ["12px", {"lineHeight": "1.0", "letterSpacing": "0.05em", "fontWeight": "600"}],
+            "headline-lg": ["34px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+            "body-md-mobile": ["15px", {"lineHeight": "1.5", "fontWeight": "400"}],
+            "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+            "display-xl-mobile": ["34px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "800"}]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface">
+<!-- Background Environment -->
+<div class="liquid-bg">
+<div class="liquid-orb w-64 h-64 bg-primary-fixed-dim top-[-10%] left-[-10%]"></div>
+<div class="liquid-orb w-80 h-80 bg-secondary-fixed-dim bottom-[10%] right-[-20%]"></div>
+<div class="liquid-orb w-48 h-48 bg-tertiary-fixed-dim top-[40%] left-[60%]"></div>
+</div>
+<canvas class="confetti-canvas" id="confetti"></canvas>
+<!-- TopAppBar Section -->
+<header class="fixed top-0 w-full backdrop-blur-3xl z-50 bg-glass-fill border-b border-glass-border shadow-[0_12px_40px_0_rgba(71,26,112,0.15)] flex items-center justify-between px-mobile-margin h-safe-top">
+<div class="flex items-center gap-3 h-full">
+<div class="w-10 h-10 rounded-full bg-secondary-container overflow-hidden border border-glass-border">
+<img alt="Profile" data-alt="A close-up portrait of a professional mentor in a modern studio. The subject has a warm, inviting expression and is wearing sleek, contemporary business casual attire. The background is a soft-focus office with elegant lavender and blue glass partitions and warm ambient lighting, maintaining the high-end premium aesthetic of the design system." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCsbNovMCZKpofuF7s5ly0LkJQatOZCwuo3xJCJI2VYFP_YLa6sn0lX9lta-5G52XnBfZCANcfuMZxyY7p6bGIWX5seOoi-5bT12tGMxM2tVvAMxlJKz1Wee1I8dw3fnyJkm9SGC7gMGg1rZFZNH9Vhb1dKy1ZE_Wz7jDzhlWbp50wJz-Hzbjy_ow_c0xXc0Jrt2g5UgkQtXlOb1uVnwlITyTwivUDYGHjZPRTAiTHduI4gOJpzOcas6zyVwmAAlVtOljob7SQc2uzM"/>
+</div>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile font-bold text-on-surface">Rewards Hub</h1>
+</div>
+<button class="w-11 h-11 flex items-center justify-center rounded-full active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-primary">more_horiz</span>
+</button>
+</header>
+<!-- Main Scrollable Content -->
+<main class="pt-24 pb-32 px-mobile-margin space-y-6">
+<!-- Streak Section Card -->
+<section class="glass-card bg-glass-fill border border-glass-border rounded-[24px] p-5 shadow-[0_12px_40px_0_rgba(71,26,112,0.15)]">
+<div class="flex justify-between items-center mb-6">
+<div>
+<h2 class="font-headline-lg-mobile text-[20px] font-bold text-on-background">Consistency Streak</h2>
+<p class="font-body-md-mobile text-on-surface-variant">October 2024</p>
+</div>
+<div class="flex items-center gap-1 bg-primary text-on-primary px-3 py-1 rounded-full shadow-lg">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">local_fire_department</span>
+<span class="font-label-caps-mobile font-bold">12 Days</span>
+</div>
+</div>
+<!-- Calendar Grid -->
+<div class="grid grid-cols-7 gap-2 text-center">
+<!-- Weekdays -->
+<div class="font-label-caps-mobile text-outline mb-2">M</div>
+<div class="font-label-caps-mobile text-outline mb-2">T</div>
+<div class="font-label-caps-mobile text-outline mb-2">W</div>
+<div class="font-label-caps-mobile text-outline mb-2">T</div>
+<div class="font-label-caps-mobile text-outline mb-2">F</div>
+<div class="font-label-caps-mobile text-outline mb-2">S</div>
+<div class="font-label-caps-mobile text-outline mb-2">S</div>
+<!-- Days (Mock for Oct 2024 starting Tuesday) -->
+<div class="h-8"></div>
+<div class="flex items-center justify-center relative">
+<div class="w-8 h-8 rounded-full flex items-center justify-center bg-primary-container text-on-primary-container font-label-caps-mobile relative">1<span class="absolute -bottom-1 w-1 h-1 bg-gold rounded-full"></span></div>
+</div>
+<div class="flex items-center justify-center"><div class="w-8 h-8 rounded-full flex items-center justify-center bg-primary-container text-on-primary-container font-label-caps-mobile">2</div></div>
+<div class="flex items-center justify-center"><div class="w-8 h-8 rounded-full flex items-center justify-center bg-primary-container text-on-primary-container font-label-caps-mobile">3</div></div>
+<div class="flex items-center justify-center"><div class="w-8 h-8 rounded-full flex items-center justify-center bg-primary-container text-on-primary-container font-label-caps-mobile">4</div></div>
+<div class="flex items-center justify-center"><div class="w-8 h-8 rounded-full flex items-center justify-center bg-primary-container text-on-primary-container font-label-caps-mobile">5</div></div>
+<div class="flex items-center justify-center"><div class="w-8 h-8 rounded-full flex items-center justify-center bg-primary-container text-on-primary-container font-label-caps-mobile">6</div></div>
+<!-- Active Streak Highlights -->
+<div class="flex items-center justify-center"><div class="w-8 h-8 rounded-full flex items-center justify-center bg-primary text-on-primary font-label-caps-mobile shadow-md">7</div></div>
+<div class="flex items-center justify-center"><div class="w-8 h-8 rounded-full flex items-center justify-center bg-primary text-on-primary font-label-caps-mobile shadow-md">8</div></div>
+<div class="flex items-center justify-center"><div class="w-8 h-8 rounded-full flex items-center justify-center bg-primary text-on-primary font-label-caps-mobile shadow-md">9</div></div>
+<div class="flex items-center justify-center"><div class="w-8 h-8 rounded-full flex items-center justify-center bg-primary text-on-primary font-label-caps-mobile shadow-md">10</div></div>
+<div class="flex items-center justify-center"><div class="w-8 h-8 rounded-full flex items-center justify-center bg-primary text-on-primary font-label-caps-mobile shadow-md">11</div></div>
+<div class="flex items-center justify-center"><div class="w-8 h-8 rounded-full flex items-center justify-center bg-primary text-on-primary font-label-caps-mobile shadow-md">12</div></div>
+<div class="flex items-center justify-center"><div class="w-8 h-8 rounded-full flex items-center justify-center bg-primary text-on-primary font-label-caps-mobile shadow-md">13</div></div>
+<!-- Oct 14: Today marked with a ring -->
+<div class="flex items-center justify-center">
+<div class="w-8 h-8 rounded-full border-2 border-primary flex items-center justify-center font-bold text-primary font-label-caps-mobile">14</div>
+</div>
+</div>
+</section>
+<!-- Rewards Grid Title -->
+<div class="flex items-center justify-between">
+<h3 class="font-headline-lg-mobile text-[22px] font-extrabold text-on-background">Available Rewards</h3>
+<button class="text-primary font-label-caps-mobile">See All</button>
+</div>
+<!-- 2x2 Bento Rewards Grid -->
+<div class="grid grid-cols-2 gap-4">
+<!-- Reward Card 1: Active -->
+<div class="reward-tile spring-bounce glass-card bg-glass-thick border border-primary/40 rounded-[28px] p-4 flex flex-col items-center gap-3 relative overflow-hidden neon-glow-purple group" onclick="triggerConfetti()">
+<div class="absolute inset-0 bg-gradient-to-br from-primary/10 to-secondary/10 opacity-50 group-hover:opacity-100 transition-opacity"></div>
+<div class="w-24 h-24 relative z-10">
+<img alt="Gift" class="w-full h-full object-contain" data-alt="A high-fidelity 3D rendering of a luxury gift box floating in a digital void. The box is wrapped in translucent neon purple ribbons that pulse with light. Soft lavender ambient lighting illuminates the scene, creating a sense of value and excitement. The style is ultra-modern and tech-focused, aligned with a premium digital rewards application." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBbSQ20jZGHAXENVpycffznVQKY_21RoZgbGswg8XvnYF2CTxMCVO14wyNklNjkHisM69Mq63oMijliRhILxqRgH52ynV0WHugTJjHkX1AdQA5sZbCGnpt9fhumweIJlLzaI4YN9a_TkArwyD9BRDcHq5A79Uo-vBJsi-m2ivpVHi3AJxeaYEAbiVi1mVt67HMQn4afKWW7njsviLaCkvn5OqgqnbEYnSmRFJ7G2ZMlv0JzxE-Pg_Cl5QmkHecOoEfeTDG0uW6mAsF3"/>
+<!-- Neon ribbon effect using absolute div -->
+<div class="absolute inset-0 border-2 border-primary-fixed rounded-xl animate-pulse blur-sm"></div>
+</div>
+<div class="text-center z-10">
+<p class="font-label-caps-mobile text-primary-container uppercase tracking-widest text-[10px]">Unlocks in 2h</p>
+<h4 class="font-headline-lg-mobile text-[16px] font-bold text-on-background">Master Kit</h4>
+</div>
+<button class="w-full h-11 bg-primary text-on-primary rounded-full font-label-caps-mobile font-bold z-10 shadow-lg">CLAIM NOW</button>
+</div>
+<!-- Reward Card 2 -->
+<div class="reward-tile spring-bounce glass-card bg-glass-fill border border-glass-border rounded-[28px] p-4 flex flex-col items-center gap-3 opacity-90 group">
+<div class="w-24 h-24 relative z-10 grayscale-[0.5] group-hover:grayscale-0 transition-all">
+<img alt="Diamond" class="w-full h-full object-contain" data-alt="A crystalline, multifaceted diamond rendered in 3D with realistic light refraction. Subtle highlights of neon blue and soft violet dance on the surface. The gemstone sits on a translucent glass pedestal within a minimalist atmosphere, emphasizing its premium quality and rarity in a digital ecosystem." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBMTmHvBP5UYjjignGMGXNRv0g-_cEI2rdckeCJE141FVSLS-R1W95vcDLnGonjvFoSvEW6aJOTAhOY_iy0D4cuqKCpldiWUBU7UpJyLrBSS65-CQiKS5SJqG_ET8a634Kn3bhZR8-4mU6_10CjHctPFhqG2cH14rWwBFVct4UU_xcp-z8kMB0VS__w-3jOAOSosjA688UEzpzzKKqg9WJHhcWgk5fQJgqHWmNtHQGi2pB3BHzbmbhmupZLegpjCln5_ChWg0g1WbXX"/>
+</div>
+<div class="text-center z-10">
+<p class="font-label-caps-mobile text-outline uppercase tracking-widest text-[10px]">Tier 3 Reward</p>
+<h4 class="font-headline-lg-mobile text-[16px] font-bold text-on-background">Pro Badge</h4>
+</div>
+<div class="w-full h-11 border border-glass-border rounded-full flex items-center justify-center font-label-caps-mobile text-outline z-10">LOCKED</div>
+</div>
+<!-- Reward Card 3 -->
+<div class="reward-tile spring-bounce glass-card bg-glass-fill border border-glass-border rounded-[28px] p-4 flex flex-col items-center gap-3 opacity-90 group">
+<div class="w-24 h-24 relative z-10">
+<img alt="Pack" class="w-full h-full object-contain" data-alt="A futuristic backpack icon designed with clean lines and a glass-like finish. Neon orange accents define the pockets and zippers, glowing softly against a lavender background. The aesthetic is high-end digital luxury, suggesting a premium utility item for an adventurous user journey." src="https://lh3.googleusercontent.com/aida-public/AB6AXuApu06gDoxGGlwiMk4JlTqf7q4k_H4lcF3oGpoEUn5tb43IRr2-OPN4TUULYVZSuaGlzIcxcvomIVQBfiGdrnV6B79JwSriGSMxkiSoxaTp7Evxy5FxBN5yvohVAd6Dm4EXO1Ze7UcSFVf_2V4-KSbIN8ljAVDL22ii_gOBDjeYrBWPrsEUV9rpIivT-b-RBGQyKmCJRS4DHg6up6j84lPsL9DAaufmuZbWvycD7P271-zJls-uhdU_nT-H_DzFNRKX9hFJ6EYICBHe"/>
+</div>
+<div class="text-center z-10">
+<p class="font-label-caps-mobile text-outline uppercase tracking-widest text-[10px]">Level 10</p>
+<h4 class="font-headline-lg-mobile text-[16px] font-bold text-on-background">Gear Pack</h4>
+</div>
+<div class="w-full h-11 border border-glass-border rounded-full flex items-center justify-center font-label-caps-mobile text-outline z-10">LOCKED</div>
+</div>
+<!-- Reward Card 4: Active Glow -->
+<div class="reward-tile spring-bounce glass-card bg-glass-thick border border-secondary/40 rounded-[28px] p-4 flex flex-col items-center gap-3 relative overflow-hidden shadow-[0_12px_40px_0_rgba(84,163,255,0.2)] group" onclick="triggerConfetti()">
+<div class="absolute inset-0 bg-gradient-to-tr from-secondary/10 to-tertiary/10 opacity-50"></div>
+<div class="w-24 h-24 relative z-10">
+<img alt="Ticket" class="w-full h-full object-contain" data-alt="A stylized digital ticket with glowing edges and holographic patterns. The ticket features intricate geometric details and pulses with a soft blue neon light. It floats elegantly above a blurred glass surface, capturing a premium, exclusive feel for a high-value digital reward." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDh5YBWykcq2JflhdUdkgPENdS5hIGCZ_X7NRK8GEpW0haZGZN7DMzUnqL8hezdOu8dsP8kXcB4X8ZSG6nbo95WlS-1nx0vSDwOeEQWzZihTYxUqnZ5fj4f2bhzip1FZTewKdfE2GYIW2grh4qgv7WBRxrLMV8Qo8sChS25bCG7RPonDPdC76nRXZSun_l3ncnihu8MzimIiancuPMHyrih13LuoesK8ADrcSDTZ0LZr-6Vc7Mcdo_f97QrFGj1z5o269tRtKZqESah"/>
+</div>
+<div class="text-center z-10">
+<p class="font-label-caps-mobile text-secondary uppercase tracking-widest text-[10px]">Flash Reward</p>
+<h4 class="font-headline-lg-mobile text-[16px] font-bold text-on-background">Live Pass</h4>
+</div>
+<button class="w-full h-11 bg-secondary text-on-primary rounded-full font-label-caps-mobile font-bold z-10 shadow-lg">COLLECT</button>
+</div>
+</div>
+<!-- Extra Space for scroll -->
+<div class="h-10"></div>
+</main>
+<!-- BottomNavBar Section -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-mobile-gutter pb-safe-bottom h-20 bg-glass-fill backdrop-blur-3xl border-t border-glass-border shadow-[0_-12px_40px_0_rgba(71,26,112,0.15)] rounded-t-xl">
+<!-- Home -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:opacity-80 transition-opacity active:scale-95 spring-bounce" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="font-label-caps-mobile text-label-caps-mobile">Home</span>
+</a>
+<!-- Mentors -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:opacity-80 transition-opacity active:scale-95 spring-bounce" href="#">
+<span class="material-symbols-outlined">school</span>
+<span class="font-label-caps-mobile text-label-caps-mobile">Mentors</span>
+</a>
+<!-- Rewards (Active) -->
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-4 py-1 hover:opacity-80 transition-opacity active:scale-95 spring-bounce" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">redeem</span>
+<span class="font-label-caps-mobile text-label-caps-mobile">Rewards</span>
+</a>
+<!-- Profile -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:opacity-80 transition-opacity active:scale-95 spring-bounce" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-caps-mobile text-label-caps-mobile">Profile</span>
+</a>
+</nav>
+<script>
+    // Confetti logic
+    const canvas = document.getElementById('confetti');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+    
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    class Particle {
+      constructor() {
+        this.x = Math.random() * canvas.width;
+        this.y = -10;
+        this.size = Math.random() * 8 + 4;
+        this.speedX = Math.random() * 3 - 1.5;
+        this.speedY = Math.random() * 5 + 2;
+        this.color = `hsl(${Math.random() * 360}, 80%, 60%)`;
+        this.rotation = Math.random() * 360;
+        this.rotationSpeed = Math.random() * 10 - 5;
+      }
+      update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+        this.rotation += this.rotationSpeed;
+      }
+      draw() {
+        ctx.save();
+        ctx.translate(this.x, this.y);
+        ctx.rotate(this.rotation * Math.PI / 180);
+        ctx.fillStyle = this.color;
+        ctx.fillRect(-this.size/2, -this.size/2, this.size, this.size);
+        ctx.restore();
+      }
+    }
+
+    function triggerConfetti() {
+      for (let i = 0; i < 50; i++) {
+        particles.push(new Particle());
+      }
+    }
+
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (let i = 0; i < particles.length; i++) {
+        particles[i].update();
+        particles[i].draw();
+        if (particles[i].y > canvas.height) {
+          particles.splice(i, 1);
+          i--;
+        }
+      }
+      requestAnimationFrame(animate);
+    }
+    animate();
+
+    // Haptic simulation on reward click
+    document.querySelectorAll('.reward-tile').forEach(tile => {
+      tile.addEventListener('touchstart', () => {
+        if (window.navigator.vibrate) {
+          window.navigator.vibrate(10);
+        }
+      });
+    });
+  </script>
+</body></html>

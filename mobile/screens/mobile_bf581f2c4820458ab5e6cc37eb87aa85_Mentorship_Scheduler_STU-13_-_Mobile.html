@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<title>STU-13 Mentorship Scheduler</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-container": "#00842f",
+                        "on-tertiary": "#ffffff",
+                        "on-secondary-fixed": "#001c39",
+                        "surface-bright": "#f9f9ff",
+                        "primary-container": "#a34cbe",
+                        "tertiary-fixed": "#6cff82",
+                        "on-primary-fixed-variant": "#72188f",
+                        "background": "#f9f9ff",
+                        "secondary-fixed-dim": "#a3c9ff",
+                        "on-primary-fixed": "#330044",
+                        "glass-fill": "rgba(255, 255, 255, 0.35)",
+                        "inverse-surface": "#29313f",
+                        "on-tertiary-fixed": "#002106",
+                        "secondary-fixed": "#d3e3ff",
+                        "primary-fixed-dim": "#f0b0ff",
+                        "surface-container-low": "#f0f3ff",
+                        "on-secondary": "#ffffff",
+                        "on-secondary-container": "#003868",
+                        "tertiary": "#006823",
+                        "on-error-container": "#93000a",
+                        "secondary-container": "#54a3ff",
+                        "on-secondary-fixed-variant": "#004883",
+                        "surface-container": "#e7eeff",
+                        "gold": "#FFD60A",
+                        "on-primary-container": "#fff5fb",
+                        "on-error": "#ffffff",
+                        "secondary": "#0060ab",
+                        "on-tertiary-container": "#e6ffe0",
+                        "surface-container-highest": "#dbe3f6",
+                        "card-gradient": "linear-gradient(135deg, #4D9EFA 0%, #BF7DF5 100%)",
+                        "orange": "#FF9F0A",
+                        "surface-container-lowest": "#ffffff",
+                        "primary": "#8731a3",
+                        "surface-tint": "#8d37a9",
+                        "glass-border": "rgba(255, 255, 255, 0.6)",
+                        "surface-dim": "#d2daed",
+                        "on-background": "#141c29",
+                        "on-primary": "#ffffff",
+                        "tertiary-fixed-dim": "#47e266",
+                        "primary-fixed": "#fbd7ff",
+                        "inverse-primary": "#f0b0ff",
+                        "surface": "#f9f9ff",
+                        "error": "#FF453A",
+                        "glass-thick": "rgba(255, 255, 255, 0.8)",
+                        "surface-variant": "#dbe3f6",
+                        "error-container": "#ffdad6",
+                        "on-surface-variant": "#4f4350",
+                        "outline": "#817381",
+                        "surface-container-high": "#e0e8fb",
+                        "on-tertiary-fixed-variant": "#00531a",
+                        "on-surface": "#141c29",
+                        "inverse-on-surface": "#ecf1ff",
+                        "outline-variant": "#d2c1d2"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "mobile-gutter": "16px",
+                        "desktop-gutter": "24px",
+                        "safe-top": "44px",
+                        "mobile-margin": "20px",
+                        "desktop-margin": "64px",
+                        "base": "8px",
+                        "max-width": "1280px",
+                        "safe-bottom": "34px"
+                    },
+                    "fontFamily": {
+                        "label-caps-mobile": ["Inter"],
+                        "body-md-mobile": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "display-xl-mobile": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-caps-mobile": ["12px", {"lineHeight": "1.0", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "body-md-mobile": ["15px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                        "headline-lg-mobile": ["28px", {"lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "display-xl-mobile": ["34px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "800"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            -webkit-tap-highlight-color: transparent;
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(180deg, #DCE4F7 0%, #f9f9ff 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.35);
+            backdrop-filter: blur(28px);
+            -webkit-backdrop-filter: blur(28px);
+            border: 0.5px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 12px 40px 0 rgba(71, 26, 112, 0.15);
+        }
+        .spring-bounce {
+            transition: transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .spring-bounce:active {
+            transform: scale(0.96);
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="text-on-surface">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full backdrop-blur-3xl z-50 bg-glass-fill border-b border-glass-border shadow-[0_12px_40px_0_rgba(71,26,112,0.15)] flex items-center justify-between px-mobile-margin h-safe-top w-full">
+<button class="text-primary hover:scale-95 transition-transform duration-200 active:scale-95 spring-bounce flex items-center justify-center h-11 w-11">
+<span class="material-symbols-outlined" data-icon="arrow_back_ios">arrow_back_ios</span>
+</button>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile font-bold text-on-surface">Book Mentorship</h1>
+<button class="text-primary hover:scale-95 transition-transform duration-200 active:scale-95 spring-bounce flex items-center justify-center h-11 w-11">
+<span class="material-symbols-outlined" data-icon="more_horiz">more_horiz</span>
+</button>
+</header>
+<main class="pt-[calc(44px+24px)] pb-[calc(80px+34px)] px-mobile-margin space-y-6">
+<!-- Mentor Bio Card -->
+<section class="glass-card rounded-3xl p-5 flex flex-col gap-4 animate-in fade-in slide-in-from-bottom-4 duration-700">
+<div class="flex items-center gap-4">
+<div class="relative w-16 h-16">
+<img alt="Sarah Jenkins" class="w-full h-full rounded-full object-cover border-2 border-white" data-alt="A professional and warm close-up portrait of Sarah Jenkins, a senior product designer with a welcoming smile. She is set against a soft, out-of-focus modern studio background with gentle lavender lighting. The photography style is high-end, clean, and minimalist, perfectly matching an iOS liquid glass aesthetic with soft highlights and premium clarity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCR14IsIwA1bMsgXyhI1zwdREQKzuOhLpw1oHxwj_rx7zyyEo1NQ_mSrbSOiyQCX7kmONNTJcCD0xS3fGnEHbtW_3ga7yirYLQTYNWC1z0pFnftXBzEfFVLIQ5IYz12ryBr_lhTxtgE4CAvnZ2OxN8dYI1ELmFsXNFgxj_qRCeFDvqEbYwVU43Kzm5Z4ekUoom53Qpnoo8CX1Q8Eyt3p5pwsVoPsGUmyY9CBrJ4GZkJC-ElePEb1ytgDjSngSEKcKG3NglvQTScxXxC"/>
+<div class="absolute -bottom-1 -right-1 bg-tertiary-container text-white px-2 py-0.5 rounded-full flex items-center gap-1 shadow-sm">
+<span class="material-symbols-outlined text-[12px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-[10px] font-bold">5.0</span>
+</div>
+</div>
+<div>
+<h2 class="text-headline-lg-mobile font-bold text-on-surface leading-tight">Sarah Jenkins</h2>
+<p class="text-body-md-mobile text-on-surface-variant">Senior Product Designer</p>
+</div>
+</div>
+<p class="text-body-md-mobile text-on-surface leading-relaxed italic opacity-90">
+                "Helping designers master digital materiality and craft high-fidelity interfaces."
+            </p>
+</section>
+<!-- Date Selection Carousel -->
+<section class="space-y-3">
+<div class="flex justify-between items-center">
+<h3 class="font-label-caps-mobile text-label-caps-mobile text-on-surface-variant uppercase tracking-wider">Select Date</h3>
+<span class="text-primary font-bold text-xs">November 2024</span>
+</div>
+<div class="flex gap-3 overflow-x-auto hide-scrollbar py-2 -mx-mobile-margin px-mobile-margin">
+<!-- Mon 12 (Active) -->
+<button class="flex-shrink-0 w-16 h-20 rounded-2xl flex flex-col items-center justify-center gap-1 spring-bounce bg-primary text-white shadow-lg">
+<span class="text-[10px] font-medium uppercase">Mon</span>
+<span class="text-xl font-extrabold">12</span>
+<div class="w-1 h-1 rounded-full bg-white opacity-50"></div>
+</button>
+<!-- Tue 13 -->
+<button class="flex-shrink-0 w-16 h-20 rounded-2xl flex flex-col items-center justify-center gap-1 spring-bounce glass-card text-on-surface-variant">
+<span class="text-[10px] font-medium uppercase">Tue</span>
+<span class="text-xl font-extrabold">13</span>
+</button>
+<!-- Wed 14 -->
+<button class="flex-shrink-0 w-16 h-20 rounded-2xl flex flex-col items-center justify-center gap-1 spring-bounce glass-card text-on-surface-variant">
+<span class="text-[10px] font-medium uppercase">Wed</span>
+<span class="text-xl font-extrabold">14</span>
+</button>
+<!-- Thu 15 -->
+<button class="flex-shrink-0 w-16 h-20 rounded-2xl flex flex-col items-center justify-center gap-1 spring-bounce glass-card text-on-surface-variant">
+<span class="text-[10px] font-medium uppercase">Thu</span>
+<span class="text-xl font-extrabold">15</span>
+</button>
+<!-- Fri 16 -->
+<button class="flex-shrink-0 w-16 h-20 rounded-2xl flex flex-col items-center justify-center gap-1 spring-bounce glass-card text-on-surface-variant">
+<span class="text-[10px] font-medium uppercase">Fri</span>
+<span class="text-xl font-extrabold">16</span>
+</button>
+</div>
+</section>
+<!-- Time Slots Grid -->
+<section class="space-y-6">
+<!-- Morning -->
+<div class="space-y-3">
+<h3 class="font-label-caps-mobile text-label-caps-mobile text-on-surface-variant uppercase tracking-wider">Morning</h3>
+<div class="grid grid-cols-3 gap-3">
+<button class="h-11 rounded-xl glass-card flex items-center justify-center text-body-md-mobile font-semibold text-on-surface spring-bounce">
+                        09:00 AM
+                    </button>
+<button class="h-11 rounded-xl glass-card flex items-center justify-center text-body-md-mobile font-semibold text-on-surface spring-bounce">
+                        10:00 AM
+                    </button>
+<button class="h-11 rounded-xl glass-card flex items-center justify-center text-body-md-mobile font-semibold text-outline-variant opacity-50 cursor-not-allowed">
+                        11:00 AM
+                    </button>
+</div>
+</div>
+<!-- Afternoon -->
+<div class="space-y-3">
+<h3 class="font-label-caps-mobile text-label-caps-mobile text-on-surface-variant uppercase tracking-wider">Afternoon</h3>
+<div class="grid grid-cols-3 gap-3">
+<button class="h-11 rounded-xl glass-card flex items-center justify-center text-body-md-mobile font-semibold text-on-surface spring-bounce border-primary border-2">
+                        01:30 PM
+                    </button>
+<button class="h-11 rounded-xl glass-card flex items-center justify-center text-body-md-mobile font-semibold text-on-surface spring-bounce">
+                        03:00 PM
+                    </button>
+<button class="h-11 rounded-xl glass-card flex items-center justify-center text-body-md-mobile font-semibold text-on-surface spring-bounce">
+                        04:30 PM
+                    </button>
+</div>
+</div>
+<!-- Evening -->
+<div class="space-y-3">
+<h3 class="font-label-caps-mobile text-label-caps-mobile text-on-surface-variant uppercase tracking-wider">Evening</h3>
+<div class="grid grid-cols-3 gap-3">
+<button class="h-11 rounded-xl glass-card flex items-center justify-center text-body-md-mobile font-semibold text-on-surface spring-bounce">
+                        06:00 PM
+                    </button>
+<button class="h-11 rounded-xl glass-card flex items-center justify-center text-body-md-mobile font-semibold text-on-surface spring-bounce">
+                        07:30 PM
+                    </button>
+</div>
+</div>
+</section>
+<!-- CTA Action -->
+<div class="pt-4">
+<button class="w-full h-14 bg-primary text-on-primary rounded-2xl font-bold text-lg shadow-[0_8px_24px_rgba(135,49,163,0.3)] spring-bounce hover:opacity-90 active:scale-[0.98]">
+                Confirm Booking
+            </button>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-mobile-gutter pb-safe-bottom h-20 bg-glass-fill border-t border-glass-border backdrop-blur-3xl shadow-[0_-12px_40px_0_rgba(71,26,112,0.15)] rounded-t-xl">
+<!-- Home -->
+<button class="flex flex-col items-center justify-center text-on-surface-variant hover:opacity-80 transition-opacity active:scale-95 spring-bounce">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-label-caps-mobile text-label-caps-mobile">Home</span>
+</button>
+<!-- Mentors (Active) -->
+<button class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-4 py-1 hover:opacity-80 transition-opacity active:scale-95 spring-bounce">
+<span class="material-symbols-outlined" data-icon="school" style="font-variation-settings: 'FILL' 1;">school</span>
+<span class="font-label-caps-mobile text-label-caps-mobile">Mentors</span>
+</button>
+<!-- Schedule -->
+<button class="flex flex-col items-center justify-center text-on-surface-variant hover:opacity-80 transition-opacity active:scale-95 spring-bounce">
+<span class="material-symbols-outlined" data-icon="calendar_today">calendar_today</span>
+<span class="font-label-caps-mobile text-label-caps-mobile">Schedule</span>
+</button>
+<!-- Profile -->
+<button class="flex flex-col items-center justify-center text-on-surface-variant hover:opacity-80 transition-opacity active:scale-95 spring-bounce">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-label-caps-mobile text-label-caps-mobile">Profile</span>
+</button>
+</nav>
+<script>
+        // Simple Interaction logic for slot selection
+        document.querySelectorAll('.grid button:not(.cursor-not-allowed)').forEach(btn => {
+            btn.addEventListener('click', function() {
+                // Remove active states from siblings or all other buttons in grid
+                document.querySelectorAll('.grid button').forEach(b => b.classList.remove('border-primary', 'border-2'));
+                // Add active state to clicked
+                this.classList.add('border-primary', 'border-2');
+            });
+        });
+
+        // Simple interaction for date selection
+        document.querySelectorAll('.hide-scrollbar button').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.hide-scrollbar button').forEach(b => {
+                    b.classList.remove('bg-primary', 'text-white', 'shadow-lg');
+                    b.classList.add('glass-card', 'text-on-surface-variant');
+                });
+                this.classList.remove('glass-card', 'text-on-surface-variant');
+                this.classList.add('bg-primary', 'text-white', 'shadow-lg');
+            });
+        });
+    </script>
+</body></html>

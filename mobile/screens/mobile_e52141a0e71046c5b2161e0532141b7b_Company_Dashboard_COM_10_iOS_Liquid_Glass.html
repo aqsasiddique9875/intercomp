@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+  <title>RecruiterPro | iOS Dashboard</title>
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
+  <!-- Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            primary: "#8731a3",
+            secondary: "#4D9EFA",
+            background: "#fff7fb",
+            outline: "#817381",
+            "glass-fill": "rgba(255, 255, 255, 0.45)",
+            "glass-border": "rgba(255, 255, 255, 0.6)"
+          },
+          borderRadius: {
+            xxl: "24px"
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      background-color: #DCE4F7;
+      -webkit-tap-highlight-color: transparent;
+      font-family: 'Inter', sans-serif;
+      color: #471A70;
+    }
+    .glass-card {
+      background: rgba(255, 255, 255, 0.4);
+      backdrop-filter: blur(28px);
+      -webkit-backdrop-filter: blur(28px);
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      box-shadow: 0 8px 32px 0 rgba(163, 76, 190, 0.08);
+    }
+    .animated-bg-sphere {
+      position: fixed;
+      width: 350px;
+      height: 350px;
+      border-radius: 50%;
+      filter: blur(80px);
+      z-index: -1;
+      opacity: 0.5;
+      animation: float 20s infinite ease-in-out;
+    }
+    @keyframes float {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(50px, -50px) scale(1.1); }
+    }
+    /* Hide scrollbar */
+    .hide-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .hide-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+</head>
+<body class="antialiased overflow-x-hidden pb-32">
+  <!-- Animated Background Spheres -->
+  <div class="animated-bg-sphere bg-purple-300" style="top: -50px; left: -50px; animation-delay: 0s;"></div>
+  <div class="animated-bg-sphere bg-blue-200" style="bottom: -100px; right: -50px; animation-delay: -5s;"></div>
+
+  <!-- TopAppBar -->
+  <header class="fixed top-0 left-0 right-0 max-w-md mx-auto w-full z-50 bg-white/45 backdrop-blur-[28px] border-b border-white/50 shadow-[0_4px_20px_0_rgba(163,76,190,0.06)] flex justify-between items-center px-5 h-[64px]">
+    <div class="flex items-center gap-3">
+      <div onclick="window.parent.postMessage({ type: 'NAVIGATE', view: 'company-profile' }, '*')" class="w-9 h-9 rounded-full border border-white/80 overflow-hidden shadow-sm cursor-pointer active:scale-95 transition-transform">
+        <img alt="Recruiter Avatar" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDIt827WcUwR9RknikfNiRLVtA9sbTUiLtd0n3jB3z6G-LcVgOH2Q1LSJ95e5CzDJIpIJ5MW47QlldiC3oQ47YxdkpT7yxVIKybu0-SFEgAGF_-PGnr3lHEC2mUOiChHzQlVzeJegHnlKaP42BDNxDuJvyd11-d5rEyg9kglcvwsUMj8OQcfs2DaPaRtXqQYpTnlk1DECitBMwFvdSLRPmO34dRSZsAKs6xpqv5VeKZ0k2W_RiT0X9pBx2iOKk789tArk1DHtKiKeaq"/>
+      </div>
+      <h1 class="font-bold text-base text-primary">RecruiterPro</h1>
+    </div>
+    <div class="flex items-center gap-2">
+      <button class="w-9 h-9 rounded-full bg-white/40 flex items-center justify-center text-[#471A70] shadow-sm"><span class="material-symbols-outlined text-[20px]">notifications</span></button>
+      <button class="w-9 h-9 rounded-full bg-white/40 flex items-center justify-center text-[#471A70] shadow-sm"><span class="material-symbols-outlined text-[20px]">settings</span></button>
+    </div>
+  </header>
+
+  <main class="mt-[84px] px-5 max-w-md mx-auto space-y-5">
+    
+    <!-- Welcome Section -->
+    <section class="text-left py-1">
+      <h2 class="text-xl font-extrabold text-[#471A70] tracking-tight flex items-center gap-1.5">
+        Welcome back, Systems Limited 👏
+      </h2>
+      <p class="text-xs text-outline font-medium mt-1">Recruiter portal • Performance is up 12% from last month</p>
+    </section>
+
+    <!-- 2x2 Metrics Grid -->
+    <section class="grid grid-cols-2 gap-3">
+      <!-- Total Applications -->
+      <div class="glass-card rounded-2xl p-4 flex flex-col justify-between h-28 text-left relative">
+        <div class="flex justify-between items-start">
+          <span class="material-symbols-outlined text-primary text-[20px]">group</span>
+          <span class="text-[9px] font-bold text-green-600 bg-green-50 px-1.5 py-0.5 rounded-full flex items-center gap-0.5">
+            <span class="material-symbols-outlined text-[9px]">trending_up</span>+14%
+          </span>
+        </div>
+        <div>
+          <p class="text-[9px] uppercase tracking-wider text-outline font-bold">Total Applications</p>
+          <p class="text-xl font-extrabold text-[#471A70] mt-0.5">2,840</p>
+          <p class="text-[9px] text-outline">Students who applied</p>
+        </div>
+      </div>
+
+      <!-- Job Post Clicks -->
+      <div class="glass-card rounded-2xl p-4 flex flex-col justify-between h-28 text-left">
+        <div class="flex justify-between items-start">
+          <span class="material-symbols-outlined text-secondary text-[20px]">ads_click</span>
+          <span class="text-[9px] font-bold text-green-600 bg-green-50 px-1.5 py-0.5 rounded-full flex items-center gap-0.5">
+            <span class="material-symbols-outlined text-[9px]">trending_up</span>+22%
+          </span>
+        </div>
+        <div>
+          <p class="text-[9px] uppercase tracking-wider text-outline font-bold">Job Post Clicks</p>
+          <p class="text-xl font-extrabold text-[#471A70] mt-0.5">12,402</p>
+          <p class="text-[9px] text-outline">Students who viewed jobs</p>
+        </div>
+      </div>
+
+      <!-- Active Postings -->
+      <div class="glass-card rounded-2xl p-4 flex flex-col justify-between h-28 text-left">
+        <div class="flex justify-between items-start">
+          <span class="material-symbols-outlined text-primary text-[20px]">work</span>
+          <span class="text-[9px] font-bold text-outline bg-gray-100 px-1.5 py-0.5 rounded-full">Stable</span>
+        </div>
+        <div>
+          <p class="text-[9px] uppercase tracking-wider text-outline font-bold">Active Postings</p>
+          <p class="text-xl font-extrabold text-[#471A70] mt-0.5">43</p>
+          <p class="text-[9px] text-outline">Across all departments</p>
+        </div>
+      </div>
+
+      <!-- Upcoming Interviews -->
+      <div class="glass-card rounded-2xl p-4 flex flex-col justify-between h-28 text-left">
+        <div class="flex justify-between items-start">
+          <span class="material-symbols-outlined text-red-500 text-[20px]">calendar_today</span>
+          <span class="text-[9px] font-bold text-red-600 bg-red-50 px-1.5 py-0.5 rounded-full flex items-center gap-0.5">
+            <span class="material-symbols-outlined text-[9px]">trending_down</span>-2%
+          </span>
+        </div>
+        <div>
+          <p class="text-[9px] uppercase tracking-wider text-outline font-bold">Upcoming Interviews</p>
+          <p class="text-xl font-extrabold text-[#471A70] mt-0.5">12</p>
+          <p class="text-[9px] text-outline">This week scheduled</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Hiring Pipeline -->
+    <section class="glass-card p-4 rounded-3xl space-y-4">
+      <div class="flex justify-between items-center">
+        <h3 class="text-xs font-bold text-[#726580] uppercase tracking-wider">Hiring Pipeline</h3>
+        <span class="text-[10px] bg-white/60 border border-white/80 px-2.5 py-1 rounded-full font-bold text-outline">Last 30 Days</span>
+      </div>
+      
+      <!-- Horizontal Scrollable Pipeline Steps -->
+      <div class="flex items-center justify-between overflow-x-auto hide-scrollbar py-2 px-1 gap-4">
+        <div class="flex flex-col items-center shrink-0">
+          <div class="w-10 h-10 rounded-full bg-primary text-white font-bold text-xs flex items-center justify-center shadow-md">348</div>
+          <span class="text-[9px] text-outline font-bold uppercase tracking-wider mt-1.5">Sourcing</span>
+        </div>
+        <div class="h-[2px] bg-primary/20 w-8 shrink-0"></div>
+        <div class="flex flex-col items-center shrink-0">
+          <div class="w-10 h-10 rounded-full bg-primary text-white font-bold text-xs flex items-center justify-center shadow-md">204</div>
+          <span class="text-[9px] text-outline font-bold uppercase tracking-wider mt-1.5">Screening</span>
+        </div>
+        <div class="h-[2px] bg-primary/20 w-8 shrink-0"></div>
+        <div class="flex flex-col items-center shrink-0">
+          <div class="w-10 h-10 rounded-full bg-primary text-white font-bold text-xs flex items-center justify-center shadow-md">87</div>
+          <span class="text-[9px] text-outline font-bold uppercase tracking-wider mt-1.5">Interviews</span>
+        </div>
+        <div class="h-[2px] bg-primary/20 w-8 shrink-0"></div>
+        <div class="flex flex-col items-center shrink-0">
+          <div class="w-10 h-10 rounded-full bg-[#bf7df5] text-white font-bold text-xs flex items-center justify-center shadow-md">23</div>
+          <span class="text-[9px] text-outline font-bold uppercase tracking-wider mt-1.5">Offers</span>
+        </div>
+        <div class="h-[2px] bg-primary/20 w-8 shrink-0"></div>
+        <div class="flex flex-col items-center shrink-0">
+          <div class="w-10 h-10 rounded-full bg-green-500 text-white font-bold text-xs flex items-center justify-center shadow-md">18</div>
+          <span class="text-[9px] text-outline font-bold uppercase tracking-wider mt-1.5">Hired</span>
+        </div>
+      </div>
+
+      <div class="flex justify-between items-center text-xs border-t border-white/40 pt-3">
+        <span class="text-outline font-medium">Conversion Rate</span>
+        <span class="font-extrabold text-[#471A70] text-sm">5.2%</span>
+      </div>
+    </section>
+
+    <!-- Active Postings -->
+    <section class="glass-card p-4 rounded-3xl space-y-4">
+      <div class="flex justify-between items-center">
+        <h3 class="text-xs font-bold text-[#726580] uppercase tracking-wider">Active Postings</h3>
+        <button onclick="parent.App ? parent.App.navigate('company-postings') : (window.location.hash = '#/company/postings')" class="text-xs text-secondary font-bold flex items-center gap-0.5">
+          View All <span class="material-symbols-outlined text-sm">arrow_forward</span>
+        </button>
+      </div>
+
+      <div class="space-y-3">
+        <!-- Job 1 -->
+        <div class="bg-white/30 border border-white/50 rounded-2xl p-3.5 flex items-center justify-between text-left">
+          <div class="space-y-1">
+            <h4 class="font-bold text-xs text-[#471A70]">Software Engineer Intern</h4>
+            <p class="text-[10px] text-outline font-medium">Engineering • Posted 2 days ago</p>
+            <p class="text-[10px] text-[#471A70] font-bold">247 <span class="text-outline font-normal">applied</span> &bull; 1,830 <span class="text-outline font-normal">views</span></p>
+          </div>
+          <span class="px-2 py-0.5 rounded-full bg-green-100 text-green-700 font-bold text-[9px]">LIVE</span>
+        </div>
+
+        <!-- Job 2 -->
+        <div class="bg-white/30 border border-white/50 rounded-2xl p-3.5 flex items-center justify-between text-left">
+          <div class="space-y-1">
+            <h4 class="font-bold text-xs text-[#471A70]">UI/UX Designer Intern</h4>
+            <p class="text-[10px] text-outline font-medium">Product • Posted 5 days ago</p>
+            <p class="text-[10px] text-[#471A70] font-bold">183 <span class="text-outline font-normal">applied</span> &bull; 2,140 <span class="text-outline font-normal">views</span></p>
+          </div>
+          <span class="px-2 py-0.5 rounded-full bg-green-100 text-green-700 font-bold text-[9px]">LIVE</span>
+        </div>
+
+        <!-- Job 3 -->
+        <div class="bg-white/30 border border-white/50 rounded-2xl p-3.5 flex items-center justify-between text-left">
+          <div class="space-y-1">
+            <h4 class="font-bold text-xs text-[#471A70]">Data Analyst Intern</h4>
+            <p class="text-[10px] text-outline font-medium">Finance • Posted 1 week ago</p>
+            <p class="text-[10px] text-[#471A70] font-bold">312 <span class="text-outline font-normal">applied</span> &bull; 4,900 <span class="text-outline font-normal">views</span></p>
+          </div>
+          <span class="px-2 py-0.5 rounded-full bg-green-100 text-green-700 font-bold text-[9px]">LIVE</span>
+        </div>
+
+        <!-- Job 4 -->
+        <div class="bg-white/30 border border-white/50 rounded-2xl p-3.5 flex items-center justify-between text-left">
+          <div class="space-y-1">
+            <h4 class="font-bold text-xs text-[#471A70]">Marketing Intern</h4>
+            <p class="text-[10px] text-outline font-medium">Marketing • Draft</p>
+            <p class="text-[10px] text-outline font-medium">Not published</p>
+          </div>
+          <span class="px-2 py-0.5 rounded-full bg-gray-200 text-gray-700 font-bold text-[9px]">DRAFT</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Job Performance -->
+    <section class="glass-card p-4 rounded-3xl space-y-4">
+      <div class="flex justify-between items-center">
+        <h3 class="text-xs font-bold text-[#726580] uppercase tracking-wider">Job Performance</h3>
+        <div class="flex items-center gap-2 text-[9px] font-bold text-outline">
+          <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-primary"></span>Applications</span>
+          <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-secondary"></span>Clicks</span>
+        </div>
+      </div>
+
+      <div class="space-y-4 text-left">
+        <!-- Performance 1 -->
+        <div class="space-y-1.5">
+          <div class="flex justify-between text-[11px] font-bold text-[#471A70]">
+            <span>Software Engineer Intern</span>
+            <span>247 / 1,830</span>
+          </div>
+          <div class="space-y-1">
+            <!-- Applications (purple) -->
+            <div class="h-2 w-full bg-white/30 rounded-full overflow-hidden">
+              <div class="h-full bg-primary w-[82%] rounded-full"></div>
+            </div>
+            <!-- Clicks (blue) -->
+            <div class="h-2 w-full bg-white/30 rounded-full overflow-hidden">
+              <div class="h-full bg-secondary w-[91%] rounded-full"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Performance 2 -->
+        <div class="space-y-1.5">
+          <div class="flex justify-between text-[11px] font-bold text-[#471A70]">
+            <span>UI/UX Designer Intern</span>
+            <span>183 / 2,140</span>
+          </div>
+          <div class="space-y-1">
+            <!-- Applications (purple) -->
+            <div class="h-2 w-full bg-white/30 rounded-full overflow-hidden">
+              <div class="h-full bg-primary w-[65%] rounded-full"></div>
+            </div>
+            <!-- Clicks (blue) -->
+            <div class="h-2 w-full bg-white/30 rounded-full overflow-hidden">
+              <div class="h-full bg-secondary w-[78%] rounded-full"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Performance 3 -->
+        <div class="space-y-1.5">
+          <div class="flex justify-between text-[11px] font-bold text-[#471A70]">
+            <span>Data Analyst Intern</span>
+            <span>312 / 4,900</span>
+          </div>
+          <div class="space-y-1">
+            <!-- Applications (purple) -->
+            <div class="h-2 w-full bg-white/30 rounded-full overflow-hidden">
+              <div class="h-full bg-primary w-[100%] rounded-full"></div>
+            </div>
+            <!-- Clicks (blue) -->
+            <div class="h-2 w-full bg-white/30 rounded-full overflow-hidden">
+              <div class="h-full bg-secondary w-[88%] rounded-full"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Upcoming Interviews -->
+    <section class="glass-card p-4 rounded-3xl space-y-4">
+      <div class="flex justify-between items-center">
+        <h3 class="text-xs font-bold text-[#726580] uppercase tracking-wider">Upcoming Interviews</h3>
+        <button class="text-xs text-secondary font-bold flex items-center gap-0.5">
+          View All <span class="material-symbols-outlined text-sm">arrow_forward</span>
+        </button>
+      </div>
+
+      <div class="space-y-3">
+        <!-- Interviewee 1 -->
+        <div class="flex items-center justify-between p-2.5 rounded-2xl bg-white/30 border border-white/50 text-left">
+          <div class="flex items-center gap-3">
+            <img class="w-9 h-9 rounded-full object-cover" src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=100"/>
+            <div>
+              <h4 class="font-bold text-xs text-[#471A70]">Ali Hassan</h4>
+              <p class="text-[10px] text-outline font-medium">Software Engineer &bull; Today 2:00 PM</p>
+            </div>
+          </div>
+          <span class="px-2.5 py-0.5 rounded-full bg-green-100 text-green-700 font-bold text-[9px]">TODAY</span>
+        </div>
+
+        <!-- Interviewee 2 -->
+        <div class="flex items-center justify-between p-2.5 rounded-2xl bg-white/30 border border-white/50 text-left">
+          <div class="flex items-center gap-3">
+            <img class="w-9 h-9 rounded-full object-cover" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=100"/>
+            <div>
+              <h4 class="font-bold text-xs text-[#471A70]">Sara Ahmed</h4>
+              <p class="text-[10px] text-outline font-medium">UI/UX Designer &bull; Today 4:30 PM</p>
+            </div>
+          </div>
+          <span class="px-2.5 py-0.5 rounded-full bg-green-100 text-green-700 font-bold text-[9px]">TODAY</span>
+        </div>
+
+        <!-- Interviewee 3 -->
+        <div class="flex items-center justify-between p-2.5 rounded-2xl bg-white/30 border border-white/50 text-left">
+          <div class="flex items-center gap-3">
+            <img class="w-9 h-9 rounded-full object-cover" src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?q=80&w=100"/>
+            <div>
+              <h4 class="font-bold text-xs text-[#471A70]">Zara Malik</h4>
+              <p class="text-[10px] text-outline font-medium">Data Analyst &bull; Tomorrow 10:00 AM</p>
+            </div>
+          </div>
+          <span class="px-2.5 py-0.5 rounded-full bg-purple-100 text-purple-700 font-bold text-[9px]">TMR</span>
+        </div>
+
+        <!-- Interviewee 4 -->
+        <div class="flex items-center justify-between p-2.5 rounded-2xl bg-white/30 border border-white/50 text-left">
+          <div class="flex items-center gap-3">
+            <img class="w-9 h-9 rounded-full object-cover" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=100"/>
+            <div>
+              <h4 class="font-bold text-xs text-[#471A70]">Omar Farooq</h4>
+              <p class="text-[10px] text-outline font-medium">Marketing &bull; Thu 2:00 PM</p>
+            </div>
+          </div>
+          <span class="px-2.5 py-0.5 rounded-full bg-gray-100 text-gray-700 font-bold text-[9px]">THU</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Top Matches -->
+    <section class="glass-card p-4 rounded-3xl space-y-4">
+      <div class="flex justify-between items-center">
+        <h3 class="text-xs font-bold text-[#726580] uppercase tracking-wider">Top Matches</h3>
+        <button onclick="parent.App ? parent.App.navigate('company-kanban') : (window.location.hash = '#/company/kanban')" class="text-xs text-secondary font-bold flex items-center gap-0.5">
+          View All <span class="material-symbols-outlined text-sm">arrow_forward</span>
+        </button>
+      </div>
+
+      <div class="space-y-3">
+        <!-- Match 1 -->
+        <div class="bg-white/30 border border-white/50 rounded-2xl p-3.5 text-left space-y-2 relative">
+          <span class="absolute top-3.5 right-3.5 font-extrabold text-xs text-primary bg-primary/10 px-2 py-0.5 rounded-full">98% Match</span>
+          <div class="flex items-center gap-3">
+            <img class="w-9 h-9 rounded-full object-cover" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=100"/>
+            <div>
+              <h4 class="font-bold text-xs text-[#471A70]">Fatima Zahra</h4>
+              <p class="text-[10px] text-outline font-medium">FAST-NUCES &bull; Class of 2025</p>
+            </div>
+          </div>
+          <div class="flex gap-1.5 flex-wrap pt-1">
+            <span class="text-[9px] font-bold text-primary bg-primary/10 px-2 py-0.5 rounded-full">Python</span>
+            <span class="text-[9px] font-bold text-primary bg-primary/10 px-2 py-0.5 rounded-full">React</span>
+            <span class="text-[9px] font-bold text-primary bg-primary/10 px-2 py-0.5 rounded-full">ML</span>
+          </div>
+        </div>
+
+        <!-- Match 2 -->
+        <div class="bg-white/30 border border-white/50 rounded-2xl p-3.5 text-left space-y-2 relative">
+          <span class="absolute top-3.5 right-3.5 font-extrabold text-xs text-primary bg-primary/10 px-2 py-0.5 rounded-full">95% Match</span>
+          <div class="flex items-center gap-3">
+            <img class="w-9 h-9 rounded-full object-cover" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=100"/>
+            <div>
+              <h4 class="font-bold text-xs text-[#471A70]">Ahmed Raza</h4>
+              <p class="text-[10px] text-outline font-medium">LUMS &bull; Class of 2025</p>
+            </div>
+          </div>
+          <div class="flex gap-1.5 flex-wrap pt-1">
+            <span class="text-[9px] font-bold text-primary bg-primary/10 px-2 py-0.5 rounded-full">Java</span>
+            <span class="text-[9px] font-bold text-primary bg-primary/10 px-2 py-0.5 rounded-full">Node.js</span>
+          </div>
+        </div>
+
+        <!-- Match 3 -->
+        <div class="bg-white/30 border border-white/50 rounded-2xl p-3.5 text-left space-y-2 relative">
+          <span class="absolute top-3.5 right-3.5 font-extrabold text-xs text-primary bg-primary/10 px-2 py-0.5 rounded-full">92% Match</span>
+          <div class="flex items-center gap-3">
+            <img class="w-9 h-9 rounded-full object-cover" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=100"/>
+            <div>
+              <h4 class="font-bold text-xs text-[#471A70]">Sana Mirza</h4>
+              <p class="text-[10px] text-outline font-medium">IBA Karachi &bull; Class of 2024</p>
+            </div>
+          </div>
+          <div class="flex gap-1.5 flex-wrap pt-1">
+            <span class="text-[9px] font-bold text-primary bg-primary/10 px-2 py-0.5 rounded-full">Figma</span>
+            <span class="text-[9px] font-bold text-primary bg-primary/10 px-2 py-0.5 rounded-full">UX Research</span>
+          </div>
+        </div>
+
+        <!-- Match 4 -->
+        <div class="bg-white/30 border border-white/50 rounded-2xl p-3.5 text-left space-y-2 relative">
+          <span class="absolute top-3.5 right-3.5 font-extrabold text-xs text-primary bg-primary/10 px-2 py-0.5 rounded-full">89% Match</span>
+          <div class="flex items-center gap-3">
+            <img class="w-9 h-9 rounded-full object-cover" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=100"/>
+            <div>
+              <h4 class="font-bold text-xs text-[#471A70]">Usman Tariq</h4>
+              <p class="text-[10px] text-outline font-medium">GIKI &bull; Class of 2025</p>
+            </div>
+          </div>
+          <div class="flex gap-1.5 flex-wrap pt-1">
+            <span class="text-[9px] font-bold text-primary bg-primary/10 px-2 py-0.5 rounded-full">SQL</span>
+            <span class="text-[9px] font-bold text-primary bg-primary/10 px-2 py-0.5 rounded-full">Tableau</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Quick Actions -->
+    <section class="glass-card p-4 rounded-3xl space-y-3">
+      <h3 class="text-xs font-bold text-[#726580] uppercase tracking-wider text-left">Quick Actions</h3>
+      <div class="grid grid-cols-3 gap-2.5">
+        <button onclick="parent.App ? parent.App.navigate('company-job-creator') : (window.location.hash = '#/company/postings/create')" class="bg-white/50 border border-white/70 p-3 rounded-2xl flex flex-col items-center gap-1.5 active:scale-95 transition-transform">
+          <span class="material-symbols-outlined text-primary text-xl">add_circle</span>
+          <span class="text-[9px] font-extrabold text-[#471A70] uppercase">Post Job</span>
+        </button>
+        <button onclick="parent.App ? parent.App.navigate('company-kanban') : (window.location.hash = '#/company/kanban')" class="bg-white/50 border border-white/70 p-3 rounded-2xl flex flex-col items-center gap-1.5 active:scale-95 transition-transform">
+          <span class="material-symbols-outlined text-primary text-xl">calendar_today</span>
+          <span class="text-[9px] font-extrabold text-[#471A70] uppercase">Schedule</span>
+        </button>
+        <button onclick="parent.App ? parent.App.navigate('company-talent') : (window.location.hash = '#/company/talent')" class="bg-white/50 border border-white/70 p-3 rounded-2xl flex flex-col items-center gap-1.5 active:scale-95 transition-transform">
+          <span class="material-symbols-outlined text-primary text-xl">search</span>
+          <span class="text-[9px] font-extrabold text-[#471A70] uppercase">Find Talent</span>
+        </button>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Bottom Navigation Bar Placeholder -->
+  <nav id="bottom-nav"></nav>
+
+  <script>
+    // Micro-interactions
+    document.querySelectorAll('.glass-card, button').forEach(el => {
+      el.addEventListener('touchstart', () => {
+        el.style.transform = 'scale(0.97)';
+        el.style.transition = 'transform 0.15s ease-in-out';
+      });
+      el.addEventListener('touchend', () => {
+        el.style.transform = 'scale(1)';
+      });
+    });
+  </script>
+</body>
+</html>

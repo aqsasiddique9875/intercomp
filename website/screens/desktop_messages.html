@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+  <script>
+    if (window.self !== window.top) {
+      const style = document.createElement('style');
+      style.innerHTML = `
+        header, nav, aside, 
+        .SideNavBar, .TopNavBar, 
+        #SideNavBar, #TopNavBar {
+          display: none !important;
+        }
+        main, .main-content {
+          margin-left: 0 !important;
+          padding-top: 1.5rem !important;
+        }
+        main.ml-64, main.lg\\:ml-64 {
+          margin-left: 0 !important;
+          padding-top: 2rem !important;
+        }
+      `;
+      document.documentElement.appendChild(style);
+    }
+  </script>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>Messages | Intercomp Student Portal</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&amp;display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet" />
+  <script id="tailwind-config">
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#8731a3",
+            "primary-container": "#a34cbe",
+            "secondary": "#0060ab",
+            "background": "#DCE4F7",
+            "deep-purple": "#471A70",
+            "glass-fill": "rgba(255, 255, 255, 0.35)",
+            "glass-thick": "rgba(255, 255, 255, 0.8)",
+            "glass-border": "rgba(255, 255, 255, 0.6)"
+          }
+        }
+      }
+    };
+  </script>
+  <style>
+    ::-webkit-scrollbar {
+      display: none;
+    }
+    * {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    body {
+      background-color: #DCE4F7;
+      color: #471A70;
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+    }
+    .glass-card {
+      background: rgba(255, 255, 255, 0.35);
+      backdrop-filter: blur(28px);
+      -webkit-backdrop-filter: blur(28px);
+      border: 1px solid rgba(255, 255, 255, 0.6);
+      box-shadow: 0 12px 40px 0 rgba(71, 26, 112, 0.15);
+    }
+    .liquid-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: -1;
+      filter: blur(80px);
+      opacity: 0.6;
+    }
+    .blob {
+      position: absolute;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(163, 76, 190, 0.4) 0%, rgba(84, 163, 255, 0.1) 70%);
+      border-radius: 50%;
+      animation: move 20s infinite alternate;
+    }
+    @keyframes move {
+      from { transform: translate(-10%, -10%); }
+      to { transform: translate(20%, 20%); }
+    }
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      vertical-align: middle;
+    }
+    .active-chat-item {
+      background-color: rgba(135, 49, 163, 0.15);
+      border-left: 4px solid #8731a3;
+    }
+    .typing-dots span {
+      animation: blink 1.4s infinite both;
+      height: 6px;
+      width: 6px;
+      background: currentColor;
+      border-radius: 50%;
+      display: inline-block;
+      margin: 0 1px;
+    }
+    .typing-dots span:nth-child(2) { animation-delay: .2s; }
+    .typing-dots span:nth-child(3) { animation-delay: .4s; }
+    @keyframes blink {
+      0% { opacity: .2; }
+      20% { opacity: 1; }
+      100% { opacity: .2; }
+    }
+  </style>
+</head>
+<body class="min-h-screen relative flex flex-col justify-start">
+  <div class="liquid-bg">
+    <div class="blob" style="top: -10%; left: -10%;"></div>
+    <div class="blob" style="bottom: -10%; right: -10%; background: radial-gradient(circle, rgba(84, 163, 255, 0.4) 0%, rgba(163, 76, 190, 0.1) 70%); animation-delay: -5s;"></div>
+  </div>
+
+  <main class="w-full max-w-6xl">
+    <div class="w-full h-[calc(100vh-4rem)] glass-card rounded-3xl overflow-hidden grid grid-cols-1 md:grid-cols-12 shadow-2xl">
+    
+    <!-- Left Column: Conversations List -->
+    <div class="md:col-span-4 border-r border-glass-border flex flex-col h-full bg-white/20">
+      
+      <!-- List Header -->
+      <div class="p-4 border-b border-glass-border">
+        <h2 class="text-lg font-bold text-deep-purple flex items-center gap-2">
+          <span class="material-symbols-outlined text-primary">chat_bubble</span> Student Inbox
+        </h2>
+        <div class="mt-3 relative">
+          <span class="material-symbols-outlined absolute left-3 top-2.5 text-deep-purple/40 text-sm">search</span>
+          <input id="chatSearch" type="text" placeholder="Search chats..." class="w-full pl-9 pr-4 py-2 rounded-xl bg-white/40 border border-glass-border focus:border-primary focus:ring-1 focus:ring-primary text-xs text-deep-purple placeholder-deep-purple/50" oninput="filterChats()" />
+        </div>
+      </div>
+
+      <!-- Chats Stream -->
+      <div id="chatsContainer" class="flex-grow overflow-y-auto divide-y divide-glass-border/30 no-scrollbar">
+        <!-- Filled dynamically -->
+      </div>
+    </div>
+
+    <!-- Right Column: Active Chat Area -->
+    <div class="md:col-span-8 flex flex-col h-full bg-white/10 relative">
+      
+      <!-- Active Chat Header -->
+      <div class="p-4 border-b border-glass-border flex justify-between items-center bg-white/10 backdrop-blur-md">
+        <div class="flex items-center gap-3">
+          <div class="relative">
+            <img id="activeAvatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCOTIe8IIKRj1nm1BtYr2gj3qEvYHfC49iECROcht5YY95iVetMG2Ri-_h5iLqZW7OXXdDPfEBIyIFGk9ydSpc8JDWw_rcI0EvfGniNgE2vkel332e9slOB-L8qdRGNztBI9D-9EizAICxUULxGA6Iohe7RPbE_klZ-lTJELxwYkbymNHv7aHA_P_4xdIKgGCfKiQ4AmU374SJcsPkWjzqVVeWYP67vTw9KfMvjDBBfSyn-E9h5oQyhV8U6rx6T9ZjRd8iy0rV9Xgvf" class="w-10 h-10 rounded-full object-cover border border-glass-border" alt="" />
+            <span id="activeStatusBadge" class="absolute bottom-0 right-0 w-2.5 h-2.5 bg-green-500 border border-white rounded-full"></span>
+          </div>
+          <div>
+            <h3 id="activeName" class="text-sm font-bold text-deep-purple">Sarah Jenkins</h3>
+            <p id="activeRole" class="text-[10px] text-primary font-semibold">UI/UX Mentor & Industry Lead</p>
+          </div>
+        </div>
+        
+        <!-- Header Actions -->
+        <div class="flex items-center gap-2">
+          <button onclick="triggerCall('audio')" class="p-2 rounded-xl hover:bg-white/40 text-deep-purple/70 hover:text-primary transition-all">
+            <span class="material-symbols-outlined text-lg">call</span>
+          </button>
+          <button onclick="triggerCall('video')" class="p-2 rounded-xl hover:bg-white/40 text-deep-purple/70 hover:text-primary transition-all">
+            <span class="material-symbols-outlined text-lg">videocam</span>
+          </button>
+          <button class="p-2 rounded-xl hover:bg-white/40 text-deep-purple/70 transition-all">
+            <span class="material-symbols-outlined text-lg">more_vert</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Messages History Area -->
+      <div id="messagesHistory" class="flex-grow overflow-y-auto p-4 space-y-4 no-scrollbar bg-slate-50/10">
+        <!-- Rendered dynamically -->
+      </div>
+
+      <!-- Typing Indicator (Hidden by default) -->
+      <div id="typingIndicator" class="hidden px-6 py-2 flex items-center gap-2 text-deep-purple/60 text-xs italic bg-white/5 border-t border-glass-border/30">
+        <span id="typingName">Sarah</span> is typing
+        <div class="typing-dots"><span></span><span></span><span></span></div>
+      </div>
+
+      <!-- Chat Input Area -->
+      <div class="p-4 border-t border-glass-border bg-white/20 flex gap-2 items-center">
+        <button class="p-2 rounded-xl hover:bg-white/40 text-deep-purple/50 hover:text-deep-purple transition-all">
+          <span class="material-symbols-outlined text-lg">attach_file</span>
+        </button>
+        <button class="p-2 rounded-xl hover:bg-white/40 text-deep-purple/50 hover:text-deep-purple transition-all">
+          <span class="material-symbols-outlined text-lg">mood</span>
+        </button>
+        <input id="chatInput" type="text" placeholder="Type your message here..." class="flex-grow px-4 py-2.5 rounded-xl bg-white/60 border border-glass-border focus:border-primary focus:ring-1 focus:ring-primary text-xs text-deep-purple placeholder-deep-purple/50 focus:outline-none" onkeydown="handleInputKeydown(event)" />
+        <button onclick="sendMessage()" class="p-2.5 bg-primary hover:bg-primary-container text-white rounded-xl shadow-md transition-all active:scale-95 flex items-center justify-center">
+          <span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">send</span>
+        </button>
+      </div>
+
+    </div>
+
+  </main>
+
+  <script>
+    const conversations = [
+      {
+        id: "c1",
+        name: "Sarah Jenkins",
+        role: "UI/UX Mentor & Industry Lead",
+        avatar: "https://lh3.googleusercontent.com/aida-public/AB6AXuCOTIe8IIKRj1nm1BtYr2gj3qEvYHfC49iECROcht5YY95iVetMG2Ri-_h5iLqZW7OXXdDPfEBIyIFGk9ydSpc8JDWw_rcI0EvfGniNgE2vkel332e9slOB-L8qdRGNztBI9D-9EizAICxUULxGA6Iohe7RPbE_klZ-lTJELxwYkbymNHv7aHA_P_4xdIKgGCfKiQ4AmU374SJcsPkWjzqVVeWYP67vTw9KfMvjDBBfSyn-E9h5oQyhV8U6rx6T9ZjRd8iy0rV9Xgvf",
+        online: true,
+        unread: 0,
+        messages: [
+          { sender: "Sarah", text: "Hey Alex! I reviewed your portfolio file. The autolayout constraints are set up perfectly.", time: "10:32 AM", me: false },
+          { sender: "Me", text: "Thank you Sarah! I worked hard on the card alignments. Should I add the dark mode variants now?", time: "10:34 AM", me: true },
+          { sender: "Sarah", text: "Yes, definitely. Ensure the contrast ratio is 4.5:1. Let's align on our next mentoring session.", time: "10:35 AM", me: false }
+        ],
+        autoreply: "Hi! That's a great question. Let's discuss this during our upcoming 1-on-1 mentorship scheduler slot. Have you checked out the course material on Advanced UX research?"
+      },
+      {
+        id: "c2",
+        name: "Systems Ltd Recruitment",
+        role: "HR Talent Acquisition Team",
+        avatar: "../assets/systems_logo.png",
+        online: false,
+        unread: 2,
+        messages: [
+          { sender: "HR", text: "Dear Alex, we have selected your profile for the Associate Software Engineer role test evaluation.", time: "Yesterday", me: false },
+          { sender: "HR", text: "Please login to the secure proctor room tomorrow at 10:00 AM using the student portal schedule link.", time: "Yesterday", me: false }
+        ],
+        autoreply: "Our HR bot is currently offline, but your test is confirmed. Please join 5 minutes early to launch the secure web browser."
+      },
+      {
+        id: "c3",
+        name: "David K. (Study Group)",
+        role: "Frontend Development Peer",
+        avatar: "https://lh3.googleusercontent.com/aida-public/AB6AXuBNG6GG-Qdh4rSmiegh2fBuLErHkOHgsakvd5tcnZ_3nx9yowFJfUvbQF7zwF7yFgyuMuDjX0maaRIUSFXozSnSobWjo2T4TpU72VO0mRu5yjYSvf88AhtNo-UNRc9YVAsd1-yXeoI4rrQhdUfhODyDQRKfD2HWWw05nIQ78j7uJEYcXbu5eP9Qy47prAWirkJuozlsMUdepkfDIJkSe1HF7rj-fU01Ymdav3gFr5jecuT7e9cLgOb88zNjqR8GKg_6tYIym_qV7W1B",
+        online: true,
+        unread: 0,
+        messages: [
+          { sender: "David", text: "Bro, are you ready for the DSA test tomorrow? I'm struggling with binary trees recursion.", time: "2 hours ago", me: false },
+          { sender: "Me", text: "Check out the LeetCode 75 cheat sheet in the Library resource section! It has perfect templates.", time: "1 hour ago", me: true }
+        ],
+        autoreply: "Thanks for the tip! That LeetCode cheat sheet is amazing. Let's do a mock session tonight."
+      },
+      {
+        id: "c4",
+        name: "Intercomp AI Agent",
+        role: "Contextual Portal Assistant",
+        avatar: "../assets/ai_agent_avatar.png",
+        online: true,
+        unread: 0,
+        messages: [
+          { sender: "AI Agent", text: "Hello! I am your Intercomp AI Assistant. I can guide you through the active screen you are currently viewing. Ask me anything about this page!", time: "Just now", me: false }
+        ]
+      }
+    ];
+
+    let activeChatId = "c1";
+
+    // ============================================================
+    // LOAD INTERVIEW NOTIFICATIONS FROM RECRUITER (localStorage)
+    // ============================================================
+    function loadInterviewNotifications() {
+      var interviewMsgs = JSON.parse(localStorage.getItem('studentInterviewMessages') || '[]');
+      if (interviewMsgs.length === 0) return;
+
+      var unreadCount = interviewMsgs.filter(function(m){ return !m.isRead; }).length;
+
+      // Check if HR conversation already exists
+      var existing = conversations.find(function(c){ return c.id === 'hr-interviews'; });
+
+      // Build messages thread from all interview notifications
+      var msgs = interviewMsgs.map(function(iv) {
+        var timeAgo = getTimeAgo(new Date(iv.sentAt));
+        return {
+          sender: 'HR Team',
+          text: iv.message.replace(/\n/g, ' ').substring(0, 200),
+          fullText: iv.message,
+          time: timeAgo,
+          me: false,
+          isInterview: true,
+          subject: iv.subject,
+          dateLabel: iv.dateLabel,
+          timeLabel: iv.timeLabel,
+          duration: iv.duration,
+          candidateName: iv.candidateName
+        };
+      });
+
+      var hrConv = {
+        id: 'hr-interviews',
+        name: 'EliteRecruit HR Team',
+        role: 'Interview Scheduling & Talent Acquisition',
+        avatar: 'https://i.pravatar.cc/40?img=68',
+        online: true,
+        unread: unreadCount,
+        messages: msgs,
+        autoreply: 'Thank you for your response! Our HR team will get back to you shortly. If you have any questions about your interview, please call us at +92-300-ELITE.'
+      };
+
+      if (existing) {
+        // Update existing
+        var idx = conversations.indexOf(existing);
+        conversations[idx] = hrConv;
+      } else {
+        // Insert at top
+        conversations.unshift(hrConv);
+      }
+
+      // Mark all as read when loaded (will be marked on open)
+    }
+
+    function getTimeAgo(date) {
+      var now = new Date();
+      var diff = Math.floor((now - date) / 1000);
+      if (diff < 60) return 'Just now';
+      if (diff < 3600) return Math.floor(diff/60) + 'm ago';
+      if (diff < 86400) return Math.floor(diff/3600) + 'h ago';
+      return Math.floor(diff/86400) + 'd ago';
+    }
+
+    // loadInterviewNotifications(); // Disabled EliteRecruit HR Team conversation
+
+
+    function renderChats() {
+      const container = document.getElementById('chatsContainer');
+      if (!container) return;
+      container.innerHTML = '';
+
+      const term = document.getElementById('chatSearch').value.toLowerCase();
+
+      conversations.forEach(c => {
+        if (term && !c.name.toLowerCase().includes(term) && !c.role.toLowerCase().includes(term)) {
+          return;
+        }
+
+        const lastMsgObj = c.messages[c.messages.length - 1];
+        const lastMsgText = lastMsgObj ? lastMsgObj.text : '';
+        const lastMsgTime = lastMsgObj ? lastMsgObj.time : '';
+
+        const item = document.createElement('div');
+        item.className = `p-4 flex items-center justify-between cursor-pointer hover:bg-white/10 transition-colors ${c.id === activeChatId ? 'active-chat-item' : ''}`;
+        item.onclick = () => selectChat(c.id);
+
+        item.innerHTML = `
+          <div class="flex items-center gap-3 w-10/12">
+            <div class="relative flex-shrink-0">
+              <img src="${c.avatar}" class="w-10 h-10 rounded-full object-cover border border-glass-border bg-white" alt="" />
+              ${c.online ? '<span class="absolute bottom-0 right-0 w-2.5 h-2.5 bg-green-500 border border-white rounded-full"></span>' : ''}
+            </div>
+            <div class="truncate flex-grow">
+              <div class="flex justify-between items-center">
+                <span class="text-xs font-bold text-deep-purple">${c.name}</span>
+                <span class="text-[9px] text-deep-purple/40">${lastMsgTime}</span>
+              </div>
+              <p class="text-[10px] text-deep-purple/50 truncate font-body-md mt-0.5">${lastMsgText}</p>
+            </div>
+          </div>
+          <div class="w-2/12 flex justify-end">
+            ${c.unread > 0 ? `<span class="bg-primary text-white text-[8px] font-black px-1.5 py-0.5 rounded-full">${c.unread}</span>` : ''}
+          </div>
+        `;
+        container.appendChild(item);
+      });
+    }
+
+    function renderMessages() {
+      const history = document.getElementById('messagesHistory');
+      if (!history) return;
+      history.innerHTML = '';
+
+      const chat = conversations.find(c => c.id === activeChatId);
+      if (!chat) return;
+
+      chat.messages.forEach(m => {
+        const bubble = document.createElement('div');
+
+        if (m.me) {
+          bubble.className = "flex flex-col items-end space-y-1 w-9/12 ml-auto";
+          bubble.innerHTML = `
+            <div class="bg-primary text-white p-3 rounded-2xl rounded-tr-none text-xs leading-relaxed shadow-sm">
+              ${m.text}
+            </div>
+            <span class="text-[9px] text-deep-purple/40 pr-1">${m.time}</span>
+          `;
+        } else if (m.isInterview) {
+          // Special interview notification bubble
+          bubble.className = "flex gap-3 w-11/12";
+          bubble.innerHTML = `
+            <img src="${chat.avatar}" class="w-8 h-8 rounded-full object-cover border border-glass-border flex-shrink-0 bg-white" alt="" />
+            <div class="flex flex-col space-y-1 flex-1">
+              <div class="bg-white/90 p-3 rounded-2xl rounded-tl-none text-xs text-deep-purple leading-relaxed shadow-sm border border-glass-border">
+                <div style="display:flex;align-items:center;gap:6px;margin-bottom:8px;padding:6px 10px;background:rgba(71,26,112,0.07);border-radius:8px;">
+                  <span style="font-family:'Material Symbols Outlined';font-size:16px;color:#471A70;display:inline-block;">event_available</span>
+                  <strong style="font-size:11px;color:#471A70;">${m.subject}</strong>
+                </div>
+                <div style="white-space:pre-line;color:#374151;line-height:1.6;">${m.fullText || m.text}</div>
+                <div style="margin-top:10px;display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+                  <div style="background:rgba(71,26,112,0.05);border-radius:8px;padding:8px;">
+                    <div style="font-size:9px;font-weight:700;color:rgba(71,26,112,0.5);text-transform:uppercase;letter-spacing:0.05em;">Date & Time</div>
+                    <div style="font-size:11px;font-weight:700;color:#1a0533;margin-top:2px;">${m.dateLabel} · ${m.timeLabel}</div>
+                  </div>
+                  <div style="background:rgba(71,26,112,0.05);border-radius:8px;padding:8px;">
+                    <div style="font-size:9px;font-weight:700;color:rgba(71,26,112,0.5);text-transform:uppercase;letter-spacing:0.05em;">Duration</div>
+                    <div style="font-size:11px;font-weight:700;color:#1a0533;margin-top:2px;">${m.duration} minutes</div>
+                  </div>
+                </div>
+                <div style="margin-top:10px;display:flex;gap:8px;">
+                  <button onclick="confirmInterview(this)" style="flex:1;padding:8px;background:#471A70;border:none;border-radius:8px;font-family:'Inter',sans-serif;font-size:11px;font-weight:700;color:#fff;cursor:pointer;">✓ Confirm Attendance</button>
+                  <button onclick="declineInterview(this)" style="flex:1;padding:8px;background:rgba(192,41,90,0.1);border:none;border-radius:8px;font-family:'Inter',sans-serif;font-size:11px;font-weight:600;color:#c0295a;cursor:pointer;">✗ Reschedule</button>
+                </div>
+              </div>
+              <span class="text-[9px] text-deep-purple/40 pl-1">${m.time}</span>
+            </div>
+          `;
+        } else {
+          bubble.className = "flex gap-3 w-9/12";
+          bubble.innerHTML = `
+            <img src="${chat.avatar}" class="w-8 h-8 rounded-full object-cover border border-glass-border flex-shrink-0 bg-white" alt="" />
+            <div class="flex flex-col space-y-1">
+              <div class="bg-white/70 p-3 rounded-2xl rounded-tl-none text-xs text-deep-purple leading-relaxed shadow-sm border border-glass-border">
+                ${m.text}
+              </div>
+              <span class="text-[9px] text-deep-purple/40 pl-1">${m.time}</span>
+            </div>
+          `;
+        }
+        history.appendChild(bubble);
+      });
+
+
+      // Auto scroll to bottom
+      history.scrollTop = history.scrollHeight;
+    }
+
+    function selectChat(id) {
+      activeChatId = id;
+      const chat = conversations.find(c => c.id === id);
+      if (chat) {
+        chat.unread = 0;
+
+        // Update header details
+        document.getElementById('activeName').textContent = chat.name;
+        document.getElementById('activeRole').textContent = chat.role;
+        document.getElementById('activeAvatar').src = chat.avatar;
+        document.getElementById('activeStatusBadge').className = `absolute bottom-0 right-0 w-2.5 h-2.5 border border-white rounded-full ${chat.online ? 'bg-green-500' : 'bg-gray-400'}`;
+
+        renderChats();
+        renderMessages();
+      }
+    }
+
+    function sendMessage() {
+      const input = document.getElementById('chatInput');
+      const val = input.value.trim();
+      if (!val) return;
+
+      const chat = conversations.find(c => c.id === activeChatId);
+      if (!chat) return;
+
+      // Add user message
+      const time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+      chat.messages.push({
+        sender: "Me",
+        text: val,
+        time: time,
+        me: true
+      });
+
+      input.value = '';
+      renderMessages();
+      renderChats();
+
+      // Trigger Simulated Mentor Reply
+      showTypingIndicator(chat.name.split(' ')[0], true);
+      setTimeout(async () => {
+        showTypingIndicator('', false);
+        
+        let replyText = chat.autoreply;
+        if (chat.id === "c4") {
+          // Dynamic reply for AI Agent based on parent screen
+          let activeView = "messages";
+          try {
+            if (window.parent && window.parent.App) {
+              activeView = window.parent.App.activeView;
+            }
+          } catch (e) {}
+
+          const screenTopics = {
+            'onboarding': {
+              name: 'Onboarding & Skills Setup',
+              info: 'The Onboarding screen guides you through setting up your profile, selecting your primary role, and choosing your skills (e.g. Design, Frontend, Machine Learning) to customize your dashboard.',
+              keywords: ['onboarding', 'skills', 'assessment', 'setup', 'welcome', 'start']
+            },
+            'gateway': {
+              name: 'Gateway Role Selection',
+              info: 'The Gateway page allows you to select your path. Choose between the Student Portal (to learn, take tests, and apply for jobs) or the Recruiter Console (to track applicants and manage campaigns).',
+              keywords: ['gateway', 'role', 'selection', 'student', 'recruiter', 'portal', 'console']
+            },
+            'register': {
+              name: 'Student Registration Wizard',
+              info: 'The Registration Wizard helps you create a new account, enter your academic details, verify your email using a secure OTP code, and build your initial profile.',
+              keywords: ['register', 'signup', 'create account', 'otp', 'email', 'verification']
+            },
+            'login': {
+              name: 'Login Screen',
+              info: 'The Login page allows registered users to securely sign in using their credentials. If MFA is enabled, you will be redirected to the multi-factor authentication step.',
+              keywords: ['login', 'signin', 'credentials', 'password', 'email']
+            },
+            'mfa': {
+              name: 'Multi-Factor Authentication (MFA)',
+              info: 'The Multi-Factor Authentication page adds an extra layer of security. Enter the temporary verification code sent to your authenticator app or email to log in.',
+              keywords: ['mfa', 'security', 'otp', 'code', 'authentication', 'factor']
+            },
+            'student-dash': {
+              name: 'Student Dashboard',
+              info: 'The Student Dashboard shows your overall academic progress, weekly milestones, calendar schedule, recent activities, and shortcuts to courses or tests. You can also view your current active streak here.',
+              keywords: ['dashboard', 'home', 'main', 'progress', 'streak', 'milestone', 'welcome']
+            },
+            'recruiter-dash': {
+              name: 'Recruiter Command Center',
+              info: 'The Recruiter Dashboard provides an overview of hiring activity, candidate pipelines, interview schedules, ad campaigns, and quick stats on candidate matching.',
+              keywords: ['recruiter', 'command center', 'hiring', 'dashboard', 'pipeline', 'statistics']
+            },
+            'courses': {
+              name: 'Courses Catalog',
+              info: 'The Course Catalog lists all available curriculum areas (Design, Engineering, Business, Data). You can select a course path, view its details, and quickly apply to register in PKR.',
+              keywords: ['course', 'curriculum', 'learn', 'subject', 'class', 'design', 'engineering', 'business', 'data']
+            },
+            'guidelines': {
+              name: 'Test Integrity & Guidelines',
+              info: 'The Test Guidelines page displays security rules for proctored exams, including tab defocus restrictions and trust score penalty terms.',
+              keywords: ['guideline', 'integrity', 'rules', 'instructions', 'proctoring', 'policy']
+            },
+            'player': {
+              name: 'Anti-Cheat Test Player',
+              info: 'The Test Player hosts the timed proctored assessment. It logs activities such as tab switching or resizing to ensure exam integrity.',
+              keywords: ['player', 'exam player', 'timer', 'questions', 'proctored', 'anti-cheat']
+            },
+            'video': {
+              name: 'Video Player Classroom',
+              info: 'The Video Player Classroom lets you watch course lectures in high quality. You can follow along with timestamps, access lecture resources, and take notes.',
+              keywords: ['video', 'player', 'lecture', 'watch', 'classroom', 'lesson']
+            },
+            'assign': {
+              name: 'Assignments Dashboard',
+              info: 'The Assignments Dashboard lists your course assignments divided by status (Remaining, Pending Evaluation, and Graded). You can submit a Git repository link to turn in your work here.',
+              keywords: ['assignment', 'grade', 'evaluation', 'submit', 'git', 'homework', 'task']
+            },
+            'submit': {
+              name: 'Assignment Submission Portal',
+              info: 'The Assignment Submission page allows you to submit your project files and links (like GitHub repositories) for evaluation. Make sure to double-check files before submitting.',
+              keywords: ['submit', 'submission', 'upload', 'github', 'repository', 'deliver']
+            },
+            'leaderboard': {
+              name: 'Grades & Leaderboard',
+              info: 'The Leaderboard shows the global academic rankings of all students based on their score ratings, badges, and trust score. Work hard to climb to the top of the leader ranks!',
+              keywords: ['grade', 'leaderboard', 'rank', 'ranking', 'score', 'trust', 'points']
+            },
+            'showcase': {
+              name: 'Success Showcase',
+              info: 'The Success Showcase features stories of students who secured top jobs through the portal, detailing their learning paths, projects, and interview tips.',
+              keywords: ['showcase', 'success', 'story', 'placement', 'hired', 'alumni']
+            },
+            'premium': {
+              name: 'Premium Membership Hub',
+              info: 'The Premium Membership page displays details about the Gold Elite tier, including advanced AI features, unlimited mentor bookings, priority job applications, and fee waivers.',
+              keywords: ['premium', 'membership', 'gold', 'elite', 'upgrade', 'pricing', 'subscribe']
+            },
+            'talent': {
+              name: 'Talent Candidate Search',
+              info: 'The Talent Search screen allows recruiters to filter and search candidates based on skills, academic rating, group division, and trust scores to find the perfect match.',
+              keywords: ['talent', 'search', 'candidate', 'filter', 'recruiting', 'find']
+            },
+            'kanban': {
+              name: 'Applicant Tracking Board (Kanban)',
+              info: 'The Kanban board displays candidates in columns representing stages of the recruitment funnel (Applied, Shortlisted, Interviewing, Offered). Recruiters can drag items to update status.',
+              keywords: ['kanban', 'board', 'applicant', 'tracking', 'stages', 'drag', 'funnel']
+            },
+            'job-create': {
+              name: 'Job Creator & Editor',
+              info: 'The Job Creator lets recruiters draft and publish new job listings, specifying job descriptions, requirements, locations, salaries, and application fees in PKR.',
+              keywords: ['job-create', 'creator', 'editor', 'publish', 'posting', 'description']
+            },
+            'ad-campaign': {
+              name: 'Ad Campaign Creator',
+              info: 'The Ad Campaign Creator allows companies to design and sponsor ads across the student portal, with live previews showing how the ad appears on different devices.',
+              keywords: ['campaign', 'ad', 'advertisement', 'sponsor', 'preview', 'marketing']
+            },
+            'ad-store': {
+              name: 'Ad System Store',
+              info: 'The Ad Store lets recruiters purchase advertising credits, view pricing tiers, and browse history of active and completed marketing campaigns.',
+              keywords: ['store', 'ads', 'credits', 'pricing', 'purchase', 'campaigns']
+            },
+            'scheduler': {
+              name: 'Interview Scheduler',
+              info: 'The Interview Scheduler helps recruiters sync calendars, propose time slots, and schedule live video interviews with selected candidates.',
+              keywords: ['scheduler', 'interview', 'calendar', 'sync', 'slot', 'meeting']
+            },
+            'verify-queue': {
+              name: 'Company Verification Queue',
+              info: 'The Admin Queue page displays pending company registrations and document uploads requiring verification from the portal administrators.',
+              keywords: ['queue', 'verify-queue', 'verification', 'admin', 'pending', 'company']
+            },
+            'doc-verify': {
+              name: 'Document Verification Viewer',
+              info: 'The Document Verification Viewer provides a side-by-side view of uploaded company documents and credentials for quick admin approval or rejection.',
+              keywords: ['doc-verify', 'document', 'viewer', 'credentials', 'approval', 'admin']
+            },
+            'mentors': {
+              name: 'Mentors Booking',
+              info: 'The Mentors screen lets you schedule one-on-one sessions with senior industry professionals (like Sarah Jenkins). You can select 30/60/90 minute slot durations and confirm bookings.',
+              keywords: ['mentor', 'booking', 'schedule', 'sarah', 'slot', 'call', 'meeting']
+            },
+            'opportunities': {
+              name: 'Job Opportunities Board',
+              info: 'The Opportunities screen lists curated job postings with quick apply features. You can browse listings, view job descriptions, and apply directly. Application fees are dynamically converted to PKR.',
+              keywords: ['job', 'internship', 'opportunity', 'apply', 'career', 'hiring', 'salary', 'company']
+            },
+            'profile': {
+              name: 'Student Profile Viewer',
+              info: 'The Student Profile shows your public CV page, including education, personal skills, interests, badges, trust scores, and dynamic academic stats.',
+              keywords: ['profile', 'cv', 'resume', 'skills', 'education', 'interests', 'user']
+            },
+            'courses-design': {
+              name: 'Design Course Catalog',
+              info: 'The Design Curriculum section lists specialized courses in UI/UX Design, Typography, Interaction Design, and Visual Branding, complete with mock PKR pricing.',
+              keywords: ['design', 'ui', 'ux', 'typography', 'interaction', 'branding']
+            },
+            'courses-engineering': {
+              name: 'Engineering Course Catalog',
+              info: 'The Engineering Curriculum section lists technical courses in Web Development, Software Engineering, DevOps, and Database Architectures.',
+              keywords: ['engineering', 'software', 'developer', 'web', 'devops', 'databases']
+            },
+            'courses-business': {
+              name: 'Business Course Catalog',
+              info: 'The Business Curriculum section lists management courses in Entrepreneurship, Project Management, Marketing, and Financial Analyst paths.',
+              keywords: ['business', 'management', 'entrepreneurship', 'marketing', 'finance']
+            },
+            'courses-data': {
+              name: 'Data Science Course Catalog',
+              info: 'The Data Science Curriculum section lists courses in Python Programming, Machine Learning, Data Analytics, and Big Data Technologies.',
+              keywords: ['data', 'science', 'python', 'machine learning', 'analytics', 'statistics']
+            },
+            'tests': {
+              name: 'Weekly Tests Hub / Schedule',
+              info: 'The Tests Hub/Schedule lists your upcoming academic assessments, cognitive tests, and scheduled interviews. You can read integrity rules and launch the timed proctored exam from here.',
+              keywords: ['test', 'exam', 'quiz', 'proctor', 'schedule', 'rules', 'cheat']
+            },
+            'analytics': {
+              name: 'Performance Analytics',
+              info: 'The Performance Analytics dashboard displays your dynamic learning metrics in real time, including your average test score, course completion rate, assignment grade, streak logs, and acquired skills.',
+              keywords: ['analytics', 'performance', 'metrics', 'chart', 'data', 'stat', 'graph', 'log']
+            },
+            'library': {
+              name: 'Resource Library',
+              info: 'The Curated Resource Library contains Cheat Sheets, Roadmaps, E-books, and Handbooks. You can search resources, bookmark them, request custom curation, and download guides directly to your computer.',
+              keywords: ['library', 'download', 'pdf', 'book', 'cheat', 'sheet', 'roadmap', 'resource', 'guide']
+            },
+            'messages': {
+              name: 'Inbox Messages',
+              info: 'The Inbox Messages screen allows you to communicate directly with mentors and hiring teams. You can view conversations, check online status, send attachments, and chat with this AI Agent!',
+              keywords: ['message', 'chat', 'inbox', 'agent', 'bot', 'talk', 'conversation']
+            },
+            'checkout': {
+              name: 'Checkout & Billing',
+              info: 'The Checkout page processes your course registrations or job applications in PKR (1 USD = 280 PKR). It integrates EasyPaisa and JazzCash mobile wallet methods without any card express options.',
+              keywords: ['checkout', 'billing', 'pay', 'easypaisa', 'jazzcash', 'rs', 'rupee', 'pkr']
+            }
+          };
+
+          const viewData = screenTopics[activeView] || { name: 'Current Screen', info: 'You are currently on the ' + activeView + ' screen.', keywords: [] };
+
+          try {
+            const response = await fetch('/api/ai-chat', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({
+                message: val,
+                activeScreen: activeView,
+                screenName: viewData.name,
+                screenInfo: viewData.info
+              })
+            });
+
+            if (!response.ok) throw new Error("API request failed");
+            const data = await response.json();
+            if (data && data.success && data.reply) {
+              replyText = data.reply;
+            } else {
+              throw new Error("Invalid response schema");
+            }
+          } catch (err) {
+            console.warn("AI Chat API failed, using static fallback:", err);
+            const isAskingAboutOtherScreen = Object.keys(screenTopics).some(key => {
+              if (key === activeView) return false;
+              const keywords = screenTopics[key].keywords;
+              return keywords.some(kw => val.toLowerCase().includes(kw));
+            });
+
+            if (isAskingAboutOtherScreen) {
+              replyText = `I apologize, but I am restricted to answering questions only about your currently active screen: **${viewData.name}**. I cannot provide details or answer questions regarding other sections of the portal. Please switch to that screen if you wish to ask questions about it!`;
+            } else {
+              const hasMatchedCurrentKeywords = viewData.keywords.some(kw => val.toLowerCase().includes(kw)) || val.toLowerCase().includes('help') || val.toLowerCase().includes('what') || val.toLowerCase().includes('page') || val.toLowerCase().includes('screen');
+              
+              if (hasMatchedCurrentKeywords) {
+                replyText = `[AI Agent Response for ${viewData.name}]: Here is some information about your current screen:\n\n${viewData.info}\n\nFeel free to ask more specific questions about the features on this page!`;
+              } else {
+                replyText = `I am your screen-specific AI Agent. I see you are currently on the **${viewData.name}** screen. You can ask me anything about the features, metrics, or details of this page. (Please note that I am restricted and cannot answer questions about other screens of the portal).`;
+              }
+            }
+          }
+        }
+
+        chat.messages.push({
+          sender: chat.name.split(' ')[0],
+          text: replyText,
+          time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+          me: false
+        });
+        renderMessages();
+        renderChats();
+      }, 2000);
+    }
+
+    function handleInputKeydown(e) {
+      if (e.key === 'Enter') {
+        sendMessage();
+      }
+    }
+
+    function showTypingIndicator(name, show) {
+      const indicator = document.getElementById('typingIndicator');
+      if (show) {
+        document.getElementById('typingName').textContent = name;
+        indicator.classList.remove('hidden');
+      } else {
+        indicator.classList.add('hidden');
+      }
+      const history = document.getElementById('messagesHistory');
+      history.scrollTop = history.scrollHeight;
+    }
+
+    function filterChats(term) {
+      if (term !== undefined) {
+        const input = document.getElementById('chatSearch');
+        if (input) input.value = term;
+      }
+      renderChats();
+    }
+    window.filterChats = filterChats;
+
+    function triggerCall(type) {
+      if (window.parent && window.parent.App && typeof window.parent.App.showToast === 'function') {
+        window.parent.App.showToast(`Connecting secure ${type} call to mentor...`, "warning");
+      }
+    }
+
+    function confirmInterview(btn) {
+      btn.textContent = '✓ Confirmed!';
+      btn.style.background = '#059669';
+      btn.disabled = true;
+      var chat = conversations.find(c => c.id === activeChatId);
+      if (chat) {
+        var time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+        chat.messages.push({ sender: 'Me', text: 'Thank you! I confirm my attendance for the interview. Looking forward to it!', time: time, me: true });
+        setTimeout(function() {
+          chat.messages.push({ sender: 'HR Team', text: '✓ Great! Your attendance is confirmed. You will receive a Google Meet link 30 minutes before the interview. All the best! 🎉', time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }), me: false });
+          renderMessages(); renderChats();
+        }, 1500);
+        renderMessages(); renderChats();
+      }
+    }
+    function declineInterview(btn) {
+      btn.textContent = 'Reschedule Requested';
+      btn.style.background = 'rgba(192,41,90,0.2)';
+      btn.disabled = true;
+      var chat = conversations.find(c => c.id === activeChatId);
+      if (chat) {
+        var time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+        chat.messages.push({ sender: 'Me', text: 'I would like to request a reschedule for this interview. Please let me know available alternative slots.', time: time, me: true });
+        setTimeout(function() {
+          chat.messages.push({ sender: 'HR Team', text: 'Understood! Our HR team will contact you within 24 hours with alternative interview slots. Thank you for letting us know.', time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }), me: false });
+          renderMessages(); renderChats();
+        }, 1500);
+        renderMessages(); renderChats();
+      }
+    }
+
+    // Initial load
+    selectChat(conversations[0] && conversations[0].id === 'hr-interviews' ? 'hr-interviews' : 'c1');
+
+  </script>
+</body>
+</html>

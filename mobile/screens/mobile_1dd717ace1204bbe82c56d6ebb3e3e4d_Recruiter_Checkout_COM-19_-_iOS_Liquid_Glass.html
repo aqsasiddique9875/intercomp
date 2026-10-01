@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<title>Checkout - Liquid Glass</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-highest": "#dbe3f6",
+                        "on-error-container": "#93000a",
+                        "surface-tint": "#8d37a9",
+                        "secondary-container": "#54a3ff",
+                        "tertiary": "#006823",
+                        "card-gradient": "linear-gradient(135deg, #4D9EFA 0%, #BF7DF5 100%)",
+                        "outline-variant": "#d2c1d2",
+                        "on-tertiary": "#ffffff",
+                        "gold": "#FFD60A",
+                        "secondary-fixed-dim": "#a3c9ff",
+                        "inverse-primary": "#f0b0ff",
+                        "surface-dim": "#d2daed",
+                        "on-background": "#141c29",
+                        "background": "#f9f9ff",
+                        "primary-fixed-dim": "#f0b0ff",
+                        "on-secondary": "#ffffff",
+                        "primary": "#8731a3",
+                        "on-secondary-container": "#003868",
+                        "on-secondary-fixed-variant": "#004883",
+                        "on-tertiary-fixed": "#002106",
+                        "surface-variant": "#dbe3f6",
+                        "surface-bright": "#f9f9ff",
+                        "primary-fixed": "#fbd7ff",
+                        "inverse-on-surface": "#ecf1ff",
+                        "on-tertiary-container": "#e6ffe0",
+                        "on-primary-container": "#fff5fb",
+                        "primary-container": "#a34cbe",
+                        "glass-border": "rgba(255, 255, 255, 0.6)",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container-high": "#e0e8fb",
+                        "on-primary-fixed-variant": "#72188f",
+                        "on-surface-variant": "#4f4350",
+                        "glass-fill": "rgba(255, 255, 255, 0.35)",
+                        "surface-container": "#e7eeff",
+                        "error-container": "#ffdad6",
+                        "tertiary-fixed-dim": "#47e266",
+                        "surface-container-low": "#f0f3ff",
+                        "outline": "#817381",
+                        "secondary-fixed": "#d3e3ff",
+                        "orange": "#FF9F0A",
+                        "on-primary": "#ffffff",
+                        "surface": "#f9f9ff",
+                        "on-tertiary-fixed-variant": "#00531a",
+                        "on-primary-fixed": "#330044",
+                        "on-error": "#ffffff",
+                        "inverse-surface": "#29313f",
+                        "glass-thick": "rgba(255, 255, 255, 0.8)",
+                        "on-surface": "#141c29",
+                        "tertiary-container": "#00842f",
+                        "error": "#FF453A",
+                        "secondary": "#0060ab",
+                        "on-secondary-fixed": "#001c39",
+                        "tertiary-fixed": "#6cff82"
+                    },
+                    "spacing": {
+                        "safe-top": "44px",
+                        "max-width": "1280px",
+                        "desktop-gutter": "24px",
+                        "mobile-margin": "20px",
+                        "base": "8px",
+                        "mobile-gutter": "16px",
+                        "safe-bottom": "34px",
+                        "desktop-margin": "64px"
+                    },
+                    "fontFamily": {
+                        "label-caps-mobile": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "body-md-mobile": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-caps-mobile": ["12px", {"lineHeight": "1.0", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "headline-lg-mobile": ["28px", {"lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "body-md-mobile": ["15px", {"lineHeight": "1.5", "fontWeight": "400"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            background: linear-gradient(180deg, #f0f3ff 0%, #e0e8fb 100%);
+            min-height: 100vh;
+            font-family: 'Inter', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        .liquid-glass-card {
+            background: rgba(255, 255, 255, 0.35);
+            backdrop-filter: blur(28px);
+            -webkit-backdrop-filter: blur(28px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 12px 40px 0 rgba(71, 26, 112, 0.15);
+        }
+
+        .liquid-input {
+            background: rgba(255, 255, 255, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .liquid-input:focus {
+            background: #ffffff;
+            border-color: #8731a3;
+            box-shadow: 0 0 0 4px rgba(135, 49, 163, 0.1);
+            outline: none;
+        }
+
+        .active-scale:active {
+            transform: scale(0.96);
+        }
+
+        /* Material Symbols Fill Logic */
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        
+        .filled-icon {
+            font-variation-settings: 'FILL' 1;
+        }
+
+        /* Custom animation for background blobs */
+        @keyframes float {
+            0% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(20px, -30px) scale(1.1); }
+            66% { transform: translate(-20px, 20px) scale(0.9); }
+            100% { transform: translate(0, 0) scale(1); }
+        }
+        .blob {
+            position: fixed;
+            z-index: -1;
+            filter: blur(60px);
+            opacity: 0.4;
+            animation: float 20s infinite alternate ease-in-out;
+        }
+    </style>
+</head>
+<body class="overflow-x-hidden pb-safe-bottom">
+<!-- Atmospheric Blobs -->
+<div class="blob w-64 h-64 bg-primary-container rounded-full top-[-50px] right-[-50px]"></div>
+<div class="blob w-80 h-80 bg-secondary-container rounded-full bottom-[10%] left-[-100px]" style="animation-delay: -5s;"></div>
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-glass-fill backdrop-blur-[28px] border-b border-glass-border shadow-[0_12px_40px_0_rgba(71,26,112,0.15)] flex items-center justify-between px-mobile-margin pt-safe-top h-[94px]">
+<button class="active-scale transition-transform flex items-center justify-center w-11 h-11 text-primary">
+<span class="material-symbols-outlined text-[24px]">arrow_back_ios</span>
+</button>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface">Checkout</h1>
+<div class="w-11"></div> <!-- Spacer for centering -->
+</header>
+<main class="mt-[110px] px-mobile-margin space-y-6">
+<!-- Invoice Section Card -->
+<section class="liquid-glass-card rounded-[24px] p-6">
+<h2 class="font-label-caps-mobile text-label-caps-mobile text-primary mb-4">ORDER SUMMARY</h2>
+<div class="space-y-4">
+<div class="flex justify-between items-start">
+<div>
+<p class="font-body-md-mobile text-on-surface font-semibold">Premium Posting Pack (5)</p>
+<p class="text-[13px] text-on-surface-variant">Active for 30 days</p>
+</div>
+<span class="font-body-md-mobile text-on-surface font-bold">Rs. 149.00</span>
+</div>
+<div class="flex justify-between items-start">
+<div>
+<p class="font-body-md-mobile text-on-surface font-semibold">AI Matching Boost</p>
+<p class="text-[13px] text-on-surface-variant">Prioritize top candidates</p>
+</div>
+<span class="font-body-md-mobile text-on-surface font-bold">Rs. 49.00</span>
+</div>
+<div class="pt-4 border-t border-glass-border space-y-2">
+<div class="flex justify-between text-[14px]">
+<span class="text-on-surface-variant">Subtotal</span>
+<span class="text-on-surface">Rs. 198.00</span>
+</div>
+<div class="flex justify-between text-[14px]">
+<span class="text-on-surface-variant">Tax (5%)</span>
+<span class="text-on-surface">Rs. 9.90</span>
+</div>
+<div class="flex justify-between pt-2">
+<span class="font-headline-lg-mobile text-[18px] text-on-surface">Total</span>
+<span class="font-headline-lg-mobile text-[22px] text-primary">Rs. 207.90</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Payment Section -->
+<section class="space-y-4">
+<h2 class="font-label-caps-mobile text-label-caps-mobile text-on-surface-variant px-1">PAYMENT DETAILS</h2>
+<div class="space-y-4">
+<div class="space-y-2">
+<label class="text-[13px] font-semibold text-on-surface-variant ml-1">Cardholder Name</label>
+<input class="liquid-input w-full h-[54px] rounded-xl px-4 font-body-md-mobile text-on-surface placeholder:text-on-surface-variant/40" placeholder="Johnathan Doe" type="text"/>
+</div>
+<div class="space-y-2">
+<label class="text-[13px] font-semibold text-on-surface-variant ml-1">Card Number</label>
+<div class="relative">
+<input class="liquid-input w-full h-[54px] rounded-xl px-4 pr-12 font-body-md-mobile text-on-surface placeholder:text-on-surface-variant/40" placeholder="0000 0000 0000 0000" type="tel"/>
+<span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-on-surface-variant opacity-60">credit_card</span>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div class="space-y-2">
+<label class="text-[13px] font-semibold text-on-surface-variant ml-1">Expiry Date</label>
+<input class="liquid-input w-full h-[54px] rounded-xl px-4 font-body-md-mobile text-on-surface placeholder:text-on-surface-variant/40" placeholder="MM/YY" type="text"/>
+</div>
+<div class="space-y-2">
+<label class="text-[13px] font-semibold text-on-surface-variant ml-1">CVV</label>
+<input class="liquid-input w-full h-[54px] rounded-xl px-4 font-body-md-mobile text-on-surface placeholder:text-on-surface-variant/40" placeholder="123" type="password"/>
+</div>
+</div>
+</div>
+</section>
+<!-- Security Badge Section -->
+<section class="flex flex-col items-center justify-center py-4 space-y-3">
+<div class="w-16 h-16 rounded-full liquid-glass-card flex items-center justify-center p-2">
+<img alt="Secure Lock Icon" class="w-full h-full object-contain" src="https://lh3.googleusercontent.com/aida/AP1WRLtdkDp0V4i8TJXTgYQ_BqCVtB0f8UVW_SHDL1iSpRxi2XHma3U3yoFJ0gNwGsnfAL4FRricvnEjpE9wmMpXIplUHtU2l9ZKdYto1Q27fEUpe5DhR_hZgAXznHR9ZIBBlcaRprAaX4v0f6hhk6YUKIdLw552RDcWtoWIRUcjgkDEjIzlQOkCS-f4gp6dlkf4ouuCpPqKGPIiO2EBmhDEid1mOIsr09xUWqj2cuWLGHOkcTIeAApBQ_iQ04Rk"/>
+</div>
+<div class="flex items-center space-x-1.5 opacity-80">
+<span class="material-symbols-outlined text-[14px] text-tertiary filled-icon">verified_user</span>
+<span class="font-label-caps-mobile text-label-caps-mobile text-on-surface-variant">Secure Encrypted Payment</span>
+</div>
+<p class="text-[11px] text-center text-on-surface-variant/60 max-w-[200px]">Your information is encrypted and processed securely by industry standards.</p>
+</section>
+</main>
+<!-- Floating Primary Action -->
+<div class="fixed bottom-0 left-0 w-full p-mobile-margin bg-gradient-to-t from-background via-background/90 to-transparent pt-10">
+<button class="active-scale w-full h-[60px] bg-primary text-on-primary rounded-full font-headline-lg-mobile text-[18px] shadow-[0_8px_24px_rgba(135,49,163,0.3)] transition-all hover:brightness-110 active:duration-100 flex items-center justify-center space-x-2">
+<span>Pay Rs. 207.90</span>
+<span class="material-symbols-outlined text-[20px]">lock</span>
+</button>
+<div class="mt-4 h-1 w-32 bg-on-surface/10 rounded-full mx-auto"></div> <!-- iPhone Home Indicator Mimic -->
+</div>
+<!-- Micro-interaction script -->
+<script>
+        document.querySelectorAll('input').forEach(input => {
+            input.addEventListener('focus', () => {
+                // Subtle scale effect on card focus
+                input.parentElement.parentElement.classList.add('scale-[1.01]');
+            });
+            input.addEventListener('blur', () => {
+                input.parentElement.parentElement.classList.remove('scale-[1.01]');
+            });
+        });
+
+        // Simple Payment Button Feedback
+        const payBtn = document.querySelector('button.bg-primary');
+        payBtn.addEventListener('click', function() {
+            const originalContent = this.innerHTML;
+            this.innerHTML = `<span class="animate-spin material-symbols-outlined">progress_activity</span>`;
+            setTimeout(() => {
+                this.innerHTML = `<span class="material-symbols-outlined text-green-300">check_circle</span> <span>Success</span>`;
+                this.classList.remove('bg-primary');
+                this.classList.add('bg-tertiary-container');
+            }, 1800);
+        });
+    </script>
+</body></html>

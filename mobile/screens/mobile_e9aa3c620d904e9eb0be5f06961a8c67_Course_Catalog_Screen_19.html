@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/>
+<title>Course Catalog - JobPath</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-surface-variant": "#4f4350",
+                    "on-primary-fixed": "#330044",
+                    "surface-container-low": "#f0f3ff",
+                    "on-primary": "#ffffff",
+                    "gold": "#FFD60A",
+                    "on-secondary-fixed-variant": "#004883",
+                    "surface-variant": "#dbe3f6",
+                    "outline-variant": "#d2c1d2",
+                    "surface": "#f9f9ff",
+                    "on-surface": "#141c29",
+                    "on-secondary-fixed": "#001c39",
+                    "on-background": "#141c29",
+                    "error-container": "#ffdad6",
+                    "secondary-container": "#54a3ff",
+                    "tertiary-fixed-dim": "#47e266",
+                    "surface-tint": "#8d37a9",
+                    "surface-bright": "#f9f9ff",
+                    "glass-fill": "rgba(255, 255, 255, 0.35)",
+                    "tertiary-fixed": "#6cff82",
+                    "inverse-primary": "#f0b0ff",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-container-highest": "#dbe3f6",
+                    "surface-container": "#e7eeff",
+                    "on-primary-fixed-variant": "#72188f",
+                    "inverse-on-surface": "#ecf1ff",
+                    "on-error-container": "#93000a",
+                    "secondary": "#0060ab",
+                    "tertiary": "#006823",
+                    "inverse-surface": "#29313f",
+                    "surface-container-high": "#e0e8fb",
+                    "glass-thick": "rgba(255, 255, 255, 0.8)",
+                    "surface-dim": "#d2daed",
+                    "on-tertiary-fixed-variant": "#00531a",
+                    "primary-fixed-dim": "#f0b0ff",
+                    "orange": "#FF9F0A",
+                    "card-gradient": "linear-gradient(135deg, #4D9EFA 0%, #BF7DF5 100%)",
+                    "on-tertiary-container": "#e6ffe0",
+                    "error": "#FF453A",
+                    "primary-container": "#a34cbe",
+                    "on-secondary-container": "#003868",
+                    "outline": "#817381",
+                    "secondary-fixed-dim": "#a3c9ff",
+                    "secondary-fixed": "#d3e3ff",
+                    "tertiary-container": "#00842f",
+                    "primary": "#8731a3",
+                    "on-tertiary": "#ffffff",
+                    "on-tertiary-fixed": "#002106",
+                    "primary-fixed": "#fbd7ff",
+                    "on-primary-container": "#fff5fb",
+                    "on-error": "#ffffff",
+                    "background": "#f9f9ff",
+                    "on-secondary": "#ffffff",
+                    "glass-border": "rgba(255, 255, 255, 0.6)"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "mobile-margin": "20px",
+                    "desktop-margin": "64px",
+                    "safe-top": "44px",
+                    "desktop-gutter": "24px",
+                    "safe-bottom": "34px",
+                    "mobile-gutter": "16px",
+                    "max-width": "1280px",
+                    "base": "8px"
+            },
+            "fontFamily": {
+                    "display-xl-mobile": ["Inter"],
+                    "body-md-mobile": ["Inter"],
+                    "display-xl": ["Inter"],
+                    "body-md": ["Inter"],
+                    "label-caps-mobile": ["Inter"],
+                    "headline-lg-mobile": ["Inter"],
+                    "label-caps": ["Inter"],
+                    "headline-lg": ["Inter"]
+            },
+            "fontSize": {
+                    "display-xl-mobile": ["34px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "body-md-mobile": ["15px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                    "display-xl": ["56px", {"lineHeight": "1.1", "letterSpacing": "-0.03em", "fontWeight": "700"}],
+                    "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                    "label-caps-mobile": ["12px", {"lineHeight": "1.0", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "label-caps": ["13px", {"lineHeight": "1.0", "letterSpacing": "0.03em", "fontWeight": "600"}],
+                    "headline-lg": ["34px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #DCE4F7;
+            -webkit-tap-highlight-color: transparent;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(28px);
+            -webkit-backdrop-filter: blur(28px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 12px 40px 0 rgba(71, 26, 112, 0.15);
+        }
+
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        .liquid-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(120deg, #DCE4F7 0%, #E7EEFF 100%);
+            overflow: hidden;
+        }
+
+        .liquid-blob {
+            position: absolute;
+            filter: blur(80px);
+            border-radius: 50%;
+            opacity: 0.6;
+            animation: move 20s infinite alternate ease-in-out;
+        }
+
+        @keyframes move {
+            from { transform: translate(0, 0) scale(1); }
+            to { transform: translate(100px, 50px) scale(1.2); }
+        }
+
+        .ios-active-scale:active {
+            transform: scale(0.96);
+            transition: transform 0.35s cubic-bezier(0.35, 0, 0.15, 1);
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="antialiased text-on-background">
+<!-- Atmospheric Liquid Background -->
+<div class="liquid-bg">
+<div class="liquid-blob bg-[#BF7DF5] w-[300px] h-[300px] -top-20 -left-20"></div>
+<div class="liquid-blob bg-[#4D9EFA] w-[400px] h-[400px] bottom-0 right-0" style="animation-delay: -5s;"></div>
+</div>
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-glass-fill backdrop-blur-xl border-b border-glass-border shadow-sm flex items-center justify-center h-16 shrink-0">
+<div class="max-w-6xl w-full flex items-center justify-between px-5">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full overflow-hidden border-2 border-primary p-0.5">
+<img alt="User Avatar" class="w-full h-full rounded-full object-cover" src="https://lh3.googleusercontent.com/aida/AP1WRLso_htihnJ33V7q5zYbt8u-NfoB3ZJISVs-vTicj-4qC5ECtS5f1-4w6YV4027sl6FECnMGNFL4Eze2hGxzE5ViYe1GBC8aDxIr22IBxwvOTBnY5DdP0lr1Mr2oLjdLDQEY0cdp3BV6_eqpLSJsYhE7rCzOhJ8HUy0EsOj0u-xBNtknhbc6cEOMP7n10QkRNTVn5eQUKTTbb4EwqYmkzCf2khW3fWkeIqVSOMA4d6uGGMlKakT_BMt5YDQ"/>
+</div>
+<h1 class="text-sm font-bold text-[#471A70]">Hello, Studentone!</h1>
+</div>
+<div class="flex items-center gap-3">
+<button class="w-10 h-10 rounded-full bg-white/40 border border-white/60 flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-primary text-[22px]">notifications</span>
+</button>
+<button class="w-10 h-10 rounded-full bg-white/40 border border-white/60 flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-primary text-[22px]">settings</span>
+</button>
+</div>
+</div>
+</header>
+<main class="pt-20 pb-32 px-mobile-margin space-y-10 max-w-6xl w-full mx-auto md:px-8">
+<!-- Search Bar -->
+<section class="relative">
+<div class="glass-card rounded-full flex items-center px-6 h-14 w-full">
+<span class="material-symbols-outlined text-outline mr-3">search</span>
+<input id="courseCatalogSearchInput" class="bg-transparent border-none focus:ring-0 w-full text-body-md-mobile placeholder-outline/60 text-on-surface" placeholder="Search for courses..." type="text"/>
+</div>
+</section>
+<!-- Popular Category -->
+<section class="space-y-4">
+<div class="flex items-center justify-between">
+<h2 class="font-headline-lg-mobile text-[20px] font-bold text-primary">Popular</h2>
+<button class="text-primary font-semibold text-label-caps-mobile ios-active-scale">See All</button>
+</div>
+<div id="popularCoursesContainer" class="flex md:grid md:grid-cols-3 md:gap-6 overflow-x-auto hide-scrollbar -mx-mobile-margin px-mobile-margin space-x-mobile-gutter md:space-x-0 md:mx-0 md:px-0">
+<!-- Course Card 1 -->
+<div class="min-w-[280px] glass-card rounded-[32px] p-5 flex flex-col space-y-4 ios-active-scale">
+<div class="relative h-40 w-full rounded-2xl overflow-hidden shadow-inner">
+<img class="w-full h-full object-cover" data-alt="A futuristic UI design interface displayed on multiple floating digital glass screens. The color palette features vibrant purples, electric blues, and soft magenta highlights, creating a high-fidelity and professional tech atmosphere. The scene is bright, crisp, and conveys innovation and advanced digital artistry in a clean minimalist environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCAF6cpXJ_IjiLDtHuBYRHofd1CRTEKbzSr8edd7c2bJm8Dh6lSyxzPOQFt3i5GlweBU3au8tTQn317L_X5mPF4CjJtLmF22PBlJ47VgL_FHZUvD4cgya4elqLm1X9CLWM7pePWG8iSpBM9VzBNON0pHbZrRM_wBUg3gY0nlv4uIw8o0kal22vMMzqZolJ_GCcllBe0V9gFe2VzRjtAMi3zOZjoHNb5r3hn6S-T4J06a5k_1HMpodRmeNKGMwyhwZvMlrp3G24ajiV4"/>
+<div class="absolute top-3 left-3 px-3 py-1 rounded-full bg-glass-thick border border-glass-border">
+<p class="text-[10px] font-bold text-primary uppercase tracking-wider">In Progress</p>
+</div>
+</div>
+<div class="space-y-1">
+<h3 class="font-headline-lg-mobile text-lg text-[#471A70]">Advanced UI/UX Design</h3>
+<p class="text-sm text-outline font-medium">Sarah Jenkins</p>
+</div>
+<div class="flex items-center justify-between pt-2">
+<div class="flex items-center text-orange font-bold">
+<span class="material-symbols-outlined text-sm mr-1" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-sm">4.9</span>
+</div>
+<button onclick="parent.App ? parent.App.navigate('video') : (window.location.hash = '#/student/courses/video')" class="bg-primary text-on-primary px-4 py-2 rounded-full text-xs font-bold shadow-lg">Continue</button>
+</div>
+</div>
+<!-- Course Card 2 -->
+<div class="min-w-[280px] glass-card rounded-[32px] p-5 flex flex-col space-y-4 ios-active-scale">
+<div class="relative h-40 w-full rounded-2xl overflow-hidden shadow-inner">
+<img class="w-full h-full object-cover" data-alt="A clean, high-performance workspace with a sleek laptop displaying complex coding structures. The background is a soft blue and lavender gradient, illuminated by ambient studio lighting. The overall feel is academic yet modern, focusing on technical mastery and professional cloud computing development in a well-organized digital space." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAMhxl7_PIJS_hX_kHBtRKXN8hPwyJ_i-uem_EBoMQ30yb5xHJEwA8L28P4EljSDOXfvHO-NCz87hgBrHFk5KIPurgXVnzW9pXKSdgigMR9qoE7G92RGJhoYVZE37-0sqVhhQdkiGTr8q2dOc6FAMcmLMjl5091FgpH8JjikxyMOIcG02eYBQ0A8aY_1rWx9D0bh-i0UcGwy5erVLfKKnBbocLV63-06GIya-X03ZwKRP_T9D-uy2Ms-Go3JCZOMCZlwgGEsjeNxsQ-"/>
+<div class="absolute top-3 left-3 px-3 py-1 rounded-full bg-glass-thick border border-glass-border">
+<p class="text-[10px] font-bold text-outline uppercase tracking-wider">Not Started</p>
+</div>
+</div>
+<div class="space-y-1">
+<h3 class="font-headline-lg-mobile text-lg text-[#471A70]">Cloud Computing Mastery</h3>
+<p class="text-sm text-outline font-medium">Dr. Michael Chen</p>
+</div>
+<div class="flex items-center justify-between pt-2">
+<div class="flex items-center text-orange font-bold">
+<span class="material-symbols-outlined text-sm mr-1" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-sm">4.7</span>
+</div>
+<button class="bg-surface-variant text-primary border border-glass-border px-4 py-2 rounded-full text-xs font-bold">Enroll</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Design Category -->
+<section class="space-y-4">
+<div class="flex items-center justify-between">
+<h2 class="font-headline-lg-mobile text-[20px] font-bold text-primary">Design</h2>
+<button class="text-primary font-semibold text-label-caps-mobile ios-active-scale">See All</button>
+</div>
+<div id="designCoursesContainer" class="flex md:grid md:grid-cols-3 md:gap-6 overflow-x-auto hide-scrollbar -mx-mobile-margin px-mobile-margin space-x-mobile-gutter md:space-x-0 md:mx-0 md:px-0">
+<!-- Card 3 -->
+<div class="min-w-[280px] glass-card rounded-[32px] p-5 flex flex-col space-y-4 ios-active-scale">
+<div class="relative h-40 w-full rounded-2xl overflow-hidden shadow-inner">
+<img class="w-full h-full object-cover" data-alt="Abstract 3D shapes and fluid iridescent materials floating in a serene, bright white space. The lighting is soft and high-key, highlighting textures of brushed metal and transparent glass. The aesthetic is futuristic and high-end, representing the core principles of professional visual design and artistic harmony in a modern digital world." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAciuHZaKB8hCRSYPDpxIu4BtDRG0dSX64Sj1vyM0LQLE8Qmr2btmQ2tcICJN1xtiQ09M7evN1S_RIKrWOOeDpsOiIR5RIzUraNDyXOu6Xmh2hCd6xHKTbbIxeImXjAYWOx6TzYVjali_yf1YlQA5RVgi0Yw_LvdunvbGjHFn-yvpaS6fXvOeJPaPPyVY7OnxYyBKGfA7TjQ7lQbd2G1JoS3lHIMous54xuKTxTNkUxXD-NbQMw6W8E2Zlsjflh0y83RVFtpQW39dzn"/>
+<div class="absolute top-3 left-3 px-3 py-1 rounded-full bg-glass-thick border border-glass-border">
+<p class="text-[10px] font-bold text-outline uppercase tracking-wider">Not Started</p>
+</div>
+</div>
+<div class="space-y-1">
+<h3 class="font-headline-lg-mobile text-lg text-[#471A70]">Visual Branding</h3>
+<p class="text-sm text-outline font-medium">Elena Rodriguez</p>
+</div>
+<div class="flex items-center justify-between pt-2">
+<div class="flex items-center text-orange font-bold">
+<span class="material-symbols-outlined text-sm mr-1" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-sm">4.8</span>
+</div>
+<button class="bg-surface-variant text-primary border border-glass-border px-4 py-2 rounded-full text-xs font-bold">Enroll</button>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="min-w-[280px] glass-card rounded-[32px] p-5 flex flex-col space-y-4 ios-active-scale">
+<div class="relative h-40 w-full rounded-2xl overflow-hidden shadow-inner">
+<img class="w-full h-full object-cover" data-alt="A high-tech digital workspace showcasing 3D modeling software with intricate wireframe models. The room is filled with soft purple and blue neon light, reflecting off sleek surfaces. The mood is highly professional and focused on the detailed craft of 3D motion design and technical illustration in a contemporary studio setting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCXlo-I_MTV1cF0wnl03zWvJvLYVtvYDr21AeS3YEv589whfdNbgtlVsyWBFcw1P5QysVNILwN97md31I0t1KoggmjXbFUhJT-MR9icA8NrBHfs-Mo4xO89YP60oJik6l0hdPRkpbYsvGRqiahYWayZ5dZGfCFk3uZimWc5pJibHyquFNH5Y-hg-ioI8dSgFquEmNipNZ2A29FwUM-yEeUtjOcFq46SItr01z3XEEXrG19PEqQC5I97lCVrhs4FFgpyNIqoEvxJWzs7"/>
+<div class="absolute top-3 left-3 px-3 py-1 rounded-full bg-glass-thick border border-glass-border">
+<p class="text-[10px] font-bold text-primary uppercase tracking-wider">In Progress</p>
+</div>
+</div>
+<div class="space-y-1">
+<h3 class="font-headline-lg-mobile text-lg text-[#471A70]">3D Motion Design</h3>
+<p class="text-sm text-outline font-medium">Marcus Volkov</p>
+</div>
+<div class="flex items-center justify-between pt-2">
+<div class="flex items-center text-orange font-bold">
+<span class="material-symbols-outlined text-sm mr-1" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-sm">5.0</span>
+</div>
+<button onclick="parent.App ? parent.App.navigate('video') : (window.location.hash = '#/student/courses/video')" class="bg-primary text-on-primary px-4 py-2 rounded-full text-xs font-bold shadow-lg">Continue</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Technical Category -->
+<section class="space-y-4">
+<div class="flex items-center justify-between">
+<h2 class="font-headline-lg-mobile text-[20px] font-bold text-primary">Technical</h2>
+<button class="text-primary font-semibold text-label-caps-mobile ios-active-scale">See All</button>
+</div>
+<div id="technicalCoursesContainer" class="flex md:grid md:grid-cols-3 md:gap-6 overflow-x-auto hide-scrollbar -mx-mobile-margin px-mobile-margin space-x-mobile-gutter md:space-x-0 md:mx-0 md:px-0">
+<!-- Card 5 -->
+<div class="min-w-[280px] glass-card rounded-[32px] p-5 flex flex-col space-y-4 ios-active-scale">
+<div class="relative h-40 w-full rounded-2xl overflow-hidden shadow-inner">
+<img class="w-full h-full object-cover" data-alt="A sophisticated close-up of a high-end circuit board with glowing golden and electric blue data pathways. The lighting is dramatic, emphasizing the intricate technical architecture. This image conveys a high-fidelity sense of advanced hardware engineering and deep technical expertise within a futuristic and professional framework." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBbIYnF3LcOEO0Weh90hADAfc5egatkHcWIyUQ5x64rvQdaB651NXhkUyAogcpJmJuiDYSBzr0mWXz3KXyre6TFPACEUoT616lSKFTmiQpKlEdO6HhD3zGyAScIMacZk7ksJ5ovU-jrc5vMOQozoZptawRN3sRC_I2QBc1PieCDdhFwttt1E_64tBSAxbiLIdLHTG3IUqI-ozUMMjADJQvmYUkm401jjIWIUDn_Qw_J2dTclWeDpoIeQFY7xDHvc3N3saSUYwZxnDn_"/>
+<div class="absolute top-3 left-3 px-3 py-1 rounded-full bg-glass-thick border border-glass-border">
+<p class="text-[10px] font-bold text-outline uppercase tracking-wider">Not Started</p>
+</div>
+</div>
+<div class="space-y-1">
+<h3 class="font-headline-lg-mobile text-lg text-[#471A70]">AI Architecture</h3>
+<p class="text-sm text-outline font-medium">Sophia Wu</p>
+</div>
+<div class="flex items-center justify-between pt-2">
+<div class="flex items-center text-orange font-bold">
+<span class="material-symbols-outlined text-sm mr-1" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-sm">4.9</span>
+</div>
+<button class="bg-surface-variant text-primary border border-glass-border px-4 py-2 rounded-full text-xs font-bold">Enroll</button>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full z-50 rounded-t-xl backdrop-blur-2xl bg-glass-thick border-t border-glass-border shadow-[0_-8px_32px_0_rgba(71,26,112,0.1)] flex justify-around items-center px-4 pb-safe-bottom h-20">
+<!-- Discover Active -->
+<a class="flex flex-col items-center justify-center text-primary font-bold scale-110 ios-active-scale" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">explore</span>
+<span class="font-label-caps-mobile text-label-caps-mobile mt-1">Discover</span>
+</a>
+<!-- Applied Inactive -->
+<a class="flex flex-col items-center justify-center text-outline ios-active-scale" href="#">
+<span class="material-symbols-outlined">assignment_turned_in</span>
+<span class="font-label-caps-mobile text-label-caps-mobile mt-1">Applied</span>
+</a>
+<!-- Saved Inactive -->
+<a class="flex flex-col items-center justify-center text-outline ios-active-scale" href="#">
+<span class="material-symbols-outlined">bookmark</span>
+<span class="font-label-caps-mobile text-label-caps-mobile mt-1">Saved</span>
+</a>
+<!-- Profile Inactive -->
+<a class="flex flex-col items-center justify-center text-outline ios-active-scale" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-caps-mobile text-label-caps-mobile mt-1">Profile</span>
+</a>
+</nav>
+<script>
+        // Simple micro-interaction for horizontal scrolling physics
+        const carousels = document.querySelectorAll('.overflow-x-auto');
+        carousels.forEach(carousel => {
+            let isDown = false;
+            let startX;
+            let scrollLeft;
+
+            carousel.addEventListener('mousedown', (e) => {
+                isDown = true;
+                startX = e.pageX - carousel.offsetLeft;
+                scrollLeft = carousel.scrollLeft;
+            });
+            carousel.addEventListener('mouseleave', () => {
+                isDown = false;
+            });
+            carousel.addEventListener('mouseup', () => {
+                isDown = false;
+            });
+            carousel.addEventListener('mousemove', (e) => {
+                if(!isDown) return;
+                e.preventDefault();
+                const x = e.pageX - carousel.offsetLeft;
+                const walk = (x - startX) * 2;
+                carousel.scrollLeft = scrollLeft - walk;
+            });
+        });
+
+        // Search highlight effect
+        const searchInput = document.querySelector('input');
+        if (searchInput) {
+          searchInput.addEventListener('focus', () => {
+              searchInput.parentElement.classList.add('ring-2', 'ring-primary/20', 'border-primary/40');
+          });
+          searchInput.addEventListener('blur', () => {
+              searchInput.parentElement.classList.remove('ring-2', 'ring-primary/20', 'border-primary/40');
+          });
+        }
+
+        // ===================== DYNAMIC COURSE LOADING =====================
+        let allCourses = [];
+
+        function loadCourses() {
+          // Dynamic greeting based on current logged in user
+          const storedUser = localStorage.getItem('currentUser');
+          if (storedUser) {
+            try {
+              const userObj = JSON.parse(storedUser);
+              const userName = userObj.username || userObj.email || 'Alex';
+              const capitalized = userName.charAt(0).toUpperCase() + userName.slice(1);
+              const greetingEl = document.querySelector('header h1');
+              if (greetingEl) {
+                greetingEl.textContent = `Hello, ${capitalized}!`;
+              }
+            } catch (err) {}
+          }
+
+          const token = localStorage.getItem('supabase_access_token') || 'mock_token_student';
+          fetch('/api/courses', {
+            headers: {
+              'Authorization': `Bearer ${token}`
+            }
+          })
+          .then(res => res.json())
+          .then(courses => {
+            console.log("Mobile Course Catalog fetched courses: ", courses);
+            allCourses = courses;
+            renderAllCategories(allCourses);
+          })
+          .catch(err => {
+            console.error("Failed to load courses: ", err);
+          });
+        }
+
+        function renderAllCategories(list) {
+          renderCategory(list, 'popular', 'popularCoursesContainer');
+          renderCategory(list, 'design', 'designCoursesContainer');
+          renderCategory(list, 'technical', 'technicalCoursesContainer');
+        }
+
+        // Search Input Activation
+        document.getElementById('courseCatalogSearchInput').addEventListener('input', (e) => {
+          const query = e.target.value.toLowerCase().trim();
+          const filtered = allCourses.filter(course => 
+            course.title.toLowerCase().includes(query) || 
+            (course.category || '').toLowerCase().includes(query)
+          );
+          renderAllCategories(filtered);
+        });
+
+        function selectCourseForEnroll(id, title, image) {
+          try {
+            let enrolled = JSON.parse(localStorage.getItem('enrolledCourses')) || [];
+            if (!enrolled.some(c => c.id === id)) {
+              enrolled.push({ id, title, image });
+              localStorage.setItem('enrolledCourses', JSON.stringify(enrolled));
+            }
+            localStorage.setItem('selectedCourse', JSON.stringify({ id, title, image }));
+          } catch(e){}
+
+          if (window.parent) {
+            window.parent.postMessage({ type: 'NAVIGATE', view: 'video' }, '*');
+          }
+        }
+
+        function renderCategory(courses, type, containerId) {
+          const container = document.getElementById(containerId);
+          if (!container) return;
+
+          let filtered = [];
+          if (type === 'popular') {
+            filtered = courses.slice(0, 4);
+          } else {
+            filtered = courses.filter(c => (c.category || '').toLowerCase().includes(type));
+          }
+
+          if (filtered.length === 0) {
+            container.innerHTML = `<p class="text-xs text-outline italic py-8 px-4">No courses available in this category.</p>`;
+            return;
+          }
+
+          container.innerHTML = filtered.map(course => {
+            const isProgress = course.match >= 80 || course.id.includes('ux') || course.id.includes('antigravity');
+            const safeTitle = course.title.replace(/'/g, "\\'");
+            return `
+              <div onclick="selectCourseForEnroll('${course.id}', '${safeTitle}', '${course.image || ''}')" class="min-w-[280px] md:min-w-0 glass-card rounded-[32px] p-5 flex flex-col space-y-4 ios-active-scale cursor-pointer">
+                <div class="relative h-40 w-full rounded-2xl overflow-hidden shadow-inner">
+                  <img class="w-full h-full object-cover" src="${course.image || 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=600&auto=format&fit=crop'}"/>
+                  <div class="absolute top-3 left-3 px-3 py-1 rounded-full bg-glass-thick border border-glass-border">
+                    <p class="text-[10px] font-bold ${isProgress ? 'text-primary' : 'text-outline'} uppercase tracking-wider">${isProgress ? 'In Progress' : 'Not Started'}</p>
+                  </div>
+                </div>
+                <div class="space-y-1">
+                  <h3 class="font-headline-lg-mobile text-lg text-[#471A70]">${course.title}</h3>
+                  <p class="text-sm text-outline font-medium">${course.category || 'General'}</p>
+                </div>
+                <div class="flex items-center justify-between pt-2">
+                  <div class="flex items-center text-orange font-bold">
+                    <span class="material-symbols-outlined text-sm mr-1" style="font-variation-settings: 'FILL' 1;">star</span>
+                    <span class="text-sm">4.8</span>
+                  </div>
+                  <button onclick="event.stopPropagation(); selectCourseForEnroll('${course.id}', '${safeTitle}', '${course.image || ''}')" class="bg-primary hover:bg-primary-container text-white px-4 py-2 rounded-full text-xs font-bold shadow-lg">Enroll</button>
+                </div>
+              </div>
+            `;
+          }).join('');
+        }
+
+        // Call on load
+        loadCourses();
+    </script>
+    <nav id="bottom-nav"></nav>
+</body></html>

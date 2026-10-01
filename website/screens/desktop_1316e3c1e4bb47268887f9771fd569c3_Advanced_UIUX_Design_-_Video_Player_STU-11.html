@@ -1,0 +1,1129 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+  <script>
+    if (window.self !== window.top) {
+      const style = document.createElement('style');
+      style.innerHTML = `
+        header, nav, aside, 
+        .SideNavBar, .TopNavBar, 
+        #SideNavBar, #TopNavBar {
+          display: none !important;
+        }
+        main, .main-content {
+          margin-left: 0 !important;
+          padding-top: 0 !important;
+        }
+      `;
+      document.documentElement.appendChild(style);
+    }
+  </script>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>Skills Booster | Learning Workspace</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #DCE4F7;
+    }
+    .sb-logo-green {
+      color: #2e7d32;
+    }
+    .sb-logo-purple {
+      color: #7b1fa2;
+    }
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+</head>
+<body class="bg-transparent text-gray-900 min-h-screen flex flex-col selection:bg-blue-200">
+
+  <!-- View 1: Main Course Player Workspace -->
+  <div id="mainWorkspace" class="flex flex-1 min-h-screen w-full">
+    <!-- Left Sidebar (Coursera Layout) -->
+    <div class="w-80 border-r border-gray-200 flex flex-col h-screen sticky top-0 flex-shrink-0 bg-[#e7eeff]">
+      <!-- Top Branding & Logo -->
+      <div class="p-6 pb-4 border-b border-gray-100 flex flex-col gap-4">
+        <div class="flex items-center gap-2">
+          <div class="flex items-center gap-1">
+            <span class="text-3xl font-extrabold tracking-tighter sb-logo-green">S</span>
+            <span class="text-3xl font-extrabold tracking-tighter sb-logo-purple">B<span class="text-blue-600">.</span></span>
+          </div>
+          <div class="flex flex-col">
+            <span class="text-[10px] font-bold text-gray-500 tracking-wider uppercase leading-none">SKILLS</span>
+            <span class="text-[10px] font-bold text-gray-500 tracking-wider uppercase leading-none">BOOSTER</span>
+          </div>
+        </div>
+        
+        <div>
+          <h2 id="sidebarCourseTitle" class="text-sm font-bold text-gray-900 leading-tight">Mastering Google Antigravity: From Setup to Real Projects</h2>
+          <p id="sidebarAcademyName" class="text-xs text-gray-500 mt-1">SkillsBooster Academy</p>
+        </div>
+      </div>
+
+      <!-- Navigation Tree -->
+      <div class="flex-grow overflow-y-auto no-scrollbar py-4 px-2 flex flex-col gap-4">
+        <!-- Course Material Accordion -->
+        <div>
+          <button class="w-full flex items-center justify-between px-4 py-2 text-xs font-bold text-gray-800 uppercase tracking-wider hover:bg-gray-50 rounded-lg transition-colors">
+            <span class="flex items-center gap-2">
+              <span class="material-symbols-outlined text-[18px]">expand_more</span>
+              Course Material
+            </span>
+          </button>
+          
+          <div id="sidebarModulesList" class="mt-2 space-y-1 pl-2">
+            <!-- Dynamic sidebar modules list -->
+          </div>
+        </div>
+
+        <!-- Grades, Notes, and Forums Links -->
+        <div class="pt-4 border-t border-gray-100 space-y-1">
+          <a href="#" id="sidebarLinkGrades" class="flex items-center gap-3 px-4 py-3 text-gray-700 hover:bg-gray-50 rounded-xl text-sm font-semibold transition-colors">
+            <span class="material-symbols-outlined text-gray-500 text-[20px]">assessment</span>
+            Grades
+          </a>
+          <a href="#" id="sidebarLinkNotes" class="flex items-center gap-3 px-4 py-3 text-gray-700 hover:bg-gray-50 rounded-xl text-sm font-semibold transition-colors">
+            <span class="material-symbols-outlined text-gray-500 text-[20px]">sticky_note_2</span>
+            Notes
+          </a>
+          <a href="#" id="sidebarLinkForums" class="flex items-center gap-3 px-4 py-3 text-gray-700 hover:bg-gray-50 rounded-xl text-sm font-semibold transition-colors">
+            <span class="material-symbols-outlined text-gray-500 text-[20px]">forum</span>
+            Discussion Forums
+          </a>
+          <a href="#" id="sidebarLinkMessages" class="flex items-center justify-between px-4 py-3 text-gray-700 hover:bg-gray-50 rounded-xl text-sm font-semibold transition-colors">
+            <span class="flex items-center gap-3">
+              <span class="material-symbols-outlined text-gray-500 text-[20px]">mail</span>
+              Messages
+            </span>
+            <span class="bg-blue-600 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">2</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Content Area -->
+    <main class="flex-1 overflow-y-auto h-screen bg-transparent">
+      <div class="max-w-4xl mx-auto p-8 md:p-12">
+        <!-- Module Info View -->
+        <div id="moduleContentArea">
+          <!-- Module Header Card (Accordion Style) -->
+          <div class="border border-gray-300/40 rounded-xl overflow-hidden shadow-sm mb-8 bg-[#e7eeff] backdrop-blur-md">
+            <!-- Accordion Header -->
+            <div class="p-6 flex items-center justify-between cursor-pointer hover:bg-gray-50/50 transition-colors" id="moduleAccordionHeader">
+              <div class="flex items-start gap-4">
+                <span class="material-symbols-outlined text-gray-800 text-[28px] mt-0.5" id="accordionToggleIcon">expand_less</span>
+                <div>
+                  <h1 id="activeModuleTitle" class="text-xl font-bold text-gray-900 leading-tight">ANTIGRAVITY: Getting Started with Antigravity</h1>
+                  <p id="moduleProgressDetails" class="text-xs text-gray-500 mt-1 flex items-center gap-4">
+                    <span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">videocam</span> <span id="videoMinLabel">29 min</span> of videos left</span>
+                    <span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">assignment</span> <span id="assignmentCountLabel">1 graded assessment</span> left</span>
+                  </p>
+                </div>
+              </div>
+              <span class="text-xs font-semibold text-gray-500 bg-gray-100 px-3 py-1 rounded-full flex-shrink-0" id="assessmentBadge">1 graded assessment left</span>
+            </div>
+
+            <!-- Accordion Content -->
+            <div class="px-6 pb-6 border-t border-gray-300/30 pt-6 bg-[#e7eeff]/60" id="moduleAccordionContent">
+              <p id="activeModuleDesc" class="text-sm text-gray-700">Understand what Antigravity is, how it works, and why it's useful for developers.</p>
+              <button class="mt-4 flex items-center gap-1.5 text-xs font-bold text-blue-600 hover:text-blue-800 transition-colors">
+                <span class="material-symbols-outlined text-[16px]">expand_more</span>
+                Show Learning Objectives
+              </button>
+            </div>
+          </div>
+
+          <!-- Module Items Listing Grid -->
+          <div class="border border-gray-300/40 rounded-xl overflow-hidden bg-[#e7eeff] shadow-sm">
+            <div id="moduleItemsList" class="divide-y divide-gray-100">
+              <!-- Rendered dynamically -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Grades View -->
+        <div id="gradesContainer" class="hidden">
+          <!-- Rendered dynamically by JS -->
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- View 2: Theater Lecture Workspace (Dynamic Player View matching image one) -->
+  <div id="theaterWorkspace" class="hidden flex flex-col h-screen w-full bg-[#DCE4F7]">
+    
+    <!-- Theater Header Bar -->
+    <header class="h-16 bg-[#e7eeff] border-b border-gray-300/40 flex items-center justify-between px-6 flex-shrink-0 z-10">
+      <div class="flex items-center gap-4">
+        <!-- Brand Logos -->
+        <div class="flex items-center gap-3">
+          <span class="text-[#0056D2] font-bold text-xl tracking-tight select-none">coursera</span>
+          <span class="text-gray-300 font-light select-none text-xl">|</span>
+          <div class="flex items-center gap-0.5">
+            <span class="text-lg font-black sb-logo-green">S</span>
+            <span class="text-lg font-black sb-logo-purple">B<span class="text-blue-600">.</span></span>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Progress Indicator Area -->
+      <div class="flex items-center gap-4">
+        <div class="flex items-center gap-3 bg-gray-50 border border-gray-200/80 rounded-full px-4 py-1.5 text-xs font-semibold text-gray-600 shadow-sm">
+          <span id="theaterProgressLabel">0/3 learning items</span>
+          <div class="w-32 h-1.5 bg-gray-200 rounded-full overflow-hidden">
+            <div id="theaterProgressBar" class="h-full bg-blue-600 rounded-full transition-all duration-300" style="width: 33%"></div>
+          </div>
+        </div>
+        
+        <!-- Stars rating mockup -->
+        <div class="flex items-center gap-1 border border-gray-200 rounded-lg px-2.5 py-1.5 bg-white cursor-pointer hover:bg-gray-50">
+          <span class="material-symbols-outlined text-[16px] text-yellow-400" style="font-variation-settings: 'FILL' 1;">star</span>
+          <span class="material-symbols-outlined text-[16px] text-yellow-400" style="font-variation-settings: 'FILL' 1;">star</span>
+          <span class="material-symbols-outlined text-[16px] text-yellow-400" style="font-variation-settings: 'FILL' 1;">star</span>
+          <span class="material-symbols-outlined text-[16px] text-gray-300">star</span>
+          <span class="material-symbols-outlined text-[14px] text-gray-500 ml-1">expand_more</span>
+        </div>
+      </div>
+
+      <!-- Action items right side -->
+      <div class="flex items-center gap-4">
+        <button class="border border-blue-600 text-blue-600 rounded-lg px-4 py-1.5 text-xs font-bold hover:bg-blue-50 transition-colors shadow-sm select-none">Unlock full access</button>
+        
+        <span class="material-symbols-outlined text-gray-500 cursor-pointer hover:text-gray-900 text-[20px]">help_outline</span>
+        <span class="material-symbols-outlined text-gray-500 cursor-pointer hover:text-gray-900 text-[20px]">language</span>
+        <div class="relative">
+          <span class="material-symbols-outlined text-gray-500 cursor-pointer hover:text-gray-900 text-[20px]">notifications</span>
+          <div class="absolute -top-0.5 -right-0.5 w-2 h-2 bg-blue-600 rounded-full border border-white"></div>
+        </div>
+        <img class="w-8 h-8 rounded-full object-cover border border-gray-200" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=200"/>
+      </div>
+    </header>
+
+    <!-- Main Workspace Container -->
+    <div class="flex flex-1 overflow-hidden w-full">
+      
+      <!-- Theater Playlist Left Sidebar -->
+      <div class="w-80 border-r border-gray-300/40 flex flex-col h-full bg-[#e7eeff] flex-shrink-0">
+        <div class="p-6 pb-4 border-b border-gray-100 flex items-start justify-between gap-3">
+          <div>
+            <span class="text-[10px] font-bold text-blue-600 uppercase tracking-widest block mb-0.5" id="theaterPlaylistModNum">Module 1</span>
+            <h3 id="theaterPlaylistTitle" class="text-sm font-bold text-gray-900 leading-tight">ANTIGRAVITY: Getting Started with Antigravity</h3>
+          </div>
+          <!-- Close button to return to Main Workspace -->
+          <button onclick="closeTheaterView()" class="text-gray-400 hover:text-gray-900 transition-colors p-1 hover:bg-gray-100 rounded-full flex items-center justify-center">
+            <span class="material-symbols-outlined text-[20px]">close</span>
+          </button>
+        </div>
+
+        <!-- Playlist items scroll area -->
+        <div id="theaterPlaylistItems" class="flex-grow overflow-y-auto no-scrollbar py-2">
+          <!-- Populated dynamically -->
+        </div>
+      </div>
+
+      <!-- Theater Center Player Section -->
+      <div class="flex-1 overflow-y-auto h-full bg-transparent flex flex-col">
+        <div class="p-8 max-w-4xl w-full mx-auto flex flex-col gap-6">
+          
+          <!-- Dynamic stock video or document view frame -->
+          <div class="aspect-video bg-black rounded-xl overflow-hidden shadow-md relative border border-gray-100/30 group">
+            
+            <!-- Video Container for Custom Controls -->
+            <div class="relative w-full h-full flex items-center justify-center">
+              <video id="theaterMainVideo" class="w-full h-full object-contain" src="https://assets.mixkit.co/videos/preview/mixkit-man-working-on-his-laptop-at-home-43224-large.mp4" autoplay></video>
+              
+              <!-- Custom Video Player Controls Overlay -->
+              <div id="videoCustomControls" class="absolute bottom-4 left-4 right-4 bg-gray-900/60 backdrop-blur-md rounded-xl p-3 flex flex-col gap-2 border border-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20">
+                
+                <!-- Scrub Bar / Timeline -->
+                <div class="flex items-center gap-3 w-full group/timeline">
+                  <div id="videoTimeline" class="flex-grow h-1 bg-white/20 rounded-full cursor-pointer relative transition-all group-hover/timeline:h-1.5" onclick="seekVideo(event)">
+                    <div id="videoProgress" class="absolute top-0 left-0 h-full bg-blue-600 rounded-full" style="width: 0%"></div>
+                    <div id="videoKnob" class="absolute top-1/2 -translate-y-1/2 w-3.5 h-3.5 bg-blue-600 rounded-full shadow-md scale-0 group-hover/timeline:scale-100 transition-transform" style="left: 0%"></div>
+                  </div>
+                </div>
+                
+                <!-- Control Buttons row -->
+                <div class="flex items-center justify-between text-white text-xs select-none">
+                  <!-- Left Controls -->
+                  <div class="flex items-center gap-4">
+                    <button onclick="togglePlayPause(event)" class="hover:scale-110 active:scale-95 transition-transform flex items-center justify-center focus:outline-none">
+                      <span id="playIcon" class="material-symbols-outlined text-[20px] pointer-events-none">pause</span>
+                    </button>
+                    <button onclick="toggleMute(event)" class="hover:scale-110 active:scale-95 transition-transform flex items-center justify-center focus:outline-none">
+                      <span id="volumeIcon" class="material-symbols-outlined text-[20px] pointer-events-none">volume_up</span>
+                    </button>
+                    <button onclick="skipVideo(event, -10)" class="hover:scale-110 active:scale-95 transition-transform flex items-center justify-center focus:outline-none">
+                      <span class="material-symbols-outlined text-[20px] pointer-events-none">replay_10</span>
+                    </button>
+                    <span class="font-medium font-mono text-[11px]"><span id="currentTime">0:00</span> / <span id="durationTime">0:59</span></span>
+                    <button onclick="skipVideo(event, 10)" class="hover:scale-110 active:scale-95 transition-transform flex items-center justify-center focus:outline-none">
+                      <span class="material-symbols-outlined text-[20px] pointer-events-none">forward_10</span>
+                    </button>
+                  </div>
+                  
+                  <!-- Right Controls -->
+                  <div class="flex items-center gap-4 text-gray-200">
+                    <button onclick="toggleSpeed(event)" class="hover:text-white font-bold text-[11px] border border-white/20 rounded px-1.5 py-0.5 focus:outline-none">1x</button>
+                    <button class="hover:text-white flex items-center justify-center focus:outline-none">
+                      <span class="material-symbols-outlined text-[20px] pointer-events-none">settings</span>
+                    </button>
+                    <button onclick="togglePip(event)" class="hover:text-white flex items-center justify-center focus:outline-none">
+                      <span class="material-symbols-outlined text-[20px] pointer-events-none">picture_in_picture_alt</span>
+                    </button>
+                    <button class="hover:text-white flex items-center justify-center focus:outline-none">
+                      <span class="material-symbols-outlined text-[20px] pointer-events-none">open_in_full</span>
+                    </button>
+                    <button onclick="toggleFullscreen(event)" class="hover:scale-110 active:scale-95 transition-transform flex items-center justify-center focus:outline-none">
+                      <span class="material-symbols-outlined text-[20px] pointer-events-none">fullscreen</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div id="theaterImageFrame" class="hidden w-full h-full bg-gray-50 absolute inset-0 z-10 p-0 flex flex-col items-center justify-center">
+              <img id="theaterStaticImage" class="max-h-full max-w-full object-contain hidden" src=""/>
+              
+              <!-- Document Viewer View -->
+              <div id="theaterDocViewer" class="hidden w-full h-full bg-white flex flex-col p-6 rounded-xl border border-gray-200/50">
+                <!-- Header Row -->
+                <div class="flex items-center justify-between border-b border-gray-100 pb-4 mb-4 flex-shrink-0">
+                  <div class="flex items-center gap-3">
+                    <span class="material-symbols-outlined text-blue-600 text-3xl" style="font-variation-settings: 'FILL' 1;">description</span>
+                    <div class="text-left">
+                      <h3 id="docViewerTitle" class="text-sm font-bold text-gray-900 leading-snug">Project_Report.docx</h3>
+                      <p id="docViewerDetails" class="text-[11px] text-gray-500 mt-0.5">Document • 16.9 KB</p>
+                    </div>
+                  </div>
+                  <a id="docDownloadBtn" href="#" download class="bg-blue-600 text-white px-4 py-2 rounded-lg font-bold text-xs hover:bg-blue-700 active:scale-95 transition-all shadow-sm flex items-center gap-1 focus:outline-none border-none">
+                    <span class="material-symbols-outlined text-[14px]">download</span> Download
+                  </a>
+                </div>
+                
+                <!-- Scrollable docx text preview - occupying full remaining height -->
+                <div id="theaterDocxContentView" class="flex-1 w-full text-left bg-gray-50 p-6 rounded-xl overflow-y-auto border border-gray-200/50 text-sm text-gray-700 leading-relaxed hidden">
+                </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Video Details and AI assistance row -->
+          <div>
+            <div class="flex items-center justify-between">
+              <h2 id="theaterLectureTitle" class="text-2xl font-bold text-gray-900">Course Requirements</h2>
+              <button class="flex items-center gap-1 text-xs font-bold text-gray-700 border border-gray-300 rounded-lg px-3 py-1.5 hover:bg-gray-50 transition-colors">
+                <span class="material-symbols-outlined text-[16px]">edit_note</span>
+                Save note
+              </button>
+            </div>
+            
+            <!-- AI Copilot Assistant accordion section -->
+            <div class="border border-blue-100 bg-blue-50/20 rounded-xl mt-6 overflow-hidden">
+              <div class="p-4 flex items-center justify-between cursor-pointer select-none hover:bg-blue-50/40" id="aiAccordionHeader">
+                <div class="flex items-center gap-2 text-blue-800 font-semibold text-sm">
+                  <span class="material-symbols-outlined text-blue-600 text-[18px]">auto_awesome</span>
+                  <span>Dive deeper on this topic</span>
+                </div>
+                <span class="material-symbols-outlined text-blue-600 text-[18px]" id="aiAccordionIcon">expand_less</span>
+              </div>
+              
+              <!-- Accordion Content -->
+              <div class="p-4 pt-0 flex flex-wrap gap-2.5 border-t border-blue-100/50" id="aiAccordionContent">
+                <button onclick="askMockAI('practice')" class="border border-blue-200/80 bg-white hover:bg-blue-50/50 text-blue-700 px-4 py-2 rounded-xl text-xs font-bold transition-all shadow-sm">Give me practice questions</button>
+                <button onclick="askMockAI('simple')" class="border border-blue-200/80 bg-white hover:bg-blue-50/50 text-blue-700 px-4 py-2 rounded-xl text-xs font-bold transition-all shadow-sm">Explain this topic in simple terms</button>
+                <button onclick="askMockAI('summary')" class="border border-blue-200/80 bg-white hover:bg-blue-50/50 text-blue-700 px-4 py-2 rounded-xl text-xs font-bold transition-all shadow-sm">Give me a summary</button>
+                <button onclick="askMockAI('examples')" class="border border-blue-200/80 bg-white hover:bg-blue-50/50 text-blue-700 px-4 py-2 rounded-xl text-xs font-bold transition-all shadow-sm">Give me real-life examples</button>
+              </div>
+            </div>
+
+            <!-- Feedback rating and Go to next item button -->
+            <div class="flex items-center justify-between border-t border-gray-100 mt-8 pt-6">
+              <div class="flex items-center gap-4 text-gray-500">
+                <button class="hover:text-gray-900 flex items-center justify-center p-1"><span class="material-symbols-outlined text-[20px]">thumb_up</span></button>
+                <button class="hover:text-gray-900 flex items-center justify-center p-1"><span class="material-symbols-outlined text-[20px]">thumb_down</span></button>
+                <button class="hover:text-gray-900 flex items-center justify-center p-1"><span class="material-symbols-outlined text-[20px]">flag</span></button>
+              </div>
+              
+              <button onclick="loadNextPlaylistItem()" id="nextItemButton" class="border border-gray-300 hover:bg-gray-50 text-gray-800 rounded-lg px-5 py-2 text-xs font-bold transition-all shadow-sm flex items-center gap-1">
+                <span>Go to next item</span>
+                <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+              </button>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- Theater Right Action sidebar (Transcript, Notes, Files) -->
+      <div class="w-16 border-l border-gray-300/40 flex flex-col items-center py-6 gap-6 bg-[#e7eeff] flex-shrink-0">
+        <button class="flex flex-col items-center gap-1 text-[10px] font-bold text-gray-500 hover:text-gray-900">
+          <span class="material-symbols-outlined text-[22px]">description</span>
+          <span>Transcript</span>
+        </button>
+        <button class="flex flex-col items-center gap-1 text-[10px] font-bold text-gray-500 hover:text-gray-900">
+          <span class="material-symbols-outlined text-[22px]">sticky_note_2</span>
+          <span>Notes</span>
+        </button>
+        <button class="flex flex-col items-center gap-1 text-[10px] font-bold text-gray-500 hover:text-gray-900">
+          <span class="material-symbols-outlined text-[22px]">folder</span>
+          <span>Files</span>
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Simulated AI Response Modal -->
+  <div id="aiResponseModal" class="fixed inset-0 z-50 bg-black/40 backdrop-blur-sm hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl overflow-hidden shadow-2xl max-w-md w-full border border-gray-100 flex flex-col">
+      <div class="p-4 bg-blue-50 flex justify-between items-center border-b border-blue-100/50">
+        <h3 class="text-blue-900 font-bold text-sm flex items-center gap-2">
+          <span class="material-symbols-outlined text-[18px] text-blue-700 animate-pulse">auto_awesome</span>
+          AI Helper Response
+        </h3>
+        <button onclick="closeAIModal()" class="text-blue-900 hover:scale-105 transition-transform flex items-center justify-center">
+          <span class="material-symbols-outlined">close</span>
+        </button>
+      </div>
+      <div class="p-6 text-sm text-gray-700 leading-relaxed" id="aiModalContent">
+        AI Text Content...
+      </div>
+    </div>
+  </div>
+
+  <!-- Javascript Logic -->
+  <script>
+    const video = document.getElementById('theaterMainVideo');
+    let currentCourse = null;
+    let currentModules = [];
+    let activeModuleId = 'mod1';
+    let playlistItems = [];
+    let activePlaylistItemIdx = 0;
+
+    function resolveVideoDuration(item, callback) {
+      if (item.duration) {
+        callback(item.duration);
+        return;
+      }
+      const testVideo = document.createElement('video');
+      testVideo.preload = 'metadata';
+      testVideo.src = item.url || "https://assets.mixkit.co/videos/preview/mixkit-man-working-on-his-laptop-at-home-43224-large.mp4";
+      testVideo.onloadedmetadata = () => {
+        const mins = Math.floor(testVideo.duration / 60);
+        const secs = Math.floor(testVideo.duration % 60);
+        const formatted = `${mins}:${secs < 10 ? '0' : ''}${secs}`;
+        item.duration = formatted; // cache
+        callback(formatted);
+      };
+      testVideo.onerror = () => {
+        callback('0:59');
+      };
+    }
+
+    function loadCourseData() {
+      let courseId = localStorage.getItem('activeStudentCourseId') || 'ux-research';
+      
+      try {
+        const hash = window.top.location.hash;
+        if (hash.includes('?')) {
+          const searchParams = new URLSearchParams(hash.split('?')[1]);
+          const paramId = searchParams.get('id');
+          if (paramId) courseId = paramId;
+        }
+      } catch (e) {}
+      
+      const origin = window.location.origin;
+      const apiBase = (!origin || origin.includes('localhost:3000')) ? 'http://localhost:8080' : '';
+      fetch(apiBase + '/api/courses')
+        .then(res => res.json())
+        .then(courses => {
+          currentCourse = courses.find(c => String(c.id) === String(courseId) || String(c.title).toLowerCase() === String(courseId).toLowerCase());
+          if (!currentCourse) {
+            const title = courseId
+              .split('-')
+              .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+              .join(' ');
+              
+            currentCourse = {
+              id: courseId,
+              title: title,
+              category: "Demo Academy",
+              modules: [
+                {
+                  id: "mod1",
+                  title: "Module 1: Getting Started",
+                  items: [
+                    { name: "1. Welcome & Overview", type: "video", sizeLabel: "1.2 MB", url: "" },
+                    { name: "2. Setting Up Your Tools", type: "video", sizeLabel: "5.4 MB", url: "" },
+                    { name: "3. Lesson PDF Notes", type: "document", sizeLabel: "800 KB", url: "" }
+                  ]
+                },
+                {
+                  id: "mod2",
+                  title: "Module 2: Core Concepts",
+                  items: [
+                    { name: "4. Theoretical Principles", type: "video", sizeLabel: "12.0 MB", url: "" },
+                    { name: "5. Practical Implementation", type: "video", sizeLabel: "15.2 MB", url: "" },
+                    { name: "6. Quick Assessment Challenge", type: "assignment", sizeLabel: "10 min", url: "" }
+                  ]
+                }
+              ]
+            };
+          }
+          
+          if (currentCourse) {
+            document.getElementById('sidebarCourseTitle').textContent = currentCourse.title;
+            document.getElementById('sidebarAcademyName').textContent = currentCourse.category || 'SkillsBooster Academy';
+            
+            currentModules = currentCourse.modules || [];
+            
+            if (currentModules.length > 0) {
+              activeModuleId = currentModules[0].id;
+            }
+            
+            renderSidebar();
+            renderActiveModule();
+          }
+        })
+        .catch(err => {
+          console.error("Error loading course details:", err);
+        });
+    }
+
+    function renderSidebar(highlightActive = true) {
+      const container = document.getElementById('sidebarModulesList');
+      if (!container) return;
+      container.innerHTML = '';
+      
+      if (currentModules.length === 0) {
+        container.innerHTML = `
+          <p class="text-xs text-gray-400 italic px-4 py-2">No material added</p>
+        `;
+        return;
+      }
+      
+      currentModules.forEach((mod, idx) => {
+        const isActive = highlightActive && (mod.id === activeModuleId);
+        const div = document.createElement('div');
+        
+        if (isActive) {
+          div.className = "flex items-center gap-3 px-4 py-3 rounded-r-xl border-l-4 border-blue-600 bg-blue-50/50 text-blue-700 font-semibold text-sm cursor-pointer transition-all";
+          div.innerHTML = `
+            <span class="material-symbols-outlined text-blue-600 text-[18px]">radio_button_checked</span>
+            <span class="truncate">${mod.title}</span>
+          `;
+        } else {
+          const isLocked = idx > 0;
+          div.className = "flex items-center justify-between px-4 py-3 rounded-xl text-gray-500 text-sm hover:bg-gray-50 cursor-pointer transition-all";
+          div.innerHTML = `
+            <span class="flex items-center gap-3">
+              <span class="material-symbols-outlined text-gray-400 text-[18px]">${isLocked ? 'lock' : 'circle'}</span>
+              <span class="truncate">${mod.title}</span>
+            </span>
+          `;
+        }
+        
+        div.addEventListener('click', () => {
+          activeModuleId = mod.id;
+          showSection('material');
+        });
+        
+        container.appendChild(div);
+      });
+    }
+
+    function renderActiveModule() {
+      const mod = currentModules.find(m => m.id === activeModuleId);
+      if (!mod) return;
+      
+      document.getElementById('activeModuleTitle').textContent = mod.title;
+      
+      const items = mod.items || [];
+      const videos = items.filter(it => it.type === 'video');
+      const assignments = items.filter(it => it.type === 'assignment' || it.type === 'document' || it.type === 'image');
+      
+      document.getElementById('videoMinLabel').textContent = `${videos.length * 5} min`;
+      document.getElementById('assignmentCountLabel').textContent = `${assignments.length} graded assessment${assignments.length !== 1 ? 's' : ''}`;
+      
+      const badge = document.getElementById('assessmentBadge');
+      if (assignments.length > 0) {
+        badge.textContent = `${assignments.length} graded assessment${assignments.length !== 1 ? 's' : ''} left`;
+        badge.classList.remove('hidden');
+      } else {
+        badge.classList.add('hidden');
+      }
+      
+      const listContainer = document.getElementById('moduleItemsList');
+      if (!listContainer) return;
+      listContainer.innerHTML = '';
+      
+      if (items.length === 0) {
+        listContainer.innerHTML = `
+          <div class="p-8 text-center text-gray-400 italic text-sm bg-transparent">
+            No items in this module.
+          </div>
+        `;
+        return;
+      }
+      
+      items.forEach((item, idx) => {
+        const isFirst = idx === 0;
+        const row = document.createElement('div');
+        row.className = "p-5 flex items-center justify-between hover:bg-purple-950/5 transition-colors bg-transparent border-b border-gray-300/20 last:border-b-0 group cursor-pointer";
+        row.onclick = () => enterTheaterView(idx);
+        
+        let typeIcon = 'description';
+        let typeLabel = 'Document';
+        
+        if (item.type === 'video') {
+          typeIcon = 'play_circle';
+          typeLabel = 'Video';
+        } else if (item.type === 'image') {
+          typeIcon = 'image';
+          typeLabel = 'Image File';
+        } else if (item.type === 'assignment') {
+          typeIcon = 'assignment';
+          typeLabel = 'Graded Assignment';
+        }
+        
+        const sizeId = `size-duration-${item.id || idx}`;
+        const sizeOrDuration = item.type === 'video' ? 'Loading...' : (item.sizeLabel || '5.0 MB');
+        
+        let actionHTML = '';
+        if (isFirst) {
+          actionHTML = `
+            <button onclick="enterTheaterView(${idx})" class="bg-blue-600 text-white px-5 py-2 rounded-lg font-bold text-sm hover:bg-blue-700 active:scale-95 transition-all shadow-sm">
+              Get started
+            </button>
+          `;
+        } else {
+          actionHTML = `
+            <span class="material-symbols-outlined text-gray-300 opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer hover:text-blue-600" onclick="enterTheaterView(${idx})">play_arrow</span>
+          `;
+        }
+        
+        row.innerHTML = `
+          <div class="flex items-center gap-4">
+            <span class="material-symbols-outlined text-gray-800 text-[22px]">${typeIcon}</span>
+            <div>
+              <h4 class="text-sm font-semibold text-gray-900 leading-tight">${item.name}</h4>
+              <p class="text-xs text-gray-500 mt-0.5">${typeLabel} • <span id="${sizeId}">${sizeOrDuration}</span></p>
+            </div>
+          </div>
+          <div>
+            ${actionHTML}
+          </div>
+        `;
+        
+        listContainer.appendChild(row);
+        
+        if (item.type === 'video') {
+          resolveVideoDuration(item, (durationStr) => {
+            const label = document.getElementById(sizeId);
+            if (label) label.textContent = durationStr;
+          });
+        }
+      });
+    }
+
+    // SPA View Switcher
+    function showSection(sectionName) {
+      const moduleArea = document.getElementById('moduleContentArea');
+      const gradesArea = document.getElementById('gradesContainer');
+      
+      moduleArea.classList.add('hidden');
+      gradesArea.classList.add('hidden');
+      
+      // Reset sidebar active class on Grades link
+      document.getElementById('sidebarLinkGrades').className = "flex items-center gap-3 px-4 py-3 text-gray-700 hover:bg-gray-50 rounded-xl text-sm font-semibold transition-colors";
+      
+      if (sectionName === 'grades') {
+        gradesArea.classList.remove('hidden');
+        renderGradesView();
+        
+        // Highlight Grades link in the sidebar
+        document.getElementById('sidebarLinkGrades').className = "flex items-center gap-3 px-4 py-3 rounded-r-xl border-l-4 border-blue-600 bg-blue-50/50 text-blue-700 font-semibold text-sm cursor-pointer";
+        
+        // Disable highlighting on modules
+        renderSidebar(false);
+      } else {
+        moduleArea.classList.remove('hidden');
+        renderSidebar(true);
+        renderActiveModule();
+      }
+    }
+
+    function renderGradesView() {
+      const container = document.getElementById('gradesContainer');
+      if (!container) return;
+      
+      let assignments = [];
+      if (currentCourse && currentCourse.modules) {
+        currentCourse.modules.forEach(mod => {
+          if (mod.items) {
+            mod.items.forEach(item => {
+              if (item.type === 'assignment') {
+                assignments.push(item);
+              }
+            });
+          }
+        });
+      }
+      
+      // Fallback matching the exact screenshot items
+      if (assignments.length === 0) {
+        assignments = [
+          { name: "Do a Quick Knowledge Check", due: "Jul 1 11:59 PM PKT" },
+          { name: "Do a Quick Knowledge Check", due: "Jul 3 11:59 PM PKT", locked: true },
+          { name: "Do a Quick Knowledge Check", due: "Jul 8 11:59 PM PKT", locked: true },
+          { name: "Do a Quick Knowledge Check", due: "Jul 8 11:59 PM PKT", locked: true }
+        ];
+      }
+      
+      let rowsHTML = '';
+      assignments.forEach((item, idx) => {
+        const isLocked = item.locked || idx > 0;
+        const icon = isLocked ? 'lock' : 'assignment';
+        
+        const statusHTML = isLocked 
+          ? `<div class="flex items-center gap-1.5 text-gray-700 text-sm font-medium"><span class="material-symbols-outlined text-[16px] text-gray-600">info</span> Locked</div>`
+          : `<span class="text-gray-400">--</span>`;
+          
+        rowsHTML += `
+          <tr class="hover:bg-purple-950/5 transition-colors border-b border-gray-300/20">
+            <td class="py-5 px-4 flex items-center gap-4">
+              <span class="material-symbols-outlined text-gray-500 text-[20px]">${isLocked ? 'lock' : 'assignment'}</span>
+              <div>
+                <a href="#" class="text-sm font-semibold text-blue-600 hover:underline block leading-tight">${item.name}</a>
+                <span class="text-xs text-gray-500 mt-1 block">Graded Assignment</span>
+              </div>
+            </td>
+            <td class="py-5 px-4">
+              ${statusHTML}
+            </td>
+            <td class="py-5 px-4 text-sm text-gray-600 font-medium">
+              <div class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-gray-400 text-[18px]">calendar_today</span>
+                <span>${item.due || 'Jul 1 11:59 PM PKT'}</span>
+              </div>
+            </td>
+            <td class="py-5 px-4 text-sm text-gray-500 font-semibold">25%</td>
+            <td class="py-5 px-4 text-sm text-gray-400 text-center font-medium">--</td>
+          </tr>
+        `;
+      });
+      
+      container.innerHTML = `
+        <h2 class="text-2xl font-bold text-gray-900 mb-8 border-b border-gray-200 pb-3">Grades</h2>
+        <div class="border border-gray-300/40 rounded-xl overflow-hidden shadow-sm bg-[#e7eeff]">
+          <table class="w-full text-left border-collapse">
+            <thead>
+              <tr class="bg-[#e7eeff]/60 border-b border-gray-300/30 text-xs font-bold text-gray-600 uppercase tracking-wider">
+                <th class="py-3 px-4">Item</th>
+                <th class="py-3 px-4">Status</th>
+                <th class="py-3 px-4">Due</th>
+                <th class="py-3 px-4">Weight</th>
+                <th class="py-3 px-4 text-center">Grade</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-300/20 bg-transparent">
+              ${rowsHTML}
+            </tbody>
+          </table>
+        </div>
+      `;
+    }
+
+    // Theater Mode (View 2) Controller
+    window.enterTheaterView = function(startIndex) {
+      const mod = currentModules.find(m => m.id === activeModuleId);
+      if (!mod) return;
+      
+      playlistItems = mod.items || [];
+      activePlaylistItemIdx = startIndex;
+
+      document.getElementById('mainWorkspace').classList.add('hidden');
+      document.getElementById('theaterWorkspace').classList.remove('hidden');
+      
+      // Extract active module index/number
+      const activeIdx = currentModules.findIndex(m => m.id === activeModuleId);
+      document.getElementById('theaterPlaylistModNum').textContent = `Module ${activeIdx + 1}`;
+      document.getElementById('theaterPlaylistTitle').textContent = mod.title;
+      
+      renderTheaterPlaylist();
+      loadTheaterPlaylistItem();
+    };
+
+    window.closeTheaterView = function() {
+      const video = document.getElementById('theaterMainVideo');
+      if (video) video.pause();
+      
+      document.getElementById('theaterWorkspace').classList.add('hidden');
+      document.getElementById('mainWorkspace').classList.remove('hidden');
+    };
+
+    function renderTheaterPlaylist() {
+      const container = document.getElementById('theaterPlaylistItems');
+      if (!container) return;
+      container.innerHTML = '';
+      
+      playlistItems.forEach((item, idx) => {
+        const isActive = idx === activePlaylistItemIdx;
+        const div = document.createElement('div');
+        
+        let typeIcon = 'description';
+        if (item.type === 'video') typeIcon = 'play_circle';
+        else if (item.type === 'image') typeIcon = 'image';
+        else if (item.type === 'assignment') typeIcon = 'assignment';
+        
+        const sizeId = `theater-size-duration-${item.id || idx}`;
+        const sizeOrDuration = item.type === 'video' ? 'Loading...' : (item.sizeLabel || '5.0 MB');
+        
+        if (isActive) {
+          div.className = "flex items-center gap-3 px-6 py-4 bg-blue-50/50 border-l-4 border-blue-600 text-blue-700 font-semibold text-sm cursor-pointer transition-all";
+          div.innerHTML = `
+            <span class="material-symbols-outlined text-blue-600 text-[18px]">radio_button_checked</span>
+            <div class="flex-grow min-w-0">
+              <p class="truncate leading-tight">${item.name}</p>
+              <p class="text-[10px] text-blue-500 font-normal mt-1">${item.type.toUpperCase()} • <span id="${sizeId}">${sizeOrDuration}</span></p>
+            </div>
+          `;
+        } else {
+          div.className = "flex items-center gap-3 px-6 py-4 text-gray-600 hover:bg-purple-950/5 text-sm cursor-pointer transition-all";
+          div.innerHTML = `
+            <span class="material-symbols-outlined text-gray-400 text-[18px]">${typeIcon}</span>
+            <div class="flex-grow min-w-0">
+              <p class="truncate leading-tight">${item.name}</p>
+              <p class="text-[10px] text-gray-400 font-normal mt-0.5">${item.type.toUpperCase()} • <span id="${sizeId}">${sizeOrDuration}</span></p>
+            </div>
+          `;
+        }
+        
+        div.addEventListener('click', () => {
+          activePlaylistItemIdx = idx;
+          renderTheaterPlaylist();
+          loadTheaterPlaylistItem();
+        });
+        
+        container.appendChild(div);
+        
+        if (item.type === 'video') {
+          resolveVideoDuration(item, (durationStr) => {
+            const label = document.getElementById(sizeId);
+            if (label) label.textContent = durationStr;
+          });
+        }
+      });
+    }
+
+    function loadTheaterPlaylistItem() {
+      const item = playlistItems[activePlaylistItemIdx];
+      if (!item) return;
+      
+      document.getElementById('theaterLectureTitle').textContent = item.name;
+      
+      const progressLabel = document.getElementById('theaterProgressLabel');
+      const progressBar = document.getElementById('theaterProgressBar');
+      const total = playlistItems.length;
+      const completed = activePlaylistItemIdx + 1;
+      progressLabel.textContent = `${completed}/${total} learning items`;
+      progressBar.style.width = `${(completed / total) * 100}%`;
+      
+      const video = document.getElementById('theaterMainVideo');
+      const imgFrame = document.getElementById('theaterImageFrame');
+      const staticImg = document.getElementById('theaterStaticImage');
+      const docViewer = document.getElementById('theaterDocViewer');
+      const customControls = document.getElementById('videoCustomControls');
+      
+      if (item.type === 'video') {
+        video.classList.remove('hidden');
+        if (customControls) customControls.classList.remove('hidden');
+        imgFrame.classList.add('hidden');
+        if (docViewer) docViewer.classList.add('hidden');
+        
+        video.src = item.url || "https://assets.mixkit.co/videos/preview/mixkit-man-working-on-his-laptop-at-home-43224-large.mp4";
+        video.load();
+        video.play();
+      } else {
+        video.classList.add('hidden');
+        video.pause();
+        if (customControls) customControls.classList.add('hidden');
+        imgFrame.classList.remove('hidden');
+        
+        if (item.type === 'image') {
+          staticImg.src = item.url || 'https://images.unsplash.com/photo-1531403009284-440f080d1e12?q=80&w=800';
+          staticImg.classList.remove('hidden');
+          if (docViewer) docViewer.classList.add('hidden');
+        } else {
+          // Document view fallback
+          staticImg.classList.add('hidden');
+          if (docViewer) {
+            docViewer.classList.remove('hidden');
+            document.getElementById('docViewerTitle').textContent = item.name;
+            document.getElementById('docViewerDetails').textContent = `${item.type.toUpperCase()} • ${item.sizeLabel || '16.9 KB'}`;
+            
+            const downloadBtn = document.getElementById('docDownloadBtn');
+            if (downloadBtn) {
+              downloadBtn.href = item.url || '#';
+              downloadBtn.download = item.name;
+            }
+
+            const docxView = document.getElementById('theaterDocxContentView');
+            if (item.name.toLowerCase().endsWith('.docx') && item.url) {
+              if (docxView) {
+                docxView.innerHTML = '<p class="text-xs text-gray-400 italic text-center py-2">Loading document text...</p>';
+                docxView.classList.remove('hidden');
+              }
+              const origin = window.location.origin;
+              const apiBase = (!origin || origin.includes('localhost:3000')) ? 'http://localhost:8080' : '';
+              fetch(apiBase + `/api/parse-docx?url=${encodeURIComponent(item.url)}`)
+                .then(res => res.json())
+                .then(data => {
+                  if (data.success) {
+                    docxView.innerHTML = data.html || '<p class="text-xs text-gray-400 italic text-center py-2">Document is empty.</p>';
+                  } else {
+                    docxView.innerHTML = `<p class="text-xs text-error italic text-center py-2">Could not read document text: ${data.error}</p>`;
+                  }
+                })
+                .catch(err => {
+                  console.error(err);
+                  docxView.innerHTML = '<p class="text-xs text-error italic text-center py-2">Failed to load document text.</p>';
+                });
+            } else {
+              if (docxView) docxView.classList.add('hidden');
+            }
+          }
+        }
+      }
+      
+      const nextBtn = document.getElementById('nextItemButton');
+      if (activePlaylistItemIdx >= playlistItems.length - 1) {
+        nextBtn.innerHTML = `<span>Finish Module</span><span class="material-symbols-outlined text-[14px]">done</span>`;
+      } else {
+        nextBtn.innerHTML = `<span>Go to next item</span><span class="material-symbols-outlined text-[14px]">arrow_forward</span>`;
+      }
+    }
+
+    window.loadNextPlaylistItem = function() {
+      if (activePlaylistItemIdx < playlistItems.length - 1) {
+        activePlaylistItemIdx++;
+        renderTheaterPlaylist();
+        loadTheaterPlaylistItem();
+      } else {
+        alert("Congratulations! You have completed this module!");
+        closeTheaterView();
+      }
+    };
+
+    // AI Accordion Toggle
+    const aiAccordionHeader = document.getElementById('aiAccordionHeader');
+    const aiAccordionContent = document.getElementById('aiAccordionContent');
+    const aiAccordionIcon = document.getElementById('aiAccordionIcon');
+    if (aiAccordionHeader && aiAccordionContent) {
+      aiAccordionHeader.addEventListener('click', () => {
+        const isHidden = aiAccordionContent.classList.contains('hidden');
+        aiAccordionContent.classList.toggle('hidden', !isHidden);
+        aiAccordionIcon.textContent = isHidden ? 'expand_less' : 'expand_more';
+      });
+    }
+
+    // AI responses mockup mapper
+    const aiResponses = {
+      practice: "Here are some practice questions for you:\n\n1. What is Google Antigravity and how does it optimize coding tasks?\n2. Detail the workflow required to initialize an agent on your local system.\n3. How do browser subagents communicate results back to the planner module?",
+      simple: "To explain this in simple terms: Antigravity is a coding helper that can read your workspace files, write updates for you, and test them automatically in the background. It acts like an autopilot co-pilot for developer workflows, taking care of manual chores.",
+      summary: "Summary of this lecture:\n\nIn this session, we introduced the concept of Advanced Agentic Coding. We explored how agents receive prompts, invoke tools (like file-edits, shell scripts, and web searches), and handle multi-step development plans. We also highlighted coding aesthetics best practices.",
+      examples: "Real-world examples of Antigravity in action:\n\n1. Automatically building landing pages from descriptive layout images.\n2. Upgrading obsolete database calls across multiple files in a repository.\n3. Setting up recurring status checkers and alarms for cloud deployments."
+    };
+
+    window.askMockAI = function(type) {
+      const modal = document.getElementById('aiResponseModal');
+      const content = document.getElementById('aiModalContent');
+      if (modal && content && aiResponses[type]) {
+        content.innerHTML = aiResponses[type].replace(/\n/g, '<br>');
+        modal.classList.remove('hidden');
+      }
+    };
+
+    window.closeAIModal = function() {
+      document.getElementById('aiResponseModal').classList.add('hidden');
+    };
+
+    // Module Accordion Toggle (View 1)
+    const accordionHeader = document.getElementById('moduleAccordionHeader');
+    const accordionContent = document.getElementById('moduleAccordionContent');
+    const toggleIcon = document.getElementById('accordionToggleIcon');
+    if (accordionHeader && accordionContent) {
+      accordionHeader.addEventListener('click', () => {
+        const isHidden = accordionContent.classList.contains('hidden');
+        accordionContent.classList.toggle('hidden', !isHidden);
+        toggleIcon.textContent = isHidden ? 'expand_less' : 'expand_more';
+      });
+    }
+
+    // Custom Video Player Controls Handlers
+    window.togglePlayPause = function(event) {
+      if (event) {
+        event.stopPropagation();
+        event.preventDefault();
+      }
+      const vid = document.getElementById('theaterMainVideo');
+      const playIcon = document.getElementById('playIcon');
+      if (!vid) return;
+      
+      if (vid.paused) {
+        vid.play();
+        if (playIcon) playIcon.textContent = 'pause';
+      } else {
+        vid.pause();
+        if (playIcon) playIcon.textContent = 'play_arrow';
+      }
+    };
+    
+    window.toggleMute = function(event) {
+      if (event) {
+        event.stopPropagation();
+        event.preventDefault();
+      }
+      const vid = document.getElementById('theaterMainVideo');
+      if (!vid) return;
+      
+      vid.muted = !vid.muted;
+      const volumeIcon = document.getElementById('volumeIcon');
+      if (volumeIcon) {
+        volumeIcon.textContent = vid.muted ? 'volume_off' : 'volume_up';
+      }
+    };
+    
+    window.skipVideo = function(event, secs) {
+      if (event) {
+        event.stopPropagation();
+        event.preventDefault();
+      }
+      const vid = document.getElementById('theaterMainVideo');
+      if (vid && !isNaN(vid.duration)) {
+        vid.currentTime = Math.max(0, Math.min(vid.currentTime + secs, vid.duration));
+      }
+    };
+    
+    window.seekVideo = function(event) {
+      if (event) {
+        event.stopPropagation();
+      }
+      const vid = document.getElementById('theaterMainVideo');
+      const timeline = document.getElementById('videoTimeline');
+      if (!vid || !timeline) return;
+      
+      const rect = timeline.getBoundingClientRect();
+      const clickX = event.clientX - rect.left;
+      const pct = Math.max(0, Math.min(1, clickX / rect.width));
+      vid.currentTime = pct * (vid.duration || 59);
+    };
+    
+    let speeds = [1, 1.25, 1.5, 2, 0.75];
+    let currentSpeedIdx = 0;
+    window.toggleSpeed = function(event) {
+      if (event) {
+        event.stopPropagation();
+        event.preventDefault();
+      }
+      const vid = document.getElementById('theaterMainVideo');
+      if (!vid) return;
+      
+      currentSpeedIdx = (currentSpeedIdx + 1) % speeds.length;
+      const sp = speeds[currentSpeedIdx];
+      vid.playbackRate = sp;
+      event.target.textContent = sp + 'x';
+    };
+    
+    window.togglePip = async function(event) {
+      if (event) {
+        event.stopPropagation();
+        event.preventDefault();
+      }
+      const vid = document.getElementById('theaterMainVideo');
+      if (!vid) return;
+      
+      try {
+        if (document.pictureInPictureElement) {
+          await document.exitPictureInPicture();
+        } else {
+          await vid.requestPictureInPicture();
+        }
+      } catch (err) {
+        console.warn("PIP failed:", err);
+      }
+    };
+    
+    window.toggleFullscreen = function(event) {
+      if (event) {
+        event.stopPropagation();
+        event.preventDefault();
+      }
+      const vid = document.getElementById('theaterMainVideo');
+      if (!vid) return;
+      
+      const playerContainer = vid.closest('.aspect-video');
+      if (!document.fullscreenElement) {
+        playerContainer.requestFullscreen().catch(err => {
+          console.warn("Fullscreen error:", err);
+        });
+      } else {
+        document.exitFullscreen();
+      }
+    };
+    
+    function formatTime(secs) {
+      if (isNaN(secs)) return '0:00';
+      const m = Math.floor(secs / 60);
+      const s = Math.floor(secs % 60);
+      return `${m}:${s < 10 ? '0' : ''}${s}`;
+    }
+    
+    video.addEventListener('timeupdate', () => {
+      const current = video.currentTime;
+      const duration = video.duration || 59;
+      const pct = (current / duration) * 100;
+      
+      const progressBar = document.getElementById('videoProgress');
+      const progressKnob = document.getElementById('videoKnob');
+      const curTimeLabel = document.getElementById('currentTime');
+      const durTimeLabel = document.getElementById('durationTime');
+      
+      if (progressBar) progressBar.style.width = pct + '%';
+      if (progressKnob) progressKnob.style.left = pct + '%';
+      if (curTimeLabel) curTimeLabel.textContent = formatTime(current);
+      if (durTimeLabel) durTimeLabel.textContent = formatTime(duration);
+    });
+
+    video.addEventListener('play', () => {
+      const playIcon = document.getElementById('playIcon');
+      if (playIcon) playIcon.textContent = 'pause';
+    });
+    
+    video.addEventListener('pause', () => {
+      const playIcon = document.getElementById('playIcon');
+      if (playIcon) playIcon.textContent = 'play_arrow';
+    });
+
+    video.addEventListener('error', () => {
+      if (video.src && video.src.includes('blob:') && video.src !== "https://assets.mixkit.co/videos/preview/mixkit-man-working-on-his-laptop-at-home-43224-large.mp4") {
+        console.warn("Expired blob URL, falling back to default video");
+        video.src = "https://assets.mixkit.co/videos/preview/mixkit-man-working-on-his-laptop-at-home-43224-large.mp4";
+        video.load();
+        video.play();
+      }
+    });
+
+    loadCourseData();
+  </script>
+</body>
+</html>

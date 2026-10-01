@@ -1,0 +1,1357 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+    <title>Course Player - SkillsBooster Academy</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+              "primary": "#8731a3",
+              "primary-container": "#a34cbe",
+              "on-surface": "#141c29",
+              "on-surface-variant": "#4f4350",
+              "outline": "#817381",
+              "background": "#DCE4F7",
+            },
+            "fontFamily": {
+              "body-md-mobile": ["Inter"],
+            },
+            "spacing": {
+              "safe-bottom": "34px",
+              "base": "8px",
+              "mobile-gutter": "16px",
+              "safe-top": "44px",
+              "mobile-margin": "20px",
+            }
+          },
+        },
+      }
+    </script>
+    <style>
+        body {
+            background-color: #DCE4F7;
+            -webkit-tap-highlight-color: transparent;
+            overflow-x: hidden;
+            min-height: max(884px, 100dvh);
+            font-family: 'Inter', sans-serif;
+        }
+
+        .liquid-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            filter: blur(80px);
+            opacity: 0.8;
+        }
+
+        .blob-1 {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: #BF7DF5;
+            border-radius: 50%;
+            top: -20%;
+            left: -20%;
+            opacity: 0.6;
+        }
+
+        .blob-2 {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: #4D9EFA;
+            border-radius: 50%;
+            bottom: -20%;
+            right: -20%;
+            opacity: 0.5;
+        }
+
+        .lecture-card {
+            background: rgba(255, 255, 255, 0.45);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 8px 32px 0 rgba(71, 26, 112, 0.05);
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .lecture-card.active {
+            background: rgba(135, 49, 163, 0.12);
+            border-color: rgba(135, 49, 163, 0.35);
+        }
+
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        .video-gradient-overlay {
+            background: linear-gradient(to top, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0) 40%);
+        }
+        
+        .active-tab {
+            color: #8731a3 !important;
+            border-bottom: 2px solid #8731a3;
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body class="font-body-md-mobile text-on-background antialiased flex flex-col h-screen">
+
+<!-- Atmospheric Liquid Background -->
+<div class="liquid-bg">
+    <div class="blob-1"></div>
+    <div class="blob-2"></div>
+</div>
+
+<!-- Header -->
+<header class="w-full flex items-center gap-4 px-mobile-margin py-4 pt-10 bg-transparent shrink-0">
+    <button onclick="goBack()" class="w-10 h-10 rounded-full bg-white/40 backdrop-blur-md border border-white/60 flex items-center justify-center flex-shrink-0 shadow-sm active:scale-90 transition-transform">
+        <span class="material-symbols-outlined text-[#8731a3]">arrow_back</span>
+    </button>
+    <h1 id="currentCourseTitle" class="text-[#471A70] font-bold text-[16px] leading-tight flex-1 truncate pr-4">Mastering Google Antigravity: From Setup to Deployment</h1>
+</header>
+
+<!-- Theater-style Video Window -->
+<section class="relative w-full aspect-video overflow-hidden shadow-2xl z-10 bg-black shrink-0 group">
+    <video id="courseVideo" class="w-full h-full object-cover cursor-pointer" src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" autoplay></video>
+    
+    <!-- Image Viewer -->
+    <div id="imageViewer" class="absolute inset-0 bg-gray-900 flex items-center justify-center hidden z-10">
+      <img class="max-h-full max-w-full object-contain" src="" alt="Image Viewer"/>
+    </div>
+
+    <!-- Document Viewer -->
+    <div id="documentViewer" class="absolute inset-0 bg-[#f8f9fa] flex flex-col items-center justify-center p-6 hidden z-10">
+      <div id="docMetaView" class="flex flex-col items-center justify-center">
+        <span class="material-symbols-outlined text-[#8731a3] text-5xl mb-2">description</span>
+        <p class="doc-title text-sm font-bold text-[#471A70] text-center max-w-[200px] truncate">Document Name</p>
+        <p class="doc-size text-[11px] text-[#726580] mt-0.5">1.2 MB</p>
+        <button id="readDocBtn" onclick="readDocument()" class="mt-4 px-4 py-1.5 rounded-full bg-[#8731a3] text-white text-xs font-bold shadow-md">Read Document</button>
+      </div>
+      <!-- Scrollable docx text preview -->
+      <div id="docxContentView" class="hidden w-full h-full text-left bg-white p-4 rounded-xl overflow-y-auto border border-gray-200 text-xs text-gray-700 leading-relaxed relative">
+        <button onclick="closeDocReader()" class="absolute top-2 right-2 text-gray-400 hover:text-gray-900 transition-colors p-1 hover:bg-gray-100 rounded-full flex items-center justify-center">
+          <span class="material-symbols-outlined text-[16px]">close</span>
+        </button>
+        <div id="docxParsedHtml" class="pt-6 pr-4"></div>
+      </div>
+    </div>
+
+    <!-- Custom Video Player Controls Overlay -->
+    <div id="videoCustomControls" class="absolute bottom-2 left-2 right-2 bg-black/65 backdrop-blur-md rounded-2xl p-2.5 flex flex-col gap-2 border border-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20">
+      <!-- Timeline -->
+      <div class="flex items-center gap-2 w-full group/timeline">
+        <div id="videoTimeline" class="flex-grow h-1.5 bg-white/20 rounded-full cursor-pointer relative" onclick="seekVideo(event)">
+          <div id="videoProgress" class="absolute top-0 left-0 h-full bg-primary rounded-full" style="width: 0%"></div>
+        </div>
+      </div>
+      
+      <!-- Buttons -->
+      <div class="flex items-center justify-between text-white text-xs select-none">
+        <div class="flex items-center gap-3">
+          <button onclick="togglePlayPause(event)" class="hover:scale-115 active:scale-95 transition-transform flex items-center justify-center focus:outline-none">
+            <span id="playIcon" class="material-symbols-outlined text-[18px] pointer-events-none">pause</span>
+          </button>
+          <button onclick="skipVideo(event, -10)" class="hover:scale-115 active:scale-95 transition-transform flex items-center justify-center focus:outline-none">
+            <span class="material-symbols-outlined text-[18px] pointer-events-none">replay_10</span>
+          </button>
+          <span class="font-medium font-mono text-[10px]"><span id="currentTime">0:00</span> / <span id="durationTime">0:00</span></span>
+          <button onclick="skipVideo(event, 10)" class="hover:scale-115 active:scale-95 transition-transform flex items-center justify-center focus:outline-none">
+            <span class="material-symbols-outlined text-[18px] pointer-events-none">forward_10</span>
+          </button>
+        </div>
+        
+        <div class="flex items-center gap-3 text-gray-200">
+          <button id="speedBtn" onclick="cycleSpeed(event)" class="hover:text-white font-extrabold text-[10px] border border-white/20 rounded-lg px-2 py-0.5 focus:outline-none bg-white/10">1x</button>
+          <button onclick="toggleMute(event)" class="hover:scale-115 active:scale-95 transition-transform flex items-center justify-center focus:outline-none">
+            <span id="volumeIcon" class="material-symbols-outlined text-[18px] pointer-events-none">volume_up</span>
+          </button>
+          <button onclick="toggleAspect(event)" class="hover:scale-115 active:scale-95 transition-transform flex items-center justify-center focus:outline-none">
+            <span id="aspectIcon" class="material-symbols-outlined text-[18px] pointer-events-none">open_in_full</span>
+          </button>
+          <button onclick="toggleFullscreen(event)" class="hover:scale-115 active:scale-95 transition-transform flex items-center justify-center focus:outline-none">
+            <span class="material-symbols-outlined text-[18px] pointer-events-none">fullscreen</span>
+          </button>
+        </div>
+      </div>
+    </div>
+    
+
+</section>
+
+<!-- AI Copilot Assistant Accordion -->
+<div class="px-mobile-margin mt-4">
+    <div class="border border-[#8731a3]/20 bg-[#8731a3]/5 rounded-2xl overflow-hidden">
+      <div class="p-3.5 flex items-center justify-between cursor-pointer select-none hover:bg-[#8731a3]/10" id="aiAccordionHeader">
+        <div class="flex items-center gap-2 text-[#471A70] font-bold text-xs">
+          <span class="material-symbols-outlined text-primary text-[18px]">auto_awesome</span>
+          <span>Dive deeper on this topic</span>
+        </div>
+        <span class="material-symbols-outlined text-primary text-[18px]" id="aiAccordionIcon">expand_more</span>
+      </div>
+      
+      <!-- Accordion Content -->
+      <div class="p-3.5 pt-0 flex flex-wrap gap-2 border-t border-[#8731a3]/10 hidden" id="aiAccordionContent">
+        <button onclick="askMockAI('practice')" class="border border-[#8731a3]/20 bg-white/60 hover:bg-white text-[#471A70] px-3 py-1.5 rounded-xl text-[11px] font-bold transition-all shadow-sm">Give me practice questions</button>
+        <button onclick="askMockAI('simple')" class="border border-[#8731a3]/20 bg-white/60 hover:bg-white text-[#471A70] px-3 py-1.5 rounded-xl text-[11px] font-bold transition-all shadow-sm">Explain this topic in simple terms</button>
+        <button onclick="askMockAI('summary')" class="border border-[#8731a3]/20 bg-white/60 hover:bg-white text-[#471A70] px-3 py-1.5 rounded-xl text-[11px] font-bold transition-all shadow-sm">Give me a summary</button>
+        <button onclick="askMockAI('examples')" class="border border-[#8731a3]/20 bg-white/60 hover:bg-white text-[#471A70] px-3 py-1.5 rounded-xl text-[11px] font-bold transition-all shadow-sm">Give me real-life examples</button>
+      </div>
+    </div>
+</div>
+
+
+<!-- Navigation Tabs -->
+<div id="course-tabs" class="flex px-mobile-margin mt-6 gap-6 border-b border-white/40 overflow-x-auto hide-scrollbar shrink-0">
+    <button onclick="switchTab(this)" class="pb-3 font-bold text-sm whitespace-nowrap active-tab">Dashboard</button>
+    <button onclick="switchTab(this)" class="pb-3 text-[#726580] font-medium text-sm whitespace-nowrap">Grades</button>
+    <button onclick="switchTab(this)" class="pb-3 text-[#726580] font-medium text-sm whitespace-nowrap">Forums</button>
+    <button onclick="switchTab(this)" class="pb-3 text-[#726580] font-medium text-sm whitespace-nowrap">Notes</button>
+    <button onclick="switchTab(this)" class="pb-3 text-[#726580] font-medium text-sm whitespace-nowrap">Resources</button>
+    <button onclick="switchTab(this)" class="pb-3 text-[#726580] font-medium text-sm whitespace-nowrap">Info</button>
+</div>
+
+<!-- Content Area: Dynamic List -->
+<main class="flex-grow overflow-y-auto pb-safe-bottom">
+    <div id="lectureList" class="px-mobile-margin mt-6 space-y-4 pb-12">
+        <!-- Cards will be dynamically injected here -->
+    </div>
+</main>
+
+<script>
+    // Course-specific syllabus, notes, and info database
+    const courseData = {
+      'ux': {
+        title: "Advanced UI/UX Liquid Design Patterns",
+        modules: [
+          {
+            name: "Module 1: Introduction",
+            description: "Understand the core fundamentals and setup guidelines.",
+            items: [
+              { id: "ux1", name: "Introduction to Liquid Glass Aesthetics", type: "video", duration: "3 min", url: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" },
+              { id: "ux2", name: "Designing Pastel Color Palettes", type: "video", duration: "5 min", url: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4" },
+              { id: "ux3", name: "Implementing Backdrop Blurs in CSS", type: "video", duration: "8 min", url: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4" },
+              { id: "ux4", name: "Micro-interactions & Spring Physics", type: "video", duration: "6 min", url: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4" },
+              { id: "ux5", name: "Final Case Study Submission", type: "video", duration: "12 min", url: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4" }
+            ]
+          },
+          {
+            name: "module 1",
+            items: [],
+            locked: true
+          },
+          {
+            name: "module 2",
+            items: [],
+            locked: true
+          }
+        ],
+        notes: [
+          "Glassmorphism requires `backdrop-filter: blur(20px)` and a thin semi-transparent border for maximum elegance.",
+          "Soft lavender (#DCE4F7) background with floating blurred organic shapes creates a modern premium depth.",
+          "Micro-animations should use spring curves (cubic-bezier) to feel responsive and alive."
+        ],
+        resources: [
+          { name: "Liquid Glass UI Kit.fig", size: "24 MB" },
+          { name: "CSS Backdrop Blur Cheat Sheet.pdf", size: "1.8 MB" }
+        ],
+        info: "Learn how to build premium, state-of-the-art user interfaces with glassmorphic elements, soft pastel gradients, and dynamic micro-animations. Taught by Sarah Jenkins."
+      },
+      'antigravity': {
+        title: "Mastering Google Antigravity: From Setup to Deployment",
+        modules: [
+          {
+            name: "Module 1: Introduction",
+            description: "Understand the core fundamentals and setup guidelines.",
+            items: [
+              { id: "ag1", name: "Course Requirements", type: "video", duration: "58 sec", url: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" },
+              { id: "ag2", name: "Install & Setup Google Antigravity", type: "video", duration: "3 min 12 sec", url: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4" },
+              { id: "ag3", name: "Core Principles of Anti-Mass", type: "video", duration: "5 min 45 sec", url: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4" },
+              { id: "ag4", name: "Building Your First Float Container", type: "video", duration: "8 min 20 sec", url: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4" }
+            ]
+          },
+          {
+            name: "module 1",
+            items: [],
+            locked: true
+          },
+          {
+            name: "module 2",
+            items: [],
+            locked: true
+          }
+        ],
+        notes: [
+          "Antigravity is a powerful tool to build and run local sandboxed instances.",
+          "Ensure your Cwd is within the user's workspace before executing shell commands.",
+          "Always verify API endpoints using test scripts on localhost:8080."
+        ],
+        resources: [
+          { name: "Antigravity Documentation.pdf", size: "4.5 MB" },
+          { name: "Workspace Setup Guide.txt", size: "12 KB" }
+        ],
+        info: "Master Google Antigravity from scratch. Learn installation, environment configuration, command execution, and deployment pipeline workflows."
+      }
+    };
+
+    // Determine current course dynamically
+    let currentCourse = {
+      title: "Loading...",
+      lectures: [{ id: "loading", title: "Loading Lectures...", duration: "", videoUrl: "" }],
+      notes: [],
+      resources: [],
+      info: "Loading..."
+    };
+    let lectures = currentCourse.lectures;
+    let currentLectureId = lectures[0].id;
+    let activeTab = 'dashboard';
+
+    function loadCourseData() {
+      let selected = null;
+      try {
+        selected = JSON.parse(localStorage.getItem('selectedCourse')) || (parent && parent.localStorage && JSON.parse(parent.localStorage.getItem('selectedCourse')));
+      } catch (e) {}
+      
+      const courseId = selected ? selected.id : 'ux-research';
+      const apiBase = 'http://localhost:8080';
+      
+      console.log("loadCourseData [Mobile] - selectedCourse:", selected);
+      console.log("loadCourseData [Mobile] - courseId:", courseId);
+      console.log("loadCourseData [Mobile] - apiBase:", apiBase);
+
+      const sendDebug = (msg, data = {}) => {
+        fetch('http://localhost:8080/api/debug-log', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ msg, courseId, data })
+        }).catch(() => {});
+      };
+
+      sendDebug("Loading course player dynamic data", { selected });
+
+      fetch(apiBase + '/api/courses')
+        .then(res => {
+          sendDebug("Courses fetch response status received", { status: res.status });
+          return res.json();
+        })
+        .then(courses => {
+          sendDebug("Courses fetched successfully", { coursesCount: courses.length, coursesList: courses.map(c => ({ id: c.id, title: c.title })) });
+          const match = courses.find(c => String(c.id) === String(courseId) || String(c.title).toLowerCase() === String(courseId).toLowerCase());
+          sendDebug("Course match result", { found: !!match, matchId: match ? match.id : null, matchTitle: match ? match.title : null });
+          if (match) {
+            currentCourse = {
+              title: match.title,
+              info: match.description || `Comprehensive training course on ${match.title}. Explore advanced methodologies, practical exercises, and industry best practices.`,
+              modules: match.modules || [],
+              lectures: [],
+              notes: [],
+              resources: []
+            };
+            
+            // Map modules and items
+            const fallbackVideos = [
+              "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+              "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
+              "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
+              "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4",
+              "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4"
+            ];
+            
+            let videoIdx = 0;
+             const modules = match.modules || [];
+             modules.forEach(mod => {
+               const items = mod.items || [];
+               items.forEach(item => {
+                 let itemUrl = item.url || '';
+                 if (itemUrl && !itemUrl.startsWith('http') && !itemUrl.startsWith('/') && !itemUrl.startsWith('blob:')) {
+                   itemUrl = '/website/uploads/' + itemUrl;
+                 }
+                 
+                 // Dynamic fallbacks
+                 if (!itemUrl || itemUrl.endsWith('Intro_Video.mp4') || itemUrl.endsWith('Design Systems.mp4') || itemUrl.endsWith('Figma Basics.mp4') || itemUrl.startsWith('blob:')) {
+                   if (item.type === 'image') {
+                     itemUrl = itemUrl.startsWith('blob:') ? 'https://images.unsplash.com/photo-1531403009284-440f080d1e12?q=80&w=800' : itemUrl;
+                   } else if (item.type === 'document' || item.type === 'pdf') {
+                     itemUrl = itemUrl.startsWith('blob:') ? '#' : itemUrl;
+                   } else {
+                     itemUrl = fallbackVideos[videoIdx % fallbackVideos.length];
+                     videoIdx++;
+                   }
+                 }
+
+                 currentCourse.lectures.push({
+                   id: item.id || `dyn-item-${Math.random()}`,
+                   title: item.name,
+                   type: item.type || 'video',
+                   duration: item.duration || item.sizeLabel || "5 min",
+                   videoUrl: itemUrl,
+                   size: item.sizeLabel || "1.2 MB",
+                   desc: item.desc || ''
+                 });
+
+                 // Keep resources list updated for resources tab compatibility
+                 if (item.type !== 'video') {
+                   currentCourse.resources.push({
+                     name: item.name,
+                     size: item.sizeLabel || "1.2 MB",
+                     url: itemUrl
+                   });
+                 }
+                
+                if (item.desc) {
+                  currentCourse.notes.push(item.desc);
+                }
+              });
+            });
+            
+            if (currentCourse.lectures.length === 0) {
+              currentCourse.lectures.push({
+                id: "default-vid",
+                title: "Introduction & Getting Started",
+                duration: "4 min",
+                videoUrl: fallbackVideos[0]
+              });
+            }
+            if (currentCourse.notes.length === 0) {
+              currentCourse.notes = [
+                "Review the syllabus and program materials before starting.",
+                "Practice assignments and run files locally to understand the code.",
+                "Post in the discussion forums if you encounter any setup issues."
+              ];
+            }
+            if (currentCourse.resources.length === 0) {
+              currentCourse.resources = [
+                { name: "Course Syllabus.pdf", size: "1.2 MB", url: "#" }
+              ];
+            }
+            
+            document.getElementById("currentCourseTitle").textContent = currentCourse.title;
+            lectures = currentCourse.lectures;
+            currentLectureId = lectures[0] ? lectures[0].id : null;
+            
+            if (currentLectureId) {
+              selectLecture(currentLectureId);
+            } else {
+              renderContent();
+            }
+          } else {
+            sendDebug("Course match failed - not found in API list", { available: courses.map(c => ({ id: c.id, title: c.title })) });
+            const errorMsg = document.createElement('div');
+            errorMsg.className = 'p-4 bg-yellow-100 text-yellow-800 text-xs rounded-2xl mb-4 font-mono text-left border border-yellow-300';
+            errorMsg.innerHTML = `<strong>Diagnostic Warning:</strong> Course not found in API.<br/>courseId: "${courseId}"<br/>Available courses: [${courses.map(c => `'${c.id}' ('${c.title}')`).join(', ')}]`;
+            const container = document.getElementById("lectureList");
+            if (container) container.prepend(errorMsg);
+            useFallbackCourse();
+          }
+        })
+        .catch(err => {
+          console.error("Error loading course:", err);
+          sendDebug("Courses load caught JS error", { error: err.message, stack: err.stack });
+          const errorMsg = document.createElement('div');
+          errorMsg.className = 'p-4 bg-red-100 text-red-800 text-xs rounded-2xl mb-4 font-mono text-left border border-red-300';
+          errorMsg.innerHTML = `<strong>Diagnostic Error:</strong> ${err.message}<br/>Stack: ${err.stack}`;
+          const container = document.getElementById("lectureList");
+          if (container) container.prepend(errorMsg);
+          useFallbackCourse();
+        });
+    }
+
+    function useFallbackCourse() {
+      let selected = null;
+      try {
+        selected = JSON.parse(localStorage.getItem('selectedCourse'));
+      } catch (e) {}
+      
+      let fallback = courseData.antigravity;
+      if (selected) {
+        const titleLower = selected.title.toLowerCase();
+        if (titleLower.includes('ux') || titleLower.includes('design') || titleLower.includes('pattern')) {
+          fallback = courseData.ux;
+        } else {
+          fallback = {
+            title: selected.title,
+            modules: [
+              {
+                name: "Module 1: Introduction",
+                description: "Understand the core fundamentals and setup guidelines.",
+                items: [
+                  { id: "dyn1", name: "Introduction to " + selected.title, type: "video", duration: "4 min", url: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" },
+                  { id: "dyn2", name: "Core Concepts & Fundamentals", type: "video", duration: "10 min", url: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4" },
+                  { id: "dyn3", name: "Practical Implementation", type: "video", duration: "15 min", url: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4" }
+                ]
+              },
+              {
+                name: "module 1",
+                items: [],
+                locked: true
+              },
+              {
+                name: "module 2",
+                items: [],
+                locked: true
+              }
+            ],
+            notes: [
+              "Review the course syllabus for prerequisite materials.",
+              "Complete all module assessments on time to maintain status."
+            ],
+            resources: [
+              { name: "Course Syllabus.pdf", size: "1.2 MB", url: "#" }
+            ],
+            info: "Comprehensive training course on " + selected.title + ". Explore advanced methodologies, practical exercises, and industry best practices."
+          };
+        }
+      }
+      
+      // Flatten fallback modules items into lectures array
+      fallback.lectures = [];
+      if (fallback.modules) {
+        fallback.modules.forEach(mod => {
+          if (mod.items) {
+            mod.items.forEach(item => {
+              fallback.lectures.push({
+                id: item.id || `dyn-item-${Math.random()}`,
+                title: item.name,
+                type: item.type || 'video',
+                duration: item.duration || "5 min",
+                videoUrl: item.url,
+                size: item.sizeLabel || "1.2 MB",
+                desc: item.desc || ''
+              });
+            });
+          }
+        });
+      }
+      
+      currentCourse = fallback;
+      document.getElementById("currentCourseTitle").textContent = currentCourse.title;
+      lectures = currentCourse.lectures;
+      currentLectureId = lectures[0] ? lectures[0].id : null;
+      
+      if (currentLectureId) {
+        selectLecture(currentLectureId);
+      } else {
+        renderContent();
+      }
+    }
+
+    window.toggleModuleCollapse = function(event, modId) {
+      if (event) {
+        event.stopPropagation();
+        event.preventDefault();
+      }
+      window.collapsedModules = window.collapsedModules || {};
+      window.collapsedModules[modId] = !window.collapsedModules[modId];
+      renderContent();
+    };
+
+    function renderContent() {
+      const container = document.getElementById("lectureList");
+      if (!container) return;
+
+      if (activeTab === 'dashboard') {
+        container.innerHTML = (currentCourse.modules || []).map((mod, modIdx) => {
+          const modId = `mod-${modIdx}`;
+          const isCollapsed = window.collapsedModules && window.collapsedModules[modId];
+          const modItems = mod.items || [];
+          const videoCount = modItems.filter(i => i.type === 'video').length;
+          
+          const itemsHtml = isCollapsed ? '' : `
+            <div class="mt-4 space-y-4">
+              ${modItems.map(item => {
+                const l = lectures.find(lec => lec.title === item.name) || {
+                  id: item.id || `item-${Math.random()}`,
+                  title: item.name,
+                  type: item.type || 'video',
+                  duration: item.duration || item.sizeLabel || '5 min',
+                  videoUrl: item.url,
+                  size: item.sizeLabel || '1.2 MB'
+                };
+                
+                const isActive = String(l.id) === String(currentLectureId);
+                const isDownloaded = localStorage.getItem('offline_downloaded_' + l.id) === 'true';
+                
+                let typeIcon = 'play_circle';
+                let typeLabel = 'Video';
+                let activeLabel = 'Playing';
+                if (l.type === 'image') {
+                  typeIcon = 'image';
+                  typeLabel = 'Image';
+                  activeLabel = 'Viewing';
+                } else if (l.type === 'document' || l.type === 'pdf' || l.type === 'docx') {
+                  typeIcon = 'description';
+                  typeLabel = 'Document';
+                  activeLabel = 'Viewing';
+                }
+                
+                return `
+                  <div onclick="selectLecture('${l.id}')" class="lecture-card rounded-2xl p-4 flex items-center gap-4 cursor-pointer active:scale-[0.98] transition-transform ${isActive ? 'active' : ''}">
+                    <div class="flex-1 space-y-3">
+                      <div class="flex justify-between items-start gap-1">
+                        <h3 class="font-bold ${isActive ? 'text-primary' : 'text-[#471A70]'} text-[14px] leading-snug text-left">${l.title}</h3>
+                        <div class="flex flex-col gap-1 items-end shrink-0">
+                          ${isActive ? `
+                            <span class="text-[9px] font-bold uppercase tracking-wider text-primary bg-white/50 px-1.5 py-0.5 rounded-md">${activeLabel}</span>
+                          ` : ''}
+                          ${isDownloaded ? `
+                            <span class="text-[9px] font-bold uppercase tracking-wider text-green-700 bg-green-100/60 px-1.5 py-0.5 rounded-md flex items-center gap-0.5">
+                              <span class="material-symbols-outlined text-[10px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                              Offline
+                            </span>
+                          ` : ''}
+                        </div>
+                      </div>
+                      <div class="flex items-center gap-3">
+                        <div class="flex items-center gap-1 bg-white/40 border border-[#8731a3]/30 rounded-full px-2 py-0.5">
+                          <span class="material-symbols-outlined text-[12px] text-primary" style="font-variation-settings: 'FILL' 1;">${typeIcon}</span>
+                          <span class="text-[10px] font-semibold text-primary">${typeLabel}</span>
+                        </div>
+                        <span class="text-[11px] font-medium text-[#726580]">${l.duration || l.size || '1.2 MB'}</span>
+                      </div>
+                    </div>
+                    <button onclick="handleDownload(event, '${l.id}', '${l.title.replace(/'/g, "\\'")}')" class="w-9 h-9 rounded-full bg-white/50 border border-white/60 flex items-center justify-center flex-shrink-0 shadow-sm active:bg-white/70">
+                      <span class="material-symbols-outlined text-primary text-[18px]">${isDownloaded ? 'cloud_done' : 'download'}</span>
+                    </button>
+                  </div>
+                `;
+              }).join('')}
+            </div>
+          `;
+
+          return `
+            <div class="lecture-card rounded-2xl p-4">
+              <div onclick="toggleModuleCollapse(event, '${modId}')" class="flex justify-between items-center cursor-pointer">
+                <div>
+                  <h3 class="font-bold text-[#471A70] text-sm text-left">${mod.title || mod.name || 'Module'}</h3>
+                  <p class="text-[10px] font-semibold text-[#726580] mt-0.5">${videoCount} Videos • ${modItems.length} Total Items</p>
+                </div>
+                <span class="material-symbols-outlined text-primary">${isCollapsed ? 'expand_more' : 'expand_less'}</span>
+              </div>
+              ${itemsHtml}
+            </div>
+          `;
+        }).join('<div class="h-4"></div>');
+      } 
+      else if (activeTab === 'grades') {
+        let assignments = [];
+        if (currentCourse && currentCourse.modules) {
+          currentCourse.modules.forEach(mod => {
+            if (mod.items) {
+              mod.items.forEach(item => {
+                if (item.type === 'assignment') {
+                  assignments.push(item);
+                }
+              });
+            }
+          });
+        }
+        
+        if (assignments.length === 0) {
+          assignments = [
+            { name: "Do a Quick Knowledge Check #1", due: "Jul 1 11:59 PM PKT", status: "Graded", grade: "22/25", weight: "25%" },
+            { name: "Do a Quick Knowledge Check #2", due: "Jul 3 11:59 PM PKT", status: "Graded", grade: "24/25", weight: "25%" },
+            { name: "Final Assignment Submission", due: "Jul 8 11:59 PM PKT", status: "Submitted (Pending Review)", grade: "--", weight: "25%" },
+            { name: "Liquid Glass Capstone Project", due: "Jul 15 11:59 PM PKT", status: "Locked", grade: "--", weight: "25%" }
+          ];
+        } else {
+          assignments = assignments.map((item, idx) => ({
+            name: item.name,
+            due: item.due || "Jul 8 11:59 PM PKT",
+            status: idx === 0 ? "Graded" : (idx === 1 ? "Submitted" : "Locked"),
+            grade: idx === 0 ? "22/25" : "--",
+            weight: "25%"
+          }));
+        }
+
+        container.innerHTML = `
+          <div class="space-y-4">
+            <div class="lecture-card p-5 rounded-2xl flex items-center justify-between bg-primary/10 border-primary/20">
+              <div>
+                <p class="text-xs font-bold text-primary uppercase tracking-wider text-left">Overall Grade</p>
+                <p class="text-2xl font-black text-[#471A70] mt-1 text-left">92.0%</p>
+              </div>
+              <div class="text-right">
+                <p class="text-xs font-semibold text-[#726580]">Course Progress</p>
+                <p class="text-sm font-bold text-[#471A70] mt-1">2 of 4 Graded</p>
+              </div>
+            </div>
+            
+            <h2 class="text-xs font-bold uppercase tracking-widest text-[#726580] mb-2 text-left">Graded Items</h2>
+            ${assignments.map(item => {
+              const isLocked = item.status === 'Locked';
+              const isGraded = item.status === 'Graded';
+              const badgeClass = isGraded ? 'bg-green-100 text-green-700' : (isLocked ? 'bg-gray-100 text-gray-500' : 'bg-blue-100 text-blue-700');
+              
+              return `
+                <div class="lecture-card p-4 rounded-2xl space-y-3">
+                  <div class="flex justify-between items-start">
+                    <div class="flex items-center gap-2">
+                      <span class="material-symbols-outlined text-[#726580] text-[20px]">${isLocked ? 'lock' : 'assignment'}</span>
+                      <span class="text-[10px] font-bold ${badgeClass} px-2 py-0.5 rounded-md">${item.status}</span>
+                    </div>
+                    <span class="text-xs font-bold text-[#471A70]">Weight: ${item.weight}</span>
+                  </div>
+                  <div class="text-left">
+                    <p class="text-sm font-bold text-[#471A70] leading-snug">${item.name}</p>
+                    <p class="text-[11px] text-[#726580] mt-1 flex items-center gap-1">
+                      <span class="material-symbols-outlined text-[12px]">calendar_today</span> Due: ${item.due}
+                    </p>
+                  </div>
+                  <div class="pt-2 border-t border-white/40 flex justify-between items-center">
+                    <span class="text-xs font-medium text-[#726580]">Grade Received:</span>
+                    <span class="text-sm font-bold ${isGraded ? 'text-primary' : 'text-[#726580]'}">${item.grade}</span>
+                  </div>
+                </div>
+              `;
+            }).join('')}
+          </div>
+        `;
+      }
+      else if (activeTab === 'forums') {
+        if (!window.forumThreads) {
+          window.forumThreads = [
+            {
+              id: 1,
+              title: "How do I implement backdrop-filter on Chrome for Android?",
+              author: "Ali Raza (Student)",
+              date: "2 hours ago",
+              replies: 2,
+              votes: 5,
+              content: "I am trying to use backdrop-filter: blur(20px) but it is not rendering smoothly on my mobile browser. Any tips on hardware acceleration?"
+            },
+            {
+              id: 2,
+              title: "What is the recommended padding for iOS list elements?",
+              author: "Zainab Malik (Student)",
+              date: "1 day ago",
+              replies: 4,
+              votes: 8,
+              content: "Is there a standard gutter padding for iOS-themed components? I'm currently using 16px (px-4) but it looks a bit compact."
+            },
+            {
+              id: 3,
+              title: "Is Tailwind CSS allowed for the final project submission?",
+              author: "Sarah Jenkins (Instructor)",
+              date: "3 days ago",
+              replies: 12,
+              votes: 15,
+              content: "Yes, Tailwind CSS is permitted. Please ensure you configure the tailwind.config object appropriately and link the CDN script."
+            }
+          ];
+        }
+
+        container.innerHTML = `
+          <div class="space-y-4">
+            <div class="lecture-card p-4 rounded-2xl space-y-3 bg-white/60">
+              <h3 class="text-xs font-extrabold text-[#471A70] uppercase tracking-wider text-left">Ask the Community</h3>
+              <input type="text" id="forum-input-title" placeholder="Question Title" class="w-full h-9 bg-white border border-white/80 rounded-xl px-3 text-xs font-semibold text-[#471A70] focus:ring-primary focus:border-primary outline-none" />
+              <textarea id="forum-input-body" placeholder="Describe your question in detail..." rows="2" class="w-full bg-white border border-white/80 rounded-xl p-3 text-xs font-semibold text-[#471A70] focus:ring-primary focus:border-primary outline-none resize-none"></textarea>
+              <div class="flex justify-end">
+                <button onclick="postForumQuestion()" class="h-9 px-5 rounded-xl bg-primary text-white font-bold text-xs shadow-md shadow-primary/20 active:scale-95 transition-all">Post Question</button>
+              </div>
+            </div>
+
+            <h2 class="text-xs font-bold uppercase tracking-widest text-[#726580] mb-2 text-left">Discussion Threads</h2>
+            <div class="space-y-3" id="forum-threads-container">
+              ${window.forumThreads.map(thread => `
+                <div class="lecture-card p-4 rounded-2xl text-left space-y-3">
+                  <div class="flex justify-between items-start gap-2">
+                    <h3 class="text-sm font-bold text-[#471A70] leading-snug">${thread.title}</h3>
+                    <div class="flex items-center gap-1 bg-primary/10 text-primary px-2 py-0.5 rounded-md text-[10px] font-bold">
+                      <span class="material-symbols-outlined text-[12px]" style="font-variation-settings: 'FILL' 1;">thumb_up</span>
+                      <span>${thread.votes}</span>
+                    </div>
+                  </div>
+                  <p class="text-xs text-[#726580] line-clamp-2">${thread.content}</p>
+                  <div class="pt-2 border-t border-white/40 flex justify-between items-center text-[10px] text-[#726580] font-semibold">
+                    <span>By ${thread.author} • ${thread.date}</span>
+                    <div class="flex items-center gap-1 text-primary">
+                      <span class="material-symbols-outlined text-[14px]">chat_bubble</span>
+                      <span>${thread.replies} Replies</span>
+                    </div>
+                  </div>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        `;
+      }
+      else if (activeTab === 'notes') {
+        container.innerHTML = `
+          <div class="space-y-4">
+            <h2 class="text-xs font-bold uppercase tracking-widest text-[#726580] mb-2 text-left">Study Notes</h2>
+            ${currentCourse.notes.map((note, idx) => `
+              <div class="lecture-card p-5 rounded-2xl">
+                <p class="text-sm font-medium leading-relaxed text-[#471A70] text-left"><span class="text-primary font-bold mr-2">#${idx+1}</span>${note}</p>
+              </div>
+            `).join('')}
+          </div>
+        `;
+      } 
+      else if (activeTab === 'resources') {
+        container.innerHTML = `
+          <div class="space-y-3">
+            <h2 class="text-xs font-bold uppercase tracking-widest text-[#726580] mb-2 text-left">Reference Materials</h2>
+            ${currentCourse.resources.map(res => {
+              const resId = res.name.replace(/\s+/g, '_');
+              const isDownloaded = localStorage.getItem('offline_downloaded_' + resId) === 'true';
+              return `
+                <div class="lecture-card p-4 rounded-2xl flex items-center justify-between cursor-pointer" onclick="handleDownload(event, '${resId}', '${res.name.replace(/'/g, "\\'")}')">
+                  <div class="flex items-center gap-3">
+                    <span class="material-symbols-outlined text-primary text-2xl">description</span>
+                    <div>
+                      <p class="text-sm font-bold text-[#471A70] text-left">${res.name}</p>
+                      <p class="text-xs text-[#726580] text-left">${res.size} ${isDownloaded ? '• Offline Available' : ''}</p>
+                    </div>
+                  </div>
+                  <span class="material-symbols-outlined text-primary">${isDownloaded ? 'cloud_done' : 'download'}</span>
+                </div>
+              `;
+            }).join('')}
+          </div>
+        `;
+      } 
+      else if (activeTab === 'info') {
+        container.innerHTML = `
+          <div class="lecture-card p-6 rounded-2xl space-y-4">
+            <h2 class="text-xs font-bold uppercase tracking-widest text-[#726580] text-left">Course Information</h2>
+            <p class="text-sm leading-relaxed text-[#471A70] font-medium text-left">${currentCourse.info}</p>
+            <div class="pt-2 flex items-center gap-3">
+              <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
+                <span class="material-symbols-outlined text-primary">school</span>
+              </div>
+              <div>
+                <p class="text-xs font-bold text-[#471A70] text-left">SkillsBooster Instructor</p>
+                <p class="text-xs text-[#726580] text-left">Verified Expert Educator</p>
+              </div>
+            </div>
+          </div>
+        `;
+      } 
+      else {
+        container.innerHTML = `
+          <div class="lecture-card p-6 rounded-2xl text-center py-12">
+            <span class="material-symbols-outlined text-primary text-4xl mb-3">lock_open</span>
+            <p class="text-sm font-bold text-[#471A70] mb-1">Module Unlocked</p>
+            <p class="text-xs text-[#726580]">All course content is fully authorized and accessible.</p>
+          </div>
+        `;
+      }
+    }
+
+    function getNextLectureIndex() {
+      const currentIndex = lectures.findIndex(l => String(l.id) === String(currentLectureId));
+      return currentIndex + 1 < lectures.length ? currentIndex + 1 : -1;
+    }
+
+    function selectLecture(id) {
+      currentLectureId = id;
+      const lecture = lectures.find(l => String(l.id) === String(id));
+      if (lecture) {
+        const video = document.getElementById("courseVideo");
+        const imgViewer = document.getElementById("imageViewer");
+        const docViewer = document.getElementById("documentViewer");
+
+        // Save active document state
+        window.activeDocUrl = lecture.videoUrl;
+        window.activeDocName = lecture.title;
+
+        // Reset document sub-views inside documentViewer
+        const docMetaView = document.getElementById("docMetaView");
+        const docxContentView = document.getElementById("docxContentView");
+        if (docMetaView) docMetaView.classList.remove("hidden");
+        if (docxContentView) docxContentView.classList.add("hidden");
+
+        if (lecture.type === 'video') {
+          if (video) {
+            video.classList.remove("hidden");
+            video.src = lecture.videoUrl;
+            const playPromise = video.play();
+            if (playPromise !== undefined) {
+              playPromise.catch(error => console.log("Play failed:", error));
+            }
+          }
+          if (imgViewer) imgViewer.classList.add("hidden");
+          if (docViewer) docViewer.classList.add("hidden");
+          const playIcon = document.getElementById('playIcon');
+          if (playIcon) playIcon.textContent = 'pause';
+
+          const isDownloaded = localStorage.getItem('offline_downloaded_' + id) === 'true';
+          if (isDownloaded && parent && parent.App && typeof parent.App.showToast === 'function') {
+            parent.App.showToast("Playing downloaded offline video.", "success");
+          }
+        } 
+        else if (lecture.type === 'image') {
+          if (video) {
+            video.classList.add("hidden");
+            video.pause();
+          }
+          if (imgViewer) {
+            imgViewer.classList.remove("hidden");
+            imgViewer.querySelector("img").src = lecture.videoUrl;
+          }
+          if (docViewer) docViewer.classList.add("hidden");
+
+          const isDownloaded = localStorage.getItem('offline_downloaded_' + id) === 'true';
+          if (isDownloaded && parent && parent.App && typeof parent.App.showToast === 'function') {
+            parent.App.showToast("Viewing downloaded offline image.", "success");
+          }
+        } 
+        else {
+          if (video) {
+            video.classList.add("hidden");
+            video.pause();
+          }
+          if (imgViewer) imgViewer.classList.add("hidden");
+          if (docViewer) {
+            docViewer.classList.remove("hidden");
+            docViewer.querySelector(".doc-title").textContent = lecture.title;
+            docViewer.querySelector(".doc-size").textContent = lecture.size;
+          }
+
+          const isDownloaded = localStorage.getItem('offline_downloaded_' + id) === 'true';
+          if (isDownloaded && parent && parent.App && typeof parent.App.showToast === 'function') {
+            parent.App.showToast("Viewing downloaded offline document.", "success");
+          }
+        }
+      }
+      renderContent();
+    }
+
+    window.handleDownload = function(event, id, name) {
+      if (event) {
+        event.stopPropagation();
+        event.preventDefault();
+      }
+      window.startDownload(name, id);
+    };
+
+    window.startDownload = function(name, id) {
+      let fileUrl = '';
+      const lecture = lectures.find(l => String(l.id) === String(id));
+      if (lecture) {
+        fileUrl = lecture.videoUrl;
+      } else if (currentCourse && currentCourse.resources) {
+        const res = currentCourse.resources.find(r => r.name.replace(/\s+/g, '_') === id);
+        if (res) {
+          fileUrl = res.url;
+        }
+      }
+
+      if (!fileUrl) {
+        fileUrl = 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4';
+      }
+
+      const modal = document.getElementById('downloadProgressModal');
+      const fileNameEl = document.getElementById('downloadFileName');
+      const bar = document.getElementById('downloadProgressBar');
+      const pctEl = document.getElementById('downloadPercentage');
+      if (!modal || !fileNameEl || !bar || !pctEl) return;
+
+      fileNameEl.textContent = name;
+      bar.style.width = '0%';
+      pctEl.textContent = '0%';
+      modal.classList.remove('hidden');
+
+      let progress = 0;
+      const interval = setInterval(() => {
+        progress += Math.floor(Math.random() * 15) + 5;
+        if (progress >= 100) {
+          progress = 100;
+          clearInterval(interval);
+          bar.style.width = '100%';
+          pctEl.textContent = '100%';
+          
+          setTimeout(() => {
+            modal.classList.add('hidden');
+            localStorage.setItem('offline_downloaded_' + id, 'true');
+            
+            try {
+              const a = document.createElement('a');
+              a.href = fileUrl;
+              a.download = name;
+              a.target = '_blank';
+              document.body.appendChild(a);
+              a.click();
+              document.body.removeChild(a);
+            } catch(err) {
+              console.warn("Browser trigger download failed:", err);
+            }
+
+            if (parent && parent.App && typeof parent.App.showToast === 'function') {
+              parent.App.showToast(`${name} saved offline!`, "success");
+            } else {
+              alert(`${name} saved offline successfully!`);
+            }
+            renderContent();
+          }, 400);
+        } else {
+          bar.style.width = progress + '%';
+          pctEl.textContent = progress + '%';
+        }
+      }, 150);
+    };
+
+    function switchTab(button) {
+      const tabsContainer = document.getElementById('course-tabs');
+      if (tabsContainer) {
+        tabsContainer.querySelectorAll("button").forEach(btn => {
+          btn.classList.remove("active-tab");
+          btn.classList.add("text-[#726580]");
+          btn.classList.remove("font-bold");
+        });
+      }
+      button.classList.add("active-tab");
+      button.classList.remove("text-[#726580]");
+
+      activeTab = button.textContent.trim().toLowerCase();
+      renderContent();
+    }
+
+    function goBack() {
+      if (parent && parent.App && typeof parent.App.navigate === 'function') {
+        parent.App.navigate('courses');
+      } else {
+        window.location.hash = '#/student/courses';
+      }
+    }
+
+    window.readDocument = function() {
+      const docMetaView = document.getElementById("docMetaView");
+      const docxContentView = document.getElementById("docxContentView");
+      const docxParsedHtml = document.getElementById("docxParsedHtml");
+      if (!docxContentView || !docxParsedHtml) return;
+
+      if (window.activeDocName && window.activeDocName.toLowerCase().endsWith('.docx') && window.activeDocUrl) {
+        if (docMetaView) docMetaView.classList.add("hidden");
+        docxContentView.classList.remove("hidden");
+        docxParsedHtml.innerHTML = '<p class="text-xs text-gray-500 italic text-center py-4">Loading document content...</p>';
+        
+        const origin = window.location.origin;
+        const apiBase = (!origin || origin.includes('localhost:3000') || origin.includes('null')) ? 'http://localhost:8080' : '';
+        fetch(apiBase + `/api/parse-docx?url=${encodeURIComponent(window.activeDocUrl)}`)
+          .then(res => res.json())
+          .then(data => {
+            if (data.success) {
+              docxParsedHtml.innerHTML = data.html || '<p class="text-xs text-gray-500 italic text-center py-4">Document is empty.</p>';
+            } else {
+              docxParsedHtml.innerHTML = `<p class="text-xs text-red-500 italic text-center py-4">Could not parse document: ${data.error}</p>`;
+            }
+          })
+          .catch(err => {
+            console.error(err);
+            docxParsedHtml.innerHTML = '<p class="text-xs text-red-500 italic text-center py-4">Failed to load document content.</p>';
+          });
+      } else {
+        if (parent && parent.App && typeof parent.App.showToast === 'function') {
+          parent.App.showToast("Detailed preview for this file format is not supported.", "info");
+        } else {
+          alert("Detailed preview for this file format is not supported.");
+        }
+      }
+    };
+
+    window.closeDocReader = function() {
+      const docMetaView = document.getElementById("docMetaView");
+      const docxContentView = document.getElementById("docxContentView");
+      if (docMetaView) docMetaView.classList.remove("hidden");
+      if (docxContentView) docxContentView.classList.add("hidden");
+    };
+
+    // AI Responses mockup mapper
+    const aiResponses = {
+      practice: "Here are some practice questions for you:\n\n1. What is Google Antigravity and how does it optimize coding tasks?\n2. Detail the workflow required to initialize an agent on your local system.\n3. How do browser subagents communicate results back to the planner module?",
+      simple: "To explain this in simple terms: Antigravity is a coding helper that can read your workspace files, write updates for you, and test them automatically in the background. It acts like an autopilot co-pilot for developer workflows, taking care of manual chores.",
+      summary: "Summary of this lecture:\n\nIn this session, we introduced the concept of Advanced Agentic Coding. We explored how agents receive prompts, invoke tools (like file-edits, shell scripts, and web searches), and handle multi-step development plans. We also highlighted coding aesthetics best practices.",
+      examples: "Real-world examples of Antigravity in action:\n\n1. Automatically building landing pages from descriptive layout images.\n2. Upgrading obsolete database calls across multiple files in a repository.\n3. Setting up recurring status checkers and alarms for cloud deployments."
+    };
+
+    window.askMockAI = function(type) {
+      const modal = document.getElementById('aiResponseModal');
+      const content = document.getElementById('aiModalContent');
+      if (modal && content && aiResponses[type]) {
+        content.innerHTML = aiResponses[type].replace(/\n/g, '<br>');
+        modal.classList.remove('hidden');
+      }
+    };
+
+    window.closeAIModal = function() {
+      const modal = document.getElementById('aiResponseModal');
+      if (modal) modal.classList.add('hidden');
+    };
+
+    window.playVideo = function() {
+      const video = document.getElementById("courseVideo");
+      if (video) {
+        const playPromise = video.play();
+        if (playPromise !== undefined) {
+          playPromise.catch(error => {
+            console.log("Play failed:", error);
+          });
+        }
+      }
+    };
+
+    window.postForumQuestion = function() {
+      const titleInput = document.getElementById('forum-input-title');
+      const bodyInput = document.getElementById('forum-input-body');
+      if (!titleInput || !bodyInput) return;
+
+      const title = titleInput.value.trim();
+      const body = bodyInput.value.trim();
+
+      if (!title || !body) {
+        alert("Please enter both a title and details for your question.");
+        return;
+      }
+
+      if (!window.forumThreads) window.forumThreads = [];
+
+      window.forumThreads.unshift({
+        id: Date.now(),
+        title: title,
+        author: "You (Student)",
+        date: "Just now",
+        replies: 0,
+        votes: 1,
+        content: body
+      });
+
+      titleInput.value = '';
+      bodyInput.value = '';
+      
+      if (parent && parent.App && typeof parent.App.showToast === 'function') {
+        parent.App.showToast("Question posted to forum!", "success");
+      } else {
+        alert("Question posted to forum successfully!");
+      }
+
+      renderContent();
+    };
+
+    // Custom Video controls handlers
+    window.togglePlayPause = function(event) {
+      if (event) event.stopPropagation();
+      const video = document.getElementById('courseVideo');
+      const playIcon = document.getElementById('playIcon');
+      if (!video || !playIcon) return;
+      if (video.paused) {
+        const playPromise = video.play();
+        if (playPromise !== undefined) {
+          playPromise.catch(error => {
+            console.log("Play failed:", error);
+          });
+        }
+        playIcon.textContent = 'pause';
+      } else {
+        video.pause();
+        playIcon.textContent = 'play_arrow';
+      }
+    };
+
+    window.skipVideo = function(event, secs) {
+      if (event) event.stopPropagation();
+      const video = document.getElementById('courseVideo');
+      if (!video) return;
+      video.currentTime = Math.max(0, Math.min(video.duration || 0, video.currentTime + secs));
+    };
+
+    const speeds = [1, 1.25, 1.5, 2];
+    let currentSpeedIdx = 0;
+    window.cycleSpeed = function(event) {
+      if (event) event.stopPropagation();
+      const video = document.getElementById('courseVideo');
+      const btn = document.getElementById('speedBtn');
+      if (!video || !btn) return;
+      currentSpeedIdx = (currentSpeedIdx + 1) % speeds.length;
+      const speed = speeds[currentSpeedIdx];
+      video.playbackRate = speed;
+      btn.textContent = speed + 'x';
+    };
+
+    window.toggleMute = function(event) {
+      if (event) event.stopPropagation();
+      const video = document.getElementById('courseVideo');
+      const volIcon = document.getElementById('volumeIcon');
+      if (!video || !volIcon) return;
+      video.muted = !video.muted;
+      volIcon.textContent = video.muted ? 'volume_off' : 'volume_up';
+    };
+
+    window.toggleAspect = function(event) {
+      if (event) event.stopPropagation();
+      const video = document.getElementById('courseVideo');
+      const icon = document.getElementById('aspectIcon');
+      if (!video || !icon) return;
+      if (video.classList.contains('object-cover')) {
+        video.classList.remove('object-cover');
+        video.classList.add('object-contain');
+        icon.textContent = 'aspect_ratio';
+      } else {
+        video.classList.remove('object-contain');
+        video.classList.add('object-cover');
+        icon.textContent = 'open_in_full';
+      }
+    };
+
+    window.toggleFullscreen = function(event) {
+      if (event) event.stopPropagation();
+      const video = document.getElementById('courseVideo');
+      if (!video) return;
+      if (video.requestFullscreen) {
+        video.requestFullscreen();
+      } else if (video.webkitRequestFullscreen) {
+        video.webkitRequestFullscreen();
+      } else if (video.msRequestFullscreen) {
+        video.msRequestFullscreen();
+      }
+    };
+
+    window.seekVideo = function(event) {
+      if (event) event.stopPropagation();
+      const timeline = document.getElementById('videoTimeline');
+      const video = document.getElementById('courseVideo');
+      if (!timeline || !video || !video.duration) return;
+      const rect = timeline.getBoundingClientRect();
+      const clickX = event.clientX - rect.left;
+      const width = rect.width;
+      const percentage = clickX / width;
+      video.currentTime = percentage * video.duration;
+    };
+
+    function formatTime(seconds) {
+      const min = Math.floor(seconds / 60);
+      const sec = Math.floor(seconds % 60);
+      return `${min}:${sec < 10 ? '0' : ''}${sec}`;
+    }
+
+    // Attach Video Event Listeners
+    document.addEventListener('DOMContentLoaded', () => {
+      const video = document.getElementById('courseVideo');
+      const progress = document.getElementById('videoProgress');
+      const currentTimeLbl = document.getElementById('currentTime');
+      const durationTimeLbl = document.getElementById('durationTime');
+      const controls = document.getElementById('videoCustomControls');
+
+      if (video) {
+        // Toggle controls on touch/click
+        video.addEventListener('click', (e) => {
+          e.stopPropagation();
+          if (controls) {
+            const isHidden = window.getComputedStyle(controls).opacity === '0';
+            controls.style.opacity = isHidden ? '1' : '0';
+            controls.style.pointerEvents = isHidden ? 'auto' : 'none';
+          }
+        });
+
+        // Prevent controls auto-hide when clicking controls directly
+        if (controls) {
+          controls.addEventListener('click', (e) => {
+            e.stopPropagation();
+          });
+        }
+
+        video.addEventListener('timeupdate', () => {
+          if (video.duration) {
+            const pct = (video.currentTime / video.duration) * 100;
+            if (progress) progress.style.width = pct + '%';
+            
+            if (currentTimeLbl) currentTimeLbl.textContent = formatTime(video.currentTime);
+            if (durationTimeLbl) durationTimeLbl.textContent = formatTime(video.duration);
+          }
+        });
+
+        video.addEventListener('loadedmetadata', () => {
+          if (durationTimeLbl && video.duration) {
+            durationTimeLbl.textContent = formatTime(video.duration);
+          }
+        });
+        
+        video.addEventListener('play', () => {
+          const playIcon = document.getElementById('playIcon');
+          if (playIcon) playIcon.textContent = 'pause';
+        });
+
+        video.addEventListener('pause', () => {
+          const playIcon = document.getElementById('playIcon');
+          if (playIcon) playIcon.textContent = 'play_arrow';
+        });
+
+        video.addEventListener('ended', () => {
+          const playIcon = document.getElementById('playIcon');
+          if (playIcon) playIcon.textContent = 'play_arrow';
+        });
+      }
+
+      // Hook up AI accordion toggle
+      const aiAccordionHeader = document.getElementById('aiAccordionHeader');
+      const aiAccordionContent = document.getElementById('aiAccordionContent');
+      const aiAccordionIcon = document.getElementById('aiAccordionIcon');
+      if (aiAccordionHeader && aiAccordionContent) {
+        aiAccordionHeader.addEventListener('click', () => {
+          const isHidden = aiAccordionContent.classList.contains('hidden');
+          aiAccordionContent.classList.toggle('hidden', !isHidden);
+          if (aiAccordionIcon) {
+            aiAccordionIcon.textContent = isHidden ? 'expand_less' : 'expand_more';
+          }
+        });
+      }
+    });
+
+    // Initial Render - Dynamic
+    loadCourseData();
+</script>
+<!-- Bottom Navigation Bar Placeholder -->
+<nav id="bottom-nav"></nav>
+
+<!-- Premium Download Progress Modal -->
+<div id="downloadProgressModal" class="fixed inset-0 z-50 hidden flex items-center justify-center bg-black/35 backdrop-blur-sm px-6">
+  <div class="w-full max-w-xs bg-white/80 backdrop-blur-md border border-white/50 rounded-3xl p-5 shadow-2xl text-center space-y-4">
+    <div class="w-12 h-12 rounded-full bg-[#8731a3]/10 flex items-center justify-center mx-auto text-[#8731a3] animate-bounce">
+      <span class="material-symbols-outlined text-[24px]">download</span>
+    </div>
+    <div>
+      <p class="text-sm font-bold text-[#471A70]" id="downloadFileName">Downloading file...</p>
+      <p class="text-[11px] text-[#726580] mt-0.5">Please wait, saving offline...</p>
+    </div>
+    <!-- Progress Bar -->
+    <div class="w-full h-1.5 bg-gray-200/60 rounded-full overflow-hidden">
+      <div id="downloadProgressBar" class="h-full bg-[#8731a3] transition-all duration-300" style="width: 0%"></div>
+    </div>
+    <p class="text-[10px] font-bold text-[#8731a3]" id="downloadPercentage">0%</p>
+  </div>
+</div>
+
+<!-- Simulated AI Response Modal -->
+<div id="aiResponseModal" class="fixed inset-0 z-50 bg-black/45 backdrop-blur-sm hidden flex items-center justify-center p-6">
+  <div class="bg-white/90 backdrop-blur-md rounded-3xl overflow-hidden shadow-2xl max-w-xs w-full border border-white/40 flex flex-col">
+    <div class="p-4 bg-primary/10 flex justify-between items-center border-b border-primary/20">
+      <h3 class="text-[#471A70] font-bold text-xs flex items-center gap-2">
+        <span class="material-symbols-outlined text-[16px] text-primary">auto_awesome</span>
+        AI Helper Response
+      </h3>
+      <button onclick="closeAIModal()" class="text-[#471A70] hover:scale-105 transition-transform flex items-center justify-center">
+        <span class="material-symbols-outlined text-[18px]">close</span>
+      </button>
+    </div>
+    <div class="p-5 text-[11px] font-medium text-[#471A70] leading-relaxed max-h-72 overflow-y-auto text-left" id="aiModalContent">
+      AI Text Content...
+    </div>
+  </div>
+</div>
+</body>
+</html>

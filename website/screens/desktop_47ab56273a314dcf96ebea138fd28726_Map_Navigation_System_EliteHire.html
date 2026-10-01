@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>EliteHire | Map & Navigation System</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .glass-card {
+            backdrop-filter: blur(28px);
+            -webkit-backdrop-filter: blur(28px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: rgba(135, 49, 163, 0.2);
+            border-radius: 10px;
+        }
+        .active-route-glow {
+            filter: drop-shadow(0 0 8px rgba(0, 96, 171, 0.6));
+        }
+        @keyframes pulse-dot {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.5); opacity: 0.4; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        .animate-pulse-dot {
+            animation: pulse-dot 2s infinite ease-in-out;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary": "#0060ab",
+                        "primary": "#8731a3",
+                        "on-error": "#ffffff",
+                        "on-secondary-fixed-variant": "#004883",
+                        "on-secondary-fixed": "#001c39",
+                        "secondary-fixed-dim": "#a3c9ff",
+                        "on-secondary-container": "#003868",
+                        "glass-border": "rgba(255, 255, 255, 0.6)",
+                        "glass-fill": "rgba(255, 255, 255, 0.35)",
+                        "error": "#FF453A",
+                        "glass-thick": "rgba(255, 255, 255, 0.8)",
+                        "surface": "#f9f9ff",
+                        "tertiary": "#006823",
+                        "on-surface": "#141c29",
+                        "on-primary-container": "#fff5fb",
+                        "card-gradient": "linear-gradient(135deg, #4D9EFA 0%, #BF7DF5 100%)",
+                        "background": "#f9f9ff",
+                        "outline-variant": "#d2c1d2",
+                        "surface-dim": "#d2daed",
+                        "primary-container": "#a34cbe",
+                        "error-container": "#ffdad6",
+                        "surface-container-low": "#f0f3ff",
+                        "on-tertiary-container": "#e6ffe0",
+                        "inverse-on-surface": "#ecf1ff",
+                        "on-error-container": "#93000a",
+                        "on-tertiary-fixed": "#002106",
+                        "tertiary-fixed": "#6cff82",
+                        "tertiary-container": "#00842f",
+                        "on-surface-variant": "#4f4350",
+                        "surface-container-high": "#e0e8fb",
+                        "primary-fixed-dim": "#f0b0ff",
+                        "surface-variant": "#dbe3f6",
+                        "secondary-container": "#54a3ff",
+                        "primary-fixed": "#fbd7ff",
+                        "surface-tint": "#8d37a9",
+                        "on-primary": "#ffffff",
+                        "inverse-surface": "#29313f",
+                        "on-background": "#471A70",
+                        "secondary-fixed": "#d3e3ff",
+                        "tertiary-fixed-dim": "#47e266",
+                        "outline": "#817381",
+                        "on-secondary": "#ffffff",
+                        "surface-container": "#e7eeff",
+                        "surface-container-lowest": "#ffffff",
+                        "inverse-primary": "#f0b0ff",
+                        "on-tertiary": "#ffffff",
+                        "gold": "#FFD60A",
+                        "surface-bright": "#f9f9ff",
+                        "on-primary-fixed-variant": "#72188f",
+                        "orange": "#FF9F0A",
+                        "on-tertiary-fixed-variant": "#00531a",
+                        "surface-container-highest": "#dbe3f6",
+                        "on-primary-fixed": "#330044"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "mobile-margin": "20px",
+                        "base": "8px",
+                        "mobile-gutter": "16px",
+                        "max-width": "1280px",
+                        "safe-top": "44px",
+                        "desktop-margin": "64px",
+                        "safe-bottom": "34px",
+                        "desktop-gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "display-xl-mobile": ["Inter"],
+                        "label-caps": ["Inter"],
+                        "display-xl": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "body-md": ["Inter"],
+                        "label-caps-mobile": ["Inter"],
+                        "body-md-mobile": ["Inter"]
+                    },
+                    "fontSize": {
+                        "display-xl-mobile": ["34px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "label-caps": ["13px", {"lineHeight": "1.0", "letterSpacing": "0.03em", "fontWeight": "600"}],
+                        "display-xl": ["56px", {"lineHeight": "1.1", "letterSpacing": "-0.03em", "fontWeight": "700"}],
+                        "headline-lg-mobile": ["28px", {"lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "headline-lg": ["34px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                        "label-caps-mobile": ["12px", {"lineHeight": "1.0", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "body-md-mobile": ["15px", {"lineHeight": "1.5", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-[#DCE4F7] font-body-md text-on-surface overflow-hidden h-screen">
+<!-- TopNavBar -->
+<header class="fixed top-0 w-full z-50 flex justify-between items-center px-desktop-margin h-20 bg-glass-fill backdrop-blur-xl border-b border-glass-border shadow-[0_12px_40px_0_rgba(71,26,112,0.15)]">
+<div class="flex items-center gap-8">
+<h1 class="font-display-xl text-primary font-black text-[28px] md:text-display-xl">EliteHire</h1>
+<div class="hidden md:flex items-center gap-6">
+<nav class="flex gap-4">
+<a class="font-label-caps text-primary border-b-2 border-primary pb-1 transition-all" href="#">Network</a>
+<a class="font-label-caps text-on-surface-variant hover:text-primary transition-all" href="#">Opportunities</a>
+</nav>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative hidden lg:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="pl-10 pr-4 py-2 bg-glass-thick border-glass-border rounded-full text-sm focus:ring-primary focus:border-primary w-64" placeholder="Search companies..." type="text"/>
+</div>
+<button class="w-10 h-10 rounded-full flex items-center justify-center bg-glass-fill hover:scale-95 transition-transform">
+<span class="material-symbols-outlined text-primary">notifications</span>
+</button>
+<div class="w-10 h-10 rounded-full bg-primary-fixed-dim overflow-hidden border-2 border-white">
+<img alt="User Profile" data-alt="A professional headshot of a young male executive with dark hair, wearing a stylish navy blue suit. The portrait is captured with soft cinematic lighting against a clean, minimalist lavender studio background, reflecting a premium corporate aesthetic with high-fidelity detail and a confident, approachable expression." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAsVZZ90YDy7VPscHo4DKVzy8sQe6jHzSWtwRH-xQFinTeu1NuuRJu0zgs7moAzqRUDSD-dWI2beHGsAhraesJ4tSm3tNmvZUWivByau9TX_xQxFfXxxBfjZ9uHDmSi0Oo5pxzvHrUqd8jEakVjZzh_h_HeZdzZhLzt1n52sCxgoevpjvQUbprISUc6FqV23aFX_tshdcV-Euc5Pyemv3V5I212V_Bllv4uoMPDp5mVd8YZIkXrnl1URkLKCHuTzzH1gKJ3PQ0dqi4N"/>
+</div>
+</div>
+</header>
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-20 h-[calc(100vh-80px)] w-72 flex flex-col p-6 z-40 bg-glass-thick backdrop-blur-2xl border-r border-glass-border shadow-[12px_0_40px_0_rgba(71,26,112,0.1)] hidden md:flex">
+<div class="mb-8">
+<p class="font-label-caps text-primary mb-1">NAVIGATION</p>
+<p class="text-xs text-on-surface-variant">Premium Routing</p>
+</div>
+<nav class="flex flex-col gap-2 flex-grow">
+<a class="flex items-center gap-4 p-3 bg-primary-container text-on-primary-container rounded-xl shadow-inner transition-all scale-active:0.96" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">map</span>
+<span class="font-label-caps">Map View</span>
+</a>
+<a class="flex items-center gap-4 p-3 text-on-surface-variant hover:bg-glass-fill rounded-xl transition-all hover:scale-[0.98]" href="#">
+<span class="material-symbols-outlined">work</span>
+<span class="font-label-caps">Job List</span>
+</a>
+<a class="flex items-center gap-4 p-3 text-on-surface-variant hover:bg-glass-fill rounded-xl transition-all hover:scale-[0.98]" href="#">
+<span class="material-symbols-outlined">bookmark</span>
+<span class="font-label-caps">Saved</span>
+</a>
+<a class="flex items-center gap-4 p-3 text-on-surface-variant hover:bg-glass-fill rounded-xl transition-all hover:scale-[0.98]" href="#">
+<span class="material-symbols-outlined">chat_bubble</span>
+<span class="font-label-caps">Messages</span>
+</a>
+<a class="flex items-center gap-4 p-3 text-on-surface-variant hover:bg-glass-fill rounded-xl transition-all hover:scale-[0.98]" href="#">
+<span class="material-symbols-outlined">insights</span>
+<span class="font-label-caps">Analytics</span>
+</a>
+</nav>
+<button class="mt-auto w-full py-4 bg-primary text-white rounded-full font-bold shadow-lg hover:scale-105 transition-transform active:scale-95 flex items-center justify-center gap-2">
+<span class="material-symbols-outlined">add_circle</span>
+            Post a Job
+        </button>
+</aside>
+<!-- Main Content Area -->
+<main class="md:ml-72 mt-20 h-[calc(100vh-80px)] flex flex-col lg:flex-row overflow-hidden">
+<!-- Left Panel: Company List -->
+<section class="w-full lg:w-[35%] h-full flex flex-col bg-glass-fill/30 backdrop-blur-md border-r border-glass-border">
+<div class="p-6 border-b border-glass-border bg-white/10">
+<h2 class="font-headline-lg text-on-background">Nearby Headquarters</h2>
+<p class="text-on-surface-variant text-sm mt-1">Found 12 elite partners in your area</p>
+</div>
+<div class="flex-grow overflow-y-auto custom-scrollbar p-6 space-y-4">
+<!-- Company Card 1 -->
+<div class="glass-card bg-glass-thick rounded-2xl p-5 group hover:bg-white transition-all cursor-pointer shadow-sm hover:shadow-md">
+<div class="flex gap-4">
+<div class="w-14 h-14 rounded-xl bg-surface-container flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-primary text-3xl">bolt</span>
+</div>
+<div class="flex-grow">
+<div class="flex justify-between items-start">
+<h3 class="font-bold text-on-background text-lg">TechFlow</h3>
+<span class="bg-secondary-fixed text-on-secondary-fixed text-[10px] px-2 py-0.5 rounded-full font-bold">TOP MATCH</span>
+</div>
+<p class="text-on-surface-variant text-sm">Palo Alto, CA</p>
+<div class="flex items-center gap-4 mt-3 text-xs font-semibold text-secondary">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">near_me</span> 2.4 km</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">schedule</span> 12 mins</span>
+</div>
+</div>
+</div>
+<button class="mt-4 w-full py-2.5 bg-secondary text-white rounded-xl font-bold flex items-center justify-center gap-2 group-hover:bg-primary transition-colors">
+<span class="material-symbols-outlined text-sm">directions</span>
+                        Route
+                    </button>
+</div>
+<!-- Company Card 2 -->
+<div class="glass-card bg-glass-fill rounded-2xl p-5 group hover:bg-white transition-all cursor-pointer shadow-sm hover:shadow-md">
+<div class="flex gap-4">
+<div class="w-14 h-14 rounded-xl bg-surface-container flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-secondary text-3xl">hub</span>
+</div>
+<div class="flex-grow">
+<h3 class="font-bold text-on-background text-lg">InnovateX</h3>
+<p class="text-on-surface-variant text-sm">Mountain View, CA</p>
+<div class="flex items-center gap-4 mt-3 text-xs font-semibold text-secondary">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">near_me</span> 4.8 km</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">schedule</span> 18 mins</span>
+</div>
+</div>
+</div>
+<button class="mt-4 w-full py-2.5 border-2 border-secondary text-secondary rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-secondary hover:text-white transition-all">
+<span class="material-symbols-outlined text-sm">directions</span>
+                        Route
+                    </button>
+</div>
+<!-- Company Card 3 -->
+<div class="glass-card bg-glass-fill rounded-2xl p-5 group hover:bg-white transition-all cursor-pointer shadow-sm hover:shadow-md">
+<div class="flex gap-4">
+<div class="w-14 h-14 rounded-xl bg-[#1DB954]/20 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[#1DB954] text-3xl" style="font-variation-settings: 'FILL' 1;">graphic_eq</span>
+</div>
+<div class="flex-grow">
+<h3 class="font-bold text-on-background text-lg">Spotify</h3>
+<p class="text-on-surface-variant text-sm">San Francisco, CA</p>
+<div class="flex items-center gap-4 mt-3 text-xs font-semibold text-secondary">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">near_me</span> 1.1 km</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">schedule</span> 8 mins</span>
+</div>
+</div>
+</div>
+<button class="mt-4 w-full py-2.5 border-2 border-secondary text-secondary rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-secondary hover:text-white transition-all">
+<span class="material-symbols-outlined text-sm">directions</span>
+                        Route
+                    </button>
+</div>
+<!-- Company Card 4 -->
+<div class="glass-card bg-glass-fill rounded-2xl p-5 group hover:bg-white transition-all cursor-pointer shadow-sm hover:shadow-md">
+<div class="flex gap-4">
+<div class="w-14 h-14 rounded-xl bg-surface-container flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-orange text-3xl">token</span>
+</div>
+<div class="flex-grow">
+<h3 class="font-bold text-on-background text-lg">Prism Data</h3>
+<p class="text-on-surface-variant text-sm">San Jose, CA</p>
+<div class="flex items-center gap-4 mt-3 text-xs font-semibold text-secondary">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">near_me</span> 12.5 km</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">schedule</span> 25 mins</span>
+</div>
+</div>
+</div>
+<button class="mt-4 w-full py-2.5 border-2 border-secondary text-secondary rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-secondary hover:text-white transition-all">
+<span class="material-symbols-outlined text-sm">directions</span>
+                        Route
+                    </button>
+</div>
+</div>
+</section>
+<!-- Right Panel: Map Container -->
+<section class="w-full lg:w-[65%] relative h-full bg-[#141c29] overflow-hidden">
+<!-- Simulated Map Background -->
+<div class="absolute inset-0 opacity-40 mix-blend-screen pointer-events-none">
+<svg height="100%" preserveaspectratio="xMidYMid slice" viewbox="0 0 800 600" width="100%" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<pattern height="40" id="grid" patternunits="userSpaceOnUse" width="40">
+<path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"></path>
+</pattern>
+</defs>
+<rect fill="url(#grid)" height="100%" width="100%"></rect>
+<!-- Map Lines -->
+<path d="M-100,300 L900,300 M400,-100 L400,700" stroke="rgba(255,255,255,0.1)" stroke-width="2"></path>
+<path d="M50,50 L750,550 M750,50 L50,550" stroke="rgba(255,255,255,0.05)" stroke-width="1"></path>
+</svg>
+</div>
+<!-- Active Route Line -->
+<svg class="absolute inset-0 w-full h-full pointer-events-none" xmlns="http://www.w3.org/2000/svg">
+<path class="active-route-glow opacity-80" d="M 150 450 Q 300 400 450 320 T 650 150" fill="none" stroke="#4D9EFA" stroke-dasharray="10 10" stroke-linecap="round" stroke-width="6"></path>
+<circle class="animate-pulse-dot" cx="150" cy="450" fill="#4D9EFA" r="8"></circle>
+</svg>
+<!-- Map Markers -->
+<div class="absolute top-[150px] left-[650px] group cursor-pointer">
+<div class="relative">
+<span class="material-symbols-outlined text-secondary text-4xl active-route-glow" style="font-variation-settings: 'FILL' 1;">location_on</span>
+<div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 bg-glass-thick backdrop-blur-md px-3 py-1 rounded-lg border border-glass-border shadow-xl opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+<p class="font-bold text-xs text-primary">Spotify HQ</p>
+</div>
+</div>
+</div>
+<div class="absolute top-[320px] left-[450px] group cursor-pointer">
+<div class="relative">
+<span class="material-symbols-outlined text-white/50 text-3xl" style="font-variation-settings: 'FILL' 1;">location_on</span>
+<div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 bg-glass-thick backdrop-blur-md px-3 py-1 rounded-lg border border-glass-border shadow-xl opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+<p class="font-bold text-xs text-on-surface">TechFlow</p>
+</div>
+</div>
+</div>
+<div class="absolute top-[400px] left-[200px] group cursor-pointer">
+<div class="relative">
+<span class="material-symbols-outlined text-white/50 text-3xl" style="font-variation-settings: 'FILL' 1;">location_on</span>
+</div>
+</div>
+<!-- Map HUD Overlay -->
+<div class="absolute top-6 left-6 flex flex-col gap-3">
+<div class="glass-card bg-glass-thick/90 p-4 rounded-2xl flex items-center gap-4 shadow-xl max-w-sm">
+<div class="w-12 h-12 bg-secondary rounded-full flex items-center justify-center shrink-0 animate-pulse">
+<span class="material-symbols-outlined text-white">navigation</span>
+</div>
+<div>
+<p class="text-[10px] font-bold text-secondary tracking-widest uppercase">NAVIGATING TO</p>
+<p class="font-bold text-on-surface">Spotify Headquarters</p>
+<p class="text-xs text-on-surface-variant">Arrival in 8 minutes • 1.1 km</p>
+</div>
+</div>
+</div>
+<!-- Map Controls HUD -->
+<div class="absolute bottom-8 right-8 flex flex-col gap-4">
+<div class="flex flex-col bg-glass-thick/90 backdrop-blur-xl rounded-2xl border border-glass-border shadow-2xl overflow-hidden">
+<button class="p-4 hover:bg-secondary hover:text-white transition-colors border-b border-glass-border text-on-surface-variant" onclick="zoomIn()">
+<span class="material-symbols-outlined">add</span>
+</button>
+<button class="p-4 hover:bg-secondary hover:text-white transition-colors text-on-surface-variant" onclick="zoomOut()">
+<span class="material-symbols-outlined">remove</span>
+</button>
+</div>
+<button class="bg-primary text-white p-4 rounded-2xl shadow-2xl hover:scale-105 active:scale-95 transition-all flex items-center gap-2 font-bold" onclick="recenter()">
+<span class="material-symbols-outlined">my_location</span>
+                    Recenter
+                </button>
+</div>
+<!-- Bottom Information Bar (Floating) -->
+<div class="absolute bottom-8 left-1/2 -translate-x-1/2 w-[90%] md:w-auto">
+<div class="glass-card bg-glass-thick/90 p-4 rounded-3xl flex flex-wrap items-center justify-center gap-8 shadow-2xl">
+<div class="flex items-center gap-3">
+<div class="w-2 h-2 rounded-full bg-error animate-ping"></div>
+<span class="text-sm font-semibold">Live Traffic: Normal</span>
+</div>
+<div class="h-6 w-px bg-glass-border hidden md:block"></div>
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary">ev_station</span>
+<span class="text-sm font-semibold">3 Chargers Nearby</span>
+</div>
+<div class="h-6 w-px bg-glass-border hidden md:block"></div>
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-orange">warning</span>
+<span class="text-sm font-semibold">Construction on 4th Ave</span>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Global Scripts -->
+<script>
+        function zoomIn() {
+            console.log("Zooming map in...");
+            // Placeholder for map zoom logic
+        }
+        function zoomOut() {
+            console.log("Zooming map out...");
+            // Placeholder for map zoom logic
+        }
+        function recenter() {
+            console.log("Recentering to user location...");
+            // Placeholder for recenter logic
+        }
+
+        // Add a subtle parallax effect to glass cards on hover
+        document.querySelectorAll('.glass-card').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                
+                const rotateX = (y - centerY) / 20;
+                const rotateY = (centerX - x) / 20;
+                
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0)';
+            });
+        });
+    </script>
+</body></html>

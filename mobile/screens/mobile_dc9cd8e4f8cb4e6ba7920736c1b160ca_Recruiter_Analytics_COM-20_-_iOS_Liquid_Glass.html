@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
+<title>Recruiter Analytics - Liquid Glass</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "secondary-fixed-dim": "#a3c9ff",
+                    "gold": "#FFD60A",
+                    "on-tertiary": "#ffffff",
+                    "outline-variant": "#d2c1d2",
+                    "card-gradient": "linear-gradient(135deg, #4D9EFA 0%, #BF7DF5 100%)",
+                    "secondary-container": "#54a3ff",
+                    "tertiary": "#006823",
+                    "surface-tint": "#8d37a9",
+                    "on-error-container": "#93000a",
+                    "surface-container-highest": "#dbe3f6",
+                    "surface-bright": "#f9f9ff",
+                    "surface-variant": "#dbe3f6",
+                    "on-tertiary-fixed": "#002106",
+                    "on-secondary-container": "#003868",
+                    "on-secondary-fixed-variant": "#004883",
+                    "primary": "#8731a3",
+                    "on-secondary": "#ffffff",
+                    "primary-fixed-dim": "#f0b0ff",
+                    "background": "#f9f9ff",
+                    "on-background": "#141c29",
+                    "surface-dim": "#d2daed",
+                    "inverse-primary": "#f0b0ff",
+                    "surface": "#f9f9ff",
+                    "on-tertiary-fixed-variant": "#00531a",
+                    "on-primary-fixed": "#330044",
+                    "on-error": "#ffffff",
+                    "secondary-fixed": "#d3e3ff",
+                    "orange": "#FF9F0A",
+                    "on-primary": "#ffffff",
+                    "outline": "#817381",
+                    "surface-container": "#e7eeff",
+                    "error-container": "#ffdad6",
+                    "tertiary-fixed-dim": "#47e266",
+                    "surface-container-low": "#f0f3ff",
+                    "on-surface-variant": "#4f4350",
+                    "glass-fill": "rgba(255, 255, 255, 0.35)",
+                    "surface-container-high": "#e0e8fb",
+                    "on-primary-fixed-variant": "#72188f",
+                    "surface-container-lowest": "#ffffff",
+                    "primary-container": "#a34cbe",
+                    "glass-border": "rgba(255, 255, 255, 0.6)",
+                    "on-tertiary-container": "#e6ffe0",
+                    "on-primary-container": "#fff5fb",
+                    "primary-fixed": "#fbd7ff",
+                    "inverse-on-surface": "#ecf1ff",
+                    "tertiary-fixed": "#6cff82",
+                    "on-secondary-fixed": "#001c39",
+                    "secondary": "#0060ab",
+                    "error": "#FF453A",
+                    "tertiary-container": "#00842f",
+                    "on-surface": "#141c29",
+                    "glass-thick": "rgba(255, 255, 255, 0.8)",
+                    "inverse-surface": "#29313f"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "desktop-margin": "64px",
+                    "safe-bottom": "34px",
+                    "mobile-gutter": "16px",
+                    "mobile-margin": "20px",
+                    "base": "8px",
+                    "safe-top": "44px",
+                    "max-width": "1280px",
+                    "desktop-gutter": "24px"
+            },
+            "fontFamily": {
+                    "label-caps-mobile": ["Inter"],
+                    "headline-lg-mobile": ["Inter"],
+                    "body-md-mobile": ["Inter"],
+                    "label-caps": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "display-xl": ["Inter"],
+                    "display-xl-mobile": ["Inter"],
+                    "body-md": ["Inter"]
+            },
+            "fontSize": {
+                    "label-caps-mobile": ["12px", {"lineHeight": "1.0", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "body-md-mobile": ["15px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                    "label-caps": ["13px", {"lineHeight": "1.0", "letterSpacing": "0.03em", "fontWeight": "600"}],
+                    "headline-lg": ["34px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                    "display-xl": ["56px", {"lineHeight": "1.1", "letterSpacing": "-0.03em", "fontWeight": "700"}],
+                    "display-xl-mobile": ["34px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background: radial-gradient(circle at top left, #fbd7ff 0%, #f0f3ff 40%, #e7eeff 100%);
+            min-height: 100vh;
+            color: #471A70; /* Deep Purple branding override */
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.35);
+            backdrop-filter: blur(28px);
+            -webkit-backdrop-filter: blur(28px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 12px 40px 0 rgba(71, 26, 112, 0.1);
+        }
+
+        .chart-path-purple {
+            stroke: #8731a3;
+            fill: none;
+            stroke-width: 3;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            filter: drop-shadow(0 4px 6px rgba(135, 49, 163, 0.3));
+        }
+
+        .chart-path-blue {
+            stroke: #0060ab;
+            fill: none;
+            stroke-width: 3;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            filter: drop-shadow(0 4px 6px rgba(0, 96, 171, 0.2));
+        }
+
+        .progress-ring-circle {
+            transition: stroke-dashoffset 0.35s;
+            transform: rotate(-90deg);
+            transform-origin: 50% 50%;
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        
+        .active-icon {
+            font-variation-settings: 'FILL' 1;
+        }
+
+        /* Micro-interactions */
+        .tap-scale:active {
+            transform: scale(0.96);
+        }
+        
+        /* Layout Grids */
+        .grid-mobile-layout {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            padding: 0 20px;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="pb-32">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 backdrop-blur-xl border-b border-glass-border bg-glass-fill h-14 flex justify-between items-center px-mobile-margin pt-safe-top">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full overflow-hidden border border-white/60">
+<img alt="Recruiter Profile" class="w-full h-full object-cover" data-alt="A professional headshot of a recruitment executive with a warm, confident expression. He is wearing a modern charcoal suit in a high-end corporate office setting. The lighting is soft and natural, emphasizing a premium professional atmosphere with soft blue and purple background highlights." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAo9zUY8bFdMFBNLhyExOTyVSHK16sYqTZCTiHm8t2x7ORNQcLMo_Oizi1HQj7yTeuVhS_M3zA43kvbGUW_F7ShVF4C5YXxSVVX2UIXawwv9_WaAUqkZZCUwkp9_oZOHhQvT2kIORjqzfJJah7RmUEfddv4AB1pSEeXyL7iFTdzEtiegdx7_KH3dSYHqLj6BKURI319IQ3o5ndiE76M3OfADfuwQhh9lCrW5l13TtXwz_lCcKAM61_51RJJx3Lzn-azsggkEiNM0ppZ"/>
+</div>
+</div>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface font-bold">Analytics</h1>
+<button class="tap-scale active:opacity-70 transition-all">
+<span class="material-symbols-outlined text-primary text-2xl">notifications</span>
+</button>
+</header>
+<!-- Content Area -->
+<main class="mt-20 px-mobile-margin space-y-6">
+<!-- ROI Analysis Chart (Large) -->
+<section class="glass-card rounded-3xl p-6 relative overflow-hidden">
+<div class="flex justify-between items-start mb-4">
+<div>
+<h2 class="font-label-caps-mobile text-on-surface-variant uppercase tracking-wider">Weekly ROI</h2>
+<div class="flex items-baseline gap-2">
+<span class="text-4xl font-extrabold tracking-tight">142%</span>
+<span class="text-tertiary font-bold text-sm bg-tertiary-fixed-dim/20 px-2 py-0.5 rounded-full">+12.4%</span>
+</div>
+</div>
+<button class="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center tap-scale">
+<span class="material-symbols-outlined text-primary">more_horiz</span>
+</button>
+</div>
+<!-- Spline Chart Container -->
+<div class="h-40 w-full mt-4">
+<svg class="w-full h-full" viewbox="0 0 400 150">
+<!-- ROI Path -->
+<path class="chart-path-purple" d="M0,120 Q50,110 80,60 T160,80 T240,40 T320,70 T400,20"></path>
+<!-- Benchmark Path -->
+<path class="chart-path-blue" d="M0,130 Q60,120 100,100 T180,110 T280,90 T400,100" opacity="0.4"></path>
+</svg>
+</div>
+<div class="flex justify-between mt-2 text-xs font-semibold text-on-surface-variant/60">
+<span>MON</span>
+<span>WED</span>
+<span>FRI</span>
+<span>SUN</span>
+</div>
+</section>
+<!-- Stats Grid (Side-by-side small cards) -->
+<div class="grid grid-cols-2 gap-4">
+<!-- Application Rate -->
+<div class="glass-card rounded-3xl p-5 flex flex-col items-center justify-center text-center">
+<div class="relative w-16 h-16 mb-3">
+<svg class="w-full h-full" viewbox="0 0 36 36">
+<circle class="stroke-primary-fixed" cx="18" cy="18" fill="none" r="16" stroke-width="3"></circle>
+<circle class="stroke-primary progress-ring-circle" cx="18" cy="18" fill="none" r="16" stroke-dasharray="100, 100" stroke-dashoffset="28" stroke-linecap="round" stroke-width="3"></circle>
+</svg>
+<div class="absolute inset-0 flex items-center justify-center">
+<span class="text-xs font-bold">72%</span>
+</div>
+</div>
+<h3 class="text-xs font-bold uppercase tracking-tight text-on-surface-variant">Application %</h3>
+</div>
+<!-- Interview Rate -->
+<div class="glass-card rounded-3xl p-5 flex flex-col items-center justify-center text-center">
+<div class="relative w-16 h-16 mb-3">
+<svg class="w-full h-full" viewbox="0 0 36 36">
+<circle class="stroke-secondary-fixed" cx="18" cy="18" fill="none" r="16" stroke-width="3"></circle>
+<circle class="stroke-secondary progress-ring-circle" cx="18" cy="18" fill="none" r="16" stroke-dasharray="100, 100" stroke-dashoffset="62" stroke-linecap="round" stroke-width="3"></circle>
+</svg>
+<div class="absolute inset-0 flex items-center justify-center">
+<span class="text-xs font-bold">38%</span>
+</div>
+</div>
+<h3 class="text-xs font-bold uppercase tracking-tight text-on-surface-variant">Interview Rate</h3>
+</div>
+</div>
+<!-- Click Volume Bar Chart (Mid-sized) -->
+<section class="glass-card rounded-3xl p-6">
+<div class="flex justify-between items-center mb-6">
+<h2 class="font-bold text-lg">Click Volume</h2>
+<span class="text-xs font-semibold text-primary">Daily Average: 420</span>
+</div>
+<div class="flex items-end justify-between h-32 gap-2 px-1">
+<div class="w-full bg-primary-container/30 rounded-t-lg h-[40%] transition-all hover:bg-primary"></div>
+<div class="w-full bg-primary-container/30 rounded-t-lg h-[65%] transition-all hover:bg-primary"></div>
+<div class="w-full bg-primary-container/30 rounded-t-lg h-[85%] transition-all hover:bg-primary"></div>
+<div class="w-full bg-primary rounded-t-lg h-[100%]"></div>
+<div class="w-full bg-primary-container/30 rounded-t-lg h-[75%] transition-all hover:bg-primary"></div>
+<div class="w-full bg-primary-container/30 rounded-t-lg h-[55%] transition-all hover:bg-primary"></div>
+<div class="w-full bg-primary-container/30 rounded-t-lg h-[90%] transition-all hover:bg-primary"></div>
+</div>
+</section>
+<!-- Top Campaigns (Vertical List) -->
+<section class="space-y-4 pb-12">
+<h2 class="font-bold text-lg px-2">Top Campaigns</h2>
+<div class="space-y-3">
+<!-- Campaign Item -->
+<div class="glass-card rounded-2xl p-4 flex items-center justify-between tap-scale cursor-pointer group transition-transform duration-300">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-xl bg-gradient-to-br from-primary to-primary-container flex items-center justify-center shadow-lg">
+<span class="material-symbols-outlined text-white" style="font-variation-settings: 'FILL' 1">rocket_launch</span>
+</div>
+<div>
+<h4 class="font-bold text-on-surface">Senior UX Designer</h4>
+<p class="text-xs text-on-surface-variant font-medium">84 Applications • <span class="text-tertiary">Active</span></p>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<span class="text-sm font-bold text-primary">Rs. 12.4k</span>
+<span class="material-symbols-outlined text-on-surface-variant/40 group-hover:translate-x-1 transition-transform">chevron_right</span>
+</div>
+</div>
+<!-- Campaign Item -->
+<div class="glass-card rounded-2xl p-4 flex items-center justify-between tap-scale cursor-pointer group transition-transform duration-300">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-xl bg-gradient-to-br from-secondary to-secondary-container flex items-center justify-center shadow-lg">
+<span class="material-symbols-outlined text-white" style="font-variation-settings: 'FILL' 1">code</span>
+</div>
+<div>
+<h4 class="font-bold text-on-surface">Backend Engineer</h4>
+<p class="text-xs text-on-surface-variant font-medium">156 Applications • <span class="text-tertiary">Active</span></p>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<span class="text-sm font-bold text-primary">Rs. 8.2k</span>
+<span class="material-symbols-outlined text-on-surface-variant/40 group-hover:translate-x-1 transition-transform">chevron_right</span>
+</div>
+</div>
+<!-- Campaign Item -->
+<div class="glass-card rounded-2xl p-4 flex items-center justify-between tap-scale cursor-pointer group transition-transform duration-300">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-xl bg-gradient-to-br from-surface-tint to-primary flex items-center justify-center shadow-lg">
+<span class="material-symbols-outlined text-white" style="font-variation-settings: 'FILL' 1">hub</span>
+</div>
+<div>
+<h4 class="font-bold text-on-surface">Marketing Lead</h4>
+<p class="text-xs text-on-surface-variant font-medium">42 Applications • <span class="text-tertiary">Active</span></p>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<span class="text-sm font-bold text-primary">Rs. 4.1k</span>
+<span class="material-symbols-outlined text-on-surface-variant/40 group-hover:translate-x-1 transition-transform">chevron_right</span>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-base pb-safe-bottom h-20 backdrop-blur-2xl border-t border-glass-border bg-glass-thick shadow-[0_-12px_40px_0_rgba(71,26,112,0.15)] rounded-t-xl">
+<a class="flex flex-col items-center justify-center text-on-surface-variant tap-scale hover:bg-glass-fill px-4 py-1.5 transition-colors" href="#">
+<span class="material-symbols-outlined mb-1">work</span>
+<span class="font-label-caps-mobile text-label-caps-mobile">Postings</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-4 py-1.5 tap-scale" href="#">
+<span class="material-symbols-outlined mb-1 active-icon">analytics</span>
+<span class="font-label-caps-mobile text-label-caps-mobile">Reports</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant tap-scale hover:bg-glass-fill px-4 py-1.5 transition-colors" href="#">
+<span class="material-symbols-outlined mb-1">monetization_on</span>
+<span class="font-label-caps-mobile text-label-caps-mobile">ROI</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant tap-scale hover:bg-glass-fill px-4 py-1.5 transition-colors" href="#">
+<span class="material-symbols-outlined mb-1">settings</span>
+<span class="font-label-caps-mobile text-label-caps-mobile">Settings</span>
+</a>
+</nav>
+<!-- Ambient Liquid Background Decoration (CSS only) -->
+<div class="fixed top-[-10%] right-[-10%] w-[300px] h-[300px] bg-primary/20 blur-[100px] -z-10 rounded-full animate-pulse"></div>
+<div class="fixed bottom-[-5%] left-[-10%] w-[250px] h-[250px] bg-secondary/15 blur-[80px] -z-10 rounded-full" style="animation: bounce 10s infinite alternate;"></div>
+<script>
+        // Micro-interaction for bar charts
+        document.querySelectorAll('.glass-card div.w-full').forEach(bar => {
+            bar.addEventListener('mouseenter', () => {
+                bar.classList.add('scale-y-105');
+            });
+            bar.addEventListener('mouseleave', () => {
+                bar.classList.remove('scale-y-105');
+            });
+        });
+
+        // Simple bounce animation for decoration
+        const styleSheet = document.createElement("style");
+        styleSheet.innerText = `
+            @keyframes bounce {
+                from { transform: translateY(0) translateX(0); }
+                to { transform: translateY(-50px) translateX(30px); }
+            }
+        `;
+        document.head.appendChild(styleSheet);
+    </script>
+</body></html>

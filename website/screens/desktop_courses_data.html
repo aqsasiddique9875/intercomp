@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+  <script>
+    if (window.self !== window.top) {
+      const style = document.createElement('style');
+      style.innerHTML = `
+        header, nav, aside, 
+        .SideNavBar, .TopNavBar, 
+        #SideNavBar, #TopNavBar {
+          display: none !important;
+        }
+        main, .main-content {
+          margin-left: 0 !important;
+          padding-top: 1.5rem !important;
+        }
+        main.ml-64, main.lg\\:ml-64 {
+          margin-left: 0 !important;
+          padding-top: 2rem !important;
+        }
+      `;
+      document.documentElement.appendChild(style);
+    }
+  </script>
+
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>EduPulse | Data Science Courses</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-secondary-fixed": "#001c39",
+                    "gold": "#FFD60A",
+                    "surface-container-low": "#f0f3ff",
+                    "on-surface-variant": "#4f4350",
+                    "on-surface": "#141c29",
+                    "glass-border": "rgba(255, 255, 255, 0.6)",
+                    "error-bright": "#FF453A",
+                    "surface-tint": "#8d37a9",
+                    "primary-fixed": "#fbd7ff",
+                    "on-secondary": "#ffffff",
+                    "primary-container": "#8731a3",
+                    "on-tertiary": "#ffffff",
+                    "glass-fill": "rgba(255, 255, 255, 0.35)",
+                    "on-secondary-fixed-variant": "#004883",
+                    "secondary-fixed": "#d3e3ff",
+                    "outline-variant": "#d2c1d2",
+                    "surface-container": "#e7eeff",
+                    "surface-bright": "#f9f9ff",
+                    "on-background": "#141c29",
+                    "orange": "#FF9F0A",
+                    "primary": "#6c1089",
+                    "inverse-on-surface": "#ecf1ff",
+                    "on-tertiary-fixed-variant": "#00531a",
+                    "surface-container-highest": "#dbe3f6",
+                    "tertiary-container": "#006823",
+                    "on-primary-fixed": "#330044",
+                    "inverse-primary": "#f0b0ff",
+                    "surface": "#f9f9ff",
+                    "error": "#ba1a1a",
+                    "primary-fixed-dim": "#f0b0ff",
+                    "on-secondary-container": "#003868",
+                    "surface-container-high": "#e0e8fb",
+                    "on-error": "#ffffff",
+                    "on-error-container": "#93000a",
+                    "tertiary-fixed-dim": "#81da86",
+                    "on-tertiary-fixed": "#002106",
+                    "on-tertiary-container": "#8be590",
+                    "inverse-surface": "#29313f",
+                    "outline": "#817381",
+                    "background": "#DCE4F7",
+                    "error-container": "#ffdad6",
+                    "card-gradient": "linear-gradient(135deg, #4D9EFA 0%, #BF7DF5 100%)",
+                    "secondary-container": "#54a3ff",
+                    "on-primary-fixed-variant": "#72198f",
+                    "on-primary-container": "#f4beff",
+                    "surface-container-lowest": "#ffffff",
+                    "tertiary-fixed": "#9df7a0",
+                    "surface-variant": "#dbe3f6",
+                    "tertiary": "#004d18",
+                    "on-primary": "#ffffff",
+                    "secondary": "#0060ab",
+                    "secondary-fixed-dim": "#a3c9ff",
+                    "glass-thick": "rgba(255, 255, 255, 0.8)",
+                    "surface-dim": "#d2daed"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "max-width": "1280px",
+                    "mobile-gutter": "16px",
+                    "desktop-margin": "64px",
+                    "mobile-margin": "20px",
+                    "desktop-gutter": "24px",
+                    "base": "8px"
+            },
+            "fontFamily": {
+                    "label-caps": ["Inter"],
+                    "body-md": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "display-xl": ["Inter"]
+            },
+            "fontSize": {
+                    "label-caps": ["13px", {"lineHeight": "1.0", "letterSpacing": "0.03em", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                    "headline-lg": ["34px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                    "display-xl": ["56px", {"lineHeight": "1.1", "letterSpacing": "-0.03em", "fontWeight": "700"}]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        body {
+            background-color: #DCE4F7;
+            font-family: 'Inter', sans-serif;
+            color: #141c29;
+        }
+        .glass-thick-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(28px);
+            -webkit-backdrop-filter: blur(28px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .card-hover:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(71, 26, 112, 0.15);
+        }
+        .liquid-accent {
+            background: linear-gradient(135deg, #4D9EFA 0%, #BF7DF5 100%);
+        }
+    </script>
+</head>
+<body class="bg-background min-h-screen">
+
+    <!-- TopNavBar -->
+    <nav class="fixed top-0 w-full z-50 backdrop-blur-xl border-b border-glass-border bg-glass-thick shadow-lg shadow-[rgba(71,26,112,0.15)] flex justify-between items-center px-desktop-margin h-20">
+        <div class="flex items-center gap-8">
+            <span class="font-headline-lg text-headline-lg text-primary font-bold">EduPulse</span>
+            <div class="hidden md:flex gap-6">
+                <a href="#" class="font-body-md text-body-md text-on-surface-variant hover:scale-105 transition-transform duration-200">Dashboard</a>
+                <a href="#" class="font-body-md text-body-md text-secondary font-bold border-b-2 border-secondary hover:scale-105 transition-transform duration-200">Courses</a>
+                <a href="#" class="font-body-md text-body-md text-on-surface-variant hover:scale-105 transition-transform duration-200">Resource Library</a>
+            </div>
+        </div>
+        <div class="flex items-center gap-4">
+            <button class="material-symbols-outlined text-primary hover:scale-105 transition-transform">notifications</button>
+            <button class="material-symbols-outlined text-primary hover:scale-105 transition-transform">help</button>
+            <div class="w-10 h-10 rounded-full bg-surface-container overflow-hidden border border-glass-border">
+                <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&q=80&w=100" data-alt="A professional headshot of a student for their educational profile, featuring clean lighting and a minimalist soft purple background that matches the brand identity." class="w-full h-full object-cover">
+            </div>
+        </div>
+    </nav>
+
+    <!-- Sidebar Navigation -->
+    <aside class="fixed left-0 top-0 h-full w-64 z-40 backdrop-blur-xl border-r border-glass-border bg-glass-thick shadow-2xl shadow-[rgba(71,26,112,0.15)] hidden md:flex flex-col p-6 pt-24 gap-4">
+        <div class="mb-8">
+            <div class="flex items-center gap-3 mb-2">
+                <div class="w-10 h-10 rounded-xl liquid-accent flex items-center justify-center text-white">
+                    <span class="material-symbols-outlined">school</span>
+                </div>
+                <div>
+                    <h2 class="font-label-caps text-label-caps text-primary">EduPulse</h2>
+                    <p class="text-[11px] text-on-surface-variant">Student Portal</p>
+                </div>
+            </div>
+        </div>
+
+        <nav class="flex flex-col gap-2">
+            <a href="#" class="flex items-center gap-3 p-3 rounded-xl text-on-surface-variant hover:bg-glass-fill hover:scale-105 transition-all duration-300">
+                <span class="material-symbols-outlined">dashboard</span>
+                <span class="font-label-caps text-label-caps">Dashboard</span>
+            </a>
+            <a href="#" class="flex items-center gap-3 p-3 rounded-xl text-on-surface-variant hover:bg-glass-fill hover:scale-105 transition-all duration-300">
+                <span class="material-symbols-outlined">assignment</span>
+                <span class="font-label-caps text-label-caps">Assignments</span>
+            </a>
+            <a href="#" class="flex items-center gap-3 p-3 rounded-xl bg-secondary-container text-on-secondary-container scale-105 shadow-inner">
+                <span class="material-symbols-outlined">school</span>
+                <span class="font-label-caps text-label-caps">Courses</span>
+            </a>
+            <a href="#" class="flex items-center gap-3 p-3 rounded-xl text-on-surface-variant hover:bg-glass-fill hover:scale-105 transition-all duration-300">
+                <span class="material-symbols-outlined">grade</span>
+                <span class="font-label-caps text-label-caps">Grades</span>
+            </a>
+            <a href="#" class="flex items-center gap-3 p-3 rounded-xl text-on-surface-variant hover:bg-glass-fill hover:scale-105 transition-all duration-300">
+                <span class="material-symbols-outlined">calendar_today</span>
+                <span class="font-label-caps text-label-caps">Schedule</span>
+            </a>
+        </nav>
+
+        <div class="mt-auto">
+            <button class="w-full py-4 rounded-xl liquid-accent text-white font-bold shadow-lg shadow-[rgba(84,163,255,0.3)] hover:scale-105 active:scale-95 transition-all">
+                New Submission
+            </button>
+        </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="md:ml-64 pt-28 pb-12 px-6 md:px-12 max-w-7xl mx-auto">
+        <!-- Breadcrumbs -->
+        <nav class="flex items-center gap-2 text-on-surface-variant mb-6 font-label-sm text-label-sm">
+            <a href="#" class="hover:text-primary transition-colors cursor-pointer">Home</a>
+            <span class="material-symbols-outlined text-[14px]">chevron_right</span>
+            <a href="#" class="hover:text-primary transition-colors cursor-pointer">Course Catalog</a>
+            <span class="material-symbols-outlined text-[14px]">chevron_right</span>
+            <span class="text-primary font-bold">Data Science</span>
+        </nav>
+        <header class="mb-12">
+            <h1 class="font-display-xl text-display-xl mb-4" style="color: #471A70;">Data Science Courses</h1>
+            <p class="font-body-md text-body-md max-w-2xl" style="color: #471A70;">Extract insights, train intelligence models, and visualize complex data with our elite modules.</p>
+        </header>
+
+        <!-- Bento Grid / 3-Column Layout -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            
+            <!-- Card 1 -->
+            <div class="glass-thick-card rounded-3xl overflow-hidden flex flex-col card-hover transition-all duration-500">
+                <div class="h-48 w-full relative">
+                    <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuChVa7K-QHTtOhv2m6j8k-B2OSVJCFSCt-sIhIiGQsPKkgS8h8krFW-KXaRKEmfOhaaazDV1vkgAP2BhFKs-YYq67EZy1uy4rvJTDdjyB0IH2mTLKNyhEZmuTpVZ6DyDFlG8F6WX9W5Gj6bD_ofC1rDrKzg0oZ04ZpTnmbCpkyRyI1SvXe_ZEkwc2mXR-EjlDe-AcfH1jvyFsAQ9ruHlm_tl-QL40x4Gb1t8xog3FXhRtlaF7pdymT-DFR_QEJnQXjm3eiGvt8MpsIC" class="w-full h-full object-cover">
+                    <div class="absolute top-4 right-4 bg-glass-thick px-3 py-1 rounded-full flex items-center gap-1 border border-glass-border">
+                        <span class="material-symbols-outlined text-gold text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+                        <span class="text-xs font-bold text-on-surface">4.9</span>
+                    </div>
+                </div>
+                <div class="p-6 flex flex-col flex-grow gap-4">
+                    <h3 class="font-headline-lg text-[22px] leading-tight text-primary">Machine Learning Fundamentals</h3>
+                    <p class="text-on-surface-variant font-body-md text-sm">Master the core algorithms and mathematical foundations that power modern artificial intelligence.</p>
+                    <div class="mt-auto flex items-center justify-between">
+                        <span class="text-2xl font-bold text-secondary">Rs. 299.00</span>
+                        <button onclick="handleQuickApply(event)" data-link="https://www.coursera.org/specializations/machine-learning-introduction" class="px-6 py-2 rounded-full font-bold text-white transition-all hover:scale-105 active:scale-95" style="background-color: #A34CBE;">Apply</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="glass-thick-card rounded-3xl overflow-hidden flex flex-col card-hover transition-all duration-500">
+                <div class="h-48 w-full relative">
+                    <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCj8qbmOC1Mh8Feau2jRskbeyLj5RMEjvFJpbRwH_DdsbNk03GmQr__LqCXypwm5UiWhg5bwy5AsZpQ_vy7D_sM5rv84X7c-xVWTs_lr96bSCh2taB7Q-pxIBXEtefWFEwx8lCW8aDpcFclKZxla7aqKjSpiwpE9DLTTyh-lIIPPSnU5F7qRME5TR1_TqJ21sltM4kBOB1XvFD0VCSr27-XiTUdNz0KqDEHXQZ9M_7Wf2QogaOCt43VOQJyhhX6N2xEuS3yOF-eG3dR" class="w-full h-full object-cover">
+                    <div class="absolute top-4 right-4 bg-glass-thick px-3 py-1 rounded-full flex items-center gap-1 border border-glass-border">
+                        <span class="material-symbols-outlined text-gold text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+                        <span class="text-xs font-bold text-on-surface">4.8</span>
+                    </div>
+                </div>
+                <div class="p-6 flex flex-col flex-grow gap-4">
+                    <h3 class="font-headline-lg text-[22px] leading-tight text-primary">Deep Learning & Neural Networks</h3>
+                    <p class="text-on-surface-variant font-body-md text-sm">Explore deep architectures, from CNNs to Transformers, and build models that see and hear.</p>
+                    <div class="mt-auto flex items-center justify-between">
+                        <span class="text-2xl font-bold text-secondary">Rs. 299.00</span>
+                        <button onclick="handleQuickApply(event)" data-link="https://www.coursera.org/specializations/deep-learning" class="px-6 py-2 rounded-full font-bold text-white transition-all hover:scale-105 active:scale-95" style="background-color: #A34CBE;">Apply</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="glass-thick-card rounded-3xl overflow-hidden flex flex-col card-hover transition-all duration-500">
+                <div class="h-48 w-full relative">
+                    <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDWUZa4FW6-voLub3oeWp7XJ-WrWtSTZPx3C-M0ajs-edZFl6Kohohu-3fzHLiL9CMGk6Sc0NPd0nEiTq_J9LRFpcAShKpiTtDgqlLbr4FQ9mY1nFd-DZbaP2FMZpwr0bkGMBZcXrGkMp8-cGcZzFtVwDnctaPVs_J7w8yVExvtsMRzgkX6HujZQRIJsjEF9YpPPAJbMgBw2RltxQBX1BytUY1-W1_VKE1QRUCx_b2ptFo6qmaCy97HF_1PBhoEMTJWWV4c25aiPGGT" class="w-full h-full object-cover">
+                    <div class="absolute top-4 right-4 bg-glass-thick px-3 py-1 rounded-full flex items-center gap-1 border border-glass-border">
+                        <span class="material-symbols-outlined text-gold text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+                        <span class="text-xs font-bold text-on-surface">4.9</span>
+                    </div>
+                </div>
+                <div class="p-6 flex flex-col flex-grow gap-4">
+                    <h3 class="font-headline-lg text-[22px] leading-tight text-primary">Big Data Analytics & Hadoop</h3>
+                    <p class="text-on-surface-variant font-body-md text-sm">Learn to handle petabytes of data using distributed systems and massive parallel processing.</p>
+                    <div class="mt-auto flex items-center justify-between">
+                        <span class="text-2xl font-bold text-secondary">Rs. 299.00</span>
+                        <button onclick="handleQuickApply(event)" data-link="https://www.coursera.org/learn/big-data-introduction" class="px-6 py-2 rounded-full font-bold text-white transition-all hover:scale-105 active:scale-95" style="background-color: #A34CBE;">Apply</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 4 -->
+            <div class="glass-thick-card rounded-3xl overflow-hidden flex flex-col card-hover transition-all duration-500">
+                <div class="h-48 w-full relative">
+                    <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAof-NOeMtGP_0QHF3DV4V7eKzA4TD9cEBEMxvEyGKL8mze2Wr-FfKwZonA0UCqHwrBql4iPJUxxNNGr3Lr0JjYvRX79gxRWeobl9IpcS4a62O--iCXhVSgA8hjgnKjqiQWorBwVcrNP_-J7wWIB5ioXcRUaxZKFpGUapwLM-2WdR6g3FjfsCOcI9aW7Z8LqFUtUhczzC04ksMba12VUaD3qXcvqcCzjBAiEzjXGyRkaUIWhx-bJ6TW1MI_dMWff3AukJNoq4EOvVg7" class="w-full h-full object-cover">
+                    <div class="absolute top-4 right-4 bg-glass-thick px-3 py-1 rounded-full flex items-center gap-1 border border-glass-border">
+                        <span class="material-symbols-outlined text-gold text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+                        <span class="text-xs font-bold text-on-surface">4.9</span>
+                    </div>
+                </div>
+                <div class="p-6 flex flex-col flex-grow gap-4">
+                    <h3 class="font-headline-lg text-[22px] leading-tight text-primary">Python for Data Science</h3>
+                    <p class="text-on-surface-variant font-body-md text-sm">The definitive guide to Pandas, NumPy, and Scikit-Learn for professional data manipulation.</p>
+                    <div class="mt-auto flex items-center justify-between">
+                        <span class="text-2xl font-bold text-secondary">Rs. 299.00</span>
+                        <button onclick="handleQuickApply(event)" data-link="https://www.coursera.org/learn/python-for-applied-data-science-ai" class="px-6 py-2 rounded-full font-bold text-white transition-all hover:scale-105 active:scale-95" style="background-color: #A34CBE;">Apply</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 5 -->
+            <div class="glass-thick-card rounded-3xl overflow-hidden flex flex-col card-hover transition-all duration-500">
+                <div class="h-48 w-full relative">
+                    <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCTvsEzys4MkvRzpEMKYGG6j_DzsZ-EYmJgucmx--V0iohmSlFFWdfgNC-WMiUR8drBKV2hXWyJP3BNaHBImtOERe57zpHZABOBl3RYvlp1kpY8TIQblU5SIg2BKOE-coAjIKwCe8aCO30sUnoZIGY0ajQ7titxjqIXqhJ0XXGyOrf9a7HBBEe424D-MFIo5JaM7J7fuQx02AX6Rb2QwtQYrIoNmf50Ak9IsPzDmcWW8cCjJeeVltbt4YO2Sd6vOWP6-24jMV2vg6hn" class="w-full h-full object-cover">
+                    <div class="absolute top-4 right-4 bg-glass-thick px-3 py-1 rounded-full flex items-center gap-1 border border-glass-border">
+                        <span class="material-symbols-outlined text-gold text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+                        <span class="text-xs font-bold text-on-surface">4.8</span>
+                    </div>
+                </div>
+                <div class="p-6 flex flex-col flex-grow gap-4">
+                    <h3 class="font-headline-lg text-[22px] leading-tight text-primary">Applied Statistics</h3>
+                    <p class="text-on-surface-variant font-body-md text-sm">Deepen your analytical rigor with hypothesis testing, probability, and statistical inference.</p>
+                    <div class="mt-auto flex items-center justify-between">
+                        <span class="text-2xl font-bold text-secondary">Rs. 299.00</span>
+                        <button onclick="handleQuickApply(event)" data-link="https://www.coursera.org/learn/stanford-statistics" class="px-6 py-2 rounded-full font-bold text-white transition-all hover:scale-105 active:scale-95" style="background-color: #A34CBE;">Apply</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 6 -->
+            <div class="glass-thick-card rounded-3xl overflow-hidden flex flex-col card-hover transition-all duration-500">
+                <div class="h-48 w-full relative">
+                    <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCt4IIkyxFQgvsMG7w-hf92WBpF7gJV0vSn6SAZm08vTm07fL9K6qjH1xq3E-2kEfotFcy0ca_-WO4Gh_kYCPPbc3iHcMCel4E86SlLYY5Tr2uMA6cYY72MJTq1lyuoq931kPZ4vGA5RryQ1beL095qMZu7NTkH2J9UOh-R4n3Nf3ngl8x9cOKa_sxY8fg4e3Y53UcAPIGcjOiZ7lqhkePMzRqHxBTV_35TPM3xjJgcdsC5drn67lERk8MESLDLEGUFUml87myBTPNu" class="w-full h-full object-cover">
+                    <div class="absolute top-4 right-4 bg-glass-thick px-3 py-1 rounded-full flex items-center gap-1 border border-glass-border">
+                        <span class="material-symbols-outlined text-gold text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+                        <span class="text-xs font-bold text-on-surface">4.9</span>
+                    </div>
+                </div>
+                <div class="p-6 flex flex-col flex-grow gap-4">
+                    <h3 class="font-headline-lg text-[22px] leading-tight text-primary">Data Visualization & Tableau</h3>
+                    <p class="text-on-surface-variant font-body-md text-sm">Transform raw numbers into compelling visual stories that drive boardroom decisions.</p>
+                    <div class="mt-auto flex items-center justify-between">
+                        <span class="text-2xl font-bold text-secondary">Rs. 299.00</span>
+                        <button onclick="handleQuickApply(event)" data-link="https://www.coursera.org/specializations/data-visualization" class="px-6 py-2 rounded-full font-bold text-white transition-all hover:scale-105 active:scale-95" style="background-color: #A34CBE;">Apply</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Interactive Ambient Glow Effect -->
+    <div id="ambient-glow" class="fixed pointer-events-none w-[600px] h-[600px] rounded-full opacity-30 blur-[120px] z-[-1]" style="background: radial-gradient(circle, #BF7DF5 0%, transparent 70%);"></div>
+
+    <script>
+        document.addEventListener('mousemove', (e) => {
+            const glow = document.getElementById('ambient-glow');
+            const x = e.clientX - 300;
+            const y = e.clientY - 300;
+            glow.style.transform = `translate(${x}px, ${y}px)`;
+        });
+    
+        window.handleQuickApply = function(event) {
+            if (event) event.preventDefault();
+            event.stopPropagation();
+            const target = event.currentTarget || event.target;
+            const link = target.getAttribute('data-link');
+            
+            const card = target.closest('.glass-card');
+            let courseName = "Data Science Foundations";
+            let coursePrice = "Rs. 199.00";
+            if (card) {
+                const titleEl = card.querySelector('h3');
+                const priceEl = card.querySelector('span.text-headline-md, span.font-headline-md');
+                if (titleEl) courseName = titleEl.innerText.trim();
+                if (priceEl) coursePrice = priceEl.innerText.trim();
+            }
+            
+            // Store selected course details
+            localStorage.setItem('selectedCourse', JSON.stringify({ name: courseName, price: coursePrice }));
+
+            if (window.parent && window.parent.App && typeof window.parent.App.handleQuickApply === 'function') {
+                window.parent.App.handleQuickApply('course', link);
+            } else {
+                const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+                if (isLoggedIn) {
+                    window.location.hash = '#/student/checkout';
+                } else {
+                    localStorage.setItem('pendingQuickApply', JSON.stringify({ type: 'course', link: link, view: 'courses-data' }));
+                    window.location.hash = '#/student/login';
+                }
+            }
+        };
+</script>
+</body>
+</html></style></head><body></body></html>

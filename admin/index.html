@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en" class="w-full h-full">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Console - EliteHire</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+  <script id="tailwind-config">
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: "#8731a3",
+            "primary-container": "#a34cbe",
+            "on-primary-container": "#fff5fb",
+            "on-surface-variant": "#4f4350",
+            "glass-border": "rgba(255, 255, 255, 0.6)",
+            "glass-thick": "rgba(255, 255, 255, 0.8)",
+            "glass-fill": "rgba(255, 255, 255, 0.35)",
+            background: "#DCE4F7",
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: radial-gradient(circle at 0% 0%, rgba(245, 235, 255, 0.9) 0%, transparent 50%),
+                  radial-gradient(circle at 100% 0%, rgba(225, 235, 255, 0.9) 0%, transparent 50%),
+                  radial-gradient(circle at 100% 100%, rgba(240, 225, 255, 0.9) 0%, transparent 50%),
+                  radial-gradient(circle at 0% 100%, rgba(220, 240, 255, 0.9) 0%, transparent 50%),
+                  #dae1f5;
+      -ms-overflow-style: none !important;
+      scrollbar-width: none !important;
+      font-family: 'Inter', sans-serif;
+    }
+    html::-webkit-scrollbar, body::-webkit-scrollbar {
+      display: none !important;
+    }
+    
+    /* Custom Scrollbar */
+    #mainNavBar::-webkit-scrollbar {
+      width: 4px;
+    }
+    #mainNavBar::-webkit-scrollbar-track {
+      background: rgba(135, 49, 163, 0.02);
+    }
+    #mainNavBar::-webkit-scrollbar-thumb {
+      background: rgba(135, 49, 163, 0.15);
+      border-radius: 4px;
+    }
+    .active-nav {
+      background: rgba(163, 76, 190, 0.2) !important;
+      box-shadow: inset 0 0 0 1px rgba(163, 76, 190, 0.3) !important;
+      color: #8731a3 !important;
+      font-weight: bold !important;
+    }
+    input:focus, textarea:focus, select:focus {
+      outline: none !important;
+      box-shadow: none !important;
+      border-color: transparent !important;
+      --tw-ring-color: transparent !important;
+    }
+    
+    #mainNavBar, #mainNavBar *, aside, aside * {
+      user-select: none !important;
+      -webkit-user-select: none !important;
+      -moz-user-select: none !important;
+      -ms-user-select: none !important;
+    }
+    
+    .material-symbols-outlined {
+      visibility: hidden;
+    }
+    
+    .fonts-loaded .material-symbols-outlined {
+      visibility: visible !important;
+    }
+  </style>
+</head>
+<body class="w-full h-full flex overflow-hidden m-0 p-0">
+  
+  <!-- Left Side Navigation Bar (Master Navigation) - Full Height -->
+  <aside class="w-64 h-full bg-glass-fill backdrop-blur-[28px] border-r border-glass-border shadow-[0_12px_40px_0_rgba(71,26,112,0.15)] flex flex-col pt-8 pb-10 flex-shrink-0 z-50">
+    <div class="px-6 mb-8">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-primary flex items-center justify-center text-white shadow-md shadow-primary/20">
+          <span class="material-symbols-outlined font-bold">shield</span>
+        </div>
+        <div>
+          <h2 class="font-bold text-purple-950 text-xl tracking-tight leading-none">JobPath</h2>
+          <p class="text-[10px] text-purple-950/70 font-semibold mt-1">System Administration</p>
+        </div>
+      </div>
+    </div>
+    
+    <nav class="flex flex-col gap-1 px-4 overflow-y-auto no-scrollbar flex-grow" id="mainNavBar">
+      <!-- Dynamically populated from app.js -->
+    </nav>
+    
+    <div class="px-6 mt-auto">
+      <button class="w-full bg-primary text-white py-3 rounded-full font-bold shadow-xl hover:scale-[1.02] active:scale-95 transition-all text-xs">
+        Upgrade Plan
+      </button>
+    </div>
+  </aside>
+
+  <!-- Right Container (Top Nav Bar + Content Area) -->
+  <div class="flex-1 h-full flex flex-col overflow-hidden">
+    
+    <!-- Top Navigation Bar -->
+    <nav class="w-full h-16 bg-glass-fill backdrop-blur-[28px] border-b border-glass-border shadow-[0_12px_40px_0_rgba(71,26,112,0.15)] flex justify-between items-center px-8 z-40 flex-shrink-0">
+      <div class="flex items-center gap-4">
+      </div>
+      <div class="flex items-center gap-4">
+        <div class="relative group hidden md:flex items-center bg-glass-thick rounded-full px-4 py-1.5 border border-glass-border">
+          <span class="material-symbols-outlined text-primary text-[20px] mr-2">search</span>
+          <input id="topbar-search" class="bg-transparent border-none focus:ring-0 text-xs p-0 w-48 outline-none" placeholder="Search system logs..." type="text"/>
+        </div>
+        <div class="flex gap-2">
+          <button class="w-10 h-10 flex items-center justify-center rounded-full hover:scale-105 transition-transform duration-300 text-primary">
+            <span class="material-symbols-outlined">notifications</span>
+          </button>
+          <button class="w-10 h-10 flex items-center justify-center rounded-full hover:scale-105 transition-transform duration-300 text-primary">
+            <span class="material-symbols-outlined">help</span>
+          </button>
+          <div class="w-10 h-10 rounded-full border-2 border-primary overflow-hidden ml-2 cursor-pointer active:scale-95 transition-all duration-200">
+            <img alt="Administrator Avatar" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBaxBvDbQFrH93JhCl2UtBuSJQmISEQ57NIwSx2w4w0J1aevIatPUxsWOmMl9CwP-FnXsz0OV7bCT1ZsPClo_evzO349EWexqiRba9jvZO8Bua-un5DIfN7AzKwnY9KitNw6wRZ5zlD5T78NC7lPinEkGBPBXbqVo4DctmhGHYv5OYvduyQ9FGmk2db7W2CX50be_pVttwWno7aiiQIjHr9mkyS3c5LhvSo149Z5nR9mbRco7KQnrsHixPYGV9uaPodOAdgMH_4HjOz"/>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Right Main Content Area (Iframe container) -->
+    <div class="flex-1 h-full relative bg-transparent">
+      <div class="loading-overlay absolute inset-0 flex items-center justify-center bg-white/40 backdrop-blur-sm z-50 transition-opacity duration-300 pointer-events-none" id="loadingOverlay">
+        <div class="spinner w-10 h-10 border-4 border-primary/20 border-l-primary rounded-full animate-spin"></div>
+      </div>
+      <iframe id="adminFrame" src="about:blank" class="w-full h-full border-none block"></iframe>
+    </div>
+  </div>
+
+  <script src="app.js?v=1.0.4"></script>
+</body>
+</html>

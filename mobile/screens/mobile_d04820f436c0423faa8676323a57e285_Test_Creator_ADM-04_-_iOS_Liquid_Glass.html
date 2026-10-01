@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<title>ADM-04: Liquid Glass Test Creator</title>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Google Fonts: Inter -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-error": "#ffffff",
+                    "surface-tint": "#8d37a9",
+                    "surface": "#f9f9ff",
+                    "surface-variant": "#dbe3f6",
+                    "outline-variant": "#d2c1d2",
+                    "card-gradient": "linear-gradient(135deg, #4D9EFA 0%, #BF7DF5 100%)",
+                    "on-background": "#471A70",
+                    "orange": "#FF9F0A",
+                    "background": "#f9f9ff",
+                    "on-surface-variant": "#4f4350",
+                    "primary-container": "#a34cbe",
+                    "on-primary": "#ffffff",
+                    "on-tertiary-fixed": "#002106",
+                    "tertiary-fixed-dim": "#47e266",
+                    "primary-fixed": "#fbd7ff",
+                    "tertiary-fixed": "#6cff82",
+                    "surface-container-lowest": "#ffffff",
+                    "error-container": "#ffdad6",
+                    "on-tertiary-container": "#e6ffe0",
+                    "inverse-on-surface": "#ecf1ff",
+                    "secondary-fixed": "#d3e3ff",
+                    "secondary-container": "#54a3ff",
+                    "glass-fill": "rgba(255, 255, 255, 0.35)",
+                    "on-error-container": "#93000a",
+                    "surface-container-low": "#f0f3ff",
+                    "on-secondary": "#ffffff",
+                    "on-secondary-container": "#003868",
+                    "primary-fixed-dim": "#f0b0ff",
+                    "on-surface": "#141c29",
+                    "inverse-surface": "#29313f",
+                    "glass-border": "rgba(255, 255, 255, 0.6)",
+                    "surface-container-highest": "#dbe3f6",
+                    "on-primary-container": "#fff5fb",
+                    "surface-container-high": "#e0e8fb",
+                    "error": "#FF453A",
+                    "tertiary-container": "#00842f",
+                    "on-primary-fixed": "#330044",
+                    "on-tertiary-fixed-variant": "#00531a",
+                    "outline": "#817381",
+                    "glass-thick": "rgba(255, 255, 255, 0.8)",
+                    "on-secondary-fixed": "#001c39",
+                    "secondary": "#0060ab",
+                    "surface-dim": "#d2daed",
+                    "on-secondary-fixed-variant": "#004883",
+                    "inverse-primary": "#f0b0ff",
+                    "surface-container": "#e7eeff",
+                    "tertiary": "#006823",
+                    "primary": "#8731a3",
+                    "surface-bright": "#f9f9ff",
+                    "on-primary-fixed-variant": "#72188f",
+                    "on-tertiary": "#ffffff",
+                    "gold": "#FFD60A",
+                    "secondary-fixed-dim": "#a3c9ff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "desktop-gutter": "24px",
+                    "base": "8px",
+                    "desktop-margin": "64px",
+                    "mobile-gutter": "16px",
+                    "max-width": "1280px",
+                    "safe-bottom": "34px",
+                    "safe-top": "44px",
+                    "mobile-margin": "20px"
+            },
+            "fontFamily": {
+                    "headline-lg-mobile": ["Inter", "sans-serif"],
+                    "display-xl-mobile": ["Inter", "sans-serif"],
+                    "body-md-mobile": ["Inter", "sans-serif"],
+                    "label-caps": ["Inter", "sans-serif"],
+                    "body-md": ["Inter", "sans-serif"],
+                    "display-xl": ["Inter", "sans-serif"],
+                    "headline-lg": ["Inter", "sans-serif"],
+                    "label-caps-mobile": ["Inter", "sans-serif"]
+            },
+            "fontSize": {
+                    "headline-lg-mobile": ["28px", { "lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                    "display-xl-mobile": ["34px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+                    "body-md-mobile": ["15px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                    "label-caps": ["13px", { "lineHeight": "1.0", "letterSpacing": "0.03em", "fontWeight": "600" }],
+                    "body-md": ["16px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                    "display-xl": ["56px", { "lineHeight": "1.1", "letterSpacing": "-0.03em", "fontWeight": "700" }],
+                    "headline-lg": ["34px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+                    "label-caps-mobile": ["12px", { "lineHeight": "1.0", "letterSpacing": "0.05em", "fontWeight": "600" }]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #DCE4F7;
+            color: #471A70;
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+        
+        .glass-card {
+            background: rgba(255, 255, 255, 0.35);
+            backdrop-filter: blur(28px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            border-radius: 24px;
+            box-shadow: 0 12px 40px 0 rgba(71, 26, 112, 0.15);
+        }
+
+        .liquid-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            background: radial-gradient(circle at 10% 20%, rgba(163, 76, 190, 0.15) 0%, transparent 50%),
+                        radial-gradient(circle at 90% 80%, rgba(77, 158, 250, 0.15) 0%, transparent 50%);
+        }
+
+        .ios-input {
+            background: rgba(255, 255, 255, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            border-radius: 12px;
+            transition: all 0.35s cubic-bezier(0.35, 0, 0.25, 1);
+        }
+
+        .ios-input:focus {
+            outline: none;
+            border-color: #8d37a9;
+            background: #ffffff;
+            box-shadow: 0 0 0 4px rgba(141, 55, 169, 0.1);
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        .active-nav {
+            background-color: #a34cbe;
+            color: #fff5fb;
+            border-radius: 9999px;
+            padding: 4px 16px;
+        }
+        
+        /* Custom checkbox/radio style */
+        .ios-radio {
+            appearance: none;
+            width: 24px;
+            height: 24px;
+            border: 2px solid #a34cbe;
+            border-radius: 50%;
+            display: grid;
+            place-content: center;
+        }
+        .ios-radio::before {
+            content: "";
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            transform: scale(0);
+            transition: 120ms transform ease-in-out;
+            background-color: #a34cbe;
+        }
+        .ios-radio:checked::before {
+            transform: scale(1);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="min-h-screen pb-32">
+<div class="liquid-bg"></div>
+<!-- TopAppBar Shell -->
+<header class="fixed top-0 w-full z-50 bg-glass-fill backdrop-blur-[28px] border-b border-glass-border shadow-[0_12px_40px_0_rgba(71,26,112,0.15)] flex items-center justify-between px-mobile-margin h-[44px]">
+<div class="flex items-center gap-2">
+<button class="active:scale-[0.96] transition-transform duration-[350ms] ease-[cubic-bezier(0.35,0,0.25,1)] text-primary">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile font-bold text-primary">New Test</h1>
+</div>
+<button class="font-headline-lg-mobile text-headline-lg-mobile font-bold text-primary active:scale-[0.96] transition-transform hover:opacity-80">
+            Save
+        </button>
+</header>
+<!-- Main Content -->
+<main class="mt-[64px] px-mobile-margin space-y-6">
+<!-- Section: Test Basics -->
+<section class="glass-card p-6 space-y-5">
+<h2 class="font-headline-lg-mobile text-[20px] text-on-background">Test Basics</h2>
+<div class="space-y-4">
+<div class="flex flex-col gap-1.5">
+<label class="font-label-caps-mobile text-on-surface-variant px-1">ASSESSMENT TITLE</label>
+<input class="ios-input h-[48px] px-4 font-body-md-mobile text-on-surface" placeholder="e.g. Senior Product Designer Quiz" type="text"/>
+</div>
+<div class="flex flex-col gap-1.5">
+<label class="font-label-caps-mobile text-on-surface-variant px-1">CATEGORY</label>
+<div class="relative">
+<select class="ios-input h-[48px] px-4 w-full appearance-none font-body-md-mobile text-on-surface">
+<option>Design &amp; Creative</option>
+<option>Engineering</option>
+<option>Marketing</option>
+<option>Management</option>
+</select>
+<span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-outline">expand_more</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Section: Question Editor -->
+<section class="glass-card p-6 space-y-5">
+<div class="flex justify-between items-center">
+<h2 class="font-headline-lg-mobile text-[20px] text-on-background">Question Editor</h2>
+<span class="font-label-caps-mobile bg-primary-fixed text-on-primary-fixed px-3 py-1 rounded-full">Q1</span>
+</div>
+<div class="space-y-4">
+<div class="flex flex-col gap-1.5">
+<label class="font-label-caps-mobile text-on-surface-variant px-1">QUESTION TEXT</label>
+<textarea class="ios-input p-4 font-body-md-mobile text-on-surface resize-none" placeholder="What is the primary principle of glassmorphism?" rows="3"></textarea>
+</div>
+<div class="space-y-3">
+<label class="font-label-caps-mobile text-on-surface-variant px-1">OPTIONS</label>
+<!-- Option 1 -->
+<div class="flex items-center gap-3">
+<input checked="" class="ios-radio" name="correct_ans" type="radio"/>
+<div class="flex-1 relative">
+<input class="ios-input h-[44px] px-4 w-full font-body-md-mobile pr-10" type="text" value="High background blur and transparency"/>
+<button class="absolute right-2 top-1/2 -translate-y-1/2 text-error active:scale-90 transition-transform">
+<span class="material-symbols-outlined">delete</span>
+</button>
+</div>
+</div>
+<!-- Option 2 -->
+<div class="flex items-center gap-3">
+<input class="ios-radio" name="correct_ans" type="radio"/>
+<div class="flex-1 relative">
+<input class="ios-input h-[44px] px-4 w-full font-body-md-mobile pr-10" type="text" value="Flat design with no shadows"/>
+<button class="absolute right-2 top-1/2 -translate-y-1/2 text-error active:scale-90 transition-transform">
+<span class="material-symbols-outlined">delete</span>
+</button>
+</div>
+</div>
+<!-- Option 3 -->
+<div class="flex items-center gap-3">
+<input class="ios-radio" name="correct_ans" type="radio"/>
+<div class="flex-1 relative">
+<input class="ios-input h-[44px] px-4 w-full font-body-md-mobile pr-10" type="text" value="Heavy skeuomorphic textures"/>
+<button class="absolute right-2 top-1/2 -translate-y-1/2 text-error active:scale-90 transition-transform">
+<span class="material-symbols-outlined">delete</span>
+</button>
+</div>
+</div>
+</div>
+<button class="w-full h-[48px] border-2 border-dashed border-primary/30 rounded-xl flex items-center justify-center gap-2 text-primary font-bold active:scale-[0.98] transition-transform">
+<span class="material-symbols-outlined">add_circle</span>
+<span class="font-label-caps-mobile">ADD OPTION</span>
+</button>
+</div>
+</section>
+<!-- Section: Skill Tags -->
+<section class="glass-card p-6 space-y-5">
+<h2 class="font-headline-lg-mobile text-[20px] text-on-background">Skill Tags</h2>
+<div class="flex flex-wrap gap-2">
+<div class="flex items-center gap-1.5 bg-secondary-container/20 border border-secondary-container/40 text-secondary px-3 py-2 rounded-full font-label-caps-mobile">
+                    UI DESIGN
+                    <span class="material-symbols-outlined text-[16px] cursor-pointer">close</span>
+</div>
+<div class="flex items-center gap-1.5 bg-secondary-container/20 border border-secondary-container/40 text-secondary px-3 py-2 rounded-full font-label-caps-mobile">
+                    USER RESEARCH
+                    <span class="material-symbols-outlined text-[16px] cursor-pointer">close</span>
+</div>
+<div class="flex items-center gap-1.5 bg-secondary-container/20 border border-secondary-container/40 text-secondary px-3 py-2 rounded-full font-label-caps-mobile">
+                    PROTOTYPING
+                    <span class="material-symbols-outlined text-[16px] cursor-pointer">close</span>
+</div>
+<button class="flex items-center justify-center w-[40px] h-[40px] bg-primary text-white rounded-full active:scale-90 transition-transform">
+<span class="material-symbols-outlined">add</span>
+</button>
+</div>
+</section>
+<!-- Dynamic Visual Element -->
+<div class="glass-card overflow-hidden h-40 relative">
+<div class="absolute inset-0 bg-gradient-to-br from-primary-container/20 to-secondary-container/20"></div>
+<div class="relative z-10 p-6 flex flex-col justify-center h-full">
+<p class="font-headline-lg-mobile text-[18px] text-primary">Test Preview Score</p>
+<div class="flex items-end gap-2 mt-2">
+<span class="text-4xl font-extrabold text-on-background">84</span>
+<span class="text-on-surface-variant font-label-caps mb-1.5">EST. DIFFICULTY</span>
+</div>
+</div>
+<!-- Aesthetic decoration -->
+<div class="absolute -right-10 -bottom-10 w-40 h-40 bg-primary/10 rounded-full blur-3xl"></div>
+</div>
+</main>
+<!-- BottomNavBar Shell -->
+<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center px-mobile-gutter pb-safe-bottom h-[84px] bg-glass-thick backdrop-blur-[28px] border-t border-glass-border shadow-[0_-12px_40px_0_rgba(71,26,112,0.15)] rounded-t-xl z-50">
+<button class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-4 py-1 active:scale-[0.92] transition-transform duration-[350ms]">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">add_circle</span>
+<span class="font-label-caps-mobile">Questions</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-low transition-colors active:scale-[0.92]">
+<span class="material-symbols-outlined">account_balance_wallet</span>
+<span class="font-label-caps-mobile">Bank</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-low transition-colors active:scale-[0.92]">
+<span class="material-symbols-outlined">visibility</span>
+<span class="font-label-caps-mobile">Preview</span>
+</button>
+</nav>
+<script>
+        // Simple Interaction logic for adding/removing items could go here
+        // For now, focusing on visual fidelity and layout as requested.
+        
+        document.querySelectorAll('button').forEach(btn => {
+            btn.addEventListener('touchstart', () => {
+                btn.style.opacity = '0.7';
+            });
+            btn.addEventListener('touchend', () => {
+                btn.style.opacity = '1';
+            });
+        });
+    </script>
+</body></html>

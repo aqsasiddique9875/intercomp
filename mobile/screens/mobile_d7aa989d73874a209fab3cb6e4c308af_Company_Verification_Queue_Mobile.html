@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<title>Company Verification Queue</title>
+<!-- Google Fonts: Inter as a high-fidelity proxy for SF Pro -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-primary-fixed": "#330044",
+                    "inverse-on-surface": "#ecf1ff",
+                    "on-tertiary-container": "#e6ffe0",
+                    "primary-fixed": "#fbd7ff",
+                    "secondary-fixed": "#d3e3ff",
+                    "gold": "#FFD60A",
+                    "surface-bright": "#f9f9ff",
+                    "on-error-container": "#93000a",
+                    "surface": "#f9f9ff",
+                    "glass-border": "rgba(255, 255, 255, 0.6)",
+                    "error-container": "#ffdad6",
+                    "primary": "#8731a3",
+                    "orange": "#FF9F0A",
+                    "tertiary": "#006823",
+                    "surface-dim": "#d2daed",
+                    "secondary": "#0060ab",
+                    "surface-container": "#e7eeff",
+                    "surface-container-low": "#f0f3ff",
+                    "on-secondary-fixed": "#001c39",
+                    "on-secondary-container": "#003868",
+                    "inverse-primary": "#f0b0ff",
+                    "glass-thick": "rgba(255, 255, 255, 0.8)",
+                    "on-error": "#ffffff",
+                    "surface-variant": "#dbe3f6",
+                    "outline": "#817381",
+                    "on-surface": "#141c29",
+                    "primary-container": "#a34cbe",
+                    "tertiary-container": "#00842f",
+                    "on-secondary": "#ffffff",
+                    "on-primary-container": "#fff5fb",
+                    "on-background": "#141c29",
+                    "surface-container-high": "#e0e8fb",
+                    "outline-variant": "#d2c1d2",
+                    "glass-fill": "rgba(255, 255, 255, 0.35)",
+                    "on-secondary-fixed-variant": "#004883",
+                    "on-tertiary-fixed": "#002106",
+                    "secondary-fixed-dim": "#a3c9ff",
+                    "surface-container-lowest": "#ffffff",
+                    "background": "#f9f9ff",
+                    "secondary-container": "#54a3ff",
+                    "on-primary": "#ffffff",
+                    "error": "#FF453A",
+                    "on-tertiary": "#ffffff",
+                    "card-gradient": "linear-gradient(135deg, #4D9EFA 0%, #BF7DF5 100%)",
+                    "tertiary-fixed": "#6cff82",
+                    "primary-fixed-dim": "#f0b0ff",
+                    "inverse-surface": "#29313f",
+                    "tertiary-fixed-dim": "#47e266",
+                    "on-surface-variant": "#4f4350",
+                    "surface-container-highest": "#dbe3f6",
+                    "on-primary-fixed-variant": "#72188f",
+                    "on-tertiary-fixed-variant": "#00531a",
+                    "surface-tint": "#8d37a9"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "max-width": "1280px",
+                    "desktop-gutter": "24px",
+                    "base": "8px",
+                    "mobile-gutter": "16px",
+                    "safe-top": "44px",
+                    "safe-bottom": "34px",
+                    "mobile-margin": "20px",
+                    "desktop-margin": "64px"
+            },
+            "fontFamily": {
+                    "display-xl-mobile": ["Inter"],
+                    "body-md-mobile": ["Inter"],
+                    "label-caps-mobile": ["Inter"],
+                    "headline-lg-mobile": ["Inter"],
+                    "display-xl": ["Inter"],
+                    "body-md": ["Inter"],
+                    "label-caps": ["Inter"],
+                    "headline-lg": ["Inter"]
+            },
+            "fontSize": {
+                    "display-xl-mobile": ["34px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "body-md-mobile": ["15px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                    "label-caps-mobile": ["12px", {"lineHeight": "1.0", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "display-xl": ["56px", {"lineHeight": "1.1", "letterSpacing": "-0.03em", "fontWeight": "700"}],
+                    "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                    "label-caps": ["13px", {"lineHeight": "1.0", "letterSpacing": "0.03em", "fontWeight": "600"}],
+                    "headline-lg": ["34px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #DCE4F7; /* Custom requested pastel lavender-blue */
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.35);
+            backdrop-filter: blur(28px);
+            -webkit-backdrop-filter: blur(28px);
+            border: 0.5px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 12px 40px 0 rgba(71, 26, 112, 0.1);
+        }
+
+        .spring-active:active {
+            transform: scale(0.96);
+            transition: transform 0.35s cubic-bezier(0.35, 0, 0.25, 1);
+        }
+
+        .nav-spring-active:active {
+            transform: scale(0.90);
+            transition: transform 0.3s ease;
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+
+        /* Ambient animated background for Liquid Glass theme */
+        .ambient-mesh {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: radial-gradient(circle at 10% 20%, rgba(135, 49, 163, 0.1) 0%, transparent 40%),
+                        radial-gradient(circle at 90% 80%, rgba(0, 96, 171, 0.1) 0%, transparent 40%);
+            filter: blur(80px);
+            animation: mesh-move 20s infinite alternate ease-in-out;
+        }
+
+        @keyframes mesh-move {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(5%, 5%) scale(1.1); }
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="overflow-x-hidden antialiased">
+<div class="ambient-mesh"></div>
+<!-- TopAppBar -->
+<header class="fixed top-0 left-0 w-full flex justify-between items-center px-mobile-margin h-safe-top pt-8 pb-4 bg-glass-thick backdrop-blur-[28px] border-b border-glass-border z-50 shadow-[0_12px_40px_0_rgba(71,26,112,0.15)]">
+<button class="text-primary hover:opacity-80 transition-opacity active:scale-95 duration-300">
+<span class="material-symbols-outlined text-[24px]">arrow_back</span>
+</button>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile font-bold text-on-surface">Verification Queue</h1>
+<button class="text-primary hover:opacity-80 transition-opacity active:scale-95 duration-300">
+<span class="material-symbols-outlined text-[24px]">filter_list</span>
+</button>
+</header>
+<!-- Main Content Canvas -->
+<main class="relative mt-28 mb-32 px-mobile-margin space-y-4">
+<!-- Queue Item 1: Stripe -->
+<article class="glass-card rounded-[24px] p-5 flex flex-col gap-4">
+<div class="flex items-start justify-between">
+<div class="flex gap-4">
+<div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center border border-primary/20">
+<span class="material-symbols-outlined text-primary text-[28px]">account_balance</span>
+</div>
+<div>
+<h2 class="font-headline-lg-mobile text-[18px] text-[#471A70]">Stripe Inc.</h2>
+<p class="font-label-caps-mobile text-on-surface-variant">Fintech</p>
+</div>
+</div>
+<span class="px-3 py-1 bg-gold/20 text-[#A67C00] rounded-full font-label-caps-mobile">Pending</span>
+</div>
+<div class="space-y-2 border-y border-white/20 py-3">
+<div class="flex justify-between items-center">
+<span class="font-label-caps-mobile text-on-surface-variant">REG. NUMBER</span>
+<span class="font-body-md-mobile font-semibold text-[#471A70]">US-8829441-B</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="font-label-caps-mobile text-on-surface-variant">SUBMISSION</span>
+<span class="font-body-md-mobile font-semibold text-[#471A70]">Oct 24, 2:15 PM</span>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-3">
+<button class="spring-active h-11 rounded-full bg-primary-container text-on-primary-container font-semibold flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[18px]">verified</span>
+                    Verify Now
+                </button>
+<button class="spring-active h-11 rounded-full border border-outline/30 text-on-surface-variant font-semibold hover:bg-white/10 transition-colors">
+                    Decline
+                </button>
+</div>
+</article>
+<!-- Queue Item 2: Airbnb -->
+<article class="glass-card rounded-[24px] p-5 flex flex-col gap-4">
+<div class="flex items-start justify-between">
+<div class="flex gap-4">
+<div class="w-12 h-12 rounded-xl bg-secondary/10 flex items-center justify-center border border-secondary/20">
+<span class="material-symbols-outlined text-secondary text-[28px]">home_work</span>
+</div>
+<div>
+<h2 class="font-headline-lg-mobile text-[18px] text-[#471A70]">Airbnb</h2>
+<p class="font-label-caps-mobile text-on-surface-variant">Real Estate</p>
+</div>
+</div>
+<span class="px-3 py-1 bg-gold/20 text-[#A67C00] rounded-full font-label-caps-mobile">Pending</span>
+</div>
+<div class="space-y-2 border-y border-white/20 py-3">
+<div class="flex justify-between items-center">
+<span class="font-label-caps-mobile text-on-surface-variant">REG. NUMBER</span>
+<span class="font-body-md-mobile font-semibold text-[#471A70]">EU-331290-X</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="font-label-caps-mobile text-on-surface-variant">SUBMISSION</span>
+<span class="font-body-md-mobile font-semibold text-[#471A70]">Oct 24, 11:40 AM</span>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-3">
+<button class="spring-active h-11 rounded-full bg-primary-container text-on-primary-container font-semibold flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[18px]">verified</span>
+                    Verify Now
+                </button>
+<button class="spring-active h-11 rounded-full border border-outline/30 text-on-surface-variant font-semibold hover:bg-white/10 transition-colors">
+                    Decline
+                </button>
+</div>
+</article>
+<!-- Queue Item 3: Notion -->
+<article class="glass-card rounded-[24px] p-5 flex flex-col gap-4">
+<div class="flex items-start justify-between">
+<div class="flex gap-4">
+<div class="w-12 h-12 rounded-xl bg-tertiary/10 flex items-center justify-center border border-tertiary/20">
+<span class="material-symbols-outlined text-tertiary text-[28px]">edit_note</span>
+</div>
+<div>
+<h2 class="font-headline-lg-mobile text-[18px] text-[#471A70]">Notion</h2>
+<p class="font-label-caps-mobile text-on-surface-variant">Productivity</p>
+</div>
+</div>
+<span class="px-3 py-1 bg-gold/20 text-[#A67C00] rounded-full font-label-caps-mobile">Pending</span>
+</div>
+<div class="space-y-2 border-y border-white/20 py-3">
+<div class="flex justify-between items-center">
+<span class="font-label-caps-mobile text-on-surface-variant">REG. NUMBER</span>
+<span class="font-body-md-mobile font-semibold text-[#471A70]">US-7712204-N</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="font-label-caps-mobile text-on-surface-variant">SUBMISSION</span>
+<span class="font-body-md-mobile font-semibold text-[#471A70]">Oct 23, 5:50 PM</span>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-3">
+<button class="spring-active h-11 rounded-full bg-primary-container text-on-primary-container font-semibold flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[18px]">verified</span>
+                    Verify Now
+                </button>
+<button class="spring-active h-11 rounded-full border border-outline/30 text-on-surface-variant font-semibold hover:bg-white/10 transition-colors">
+                    Decline
+                </button>
+</div>
+</article>
+<!-- Queue Item 4: SpaceX -->
+<article class="glass-card rounded-[24px] p-5 flex flex-col gap-4">
+<div class="flex items-start justify-between">
+<div class="flex gap-4">
+<div class="w-12 h-12 rounded-xl bg-orange/10 flex items-center justify-center border border-orange/20">
+<span class="material-symbols-outlined text-orange text-[28px]">rocket_launch</span>
+</div>
+<div>
+<h2 class="font-headline-lg-mobile text-[18px] text-[#471A70]">SpaceX</h2>
+<p class="font-label-caps-mobile text-on-surface-variant">Aerospace</p>
+</div>
+</div>
+<span class="px-3 py-1 bg-gold/20 text-[#A67C00] rounded-full font-label-caps-mobile">Pending</span>
+</div>
+<div class="space-y-2 border-y border-white/20 py-3">
+<div class="flex justify-between items-center">
+<span class="font-label-caps-mobile text-on-surface-variant">REG. NUMBER</span>
+<span class="font-body-md-mobile font-semibold text-[#471A70]">US-000001-Z</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="font-label-caps-mobile text-on-surface-variant">SUBMISSION</span>
+<span class="font-body-md-mobile font-semibold text-[#471A70]">Oct 23, 9:00 AM</span>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-3">
+<button class="spring-active h-11 rounded-full bg-primary-container text-on-primary-container font-semibold flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[18px]">verified</span>
+                    Verify Now
+                </button>
+<button class="spring-active h-11 rounded-full border border-outline/30 text-on-surface-variant font-semibold hover:bg-white/10 transition-colors">
+                    Decline
+                </button>
+</div>
+</article>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-safe pt-3 bg-glass-thick backdrop-blur-[28px] border-t border-glass-border rounded-t-xl shadow-[0_-8px_30px_0_rgba(71,26,112,0.1)]">
+<!-- Dashboard -->
+<button class="nav-spring-active flex flex-col items-center justify-center text-on-surface-variant px-4 py-1.5 hover:bg-glass-fill transition-colors">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-caps-mobile text-label-caps-mobile mt-1">Dashboard</span>
+</button>
+<!-- Queue (Active) -->
+<button class="nav-spring-active flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-4 py-1.5 shadow-sm">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">fact_check</span>
+<span class="font-label-caps-mobile text-label-caps-mobile mt-1">Queue</span>
+</button>
+<!-- Audits -->
+<button class="nav-spring-active flex flex-col items-center justify-center text-on-surface-variant px-4 py-1.5 hover:bg-glass-fill transition-colors">
+<span class="material-symbols-outlined">assignment_turned_in</span>
+<span class="font-label-caps-mobile text-label-caps-mobile mt-1">Audits</span>
+</button>
+<!-- Settings -->
+<button class="nav-spring-active flex flex-col items-center justify-center text-on-surface-variant px-4 py-1.5 hover:bg-glass-fill transition-colors">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-caps-mobile text-label-caps-mobile mt-1">Settings</span>
+</button>
+</nav>
+<script>
+        // Micro-interaction sound/haptic simulation
+        document.querySelectorAll('button').forEach(button => {
+            button.addEventListener('touchstart', () => {
+                // Future implementation of Web Haptics
+            });
+            
+            button.addEventListener('click', (e) => {
+                // Basic ripple effect if needed or simple interaction logging
+                console.log('Interaction captured:', e.target.innerText || 'Icon Button');
+            });
+        });
+
+        // Intersection observer for entrance animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('opacity-100', 'translate-y-0');
+                    entry.target.classList.remove('opacity-0', 'translate-y-8');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('article').forEach(card => {
+            card.classList.add('opacity-0', 'translate-y-8', 'transition-all', 'duration-700', 'ease-out');
+            observer.observe(card);
+        });
+    </script>
+</body></html>

@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/>
+  <title>Systems Limited | Profile</title>
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+  <!-- Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            primary: "#8731a3",
+            secondary: "#4D9EFA",
+            background: "#fff7fb",
+            outline: "#817381",
+            "glass-fill": "rgba(255, 255, 255, 0.45)",
+            "glass-border": "rgba(255, 255, 255, 0.6)"
+          },
+          borderRadius: {
+            xxl: "24px"
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      background-color: #DCE4F7;
+      -webkit-tap-highlight-color: transparent;
+      font-family: 'Inter', sans-serif;
+      color: #471A70;
+    }
+    .glass-card {
+      background: rgba(255, 255, 255, 0.4);
+      backdrop-filter: blur(28px);
+      -webkit-backdrop-filter: blur(28px);
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      box-shadow: 0 8px 32px 0 rgba(163, 76, 190, 0.08);
+    }
+    .animated-bg-sphere {
+      position: fixed;
+      width: 350px;
+      height: 350px;
+      border-radius: 50%;
+      filter: blur(80px);
+      z-index: -1;
+      opacity: 0.5;
+      animation: float 20s infinite ease-in-out;
+    }
+    @keyframes float {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(50px, -50px) scale(1.1); }
+    }
+    /* Hide scrollbar */
+    .hide-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .hide-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+</head>
+<body class="antialiased overflow-x-hidden pb-32">
+  <!-- Animated Background Spheres -->
+  <div class="animated-bg-sphere bg-purple-300" style="top: -50px; left: -50px; animation-delay: 0s;"></div>
+  <div class="animated-bg-sphere bg-blue-200" style="bottom: -100px; right: -50px; animation-delay: -5s;"></div>
+
+  <!-- Header -->
+  <header class="fixed top-0 left-0 right-0 max-w-md mx-auto w-full z-50 bg-white/45 backdrop-blur-[28px] border-b border-white/50 shadow-[0_4px_20px_0_rgba(163,76,190,0.06)] flex justify-between items-center px-5 h-[64px]">
+    <button onclick="window.history.back()" class="w-9 h-9 rounded-full bg-white/40 flex items-center justify-center text-primary shadow-sm active:scale-90 transition-transform">
+      <span class="material-symbols-outlined text-[20px]">arrow_back</span>
+    </button>
+    <h1 class="font-bold text-sm text-primary">Company Profile</h1>
+    <button class="w-9 h-9 rounded-full bg-white/40 flex items-center justify-center text-[#471A70] shadow-sm"><span class="material-symbols-outlined text-[20px]">share</span></button>
+  </header>
+
+  <main class="mt-[64px] max-w-md mx-auto pb-12">
+    <!-- Cover Image -->
+    <div class="h-44 w-full overflow-hidden relative">
+      <img class="w-full h-full object-cover" src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800" alt="Systems Limited Cover"/>
+      <div class="absolute inset-0 bg-gradient-to-t from-[#DCE4F7] to-transparent"></div>
+    </div>
+
+    <!-- Company Branding Header Info -->
+    <div class="px-5 -mt-12 relative z-10 flex flex-col items-center text-center">
+      <div class="w-24 h-24 rounded-3xl bg-white border border-white/80 shadow-lg flex items-center justify-center overflow-hidden p-3">
+        <span class="material-symbols-outlined text-primary text-5xl font-bold">domain</span>
+      </div>
+      
+      <div class="mt-4 flex items-center gap-1.5">
+        <h2 class="text-xl font-extrabold text-[#471A70] tracking-tight">Systems Limited</h2>
+        <span class="material-symbols-outlined text-primary text-[20px]" style="font-variation-settings: 'FILL' 1;">verified</span>
+      </div>
+      <p class="text-xs text-primary font-bold mt-1">Leading Global Technology Solutions Partner</p>
+      <div class="flex items-center gap-1 text-outline mt-1 text-[11px]">
+        <span class="material-symbols-outlined text-sm">location_on</span>
+        <span>Lahore, Pakistan (HQ)</span>
+      </div>
+    </div>
+
+    <!-- Tab Bar -->
+    <div class="px-5 mt-6">
+      <div class="glass-tab p-1 rounded-2xl flex items-center bg-white/20 border border-white/40">
+        <button onclick="switchProfileTab('about')" id="tab-about" class="flex-1 py-2 rounded-xl text-xs font-bold bg-primary text-white transition-all duration-300">About</button>
+        <button onclick="switchProfileTab('jobs')" id="tab-jobs" class="flex-1 py-2 rounded-xl text-xs font-bold text-outline transition-all duration-300">Jobs</button>
+        <button onclick="switchProfileTab('billing')" id="tab-billing" class="flex-1 py-2 rounded-xl text-xs font-bold text-outline transition-all duration-300">Billing</button>
+        <button onclick="switchProfileTab('culture')" id="tab-culture" class="flex-1 py-2 rounded-xl text-xs font-bold text-outline transition-all duration-300">Culture</button>
+      </div>
+    </div>
+
+    <!-- Tab Contents -->
+    <div class="px-5 mt-4 text-left">
+      <!-- About Tab -->
+      <div id="content-about" class="space-y-4">
+        <div class="glass-card p-5 rounded-3xl space-y-3">
+          <h3 class="text-xs font-bold text-[#726580] uppercase tracking-wider">About Company</h3>
+          <p class="text-xs leading-relaxed text-[#471A70] font-medium">
+            Systems Limited is a pioneer in global technology solutions, delivering state-of-the-art digital transformation, cloud services, and custom software development. With a rich history of innovation, we empower enterprises globally to accelerate their digital growth.
+          </p>
+        </div>
+        
+        <div class="glass-card p-5 rounded-3xl space-y-3">
+          <h3 class="text-xs font-bold text-[#726580] uppercase tracking-wider">Core Specializations</h3>
+          <div class="flex flex-wrap gap-2">
+            <span class="text-[10px] font-bold text-primary bg-primary/10 px-2.5 py-1 rounded-full">Cloud Computing</span>
+            <span class="text-[10px] font-bold text-primary bg-primary/10 px-2.5 py-1 rounded-full">AI & Machine Learning</span>
+            <span class="text-[10px] font-bold text-primary bg-primary/10 px-2.5 py-1 rounded-full">Enterprise Solutions</span>
+            <span class="text-[10px] font-bold text-primary bg-primary/10 px-2.5 py-1 rounded-full">Digital Transformation</span>
+            <span class="text-[10px] font-bold text-primary bg-primary/10 px-2.5 py-1 rounded-full">Microsoft Gold Partner</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Jobs Tab -->
+      <div id="content-jobs" class="hidden space-y-3">
+        <!-- Job 1 -->
+        <div class="glass-card p-4 rounded-2xl flex items-center justify-between">
+          <div>
+            <h4 class="font-bold text-xs text-[#471A70]">Software Engineer Intern</h4>
+            <p class="text-[9px] text-outline mt-0.5">Engineering &bull; Lahore, PK (Hybrid)</p>
+          </div>
+          <button onclick="parent.App ? parent.App.navigate('company-postings') : (window.location.hash = '#/company/postings')" class="bg-primary text-white text-[10px] font-bold px-3 py-1.5 rounded-full">View</button>
+        </div>
+
+        <!-- Job 2 -->
+        <div class="glass-card p-4 rounded-2xl flex items-center justify-between">
+          <div>
+            <h4 class="font-bold text-xs text-[#471A70]">UI/UX Designer Intern</h4>
+            <p class="text-[9px] text-outline mt-0.5">Product &bull; Lahore, PK (Hybrid)</p>
+          </div>
+          <button onclick="parent.App ? parent.App.navigate('company-postings') : (window.location.hash = '#/company/postings')" class="bg-primary text-white text-[10px] font-bold px-3 py-1.5 rounded-full">View</button>
+        </div>
+
+        <!-- Job 3 -->
+        <div class="glass-card p-4 rounded-2xl flex items-center justify-between">
+          <div>
+            <h4 class="font-bold text-xs text-[#471A70]">Data Analyst Intern</h4>
+            <p class="text-[9px] text-outline mt-0.5">Finance &bull; Lahore, PK (On-site)</p>
+          </div>
+          <button onclick="parent.App ? parent.App.navigate('company-postings') : (window.location.hash = '#/company/postings')" class="bg-primary text-white text-[10px] font-bold px-3 py-1.5 rounded-full">View</button>
+        </div>
+      </div>
+
+      <!-- Billing Tab -->
+      <div id="content-billing" class="hidden space-y-5">
+        <!-- Overview Stats -->
+        <div class="grid grid-cols-3 gap-2">
+          <div class="glass-card p-3 rounded-xl">
+            <span class="text-[8px] font-bold text-outline uppercase">Total Spent</span>
+            <p class="text-xs font-bold text-[#471A70] mt-0.5">Rs 15,000</p>
+          </div>
+          <div class="glass-card p-3 rounded-xl">
+            <span class="text-[8px] font-bold text-outline uppercase">Active Jobs</span>
+            <p class="text-xs font-bold text-[#471A70] mt-0.5">1 Job</p>
+          </div>
+          <div class="glass-card p-3 rounded-xl">
+            <span class="text-[8px] font-bold text-outline uppercase">Next Bill</span>
+            <p class="text-xs font-bold text-[#471A70] mt-0.5">Jul 15, 2025</p>
+          </div>
+        </div>
+
+        <!-- Current Plan -->
+        <div class="glass-card p-4 rounded-2xl space-y-3">
+          <div class="flex justify-between items-center">
+            <h3 class="text-xs font-bold text-[#726580] uppercase tracking-wider">Current Plan</h3>
+            <span class="bg-primary/10 text-primary text-[9px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">Active</span>
+          </div>
+          <div>
+            <h4 class="font-extrabold text-sm text-[#471A70]">Basic Plan</h4>
+            <p class="text-[11px] text-outline mt-0.5">Rs 2,500 / month</p>
+          </div>
+          <ul class="text-[10px] space-y-1.5 text-[#471A70] font-medium">
+            <li class="flex items-center gap-1.5"><span class="material-symbols-outlined text-sm text-primary">check_circle</span> Unlimited Job Postings</li>
+            <li class="flex items-center gap-1.5"><span class="material-symbols-outlined text-sm text-primary">check_circle</span> Advanced Talent Filters</li>
+            <li class="flex items-center gap-1.5"><span class="material-symbols-outlined text-sm text-primary">check_circle</span> Priority Support</li>
+          </ul>
+          <button onclick="openWalletCheckout(10000, 'Premium Plan', 'UPGRADE TO PREMIUM')" class="w-full h-10 rounded-xl bg-primary text-white text-xs font-bold active:scale-95 transition-transform">Upgrade to Premium</button>
+        </div>
+
+        <!-- Mobile Wallets (JazzCash / EasyPaisa) -->
+        <div class="glass-card p-4 rounded-2xl space-y-4">
+          <div class="flex justify-between items-center">
+            <h3 class="text-xs font-bold text-[#726580] uppercase tracking-wider">Payment Methods</h3>
+            <span class="text-[9px] text-primary font-bold">Mobile Wallets Only</span>
+          </div>
+
+          <!-- Wallets Grid -->
+          <div class="space-y-3">
+            <!-- JazzCash Card -->
+            <div id="wallet-card-jazzcash" onclick="selectPrimaryWallet('jazzcash')" class="w-full h-32 rounded-2xl bg-gradient-to-br from-neutral-900 via-neutral-800 to-red-950 p-4 flex flex-col justify-between text-white relative overflow-hidden border-2 border-primary cursor-pointer active:scale-[0.98] transition-all">
+              <div class="absolute -top-10 -right-10 w-24 h-24 rounded-full bg-red-500/10 filter blur-xl"></div>
+              <div class="flex justify-between items-center">
+                <span class="text-sm font-extrabold tracking-wider text-red-500">JazzCash</span>
+                <span id="badge-jazzcash" class="bg-primary text-white text-[8px] font-bold px-2 py-0.5 rounded-full uppercase">Primary</span>
+              </div>
+              <div>
+                <span class="text-[8px] uppercase tracking-wider opacity-60">Mobile Account</span>
+                <p class="text-xs font-bold tracking-[0.15em] mt-0.5">0300 •••• 4242</p>
+              </div>
+              <div class="flex justify-between items-end">
+                <span class="text-[9px] font-semibold opacity-80">Systems Limited</span>
+                <span class="material-symbols-outlined text-red-500 text-lg">check_circle</span>
+              </div>
+            </div>
+
+            <!-- EasyPaisa Card -->
+            <div id="wallet-card-easypaisa" onclick="selectPrimaryWallet('easypaisa')" class="w-full h-32 rounded-2xl bg-gradient-to-br from-emerald-950 via-emerald-800 to-green-900 p-4 flex flex-col justify-between text-white relative overflow-hidden border border-white/20 cursor-pointer active:scale-[0.98] transition-all">
+              <div class="absolute -top-10 -right-10 w-24 h-24 rounded-full bg-green-500/10 filter blur-xl"></div>
+              <div class="flex justify-between items-center">
+                <span class="text-sm font-extrabold tracking-wider text-green-400">easypaisa</span>
+                <span id="badge-easypaisa" class="hidden bg-primary text-white text-[8px] font-bold px-2 py-0.5 rounded-full uppercase">Primary</span>
+              </div>
+              <div>
+                <span class="text-[8px] uppercase tracking-wider opacity-60">Mobile Account</span>
+                <p class="text-xs font-bold tracking-[0.15em] mt-0.5">0312 •••• 9876</p>
+              </div>
+              <div class="flex justify-between items-end">
+                <span class="text-[9px] font-semibold opacity-80">Systems Limited</span>
+                <span class="material-symbols-outlined text-green-400 text-lg opacity-40">circle</span>
+              </div>
+            </div>
+          </div>
+
+          <button onclick="alert('Adding new mobile wallet...')" class="w-full h-10 rounded-xl border border-primary/40 text-primary text-xs font-bold hover:bg-primary/5 active:scale-95 transition-transform flex items-center justify-center gap-1.5">
+            <span class="material-symbols-outlined text-sm">add_circle</span>
+            Link New Mobile Wallet
+          </button>
+        </div>
+
+        <!-- Boost Job Posting -->
+        <div class="space-y-3">
+          <h3 class="text-xs font-bold text-[#726580] uppercase tracking-wider pl-1">Boost Job Posting</h3>
+          
+          <div class="flex gap-3 overflow-x-auto hide-scrollbar pb-1 -mx-5 px-5">
+            <!-- Card 1 -->
+            <div class="w-48 shrink-0 glass-card p-4 rounded-2xl flex flex-col justify-between h-40 border border-primary/20">
+              <div>
+                <span class="bg-primary/10 text-primary text-[8px] font-bold px-2 py-0.5 rounded-full uppercase">Top 1 Spot</span>
+                <h4 class="font-bold text-xs text-[#471A70] mt-2">Maximum Exposure</h4>
+                <p class="text-[10px] text-outline mt-0.5">Top of all searches</p>
+              </div>
+              <div class="flex justify-between items-end mt-4">
+                <div>
+                  <span class="text-[9px] text-outline">Price</span>
+                  <p class="text-xs font-extrabold text-[#471A70]">Rs 10,000</p>
+                </div>
+                <button onclick="openWalletCheckout(10000, 'Top 1 Spot', 'BOOST JOB POSTING')" class="bg-primary text-white text-[10px] font-bold px-3 py-1.5 rounded-full">Boost</button>
+              </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="w-48 shrink-0 glass-card p-4 rounded-2xl flex flex-col justify-between h-40">
+              <div>
+                <span class="bg-blue-100 text-blue-700 text-[8px] font-bold px-2 py-0.5 rounded-full uppercase">Top 3 Placement</span>
+                <h4 class="font-bold text-xs text-[#471A70] mt-2">High Visibility</h4>
+                <p class="text-[10px] text-outline mt-0.5">Top 3 results for 30 days</p>
+              </div>
+              <div class="flex justify-between items-end mt-4">
+                <div>
+                  <span class="text-[9px] text-outline">Price</span>
+                  <p class="text-xs font-extrabold text-[#471A70]">Rs 5,000</p>
+                </div>
+                <button onclick="openWalletCheckout(5000, 'Top 3 Placement', 'BOOST JOB POSTING')" class="bg-primary text-white text-[10px] font-bold px-3 py-1.5 rounded-full">Select</button>
+              </div>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="w-48 shrink-0 glass-card p-4 rounded-2xl flex flex-col justify-between h-40">
+              <div>
+                <span class="bg-gray-100 text-gray-700 text-[8px] font-bold px-2 py-0.5 rounded-full uppercase">Top 10 Visibility</span>
+                <h4 class="font-bold text-xs text-[#471A70] mt-2">Increased Reach</h4>
+                <p class="text-[10px] text-outline mt-0.5">Top 10 results</p>
+              </div>
+              <div class="flex justify-between items-end mt-4">
+                <div>
+                  <span class="text-[9px] text-outline">Price</span>
+                  <p class="text-xs font-extrabold text-[#471A70]">Rs 2,500</p>
+                </div>
+                <button onclick="openWalletCheckout(2500, 'Top 10 Visibility', 'BOOST JOB POSTING')" class="bg-primary text-white text-[10px] font-bold px-3 py-1.5 rounded-full">Select</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Billing History -->
+        <div class="glass-card p-4 rounded-2xl space-y-3">
+          <div class="flex justify-between items-center border-b border-white/20 pb-2">
+            <h3 class="text-xs font-bold text-[#726580] uppercase tracking-wider">Billing History</h3>
+            <span class="text-[9px] text-primary font-bold cursor-pointer">Download All</span>
+          </div>
+          
+          <div class="divide-y divide-white/10 text-xs">
+            <!-- Invoice 1 -->
+            <div class="py-2.5 flex justify-between items-center">
+              <div>
+                <h5 class="font-bold text-xs">Basic Plan Monthly</h5>
+                <p class="text-[9px] text-outline mt-0.5">Jun 15, 2025 &bull; Mobile Wallet</p>
+              </div>
+              <div class="text-right">
+                <span class="bg-green-100 text-green-700 text-[9px] font-bold px-2 py-0.5 rounded-full">Paid</span>
+                <p class="font-bold text-[#471A70] mt-1">Rs 2,500</p>
+              </div>
+            </div>
+
+            <!-- Invoice 2 -->
+            <div class="py-2.5 flex justify-between items-center">
+              <div>
+                <h5 class="font-bold text-xs">Basic Plan Monthly</h5>
+                <p class="text-[9px] text-outline mt-0.5">May 15, 2025 &bull; Mobile Wallet</p>
+              </div>
+              <div class="text-right">
+                <span class="bg-green-100 text-green-700 text-[9px] font-bold px-2 py-0.5 rounded-full">Paid</span>
+                <p class="font-bold text-[#471A70] mt-1">Rs 2,500</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Culture Tab -->
+      <div id="content-culture" class="hidden space-y-4">
+        <div class="grid grid-cols-2 gap-3">
+          <div class="h-32 rounded-2xl overflow-hidden shadow-sm">
+            <img class="w-full h-full object-cover" src="https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=300"/>
+          </div>
+          <div class="h-32 rounded-2xl overflow-hidden shadow-sm">
+            <img class="w-full h-full object-cover" src="https://images.unsplash.com/photo-1497215728101-856f4ea42174?q=80&w=300"/>
+          </div>
+          <div class="h-32 rounded-2xl overflow-hidden shadow-sm col-span-2">
+            <img class="w-full h-full object-cover" src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=500"/>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Payment Method Modal (Premium Card Pop-up matching second image) -->
+  <div id="checkoutModal" class="fixed inset-0 z-[100] hidden flex items-center justify-center bg-[#471A70]/60 backdrop-blur-md">
+    <div class="bg-white w-full max-w-sm rounded-[32px] overflow-hidden shadow-2xl text-left flex flex-col mx-5 transform transition-all duration-300">
+      <!-- Modal Header -->
+      <div class="bg-primary p-6 flex justify-between items-center text-white">
+        <div>
+          <span id="checkoutCategoryName" class="block text-[10px] font-bold uppercase tracking-wider text-[#F3E8FF]">UPGRADE TO PREMIUM</span>
+          <h3 id="checkoutItemName" class="font-extrabold text-xl mt-0.5">Premium Plan</h3>
+        </div>
+        <div class="text-right">
+          <span class="block text-[10px] font-bold uppercase tracking-wider text-[#F3E8FF]">Amount</span>
+          <span id="checkoutItemPrice" class="font-extrabold text-xl mt-0.5">Rs. 10,000</span>
+        </div>
+      </div>
+
+      <!-- Modal Body -->
+      <div class="p-6 space-y-5" id="checkoutModalBody">
+        <div>
+          <h4 class="font-bold text-base text-[#1a0533]">Select Payment Method</h4>
+          <p class="text-xs text-outline font-semibold mt-1">Choose your preferred mobile payment wallet</p>
+        </div>
+
+        <!-- Payment Options -->
+        <div class="space-y-3">
+          
+          <!-- JazzCash Option -->
+          <div onclick="selectCheckoutMethod('jazzcash')" id="pay-opt-jazzcash" class="border-2 border-gray-100 rounded-2xl p-4 flex items-center justify-between cursor-pointer transition-all duration-200 hover:border-primary/30">
+            <div class="flex items-center gap-3">
+              <div class="w-12 h-12 bg-[#E51C24] rounded-2xl flex items-center justify-center text-white font-extrabold text-[11px] uppercase tracking-tighter shadow-sm">
+                Jazz
+              </div>
+              <div>
+                <h5 class="font-bold text-sm text-[#471A70]">JazzCash</h5>
+                <p class="text-[10px] text-outline font-medium mt-0.5">Pay via JazzCash mobile account</p>
+              </div>
+            </div>
+            <!-- Custom Radio Button -->
+            <div id="radio-jazzcash" class="w-5 h-5 rounded-full border-2 border-gray-300 flex items-center justify-center transition-all">
+              <div class="w-2.5 h-2.5 rounded-full bg-primary hidden"></div>
+            </div>
+          </div>
+
+          <!-- Easypaisa Option -->
+          <div onclick="selectCheckoutMethod('easypaisa')" id="pay-opt-easypaisa" class="border-2 border-gray-100 rounded-2xl p-4 flex items-center justify-between cursor-pointer transition-all duration-200 hover:border-primary/30">
+            <div class="flex items-center gap-3">
+              <div class="w-12 h-12 bg-[#008F47] rounded-2xl flex items-center justify-center text-white font-extrabold text-[11px] uppercase tracking-tighter shadow-sm">
+                Easy
+              </div>
+              <div>
+                <h5 class="font-bold text-sm text-[#471A70]">Easypaisa</h5>
+                <p class="text-[10px] text-outline font-medium mt-0.5">Pay via Easypaisa mobile account</p>
+              </div>
+            </div>
+            <!-- Custom Radio Button -->
+            <div id="radio-easypaisa" class="w-5 h-5 rounded-full border-2 border-gray-300 flex items-center justify-center transition-all">
+              <div class="w-2.5 h-2.5 rounded-full bg-primary hidden"></div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Continue Button -->
+        <button id="btn-checkout-continue" onclick="processWalletCheckout()" disabled class="w-full h-12 bg-gray-300 text-gray-500 font-bold rounded-2xl transition-all flex items-center justify-center gap-1.5 text-sm cursor-not-allowed">
+          Continue →
+        </button>
+
+        <!-- Cancel Link -->
+        <div class="text-center">
+          <button onclick="closeWalletCheckout()" class="text-xs text-outline font-bold hover:text-primary active:scale-95 transition-transform">
+            Cancel
+          </button>
+        </div>
+      </div>
+
+      <!-- Checkout inputs screen (Mpin / Phone) - Appears after clicking Continue -->
+      <div class="p-6 space-y-5 hidden" id="checkoutInputsBody">
+        <div class="space-y-4">
+          <!-- Phone Number -->
+          <div class="space-y-1">
+            <label class="text-[10px] font-bold text-[#726580] uppercase tracking-wider">Wallet Account Number</label>
+            <div class="relative flex items-center bg-gray-50 border border-gray-200 rounded-xl px-4 h-12">
+              <span class="material-symbols-outlined text-outline text-lg mr-2">phone_iphone</span>
+              <input id="checkoutPhone" type="tel" class="bg-transparent border-none focus:ring-0 text-xs w-full text-on-background placeholder:text-outline/40 font-bold" value="03007654242"/>
+            </div>
+          </div>
+
+          <!-- MPIN -->
+          <div class="space-y-1">
+            <label class="text-[10px] font-bold text-[#726580] uppercase tracking-wider">Secure 4-Digit MPIN</label>
+            <div class="relative flex items-center bg-gray-50 border border-gray-200 rounded-xl px-4 h-12">
+              <span class="material-symbols-outlined text-outline text-lg mr-2">lock</span>
+              <input id="checkoutMpin" type="password" maxlength="4" placeholder="••••" class="bg-transparent border-none focus:ring-0 text-xs w-full text-on-background placeholder:text-outline/40 font-bold tracking-[0.5em]"/>
+            </div>
+          </div>
+        </div>
+
+        <button onclick="submitCheckoutPayment()" class="w-full h-12 rounded-xl bg-primary text-white font-bold text-xs flex items-center justify-center gap-2 active:scale-95 transition-transform shadow-lg">
+          Pay Now
+        </button>
+
+        <div class="text-center">
+          <button onclick="backToMethodSelection()" class="text-xs text-outline font-bold hover:text-primary active:scale-95 transition-transform">
+            ← Back
+          </button>
+        </div>
+      </div>
+
+      <!-- Processing State -->
+      <div id="processingState" class="hidden flex flex-col items-center justify-center py-10 px-6 space-y-3">
+        <div class="w-10 h-10 border-4 border-primary border-t-transparent rounded-full animate-spin"></div>
+        <p class="text-xs font-bold text-[#471A70]">Connecting to secure wallet API...</p>
+        <p class="text-[10px] text-outline">Please check your phone for the push authorization prompt.</p>
+      </div>
+
+      <!-- Success State -->
+      <div id="successState" class="hidden flex flex-col items-center justify-center py-10 px-6 space-y-3 text-center">
+        <span class="material-symbols-outlined text-5xl text-green-500 animate-bounce" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+        <p class="text-sm font-extrabold text-[#471A70]">Payment Successful!</p>
+        <p class="text-xs text-outline">Receipt and invoice sent to your email.</p>
+        <button onclick="closeWalletCheckout()" class="w-full h-10 rounded-xl bg-primary text-white font-bold text-xs mt-3">Done</button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Bottom Navigation Bar Placeholder -->
+  <nav id="bottom-nav"></nav>
+
+  <script>
+    let selectedWallet = 'jazzcash';
+    let selectedCheckoutMethodId = null;
+    let checkoutPrice = 0;
+
+    function selectPrimaryWallet(walletId) {
+      selectedWallet = walletId;
+      
+      const jcCard = document.getElementById('wallet-card-jazzcash');
+      const epCard = document.getElementById('wallet-card-easypaisa');
+      const jcBadge = document.getElementById('badge-jazzcash');
+      const epBadge = document.getElementById('badge-easypaisa');
+      const jcIcon = jcCard.querySelector('.material-symbols-outlined');
+      const epIcon = epCard.querySelector('.material-symbols-outlined');
+
+      if (walletId === 'jazzcash') {
+        jcCard.className = "w-full h-32 rounded-2xl bg-gradient-to-br from-neutral-900 via-neutral-800 to-red-950 p-4 flex flex-col justify-between text-white relative overflow-hidden border-2 border-primary cursor-pointer active:scale-[0.98] transition-all";
+        epCard.className = "w-full h-32 rounded-2xl bg-gradient-to-br from-emerald-950 via-emerald-800 to-green-900 p-4 flex flex-col justify-between text-white relative overflow-hidden border border-white/20 cursor-pointer active:scale-[0.98] transition-all";
+        jcBadge.classList.remove('hidden');
+        epBadge.classList.add('hidden');
+        jcIcon.textContent = 'check_circle';
+        jcIcon.className = 'material-symbols-outlined text-red-500 text-lg';
+        epIcon.textContent = 'circle';
+        epIcon.className = 'material-symbols-outlined text-green-400 text-lg opacity-40';
+      } else {
+        jcCard.className = "w-full h-32 rounded-2xl bg-gradient-to-br from-neutral-900 via-neutral-800 to-red-950 p-4 flex flex-col justify-between text-white relative overflow-hidden border border-white/20 cursor-pointer active:scale-[0.98] transition-all";
+        epCard.className = "w-full h-32 rounded-2xl bg-gradient-to-br from-emerald-950 via-emerald-800 to-green-900 p-4 flex flex-col justify-between text-white relative overflow-hidden border-2 border-primary cursor-pointer active:scale-[0.98] transition-all";
+        jcBadge.classList.add('hidden');
+        epBadge.classList.remove('hidden');
+        jcIcon.textContent = 'circle';
+        jcIcon.className = 'material-symbols-outlined text-red-500 text-lg opacity-40';
+        epIcon.textContent = 'check_circle';
+        epIcon.className = 'material-symbols-outlined text-green-400 text-lg';
+      }
+    }
+
+    function switchProfileTab(tabId) {
+      ['about', 'jobs', 'billing', 'culture'].forEach(t => {
+        const content = document.getElementById('content-' + t);
+        const btn = document.getElementById('tab-' + t);
+        if (content) content.classList.add('hidden');
+        if (btn) {
+          btn.className = "flex-1 py-2 rounded-xl text-xs font-bold text-outline transition-all duration-300";
+        }
+      });
+
+      const activeContent = document.getElementById('content-' + tabId);
+      const activeBtn = document.getElementById('tab-' + tabId);
+      if (activeContent) activeContent.classList.remove('hidden');
+      if (activeBtn) {
+        activeBtn.className = "flex-1 py-2 rounded-xl text-xs font-bold bg-primary text-white transition-all duration-300";
+      }
+    }
+
+    // Checkout Modal Logic
+    function openWalletCheckout(price, itemName, categoryName) {
+      checkoutPrice = price;
+      document.getElementById('checkoutCategoryName').textContent = categoryName || 'UPGRADE TO PREMIUM';
+      document.getElementById('checkoutItemName').textContent = itemName;
+      document.getElementById('checkoutItemPrice').textContent = 'Rs. ' + price.toLocaleString();
+      
+      // Reset views
+      document.getElementById('checkoutModalBody').classList.remove('hidden');
+      document.getElementById('checkoutInputsBody').classList.add('hidden');
+      document.getElementById('processingState').classList.add('hidden');
+      document.getElementById('successState').classList.add('hidden');
+      
+      // Reset selection
+      selectedCheckoutMethodId = null;
+      ['jazzcash', 'easypaisa'].forEach(m => {
+        const optionEl = document.getElementById(`pay-opt-${m}`);
+        const radioEl = document.querySelector(`#radio-${m} > div`);
+        const outerRadio = document.getElementById(`radio-${m}`);
+        
+        optionEl.className = "border-2 border-gray-100 rounded-2xl p-4 flex items-center justify-between cursor-pointer transition-all duration-200 hover:border-primary/30";
+        radioEl.classList.add('hidden');
+        outerRadio.className = "w-5 h-5 rounded-full border-2 border-gray-300 flex items-center justify-center transition-all";
+      });
+
+      // Disable continue button
+      const continueBtn = document.getElementById('btn-checkout-continue');
+      continueBtn.disabled = true;
+      continueBtn.className = "w-full h-12 bg-gray-300 text-gray-500 font-bold rounded-2xl transition-all flex items-center justify-center gap-1.5 text-sm cursor-not-allowed";
+
+      const modal = document.getElementById('checkoutModal');
+      modal.classList.remove('hidden');
+    }
+
+    function closeWalletCheckout() {
+      const modal = document.getElementById('checkoutModal');
+      modal.classList.add('hidden');
+    }
+
+    function selectCheckoutMethod(method) {
+      selectedCheckoutMethodId = method;
+
+      ['jazzcash', 'easypaisa'].forEach(m => {
+        const optionEl = document.getElementById(`pay-opt-${m}`);
+        const radioEl = document.querySelector(`#radio-${m} > div`);
+        const outerRadio = document.getElementById(`radio-${m}`);
+
+        if (m === method) {
+          optionEl.className = "border-2 border-primary bg-primary/5 rounded-2xl p-4 flex items-center justify-between cursor-pointer transition-all duration-200";
+          radioEl.classList.remove('hidden');
+          outerRadio.className = "w-5 h-5 rounded-full border-2 border-primary flex items-center justify-center transition-all";
+        } else {
+          optionEl.className = "border-2 border-gray-100 rounded-2xl p-4 flex items-center justify-between cursor-pointer transition-all duration-200 hover:border-primary/30";
+          radioEl.classList.add('hidden');
+          outerRadio.className = "w-5 h-5 rounded-full border-2 border-gray-300 flex items-center justify-center transition-all";
+        }
+      });
+
+      // Enable continue button
+      const continueBtn = document.getElementById('btn-checkout-continue');
+      continueBtn.disabled = false;
+      continueBtn.className = "w-full h-12 bg-primary text-white font-bold rounded-2xl transition-all flex items-center justify-center gap-1.5 text-sm shadow-md active:scale-95";
+    }
+
+    function processWalletCheckout() {
+      // Transition to account details entry
+      document.getElementById('checkoutModalBody').classList.add('hidden');
+      document.getElementById('checkoutInputsBody').classList.remove('hidden');
+      
+      const phoneInput = document.getElementById('checkoutPhone');
+      if (selectedCheckoutMethodId === 'jazzcash') {
+        phoneInput.value = "03007654242";
+      } else {
+        phoneInput.value = "03129876543";
+      }
+    }
+
+    function backToMethodSelection() {
+      document.getElementById('checkoutInputsBody').classList.add('hidden');
+      document.getElementById('checkoutModalBody').classList.remove('hidden');
+    }
+
+    function submitCheckoutPayment() {
+      const mpin = document.getElementById('checkoutMpin').value;
+
+      if (!mpin || mpin.length < 4) {
+        alert("Please enter your secure 4-digit MPIN to authorize the wallet payment.");
+        return;
+      }
+
+      document.getElementById('checkoutInputsBody').classList.add('hidden');
+      
+      // Show loader
+      const loader = document.getElementById('processingState');
+      loader.classList.remove('hidden');
+      loader.querySelector('p').textContent = `Authorizing Rs ${checkoutPrice.toLocaleString()} via ${selectedCheckoutMethodId === 'jazzcash' ? 'JazzCash' : 'EasyPaisa'}...`;
+
+      setTimeout(() => {
+        // Show success state
+        loader.classList.add('hidden');
+        document.getElementById('successState').classList.remove('hidden');
+        
+        // Vibrate if supported
+        if (window.navigator.vibrate) {
+          window.navigator.vibrate([100, 50, 100]);
+        }
+      }, 2000);
+    }
+  </script>
+</body>
+</html>

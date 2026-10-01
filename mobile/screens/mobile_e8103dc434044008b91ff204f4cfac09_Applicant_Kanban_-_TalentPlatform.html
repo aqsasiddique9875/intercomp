@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<title>TalentPlatform | Recruiter Kanban</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+            overscroll-behavior-y: none;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.35);
+            backdrop-filter: blur(28px);
+            -webkit-backdrop-filter: blur(28px);
+            border: 0.5px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 12px 40px 0 rgba(71, 26, 112, 0.15);
+        }
+
+        .liquid-bg {
+            background: linear-gradient(135deg, #f9f9ff 0%, #e7eeff 50%, #fbd7ff 100%);
+            min-height: 100vh;
+        }
+
+        .active-tab-indicator {
+            view-transition-name: active-tab;
+        }
+
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        .tap-target {
+            min-height: 44px;
+            min-width: 44px;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-container": "#00842f",
+                        "on-secondary-fixed": "#001c39",
+                        "card-gradient": "linear-gradient(135deg, #4D9EFA 0%, #BF7DF5 100%)",
+                        "on-tertiary": "#ffffff",
+                        "surface": "#f9f9ff",
+                        "on-background": "#471A70",
+                        "glass-thick": "rgba(255, 255, 255, 0.8)",
+                        "surface-container-highest": "#dbe3f6",
+                        "surface-container-high": "#e0e8fb",
+                        "surface-container": "#e7eeff",
+                        "on-primary-fixed": "#330044",
+                        "secondary": "#0060ab",
+                        "on-error": "#ffffff",
+                        "primary": "#8731a3",
+                        "on-surface": "#141c29",
+                        "tertiary-fixed-dim": "#47e266",
+                        "surface-container-lowest": "#ffffff",
+                        "on-secondary": "#ffffff",
+                        "on-primary": "#ffffff",
+                        "outline-variant": "#d2c1d2",
+                        "glass-fill": "rgba(255, 255, 255, 0.35)",
+                        "on-secondary-container": "#003868",
+                        "surface-tint": "#8d37a9",
+                        "error": "#FF453A",
+                        "tertiary": "#006823",
+                        "inverse-surface": "#29313f",
+                        "tertiary-fixed": "#6cff82",
+                        "surface-container-low": "#f0f3ff",
+                        "on-tertiary-fixed": "#002106",
+                        "inverse-primary": "#f0b0ff",
+                        "on-tertiary-container": "#e6ffe0",
+                        "glass-border": "rgba(255, 255, 255, 0.6)",
+                        "on-surface-variant": "#4f4350",
+                        "inverse-on-surface": "#ecf1ff",
+                        "primary-fixed": "#fbd7ff",
+                        "secondary-fixed": "#d3e3ff",
+                        "on-primary-container": "#fff5fb",
+                        "error-container": "#ffdad6",
+                        "outline": "#817381",
+                        "on-primary-fixed-variant": "#72188f",
+                        "surface-bright": "#f9f9ff",
+                        "background": "#f9f9ff",
+                        "surface-dim": "#d2daed",
+                        "secondary-fixed-dim": "#a3c9ff",
+                        "gold": "#FFD60A",
+                        "on-secondary-fixed-variant": "#004883",
+                        "secondary-container": "#54a3ff",
+                        "primary-container": "#a34cbe",
+                        "surface-variant": "#dbe3f6",
+                        "orange": "#FF9F0A",
+                        "on-error-container": "#93000a",
+                        "primary-fixed-dim": "#f0b0ff",
+                        "on-tertiary-fixed-variant": "#00531a"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "2xl": "1rem",
+                        "3xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "desktop-margin": "64px",
+                        "safe-top": "44px",
+                        "safe-bottom": "34px",
+                        "mobile-margin": "20px",
+                        "max-width": "1280px",
+                        "desktop-gutter": "24px",
+                        "mobile-gutter": "16px",
+                        "base": "8px"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["Inter"],
+                        "body-md-mobile": ["Inter"],
+                        "label-caps-mobile": ["Inter"],
+                        "display-xl-mobile": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["28px", {"lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "body-md-mobile": ["15px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                        "label-caps-mobile": ["12px", {"lineHeight": "1.0", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "display-xl-mobile": ["34px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "800"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+    body {
+      background-color: #DCE4F7;
+      -webkit-tap-highlight-color: transparent;
+      font-family: 'Inter', sans-serif;
+      color: #471A70;
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="antialiased overflow-x-hidden pb-32">
+<!-- TopAppBar -->
+<header class="fixed top-0 left-0 right-0 max-w-md mx-auto w-full z-50 bg-white/45 backdrop-blur-[28px] border-b border-white/50 shadow-[0_4px_20px_0_rgba(163,76,190,0.06)] flex justify-between items-center px-5 h-[64px]">
+<div class="flex items-center gap-3">
+<div onclick="window.parent.postMessage({ type: 'NAVIGATE', view: 'company-profile' }, '*')" class="w-9 h-9 rounded-full border border-white/80 overflow-hidden shadow-sm cursor-pointer active:scale-95 transition-transform">
+<img alt="Recruiter Avatar" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDIt827WcUwR9RknikfNiRLVtA9sbTUiLtd0n3jB3z6G-LcVgOH2Q1LSJ95e5CzDJIpIJ5MW47QlldiC3oQ47YxdkpT7yxVIKybu0-SFEgAGF_-PGnr3lHEC2mUOiChHzQlVzeJegHnlKaP42BDNxDuJvyd11-d5rEyg9kglcvwsUMj8OQcfs2DaPaRtXqQYpTnlk1DECitBMwFvdSLRPmO34dRSZsAKs6xpqv5VeKZ0k2W_RiT0X9pBx2iOKk789tArk1DHtKiKeaq"/>
+</div>
+<h1 class="font-bold text-base text-primary">RecruiterPro</h1>
+</div>
+<div class="flex items-center gap-2">
+<button class="w-9 h-9 rounded-full bg-white/40 flex items-center justify-center text-[#471A70] shadow-sm"><span class="material-symbols-outlined text-[20px]">notifications</span></button>
+<button class="w-9 h-9 rounded-full bg-white/40 flex items-center justify-center text-[#471A70] shadow-sm"><span class="material-symbols-outlined text-[20px]">settings</span></button>
+</div>
+</header>
+<main class="pt-20 pb-40 max-w-md mx-auto">
+<!-- Search Bar -->
+<section class="px-mobile-margin mb-4">
+  <div class="relative flex items-center glass-card rounded-full px-4 h-11">
+    <span class="material-symbols-outlined text-outline text-[18px] mr-2">search</span>
+    <input id="kanbanSearchInput" class="bg-transparent border-none focus:ring-0 text-xs w-full placeholder:text-outline/60 text-on-background" placeholder="Search candidates by name or role..." type="text"/>
+  </div>
+</section>
+<!-- Kanban Tab Bar -->
+<div class="sticky top-[64px] z-40 bg-transparent py-4 no-scrollbar overflow-x-auto max-w-md mx-auto w-full">
+<div class="flex gap-4 px-mobile-margin">
+<!-- Applied (Active) -->
+<button id="tab-btn-applied" onclick="switchStage('applied')" class="relative flex-shrink-0 px-6 py-2.5 rounded-full bg-primary text-white text-xs font-bold shadow-[0_4px_12px_rgba(135,49,163,0.25)] transition-all duration-300 active:scale-95 tap-target">
+<span class="font-bold">Applied</span>
+</button>
+<!-- Screened -->
+<button id="tab-btn-screened" onclick="switchStage('screened')" class="relative flex-shrink-0 px-6 py-2.5 rounded-full bg-white/50 border border-white/70 text-outline text-xs font-bold opacity-70 transition-all duration-300 active:scale-95 tap-target">
+<span class="font-bold">Screened</span>
+</button>
+<!-- Interview -->
+<button id="tab-btn-interview" onclick="switchStage('interview')" class="relative flex-shrink-0 px-6 py-2.5 rounded-full bg-white/50 border border-white/70 text-outline text-xs font-bold opacity-70 transition-all duration-300 active:scale-95 tap-target">
+<span class="font-bold">Interview</span>
+</button>
+<!-- Offered -->
+<button id="tab-btn-offered" onclick="switchStage('offered')" class="relative flex-shrink-0 px-6 py-2.5 rounded-full bg-white/50 border border-white/70 text-outline text-xs font-bold opacity-70 transition-all duration-300 active:scale-95 tap-target">
+<span class="font-bold">Offered</span>
+</button>
+</div>
+</div>
+<!-- Lane Content: Applied -->
+<div id="candidates-list-container" class="px-mobile-margin mt-2 space-y-4">
+  <!-- Dynamically Populated -->
+</div>
+</main>
+<!-- Bottom Navigation Bar Placeholder -->
+<nav id="bottom-nav"></nav>
+<!-- Micro-interaction Script -->
+<script>
+        // Smooth scroll for the tab bar
+        const scrollContainer = document.querySelector('.no-scrollbar');
+        let isDown = false;
+        let startX;
+        let scrollLeft;
+
+        scrollContainer.addEventListener('mousedown', (e) => {
+            isDown = true;
+            startX = e.pageX - scrollContainer.offsetLeft;
+            scrollLeft = scrollContainer.scrollLeft;
+        });
+        scrollContainer.addEventListener('mouseleave', () => {
+            isDown = false;
+        });
+        scrollContainer.addEventListener('mouseup', () => {
+            isDown = false;
+        });
+        scrollContainer.addEventListener('mousemove', (e) => {
+            if (!isDown) return;
+            e.preventDefault();
+            const x = e.pageX - scrollContainer.offsetLeft;
+            const walk = (x - startX) * 2;
+            scrollContainer.scrollLeft = scrollLeft - walk;
+        });
+
+        // Simple haptic feedback simulation on card tap
+        document.querySelectorAll('.glass-card').forEach(card => {
+            card.addEventListener('click', () => {
+                card.style.transform = 'scale(0.98)';
+                setTimeout(() => {
+                    card.style.transform = 'scale(1)';
+                }, 100);
+            });
+        });
+
+        const candidatesData = [
+            {
+                name: 'Alex Sterling',
+                role: 'Senior UX Designer',
+                trust: '94%',
+                image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuC4_R1EsHqIRHOpS7VpRtg3DXMMOH5jDzigS6BdfwQdLdZo8snCQmjVu6O-6xipQa13ydT9-sPmB0gVQ4-XdED0gF0-C52S6_p_q_ddkit09Zqbo-AU5-fjKUQ_Ryh7k_pyEOjLZUjQLWO29NnbLGxf9n9zkRDVSDy0-0ENiEQn6WI5etVGoffb34ZjPysK8p7uSevNrNIPLt_4bWvaiCyHdo-jNOjXYzXE_TSQg0HMQUfq4WFA2Nh9qorkTWG1ff0c74p0IJDhbtiU',
+                skills: ['Figma', 'SwiftUI'],
+                stage: 'applied'
+            },
+            {
+                name: 'Jordan Wei',
+                role: 'Lead iOS Engineer',
+                trust: '88%',
+                image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDtMvaqIxvUooxczaNdQm1Dw2IaokNWNMn4SGdU6kDOxjokrhxgwiCqVRuvzaZ9IqYy7Cpic3RwrsUw2yFOOlvydUdtzph1M-410OCZ4o0FDZrGdtjyAoZ-iYMY50uKGeYsj-wcenYWoilEijcJsQvudbQ6nwO_Z_ca4wKOvHkWgfuem73aPQ4AYHH09BMFlidkEboUWpJvZDTfd4IOlqqwxnu1a6tPZ3573JAPQXZlRohuu3OXXl27UCtFc8EmIcSQIvaCZTwYyhq4',
+                skills: ['Combine', 'Unit Testing'],
+                stage: 'screened'
+            },
+            {
+                name: 'Elena Rodriguez',
+                role: 'Product Manager',
+                trust: '91%',
+                image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBfixS27M9_Fawpew2ITxHhMYZM4xeW3IMRE92LlGnr0GWnZt717q1Yoo48xKlulwrW8AixVyyfRIA8YtXcgwrFhO9biva0vGBT5YKp0cZnONSPNhzyq2GkxtwVpnQOXe9weXfP3DstVpkGzmsQgLV8MBmlsCGgwKUw-5tXYHb16Zbpia81EZyN8zuIApdVqoBkkNBLioAB__EmObILBNSF14ZkxQe0mWl8fngR8VmVEIqCk28VZBYBQYioSYH_u51wuw53zzjZe44N',
+                skills: ['Agile', 'Growth'],
+                stage: 'interview'
+            },
+            {
+                name: 'Marcus Chen',
+                role: 'Full Stack Developer',
+                trust: '85%',
+                image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBAGqv6rsSKMVCuukUaKmOK_Mcl-293Jmr2TZr01NxmvA9GlvRqfkB5usdIe9ANJCSmWceZ-eeZ6UoU81TUj8UURofLYfiGDNo-vUFKILyYLXZ9Zp9qUA-SJ2pVxIUaBfHZi6Ip5fA5HlmgtCFSxl09FH_KiDljQD9FhvMnGSWf6UbdEbVRdjA60EoFXvumz-M0qFNSI-0AwFCMX7HJ2nDESkAE7NfiIt_ffRmiBnQZ8FaAAChOBipNKN7sWriFO3ru9cOBpSiBlLG1',
+                skills: ['Node.js', 'React'],
+                stage: 'offered'
+            }
+        ];
+
+        let currentStage = 'applied';
+
+        function renderCandidates() {
+            const container = document.getElementById('candidates-list-container');
+            if (!container) return;
+
+            const searchInput = document.getElementById('kanbanSearchInput');
+            const query = searchInput ? searchInput.value.toLowerCase().trim() : "";
+
+            const filtered = candidatesData.filter(c => {
+                const matchesStage = c.stage === currentStage;
+                const matchesQuery = c.name.toLowerCase().includes(query) || c.role.toLowerCase().includes(query);
+                return matchesStage && matchesQuery;
+            });
+
+            if (filtered.length === 0) {
+                container.innerHTML = `
+                    <div class="glass-card rounded-3xl p-8 text-center text-[#726580] space-y-2 mt-4 w-full">
+                        <span class="material-symbols-outlined text-4xl text-outline/50">group_off</span>
+                        <p class="text-xs font-bold">No candidates found in this stage.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = filtered.map(c => `
+                <div class="glass-card rounded-3xl p-5 flex flex-col gap-4 animate-in fade-in slide-in-from-bottom-4 duration-300">
+                    <div class="flex items-start justify-between">
+                        <div class="flex gap-4">
+                            <div class="w-14 h-14 rounded-2xl overflow-hidden shadow-sm">
+                                <img alt="${c.name}" class="w-full h-full object-cover" src="${c.image}"/>
+                            </div>
+                            <div class="flex flex-col justify-center">
+                                <h3 class="font-bold text-on-background text-[17px]">${c.name}</h3>
+                                <p class="text-on-surface-variant text-sm font-medium">${c.role}</p>
+                            </div>
+                        </div>
+                        <button onclick="event.stopPropagation(); viewCandidateProfile('${c.name}')" class="tap-target flex items-center justify-center text-on-surface-variant hover:text-primary transition-colors">
+                            <span class="material-symbols-outlined">more_horiz</span>
+                        </button>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <div class="bg-glass-thick px-3 py-1.5 rounded-full border border-glass-border flex items-center gap-1.5">
+                            <span class="material-symbols-outlined text-[16px] text-tertiary" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+                            <span class="text-tertiary font-bold text-[11px] tracking-wide">${c.trust} TRUST</span>
+                        </div>
+                        ${c.skills.map(skill => `
+                            <span class="bg-secondary-container/20 text-on-secondary-container px-3 py-1.5 rounded-lg font-bold text-[11px] border border-secondary-container/30 uppercase tracking-widest">${skill}</span>
+                        `).join('')}
+                    </div>
+                </div>
+            `).join('');
+
+            // Bind click animations on cards
+            container.querySelectorAll('.glass-card').forEach(card => {
+                card.addEventListener('click', () => {
+                    card.style.transform = 'scale(0.98)';
+                    setTimeout(() => {
+                        card.style.transform = 'scale(1)';
+                    }, 100);
+                });
+            });
+        }
+
+        function switchStage(stage) {
+            currentStage = stage;
+            
+            const stages = ['applied', 'screened', 'interview', 'offered'];
+            stages.forEach(s => {
+                const btn = document.getElementById(`tab-btn-${s}`);
+                if (!btn) return;
+                if (s === stage) {
+                    btn.className = "relative flex-shrink-0 px-6 py-2.5 rounded-full bg-primary text-white text-xs font-bold shadow-[0_4px_12px_rgba(135,49,163,0.25)] transition-all duration-300 active:scale-95 tap-target";
+                } else {
+                    btn.className = "relative flex-shrink-0 px-6 py-2.5 rounded-full bg-white/50 border border-white/70 text-outline text-xs font-bold opacity-70 transition-all duration-300 active:scale-95 tap-target";
+                }
+            });
+
+            renderCandidates();
+        }
+
+        // Initialize rendering
+        document.addEventListener('DOMContentLoaded', () => {
+            renderCandidates();
+        });
+
+        // Search Input listener
+        const searchInput = document.getElementById('kanbanSearchInput');
+        if (searchInput) {
+            searchInput.addEventListener('input', () => {
+                renderCandidates();
+            });
+        }
+
+        function viewCandidateProfile(name) {
+            const candidates = {
+                'Alex Sterling': {
+                    name: 'Alex Sterling',
+                    role: 'Senior UX Designer',
+                    experience: '8+ Years Experience',
+                    trust: '94%',
+                    image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDH9bTnLipxl7To_K2cA8C0iqFazYNoF2VfrFWmwkl2cse4NjXm2SV2SSrPyabKfjybh19k9LvNDHEU1yEaHNeA1LQnT-ZrrJN9ycEPmSF0XibfW9x-E2qoqeA7GC-amZj-ADgbVUBndTPQDQ1pD3lJpmTW8iZaw3Xkgzeq68WUg_hfLllu5n2XWBT9URiUmYR1LQ6z0jQwO1Ox8neTS1-m4xsAYjsjKmNNesOkcebrQFRtH-N2hwEV-SWWK4hd-qngbJjw5JSMvmzL',
+                    skills: ['Figma', 'SwiftUI', 'Design Systems', 'HCD'],
+                    education: 'B.S. Computer Science',
+                    school: 'Stanford University',
+                    certification: 'Advanced HCD Certification',
+                    certifier: 'Nielsen Norman Group',
+                    integrity: { antiCheat: 'Pass', idMatch: 'Pass', assessment: '98/100' },
+                    techSampleName: 'binary_search.py',
+                    techSampleCode: `def binary_search(arr, target):\n    low = 0\n    high = len(arr) - 1\n    \n    while low <= high:\n        mid = (low + high) // 2\n        if arr[mid] == target:\n            return mid\n        elif arr[mid] < target:\n            low = mid + 1\n        else:\n            high = mid - 1\n            \n    return -1`
+                },
+                'Jordan Wei': {
+                    name: 'Jordan Wei',
+                    role: 'Lead iOS Engineer',
+                    experience: '6+ Years Experience',
+                    trust: '88%',
+                    image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDtMvaqIxvUooxczaNdQm1Dw2IaokNWNMn4SGdU6kDOxjokrhxgwiCqVRuvzaZ9IqYy7Cpic3RwrsUw2yFOOlvydUdtzph1M-410OCZ4o0FDZrGdtjyAoZ-iYMY50uKGeYsj-wcenYWoilEijcJsQvudbQ6nwO_Z_ca4wKOvHkWgfuem73aPQ4AYHH09BMFlidkEboUWpJvZDTfd4IOlqqwxnu1a6tPZ3573JAPQXZlRohuu3OXXl27UCtFc8EmIcSQIvaCZTwYyhq4',
+                    skills: ['Swift', 'Combine', 'UIKit', 'XCTest'],
+                    education: 'B.S. Electrical Engineering',
+                    school: 'Tsinghua University',
+                    certification: 'iOS Developer Associate',
+                    certifier: 'Apple Developer Academy',
+                    integrity: { antiCheat: 'Pass', idMatch: 'Pass', assessment: '92/100' },
+                    techSampleName: 'Publisher.swift',
+                    techSampleCode: `import Combine\n\nfunc fetchUserData() -> AnyPublisher<User, Error> {\n    let url = URL(string: "https://api.domain.com/user")!\n    return URLSession.shared.dataTaskPublisher(for: url)\n        .map(\\.data)\n        .decode(type: User.self, decoder: JSONDecoder())\n        .receive(on: DispatchQueue.main)\n        .eraseToAnyPublisher()\n}`
+                },
+                'Elena Rodriguez': {
+                    name: 'Elena Rodriguez',
+                    role: 'Product Manager',
+                    experience: '7+ Years Experience',
+                    trust: '91%',
+                    image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBfixS27M9_Fawpew2ITxHhMYZM4xeW3IMRE92LlGnr0GWnZt717q1Yoo48xKlulwrW8AixVyyfRIA8YtXcgwrFhO9biva0vGBT5YKp0cZnONSPNhzyq2GkxtwVpnQOXe9weXfP3DstVpkGzmsQgLV8MBmlsCGgwKUw-5tXYHb16Zbpia81EZyN8zuIApdVqoBkkNBLioAB__EmObILBNSF14ZkxQe0mWl8fngR8VmVEIqCk28VZBYBQYioSYH_u51wuw53zzjZe44N',
+                    skills: ['Product Strategy', 'Agile', 'Scrum', 'Product Analytics'],
+                    education: 'M.S. Product Management',
+                    school: 'Carnegie Mellon University',
+                    certification: 'Certified Scrum Product Owner',
+                    certifier: 'Scrum Alliance',
+                    integrity: { antiCheat: 'Pass', idMatch: 'Pass', assessment: '95/100' },
+                    techSampleName: 'roadmap_spec.yaml',
+                    techSampleCode: `theme: "Q3 Core Feature Release"\ninitiatives:\n  - name: "Interactive Skill Assessments"\n    impact: "High"\n    effort: "Medium"\n    milestones:\n      - "Verify biometric identity setup"\n      - "Interactive Python/SQL sandboxing"\n      - "Publish instant results dashboard"`
+                },
+                'Marcus Chen': {
+                    name: 'Marcus Chen',
+                    role: 'Full Stack Developer',
+                    experience: '5+ Years Experience',
+                    trust: '85%',
+                    image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBAGqv6rsSKMVCuukUaKmOK_Mcl-293Jmr2TZr01NxmvA9GlvRqfkB5usdIe9ANJCSmWceZ-eeZ6UoU81TUj8UURofLYfiGDNo-vUFKILyYLXZ9Zp9qUA-SJ2pVxIUaBfHZi6Ip5fA5HlmgtCFSxl09FH_KiDljQD9FhvMnGSWf6UbdEbVRdjA60EoFXvumz-M0qFNSI-0AwFCMX7HJ2nDESkAE7NfiIt_ffRmiBnQZ8FaAAChOBipNKN7sWriFO3ru9cOBpSiBlLG1',
+                    skills: ['Node.js', 'React', 'MongoDB', 'AWS'],
+                    education: 'B.S. Software Engineering',
+                    school: 'University of Waterloo',
+                    certification: 'AWS Certified Developer',
+                    certifier: 'Amazon Web Services',
+                    integrity: { antiCheat: 'Pass', idMatch: 'Pass', assessment: '89/100' },
+                    techSampleName: 'server.js',
+                    techSampleCode: `const express = require('express');\nconst app = express();\n\napp.use(express.json());\napp.post('/api/verify', async (req, res) => {\n  const { candidateId } = req.body;\n  const verification = await db.verify(candidateId);\n  res.json({ success: true, verification });\n});`
+                }
+            };
+
+            const selected = candidates[name];
+            if (selected) {
+                localStorage.setItem('selectedCandidate', JSON.stringify(selected));
+                window.parent.postMessage({ type: 'NAVIGATE', view: 'company-candidate-details' }, '*');
+            }
+        }
+    </script>
+</body></html>

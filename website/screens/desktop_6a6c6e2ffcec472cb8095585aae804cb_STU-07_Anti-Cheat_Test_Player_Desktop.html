@@ -1,0 +1,956 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+  <script>
+    if (window.self !== window.top) {
+      const style = document.createElement('style');
+      style.innerHTML = `
+        header, nav, aside, 
+        .SideNavBar, .TopNavBar, 
+        #SideNavBar, #TopNavBar {
+          display: none !important;
+        }
+        main, .main-content {
+          margin-left: 0 !important;
+          padding-top: 1.5rem !important;
+        }
+        main.ml-64, main.lg\\:ml-64 {
+          margin-left: 0 !important;
+          padding-top: 2rem !important;
+        }
+      `;
+      document.documentElement.appendChild(style);
+    }
+  </script>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SecureTest Portal | STU-07 Exam</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Design System Configuration -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                "surface-tint": "#8d37a9",
+                "primary-fixed": "#fbd7ff",
+                "tertiary-container": "#00842f",
+                "on-tertiary-fixed-variant": "#00531a",
+                "error-container": "#ffdad6",
+                "surface-container-highest": "#dbe3f6",
+                "surface-container-high": "#e0e8fb",
+                "primary": "#8731a3",
+                "on-background": "#141c29",
+                "on-primary-fixed": "#330044",
+                "surface-container": "#e7eeff",
+                "error": "#FF453A",
+                "primary-fixed-dim": "#f0b0ff",
+                "glass-border": "rgba(255, 255, 255, 0.6)",
+                "inverse-surface": "#29313f",
+                "on-surface": "#141c29",
+                "on-primary-container": "#fff5fb",
+                "on-secondary-container": "#003868",
+                "on-error-container": "#93000a",
+                "secondary-container": "#54a3ff",
+                "inverse-on-surface": "#ecf1ff",
+                "orange": "#FF9F0A",
+                "tertiary-fixed-dim": "#47e266",
+                "primary-container": "#a34cbe",
+                "on-tertiary-container": "#e6ffe0",
+                "surface-variant": "#dbe3f6",
+                "background": "#DCE4F7",
+                "outline-variant": "#d2c1d2",
+                "inverse-primary": "#f0b0ff",
+                "on-primary-fixed-variant": "#72188f",
+                "outline": "#817381",
+                "surface-bright": "#f9f9ff",
+                "surface-dim": "#d2daed",
+                "tertiary-fixed": "#6cff82",
+                "glass-fill": "rgba(255, 255, 255, 0.35)",
+                "on-tertiary": "#ffffff",
+                "on-secondary-fixed-variant": "#004883",
+                "on-primary": "#ffffff",
+                "on-surface-variant": "#4f4350",
+                "secondary-fixed": "#d3e3ff",
+                "surface-container-lowest": "#ffffff",
+                "gold": "#FFD60A",
+                "secondary": "#0060ab",
+                "glass-thick": "rgba(255, 255, 255, 0.8)",
+                "tertiary": "#006823",
+                "on-error": "#ffffff",
+                "on-tertiary-fixed": "#002106",
+                "on-secondary-fixed": "#001c39",
+                "secondary-fixed-dim": "#a3c9ff",
+                "surface-container-low": "#f0f3ff",
+                "surface": "#DCE4F7",
+                "on-secondary": "#ffffff",
+                "deep-purple": "#471A70"
+            },
+            "borderRadius": {
+                "DEFAULT": "0.25rem",
+                "lg": "12px",
+                "xl": "16px",
+                "2xl": "24px",
+                "pill": "9999px"
+            },
+            "spacing": {
+                "mobile-margin": "20px",
+                "desktop-margin": "64px",
+                "max-width": "1280px",
+                "desktop-gutter": "24px",
+                "base": "8px"
+            },
+            "fontFamily": {
+                "display": ["Inter", "sans-serif"],
+                "body": ["Inter", "sans-serif"]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+      body {
+        background-color: #DCE4F7;
+        color: #471A70;
+        overflow: hidden;
+      }
+
+      .glass-card {
+        background: rgba(255, 255, 255, 0.35);
+        backdrop-filter: blur(28px);
+        -webkit-backdrop-filter: blur(28px);
+        border: 1px solid rgba(255, 255, 255, 0.6);
+        box-shadow: 0 12px 40px 0 rgba(71, 26, 112, 0.08);
+      }
+
+      .glass-thick {
+        background: rgba(255, 255, 255, 0.7);
+        backdrop-filter: blur(32px);
+        border: 1px solid rgba(255, 255, 255, 0.8);
+      }
+
+      .ios-spring {
+        transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      }
+
+      .option-card:hover {
+        transform: translateY(-2px);
+        background: rgba(255, 255, 255, 0.5);
+      }
+
+      .option-card:active {
+        transform: scale(0.98);
+      }
+
+      .timer-glow {
+        box-shadow: 0 0 15px rgba(255, 159, 10, 0.3);
+      }
+
+      .scan-line {
+        position: absolute;
+        width: 100%;
+        height: 2px;
+        background: rgba(74, 222, 128, 0.5);
+        animation: scan 3s linear infinite;
+      }
+
+      @keyframes scan {
+        0% { top: 0; }
+        100% { top: 100%; }
+      }
+
+      .dot-pulse {
+        animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+      }
+
+      @keyframes pulse {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.3; }
+      }
+
+      .custom-scrollbar::-webkit-scrollbar {
+        width: 6px;
+      }
+      .custom-scrollbar::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      .custom-scrollbar::-webkit-scrollbar-thumb {
+        background: rgba(71, 26, 112, 0.2);
+        border-radius: 10px;
+      }
+    </style>
+</head>
+<body class="font-body selection:bg-primary/20">
+<!-- Top Utility Bar & Progress -->
+<header class="fixed top-0 left-0 w-full z-50">
+<div class="w-full h-1.5 bg-white/20">
+<div class="h-full bg-orange timer-glow transition-all duration-1000" id="progress-bar" style="width: 72%;"></div>
+</div>
+<nav class="h-16 flex items-center justify-between px-desktop-margin glass-thick border-b-0">
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-deep-purple font-bold">verified_user</span>
+<span class="font-display text-lg font-bold tracking-tight text-deep-purple uppercase">SecureTest Portal</span>
+</div>
+<div class="h-4 w-[1px] bg-deep-purple/20"></div>
+<div class="flex items-center gap-2 px-3 py-1 bg-tertiary/10 rounded-pill border border-tertiary/20">
+<span class="w-2 h-2 rounded-full bg-tertiary dot-pulse"></span>
+<span class="text-xs font-semibold text-tertiary tracking-wide">SECURE SESSION ACTIVE</span>
+</div>
+</div>
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-orange text-xl">timer</span>
+<span class="font-display font-bold text-xl tabular-nums text-deep-purple" id="timer-text">34:10</span>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 rounded-full hover:bg-black/5 ios-spring">
+<span class="material-symbols-outlined text-deep-purple/60">settings</span>
+</button>
+<button class="p-2 rounded-full hover:bg-black/5 ios-spring">
+<span class="material-symbols-outlined text-deep-purple/60">help</span>
+</button>
+</div>
+</div>
+</nav>
+</header>
+<main class="relative h-[calc(100vh-64px)] mt-16 pt-[30px] pb-4 px-desktop-margin flex gap-desktop-gutter overflow-hidden">
+<!-- Result Button (Absolute positioned at top-right of content screen) -->
+<button id="viewResultBtn" class="absolute top-[30px] right-[40px] px-8 h-12 bg-primary text-white text-sm font-bold rounded-full shadow-md flex items-center gap-2 cursor-pointer z-20 shadow-primary/20 hover:shadow-xl hover:-translate-y-0.5 active:scale-95 transition-all">
+    <span class="material-symbols-outlined text-sm">assessment</span> Result
+</button>
+
+<!-- Left: Question Section -->
+<section class="flex-grow flex flex-col max-w-[800px] h-full justify-between">
+<div class="flex items-center justify-between shrink-0">
+  <div class="flex items-center gap-3">
+    <span class="text-deep-purple font-bold text-xl" id="quiz-title-display">Technical Assessment</span>
+    <span class="text-deep-purple/20">/</span>
+    <span class="text-primary font-bold text-xs bg-primary/15 px-3 py-1 rounded-full border border-primary/20" id="question-progress-badge">Question 1 of 3</span>
+  </div>
+</div>
+
+<div class="flex-grow flex flex-col justify-center min-h-0 overflow-y-auto" id="single-question-container">
+  <!-- Dynamic single question card will be loaded here -->
+</div>
+
+<!-- Bottom Navigation Controls -->
+<div class="flex items-center justify-between gap-4 mt-2 border-t border-white/20 pt-3 shrink-0">
+  <button id="prevBtn" class="px-6 h-12 rounded-full font-bold text-sm text-deep-purple bg-white/40 border border-white/60 hover:bg-white/60 transition-all flex items-center gap-2 ios-spring cursor-pointer">
+    <span class="material-symbols-outlined text-sm">arrow_back</span>
+    Back
+  </button>
+  <button id="skipBtn" class="px-6 h-12 rounded-full font-bold text-sm text-deep-purple/60 hover:bg-black/5 transition-all flex items-center gap-2 ios-spring cursor-pointer">
+    Skip Question
+    <span class="material-symbols-outlined text-sm">redo</span>
+  </button>
+  <button id="nextBtn" class="px-8 h-12 rounded-full bg-primary text-white font-bold text-sm shadow-lg shadow-primary/20 hover:shadow-xl hover:-translate-y-0.5 active:scale-95 transition-all flex items-center gap-2 ios-spring cursor-pointer">
+    <span id="next-btn-text">Save & Next</span>
+    <span class="material-symbols-outlined text-sm" id="next-btn-icon">arrow_forward</span>
+  </button>
+</div>
+</section>
+<!-- Right: Proctoring & Monitoring Section -->
+<aside class="w-96 flex flex-col gap-4 overflow-y-auto pb-4 custom-scrollbar shrink-0 h-full">
+<!-- PIP Monitor Feed -->
+<div class="glass-card rounded-2xl overflow-hidden relative group">
+<div class="absolute top-4 left-4 z-10 flex items-center gap-2 bg-black/40 backdrop-blur-md px-3 py-1.5 rounded-full">
+<span class="w-2 h-2 rounded-full bg-error dot-pulse"></span>
+<span class="text-[10px] font-bold text-white uppercase tracking-widest">Live Feed</span>
+</div>
+<div class="relative w-full aspect-video">
+<div class="scan-line"></div>
+<img alt="User webcam feed monitor" class="w-full h-full object-cover grayscale-[0.3]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDwgra5fBjBClRq_k3UoEtUX-FuTEaplcZXkH1DZ4u9Q5HvQhWfBzM38F3upBCXx3UZe4dLJSRL4W40F7vW1m6KP3wWqj_e8753db1gtspuPLfAFiKhzODN564xJr65BE2SyAKsmyUF3CjHPcqKOnPGtQuDuvhAfGrEfvZ1-pYECfvZckxGVn0rsY7AA_2OZSAVu9iMNDfHwI-P9vDMJ2H4fMxwn3u3RJvPTEMhxhU_0z2tbRMHnCmdzFglSPmQiZBRC9O2SXWTJ6zk"/>
+<!-- Facial Scanning Overlay Graphics -->
+<div class="absolute inset-0 border-[2px] border-tertiary/40 m-8 pointer-events-none">
+<div class="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-tertiary"></div>
+<div class="absolute top-0 right-0 w-4 h-4 border-t-2 border-r-2 border-tertiary"></div>
+<div class="absolute bottom-0 left-0 w-4 h-4 border-b-2 border-l-2 border-tertiary"></div>
+<div class="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-tertiary"></div>
+</div>
+</div>
+<div class="p-4 bg-white/40 flex items-center justify-between border-t border-white/20">
+<div class="flex flex-col">
+<span class="text-[10px] text-deep-purple/60 font-bold uppercase tracking-tighter">Proctor Device</span>
+<span class="text-xs font-medium text-deep-purple">STU-07 Integrated Camera</span>
+</div>
+<div class="flex gap-2">
+<span class="material-symbols-outlined text-tertiary text-sm" style="font-variation-settings: 'FILL' 1;">mic</span>
+<span class="material-symbols-outlined text-tertiary text-sm" style="font-variation-settings: 'FILL' 1;">videocam</span>
+</div>
+</div>
+</div>
+<!-- Flagged Alert Area -->
+<div class="glass-card rounded-2xl p-6 bg-error/5 border-error/30 animate-pulse-subtle">
+<div class="flex items-start gap-4">
+<div class="w-10 h-10 rounded-full bg-error/10 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-error font-bold">warning</span>
+</div>
+<div class="space-y-1">
+<h3 class="text-error font-bold text-sm uppercase tracking-tight">FLAGGED EVENT</h3>
+<p class="text-error/80 text-sm leading-tight font-medium">
+                            Suspicious eye movement detected. Please maintain focus on the screen to avoid automatic session termination.
+                        </p>
+</div>
+</div>
+</div>
+<!-- Monitoring Stats Card -->
+<div class="glass-card rounded-2xl p-6 space-y-4">
+<h4 class="text-xs font-bold text-deep-purple/40 uppercase tracking-widest">Environment Status</h4>
+<div class="space-y-3">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-deep-purple/40 text-lg">face</span>
+<span class="text-sm font-medium text-deep-purple/80">Identity Verified</span>
+</div>
+<span class="material-symbols-outlined text-tertiary text-lg">check_circle</span>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-deep-purple/40 text-lg">volume_up</span>
+<span class="text-sm font-medium text-deep-purple/80">Noise Level</span>
+</div>
+<div class="w-20 h-1.5 bg-black/10 rounded-full overflow-hidden">
+<div class="h-full bg-tertiary w-[30%]"></div>
+</div>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-deep-purple/40 text-lg">wifi</span>
+<span class="text-sm font-medium text-deep-purple/80">Latency</span>
+</div>
+<span class="text-xs font-bold text-tertiary">24ms</span>
+</div>
+</div>
+</div>
+</aside>
+</main>
+<!-- Results Modal Overlay -->
+<div id="resultsModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
+  <div class="bg-[#f8f6fb] border border-deep-purple/10 rounded-3xl max-w-2xl w-full max-h-[85vh] flex flex-col p-6 overflow-hidden shadow-2xl">
+    <!-- Header -->
+    <div class="flex items-center justify-between border-b border-deep-purple/10 pb-4 shrink-0">
+      <div class="flex flex-col">
+        <h2 class="font-display text-xl font-bold text-primary" id="modal-quiz-title">Quiz Results</h2>
+        <p class="text-xs text-purple-950/60 mt-1 font-semibold" id="modal-quiz-subtitle">Duration: -- mins | Target Group: --</p>
+      </div>
+      <button id="modalCloseBtn" class="p-1 rounded-full hover:bg-black/5 text-purple-950/60 cursor-pointer">
+        <span class="material-symbols-outlined">close</span>
+      </button>
+    </div>
+    
+    <!-- Content (Scrollable) -->
+    <div class="flex-grow overflow-y-auto py-6 pr-2 space-y-6 custom-scrollbar" id="modal-results-content">
+      <!-- General score card -->
+      <div class="flex items-center justify-around bg-primary/10 rounded-xl p-6 border border-primary/20">
+        <div class="text-center">
+          <div class="text-xs font-bold text-deep-purple/60 uppercase tracking-widest">Score</div>
+          <div class="text-4xl font-extrabold text-primary" id="modal-score-percentage">0%</div>
+          <div class="text-sm font-semibold text-deep-purple" id="modal-score-ratio">0 of 0 Correct</div>
+        </div>
+        <div class="h-12 w-[1px] bg-deep-purple/20"></div>
+        <div class="text-center">
+          <div class="text-xs font-bold text-deep-purple/60 uppercase tracking-widest">Status</div>
+          <div class="text-2xl font-bold mt-1 text-error" id="modal-pass-status">FAILED</div>
+        </div>
+      </div>
+      
+      <!-- Detailed Question Breakdown -->
+      <div class="space-y-4">
+        <h3 class="font-semibold text-deep-purple text-base">Question Breakdown</h3>
+        <div id="results-questions-list" class="space-y-4">
+          <!-- Dynamic breakdown list here -->
+        </div>
+      </div>
+    </div>
+    
+    <!-- Footer -->
+    <div class="border-t border-deep-purple/10 pt-4 flex justify-end gap-3 shrink-0">
+      <button id="modalCloseReviewBtn" class="px-8 py-2.5 rounded-full bg-primary text-white font-bold text-sm hover:brightness-110 active:scale-95 transition-all shadow-md cursor-pointer">
+        Done
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Interactive Layer -->
+<script>
+        // 1. Timer Logic
+        let timeRemaining = 34 * 60 + 10;
+        const timerDisplay = document.getElementById('timer-text');
+        const progressBar = document.getElementById('progress-bar');
+        const totalTime = 60 * 60;
+
+        const updateTimer = () => {
+            const minutes = Math.floor(timeRemaining / 60);
+            const seconds = timeRemaining % 60;
+            if (timerDisplay) {
+                timerDisplay.textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+            }
+            if (progressBar) {
+                const progress = (timeRemaining / totalTime) * 100;
+                progressBar.style.width = `${progress}%`;
+            }
+            if (timeRemaining > 0) timeRemaining--;
+        };
+        setInterval(updateTimer, 1000);
+
+        // Spring Physics hover helper function
+        function applySpringHover(selector) {
+            document.querySelectorAll(selector).forEach(el => {
+                el.style.transform = '';
+                const onMouseDown = () => el.style.transform = 'scale(0.96)';
+                const onMouseUp = () => el.style.transform = 'scale(0.99)';
+                const onMouseLeave = () => el.style.transform = 'scale(1)';
+                
+                el.removeEventListener('mousedown', onMouseDown);
+                el.removeEventListener('mouseup', onMouseUp);
+                el.removeEventListener('mouseleave', onMouseLeave);
+                
+                el.addEventListener('mousedown', onMouseDown);
+                el.addEventListener('mouseup', onMouseUp);
+                el.addEventListener('mouseleave', onMouseLeave);
+            });
+        }
+
+        // 2. Question Database
+        const quizQuestions = {
+            "Technical Assessment": [
+                {
+                    text: "What is the time complexity of searching in a balanced binary search tree?",
+                    options: ["O(1)", "O(log n)", "O(n)", "O(n log n)"],
+                    correctIndex: 1
+                },
+                {
+                    text: "Which programming paradigm focuses on writing code that describes what to do rather than how to do it?",
+                    options: ["Imperative", "Procedural", "Declarative", "Object-Oriented"],
+                    correctIndex: 2
+                },
+                {
+                    text: "What does SQL stand for?",
+                    options: ["Structured Query Language", "Sequential Query Language", "Simple Query Linker", "System Query Ledger"],
+                    correctIndex: 0
+                }
+            ],
+            "Backend Architecture Quiz": [
+                {
+                    text: "What does the CAP theorem state about distributed databases?",
+                    options: [
+                        "It must guarantee Consistency, Availability, and Partition Tolerance simultaneously.",
+                        "It can only provide two of Consistency, Availability, and Partition Tolerance.",
+                        "Consistency is always prioritized over Partition Tolerance.",
+                        "Availability is not affected by network partitions."
+                    ],
+                    correctIndex: 1
+                },
+                {
+                    text: "Which database index strategy is optimal for exact key-value match queries?",
+                    options: ["B-Tree Index", "Hash Index", "GIN Index", "Bitmap Index"],
+                    correctIndex: 1
+                },
+                {
+                    text: "Which HTTP status code represents 'Internal Server Error'?",
+                    options: ["400 Bad Request", "401 Unauthorized", "500 Internal Server Error", "502 Bad Gateway"],
+                    correctIndex: 2
+                },
+                {
+                    text: "What is the primary architectural pattern used in modern microservice applications?",
+                    options: ["Monolithic Integration", "Event-Driven Architecture", "Shared Database Architecture", "Tight Coupling"],
+                    correctIndex: 1
+                },
+                {
+                    text: "What is the purpose of a database transaction's ACID properties?",
+                    options: [
+                        "To speed up indexing and minimize search latencies.",
+                        "To guarantee data validity and consistency despite power failures or crashes.",
+                        "To minimize storage memory usage in relational tables.",
+                        "To compress database tables automatically during backups."
+                    ],
+                    correctIndex: 1
+                }
+            ],
+            "Machine Learning Models Evaluation": [
+                {
+                    text: "Which metric is most suitable for evaluating a classification model on highly imbalanced data?",
+                    options: ["Accuracy", "F1-Score / Precision-Recall AUC", "Mean Squared Error", "R-Squared"],
+                    correctIndex: 1
+                },
+                {
+                    text: "What is overfitting in machine learning?",
+                    options: [
+                        "When a model performs exceptionally well on training data but poorly on unseen test data.",
+                        "When a model performs poorly on both training and validation datasets.",
+                        "When a model achieves perfect generalization on all datasets.",
+                        "When model training completes in fewer epochs than expected."
+                    ],
+                    correctIndex: 0
+                },
+                {
+                    text: "Which algorithm is a popular ensemble learning method that builds multiple decision trees?",
+                    options: ["Linear Regression", "K-Means Clustering", "Random Forest", "Support Vector Machine"],
+                    correctIndex: 2
+                },
+                {
+                    text: "What is the primary objective of gradient descent in optimization?",
+                    options: [
+                        "To maximize the loss function of a model.",
+                        "To minimize the loss function of a model.",
+                        "To split datasets into validation sets.",
+                        "To initialize model weights randomly."
+                    ],
+                    correctIndex: 1
+                },
+                {
+                    text: "In neural networks, what is the role of an activation function?",
+                    options: [
+                        "To normalize inputs to zero mean and unit variance.",
+                        "To introduce non-linearity, allowing the model to learn complex patterns.",
+                        "To speed up backpropagation derivatives.",
+                        "To prune redundant neurons automatically."
+                    ],
+                    correctIndex: 1
+                }
+            ]
+        };
+
+        const defaultQuestions = [
+            {
+                text: "Which design principle primarily focuses on the arrangement of elements to imply importance?",
+                options: ["Visual Hierarchy", "Proximity", "Repetition", "Contrast Ratio"],
+                correctIndex: 0
+            },
+            {
+                text: "What is the standard contrast ratio recommended for body text under WCAG AA standards?",
+                options: ["1.5:1", "3:1", "4.5:1", "7:1"],
+                correctIndex: 2
+            },
+            {
+                text: "Which design file format supports native vector scaling without raster pixelation?",
+                options: ["PNG", "JPG", "SVG", "WebP"],
+                correctIndex: 2
+            },
+            {
+                text: "What is the purpose of user persona creation in UX design?",
+                options: [
+                    "To define server database schemas.",
+                    "To represent target user archetypes based on research.",
+                    "To code visual layout styles.",
+                    "To audit security log outputs."
+                ],
+                correctIndex: 1
+            },
+            {
+                text: "What does the term 'Mobile First' imply in responsive web design?",
+                options: [
+                    "Coding only for mobile platforms.",
+                    "Prioritizing mobile layouts before scaling up to desktop layouts.",
+                    "Discarding desktop users entirely.",
+                    "Using mobile frameworks exclusively."
+                ],
+                correctIndex: 1
+            }
+        ];
+
+        // 3. State & Render Logic
+        let questions = [];
+        let currentQuestionIndex = 0;
+        const selectedAnswers = {}; // { qIndex: optIndex }
+        const skippedQuestions = new Set();
+        let isSubmitted = false;
+
+        function updateQuestionView() {
+            if (questions.length === 0) return;
+
+            // Render current progress badge
+            const progressBadge = document.getElementById('question-progress-badge');
+            if (progressBadge) {
+                progressBadge.textContent = `Question ${currentQuestionIndex + 1} of ${questions.length}`;
+            }
+
+            // Render the question card
+            renderQuestion(currentQuestionIndex);
+
+            // Update Back button state
+            const prevBtn = document.getElementById('prevBtn');
+            if (prevBtn) {
+                if (currentQuestionIndex === 0) {
+                    prevBtn.classList.add('opacity-40', 'pointer-events-none');
+                } else {
+                    prevBtn.classList.remove('opacity-40', 'pointer-events-none');
+                }
+            }
+
+            // Update Next button label and icon
+            const nextBtn = document.getElementById('nextBtn');
+            const nextBtnText = document.getElementById('next-btn-text');
+            const nextBtnIcon = document.getElementById('next-btn-icon');
+            if (nextBtn) {
+                if (currentQuestionIndex === questions.length - 1) {
+                    nextBtnText.textContent = "Submit";
+                    nextBtnIcon.textContent = "check_circle";
+                    nextBtn.className = "px-8 h-12 rounded-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm shadow-lg shadow-emerald-600/20 hover:shadow-xl hover:-translate-y-0.5 active:scale-95 transition-all flex items-center gap-2 ios-spring cursor-pointer";
+                } else {
+                    nextBtnText.textContent = "Save & Next";
+                    nextBtnIcon.textContent = "arrow_forward";
+                    nextBtn.className = "px-8 h-12 rounded-full bg-primary text-white font-bold text-sm shadow-lg shadow-primary/20 hover:shadow-xl hover:-translate-y-0.5 active:scale-95 transition-all flex items-center gap-2 ios-spring cursor-pointer";
+                }
+            }
+            
+            // Skip button behavior
+            const skipBtn = document.getElementById('skipBtn');
+            if (skipBtn) {
+                if (currentQuestionIndex === questions.length - 1) {
+                    skipBtn.innerHTML = `Skip & Submit <span class="material-symbols-outlined">redo</span>`;
+                } else {
+                    skipBtn.innerHTML = `Skip Question <span class="material-symbols-outlined">redo</span>`;
+                }
+            }
+        }
+
+        function renderQuestion(index) {
+            const container = document.getElementById('single-question-container');
+            if (!container) return;
+
+            const q = questions[index];
+            const optionLabels = ['A', 'B', 'C', 'D'];
+            const selectedOpt = selectedAnswers[index];
+
+            let optionsHtml = '';
+            q.options.forEach((opt, optIndex) => {
+                const isSelected = selectedOpt === optIndex;
+                const selectionClass = isSelected ? 'ring-2 ring-primary bg-white/60' : '';
+                const badgeClass = isSelected ? 'bg-primary text-white' : 'bg-deep-purple/5 text-deep-purple';
+                const iconName = isSelected ? 'radio_button_checked' : 'radio_button_unchecked';
+                const iconOpacity = isSelected ? 'opacity-100' : 'opacity-0 group-hover:opacity-100';
+
+                optionsHtml += `
+                    <button class="option-card w-full glass-thick rounded-xl p-3.5 flex items-center gap-4 group ios-spring border-white/40 text-left cursor-pointer ${selectionClass}" data-opt="${optIndex}">
+                        <div class="w-8 h-8 rounded-lg text-sm ${badgeClass} flex items-center justify-center font-bold group-hover:bg-primary group-hover:text-white ios-spring shrink-0">
+                            ${optionLabels[optIndex]}
+                        </div>
+                        <span class="text-deep-purple font-medium text-[15px] flex-grow leading-snug">${opt}</span>
+                        <div class="ml-auto ${iconOpacity} ios-spring shrink-0">
+                            <span class="material-symbols-outlined text-primary text-[20px]">${iconName}</span>
+                        </div>
+                    </button>
+                `;
+            });
+
+            container.innerHTML = `
+                <div class="glass-card rounded-2xl p-5 border border-white/40 shadow-sm relative">
+                    <h2 class="font-display text-deep-purple text-[17px] font-bold leading-relaxed mb-4">
+                        ${q.text}
+                    </h2>
+                    <div class="space-y-2.5">
+                        ${optionsHtml}
+                    </div>
+                </div>
+            `;
+
+            // Bind click handlers to options
+            container.querySelectorAll('.option-card').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const optIndex = parseInt(this.getAttribute('data-opt'));
+                    selectedAnswers[index] = optIndex;
+                    skippedQuestions.delete(index);
+                    renderQuestion(index);
+                });
+            });
+
+            applySpringHover('.option-card');
+        }
+
+        function submitAssessment() {
+            let correctCount = 0;
+            questions.forEach((q, idx) => {
+                if (selectedAnswers[idx] === q.correctIndex) {
+                    correctCount++;
+                }
+            });
+
+            const scorePercent = Math.round((correctCount / questions.length) * 100);
+            
+            // Get student details
+            const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
+            const email = currentUser.email || 'studentone@gmail.com';
+            
+            const backendHost = window.location.origin.includes('localhost') ? 'http://localhost:8080' : window.location.origin;
+
+            fetch(`${backendHost}/api/tests/submit`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email, score: scorePercent, testId: activeQuizId, testTitle: activeQuizTitle })
+            })
+            .then(res => res.json())
+            .then(data => {
+                isSubmitted = true;
+                
+                // Update the top right Result button with the final score
+                const viewResultBtn = document.getElementById('viewResultBtn');
+                if (viewResultBtn) {
+                    viewResultBtn.innerHTML = `<span class="material-symbols-outlined text-sm">assessment</span> Result: ${scorePercent}% (${scorePercent >= 70 ? 'Passed' : 'Failed'})`;
+                }
+                
+                // Toast notification
+                if (window.parent && window.parent.App) {
+                    window.parent.App.showToast(`Assessment submitted successfully! Score: ${scorePercent}%`, "success");
+                }
+                
+                // Updated: Modal will be opened on click of Result button
+            })
+            .catch(err => {
+                console.error("Error submitting score to server:", err);
+                isSubmitted = true;
+                const viewResultBtn = document.getElementById('viewResultBtn');
+                if (viewResultBtn) {
+                    viewResultBtn.innerHTML = `<span class="material-symbols-outlined text-sm">assessment</span> Result: ${scorePercent}% (${scorePercent >= 70 ? 'Passed' : 'Failed'})`;
+                }
+                // Updated: Modal will be opened on click of Result button
+            });
+        }
+
+        function showResultsModal(correctCount, scorePercent) {
+            const modal = document.getElementById('resultsModal');
+            if (!modal) return;
+
+            const scorePercentEl = document.getElementById('modal-score-percentage');
+            if (scorePercentEl) scorePercentEl.textContent = `${scorePercent}%`;
+
+            const scoreRatioEl = document.getElementById('modal-score-ratio');
+            if (scoreRatioEl) scoreRatioEl.textContent = `${correctCount} of ${questions.length} Correct`;
+
+            const passStatusEl = document.getElementById('modal-pass-status');
+            if (passStatusEl) {
+                const passed = scorePercent >= 70;
+                passStatusEl.textContent = passed ? "PASSED" : "FAILED";
+                if (passed) {
+                    passStatusEl.className = "text-2xl font-bold mt-1 text-emerald-600";
+                } else {
+                    passStatusEl.className = "text-2xl font-bold mt-1 text-red-500";
+                }
+            }
+
+            const activeTitle = localStorage.getItem('activeQuizTitle') || 'Weekly Test';
+            const activeDuration = localStorage.getItem('activeQuizDuration') || '45 mins';
+            const activeGroup = localStorage.getItem('activeQuizGroup') || 'Group A';
+
+            const modalQuizTitle = document.getElementById('modal-quiz-title');
+            if (modalQuizTitle) modalQuizTitle.textContent = activeTitle;
+
+            const modalQuizSubtitle = document.getElementById('modal-quiz-subtitle');
+            if (modalQuizSubtitle) {
+                modalQuizSubtitle.textContent = `Duration: ${activeDuration} | Target Group: ${activeGroup}`;
+            }
+
+            const resultsList = document.getElementById('results-questions-list');
+            if (resultsList) {
+                resultsList.innerHTML = '';
+                const optionLabels = ['A', 'B', 'C', 'D'];
+
+                questions.forEach((q, idx) => {
+                    const userSel = selectedAnswers[idx];
+                    const correctSel = q.correctIndex;
+                    const isCorrect = userSel === correctSel;
+                    const isSkipped = userSel === undefined || userSel === null;
+
+                    let statusBadge = '';
+                    if (isCorrect) {
+                        statusBadge = `<span class="text-[10px] font-bold px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 shrink-0">Correct</span>`;
+                    } else if (isSkipped) {
+                        statusBadge = `<span class="text-[10px] font-bold px-2.5 py-1 rounded-full bg-amber-50 text-amber-700 border border-amber-200 shrink-0">Skipped</span>`;
+                    } else {
+                        statusBadge = `<span class="text-[10px] font-bold px-2.5 py-1 rounded-full bg-red-50 text-red-700 border border-red-200 shrink-0">Incorrect</span>`;
+                    }
+
+                    let optionsBreakdownHtml = '';
+                    q.options.forEach((opt, optIdx) => {
+                        let optClass = 'bg-gray-50/50 border border-gray-100 text-slate-800';
+                        let optIcon = '';
+                        let badgeStyle = 'bg-gray-200 text-gray-700';
+
+                        if (optIdx === correctSel) {
+                            optClass = 'border border-emerald-500/30 bg-emerald-50 text-emerald-800 font-semibold';
+                            badgeStyle = 'bg-emerald-500 text-white';
+                            optIcon = '<span class="material-symbols-outlined ml-auto text-lg text-emerald-600 font-bold" style="font-variation-settings: \'FILL\' 1;">check_circle</span>';
+                        } else if (optIdx === userSel && !isCorrect) {
+                            optClass = 'border border-red-500/30 bg-red-50 text-red-800 font-semibold';
+                            badgeStyle = 'bg-red-500 text-white';
+                            optIcon = '<span class="material-symbols-outlined ml-auto text-lg text-red-600 font-bold" style="font-variation-settings: \'FILL\' 1;">cancel</span>';
+                        }
+
+                        optionsBreakdownHtml += `
+                            <div class="flex items-center gap-3 p-3 rounded-xl text-xs font-medium ${optClass}">
+                                <span class="w-6 h-6 rounded-lg flex items-center justify-center font-bold shrink-0 ${badgeStyle}">
+                                    ${optionLabels[optIdx]}
+                                </span>
+                                <span class="flex-grow leading-snug">${opt}</span>
+                                ${optIcon}
+                            </div>
+                        `;
+                    });
+
+                    const qItem = document.createElement('div');
+                    qItem.className = "p-5 bg-white border border-gray-200 rounded-2xl space-y-3 shadow-sm";
+                    qItem.innerHTML = `
+                        <div class="flex justify-between items-start gap-2">
+                            <h4 class="font-bold text-purple-950 text-sm leading-snug">Q${idx + 1}: ${q.text}</h4>
+                            ${statusBadge}
+                        </div>
+                        <div class="grid grid-cols-2 gap-3">
+                            ${optionsBreakdownHtml}
+                        </div>
+                    `;
+                    resultsList.appendChild(qItem);
+                });
+            }
+
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            modal.style.setProperty('display', 'flex', 'important');
+        }
+
+        function closeResultsModal() {
+            const modal = document.getElementById('resultsModal');
+            if (modal) {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+                modal.style.setProperty('display', 'none', 'important');
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const activeQuizId = localStorage.getItem('activeQuizId');
+            const activeQuizTitle = localStorage.getItem('activeQuizTitle') || 'Weekly Test';
+            
+            const titleDisplay = document.getElementById('quiz-title-display');
+            if (titleDisplay) titleDisplay.textContent = activeQuizTitle;
+            
+            const backendHost = window.location.origin.includes('localhost') ? 'http://localhost:8080' : window.location.origin;
+            const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
+            const email = currentUser.email || 'studentone@gmail.com';
+
+            Promise.all([
+                fetch(`${backendHost}/api/tests`).then(res => res.json()),
+                fetch(`${backendHost}/api/submissions?email=${email}`).then(res => res.json())
+            ])
+            .then(([tests, submissions]) => {
+                const alreadySubmitted = submissions.some(s => s.testId === activeQuizId);
+                if (alreadySubmitted) {
+                    if (window.parent && window.parent.App) {
+                        window.parent.App.showToast("You have already completed this assessment.", "error");
+                        window.parent.App.navigate('tests');
+                    } else {
+                        alert("You have already completed this assessment.");
+                        window.location.href = 'desktop_259e275b59144d80865c766dbc962bbc_Weekly_Tests_Hub_STU-05_-_Desktop_Liquid_Glass.html';
+                    }
+                    return;
+                }
+
+                const activeTest = tests.find(t => t.id === activeQuizId);
+                
+                let loadedQuestions = activeTest && activeTest.questionsList && activeTest.questionsList.length > 0 ? activeTest.questionsList : quizQuestions[activeQuizTitle];
+                if (!loadedQuestions) {
+                    loadedQuestions = [];
+                    const count = activeTest ? activeTest.questions : 3;
+                    for (let i = 0; i < count; i++) {
+                        loadedQuestions.push(defaultQuestions[i % defaultQuestions.length]);
+                    }
+                } else {
+                    loadedQuestions = [...loadedQuestions];
+                    while (loadedQuestions.length > 0 && (!loadedQuestions[loadedQuestions.length - 1].text || !loadedQuestions[loadedQuestions.length - 1].text.trim())) {
+                        loadedQuestions.pop();
+                    }
+                }
+                
+                questions = loadedQuestions;
+
+                    const metaDisplay = document.getElementById('quiz-meta-display');
+                    if (metaDisplay) metaDisplay.textContent = `Total Questions: ${questions.length}`;
+
+                    // Update layout
+                    updateQuestionView();
+
+                    // Navigation buttons listeners
+                    const prevBtn = document.getElementById('prevBtn');
+                    if (prevBtn) {
+                        prevBtn.addEventListener('click', () => {
+                            if (currentQuestionIndex > 0) {
+                                currentQuestionIndex--;
+                                updateQuestionView();
+                            }
+                        });
+                    }
+
+                    const skipBtn = document.getElementById('skipBtn');
+                    if (skipBtn) {
+                        skipBtn.addEventListener('click', () => {
+                            skippedQuestions.add(currentQuestionIndex);
+                            if (currentQuestionIndex < questions.length - 1) {
+                                currentQuestionIndex++;
+                                updateQuestionView();
+                            } else {
+                                submitAssessment();
+                            }
+                        });
+                    }
+
+                    const nextBtn = document.getElementById('nextBtn');
+                    if (nextBtn) {
+                        nextBtn.addEventListener('click', () => {
+                            if (currentQuestionIndex < questions.length - 1) {
+                                currentQuestionIndex++;
+                                updateQuestionView();
+                            } else {
+                                submitAssessment();
+                            }
+                        });
+                    }
+
+                    // Header View Result button
+                    const viewResultBtn = document.getElementById('viewResultBtn');
+                    if (viewResultBtn) {
+                        viewResultBtn.addEventListener('click', () => {
+                            let correctCount = 0;
+                            questions.forEach((q, idx) => {
+                                if (selectedAnswers[idx] === q.correctIndex) {
+                                    correctCount++;
+                                }
+                            });
+                            const scorePercent = Math.round((correctCount / questions.length) * 100);
+                            showResultsModal(correctCount, scorePercent);
+                        });
+                    }
+
+                    // Modal Buttons
+                    const modalCloseBtn = document.getElementById('modalCloseBtn');
+                    if (modalCloseBtn) {
+                        modalCloseBtn.addEventListener('click', closeResultsModal);
+                    }
+
+                    const modalCloseReviewBtn = document.getElementById('modalCloseReviewBtn');
+                    if (modalCloseReviewBtn) {
+                        modalCloseReviewBtn.addEventListener('click', closeResultsModal);
+                    }
+
+                    // Removed dashboard redirection to stay on results review
+
+                    // Apply spring hovers
+                    applySpringHover('#prevBtn');
+                    applySpringHover('#skipBtn');
+                    applySpringHover('#nextBtn');
+                    applySpringHover('#viewResultBtn');
+                })
+                .catch(err => {
+                    console.error("Error setting up quiz questions:", err);
+                    const container = document.getElementById('single-question-container');
+                    if (container) {
+                        container.innerHTML = `<p class="text-error text-center py-8">Unable to set up test player. Please make sure the server is active.</p>`;
+                    }
+                });
+        });
+    </script>
+</body></html>

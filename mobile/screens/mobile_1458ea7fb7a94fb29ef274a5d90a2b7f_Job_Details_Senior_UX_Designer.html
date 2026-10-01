@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<title>Job Details | JobFlow</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-surface-variant": "#4f4350",
+                    "glass-fill": "rgba(255, 255, 255, 0.35)",
+                    "card-gradient": "linear-gradient(135deg, #4D9EFA 0%, #BF7DF5 100%)",
+                    "surface": "#f9f9ff",
+                    "on-tertiary": "#ffffff",
+                    "on-error-container": "#93000a",
+                    "glass-border": "rgba(255, 255, 255, 0.6)",
+                    "on-secondary-container": "#003868",
+                    "on-secondary-fixed-variant": "#004883",
+                    "on-error": "#ffffff",
+                    "secondary-fixed-dim": "#a3c9ff",
+                    "tertiary-container": "#00842f",
+                    "tertiary-fixed": "#6cff82",
+                    "primary-fixed-dim": "#f0b0ff",
+                    "on-primary-container": "#fff5fb",
+                    "on-background": "#141c29",
+                    "orange": "#FF9F0A",
+                    "surface-dim": "#d2daed",
+                    "surface-container-highest": "#dbe3f6",
+                    "surface-tint": "#8d37a9",
+                    "on-primary-fixed": "#330044",
+                    "tertiary-fixed-dim": "#47e266",
+                    "on-tertiary-fixed-variant": "#00531a",
+                    "on-surface": "#141c29",
+                    "surface-container-high": "#e0e8fb",
+                    "secondary": "#0060ab",
+                    "inverse-primary": "#f0b0ff",
+                    "gold": "#FFD60A",
+                    "surface-container-lowest": "#ffffff",
+                    "inverse-surface": "#29313f",
+                    "error-container": "#ffdad6",
+                    "surface-container": "#e7eeff",
+                    "on-secondary-fixed": "#001c39",
+                    "on-primary-fixed-variant": "#72188f",
+                    "error": "#FF453A",
+                    "surface-variant": "#dbe3f6",
+                    "surface-container-low": "#f0f3ff",
+                    "on-tertiary-fixed": "#002106",
+                    "secondary-fixed": "#d3e3ff",
+                    "primary-fixed": "#fbd7ff",
+                    "on-tertiary-container": "#e6ffe0",
+                    "primary": "#8731a3",
+                    "on-primary": "#ffffff",
+                    "on-secondary": "#ffffff",
+                    "glass-thick": "rgba(255, 255, 255, 0.8)",
+                    "primary-container": "#a34cbe",
+                    "outline": "#817381",
+                    "secondary-container": "#54a3ff",
+                    "tertiary": "#006823",
+                    "outline-variant": "#d2c1d2",
+                    "surface-bright": "#f9f9ff",
+                    "inverse-on-surface": "#ecf1ff",
+                    "background": "#f9f9ff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "max-width": "1280px",
+                    "mobile-gutter": "16px",
+                    "safe-top": "44px",
+                    "safe-bottom": "34px",
+                    "mobile-margin": "20px",
+                    "base": "8px",
+                    "desktop-gutter": "24px",
+                    "desktop-margin": "64px"
+            },
+            "fontFamily": {
+                    "display-xl-mobile": ["Inter"],
+                    "headline-lg-mobile": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "label-caps-mobile": ["Inter"],
+                    "label-caps": ["Inter"],
+                    "display-xl": ["Inter"],
+                    "body-md-mobile": ["Inter"],
+                    "body-md": ["Inter"]
+            },
+            "fontSize": {
+                    "display-xl-mobile": ["34px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "headline-lg": ["34px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                    "label-caps-mobile": ["12px", {"lineHeight": "1.0", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "label-caps": ["13px", {"lineHeight": "1.0", "letterSpacing": "0.03em", "fontWeight": "600"}],
+                    "display-xl": ["56px", {"lineHeight": "1.1", "letterSpacing": "-0.03em", "fontWeight": "700"}],
+                    "body-md-mobile": ["15px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                    "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background: #DCE4F7;
+            overflow-x: hidden;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.45);
+            backdrop-filter: blur(28px);
+            -webkit-backdrop-filter: blur(28px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 12px 40px 0 rgba(71, 26, 112, 0.15);
+        }
+
+        .gradient-mesh {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: 
+                radial-gradient(at 0% 0%, rgba(135, 49, 163, 0.15) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(77, 158, 250, 0.15) 0px, transparent 50%);
+            animation: pulse 10s ease-in-out infinite alternate;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 0.6; }
+            100% { transform: scale(1.1); opacity: 0.9; }
+        }
+
+        .shimmer {
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+
+        .safe-area-inset-top { padding-top: 44px; }
+        .safe-area-inset-bottom { padding-bottom: 34px; }
+    </style>
+</head>
+<body class="antialiased text-on-surface">
+<div class="gradient-mesh"></div>
+<!-- Top Navigation -->
+<header class="fixed top-0 left-0 w-full z-50 bg-glass-fill dark:bg-glass-fill backdrop-blur-[28px] border-b border-glass-border shadow-[0_12px_40px_0_rgba(71,26,112,0.15)] flex justify-between items-center px-mobile-margin h-20">
+<div class="flex items-center gap-4">
+<button class="w-10 h-10 flex items-center justify-center rounded-full bg-glass-fill hover:bg-glass-thick transition-all duration-300 active:scale-95">
+<span class="material-symbols-outlined text-primary">arrow_back</span>
+</button>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-primary font-bold">Job Details</h1>
+</div>
+<button class="w-10 h-10 flex items-center justify-center rounded-full bg-glass-fill hover:bg-glass-thick transition-all duration-300">
+<span class="material-symbols-outlined text-on-surface-variant">share</span>
+</button>
+</header>
+<!-- Main Content -->
+<main class="pt-24 pb-32 px-mobile-margin space-y-6">
+<!-- Hero Card -->
+<div class="glass-card rounded-[24px] p-6 space-y-4">
+<div class="flex justify-between items-start">
+<div class="w-16 h-16 rounded-2xl overflow-hidden glass-thick border border-glass-border flex items-center justify-center">
+<img alt="TechFlow Logo" class="w-12 h-12 object-contain" src="https://lh3.googleusercontent.com/aida/AP1WRLtHSlvHQm1XNZ4vaeue1GiJtF1j680ovYDsV1bz1IH37RWIQlHCDhIMbTh8QwjysUr_9axMNLFk7d5MtN1sRrdkCEgDdsjpU6S18_eICdCZ5ObBXpk8IMqmy52sfrJsOQaMvz7hk48gtvML_dmfwlaY-1QmOzz74jRWaBViW4SbLXgO-jIKC3LPueU0Wmini7A--bmI3LnC19bd8jueIoFhpwFhp4dCzG3gBDdCSwoekhL8nTJD3FWqr2Qs"/>
+</div>
+<div class="flex gap-2">
+<span class="bg-secondary-container text-on-secondary-container text-[11px] font-bold px-3 py-1 rounded-full tracking-wider uppercase">Full Time</span>
+</div>
+</div>
+<div class="space-y-1">
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-[#471A70]">Senior UX Designer</h2>
+<div class="flex items-center gap-2 text-on-surface-variant font-medium">
+<span class="material-symbols-outlined text-[18px]">domain</span>
+<span class="text-body-md-mobile font-body-md-mobile">TechFlow • San Francisco, CA</span>
+</div>
+</div>
+<div class="pt-4 border-t border-glass-border flex justify-between items-center">
+<div class="space-y-0.5">
+<p class="text-label-caps-mobile font-label-caps-mobile text-on-surface-variant uppercase tracking-widest">Base Salary</p>
+<p class="text-headline-lg-mobile font-headline-lg-mobile text-primary">Rs. 160k - Rs. 210k</p>
+</div>
+<div class="flex items-center gap-1 bg-tertiary-container/10 text-tertiary px-3 py-1.5 rounded-xl border border-tertiary/20">
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">verified</span>
+<span class="text-[12px] font-bold">Verified</span>
+</div>
+</div>
+</div>
+<!-- Quick Info Grid -->
+<div class="grid grid-cols-2 gap-4">
+<div class="glass-card rounded-2xl p-4 flex flex-col items-center text-center space-y-2">
+<div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">groups</span>
+</div>
+<p class="text-body-md-mobile font-body-md-mobile font-semibold">10-20 Applicants</p>
+<p class="text-[11px] text-on-surface-variant">Top 25% recommended</p>
+</div>
+<div class="glass-card rounded-2xl p-4 flex flex-col items-center text-center space-y-2">
+<div class="w-10 h-10 rounded-full bg-secondary-container/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-secondary">schedule</span>
+</div>
+<p class="text-body-md-mobile font-body-md-mobile font-semibold">Posted 2h ago</p>
+<p class="text-[11px] text-on-surface-variant">Urgent requirement</p>
+</div>
+</div>
+<!-- Description Section -->
+<section class="space-y-3">
+<h3 class="text-label-caps-mobile font-label-caps-mobile text-[#471A70] uppercase tracking-widest pl-1">Description</h3>
+<div class="glass-card rounded-2xl p-5">
+<p class="text-body-md-mobile font-body-md-mobile text-[#471A70] leading-relaxed">
+                    TechFlow is seeking a Senior UX Designer to lead our next generation of fintech products. You will be responsible for defining the visual language and interactive paradigms that simplify complex financial data for millions of users worldwide. You'll work closely with engineers and product managers to deliver world-class digital experiences.
+                </p>
+</div>
+</section>
+<!-- Requirements Section -->
+<section class="space-y-3">
+<h3 class="text-label-caps-mobile font-label-caps-mobile text-[#471A70] uppercase tracking-widest pl-1">Requirements</h3>
+<div class="glass-card rounded-2xl p-5">
+<ul class="space-y-4">
+<li class="flex gap-3">
+<span class="material-symbols-outlined text-primary-container text-[20px] mt-0.5">check_circle</span>
+<p class="text-body-md-mobile font-body-md-mobile text-[#471A70]">5+ years of experience in product design for high-scale SaaS or mobile applications.</p>
+</li>
+<li class="flex gap-3">
+<span class="material-symbols-outlined text-primary-container text-[20px] mt-0.5">check_circle</span>
+<p class="text-body-md-mobile font-body-md-mobile text-[#471A70]">Proficiency in Figma, Prototyping tools (Protopie/Framer), and Design Systems.</p>
+</li>
+<li class="flex gap-3">
+<span class="material-symbols-outlined text-primary-container text-[20px] mt-0.5">check_circle</span>
+<p class="text-body-md-mobile font-body-md-mobile text-[#471A70]">Strong portfolio demonstrating excellence in visual design and interactive patterns.</p>
+</li>
+</ul>
+</div>
+</section>
+<!-- Company Section -->
+<section class="space-y-3">
+<h3 class="text-label-caps-mobile font-label-caps-mobile text-[#471A70] uppercase tracking-widest pl-1">About the Company</h3>
+<div class="glass-card rounded-2xl p-5 space-y-4">
+<div class="flex items-center gap-4">
+<img alt="TechFlow" class="w-12 h-12 rounded-xl border border-glass-border" src="https://lh3.googleusercontent.com/aida/AP1WRLtHSlvHQm1XNZ4vaeue1GiJtF1j680ovYDsV1bz1IH37RWIQlHCDhIMbTh8QwjysUr_9axMNLFk7d5MtN1sRrdkCEgDdsjpU6S18_eICdCZ5ObBXpk8IMqmy52sfrJsOQaMvz7hk48gtvML_dmfwlaY-1QmOzz74jRWaBViW4SbLXgO-jIKC3LPueU0Wmini7A--bmI3LnC19bd8jueIoFhpwFhp4dCzG3gBDdCSwoekhL8nTJD3FWqr2Qs"/>
+<div>
+<h4 class="font-bold text-[#471A70]">TechFlow</h4>
+<p class="text-[12px] text-on-surface-variant">Fintech • 200-500 employees</p>
+</div>
+</div>
+<p class="text-body-md-mobile font-body-md-mobile text-[#471A70] italic leading-relaxed">
+                    "TechFlow is a pioneer in decentralized financial technology, building tools that empower individuals to take control of their economic destiny."
+                </p>
+<div class="grid grid-cols-3 gap-2">
+<img class="rounded-lg h-20 w-full object-cover" data-alt="A modern open-plan office space with glass walls and minimalist furniture. The lighting is soft and natural, emphasizing a professional yet creative work environment for a technology company. The color palette is composed of soft whites and cool greys with warm wood accents." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAKEcwwiBLqL2cg3JIZojdlbveFowL6k4W9pWCCFSn3fJVMdOpZDJ2D1OTLmRP1AK1q0nWt2WTsdeI7sIKcSl2_Qp85NDRG7hoLPT2HoZ0sLjw9f04avKiq-BMG9YoDCSyhwsWMj0frZucUyjB-hYk5YNZOS7fn6M2bFo6zVoJttbbrq2p0sDM5FyFfPBbetvFKTYgnXAZwaSUdztL4Q9pOeWZMOYWtKzUlj8k0nOdqoU1gr4isd2wvjhIwjpZCqUWocZl5l3w5RpRn"/>
+<img class="rounded-lg h-20 w-full object-cover" data-alt="A diverse team of young professionals collaborating in a brightly lit glass-walled meeting room. They are engaged in a creative brainstorming session with digital screens and whiteboards in the background. The atmosphere is energetic and focused, reflecting a modern tech corporate culture." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCaru7nIoO7hNskaLDni6kDOMK7AVx6e1S7mQsbCg_p0KiwE-8-P7N-2kRKyVeJj2IoSvFYOIuGsOwXt1yelNsJ_xm6PFPu7uwaMaqpL3jBQbLnCn9Cnfw5OYb5CrDXIjN6xM0KAv4MMv_7-Afvhp177oD9dZ2j5PwHUvAvDwZw0gVA7F9i6wLPf-QM0TMNWke2j3v7cWvIRAMWP2lEhvNkwqo-AJ_eel3OAzipM7dbO6EENrrwtST5QjHqIk2Bpz4M20GEC6KX0nGO"/>
+<img class="rounded-lg h-20 w-full object-cover" data-alt="Close up of a sleek designer workstation featuring a large high-resolution monitor, a mechanical keyboard, and minimalist desk accessories. The surrounding space is filled with soft, diffused sunlight and hints of green indoor plants, creating a calm and productive atmosphere for creative design work." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDtHrYSkSCfK-tWKZ-IgvJU2YQ91-flXhcys74AdV-qdoTQZsa-poQhjF1yeQ07z5VRcSiMybfIweRGTEBNtBRdp1PUqG50sj2-3mvm55L0go2ts5C0i19IAM2rTo9yXjRqxELOewlm0YpdPTJBLqZJ5LEcXay1FGVKhIXosl-JmI5sIxlBp43FmstLYzh4rf4T6gM1T2X5btiDff3tYomiqDTzcBMUw2AgfCAGNcyd9E9T4DvLb99c9jI0JkCi6lC2twmnmpiSdXDI"/>
+</div>
+</div>
+</section>
+</main>
+<!-- Sticky Bottom Bar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 bg-glass-thick backdrop-blur-[28px] border-t border-glass-border px-6 pb-safe-bottom pt-4 shadow-[0_-8px_30px_0_rgba(71,26,112,0.1)]">
+<div class="flex items-center gap-4 max-w-md mx-auto">
+<button class="w-14 h-14 flex items-center justify-center rounded-2xl border border-glass-border bg-glass-fill active:scale-95 transition-all">
+<span class="material-symbols-outlined text-[#471A70]">bookmark</span>
+</button>
+<button class="flex-1 h-14 bg-[#A34CBE] text-white rounded-2xl font-bold text-lg shadow-lg active:scale-95 transition-all duration-350 flex items-center justify-center gap-2 overflow-hidden relative" id="apply-btn">
+<span id="btn-text">Apply</span>
+<div class="hidden absolute inset-0 bg-[#A34CBE] flex items-center justify-center" id="loader">
+<div class="w-6 h-6 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+</div>
+</button>
+</div>
+</nav>
+<script>
+        const applyBtn = document.getElementById('apply-btn');
+        const btnText = document.getElementById('btn-text');
+        const loader = document.getElementById('loader');
+
+        applyBtn.addEventListener('click', () => {
+            btnText.classList.add('opacity-0');
+            loader.classList.remove('hidden');
+            
+            // Simulate loading
+            setTimeout(() => {
+                loader.innerHTML = `
+                    <div class="flex items-center gap-2">
+                        <span class="material-symbols-outlined">check_circle</span>
+                        <span>Applied!</span>
+                    </div>
+                `;
+                applyBtn.classList.remove('bg-[#A34CBE]');
+                applyBtn.classList.add('bg-tertiary-container');
+                
+                // Reset after a while
+                setTimeout(() => {
+                    btnText.classList.remove('opacity-0');
+                    loader.classList.add('hidden');
+                    loader.innerHTML = '<div class="w-6 h-6 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>';
+                    applyBtn.classList.add('bg-[#A34CBE]');
+                    applyBtn.classList.remove('bg-tertiary-container');
+                }, 3000);
+            }, 1800);
+        });
+
+        // Simple parallax for glass cards on scroll
+        window.addEventListener('scroll', () => {
+            const scroll = window.scrollY;
+            document.querySelectorAll('.glass-card').forEach((card, index) => {
+                const speed = 0.05 * (index + 1);
+                card.style.transform = `translateY(${scroll * speed * -0.2}px)`;
+            });
+        });
+    </script>
+</body></html>

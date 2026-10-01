@@ -1,0 +1,953 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>Active Postings Management | EliteRecruit</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+  <style>
+    body {
+      background: #DCE4F7;
+      color: #471A70;
+      overflow-x: hidden;
+    }
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      vertical-align: middle;
+    }
+    .glass-card {
+      background: rgba(255, 255, 255, 0.35);
+      backdrop-filter: blur(28px);
+      -webkit-backdrop-filter: blur(28px);
+      border: 0.5px solid rgba(255, 255, 255, 0.6);
+      box-shadow: 0 12px 40px 0 rgba(71, 26, 112, 0.15);
+    }
+    .row-hover:hover {
+      background: rgba(135, 49, 163, 0.04);
+      transform: translateY(-2px) scale(1.002);
+      box-shadow: 0 4px 20px rgba(135, 49, 163, 0.08);
+    }
+    .spring-transition {
+      transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    .status-chip-hot {
+      background: linear-gradient(135deg, #FF9F0A 0%, #8731a3 100%);
+      box-shadow: 0 4px 12px rgba(255, 159, 10, 0.3);
+    }
+    .pulsate-glow {
+      animation: pulsate 2s infinite ease-in-out;
+    }
+    @keyframes pulsate {
+      0% { box-shadow: 0 0 0 0 rgba(135, 49, 163, 0.4); }
+      70% { box-shadow: 0 0 0 10px rgba(135, 49, 163, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(135, 49, 163, 0); }
+    }
+  </style>
+</head>
+<body class="min-h-screen">
+
+<!-- ===== SHARED COMMAND CENTER NAV ===== -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,300,0,0" rel="stylesheet" id="ms-font-link"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" id="inter-font-link"/>
+<style id="shared-nav-css">
+  @import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,300,0,0&display=block');
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+  html, body { background-color: #DCE4F7 !important; }
+  body > main { margin-left: 220px !important; padding-top: 78px !important; }
+  .snav-btn:hover { background: rgba(71,26,112,0.08) !important; }
+  .snav-btn-active:hover { background: #3d1660 !important; }
+  .snav-logout:hover { background: rgba(192,41,90,0.07) !important; }
+</style>
+<aside id="shared-sidebar" style="position:fixed;left:0;top:0;height:100vh;width:220px;background:#ffffff;display:flex;flex-direction:column;padding:28px 0 20px;z-index:99999;border-right:1px solid rgba(71,26,112,0.09);box-shadow:2px 0 14px rgba(71,26,112,0.07);">
+  <div style="padding:0 20px;margin-bottom:26px;">
+    <div style="font-family:'Inter',sans-serif;font-size:19px;font-weight:900;color:#1a0533;letter-spacing:-0.4px;line-height:1.2;"><span style="color:#8731a3;">Intercomp</span></div>
+    <div style="font-family:'Inter',sans-serif;font-size:10px;color:rgba(71,26,112,0.6);margin-top:3px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;">Company Portal</div>
+  </div>
+  <nav style="display:flex;flex-direction:column;padding:0 10px;flex:1;gap:0;overflow-y:auto;">
+    <a href="#" id="snav-dashboard" class="snav-btn" style="display:flex;align-items:center;gap:12px;padding:11px 14px;border-radius:12px;color:#2d1152;text-decoration:none;font-family:'Inter',sans-serif;font-size:12px;font-weight:600;letter-spacing:0.07em;text-transform:uppercase;cursor:pointer;background:transparent;transition:background 0.15s ease;margin:1px 0;border:none;width:100%;text-align:left;">
+      <span style="font-family:'Material Symbols Outlined';font-size:20px;font-weight:normal;font-style:normal;line-height:1;letter-spacing:normal;text-transform:none;display:inline-block;white-space:nowrap;word-wrap:normal;direction:ltr;-webkit-font-feature-settings:'liga';font-feature-settings:'liga';-webkit-font-smoothing:antialiased;color:#2d1152;flex-shrink:0;width:22px;">dashboard</span><span>Dashboard</span>
+    </a>
+    <a href="#" id="snav-jobboard" class="snav-btn" style="display:flex;align-items:center;gap:12px;padding:11px 14px;border-radius:12px;color:#2d1152;text-decoration:none;font-family:'Inter',sans-serif;font-size:12px;font-weight:600;letter-spacing:0.07em;text-transform:uppercase;cursor:pointer;background:transparent;transition:background 0.15s ease;margin:1px 0;border:none;width:100%;text-align:left;">
+      <span style="font-family:'Material Symbols Outlined';font-size:20px;font-weight:normal;font-style:normal;line-height:1;letter-spacing:normal;text-transform:none;display:inline-block;white-space:nowrap;word-wrap:normal;direction:ltr;-webkit-font-feature-settings:'liga';font-feature-settings:'liga';-webkit-font-smoothing:antialiased;color:#2d1152;flex-shrink:0;width:22px;">assignment</span><span>Job Board</span>
+    </a>
+    <a href="#" id="snav-talent" class="snav-btn" style="display:flex;align-items:center;gap:12px;padding:11px 14px;border-radius:12px;color:#2d1152;text-decoration:none;font-family:'Inter',sans-serif;font-size:12px;font-weight:600;letter-spacing:0.07em;text-transform:uppercase;cursor:pointer;background:transparent;transition:background 0.15s ease;margin:1px 0;border:none;width:100%;text-align:left;">
+      <span style="font-family:'Material Symbols Outlined';font-size:20px;font-weight:normal;font-style:normal;line-height:1;letter-spacing:normal;text-transform:none;display:inline-block;white-space:nowrap;word-wrap:normal;direction:ltr;-webkit-font-feature-settings:'liga';font-feature-settings:'liga';-webkit-font-smoothing:antialiased;color:#2d1152;flex-shrink:0;width:22px;">person_search</span><span>Talent Pool</span>
+    </a>
+    <a href="#" id="snav-postings" style="display:flex;align-items:center;gap:12px;padding:11px 14px;border-radius:12px;color:#ffffff;text-decoration:none;font-family:'Inter',sans-serif;font-size:12px;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;cursor:pointer;background:#471A70;margin:1px 0;border:none;width:100%;text-align:left;">
+      <span style="font-family:'Material Symbols Outlined';font-size:20px;font-weight:normal;font-style:normal;line-height:1;letter-spacing:normal;text-transform:none;display:inline-block;white-space:nowrap;word-wrap:normal;direction:ltr;-webkit-font-feature-settings:'liga';font-feature-settings:'liga';-webkit-font-smoothing:antialiased;color:#ffffff;flex-shrink:0;width:22px;">work</span><span>Postings</span>
+    </a>
+    <a href="#" id="snav-kanban" class="snav-btn" style="display:flex;align-items:center;gap:12px;padding:11px 14px;border-radius:12px;color:#2d1152;text-decoration:none;font-family:'Inter',sans-serif;font-size:12px;font-weight:600;letter-spacing:0.07em;text-transform:uppercase;cursor:pointer;background:transparent;transition:background 0.15s ease;margin:1px 0;border:none;width:100%;text-align:left;">
+      <span style="font-family:'Material Symbols Outlined';font-size:20px;font-weight:normal;font-style:normal;line-height:1;letter-spacing:normal;text-transform:none;display:inline-block;white-space:nowrap;word-wrap:normal;direction:ltr;-webkit-font-feature-settings:'liga';font-feature-settings:'liga';-webkit-font-smoothing:antialiased;color:#2d1152;flex-shrink:0;width:22px;">groups</span><span>Applicants</span>
+    </a>
+    <a href="#" id="snav-scheduler" class="snav-btn" style="display:flex;align-items:center;gap:12px;padding:11px 14px;border-radius:12px;color:#2d1152;text-decoration:none;font-family:'Inter',sans-serif;font-size:12px;font-weight:600;letter-spacing:0.07em;text-transform:uppercase;cursor:pointer;background:transparent;transition:background 0.15s ease;margin:1px 0;border:none;width:100%;text-align:left;">
+      <span style="font-family:'Material Symbols Outlined';font-size:20px;font-weight:normal;font-style:normal;line-height:1;letter-spacing:normal;text-transform:none;display:inline-block;white-space:nowrap;word-wrap:normal;direction:ltr;-webkit-font-feature-settings:'liga';font-feature-settings:'liga';-webkit-font-smoothing:antialiased;color:#2d1152;flex-shrink:0;width:22px;">event_available</span><span>Interviews</span>
+    </a>
+    <a href="#" id="snav-saved-drafts" class="snav-btn" style="display:flex;align-items:center;gap:12px;padding:11px 14px;border-radius:12px;color:#2d1152;text-decoration:none;font-family:'Inter',sans-serif;font-size:12px;font-weight:600;letter-spacing:0.07em;text-transform:uppercase;cursor:pointer;background:transparent;transition:background 0.15s ease;margin:1px 0;border:none;width:100%;text-align:left;">
+      <span style="font-family:'Material Symbols Outlined';font-size:20px;font-weight:normal;font-style:normal;line-height:1;letter-spacing:normal;text-transform:none;display:inline-block;white-space:nowrap;word-wrap:normal;direction:ltr;-webkit-font-feature-settings:'liga';font-feature-settings:'liga';-webkit-font-smoothing:antialiased;color:#2d1152;flex-shrink:0;width:22px;">drafts</span><span>Save Draft</span>
+    </a>
+    <a href="#" id="snav-payment" class="snav-btn" style="display:flex;align-items:center;gap:12px;padding:11px 14px;border-radius:12px;color:#2d1152;text-decoration:none;font-family:'Inter',sans-serif;font-size:12px;font-weight:600;letter-spacing:0.07em;text-transform:uppercase;cursor:pointer;background:transparent;transition:background 0.15s ease;margin:1px 0;border:none;width:100%;text-align:left;">
+      <span style="font-family:'Material Symbols Outlined';font-size:20px;font-weight:normal;font-style:normal;line-height:1;letter-spacing:normal;text-transform:none;display:inline-block;white-space:nowrap;word-wrap:normal;direction:ltr;-webkit-font-feature-settings:'liga';font-feature-settings:'liga';-webkit-font-smoothing:antialiased;color:#2d1152;flex-shrink:0;width:22px;">payments</span><span>Payment</span>
+    </a>
+  </nav>
+  <div style="padding:0 12px;margin-top:14px;">
+    <button id="snav-new-posting" style="width:100%;padding:13px 0;background:#471A70;color:#fff;border:none;border-radius:999px;font-family:'Inter',sans-serif;font-weight:700;font-size:13px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:7px;box-shadow:0 4px 16px rgba(71,26,112,0.28);transition:all 0.2s;letter-spacing:0.02em;">
+      <span style="font-family:'Material Symbols Outlined';font-size:18px;font-weight:normal;font-style:normal;line-height:1;letter-spacing:normal;text-transform:none;-webkit-font-feature-settings:'liga';font-feature-settings:'liga';-webkit-font-smoothing:antialiased;color:#fff;display:inline-block;">add</span>
+      New Job Posting
+    </button>
+  </div>
+  <div style="padding:12px 10px 0;margin-top:10px;border-top:1px solid rgba(71,26,112,0.08);">
+    <a href="#" id="snav-help" style="display:flex;align-items:center;gap:11px;padding:9px 12px;border-radius:10px;color:rgba(45,17,82,0.5);text-decoration:none;font-family:'Inter',sans-serif;font-size:11.5px;font-weight:600;letter-spacing:0.07em;text-transform:uppercase;cursor:pointer;background:transparent;transition:background 0.15s;margin-bottom:2px;" class="snav-btn">
+      <span style="font-family:'Material Symbols Outlined';font-size:18px;font-weight:normal;font-style:normal;line-height:1;letter-spacing:normal;text-transform:none;-webkit-font-feature-settings:'liga';font-feature-settings:'liga';-webkit-font-smoothing:antialiased;color:rgba(71,26,112,0.4);display:inline-block;">help_outline</span>
+      Help Center
+    </a>
+    <a href="#" id="snav-logout" class="snav-logout" style="display:flex;align-items:center;gap:11px;padding:9px 12px;border-radius:10px;color:#c0295a;text-decoration:none;font-family:'Inter',sans-serif;font-size:11.5px;font-weight:600;letter-spacing:0.07em;text-transform:uppercase;cursor:pointer;background:transparent;transition:background 0.15s;">
+      <span style="font-family:'Material Symbols Outlined';font-size:18px;font-weight:normal;font-style:normal;line-height:1;letter-spacing:normal;text-transform:none;-webkit-font-feature-settings:'liga';font-feature-settings:'liga';-webkit-font-smoothing:antialiased;color:#c0295a;display:inline-block;">logout</span>
+      Log Out
+    </a>
+  </div>
+</aside>
+
+<style id="topbar-search-styles">
+  #topbar-search {
+    width: 144px;
+    transition: width 0.3s ease;
+  }
+  @media (min-width: 768px) {
+    #topbar-search {
+      width: 192px;
+    }
+    #topbar-search:focus {
+      width: 240px;
+    }
+  }
+  @media (min-width: 1024px) {
+    #topbar-search {
+      width: 256px;
+    }
+    #topbar-search:focus {
+      width: 320px;
+    }
+  }
+</style>
+<!-- Shared Top Bar -->
+<header id="shared-topbar" style="position:fixed;top:0;left:220px;width:calc(100vw - 220px);height:56px;background:rgba(255,255,255,0.15);backdrop-filter:blur(28px);-webkit-backdrop-filter:blur(28px);display:flex;align-items:center;justify-content:flex-end;padding:0 32px;gap:24px;z-index:99998;border-bottom:1px solid rgba(255,255,255,0.6);box-shadow:0 12px 40px 0 rgba(71,26,112,0.08);">
+  <div style="display:flex;align-items:center;gap:8px;background:rgba(255,255,255,0.2);padding:6px 16px;border-radius:999px;border:1px solid rgba(255,255,255,0.6);box-shadow:0 2px 4px rgba(0,0,0,0.02);transition:all 0.3s;">
+    <span style="font-family:'Material Symbols Outlined';font-size:18px;font-weight:normal;font-style:normal;line-height:1;letter-spacing:normal;text-transform:none;-webkit-font-feature-settings:'liga';font-feature-settings:'liga';-webkit-font-smoothing:antialiased;color:#2d1152;display:inline-block;user-select:none;">search</span>
+    <input id="topbar-search" style="background:transparent;border:none;outline:none;color:#2d1152;font-size:12px;font-family:'Inter',sans-serif;padding:0;margin:0;height:20px;line-height:20px;box-shadow:none;" placeholder="Search candidates..." type="text"/>
+  </div>
+  <div style="position:relative;cursor:pointer;display:flex;align-items:center;justify-content:center;">
+    <span style="font-family:'Material Symbols Outlined';font-size:22px;font-weight:normal;font-style:normal;line-height:1;letter-spacing:normal;text-transform:none;-webkit-font-feature-settings:'liga';font-feature-settings:'liga';-webkit-font-smoothing:antialiased;color:#2d1152;display:inline-block;">notifications</span>
+    <span style="position:absolute;top:1.5px;right:1.5px;width:8px;height:8px;background:#ff453a;border-radius:50%;border:1.5px solid #ffffff;"></span>
+  </div>
+  <span style="font-family:'Material Symbols Outlined';font-size:22px;font-weight:normal;font-style:normal;line-height:1;letter-spacing:normal;text-transform:none;-webkit-font-feature-settings:'liga';font-feature-settings:'liga';-webkit-font-smoothing:antialiased;color:#2d1152;display:inline-block;cursor:pointer;">settings</span>
+  <div style="width:40px;height:40px;border-radius:50%;overflow:hidden;cursor:pointer;border:2px solid #8731a3;box-shadow:0 2px 8px rgba(135,49,163,0.15);transition:transform 0.2s;">
+    <img alt="Profile" style="width:100%;height:100%;object-fit:cover;" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA25J-RpNqe_ribsVF3fd4mnzE6ifwHeZuVNu5AMQU2EnYpClByPq7nwtb_OW8YWdE9zHhVr_myUbTkksryul6U1vE6tYcUe2Is_Ykf44A04yPQngjPdz5xvO59lZYpyYogiOT7fWRVG0OG2uYrLcYBA_hW8xxo8YeR57ryeTXbIvT3Ziwr5FLGpOpoVx-euTPcJedNNZFG0cab6QctiazShZ8qfEjAKNGvyzlC9_fl1G_pUaR0pvuTjw1ClquEYOqjrb_2RPHXuypu"/>
+  </div>
+</header>
+
+<script id="shared-nav-wiring">
+(function() {
+  var ACTIVE_BG = '#471A70';
+  var ACTIVE_COLOR = '#ffffff';
+  var INACTIVE_BG = 'transparent';
+  var INACTIVE_COLOR = '#2d1152';
+  var ACTIVE_ICON_COLOR = '#ffffff';
+  var INACTIVE_ICON_COLOR = '#2d1152';
+  var BASE_STYLE = "display:flex;align-items:center;gap:12px;padding:11px 14px;border-radius:12px;text-decoration:none;font-family:'Inter',sans-serif;font-size:12px;font-weight:600;letter-spacing:0.07em;text-transform:uppercase;cursor:pointer;margin:1px 0;border:none;width:100%;text-align:left;transition:background 0.15s ease;";
+  var ICON_BASE = "font-family:'Material Symbols Outlined';font-size:20px;font-weight:normal;font-style:normal;line-height:1;letter-spacing:normal;text-transform:none;display:inline-block;white-space:nowrap;word-wrap:normal;direction:ltr;-webkit-font-feature-settings:'liga';font-feature-settings:'liga';-webkit-font-smoothing:antialiased;flex-shrink:0;width:22px;";
+
+  var routes = {
+    'snav-dashboard':    'recruiter-dash',
+    'snav-jobboard':     'jobboard',
+    'snav-talent':       'talent',
+    'snav-postings':     'postings',
+    'snav-kanban':       'kanban',
+    'snav-scheduler':    'scheduler',
+    'snav-saved-drafts': 'saved-drafts',
+    'snav-payment':      'payment'
+  };
+
+  function navigate(dest) {
+    if (window.parent && window.parent.App) window.parent.App.navigate(dest);
+  }
+
+  function setActive(route) {
+    var reverseMap = {};
+    Object.keys(routes).forEach(function(k) { reverseMap[routes[k]] = k; });
+    var activeId = reverseMap[route];
+    Object.keys(routes).forEach(function(id) {
+      var el = document.getElementById(id);
+      if (!el) return;
+      var icon = el.querySelector('span:first-child');
+      if (id === activeId) {
+        el.style.cssText = BASE_STYLE + 'background:' + ACTIVE_BG + ';color:' + ACTIVE_COLOR + ';font-weight:700;';
+        if (icon) icon.style.color = ACTIVE_ICON_COLOR;
+      } else {
+        el.style.cssText = BASE_STYLE + 'background:' + INACTIVE_BG + ';color:' + INACTIVE_COLOR + ';';
+        if (icon) icon.style.color = INACTIVE_ICON_COLOR;
+        el.onmouseover = function() { this.style.background = 'rgba(71,26,112,0.08)'; };
+        el.onmouseout  = function() { this.style.background = INACTIVE_BG; };
+      }
+    });
+  }
+
+  Object.keys(routes).forEach(function(id) {
+    var el = document.getElementById(id);
+    if (!el) return;
+    el.addEventListener('click', function(e) { e.preventDefault(); navigate(routes[id]); });
+  });
+
+  var btn = document.getElementById('snav-new-posting');
+  if (btn) {
+    btn.addEventListener('click', function() { navigate('job-create'); });
+    btn.addEventListener('mouseenter', function() { btn.style.opacity='0.87'; btn.style.transform='translateY(-1px)'; });
+    btn.addEventListener('mouseleave', function() { btn.style.opacity='1'; btn.style.transform='translateY(0)'; });
+  }
+
+  var logout = document.getElementById('snav-logout');
+  if (logout) {
+    logout.addEventListener('click', function(e) {
+      e.preventDefault();
+      localStorage.removeItem('isLoggedIn');
+      if (window.parent && window.parent.App) window.parent.App.navigate('landing');
+    });
+  }
+
+  function trySetActive() {
+    try {
+      if (window.parent && window.parent.App && window.parent.App.activeView) {
+        setActive(window.parent.App.activeView);
+      }
+    } catch(e) {}
+  }
+  trySetActive();
+  setTimeout(trySetActive, 200);
+  window.setNavActive = setActive;
+
+  var mainEl = document.querySelector('body > main');
+  if (mainEl) {
+    mainEl.style.setProperty('margin-left', '220px', 'important');
+    mainEl.style.setProperty('padding-top', '60px', 'important');
+  }
+})();
+</script>
+<!-- ===== END SHARED NAV ===== -->
+
+<!-- Main Content -->
+<main class="ml-[220px] pt-[58px] px-4 py-8 md:px-8 min-h-screen">
+  <!-- Page Header & Filters -->
+  <div class="flex flex-col gap-6 mb-8">
+    <div class="flex justify-between items-center">
+      <div>
+        <h1 class="font-headline-lg text-headline-lg text-on-background">Job Postings Management</h1>
+        <p class="text-on-surface-variant text-sm mt-1">Monitor, edit, boost, and analyze your active postings in real-time.</p>
+      </div>
+      <button onclick="openCreateModal()" class="px-6 py-3 bg-[#471A70] text-white font-bold rounded-full shadow-lg hover:bg-[#320f53] hover:scale-105 active:scale-95 transition-all flex items-center gap-2">
+        <span class="material-symbols-outlined text-lg">add</span> New Job Posting
+      </button>
+    </div>
+
+    <!-- Search & Filter Controls Panel -->
+    <div class="glass-card p-5 rounded-2xl flex flex-col md:flex-row gap-4 items-center justify-end">
+      
+      <div class="flex gap-3 w-full md:w-auto">
+        <!-- Status Filter -->
+        <div class="relative flex-1 md:w-48">
+          <select id="statusFilter" onchange="applyJobFilters()" class="w-full bg-white/40 border border-glass-border rounded-xl px-4 py-2.5 text-sm text-on-background focus:outline-none focus:ring-2 focus:ring-primary/30 appearance-none cursor-pointer">
+            <option value="all">All Statuses</option>
+            <option value="active">Active</option>
+            <option value="paused">Paused</option>
+            <option value="boosted">Premium (Boosted)</option>
+          </select>
+          <span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-outline pointer-events-none">expand_more</span>
+        </div>
+
+        <!-- Stipend Filter -->
+        <div class="relative flex-1 md:w-48">
+          <select id="salaryFilter" onchange="applyJobFilters()" class="w-full bg-white/40 border border-glass-border rounded-xl px-4 py-2.5 text-sm text-on-background focus:outline-none focus:ring-2 focus:ring-primary/30 appearance-none cursor-pointer">
+            <option value="all">All Stipends</option>
+            <option value="10000">Rs. 10,000+</option>
+            <option value="20000">Rs. 20,000+</option>
+            <option value="50000">Rs. 50,000+</option>
+          </select>
+          <span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-outline pointer-events-none">expand_more</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Postings Table Card -->
+  <div class="glass-card rounded-[32px] overflow-hidden mb-8">
+    <div class="overflow-x-auto">
+      <table class="w-full text-left border-collapse min-w-[900px]">
+        <thead>
+          <tr class="border-b border-glass-border/40">
+            <th class="px-8 py-6 font-label-caps text-label-caps text-on-surface-variant/80">Job Title</th>
+            <th class="px-6 py-6 font-label-caps text-label-caps text-on-surface-variant/80">Date Posted</th>
+            <th class="px-6 py-6 font-label-caps text-label-caps text-on-surface-variant/80">Total Applicants</th>
+            <th class="px-6 py-6 font-label-caps text-label-caps text-on-surface-variant/80">New</th>
+            <th class="px-6 py-6 font-label-caps text-label-caps text-on-surface-variant/80">Stipend Level</th>
+            <th class="px-6 py-6 font-label-caps text-label-caps text-on-surface-variant/80">Status</th>
+            <th class="px-8 py-6 font-label-caps text-label-caps text-on-surface-variant/80 text-right">Actions</th>
+          </tr>
+        </thead>
+        <tbody id="jobPostingsTableBody" class="divide-y divide-glass-border/20">
+          <!-- Dynamically populated rows -->
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Table Footer -->
+    <div class="px-8 py-6 border-t border-glass-border/40 flex items-center justify-between">
+      <p id="showingPostingsText" class="text-xs font-label-caps text-on-surface-variant uppercase tracking-widest">Showing 0 of 0 Postings</p>
+    </div>
+  </div>
+
+  <!-- Bento Statistics (Bottom Row) -->
+  <div class="grid grid-cols-12 gap-6">
+    <div class="col-span-4 glass-card rounded-3xl p-6 flex flex-col justify-between h-48 group">
+      <div class="flex justify-between items-start">
+        <div class="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center text-primary">
+          <span class="material-symbols-outlined text-[32px]">group</span>
+        </div>
+        <span class="text-xs font-bold text-tertiary bg-tertiary/10 px-2 py-1 rounded">+14% vs LW</span>
+      </div>
+      <div>
+        <h4 class="text-on-surface-variant font-label-caps text-[12px] uppercase tracking-widest">Total Active Applicants</h4>
+        <p id="statTotalApplicants" class="text-headline-lg text-on-background font-bold">0</p>
+      </div>
+    </div>
+    <div class="col-span-4 glass-card rounded-3xl p-6 flex flex-col justify-between h-48 bg-primary text-on-primary">
+      <div class="flex justify-between items-start">
+        <div class="w-12 h-12 rounded-2xl bg-white/20 flex items-center justify-center text-white">
+          <span class="material-symbols-outlined text-[32px]">timer</span>
+        </div>
+        <span class="text-xs font-bold text-white/60">Average</span>
+      </div>
+      <div>
+        <h4 class="text-white/70 font-label-caps text-[12px] uppercase tracking-widest">Time to Fill</h4>
+        <p class="text-headline-lg font-bold">18.4 Days</p>
+      </div>
+    </div>
+    <div class="col-span-4 glass-card rounded-3xl p-6 flex flex-col justify-between h-48">
+      <div class="flex justify-between items-start">
+        <div class="w-12 h-12 rounded-2xl bg-orange/10 flex items-center justify-center text-orange">
+          <span class="material-symbols-outlined text-[32px]">monetization_on</span>
+        </div>
+        <span class="text-xs font-bold text-error bg-error/10 px-2 py-1 rounded">-3% Spend</span>
+      </div>
+      <div>
+        <h4 class="text-on-surface-variant font-label-caps text-[12px] uppercase tracking-widest">Weekly Stipend Payout</h4>
+        <p id="statWeeklyPayout" class="text-headline-lg text-on-background font-bold">Rs. 0</p>
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- Modals & Overlays -->
+
+<!-- 1. Create/Edit Job Modal -->
+<div id="jobEditModal" class="fixed inset-0 z-[99999] hidden items-center justify-center p-4 bg-black/45 backdrop-blur-sm">
+  <div class="glass-card w-full max-w-2xl rounded-3xl overflow-hidden shadow-2xl border border-white/40 flex flex-col max-h-[90vh]">
+    <div class="p-6 border-b border-white/20 flex justify-between items-center bg-white/10">
+      <h3 id="modalJobTitle" class="font-bold text-lg text-on-background">Edit Job Posting</h3>
+      <button onclick="closeEditModal()" class="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center text-on-background hover:bg-white/40 transition-colors">
+        <span class="material-symbols-outlined text-lg">close</span>
+      </button>
+    </div>
+    
+    <div class="p-6 overflow-y-auto space-y-4 text-left custom-scrollbar flex-grow">
+      <input type="hidden" id="editJobId"/>
+      <div class="grid grid-cols-2 gap-4">
+        <div>
+          <label class="font-label-caps text-label-caps uppercase text-outline mb-1.5 block">Job Title</label>
+          <input type="text" id="editTitle" class="w-full bg-white/40 border border-glass-border rounded-xl px-4 py-2.5 text-sm text-on-background focus:ring-2 focus:ring-primary/30" placeholder="e.g. Frontend Developer Intern"/>
+        </div>
+        <div>
+          <label class="font-label-caps text-label-caps uppercase text-outline mb-1.5 block">Location</label>
+          <input type="text" id="editLocation" class="w-full bg-white/40 border border-glass-border rounded-xl px-4 py-2.5 text-sm text-on-background focus:ring-2 focus:ring-primary/30" placeholder="e.g. Lahore, Pakistan"/>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-2 gap-4">
+        <div>
+          <label class="font-label-caps text-label-caps uppercase text-outline mb-1.5 block">Stipend / Salary</label>
+          <input type="text" id="editSalary" class="w-full bg-white/40 border border-glass-border rounded-xl px-4 py-2.5 text-sm text-on-background focus:ring-2 focus:ring-primary/30" placeholder="e.g. Rs. 25,000 / mo"/>
+        </div>
+        <div>
+          <label class="font-label-caps text-label-caps uppercase text-outline mb-1.5 block">Job Type</label>
+          <select id="editType" class="w-full bg-white/40 border border-glass-border rounded-xl px-4 py-2.5 text-sm text-on-background focus:ring-2 focus:ring-primary/30">
+            <option value="Full-time">Full-time</option>
+            <option value="Part-time">Part-time</option>
+            <option value="Internship">Internship</option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <label class="font-label-caps text-label-caps uppercase text-outline mb-1.5 block">Required Skills (Comma separated)</label>
+        <input type="text" id="editSkills" class="w-full bg-white/40 border border-glass-border rounded-xl px-4 py-2.5 text-sm text-on-background focus:ring-2 focus:ring-primary/30" placeholder="e.g. React, JavaScript, CSS"/>
+      </div>
+
+      <div>
+        <label class="font-label-caps text-label-caps uppercase text-outline mb-1.5 block">Job Description</label>
+        <textarea id="editDescription" rows="5" class="w-full bg-white/40 border border-glass-border rounded-xl px-4 py-2.5 text-sm text-on-background focus:ring-2 focus:ring-primary/30 resize-none" placeholder="Enter detailed job description..."></textarea>
+      </div>
+    </div>
+
+    <div class="p-6 border-t border-white/20 bg-white/10 flex gap-4">
+      <button onclick="closeEditModal()" class="flex-1 py-3.5 border border-white/30 text-sm font-bold text-on-background rounded-2xl hover:bg-white/20 transition-all">Cancel</button>
+      <button onclick="saveJobPost()" class="flex-1 py-3.5 bg-primary text-white text-sm font-bold rounded-2xl hover:bg-primary-container transition-all">Save Changes</button>
+    </div>
+  </div>
+</div>
+
+<!-- 2. Preview Job Modal -->
+<div id="jobPreviewModal" class="fixed inset-0 z-[99999] hidden items-center justify-center p-4 bg-black/45 backdrop-blur-sm">
+  <div class="glass-card w-full max-w-2xl rounded-3xl overflow-hidden shadow-2xl border border-white/40 flex flex-col max-h-[85vh]">
+    <div class="p-6 border-b border-white/20 flex justify-between items-center bg-white/10">
+      <h3 class="font-bold text-lg text-on-background">Job Visualization Preview</h3>
+      <button onclick="closePreviewModal()" class="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center text-on-background hover:bg-white/40 transition-colors">
+        <span class="material-symbols-outlined text-lg">close</span>
+      </button>
+    </div>
+    
+    <div class="p-8 overflow-y-auto space-y-6 text-left custom-scrollbar flex-grow">
+      <div class="flex items-center gap-4">
+        <div class="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center text-primary text-2xl font-bold border border-primary/20">
+          💼
+        </div>
+        <div>
+          <h2 id="previewTitle" class="text-xl font-bold text-on-background">Job Title</h2>
+          <p id="previewSub" class="text-xs text-on-surface-variant">Company Name • Location</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-2 gap-4 bg-white/25 p-4 rounded-2xl border border-white/40">
+        <div>
+          <p class="text-[10px] text-outline uppercase font-bold">Stipend / Salary</p>
+          <p id="previewSalary" class="text-sm font-bold text-on-background mt-0.5">Rs. 0</p>
+        </div>
+        <div>
+          <p class="text-[10px] text-outline uppercase font-bold">Job Type</p>
+          <p id="previewType" class="text-sm font-bold text-on-background mt-0.5">Full-time</p>
+        </div>
+      </div>
+
+      <div class="space-y-2">
+        <h4 class="text-xs font-bold text-outline uppercase tracking-wider">Job Description</h4>
+        <p id="previewDescription" class="text-xs text-on-background/90 leading-relaxed"></p>
+      </div>
+
+      <div class="space-y-2">
+        <h4 class="text-xs font-bold text-outline uppercase tracking-wider">Skills Required</h4>
+        <div id="previewSkills" class="flex flex-wrap gap-2"></div>
+      </div>
+    </div>
+
+    <div class="p-6 border-t border-white/20 bg-white/10">
+      <button onclick="closePreviewModal()" class="w-full py-3.5 bg-primary text-white text-sm font-bold rounded-2xl hover:bg-primary-container transition-all">Close Preview</button>
+    </div>
+  </div>
+</div>
+
+<!-- 3. Boost/Payment Modal (JazzCash & EasyPaisa Integration) -->
+<div id="jobBoostModal" class="fixed inset-0 z-[99999] hidden items-center justify-center p-4 bg-black/45 backdrop-blur-sm">
+  <div class="glass-card w-full max-w-md rounded-3xl overflow-hidden shadow-2xl border border-white/40 flex flex-col">
+    <div class="p-6 border-b border-white/20 flex justify-between items-center bg-white/10">
+      <div class="flex items-center gap-2">
+        <span class="material-symbols-outlined text-orange">keyboard_double_arrow_up</span>
+        <h3 class="font-bold text-lg text-on-background">Boost Job Posting</h3>
+      </div>
+      <button onclick="closeBoostModal()" class="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center text-on-background hover:bg-white/40 transition-colors">
+        <span class="material-symbols-outlined text-lg">close</span>
+      </button>
+    </div>
+    
+    <div class="p-6 space-y-6 text-left">
+      <input type="hidden" id="boostJobId"/>
+      <div class="text-center bg-primary/10 border border-primary/20 p-4 rounded-2xl">
+        <p class="text-xs text-on-surface-variant font-medium">Elevate your posting to the top of the job board, matching the best candidates immediately.</p>
+        <p class="text-lg font-extrabold text-primary mt-2">Rs. 1,500 <span class="text-xs text-outline font-normal">One-time Boost</span></p>
+      </div>
+
+      <!-- Payment Method Selection -->
+      <div class="space-y-2">
+        <label class="font-label-caps text-label-caps uppercase text-outline mb-1.5 block">Select Mobile Wallet</label>
+        <div class="grid grid-cols-2 gap-4">
+          <button id="methodJazzcash" onclick="selectPaymentMethod('jazzcash')" class="p-4 rounded-2xl border-2 border-primary bg-white/40 flex flex-col items-center justify-center gap-2 transition-all hover:scale-102">
+            <span class="text-sm font-bold text-orange">JazzCash</span>
+            <span class="text-[10px] text-outline">Mobile Wallet</span>
+          </button>
+          <button id="methodEasypaisa" onclick="selectPaymentMethod('easypaisa')" class="p-4 rounded-2xl border-2 border-transparent bg-white/25 flex flex-col items-center justify-center gap-2 transition-all hover:scale-102">
+            <span class="text-sm font-bold text-green-700">EasyPaisa</span>
+            <span class="text-[10px] text-outline">Mobile Wallet</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Wallet Details Form -->
+      <div class="space-y-4">
+        <div>
+          <label class="font-label-caps text-label-caps uppercase text-outline mb-1.5 block">Mobile Account Number</label>
+          <input type="text" id="walletNumber" maxlength="11" class="w-full bg-white/40 border border-glass-border rounded-xl px-4 py-2.5 text-sm text-on-background focus:ring-2 focus:ring-primary/30" placeholder="e.g. 03001234567"/>
+        </div>
+        <div>
+          <label class="font-label-caps text-label-caps uppercase text-outline mb-1.5 block">MPIN (Security PIN)</label>
+          <input type="password" id="walletMpin" maxlength="6" class="w-full bg-white/40 border border-glass-border rounded-xl px-4 py-2.5 text-sm text-on-background focus:ring-2 focus:ring-primary/30" placeholder="••••"/>
+        </div>
+      </div>
+
+      <!-- Simulated Loading State -->
+      <div id="paymentLoading" class="hidden flex flex-col items-center justify-center py-4 space-y-2 text-center">
+        <div class="w-8 h-8 border-4 border-primary border-t-transparent rounded-full animate-spin"></div>
+        <p class="text-xs text-primary font-bold">Securing transaction & sending MPIN prompt...</p>
+      </div>
+    </div>
+
+    <div class="p-6 border-t border-white/20 bg-white/10 flex gap-4">
+      <button onclick="closeBoostModal()" class="flex-1 py-3.5 border border-white/30 text-sm font-bold text-on-background rounded-2xl hover:bg-white/20 transition-all">Cancel</button>
+      <button id="payConfirmBtn" onclick="confirmBoostPayment()" class="flex-1 py-3.5 bg-primary text-white text-sm font-bold rounded-2xl hover:bg-primary-container transition-all">Confirm & Pay</button>
+    </div>
+  </div>
+</div>
+
+<!-- 4. Share Boost Link Modal -->
+<div id="jobShareModal" class="fixed inset-0 z-[99999] hidden items-center justify-center p-4 bg-black/45 backdrop-blur-sm">
+  <div class="glass-card w-full max-w-md rounded-3xl overflow-hidden shadow-2xl border border-white/40 flex flex-col">
+    <div class="p-6 border-b border-white/20 flex justify-between items-center bg-white/10">
+      <h3 class="font-bold text-lg text-on-background">Share Boost Link</h3>
+      <button onclick="closeShareModal()" class="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center text-on-background hover:bg-white/40 transition-colors">
+        <span class="material-symbols-outlined text-lg">close</span>
+      </button>
+    </div>
+    
+    <div class="p-6 space-y-4 text-left">
+      <p class="text-xs text-on-surface-variant">Copy the direct job application link to share across platforms like LinkedIn, WhatsApp, or Twitter.</p>
+      
+      <div class="flex items-center gap-2 bg-white/40 border border-glass-border p-3 rounded-xl">
+        <input type="text" id="shareUrlInput" readOnly class="bg-transparent border-none focus:ring-0 text-xs text-on-background w-full p-0"/>
+        <button onclick="copyShareUrl()" class="px-3 py-1.5 bg-primary text-white text-[11px] font-bold rounded-lg hover:bg-primary-container transition-all flex items-center gap-1 flex-shrink-0">
+          <span class="material-symbols-outlined text-sm">content_copy</span> Copy
+        </button>
+      </div>
+    </div>
+
+    <div class="p-6 border-t border-white/20 bg-white/10">
+      <button onclick="closeShareModal()" class="w-full py-3.5 bg-primary text-white text-sm font-bold rounded-2xl hover:bg-primary-container transition-all">Done</button>
+    </div>
+  </div>
+</div>
+
+<!-- Toast notification -->
+<div id="toast" class="fixed bottom-8 left-1/2 -translate-x-1/2 z-[200] px-6 py-3 rounded-full font-bold text-sm shadow-xl transition-all duration-300 opacity-0 pointer-events-none flex items-center gap-2 bg-on-background text-white">
+  <span class="material-symbols-outlined text-[18px]" id="toastIcon">check_circle</span>
+  <span id="toastMsg">Done</span>
+</div>
+
+<script>
+  let ALL_JOBS = [];
+  let FILTERED_JOBS = [];
+  let activePaymentMethod = 'jazzcash';
+
+  // Fetch real-time jobs from backend
+  function fetchJobs() {
+    fetch('/api/jobs')
+      .then(res => res.json())
+      .then(data => {
+        ALL_JOBS = data;
+        applyJobFilters();
+      })
+      .catch(err => {
+        console.error("Failed to fetch jobs:", err);
+      });
+  }
+
+  // Filter jobs by logged-in company and search queries
+  function applyJobFilters() {
+    const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
+    const companyFilter = currentUser.companyName || 'zylor.io';
+    
+    // Filter by company
+    let jobs = ALL_JOBS.filter(j => j.company.toLowerCase() === companyFilter.toLowerCase());
+
+    // Search query filter
+    const searchEl = document.getElementById('searchJobInput');
+    const query = searchEl ? searchEl.value.toLowerCase().trim() : '';
+    if (query) {
+      jobs = jobs.filter(j => 
+        j.title.toLowerCase().includes(query) || 
+        j.description.toLowerCase().includes(query) ||
+        (j.skillsRequired && j.skillsRequired.some(s => s.toLowerCase().includes(query)))
+      );
+    }
+
+    // Status filter
+    const status = document.getElementById('statusFilter').value;
+    if (status === 'active') {
+      jobs = jobs.filter(j => j.status !== 'paused');
+    } else if (status === 'paused') {
+      jobs = jobs.filter(j => j.status === 'paused');
+    } else if (status === 'boosted') {
+      jobs = jobs.filter(j => j.boosted === true);
+    }
+
+    // Salary filter
+    const salary = document.getElementById('salaryFilter').value;
+    if (salary !== 'all') {
+      const minSalary = parseInt(salary);
+      jobs = jobs.filter(j => {
+        const matches = j.salary.match(/\d+/g);
+        if (matches) {
+          const salaries = matches.map(Number);
+          return salaries.some(s => s * 1000 >= minSalary || s >= minSalary); // handles K values
+        }
+        return true;
+      });
+    }
+
+    FILTERED_JOBS = jobs;
+    renderJobsTable();
+    updateStats(jobs);
+  }
+
+  // Render jobs into the table
+  function renderJobsTable() {
+    const tbody = document.getElementById('jobPostingsTableBody');
+    tbody.innerHTML = '';
+
+    if (FILTERED_JOBS.length === 0) {
+      tbody.innerHTML = `<tr><td colspan="7" class="text-center text-outline/80 py-12 text-sm italic">No job postings found matching your filters.</td></tr>`;
+      document.getElementById('showingPostingsText').textContent = `Showing 0 of 0 Postings`;
+      return;
+    }
+
+    document.getElementById('showingPostingsText').textContent = `Showing ${FILTERED_JOBS.length} of ${FILTERED_JOBS.length} Postings`;
+
+    FILTERED_JOBS.forEach(job => {
+      const row = document.createElement('tr');
+      row.className = 'row-hover spring-transition border-b border-glass-border/20';
+
+      const dateStr = job.created_at ? new Date(job.created_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : 'Oct 24, 2024';
+      const mockApplicants = (parseInt(job.id || '1001') % 150) + 24;
+      const mockNewApplicants = (parseInt(job.id || '1001') % 12) + 1;
+
+      let statusBadge = '';
+      if (job.status === 'paused') {
+        statusBadge = `<span class="inline-flex items-center px-3 py-1 rounded-full text-[10px] font-extrabold uppercase text-outline tracking-widest bg-white/20 border border-glass-border">Paused</span>`;
+      } else if (job.boosted) {
+        statusBadge = `<span class="status-chip-hot inline-flex items-center px-3 py-1 rounded-full text-[10px] font-extrabold uppercase text-white tracking-widest"><span class="material-symbols-outlined text-[14px] mr-1" style="font-variation-settings: 'FILL' 1;">local_fire_department</span>Hot</span>`;
+      } else {
+        statusBadge = `<span class="inline-flex items-center px-3 py-1 rounded-full text-[10px] font-extrabold uppercase text-on-surface-variant tracking-widest bg-glass-thick border border-glass-border">Active</span>`;
+      }
+
+      row.innerHTML = `
+        <td class="px-8 py-6">
+          <div class="flex items-center gap-4">
+            <div class="w-10 h-10 rounded-lg bg-primary-container/20 flex items-center justify-center text-primary">
+              <span class="material-symbols-outlined">${job.type === 'Internship' ? 'school' : 'work'}</span>
+            </div>
+            <div>
+              <p class="font-bold text-on-background">${job.title}</p>
+              <p class="text-xs text-on-surface-variant">${job.location}</p>
+            </div>
+          </div>
+        </td>
+        <td class="px-6 py-6 text-body-md font-medium text-on-surface-variant">${dateStr}</td>
+        <td class="px-6 py-6">
+          <span class="inline-flex items-center justify-center px-3 py-1 rounded-full bg-secondary-fixed text-on-secondary-fixed font-bold text-xs">${mockApplicants}</span>
+        </td>
+        <td class="px-6 py-6">
+          <span class="pulsate-glow inline-flex items-center justify-center px-3 py-1 rounded-full bg-primary text-on-primary font-bold text-xs">+${mockNewApplicants}</span>
+        </td>
+        <td class="px-6 py-6 font-bold text-primary">${job.salary}</td>
+        <td class="px-6 py-6">${statusBadge}</td>
+        <td class="px-8 py-6 text-right">
+          <div class="flex justify-end gap-2">
+            <button onclick="openEditModal('${job.id}')" title="Edit Post" class="w-9 h-9 rounded-full bg-glass-thick border border-glass-border flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-all shadow-sm"><span class="material-symbols-outlined text-[18px]">edit</span></button>
+            <button onclick="togglePauseJob('${job.id}')" title="${job.status === 'paused' ? 'Resume Post' : 'Pause Post'}" class="w-9 h-9 rounded-full bg-glass-thick border border-glass-border flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-all shadow-sm">
+              <span class="material-symbols-outlined text-[18px]">${job.status === 'paused' ? 'play_arrow' : 'pause'}</span>
+            </button>
+            <button onclick="openPreviewModal('${job.id}')" title="View Visualization" class="w-9 h-9 rounded-full bg-glass-thick border border-glass-border flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-all shadow-sm"><span class="material-symbols-outlined text-[18px]">visibility</span></button>
+            ${job.boosted ? `
+              <button onclick="openShareModal('${job.id}')" title="Share Boost Link" class="px-3 h-9 rounded-full bg-green-700 text-white flex items-center justify-center gap-1 font-bold text-xs shadow-md hover:scale-105 active:scale-95 transition-all"><span class="material-symbols-outlined text-[16px]">share</span> Share</button>
+            ` : `
+              <button onclick="openBoostModal('${job.id}')" class="px-3 h-9 rounded-full bg-primary text-on-primary flex items-center justify-center gap-1 font-bold text-xs shadow-md hover:scale-110 active:scale-95 transition-all"><span class="material-symbols-outlined text-[16px]">keyboard_double_arrow_up</span> Boost</button>
+            `}
+          </div>
+        </td>
+      `;
+      tbody.appendChild(row);
+    });
+  }
+
+  // Update bento statistics
+  function updateStats(jobs) {
+    let totalApps = 0;
+    let totalPayout = 0;
+    
+    jobs.forEach(job => {
+      totalApps += (parseInt(job.id || '1001') % 150) + 24;
+      const salaryMatch = job.salary.match(/\d+/g);
+      if (salaryMatch) {
+        const avgSalary = salaryMatch.map(Number).reduce((a, b) => a + b, 0) / salaryMatch.length;
+        totalPayout += avgSalary * (avgSalary < 1000 ? 1000 : 1);
+      }
+    });
+
+    document.getElementById('statTotalApplicants').textContent = totalApps.toLocaleString();
+    document.getElementById('statWeeklyPayout').textContent = `Rs. ${(totalPayout / 4).toLocaleString()}`;
+  }
+
+  // Toggle pause status on backend
+  function togglePauseJob(id) {
+    fetch('/api/jobs/pause', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ id })
+    })
+    .then(res => res.json())
+    .then(data => {
+      if (data.success) {
+        showToast(data.job.status === 'paused' ? 'Job posting paused' : 'Job posting activated', 'check_circle');
+        fetchJobs();
+      }
+    });
+  }
+
+  // --- Modal Open/Close ---
+
+  function openCreateModal() {
+    document.getElementById('modalJobTitle').textContent = "New Job Posting";
+    document.getElementById('editJobId').value = "";
+    document.getElementById('editTitle').value = "";
+    document.getElementById('editLocation').value = "Lahore, Pakistan";
+    document.getElementById('editSalary').value = "Rs. 25,000 - 35,000 / mo";
+    document.getElementById('editType').value = "Internship";
+    document.getElementById('editSkills').value = "";
+    document.getElementById('editDescription').value = "";
+
+    document.getElementById('jobEditModal').classList.remove('hidden');
+    document.getElementById('jobEditModal').classList.add('flex');
+  }
+
+  function openEditModal(id) {
+    const job = ALL_JOBS.find(j => String(j.id) === String(id));
+    if (!job) return;
+
+    document.getElementById('modalJobTitle').textContent = "Edit Job Posting";
+    document.getElementById('editJobId').value = job.id;
+    document.getElementById('editTitle').value = job.title;
+    document.getElementById('editLocation').value = job.location;
+    document.getElementById('editSalary').value = job.salary;
+    document.getElementById('editType').value = job.type;
+    document.getElementById('editSkills').value = job.skillsRequired ? job.skillsRequired.join(', ') : "";
+    document.getElementById('editDescription').value = job.description;
+
+    document.getElementById('jobEditModal').classList.remove('hidden');
+    document.getElementById('jobEditModal').classList.add('flex');
+  }
+
+  function closeEditModal() {
+    document.getElementById('jobEditModal').classList.add('hidden');
+    document.getElementById('jobEditModal').classList.remove('flex');
+  }
+
+  function saveJobPost() {
+    const id = document.getElementById('editJobId').value;
+    const title = document.getElementById('editTitle').value.trim();
+    const location = document.getElementById('editLocation').value.trim();
+    const salary = document.getElementById('editSalary').value.trim();
+    const type = document.getElementById('editType').value;
+    const skills = document.getElementById('editSkills').value.split(',').map(s => s.trim()).filter(s => s.length > 0);
+    const description = document.getElementById('editDescription').value.trim();
+
+    if (!title || !description) {
+      showToast("Title and Description are required", "warning");
+      return;
+    }
+
+    const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
+    const companyName = currentUser.companyName || 'zylor.io';
+
+    const url = id ? '/api/jobs/update' : '/api/jobs/create';
+    const payload = {
+      id,
+      title,
+      location,
+      salary,
+      type,
+      skillsRequired: skills,
+      description,
+      company: companyName
+    };
+
+    fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    })
+    .then(res => res.json())
+    .then(data => {
+      if (data.success) {
+        showToast(id ? "Job updated successfully!" : "Job posted successfully!", "check_circle");
+        closeEditModal();
+        fetchJobs();
+      }
+    });
+  }
+
+  function openPreviewModal(id) {
+    const job = ALL_JOBS.find(j => String(j.id) === String(id));
+    if (!job) return;
+
+    document.getElementById('previewTitle').textContent = job.title;
+    document.getElementById('previewSub').textContent = `${job.company} • ${job.location}`;
+    document.getElementById('previewSalary').textContent = job.salary;
+    document.getElementById('previewType').textContent = job.type;
+    document.getElementById('previewDescription').textContent = job.description;
+
+    const fontStyle = document.getElementById('previewSkills');
+    fontStyle.innerHTML = job.skillsRequired ? job.skillsRequired.map(s => `
+      <span class="px-3 py-1.5 rounded-full bg-primary/10 text-primary text-xs font-bold border border-primary/20">${s}</span>
+    `).join('') : '';
+
+    document.getElementById('jobPreviewModal').classList.remove('hidden');
+    document.getElementById('jobPreviewModal').classList.add('flex');
+  }
+
+  function closePreviewModal() {
+    document.getElementById('jobPreviewModal').classList.add('hidden');
+    document.getElementById('jobPreviewModal').classList.remove('flex');
+  }
+
+  function openBoostModal(id) {
+    // Save boosting job details in localStorage for checkout reference
+    const job = ALL_JOBS.find(j => String(j.id) === String(id));
+    if (job) {
+      localStorage.setItem('selectedCourse', JSON.stringify({ name: job.title + " (Boosting Premium)", price: "Rs. 4,999.00" }));
+    }
+    // Immediately navigate to the payment/billing dashboard
+    if (window.parent && window.parent.App && typeof window.parent.App.navigate === 'function') {
+      window.parent.App.navigate('payment');
+    } else {
+      window.location.hash = '#/company/payment';
+    }
+  }
+
+  document.getElementById('jobBoostModal').addEventListener('click', function(e) {
+    if (e.target === this) closeBoostModal();
+  });
+  document.getElementById('jobEditModal').addEventListener('click', function(e) {
+    if (e.target === this) closeEditModal();
+  });
+  document.getElementById('jobPreviewModal').addEventListener('click', function(e) {
+    if (e.target === this) closePreviewModal();
+  });
+  document.getElementById('jobShareModal').addEventListener('click', function(e) {
+    if (e.target === this) closeShareModal();
+  });
+
+  function closeBoostModal() {
+    document.getElementById('jobBoostModal').classList.add('hidden');
+    document.getElementById('jobBoostModal').classList.remove('flex');
+  }
+
+  function selectPaymentMethod(method) {
+    activePaymentMethod = method;
+    const jc = document.getElementById('methodJazzcash');
+    const ep = document.getElementById('methodEasypaisa');
+    if (method === 'jazzcash') {
+      jc.className = "p-4 rounded-2xl border-2 border-primary bg-white/40 flex flex-col items-center justify-center gap-2 transition-all hover:scale-102";
+      ep.className = "p-4 rounded-2xl border-2 border-transparent bg-white/25 flex flex-col items-center justify-center gap-2 transition-all hover:scale-102";
+    } else {
+      jc.className = "p-4 rounded-2xl border-2 border-transparent bg-white/25 flex flex-col items-center justify-center gap-2 transition-all hover:scale-102";
+      ep.className = "p-4 rounded-2xl border-2 border-primary bg-white/40 flex flex-col items-center justify-center gap-2 transition-all hover:scale-102";
+    }
+  }
+
+  function confirmBoostPayment() {
+    const number = document.getElementById('walletNumber').value.trim();
+    const mpin = document.getElementById('walletMpin').value.trim();
+    const id = document.getElementById('boostJobId').value;
+
+    if (number.length < 11 || mpin.length < 4) {
+      showToast("Please enter a valid mobile number and MPIN", "warning");
+      return;
+    }
+
+    document.getElementById('paymentLoading').classList.remove('hidden');
+    document.getElementById('payConfirmBtn').disabled = true;
+
+    setTimeout(() => {
+      fetch('/api/jobs/boost', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id })
+      })
+      .then(res => res.json())
+      .then(data => {
+        if (data.success) {
+          showToast(`Boost successful! Payment processed via ${activePaymentMethod === 'jazzcash' ? 'JazzCash' : 'EasyPaisa'}.`, "check_circle");
+          closeBoostModal();
+          fetchJobs();
+        }
+      })
+      .catch(err => {
+        console.error("Boost failed:", err);
+        document.getElementById('paymentLoading').classList.add('hidden');
+        document.getElementById('payConfirmBtn').disabled = false;
+      });
+    }, 2000);
+  }
+
+  function openShareModal(id) {
+    const directUrl = `${window.location.origin}/website/index.html#/student/opportunities?jobId=${id}`;
+    document.getElementById('shareUrlInput').value = directUrl;
+    
+    document.getElementById('jobShareModal').classList.remove('hidden');
+    document.getElementById('jobShareModal').classList.add('flex');
+  }
+
+  function closeShareModal() {
+    document.getElementById('jobShareModal').classList.add('hidden');
+    document.getElementById('jobShareModal').classList.remove('flex');
+  }
+
+  function copyShareUrl() {
+    const input = document.getElementById('shareUrlInput');
+    input.select();
+    document.execCommand('copy');
+    showToast("Link copied to clipboard!", "check_circle");
+  }
+
+  function showToast(msg, type = "check_circle") {
+    const toast = document.getElementById('toast');
+    const toastMsg = document.getElementById('toastMsg');
+    const toastIcon = document.getElementById('toastIcon');
+
+    toastMsg.textContent = msg;
+    if (type === "warning") {
+      toastIcon.textContent = "warning";
+      toast.style.background = "#FF9F0A";
+    } else {
+      toastIcon.textContent = "check_circle";
+      toast.style.background = "#471A70";
+    }
+
+    toast.style.opacity = '1';
+    toast.style.pointerEvents = 'auto';
+    toast.style.transform = 'translateY(0) translateX(-50%)';
+
+    setTimeout(() => {
+      toast.style.opacity = '0';
+      toast.style.pointerEvents = 'none';
+      toast.style.transform = 'translateY(10px) translateX(-50%)';
+    }, 3000);
+  }
+
+  fetchJobs();
+</script>
+</body>
+</html>

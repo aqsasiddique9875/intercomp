@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<title>Ad Campaign Creator</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-low": "#f0f3ff",
+                        "on-tertiary-container": "#e6ffe0",
+                        "on-primary": "#ffffff",
+                        "tertiary": "#006823",
+                        "background": "#f9f9ff",
+                        "on-surface": "#141c29",
+                        "tertiary-fixed": "#6cff82",
+                        "inverse-primary": "#f0b0ff",
+                        "surface-container": "#e7eeff",
+                        "on-tertiary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "primary-fixed-dim": "#f0b0ff",
+                        "on-tertiary-fixed-variant": "#00531a",
+                        "on-primary-fixed": "#330044",
+                        "primary": "#8731a3",
+                        "inverse-surface": "#29313f",
+                        "error": "#FF453A",
+                        "on-secondary-container": "#003868",
+                        "tertiary-container": "#00842f",
+                        "surface": "#f9f9ff",
+                        "surface-dim": "#d2daed",
+                        "tertiary-fixed-dim": "#47e266",
+                        "card-gradient": "linear-gradient(135deg, #4D9EFA 0%, #BF7DF5 100%)",
+                        "surface-variant": "#dbe3f6",
+                        "outline-variant": "#d2c1d2",
+                        "on-error-container": "#93000a",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary": "#0060ab",
+                        "orange": "#FF9F0A",
+                        "on-background": "#471A70",
+                        "error-container": "#ffdad6",
+                        "outline": "#817381",
+                        "glass-fill": "rgba(255, 255, 255, 0.35)",
+                        "secondary-fixed-dim": "#a3c9ff",
+                        "surface-container-highest": "#dbe3f6",
+                        "on-secondary-fixed-variant": "#004883",
+                        "surface-tint": "#8d37a9",
+                        "on-primary-container": "#fff5fb",
+                        "surface-bright": "#f9f9ff",
+                        "on-surface-variant": "#4f4350",
+                        "on-tertiary-fixed": "#002106",
+                        "on-primary-fixed-variant": "#72188f",
+                        "primary-fixed": "#fbd7ff",
+                        "inverse-on-surface": "#ecf1ff",
+                        "glass-border": "rgba(255, 255, 255, 0.6)",
+                        "surface-container-high": "#e0e8fb",
+                        "secondary-fixed": "#d3e3ff",
+                        "on-secondary": "#ffffff",
+                        "gold": "#FFD60A",
+                        "primary-container": "#a34cbe",
+                        "glass-thick": "rgba(255, 255, 255, 0.8)",
+                        "on-secondary-fixed": "#001c39",
+                        "secondary-container": "#54a3ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "safe-bottom": "34px",
+                        "base": "8px",
+                        "mobile-margin": "20px",
+                        "max-width": "1280px",
+                        "desktop-margin": "64px",
+                        "safe-top": "44px",
+                        "mobile-gutter": "16px",
+                        "desktop-gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "label-caps": ["Inter"],
+                        "body-md-mobile": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "display-xl-mobile": ["Inter"],
+                        "label-caps-mobile": ["Inter"],
+                        "display-xl": ["Inter"],
+                        "body-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-caps": ["13px", {"lineHeight": "1.0", "letterSpacing": "0.03em", "fontWeight": "600"}],
+                        "body-md-mobile": ["15px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                        "headline-lg-mobile": ["28px", {"lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "headline-lg": ["34px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                        "display-xl-mobile": ["34px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "label-caps-mobile": ["12px", {"lineHeight": "1.0", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "display-xl": ["56px", {"lineHeight": "1.1", "letterSpacing": "-0.03em", "fontWeight": "700"}],
+                        "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            background-color: #DCE4F7;
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(135, 49, 163, 0.1) 0px, transparent 50%),
+                radial-gradient(at 100% 0%, rgba(84, 163, 255, 0.1) 0px, transparent 50%);
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.35);
+            backdrop-filter: blur(28px);
+            -webkit-backdrop-filter: blur(28px);
+            border: 0.5px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 12px 40px 0 rgba(71, 26, 112, 0.15);
+        }
+        .custom-slider::-webkit-slider-runnable-track {
+            background: rgba(135, 49, 163, 0.2);
+            height: 6px;
+            border-radius: 3px;
+        }
+        .custom-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            height: 24px;
+            width: 24px;
+            background: #8731a3;
+            border-radius: 50%;
+            margin-top: -9px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            border: 2px solid white;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .active-tag {
+            background: #8731a3;
+            color: white;
+            transform: scale(1.05);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="min-h-screen pb-32">
+<!-- Top Navigation -->
+<header class="fixed top-0 w-full z-50 bg-glass-thick backdrop-blur-3xl border-b border-glass-border shadow-[0_12px_40px_0_rgba(71,26,112,0.15)] flex items-center justify-between px-mobile-margin h-safe-top">
+<div class="flex items-center gap-4">
+<button class="active:scale-95 duration-200 transition-transform flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">close</span>
+</button>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile font-bold text-primary">New Campaign</h1>
+</div>
+<button class="text-primary font-label-caps-mobile text-label-caps-mobile hover:opacity-80 transition-opacity active:scale-95 duration-200">
+            Preview
+        </button>
+</header>
+<main class="pt-24 px-mobile-margin space-y-6">
+<!-- Campaign Details Section -->
+<section class="space-y-3">
+<h2 class="font-label-caps-mobile text-label-caps-mobile text-on-background uppercase opacity-60 px-1">Campaign Details</h2>
+<div class="glass-card rounded-2xl p-4">
+<div class="space-y-2">
+<label class="font-label-caps-mobile text-label-caps-mobile text-on-surface-variant block">Campaign Name</label>
+<input class="w-full bg-glass-thick border-none rounded-xl px-4 py-3 text-body-md-mobile font-body-md-mobile text-on-surface placeholder:text-outline focus:ring-2 focus:ring-primary-container transition-all" placeholder="e.g. Summer 2024 Hiring" type="text"/>
+</div>
+</div>
+</section>
+<!-- Budget Section -->
+<section class="space-y-3">
+<h2 class="font-label-caps-mobile text-label-caps-mobile text-on-background uppercase opacity-60 px-1">Budget</h2>
+<div class="glass-card rounded-2xl p-4 space-y-4">
+<div class="flex justify-between items-center">
+<span class="font-label-caps-mobile text-label-caps-mobile text-on-surface-variant">Daily Budget</span>
+<span class="font-headline-lg-mobile text-headline-lg-mobile text-primary font-extrabold">Rs. 500</span>
+</div>
+<input class="w-full h-1.5 custom-slider appearance-none bg-transparent cursor-pointer" max="2000" min="50" step="50" type="range" value="500"/>
+<div class="flex justify-between text-[10px] text-outline font-bold uppercase tracking-widest">
+<span>Rs. 50 Min</span>
+<span>Rs. 2,000 Max</span>
+</div>
+</div>
+</section>
+<!-- Target Audience Section -->
+<section class="space-y-3">
+<h2 class="font-label-caps-mobile text-label-caps-mobile text-on-background uppercase opacity-60 px-1">Target Audience</h2>
+<div class="glass-card rounded-2xl p-4">
+<div class="flex flex-wrap gap-2">
+<button class="px-4 py-2 rounded-full border border-primary/30 bg-white/40 text-primary font-label-caps-mobile text-label-caps-mobile active-tag transition-all">UI Design</button>
+<button class="px-4 py-2 rounded-full border border-primary/30 bg-white/40 text-primary font-label-caps-mobile text-label-caps-mobile hover:bg-primary-fixed-dim transition-all">React</button>
+<button class="px-4 py-2 rounded-full border border-primary/30 bg-white/40 text-primary font-label-caps-mobile text-label-caps-mobile hover:bg-primary-fixed-dim transition-all">Python</button>
+<button class="px-4 py-2 rounded-full border border-primary/30 bg-white/40 text-primary font-label-caps-mobile text-label-caps-mobile hover:bg-primary-fixed-dim transition-all">Product Management</button>
+<button class="px-4 py-2 rounded-full border border-primary/30 border-dashed bg-transparent text-primary/60 font-label-caps-mobile text-label-caps-mobile flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">add</span> Add Skill
+                    </button>
+</div>
+</div>
+</section>
+<!-- Visual Assets Section -->
+<section class="space-y-3">
+<h2 class="font-label-caps-mobile text-label-caps-mobile text-on-background uppercase opacity-60 px-1">Visual Assets</h2>
+<div class="glass-card rounded-2xl p-8 border-dashed border-2 border-primary/20 flex flex-col items-center justify-center gap-3 text-center active:scale-95 transition-transform cursor-pointer">
+<div class="w-12 h-12 rounded-full bg-primary-container/20 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-3xl">upload_file</span>
+</div>
+<div>
+<p class="font-label-caps-mobile text-label-caps-mobile text-on-surface">Upload Ad Banner</p>
+<p class="text-[10px] text-on-surface-variant/60 mt-1 uppercase tracking-tighter">PNG, JPG up to 10MB (1200x628px)</p>
+</div>
+</div>
+</section>
+<!-- Live Preview Section -->
+<section class="space-y-4">
+<div class="flex justify-between items-center px-1">
+<h2 class="font-label-caps-mobile text-label-caps-mobile text-on-background uppercase opacity-60">Live Preview</h2>
+<span class="px-2 py-0.5 rounded bg-tertiary-container/20 text-tertiary font-label-caps-mobile text-[10px]">ACTIVE PREVIEW</span>
+</div>
+<div class="relative mx-auto w-[280px] h-[480px] bg-white rounded-[40px] border-[8px] border-surface-dim shadow-2xl overflow-hidden">
+<!-- Mockup Content -->
+<div class="absolute top-0 w-full h-6 bg-transparent flex justify-center items-end pb-1">
+<div class="w-16 h-4 bg-surface-dim rounded-b-xl"></div>
+</div>
+<div class="p-4 pt-10 space-y-4">
+<div class="w-full h-40 rounded-xl bg-slate-100 overflow-hidden relative">
+<img class="w-full h-full object-cover" data-alt="A high-end modern office interior with large glass windows and minimalist aesthetic. The scene is bathed in soft, purple-tinted sunlight, featuring a designer's workstation with premium equipment. The style is sophisticated and professional, aligning with a luxury corporate environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBnrygK8oe_Hu8-4HNj1_uIcGcoZ4dhVC_1xL186NpkAJ6FmaTkgKGqsnPabRmNcaezwubYmduxxa3nwlqSNzcPnvvX8a-E1pYKpG3Luq-rGVMX4Nmw38susLPCjpO_w3upE5nHat63socpKvGRRInk-NsSF1P4E1M7eSpVCrNLd7X_caJiPVTrLrWVyoAcnbUiA47kjuGpRpldl2lH0E_09lzumbpRHS_YiRabFyGcZ1IE4PZIKHezWxRTFa6HkvLBMDTDLmVs35ID"/>
+</div>
+<div class="space-y-2">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-lg bg-primary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-lg">rocket_launch</span>
+</div>
+<div>
+<p class="text-[10px] font-bold text-on-surface leading-tight">TechFlow Inc.</p>
+<p class="text-[8px] text-outline">Promoted</p>
+</div>
+</div>
+<h3 class="font-bold text-lg text-on-surface leading-tight">Junior UI/UX Designer</h3>
+<p class="text-[12px] text-on-surface-variant line-clamp-3">Join our world-class design team in creating the next generation of financial interfaces. Remote-friendly culture.</p>
+</div>
+<button class="w-full py-3 bg-secondary-container text-white font-bold rounded-xl text-sm shadow-lg shadow-secondary-container/20 active:scale-95 transition-transform">
+                        Apply
+                    </button>
+</div>
+<!-- Interactive Dots -->
+<div class="absolute bottom-4 w-full flex justify-center gap-1.5">
+<div class="w-1.5 h-1.5 rounded-full bg-primary"></div>
+<div class="w-1.5 h-1.5 rounded-full bg-outline/20"></div>
+<div class="w-1.5 h-1.5 rounded-full bg-outline/20"></div>
+</div>
+</div>
+</section>
+</main>
+<!-- Fixed Bottom Action Area -->
+<div class="fixed bottom-0 left-0 w-full px-mobile-margin pb-safe-bottom pt-4 bg-gradient-to-t from-[#DCE4F7] to-transparent z-40">
+<button class="w-full h-14 bg-primary text-on-primary rounded-full font-bold flex items-center justify-center gap-2 shadow-[0_8px_30px_rgb(135,49,163,0.4)] active:scale-[0.96] transition-all duration-300">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">rocket_launch</span>
+            Launch Campaign
+        </button>
+</div>
+<!-- Script for tag interaction -->
+<script>
+        document.querySelectorAll('button[class*="rounded-full"]').forEach(tag => {
+            tag.addEventListener('click', function() {
+                if(!this.innerText.includes('Add Skill')) {
+                    this.classList.toggle('active-tag');
+                    this.classList.toggle('bg-white/40');
+                    this.classList.toggle('text-primary');
+                }
+            });
+        });
+
+        // Simple budget slider display update
+        const slider = document.querySelector('input[type="range"]');
+        const budgetDisplay = document.querySelector('.text-primary.font-extrabold');
+        slider.addEventListener('input', (e) => {
+            budgetDisplay.innerText = `$${e.target.value}`;
+        });
+    </script>
+</body></html>

@@ -1,0 +1,1620 @@
+<!DOCTYPE html>
+<html class="light" lang="en"><head>
+
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>EliteRecruit | Talent Pool</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+          "inverse-primary": "#f0b0ff",
+          "tertiary": "#006823",
+          "primary": "#8731a3",
+          "outline-variant": "#d2c1d2",
+          "tertiary-fixed-dim": "#47e266",
+          "surface-container-highest": "#dbe3f6",
+          "on-tertiary": "#ffffff",
+          "surface-container-low": "#f0f3ff",
+          "on-secondary": "#ffffff",
+          "inverse-on-surface": "#ecf1ff",
+          "error": "#FF453A",
+          "on-primary-container": "#fff5fb",
+          "primary-fixed": "#fbd7ff",
+          "glass-fill": "rgba(255, 255, 255, 0.35)",
+          "glass-thick": "rgba(255, 255, 255, 0.8)",
+          "orange": "#FF9F0A",
+          "on-background": "#471A70",
+          "on-surface": "#141c29",
+          "surface-variant": "#dbe3f6",
+          "surface-dim": "#d2daed",
+          "on-error": "#ffffff",
+          "card-gradient": "linear-gradient(135deg, #4D9EFA 0%, #BF7DF5 100%)",
+          "primary-fixed-dim": "#f0b0ff",
+          "on-secondary-fixed": "#001c39",
+          "secondary": "#0060ab",
+          "on-tertiary-container": "#e6ffe0",
+          "surface-container": "#e7eeff",
+          "secondary-fixed-dim": "#a3c9ff",
+          "inverse-surface": "#29313f",
+          "outline": "#817381",
+          "primary-container": "#a34cbe",
+          "secondary-container": "#54a3ff",
+          "surface-container-high": "#e0e8fb",
+          "on-primary": "#ffffff",
+          "tertiary-fixed": "#6cff82",
+          "on-tertiary-fixed-variant": "#00531a",
+          "background": "#f9f9ff",
+          "on-secondary-container": "#003868",
+          "glass-border": "rgba(255, 255, 255, 0.6)",
+          "on-primary-fixed-variant": "#72188f",
+          "gold": "#FFD60A",
+          "on-tertiary-fixed": "#002106",
+          "on-primary-fixed": "#330044",
+          "tertiary-container": "#00842f",
+          "surface-tint": "#8d37a9",
+          "on-secondary-fixed-variant": "#004883",
+          "surface": "#f9f9ff",
+          "error-container": "#ffdad6",
+          "on-error-container": "#93000a",
+          "surface-container-lowest": "#ffffff",
+          "secondary-fixed": "#d3e3ff",
+          "on-surface-variant": "#4f4350",
+          "surface-bright": "#f9f9ff"
+        },
+        "borderRadius": {
+          "DEFAULT": "0.25rem",
+          "lg": "0.5rem",
+          "xl": "0.75rem",
+          "full": "9999px"
+        },
+        "spacing": {
+          "mobile-gutter": "16px",
+          "desktop-margin": "64px",
+          "safe-top": "44px",
+          "safe-bottom": "34px",
+          "max-width": "1280px",
+          "desktop-gutter": "24px",
+          "base": "8px",
+          "mobile-margin": "20px"
+        },
+        "fontFamily": {
+          "label-caps-mobile": ["Inter"],
+          "headline-lg-mobile": ["Inter"],
+          "display-xl": ["Inter"],
+          "display-xl-mobile": ["Inter"],
+          "label-caps": ["Inter"],
+          "body-md": ["Inter"],
+          "headline-lg": ["Inter"],
+          "body-md-mobile": ["Inter"]
+        },
+        "fontSize": {
+          "label-caps-mobile": ["12px", {"lineHeight": "1.0", "letterSpacing": "0.05em", "fontWeight": "600"}],
+          "headline-lg-mobile": ["28px", {"lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+          "display-xl": ["56px", {"lineHeight": "1.1", "letterSpacing": "-0.03em", "fontWeight": "700"}],
+          "display-xl-mobile": ["34px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+          "label-caps": ["13px", {"lineHeight": "1.0", "letterSpacing": "0.03em", "fontWeight": "600"}],
+          "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+          "headline-lg": ["34px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+          "body-md-mobile": ["15px", {"lineHeight": "1.5", "fontWeight": "400"}]
+        }
+      },
+    },
+  }
+</script>
+<style>
+  body {
+    background: linear-gradient(135deg, #DCE4F7 0%, #F1E9F9 100%);
+    min-height: 100vh;
+    color: #471A70;
+    overflow-x: hidden;
+  }
+  .glass-card {
+    background: rgba(255, 255, 255, 0.35);
+    backdrop-filter: blur(28px);
+    -webkit-backdrop-filter: blur(28px);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    box-shadow: 0 12px 40px 0 rgba(71, 26, 112, 0.1);
+  }
+  .glass-thick {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+  }
+  .custom-scrollbar::-webkit-scrollbar { width: 6px; }
+  .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+  .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(135, 49, 163, 0.2); border-radius: 10px; }
+  .trust-badge-glow { box-shadow: 0 0 15px rgba(0, 96, 171, 0.3); }
+  .spring-interaction { transition: transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+  .spring-interaction:active { transform: scale(0.96); }
+  input[type='range'] { accent-color: #8731a3; }
+  .skill-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 600;
+    cursor: default;
+    user-select: none;
+  }
+  .skill-tag.active {
+    background: #8731a3;
+    color: #fff;
+  }
+  .skill-tag.inactive {
+    background: rgba(231,238,255,0.8);
+    color: #4f4350;
+  }
+  .skill-tag .close-btn {
+    cursor: pointer;
+    font-size: 14px;
+    line-height: 1;
+    opacity: 0.8;
+    transition: opacity 0.15s;
+  }
+  .skill-tag .close-btn:hover { opacity: 1; }
+  .candidate-card {
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease, background-color 0.3s ease;
+  }
+  .candidate-card:hover {
+    transform: translateY(-4px);
+    background-color: rgba(255,255,255,0.5);
+    box-shadow: 0 20px 50px rgba(71,26,112,0.15);
+  }
+  .sort-btn-active { color: #8731a3; font-weight: 700; }
+  .sort-btn-inactive { color: #4f4350; font-weight: 600; }
+
+  /* Invite modal */
+  #inviteModal { display: none; }
+  #inviteModal.open { display: flex; }
+
+  /* Profile panel overlay */
+  #profilePanel { transform: translateX(100%); transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1); }
+  #profilePanel.open { transform: translateX(0); }
+  #profileOverlay { display: none; opacity: 0; transition: opacity 0.3s ease; }
+  #profileOverlay.open { display: block; opacity: 1; }
+
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+  .fade-in { animation: fadeIn 0.35s ease forwards; }
+</style>
+</head>
+<body class="font-body-md text-body-md antialiased custom-scrollbar">
+<!-- ===== SHARED COMMAND CENTER NAV ===== -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,300,0,0" rel="stylesheet" id="ms-font-link"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" id="inter-font-link"/>
+<style id="shared-nav-css">
+  @import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,300,0,0&display=block');
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+  html, body { background-color: #DCE4F7 !important; }
+  body > main { margin-left: 220px !important; padding-top: 78px !important; }
+  .snav-btn:hover { background: rgba(71,26,112,0.08) !important; }
+  .snav-btn-active:hover { background: #3d1660 !important; }
+  .snav-logout:hover { background: rgba(192,41,90,0.07) !important; }
+</style>
+<aside id="shared-sidebar" style="position:fixed;left:0;top:0;height:100vh;width:220px;background:#ffffff;display:flex;flex-direction:column;padding:28px 0 20px;z-index:99999;border-right:1px solid rgba(71,26,112,0.09);box-shadow:2px 0 14px rgba(71,26,112,0.07);">
+  <!-- Title -->
+  <div style="padding:0 20px;margin-bottom:26px;">
+    <div style="font-family:'Inter',sans-serif;font-size:19px;font-weight:900;color:#1a0533;letter-spacing:-0.4px;line-height:1.2;"><span style="color:#8731a3;">Intercomp</span></div>
+    <div style="font-family:'Inter',sans-serif;font-size:10px;color:rgba(71,26,112,0.6);margin-top:3px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;">Company Portal</div>
+  </div>
+  <!-- Nav Items -->
+  <nav style="display:flex;flex-direction:column;padding:0 10px;flex:1;gap:0;overflow-y:auto;">
+    <a href="#" id="snav-dashboard" class="snav-btn" style="display:flex;align-items:center;gap:12px;padding:11px 14px;border-radius:12px;color:#2d1152;text-decoration:none;font-family:'Inter',sans-serif;font-size:12px;font-weight:600;letter-spacing:0.07em;text-transform:uppercase;cursor:pointer;background:transparent;transition:background 0.15s ease;margin:1px 0;border:none;width:100%;text-align:left;">
+      <span style="font-family:'Material Symbols Outlined';font-size:20px;font-weight:normal;font-style:normal;line-height:1;letter-spacing:normal;text-transform:none;display:inline-block;white-space:nowrap;word-wrap:normal;direction:ltr;-webkit-font-feature-settings:'liga';font-feature-settings:'liga';-webkit-font-smoothing:antialiased;color:#2d1152;flex-shrink:0;width:22px;">dashboard</span><span>Dashboard</span>
+    </a>
+    <a href="#" id="snav-jobboard" class="snav-btn" style="display:flex;align-items:center;gap:12px;padding:11px 14px;border-radius:12px;color:#2d1152;text-decoration:none;font-family:'Inter',sans-serif;font-size:12px;font-weight:600;letter-spacing:0.07em;text-transform:uppercase;cursor:pointer;background:transparent;transition:background 0.15s ease;margin:1px 0;border:none;width:100%;text-align:left;">
+      <span style="font-family:'Material Symbols Outlined';font-size:20px;font-weight:normal;font-style:normal;line-height:1;letter-spacing:normal;text-transform:none;display:inline-block;white-space:nowrap;word-wrap:normal;direction:ltr;-webkit-font-feature-settings:'liga';font-feature-settings:'liga';-webkit-font-smoothing:antialiased;color:#2d1152;flex-shrink:0;width:22px;">assignment</span><span>Job Board</span>
+    </a>
+    <a href="#" id="snav-talent" class="snav-btn" style="display:flex;align-items:center;gap:12px;padding:11px 14px;border-radius:12px;color:#2d1152;text-decoration:none;font-family:'Inter',sans-serif;font-size:12px;font-weight:600;letter-spacing:0.07em;text-transform:uppercase;cursor:pointer;background:transparent;transition:background 0.15s ease;margin:1px 0;border:none;width:100%;text-align:left;">
+      <span style="font-family:'Material Symbols Outlined';font-size:20px;font-weight:normal;font-style:normal;line-height:1;letter-spacing:normal;text-transform:none;display:inline-block;white-space:nowrap;word-wrap:normal;direction:ltr;-webkit-font-feature-settings:'liga';font-feature-settings:'liga';-webkit-font-smoothing:antialiased;color:#2d1152;flex-shrink:0;width:22px;">person_search</span><span>Talent Pool</span>
+    </a>
+    <a href="#" id="snav-postings" class="snav-btn" style="display:flex;align-items:center;gap:12px;padding:11px 14px;border-radius:12px;color:#2d1152;text-decoration:none;font-family:'Inter',sans-serif;font-size:12px;font-weight:600;letter-spacing:0.07em;text-transform:uppercase;cursor:pointer;background:transparent;transition:background 0.15s ease;margin:1px 0;border:none;width:100%;text-align:left;">
+      <span style="font-family:'Material Symbols Outlined';font-size:20px;font-weight:normal;font-style:normal;line-height:1;letter-spacing:normal;text-transform:none;display:inline-block;white-space:nowrap;word-wrap:normal;direction:ltr;-webkit-font-feature-settings:'liga';font-feature-settings:'liga';-webkit-font-smoothing:antialiased;color:#2d1152;flex-shrink:0;width:22px;">work</span><span>Postings</span>
+    </a>
+    <a href="#" id="snav-kanban" class="snav-btn" style="display:flex;align-items:center;gap:12px;padding:11px 14px;border-radius:12px;color:#2d1152;text-decoration:none;font-family:'Inter',sans-serif;font-size:12px;font-weight:600;letter-spacing:0.07em;text-transform:uppercase;cursor:pointer;background:transparent;transition:background 0.15s ease;margin:1px 0;border:none;width:100%;text-align:left;">
+      <span style="font-family:'Material Symbols Outlined';font-size:20px;font-weight:normal;font-style:normal;line-height:1;letter-spacing:normal;text-transform:none;display:inline-block;white-space:nowrap;word-wrap:normal;direction:ltr;-webkit-font-feature-settings:'liga';font-feature-settings:'liga';-webkit-font-smoothing:antialiased;color:#2d1152;flex-shrink:0;width:22px;">groups</span><span>Applicants</span>
+    </a>
+    <a href="#" id="snav-scheduler" class="snav-btn" style="display:flex;align-items:center;gap:12px;padding:11px 14px;border-radius:12px;color:#2d1152;text-decoration:none;font-family:'Inter',sans-serif;font-size:12px;font-weight:600;letter-spacing:0.07em;text-transform:uppercase;cursor:pointer;background:transparent;transition:background 0.15s ease;margin:1px 0;border:none;width:100%;text-align:left;">
+      <span style="font-family:'Material Symbols Outlined';font-size:20px;font-weight:normal;font-style:normal;line-height:1;letter-spacing:normal;text-transform:none;display:inline-block;white-space:nowrap;word-wrap:normal;direction:ltr;-webkit-font-feature-settings:'liga';font-feature-settings:'liga';-webkit-font-smoothing:antialiased;color:#2d1152;flex-shrink:0;width:22px;">event_available</span><span>Interviews</span>
+    </a>
+    <a href="#" id="snav-analytics" class="snav-btn" style="display:flex;align-items:center;gap:12px;padding:11px 14px;border-radius:12px;color:#2d1152;text-decoration:none;font-family:'Inter',sans-serif;font-size:12px;font-weight:600;letter-spacing:0.07em;text-transform:uppercase;cursor:pointer;background:transparent;transition:background 0.15s ease;margin:1px 0;border:none;width:100%;text-align:left;">
+      <span style="font-family:'Material Symbols Outlined';font-size:20px;font-weight:normal;font-style:normal;line-height:1;letter-spacing:normal;text-transform:none;display:inline-block;white-space:nowrap;word-wrap:normal;direction:ltr;-webkit-font-feature-settings:'liga';font-feature-settings:'liga';-webkit-font-smoothing:antialiased;color:#2d1152;flex-shrink:0;width:22px;">monitoring</span><span>Analytics</span>
+    </a>
+    <a href="#" id="snav-saved-drafts" class="snav-btn" style="display:flex;align-items:center;gap:12px;padding:11px 14px;border-radius:12px;color:#2d1152;text-decoration:none;font-family:'Inter',sans-serif;font-size:12px;font-weight:600;letter-spacing:0.07em;text-transform:uppercase;cursor:pointer;background:transparent;transition:background 0.15s ease;margin:1px 0;border:none;width:100%;text-align:left;">
+      <span style="font-family:'Material Symbols Outlined';font-size:20px;font-weight:normal;font-style:normal;line-height:1;letter-spacing:normal;text-transform:none;display:inline-block;white-space:nowrap;word-wrap:normal;direction:ltr;-webkit-font-feature-settings:'liga';font-feature-settings:'liga';-webkit-font-smoothing:antialiased;color:#2d1152;flex-shrink:0;width:22px;">drafts</span><span>Save Draft</span>
+    </a>
+    <a href="#" id="snav-payment" class="snav-btn" style="display:flex;align-items:center;gap:12px;padding:11px 14px;border-radius:12px;color:#2d1152;text-decoration:none;font-family:'Inter',sans-serif;font-size:12px;font-weight:600;letter-spacing:0.07em;text-transform:uppercase;cursor:pointer;background:transparent;transition:background 0.15s ease;margin:1px 0;border:none;width:100%;text-align:left;">
+      <span style="font-family:'Material Symbols Outlined';font-size:20px;font-weight:normal;font-style:normal;line-height:1;letter-spacing:normal;text-transform:none;display:inline-block;white-space:nowrap;word-wrap:normal;direction:ltr;-webkit-font-feature-settings:'liga';font-feature-settings:'liga';-webkit-font-smoothing:antialiased;color:#2d1152;flex-shrink:0;width:22px;">payments</span><span>Payment</span>
+    </a>
+  </nav>
+  <!-- New Job Posting Button -->
+  <div style="padding:0 12px;margin-top:14px;">
+    <button id="snav-new-posting" style="width:100%;padding:13px 0;background:#471A70;color:#fff;border:none;border-radius:999px;font-family:'Inter',sans-serif;font-weight:700;font-size:13px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:7px;box-shadow:0 4px 16px rgba(71,26,112,0.28);transition:all 0.2s;letter-spacing:0.02em;">
+      <span style="font-family:'Material Symbols Outlined';font-size:18px;font-weight:normal;font-style:normal;line-height:1;letter-spacing:normal;text-transform:none;-webkit-font-feature-settings:'liga';font-feature-settings:'liga';-webkit-font-smoothing:antialiased;color:#fff;display:inline-block;">add</span>
+      New Job Posting
+    </button>
+  </div>
+  <!-- Bottom: Help + Logout -->
+  <div style="padding:12px 10px 0;margin-top:10px;border-top:1px solid rgba(71,26,112,0.08);">
+    <a href="#" id="snav-help" style="display:flex;align-items:center;gap:11px;padding:9px 12px;border-radius:10px;color:rgba(45,17,82,0.5);text-decoration:none;font-family:'Inter',sans-serif;font-size:11.5px;font-weight:600;letter-spacing:0.07em;text-transform:uppercase;cursor:pointer;background:transparent;transition:background 0.15s;margin-bottom:2px;" class="snav-btn">
+      <span style="font-family:'Material Symbols Outlined';font-size:18px;font-weight:normal;font-style:normal;line-height:1;letter-spacing:normal;text-transform:none;-webkit-font-feature-settings:'liga';font-feature-settings:'liga';-webkit-font-smoothing:antialiased;color:rgba(71,26,112,0.4);display:inline-block;">help_outline</span>
+      Help Center
+    </a>
+    <a href="#" id="snav-logout" class="snav-logout" style="display:flex;align-items:center;gap:11px;padding:9px 12px;border-radius:10px;color:#c0295a;text-decoration:none;font-family:'Inter',sans-serif;font-size:11.5px;font-weight:600;letter-spacing:0.07em;text-transform:uppercase;cursor:pointer;background:transparent;transition:background 0.15s;">
+      <span style="font-family:'Material Symbols Outlined';font-size:18px;font-weight:normal;font-style:normal;line-height:1;letter-spacing:normal;text-transform:none;-webkit-font-feature-settings:'liga';font-feature-settings:'liga';-webkit-font-smoothing:antialiased;color:#c0295a;display:inline-block;">logout</span>
+      Log Out
+    </a>
+  </div>
+</aside>
+<style id="topbar-search-styles">
+  #topbar-search {
+    width: 144px;
+    transition: width 0.3s ease;
+  }
+  @media (min-width: 768px) {
+    #topbar-search {
+      width: 192px;
+    }
+    #topbar-search:focus {
+      width: 240px;
+    }
+  }
+  @media (min-width: 1024px) {
+    #topbar-search {
+      width: 256px;
+    }
+    #topbar-search:focus {
+      width: 320px;
+    }
+  }
+</style>
+<!-- Shared Top Bar -->
+<header id="shared-topbar" style="position:fixed;top:0;left:220px;width:calc(100vw - 220px);height:56px;background:rgba(255,255,255,0.15);backdrop-filter:blur(28px);-webkit-backdrop-filter:blur(28px);display:flex;align-items:center;justify-content:flex-end;padding:0 32px;gap:24px;z-index:99998;border-bottom:1px solid rgba(255,255,255,0.6);box-shadow:0 12px 40px 0 rgba(71,26,112,0.08);">
+  <div style="display:flex;align-items:center;gap:8px;background:rgba(255,255,255,0.2);padding:6px 16px;border-radius:999px;border:1px solid rgba(255,255,255,0.6);box-shadow:0 2px 4px rgba(0,0,0,0.02);transition:all 0.3s;">
+    <span style="font-family:'Material Symbols Outlined';font-size:18px;font-weight:normal;font-style:normal;line-height:1;letter-spacing:normal;text-transform:none;-webkit-font-feature-settings:'liga';font-feature-settings:'liga';-webkit-font-smoothing:antialiased;color:#2d1152;display:inline-block;user-select:none;">search</span>
+    <input id="topbar-search" style="background:transparent;border:none;outline:none;color:#2d1152;font-size:12px;font-family:'Inter',sans-serif;padding:0;margin:0;height:20px;line-height:20px;box-shadow:none;" placeholder="Search candidates..." type="text"/>
+  </div>
+  <div style="position:relative;cursor:pointer;display:flex;align-items:center;justify-content:center;">
+    <span style="font-family:'Material Symbols Outlined';font-size:22px;font-weight:normal;font-style:normal;line-height:1;letter-spacing:normal;text-transform:none;-webkit-font-feature-settings:'liga';font-feature-settings:'liga';-webkit-font-smoothing:antialiased;color:#2d1152;display:inline-block;">notifications</span>
+    <span style="position:absolute;top:1.5px;right:1.5px;width:8px;height:8px;background:#ff453a;border-radius:50%;border:1.5px solid #ffffff;"></span>
+  </div>
+  <span style="font-family:'Material Symbols Outlined';font-size:22px;font-weight:normal;font-style:normal;line-height:1;letter-spacing:normal;text-transform:none;-webkit-font-feature-settings:'liga';font-feature-settings:'liga';-webkit-font-smoothing:antialiased;color:#2d1152;display:inline-block;cursor:pointer;">settings</span>
+  <div style="width:40px;height:40px;border-radius:50%;overflow:hidden;cursor:pointer;border:2px solid #8731a3;box-shadow:0 2px 8px rgba(135,49,163,0.15);transition:transform 0.2s;">
+    <img alt="Profile" style="width:100%;height:100%;object-fit:cover;" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA25J-RpNqe_ribsVF3fd4mnzE6ifwHeZuVNu5AMQU2EnYpClByPq7nwtb_OW8YWdE9zHhVr_myUbTkksryul6U1vE6tYcUe2Is_Ykf44A04yPQngjPdz5xvO59lZYpyYogiOT7fWRVG0OG2uYrLcYBA_hW8xxo8YeR57ryeTXbIvT3Ziwr5FLGpOpoVx-euTPcJedNNZFG0cab6QctiazShZ8qfEjAKNGvyzlC9_fl1G_pUaR0pvuTjw1ClquEYOqjrb_2RPHXuypu"/>
+  </div>
+</header>
+<!-- Nav Wiring -->
+<script id="shared-nav-wiring">
+(function() {
+  var ACTIVE_BG = '#471A70';
+  var ACTIVE_COLOR = '#ffffff';
+  var INACTIVE_BG = 'transparent';
+  var INACTIVE_COLOR = '#2d1152';
+  var ACTIVE_ICON_COLOR = '#ffffff';
+  var INACTIVE_ICON_COLOR = '#2d1152';
+  var BASE_STYLE = "display:flex;align-items:center;gap:12px;padding:11px 14px;border-radius:12px;text-decoration:none;font-family:'Inter',sans-serif;font-size:12px;font-weight:600;letter-spacing:0.07em;text-transform:uppercase;cursor:pointer;margin:1px 0;border:none;width:100%;text-align:left;transition:background 0.15s ease;";
+  var ICON_BASE = "font-family:'Material Symbols Outlined';font-size:20px;font-weight:normal;font-style:normal;line-height:1;letter-spacing:normal;text-transform:none;display:inline-block;white-space:nowrap;word-wrap:normal;direction:ltr;-webkit-font-feature-settings:'liga';font-feature-settings:'liga';-webkit-font-smoothing:antialiased;flex-shrink:0;width:22px;";
+
+  var routes = {
+    'snav-dashboard':    'recruiter-dash',
+    'snav-jobboard':     'jobboard',
+    'snav-talent':       'talent',
+    'snav-postings':     'postings',
+    'snav-kanban':       'kanban',
+    'snav-scheduler':    'scheduler',
+    'snav-analytics':    'recruiter-analytics',
+    'snav-saved-drafts': 'saved-drafts',
+    'snav-payment':      'payment'
+  };
+
+  function navigate(dest) {
+    if (window.parent && window.parent.App) window.parent.App.navigate(dest);
+  }
+
+  function setActive(route) {
+    var reverseMap = {};
+    Object.keys(routes).forEach(function(k) { reverseMap[routes[k]] = k; });
+    var activeId = reverseMap[route];
+    Object.keys(routes).forEach(function(id) {
+      var el = document.getElementById(id);
+      if (!el) return;
+      var icon = el.querySelector('span:first-child');
+      if (id === activeId) {
+        el.style.cssText = BASE_STYLE + 'background:' + ACTIVE_BG + ';color:' + ACTIVE_COLOR + ';font-weight:700;';
+        if (icon) icon.style.color = ACTIVE_ICON_COLOR;
+      } else {
+        el.style.cssText = BASE_STYLE + 'background:' + INACTIVE_BG + ';color:' + INACTIVE_COLOR + ';';
+        if (icon) icon.style.color = INACTIVE_ICON_COLOR;
+        el.onmouseover = function() { this.style.background = 'rgba(71,26,112,0.08)'; };
+        el.onmouseout  = function() { this.style.background = INACTIVE_BG; };
+      }
+    });
+  }
+
+  // Wire clicks
+  Object.keys(routes).forEach(function(id) {
+    var el = document.getElementById(id);
+    if (!el) return;
+    el.addEventListener('click', function(e) { e.preventDefault(); navigate(routes[id]); });
+  });
+
+  // New Job Posting button
+  var btn = document.getElementById('snav-new-posting');
+  if (btn) {
+    btn.addEventListener('click', function() { navigate('job-create'); });
+    btn.addEventListener('mouseenter', function() { btn.style.opacity='0.87'; btn.style.transform='translateY(-1px)'; });
+    btn.addEventListener('mouseleave', function() { btn.style.opacity='1'; btn.style.transform='translateY(0)'; });
+  }
+
+  // Log Out
+  var logout = document.getElementById('snav-logout');
+  if (logout) {
+    logout.addEventListener('click', function(e) {
+      e.preventDefault();
+      localStorage.removeItem('isLoggedIn');
+      if (window.parent && window.parent.App) window.parent.App.navigate('landing');
+    });
+  }
+
+  // Set active from parent App
+  function trySetActive() {
+    try {
+      if (window.parent && window.parent.App && window.parent.App.activeView) {
+        setActive(window.parent.App.activeView);
+      }
+    } catch(e) {}
+  }
+  trySetActive();
+  setTimeout(trySetActive, 200);
+  window.setNavActive = setActive;
+
+  // Fix main content offset
+  var mainEl = document.querySelector('body > main');
+  if (mainEl) {
+    var isAdminPortal = false;
+    try {
+      isAdminPortal = (window.self !== window.top) && (window.parent.document.getElementById('mainNavBar') || window.parent.location.pathname.includes('/admin') || (window.parent.App && window.parent.App.backendUrl));
+    } catch(e) {
+      isAdminPortal = window.location.pathname.includes('/admin');
+    }
+    
+    mainEl.style.setProperty('margin-left', isAdminPortal ? '0px' : '220px', 'important');
+    mainEl.style.setProperty('padding-top', isAdminPortal ? '20px' : '60px', 'important');
+    mainEl.style.setProperty('padding-left', '30px', 'important');
+    mainEl.style.setProperty('padding-right', '30px', 'important');
+  }
+})();
+</script>
+<!-- ===== END SHARED NAV ===== -->
+
+
+
+
+
+<!-- TopNavBar -->
+
+
+<!-- SideNavBar -->
+
+
+<!-- Main Content -->
+<main class="ml-[220px] pt-[58px] px-4 py-8 md:px-8 pb-20">
+  <div class="w-full flex flex-col gap-6">
+
+    <!-- Top Part: Matching Candidates Title & Sort -->
+    <div class="flex justify-between items-end">
+      <div>
+        <h1 class="font-headline-lg text-headline-lg text-on-background">Matching Candidates</h1>
+        <p class="text-on-surface-variant" id="resultCount">Showing <span id="shownCount">8</span> verified profiles from Pakistani universities</p>
+      </div>
+      <div class="flex items-center gap-3 text-on-surface-variant font-label-caps text-label-caps">
+        <span>Sort by:</span>
+        <button id="sortTrustBtn" onclick="toggleSort('trust')" class="flex items-center gap-1 font-bold text-primary sort-btn-active">
+          Trust Score <span class="material-symbols-outlined text-[18px]" id="sortTrustIcon">arrow_downward</span>
+        </button>
+        <button id="sortNameBtn" onclick="toggleSort('name')" class="flex items-center gap-1 sort-btn-inactive ml-2">
+          Name <span class="material-symbols-outlined text-[18px]" id="sortNameIcon" style="display:none">arrow_downward</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Filter Candidates (Horizontal Panel, Full Width) -->
+    <section class="w-full">
+      <div class="glass-card p-5 rounded-2xl flex flex-col gap-4">
+        <div class="flex justify-between items-center border-b border-glass-border pb-2.5">
+          <h3 class="font-headline-lg text-[16px] text-on-background flex items-center gap-2">
+            <span class="material-symbols-outlined text-primary text-[18px]">filter_alt</span> Filter Candidates
+          </h3>
+          <button onclick="resetAllFilters()" class="px-3.5 py-1.5 border border-primary text-primary rounded-xl text-xs font-bold spring-interaction hover:bg-primary/5 transition-all flex items-center gap-1">
+            <span class="material-symbols-outlined text-sm">filter_alt_off</span> Reset All Filters
+          </button>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+          <!-- Column 1: Skills Search -->
+          <div class="flex flex-col gap-2">
+            <label class="font-label-caps text-label-caps uppercase text-outline text-[11px] tracking-wider">Skills Search</label>
+            <div id="skillsContainer" class="flex flex-wrap gap-1.5 min-h-[24px]"></div>
+            <div class="flex gap-2">
+              <input id="skillInput" type="text" placeholder="Add a skill..." class="flex-1 bg-white/40 border border-glass-border rounded-xl px-3 py-1.5 text-xs text-on-surface focus:outline-none focus:ring-2 focus:ring-primary/30 placeholder-outline/60"/>
+              <button id="addSkillBtn" onclick="addSkillFromInput()" class="px-3 py-1.5 bg-primary text-white rounded-xl text-xs font-bold hover:bg-primary-container transition-all flex items-center justify-center">
+                <span class="material-symbols-outlined text-[16px]">add</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Column 2: University Search -->
+          <div class="flex flex-col gap-2 relative">
+            <label class="font-label-caps text-label-caps uppercase text-outline text-[11px] tracking-wider">University Search</label>
+            <div class="relative">
+              <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-[18px] pointer-events-none">search</span>
+              <input
+                id="uniSearchInput"
+                type="text"
+                placeholder="Search university..."
+                oninput="onUniSearch(this.value)"
+                class="w-full bg-white/40 border border-glass-border rounded-xl pl-9 pr-4 py-1.5 text-xs text-on-surface focus:outline-none focus:ring-2 focus:ring-primary/30 placeholder-outline/60"
+              />
+            </div>
+            <!-- Suggestions dropdown -->
+            <div id="uniSuggestions" class="hidden absolute top-full left-0 right-0 z-50 flex-col gap-1 bg-white/95 backdrop-blur-md border border-glass-border rounded-xl shadow-lg overflow-hidden text-xs mt-1"></div>
+            <!-- Active filter chip -->
+            <div id="uniActiveChip" class="hidden items-center gap-2 flex-wrap mt-0.5"></div>
+            <!-- Category quick filters -->
+            <div class="flex flex-wrap gap-1.5 mt-0.5">
+              <button onclick="setUniCategory('all')" id="catAll" class="uni-cat-btn px-3 py-1 rounded-full text-[11px] font-bold border border-primary/40 bg-primary text-white transition-all">All</button>
+              <button onclick="setUniCategory('top')" id="catTop" class="uni-cat-btn px-3 py-1 rounded-full text-[11px] font-bold border border-primary/40 bg-white/60 text-primary transition-all hover:bg-primary/10">Top Tier</button>
+              <button onclick="setUniCategory('public')" id="catPublic" class="uni-cat-btn px-3 py-1 rounded-full text-[11px] font-bold border border-primary/40 bg-white/60 text-primary transition-all hover:bg-primary/10">Public</button>
+              <button onclick="setUniCategory('private')" id="catPrivate" class="uni-cat-btn px-3 py-1 rounded-full text-[11px] font-bold border border-primary/40 bg-white/60 text-primary transition-all hover:bg-primary/10">Private</button>
+            </div>
+          </div>
+
+          <!-- Column 3: Graduation Year -->
+          <div class="flex flex-col gap-2">
+            <label class="font-label-caps text-label-caps uppercase text-outline text-[11px] tracking-wider">Graduation Year</label>
+            <div class="grid grid-cols-2 gap-2" id="gradYearFilters">
+              <label class="flex items-center gap-2 cursor-pointer group">
+                <input data-year="2023" checked class="w-3.5 h-3.5 rounded border-outline text-primary focus:ring-primary grad-year-cb" type="checkbox"/>
+                <span class="text-xs text-on-background group-hover:text-primary transition-colors">Class of 2023</span>
+              </label>
+              <label class="flex items-center gap-2 cursor-pointer group">
+                <input data-year="2024" checked class="w-3.5 h-3.5 rounded border-outline text-primary focus:ring-primary grad-year-cb" type="checkbox"/>
+                <span class="text-xs text-on-background group-hover:text-primary transition-colors">Class of 2024</span>
+              </label>
+              <label class="flex items-center gap-2 cursor-pointer group">
+                <input data-year="2025" checked class="w-3.5 h-3.5 rounded border-outline text-primary focus:ring-primary grad-year-cb" type="checkbox"/>
+                <span class="text-xs text-on-background group-hover:text-primary transition-colors">Class of 2025</span>
+              </label>
+              <label class="flex items-center gap-2 cursor-pointer group">
+                <input data-year="2026" checked class="w-3.5 h-3.5 rounded border-outline text-primary focus:ring-primary grad-year-cb" type="checkbox"/>
+                <span class="text-xs text-on-background group-hover:text-primary transition-colors">Class of 2026</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Column 4: Last Login & Min Trust Score -->
+          <div class="flex flex-col gap-2">
+            <!-- Last Login -->
+            <div class="flex flex-col gap-1.5">
+              <label class="font-label-caps text-label-caps uppercase text-outline text-[11px] tracking-wider">Last Login Activity</label>
+              <div class="flex flex-wrap gap-1.5" id="loginTimeFilters">
+                <button onclick="setLoginFilter('all')" id="loginAll" class="login-filter-btn px-3 py-1 rounded-full text-[11px] font-bold border border-primary/40 bg-primary text-white transition-all">All</button>
+                <button onclick="setLoginFilter('week')" id="loginWeek" class="login-filter-btn px-3 py-1 rounded-full text-[11px] font-bold border border-primary/40 bg-white/60 text-primary transition-all hover:bg-primary/10">1 Week</button>
+                <button onclick="setLoginFilter('month')" id="loginMonth" class="login-filter-btn px-3 py-1 rounded-full text-[11px] font-bold border border-primary/40 bg-white/60 text-primary transition-all hover:bg-primary/10">1 Month</button>
+                <button onclick="setLoginFilter('6month')" id="login6Month" class="login-filter-btn px-3 py-1 rounded-full text-[11px] font-bold border border-primary/40 bg-white/60 text-primary transition-all hover:bg-primary/10">6 Months</button>
+              </div>
+            </div>
+
+            <!-- Trust Score Slider -->
+            <div class="flex flex-col gap-1">
+              <div class="flex justify-between items-center">
+                <label class="font-label-caps text-label-caps uppercase text-outline text-[11px] tracking-wider">Min Trust Score</label>
+                <span class="font-bold text-xs text-primary" id="trust-val">70%</span>
+              </div>
+              <input class="w-full h-1.5 bg-surface-container rounded-lg appearance-none cursor-pointer" max="100" min="0" id="trustSlider" type="range" value="70" oninput="document.getElementById('trust-val').innerText = this.value + '%'; applyFilters();"/>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Candidates Grid (Full Width, 3-column layout) -->
+    <div id="candidatesGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+
+    <!-- Empty state -->
+    <div id="emptyState" class="hidden text-center py-20">
+      <span class="material-symbols-outlined text-6xl text-outline/40 mb-4 block">search_off</span>
+      <p class="text-on-surface-variant font-semibold text-lg">No candidates match your filters</p>
+      <p class="text-outline text-sm mt-1">Try adjusting your filters or resetting them</p>
+      <button onclick="resetAllFilters()" class="mt-6 px-6 py-2.5 bg-primary text-white rounded-full font-bold hover:bg-primary-container transition-all">Reset Filters</button>
+    </div>
+
+    <!-- Load More -->
+    <div class="mt-12 flex justify-center" id="loadMoreContainer">
+      <button id="loadMoreBtn" onclick="loadMore()" class="px-8 py-3 glass-thick text-primary rounded-2xl font-bold flex items-center gap-2 hover:bg-white transition-all spring-interaction border border-primary/20 shadow-lg">
+        Load More Talent
+        <span class="material-symbols-outlined">expand_more</span>
+      </button>
+    </div>
+
+  </div>
+</main>
+
+<!-- Invite to Company Modal -->
+<div id="inviteModal" class="fixed inset-0 z-[100] items-center justify-center bg-black/30 backdrop-blur-sm">
+  <div class="glass-thick rounded-3xl p-8 max-w-md w-full mx-4 shadow-2xl border border-white relative animate-bounce-in">
+    <button onclick="closeInviteModal()" class="absolute top-4 right-4 text-outline hover:text-primary transition-colors">
+      <span class="material-symbols-outlined">close</span>
+    </button>
+    <div class="flex items-center gap-3 mb-6">
+      <div class="w-12 h-12 bg-primary/10 rounded-2xl flex items-center justify-center">
+        <span class="material-symbols-outlined text-primary">send</span>
+      </div>
+      <div>
+        <h3 class="font-bold text-on-background text-lg">Invite to Company</h3>
+        <p class="text-on-surface-variant text-sm" id="inviteModalSubtitle">Send a direct invitation</p>
+      </div>
+    </div>
+    <div class="space-y-4">
+      <div>
+        <label class="font-label-caps text-label-caps uppercase text-outline mb-2 block">Message (optional)</label>
+        <textarea id="inviteMessage" rows="3" placeholder="Hi! We'd love to have you join our company..." class="w-full bg-white/40 border border-glass-border rounded-xl px-4 py-3 text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-primary/30 resize-none placeholder-outline/50"></textarea>
+      </div>
+      <div>
+        <label class="font-label-caps text-label-caps uppercase text-outline mb-2 block">Role / Position</label>
+        <input type="text" id="inviteRole" placeholder="e.g. Software Engineer Intern" class="w-full bg-white/40 border border-glass-border rounded-xl px-4 py-3 text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-primary/30 placeholder-outline/50"/>
+      </div>
+      <div class="flex gap-3 pt-2">
+        <button onclick="closeInviteModal()" class="flex-1 py-3 border border-outline/50 text-on-surface-variant rounded-xl font-bold hover:bg-white/40 transition-all">Cancel</button>
+        <button onclick="sendInvite()" class="flex-1 py-3 bg-primary text-white rounded-xl font-bold shadow-lg shadow-primary/20 hover:bg-primary-container transition-all">Send Invitation</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Profile Side Panel -->
+<div id="profileOverlay" class="fixed inset-0 z-[90] bg-black/30 backdrop-blur-sm cursor-pointer" onclick="closeProfilePanel()"></div>
+<div id="profilePanel" class="fixed top-0 right-0 h-full w-full max-w-2xl z-[95] bg-white/90 backdrop-blur-3xl shadow-2xl overflow-y-auto custom-scrollbar">
+  <div id="profilePanelContent" class="p-8">
+    <!-- Dynamically populated -->
+  </div>
+</div>
+
+<!-- Toast notification -->
+<div id="toast" class="fixed bottom-8 left-1/2 -translate-x-1/2 z-[200] px-6 py-3 rounded-full font-bold text-sm shadow-xl transition-all duration-300 opacity-0 pointer-events-none flex items-center gap-2 bg-on-background text-white">
+  <span class="material-symbols-outlined text-[18px]" id="toastIcon">check_circle</span>
+  <span id="toastMsg">Done</span>
+</div>
+
+<script>
+// ========== DATA ==========
+const STATIC_CANDIDATES = [
+  {
+    id: 1,
+    name: "Ayesha Malik",
+    gradYear: 2024,
+    university: "LUMS",
+    uniTier: "top",
+    trust: 96,
+    skills: ["UI Design", "Prototyping", "Figma"],
+    img: "https://lh3.googleusercontent.com/aida-public/AB6AXuAHYLzxSvaIFkxJsOFI0_OgvRWRG8H6YTFX6ZphsMDC1BNoLwgl8_VDYG5-2VRJ3N9mSveooVJL_oN3AWmE8Yt3cagLjZcRuy3QVX7WkUL2Eu2fVZMrwPcrIb6GMUquU1pRWXQXGFPpdDi2e19cBjpQsn1whcR0rDy4AO51Nkij9r8Lep5-KZ6UQq43ojmmTLH-kGXd5nEu9nrHlKI0pR52t9kprqTIbpFjEkU-1vYMFXXC5R-rxkuOrrvMFZj5b_aE9hZutL1fWiW8",
+    trustColor: "secondary", trustBorderColor: "border-secondary-container",
+    lastLogin: Date.now() - 2 * 24 * 60 * 60 * 1000
+  },
+  {
+    id: 2,
+    name: "Hamza Rauf",
+    gradYear: 2023,
+    university: "NUST",
+    uniTier: "top",
+    trust: 92,
+    skills: ["Python", "Machine Learning", "AWS Cloud"],
+    img: "https://lh3.googleusercontent.com/aida-public/AB6AXuBiZtsOlIKla0hFTHHrw2ORJUXHyVPoX2g4Vn4NbzNiJVQGBx5PeW4MCV1qt8ZpLRja3xOLGl3XxZ2RhXJ3zKLP_oVLeFE7Oj1LlS35El5v7ifvAKStSjicnEiHCVcdCiwfOei5k52G9X8xSLB7o634sbq38V_50FZaAoyVoYS-JT0E5TBUoT2MM4MjII-XG3VTaOm-VBGcqWUPfKMrN_QySCKR8PmiSZeEwA_l92tcTFETaVxZ470yOYm6iVCa17871GZ9TCHUsHYO",
+    trustColor: "on-background", trustBorderColor: "border-gold",
+    lastLogin: Date.now() - 15 * 24 * 60 * 60 * 1000
+  },
+  {
+    id: 3,
+    name: "Fatima Zahra",
+    gradYear: 2024,
+    university: "IBA Karachi",
+    uniTier: "top",
+    trust: 88,
+    skills: ["Fullstack", "React Native", "Node.js"],
+    img: "https://lh3.googleusercontent.com/aida-public/AB6AXuD-uLZzQjpjf9MFRRHmWd6j_VhunkfgZ0bCmESXXDKIKJZ03n9Z8oiFn3alyR6yAK1EgstIcMSLCRiHTijRG4nbXb06Mq1wMJWwbc_YB4w4lLr4daF-6y3KI1p2hSb9CSBd5WiR9MA2acv8JGkl3O2cKoVeaeE8J_9kOyaBouTruDsoxMVK7kjZqxvEYYPK5WMvRTjdmx71x3RHl58g6yh0UvbNULlgZ9S-ib2DFY07pDFUDG0ZmAEYOptCw7BtnaqJo8Y-sBnjkSqS",
+    trustColor: "tertiary", trustBorderColor: "border-tertiary",
+    lastLogin: Date.now() - 3 * 24 * 60 * 60 * 1000
+  },
+  {
+    id: 4,
+    name: "Usman Tariq",
+    gradYear: 2025,
+    university: "UET Lahore",
+    uniTier: "public",
+    trust: 91,
+    skills: ["Data Analytics", "SQL", "Power BI"],
+    img: "https://lh3.googleusercontent.com/aida-public/AB6AXuAr51BSRwXsFHabY5pMsg4d9kqgW7giDieBHEBi0TWFzSwRbrK4HC9xwc4oD1jj5MSI4OEetUt8sbcfRbVWbtRwCOjJgywF4ZysGp7Ga3iRYzFzf66VHorm0q3gubXSwMThhPCOlocA4h0-RAv7Zbv_lAJLxdshJfsYCZ857TUhlw56CL2dzPjciwfkPrDT-Qp8q8vsSXOrlCMvf0MRmrp8IWSizuRgv_SDbku17O1bjknkg8iC4aPzgqCT6CAuNMfVGeXv8DuoYSUU",
+    trustColor: "secondary", trustBorderColor: "border-secondary",
+    lastLogin: Date.now() - 40 * 24 * 60 * 60 * 1000
+  },
+  {
+    id: 5,
+    name: "Sana Iqbal",
+    gradYear: 2025,
+    university: "FAST-NUCES",
+    uniTier: "private",
+    trust: 85,
+    skills: ["Data Science", "TensorFlow", "Python"],
+    img: "https://lh3.googleusercontent.com/aida-public/AB6AXuCxum11G8pHSMKCfGGsunw2ZIi7-2urqyeBRSQNmZoRKKn4CWgz9BFFu3RAR5gKAKVjBQTUeioWG6XGpaObQc6Bgeebc-mTqs7clm2WSA2Mbb50UqSiABH2uhIuBI23JCBwX_7qagMMA6kfJwk2tvoGYE8GiJZ_j6Eo5LSu2vo1GmT2WrszfXey9JjHSMlEVTnATCurQ6w6FstWJPiCbphsKxhevygh8ws0I_sgHhSRx8o0ZSeJg9eXhN-wKhqRi0jJ87wc3q3VqJgZ",
+    trustColor: "primary", trustBorderColor: "border-primary",
+    lastLogin: Date.now() - 5 * 24 * 60 * 60 * 1000
+  },
+  {
+    id: 6,
+    name: "Ali Hassan",
+    gradYear: 2024,
+    university: "LUMS",
+    uniTier: "top",
+    trust: 94,
+    skills: ["React", "Node.js", "PostgreSQL"],
+    img: "https://lh3.googleusercontent.com/aida-public/AB6AXuBQQSHtXSd1Az2qpafyiLQlgYo-t-QmWi-Nj0G9gC9eR1u4avHNZ329vM6YkffP1ktFMOfxBK2dRB6TWy48pfJuo3NUtZmonwn7xdmMqlllO-zbkj3iYyawx6qhywPi85zURp_4m2iX9z1d9OFBg7naJMF1My4rfXODnGkkD6cEKxSFPyiFBodWehMWYB5CjAdjYx9GOGMLy1_W0GhDI1jEHT6P3IQvOdFF_9FeHs6b_SziI1S9F0XGt-Yjb1bys597G31P0WKb6qgG",
+    trustColor: "primary", trustBorderColor: "border-primary",
+    lastLogin: Date.now() - 12 * 24 * 60 * 60 * 1000
+  },
+  {
+    id: 7,
+    name: "Mahnoor Siddiqui",
+    gradYear: 2023,
+    university: "Habib University",
+    uniTier: "private",
+    trust: 89,
+    skills: ["DevOps", "Kubernetes", "Docker"],
+    img: "https://lh3.googleusercontent.com/aida-public/AB6AXuAcghbVkzvmgAW3HmyC-bCSWpnxG_9JYSERXzAv7AAEJ_zU9HUmI7cDhUnmSzuOGETpi6NESWTMp9QfHpOiqwVdlZ9rhZWFRG7vYvnG825gKRwREH6_rn3iignKw-SsJOIt4ckbYDo-dSxJHyy9-0FfU7hAjk3XjjvuAbQG2mftvTmYmUcPFLuOaQFTMeMHsHP9bbb0v1S1atJVvzriTBe_d1OPH341w2r73jz4SFuTLyDrblob4Fiea0vFDAv2gzdREzw_flcLrYxi",
+    trustColor: "tertiary", trustBorderColor: "border-tertiary",
+    lastLogin: Date.now() - 100 * 24 * 60 * 60 * 1000
+  },
+  {
+    id: 8,
+    name: "Bilal Chaudhry",
+    gradYear: 2026,
+    university: "GIK Institute",
+    uniTier: "private",
+    trust: 78,
+    skills: ["UI/UX", "Figma", "User Research"],
+    img: "https://lh3.googleusercontent.com/aida-public/AB6AXuD-uLZzQjpjf9MFRRHmWd6j_VhunkfgZ0bCmESXXDKIKJZ03n9Z8oiFn3alyR6yAK1EgstIcMSLCRiHTijRG4nbXb06Mq1wMJWwbc_YB4w4lLr4daF-6y3KI1p2hSb9CSBd5WiR9MA2acv8JGkl3O2cKoVeaeE8J_9kOyaBouTruDsoxMVK7kjZqxvEYYPK5WMvRTjdmx71x3RHl58g6yh0UvbNULlgZ9S-ib2DFY07pDFUDG0ZmAEYOptCw7BtnaqJo8Y-sBnjkSqS",
+    trustColor: "secondary", trustBorderColor: "border-secondary-container",
+    lastLogin: Date.now() - 8 * 24 * 60 * 60 * 1000
+  },
+  {
+    id: 9,
+    name: "Zain ul Abidin",
+    gradYear: 2025,
+    university: "QAU Islamabad",
+    uniTier: "public",
+    trust: 83,
+    skills: ["Java", "Spring Boot", "Microservices"],
+    img: "https://lh3.googleusercontent.com/aida-public/AB6AXuAfx4zsf4g2yyp5ur5OyZhwaBEKE89GBLlU5BBxwQCn1GIGM_hHWx0PDrKobwBQ0zmJgAcGGOvw0FQw6wZ6T1m8m9FUygvSEKbFxL-s4Mzm3cPgEsT-hLcl5nDhMq1uUAFkqnX7aX3h1risA2k5DnMW-H3Ygs8ufrqIWI8qn3n5-azGOhQWRueGBbJ5SoDieEb0GrU14r8M9abNbau53mqbm7EaymCsw47aKMWK7TTnM8mOSW9z0gW_xda92QII6ANEWbAHcAjvjKjt",
+    trustColor: "on-background", trustBorderColor: "border-gold",
+    lastLogin: Date.now() - 90 * 24 * 60 * 60 * 1000
+  },
+  {
+    id: 10,
+    name: "Hira Baig",
+    gradYear: 2023,
+    university: "Punjab University",
+    uniTier: "public",
+    trust: 87,
+    skills: ["Product Management", "Agile", "SQL"],
+    img: "https://lh3.googleusercontent.com/aida-public/AB6AXuBMYSstusQThqwea-ivblFvNId-5KZulKycZ-OYuvzkTC5IS5wFuKsg4VowJ6Kd7PCQOqISRCjXoeZOsSg9V0xVDymUgXre7PTk9WyJ6p5r1gmBWwzBZNPDY-EXso3HkY6TY1z3-xS1D0ASakHdUYwBwe7_Q7UQCz2-IoDfwpMf1JD6TRxU12eGFG8ErHRlC8-oXqRxoMDK6pfV1qEPpdYtqreqj8h6kg_MH2R4RGF0gbcJp6JiZpKUv7WoNf69vaOyBu1xLvOMZEwn",
+    trustColor: "primary", trustBorderColor: "border-primary",
+    lastLogin: Date.now() - 200 * 24 * 60 * 60 * 1000
+  },
+  {
+    id: 11,
+    name: "Omar Farooq",
+    gradYear: 2024,
+    university: "NUST",
+    uniTier: "top",
+    trust: 90,
+    skills: ["Cybersecurity", "Penetration Testing", "Python"],
+    img: "https://lh3.googleusercontent.com/aida-public/AB6AXuCDVwtxd9QLs6sVx1o08im4nc7YZbdkO3aVaOn8mUVa-Mj1pxxw86vDshZqz2cQkmlwuNGpra_EUtvpjOgv_jQzOJfB4Ka97Lemd9tcWhSidIkumumWCcLo0fzQMQvv5MftkQq7-FH5xaYQkrZdby1JLa0TAONk_b5o5wS5GNfujkl1Nvepd_jRtjD5WLlVL_bTFtAesxGFTBq4-Na59VI1FlFCgAYRUsyJSEchM4E1om4BAdGmTTAW37aVhE6PK3kMGMscn",
+    trustColor: "tertiary", trustBorderColor: "border-tertiary",
+    lastLogin: Date.now() - 1 * 24 * 60 * 60 * 1000
+  },
+  {
+    id: 12,
+    name: "Nadia Rehman",
+    gradYear: 2026,
+    university: "FAST-NUCES",
+    uniTier: "private",
+    trust: 93,
+    skills: ["Computer Vision", "PyTorch", "C++"],
+    img: "https://lh3.googleusercontent.com/aida-public/AB6AXuAHYLzxSvaIFkxJsOFI0_OgvRWRG8H6YTFX6ZphsMDC1BNoLwgl8_VDYG5-2VRJ3N9mSveooVJL_oN3AWmE8Yt3cagLjZcRuy3QVX7WkUL2Eu2fVZMrwPcrIb6GMUquU1pRWXQXGFPpdDi2e19cBjpQsn1whcR0rDy4AO51Nkij9r8Lep5-KZ6UQq43ojmmTLH-kGXd5nEu9nrHlKI0pR52t9kprqTIbpFjEkU-1vYMFXXC5R-rxkuOrrvMFZj5b_aE9hZutL1fWiW8",
+    trustColor: "secondary", trustBorderColor: "border-secondary-container",
+    lastLogin: Date.now() - 4 * 24 * 60 * 60 * 1000
+  }
+];
+
+let ALL_CANDIDATES = [];
+
+// ========== STATE ==========
+let activeSkills = [];
+let sortMode = "trust";    // 'trust' | 'name'
+let sortDir = "desc";      // 'asc' | 'desc'
+let visibleCount = 8;
+let currentInviteCandidate = null;
+let uniFilter = { type: 'all', text: '' }; // type: 'all'|'top'|'public'|'private'|'search', text: string
+let currentLoginFilter = 'all'; // 'all' | 'week' | 'month' | '6month'
+
+// All Pakistani university names for autocomplete
+const ALL_PKG_UNIS = [
+  "LUMS", "NUST", "IBA Karachi", "UET Lahore", "FAST-NUCES", "Habib University",
+  "GIK Institute", "QAU Islamabad", "Punjab University", "Aga Khan University",
+  "COMSATS University", "Air University", "NED University", "University of Karachi",
+  "University of Peshawar", "Bahria University", "Lahore University", "SZABIST",
+  "Riphah International University", "USMAN Institute of Technology"
+];
+
+function setLoginFilter(filter) {
+  currentLoginFilter = filter;
+  const buttons = ['loginAll', 'loginWeek', 'loginMonth', 'login6Month'];
+  const filters = ['all', 'week', 'month', '6month'];
+  
+  buttons.forEach((btnId, idx) => {
+    const btn = document.getElementById(btnId);
+    if (!btn) return;
+    if (filters[idx] === filter) {
+      btn.className = 'login-filter-btn px-3 py-1 rounded-full text-[11px] font-bold border border-primary/40 bg-primary text-white transition-all';
+    } else {
+      btn.className = 'login-filter-btn px-3 py-1 rounded-full text-[11px] font-bold border border-primary/40 bg-white/60 text-primary transition-all hover:bg-primary/10';
+    }
+  });
+  
+  visibleCount = 8;
+  applyFilters();
+}
+
+function hashCode(str) {
+  let hash = 0;
+  for (let i = 0; i < str.length; i++) {
+    hash = str.charCodeAt(i) + ((hash << 5) - hash);
+  }
+  return hash;
+}
+
+function mapUserToCandidate(u) {
+  const seedString = String(u.id || u.username || '');
+  let hash = 0;
+  for (let i = 0; i < seedString.length; i++) {
+    hash = seedString.charCodeAt(i) + ((hash << 5) - hash);
+  }
+  const seedIndex = Math.abs(hash);
+
+  const avatars = [
+    "https://lh3.googleusercontent.com/aida-public/AB6AXuAHYLzxSvaIFkxJsOFI0_OgvRWRG8H6YTFX6ZphsMDC1BNoLwgl8_VDYG5-2VRJ3N9mSveooVJL_oN3AWmE8Yt3cagLjZcRuy3QVX7WkUL2Eu2fVZMrwPcrIb6GMUquU1pRWXQXGFPpdDi2e19cBjpQsn1whcR0rDy4AO51Nkij9r8Lep5-KZ6UQq43ojmmTLH-kGXd5nEu9nrHlKI0pR52t9kprqTIbpFjEkU-1vYMFXXC5R-rxkuOrrvMFZj5b_aE9hZutL1fWiW8",
+    "https://lh3.googleusercontent.com/aida-public/AB6AXuBiZtsOlIKla0hFTHHrw2ORJUXHyVPoX2g4Vn4NbzNiJVQGBx5PeW4MCV1qt8ZpLRja3xOLGl3XxZ2RhXJ3zKLP_oVLeFE7Oj1LlS35El5v7ifvAKStSjicnEiHCVcdCiwfOei5k52G9X8xSLB7o634sbq38V_50FZaAoyVoYS-JT0E5TBUoT2MM4MjII-XG3VTaOm-VBGcqWUPfKMrN_QySCKR8PmiSZeEwA_l92tcTFETaVxZ470yOYm6iVCa17871GZ9TCHUsHYO",
+    "https://lh3.googleusercontent.com/aida-public/AB6AXuD-uLZzQjpjf9MFRRHmWd6j_VhunkfgZ0bCmESXXDKIKJZ03n9Z8oiFn3alyR6yAK1EgstIcMSLCRiHTijRG4nbXb06Mq1wMJWwbc_YB4w4lLr4daF-6y3KI1p2hSb9CSBd5WiR9MA2acv8JGkl3O2cKoVeaeE8J_9kOyaBouTruDsoxMVK7kjZqxvEYYPK5WMvRTjdmx71x3RHl58g6yh0UvbNULlgZ9S-ib2DFY07pDFUDG0ZmAEYOptCw7BtnaqJo8Y-sBnjkSqS",
+    "https://lh3.googleusercontent.com/aida-public/AB6AXuAr51BSRwXsFHabY5pMsg4d9kqgW7giDieBHEBi0TWFzSwRbrK4HC9xwc4oD1jj5MSI4OEetUt8sbcfRbVWbtRwCOjJgywF4ZysGp7Ga3iRYzFzf66VHorm0q3gubXSwMThhPCOlocA4h0-RAv7Zbv_lAJLxdshJfsYCZ857TUhlw56CL2dzPjciwfkPrDT-Qp8q8vsSXOrlCMvf0MRmrp8IWSizuRgv_SDbku17O1bjknkg8iC4aPzgqCT6CAuNMfVGeXv8DuoYSUU"
+  ];
+  
+  const avatarIndex = seedIndex % avatars.length;
+  const avatarUrl = u.avatar || avatars[avatarIndex];
+  
+  let trustColor = 'primary';
+  let trustBorderColor = 'border-primary';
+  if (u.trustScore >= 95) {
+    trustColor = 'secondary';
+    trustBorderColor = 'border-secondary-container';
+  } else if (u.trustScore >= 90) {
+    trustColor = 'on-background';
+    trustBorderColor = 'border-gold';
+  } else if (u.trustScore >= 85) {
+    trustColor = 'tertiary';
+    trustBorderColor = 'border-tertiary';
+  }
+
+  let formattedName = "";
+  if (u.username) {
+    let cleanName = u.username.split('@')[0];
+    if (cleanName.startsWith('studentone')) {
+      formattedName = "Aqsa Siddique";
+    } else if (cleanName.startsWith('alisidd')) {
+      formattedName = "Ali Siddique";
+    } else if (cleanName.toLowerCase().includes('testuser') || cleanName.toLowerCase().includes('test_') || cleanName.toLowerCase().startsWith('test')) {
+      const names = [
+        "Zainab Ahmed", "Muhammad Ali", "Sara Khan", "Hamza Yusuf", "Amina Begum",
+        "Omer Sheikh", "Fatima Raza", "Bilal Khan", "Sana Malik", "Usman Ghani",
+        "Hira Naeem", "Mahnoor Qureshi", "Mariam Jamil", "Saad Rehman", "Eshal Fatima",
+        "Laiba Shah", "Daniyal Faiz", "Mustafa Kamal", "Ayesha Lodhi", "Raza Haris"
+      ];
+      formattedName = names[seedIndex % names.length];
+    } else {
+      let parts = cleanName.split(/[\d_\.\-]+/).filter(p => p.length > 0);
+      if (parts.length > 0) {
+        formattedName = parts.map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+      } else {
+        formattedName = cleanName;
+      }
+    }
+  }
+  if (!formattedName) {
+    formattedName = "Student Candidate";
+  }
+
+  let university = u.university || 'State University';
+  if (university === "State University" || !university) {
+    const unis = [
+      "LUMS", "NUST", "IBA Karachi", "UET Lahore", "FAST-NUCES", "Habib University",
+      "GIK Institute", "QAU Islamabad", "Punjab University", "COMSATS University",
+      "Air University", "NED University", "University of Karachi", "University of Peshawar"
+    ];
+    university = unis[seedIndex % unis.length];
+  }
+
+  let uniTier = 'private';
+  const uLower = university.toLowerCase();
+  if (uLower.includes('lums') || uLower.includes('nust') || uLower.includes('iba') || uLower.includes('gik') || uLower.includes('fast')) {
+    uniTier = 'top';
+  } else if (uLower.includes('uet') || uLower.includes('punjab') || uLower.includes('qau') || uLower.includes('karachi') || uLower.includes('peshawar') || uLower.includes('public') || uLower.includes('state') || uLower.includes('mit')) {
+    uniTier = 'public';
+  }
+
+  let lastLoginTime = u.lastLogin;
+  if (!lastLoginTime) {
+    const idVal = parseInt(u.id);
+    if (!isNaN(idVal) && idVal > 1000000000000) {
+      lastLoginTime = idVal;
+    } else {
+      lastLoginTime = Date.now() - Math.floor(Math.random() * 180 * 24 * 60 * 60 * 1000);
+    }
+  }
+
+  return {
+    id: u.id,
+    name: formattedName,
+    email: u.email || 'student@university.edu.pk',
+    phone: u.phone || '+92 3' + String(seedIndex % 10) + String(Math.floor(1000000 + Math.random() * 9000000)),
+    gradYear: parseInt(u.graduationYear) || 2026,
+    university: university,
+    uniTier: uniTier,
+    trust: u.trustScore || 85,
+    skills: (u.skills && u.skills.length > 0) ? u.skills : ["Software Engineering", "Problem Solving"],
+    img: avatarUrl,
+    trustColor: trustColor,
+    trustBorderColor: trustBorderColor,
+    lastLogin: lastLoginTime,
+    rating: u.rating || (3.4 + (seedIndex % 7) * 0.1).toFixed(1),
+    badges: (u.badges && u.badges.length > 0) ? u.badges : ["Consistent Learner", "Elite Performer"]
+  };
+}
+
+function fetchCandidates() {
+  fetch('/api/students')
+    .then(r => r.json())
+    .then(data => {
+      if (Array.isArray(data) && data.length > 0) {
+        ALL_CANDIDATES = data.map(mapUserToCandidate);
+      } else {
+        ALL_CANDIDATES = [...STATIC_CANDIDATES];
+      }
+      applyFilters();
+    })
+    .catch(err => {
+      console.warn("Failed to fetch students from API, using static fallback:", err);
+      ALL_CANDIDATES = [...STATIC_CANDIDATES];
+      applyFilters();
+    });
+}
+
+function formatLastLogin(timestamp) {
+  if (!timestamp) return 'Never';
+  const diff = Date.now() - timestamp;
+  const oneMin = 60 * 1000;
+  const oneHour = 60 * oneMin;
+  const oneDay = 24 * oneHour;
+  if (diff < oneHour) {
+    const mins = Math.floor(diff / oneMin);
+    return mins <= 1 ? 'Just now' : `${mins} mins ago`;
+  } else if (diff < oneDay) {
+    const hours = Math.floor(diff / oneHour);
+    return hours === 1 ? '1 hour ago' : `${hours} hours ago`;
+  } else {
+    const days = Math.floor(diff / oneDay);
+    if (days === 1) return 'Yesterday';
+    if (days < 7) return `${days} days ago`;
+    if (days < 30) {
+      const weeks = Math.floor(days / 7);
+      return weeks === 1 ? '1 week ago' : `${weeks} weeks ago`;
+    }
+    const months = Math.floor(days / 30);
+    return months === 1 ? '1 month ago' : `${months} months ago`;
+  }
+}
+
+// ========== SKILL TAGS ==========
+function renderSkillTags() {
+  const container = document.getElementById('skillsContainer');
+  container.innerHTML = '';
+  activeSkills.forEach(skill => {
+    const tag = document.createElement('span');
+    tag.className = 'skill-tag active';
+    tag.innerHTML = `${skill} <span class="material-symbols-outlined close-btn" onclick="removeSkill('${skill}')">close</span>`;
+    container.appendChild(tag);
+  });
+  applyFilters();
+}
+
+function addSkillFromInput() {
+  const input = document.getElementById('skillInput');
+  const val = input.value.trim();
+  if (val && !activeSkills.includes(val)) {
+    activeSkills.push(val);
+    renderSkillTags();
+  }
+  input.value = '';
+  input.focus();
+}
+
+function removeSkill(skill) {
+  activeSkills = activeSkills.filter(s => s !== skill);
+  renderSkillTags();
+}
+
+document.getElementById('skillInput').addEventListener('keydown', function(e) {
+  if (e.key === 'Enter') addSkillFromInput();
+});
+
+// ========== FILTER & SORT ==========
+function getFilters() {
+  const minTrust = parseInt(document.getElementById('trustSlider').value);
+  const gradCbs = document.querySelectorAll('.grad-year-cb:checked');
+  const gradYears = Array.from(gradCbs).map(cb => parseInt(cb.dataset.year));
+  return { minTrust, gradYears, skills: activeSkills };
+}
+
+function filterCandidates(candidates) {
+  const { minTrust, gradYears, skills } = getFilters();
+  
+  // Get query text from topbar-search
+  const searchInput = document.getElementById('topbar-search');
+  const query = searchInput ? searchInput.value.toLowerCase().trim() : '';
+
+  return candidates.filter(c => {
+    if (query) {
+      const nameMatch = (c.name || '').toLowerCase().includes(query);
+      const uniMatch = (c.university || '').toLowerCase().includes(query);
+      const skillsMatch = c.skills && c.skills.some(s => s.toLowerCase().includes(query));
+      if (!nameMatch && !uniMatch && !skillsMatch) return false;
+    }
+    if (c.trust < minTrust) return false;
+    if (gradYears.length > 0 && !gradYears.includes(c.gradYear)) return false;
+    // University filter
+    if (uniFilter.type === 'search' && uniFilter.text) {
+      if (!c.university.toLowerCase().includes(uniFilter.text.toLowerCase())) return false;
+    } else if (uniFilter.type !== 'all') {
+      if (c.uniTier !== uniFilter.type) return false;
+    }
+    if (skills.length > 0) {
+      const hasSkill = skills.some(s => c.skills.some(cs => cs.toLowerCase().includes(s.toLowerCase())));
+      if (!hasSkill) return false;
+    }
+    // Last login filter
+    if (currentLoginFilter !== 'all') {
+      const now = Date.now();
+      const diffTime = now - c.lastLogin;
+      const oneDay = 24 * 60 * 60 * 1000;
+      if (currentLoginFilter === 'week' && diffTime > 7 * oneDay) return false;
+      if (currentLoginFilter === 'month' && diffTime > 30 * oneDay) return false;
+      if (currentLoginFilter === '6month' && diffTime > 180 * oneDay) return false;
+    }
+    return true;
+  });
+}
+
+function sortCandidates(candidates) {
+  return [...candidates].sort((a, b) => {
+    if (sortMode === 'trust') {
+      return sortDir === 'desc' ? b.trust - a.trust : a.trust - b.trust;
+    } else {
+      const cmp = a.name.localeCompare(b.name);
+      return sortDir === 'desc' ? -cmp : cmp;
+    }
+  });
+}
+
+function toggleSort(mode) {
+  if (sortMode === mode) {
+    sortDir = sortDir === 'desc' ? 'asc' : 'desc';
+  } else {
+    sortMode = mode;
+    sortDir = 'desc';
+  }
+  // Update button styles
+  const trustBtn = document.getElementById('sortTrustBtn');
+  const nameBtn = document.getElementById('sortNameBtn');
+  const trustIcon = document.getElementById('sortTrustIcon');
+  const nameIcon = document.getElementById('sortNameIcon');
+
+  if (sortMode === 'trust') {
+    trustBtn.className = 'flex items-center gap-1 font-bold text-primary sort-btn-active';
+    nameBtn.className = 'flex items-center gap-1 sort-btn-inactive ml-2';
+    trustIcon.style.display = '';
+    nameIcon.style.display = 'none';
+    trustIcon.textContent = sortDir === 'desc' ? 'arrow_downward' : 'arrow_upward';
+  } else {
+    nameBtn.className = 'flex items-center gap-1 font-bold text-primary sort-btn-active ml-2';
+    trustBtn.className = 'flex items-center gap-1 sort-btn-inactive';
+    nameIcon.style.display = '';
+    trustIcon.style.display = 'none';
+    nameIcon.textContent = sortDir === 'desc' ? 'arrow_downward' : 'arrow_upward';
+  }
+  applyFilters();
+}
+
+function applyFilters() {
+  const filtered = filterCandidates(ALL_CANDIDATES);
+  const sorted = sortCandidates(filtered);
+  renderCandidates(sorted);
+}
+
+// ========== RENDER ==========
+function renderCandidates(candidates) {
+  const grid = document.getElementById('candidatesGrid');
+  const emptyState = document.getElementById('emptyState');
+  const loadMoreBtn = document.getElementById('loadMoreBtn');
+  const shownCount = document.getElementById('shownCount');
+
+  // Prevent scroll jump by setting min-height to current height
+  const currentHeight = grid.offsetHeight;
+  if (currentHeight > 0) {
+    grid.style.minHeight = `${currentHeight}px`;
+  }
+
+  grid.innerHTML = '';
+
+  if (candidates.length === 0) {
+    emptyState.classList.remove('hidden');
+    loadMoreBtn.parentElement.classList.add('hidden');
+    shownCount.textContent = '0';
+    grid.style.minHeight = '';
+    return;
+  }
+
+  emptyState.classList.add('hidden');
+  const toShow = candidates.slice(0, visibleCount);
+  shownCount.textContent = `${toShow.length} of ${candidates.length}`;
+
+  if (candidates.length <= visibleCount) {
+    loadMoreBtn.parentElement.classList.add('hidden');
+  } else {
+    loadMoreBtn.parentElement.classList.remove('hidden');
+  }
+
+  toShow.forEach((c, i) => {
+    const card = document.createElement('div');
+    card.className = 'glass-card p-6 rounded-3xl candidate-card group relative overflow-hidden fade-in';
+    card.style.animationDelay = `${i * 50}ms`;
+
+    const skillBadges = c.skills.map((s, si) => {
+      const colors = ['bg-secondary-fixed text-on-secondary-fixed', 'bg-tertiary-fixed text-on-tertiary-fixed', 'bg-primary-fixed text-on-primary-fixed'];
+      return `<span class="px-3 py-1 ${colors[si % colors.length]} text-[11px] font-bold rounded-full">${s}</span>`;
+    }).join('');
+
+    card.innerHTML = `
+      <div class="flex justify-between items-start mb-6">
+        <div class="flex gap-4">
+          <div class="w-16 h-16 rounded-2xl overflow-hidden shadow-lg ring-2 ring-white/50 cursor-pointer" onclick="openProfilePanel(${c.id})">
+            <img alt="${c.name}" class="w-full h-full object-cover" src="${c.img}"/>
+          </div>
+          <div>
+            <h4 class="font-headline-lg text-[22px] text-on-background cursor-pointer hover:text-primary transition-colors" onclick="openProfilePanel(${c.id})">${c.name}</h4>
+            <p class="text-on-surface-variant text-sm">Class of ${c.gradYear} &bull; ${c.university}</p>
+            <p class="text-xs text-outline/80 mt-1 flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">history</span> Active ${formatLastLogin(c.lastLogin)}</p>
+          </div>
+        </div>
+        <div class="flex flex-col items-center">
+          <div class="w-14 h-14 rounded-full border-4 ${c.trustBorderColor} flex items-center justify-center bg-white trust-badge-glow">
+            <span class="font-bold text-${c.trustColor} text-sm">${c.trust}%</span>
+          </div>
+          <span class="text-[10px] uppercase font-bold text-${c.trustColor} mt-1 tracking-wider">Trust</span>
+        </div>
+      </div>
+      <div class="flex flex-wrap gap-2 mb-6">${skillBadges}</div>
+      <div class="grid grid-cols-2 gap-3">
+        <button onclick="openProfilePanel(${c.id})" class="py-3 border border-outline rounded-xl text-on-surface font-bold hover:bg-white/40 transition-colors">View Profile</button>
+        <button onclick="openInviteModal(${c.id})" class="py-3 bg-primary text-white rounded-xl font-bold shadow-lg shadow-primary/20 hover:bg-primary-container transition-all">Invite to Company</button>
+      </div>
+    `;
+    grid.appendChild(card);
+  });
+
+  // Reset min-height after rendering is complete
+  requestAnimationFrame(() => {
+    grid.style.minHeight = '';
+  });
+
+  // Store for load more
+  window._currentFiltered = candidates;
+}
+
+// ========== LOAD MORE ==========
+function loadMore() {
+  const previousVisible = visibleCount;
+  visibleCount += 4;
+  
+  const filtered = filterCandidates(ALL_CANDIDATES);
+  const sorted = sortCandidates(filtered);
+  
+  const newCandidates = sorted.slice(previousVisible, visibleCount);
+  
+  // Append new candidates directly to the grid (avoids scroll-jump)
+  const grid = document.getElementById('candidatesGrid');
+  newCandidates.forEach((c, i) => {
+    const card = document.createElement('div');
+    card.className = 'glass-card p-6 rounded-3xl candidate-card group relative overflow-hidden fade-in';
+    card.style.animationDelay = `${i * 50}ms`;
+
+    const skillBadges = c.skills.map((s, si) => {
+      const colors = ['bg-secondary-fixed text-on-secondary-fixed', 'bg-tertiary-fixed text-on-tertiary-fixed', 'bg-primary-fixed text-on-primary-fixed'];
+      return `<span class="px-3 py-1 ${colors[si % colors.length]} text-[11px] font-bold rounded-full">${s}</span>`;
+    }).join('');
+
+    card.innerHTML = `
+      <div class="flex justify-between items-start mb-6">
+        <div class="flex gap-4">
+          <div class="w-16 h-16 rounded-2xl overflow-hidden shadow-lg ring-2 ring-white/50 cursor-pointer" onclick="openProfilePanel(${c.id})">
+            <img alt="${c.name}" class="w-full h-full object-cover" src="${c.img}"/>
+          </div>
+          <div>
+            <h4 class="font-headline-lg text-[22px] text-on-background cursor-pointer hover:text-primary transition-colors" onclick="openProfilePanel(${c.id})">${c.name}</h4>
+            <p class="text-on-surface-variant text-sm">Class of ${c.gradYear} &bull; ${c.university}</p>
+            <p class="text-xs text-outline/80 mt-1 flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">history</span> Active ${formatLastLogin(c.lastLogin)}</p>
+          </div>
+        </div>
+        <div class="flex flex-col items-center">
+          <div class="w-14 h-14 rounded-full border-4 ${c.trustBorderColor} flex items-center justify-center bg-white trust-badge-glow">
+            <span class="font-bold text-${c.trustColor} text-sm">${c.trust}%</span>
+          </div>
+          <span class="text-[10px] uppercase font-bold text-${c.trustColor} mt-1 tracking-wider">Trust</span>
+        </div>
+      </div>
+      <div class="flex flex-wrap gap-2 mb-6">${skillBadges}</div>
+      <div class="grid grid-cols-2 gap-3">
+        <button onclick="openProfilePanel(${c.id})" class="py-3 border border-outline rounded-xl text-on-surface font-bold hover:bg-white/40 transition-colors">View Profile</button>
+        <button onclick="openInviteModal(${c.id})" class="py-3 bg-primary text-white rounded-xl font-bold shadow-lg shadow-primary/20 hover:bg-primary-container transition-all">Invite to Company</button>
+      </div>
+    `;
+    grid.appendChild(card);
+  });
+  
+  // Update shown count
+  const shownCount = document.getElementById('shownCount');
+  shownCount.textContent = `${Math.min(visibleCount, sorted.length)} of ${sorted.length}`;
+  
+  // Hide load more if no more candidates
+  const loadMoreBtn = document.getElementById('loadMoreBtn');
+  if (sorted.length <= visibleCount) {
+    loadMoreBtn.parentElement.classList.add('hidden');
+  } else {
+    loadMoreBtn.parentElement.classList.remove('hidden');
+  }
+
+  showToast('Loaded more candidates', 'check_circle');
+}
+
+// ========== UNIVERSITY SEARCH ==========
+function onUniSearch(val) {
+  const suggestionsEl = document.getElementById('uniSuggestions');
+  const trimmed = val.trim();
+  if (!trimmed) {
+    suggestionsEl.classList.add('hidden');
+    suggestionsEl.innerHTML = '';
+    uniFilter = { type: 'all', text: '' };
+    updateCatButtons('all');
+    renderUniChip();
+    applyFilters();
+    return;
+  }
+  // Filter suggestions from candidates + known unis
+  const candidateUnis = [...new Set(ALL_CANDIDATES.map(c => c.university))];
+  const allUnis = [...new Set([...candidateUnis, ...ALL_PKG_UNIS])];
+  const matches = allUnis.filter(u => u.toLowerCase().includes(trimmed.toLowerCase())).slice(0, 6);
+
+  if (matches.length > 0) {
+    suggestionsEl.innerHTML = matches.map(u => `
+      <div onclick="selectUni('${u.replace(/'/g, "\\'")}')"
+        class="px-4 py-2.5 cursor-pointer hover:bg-primary/10 text-on-surface font-medium transition-colors border-b border-glass-border last:border-0">
+        <span class="material-symbols-outlined text-[16px] text-primary align-middle mr-2">school</span>${u}
+      </div>`).join('');
+    suggestionsEl.classList.remove('hidden');
+    suggestionsEl.classList.add('flex');
+  } else {
+    suggestionsEl.innerHTML = `<div class="px-4 py-3 text-outline italic text-xs">No matching university found</div>`;
+    suggestionsEl.classList.remove('hidden');
+    suggestionsEl.classList.add('flex');
+  }
+  uniFilter = { type: 'search', text: trimmed };
+  updateCatButtons(null);
+  renderUniChip();
+  applyFilters();
+}
+
+function selectUni(uniName) {
+  document.getElementById('uniSearchInput').value = uniName;
+  document.getElementById('uniSuggestions').classList.add('hidden');
+  uniFilter = { type: 'search', text: uniName };
+  updateCatButtons(null);
+  renderUniChip();
+  applyFilters();
+}
+
+function setUniCategory(cat) {
+  uniFilter = { type: cat, text: '' };
+  document.getElementById('uniSearchInput').value = '';
+  document.getElementById('uniSuggestions').classList.add('hidden');
+  updateCatButtons(cat);
+  renderUniChip();
+  visibleCount = 8;
+  applyFilters();
+}
+
+function updateCatButtons(active) {
+  const cats = ['all', 'top', 'public', 'private'];
+  cats.forEach(c => {
+    const btn = document.getElementById('cat' + c.charAt(0).toUpperCase() + c.slice(1));
+    if (!btn) return;
+    if (c === active) {
+      btn.className = 'uni-cat-btn px-3 py-1 rounded-full text-[11px] font-bold border border-primary/40 bg-primary text-white transition-all';
+    } else {
+      btn.className = 'uni-cat-btn px-3 py-1 rounded-full text-[11px] font-bold border border-primary/40 bg-white/60 text-primary transition-all hover:bg-primary/10';
+    }
+  });
+}
+
+function clearUniFilter() {
+  uniFilter = { type: 'all', text: '' };
+  document.getElementById('uniSearchInput').value = '';
+  document.getElementById('uniSuggestions').classList.add('hidden');
+  updateCatButtons('all');
+  renderUniChip();
+  applyFilters();
+}
+
+function renderUniChip() {
+  const chip = document.getElementById('uniActiveChip');
+  if (uniFilter.type === 'all' && !uniFilter.text) {
+    chip.classList.add('hidden');
+    chip.innerHTML = '';
+    return;
+  }
+  const label = uniFilter.text || { top: 'Top Tier', public: 'Public', private: 'Private' }[uniFilter.type];
+  chip.innerHTML = `
+    <span class="px-3 py-1 bg-primary text-white text-[11px] rounded-full flex items-center gap-1 font-bold">
+      <span class="material-symbols-outlined text-[13px]">school</span>${label}
+      <span class="material-symbols-outlined text-[14px] cursor-pointer ml-1" onclick="clearUniFilter()">close</span>
+    </span>`;
+  chip.classList.remove('hidden');
+  chip.classList.add('flex');
+}
+
+// ========== RESET ==========
+function resetAllFilters() {
+  // Reset skills
+  activeSkills = [];
+  renderSkillTags();
+
+  // Reset trust slider
+  document.getElementById('trustSlider').value = 0;
+  document.getElementById('trust-val').textContent = '0%';
+
+  // Reset graduation year checkboxes (all checked)
+  document.querySelectorAll('.grad-year-cb').forEach(cb => cb.checked = true);
+
+  // Reset university search
+  uniFilter = { type: 'all', text: '' };
+  document.getElementById('uniSearchInput').value = '';
+  document.getElementById('uniSuggestions').classList.add('hidden');
+  updateCatButtons('all');
+  renderUniChip();
+
+  // Reset login filter
+  currentLoginFilter = 'all';
+  const loginBtns = ['loginAll', 'loginWeek', 'loginMonth', 'login6Month'];
+  loginBtns.forEach((id, idx) => {
+    const btn = document.getElementById(id);
+    if (btn) {
+      if (idx === 0) {
+        btn.className = 'login-filter-btn px-3 py-1 rounded-full text-[11px] font-bold border border-primary/40 bg-primary text-white transition-all';
+      } else {
+        btn.className = 'login-filter-btn px-3 py-1 rounded-full text-[11px] font-bold border border-primary/40 bg-white/60 text-primary transition-all hover:bg-primary/10';
+      }
+    }
+  });
+
+  // Reset sort
+  sortMode = 'trust';
+  sortDir = 'desc';
+  document.getElementById('sortTrustBtn').className = 'flex items-center gap-1 font-bold text-primary sort-btn-active';
+  document.getElementById('sortNameBtn').className = 'flex items-center gap-1 sort-btn-inactive ml-2';
+  document.getElementById('sortTrustIcon').style.display = '';
+  document.getElementById('sortNameIcon').style.display = 'none';
+  document.getElementById('sortTrustIcon').textContent = 'arrow_downward';
+
+  // Reset visible count
+  visibleCount = 8;
+
+  applyFilters();
+  showToast('All filters reset', 'filter_alt_off');
+}
+
+// ========== INVITE MODAL ==========
+function openInviteModal(candidateId) {
+  const c = ALL_CANDIDATES.find(x => x.id === candidateId);
+  if (!c) return;
+  currentInviteCandidate = c;
+  document.getElementById('inviteModalSubtitle').textContent = `Invite ${c.name} to your company`;
+  document.getElementById('inviteMessage').value = '';
+  document.getElementById('inviteRole').value = '';
+  document.getElementById('inviteModal').classList.add('open');
+}
+
+// Close modal on backdrop click
+document.getElementById('inviteModal').addEventListener('click', function(e) {
+  if (e.target === this) closeInviteModal();
+});
+
+function closeInviteModal() {
+  document.getElementById('inviteModal').classList.remove('open');
+  currentInviteCandidate = null;
+}
+
+function sendInvite() {
+  const msg = document.getElementById('inviteMessage').value;
+  const role = document.getElementById('inviteRole').value;
+  
+  if (!currentInviteCandidate) return;
+  
+  const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
+  const companyName = currentUser.companyName || 'EliteRecruit';
+
+  fetch('/api/students/invite', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      candidateId: currentInviteCandidate.id,
+      message: msg,
+      role: role,
+      companyName: companyName
+    })
+  })
+  .then(res => res.json())
+  .then(data => {
+    console.log("Invite sent via API:", data);
+  })
+  .catch(err => console.error("Failed to send invite via API:", err));
+
+  closeInviteModal();
+  showToast(`Invitation sent to ${currentInviteCandidate.name}!`, 'send');
+}
+
+// ========== PROFILE PANEL ==========
+function openProfilePanel(candidateId) {
+  const c = ALL_CANDIDATES.find(x => x.id === candidateId);
+  if (!c) return;
+
+  const panel = document.getElementById('profilePanel');
+  const overlay = document.getElementById('profileOverlay');
+  const content = document.getElementById('profilePanelContent');
+
+  const skillBadges = c.skills.map(s => `
+    <div class="glass-thick px-4 py-2 rounded-full border border-white/60 flex items-center gap-2">
+      <div class="w-2 h-2 rounded-full bg-primary shadow-[0_0_8px_rgba(135,49,163,0.8)]"></div>
+      <span class="text-[12px] font-bold text-on-surface-variant">${s}</span>
+    </div>
+  `).join('');
+
+  content.innerHTML = `
+    <div class="flex items-center justify-between mb-8">
+      <button onclick="closeProfilePanel()" class="flex items-center gap-2 text-on-surface-variant hover:text-primary transition-colors font-semibold">
+        <span class="material-symbols-outlined">arrow_back</span> Back to Talent Pool
+      </button>
+      <button onclick="openInviteModal(${c.id}); closeProfilePanel();" class="px-5 py-2.5 bg-primary text-white rounded-full font-bold text-sm hover:bg-primary-container transition-all shadow-lg">
+        Invite to Company
+      </button>
+    </div>
+
+    <!-- Profile Header -->
+    <div class="glass-card rounded-3xl p-8 mb-6">
+      <div class="flex items-start gap-6">
+        <div class="relative">
+          <div class="w-24 h-24 rounded-2xl overflow-hidden border-2 border-white shadow-lg">
+            <img class="w-full h-full object-cover" src="${c.img}" alt="${c.name}"/>
+          </div>
+          <div class="absolute -bottom-2 -right-2 bg-primary text-white p-1 rounded-lg border-2 border-white">
+            <span class="material-symbols-outlined text-[16px]" style="font-variation-settings:'FILL' 1">verified</span>
+          </div>
+        </div>
+        <div class="flex-1">
+          <h1 class="text-2xl font-bold text-on-background mb-1">${c.name}</h1>
+          <p class="text-on-surface-variant flex items-center gap-2 text-sm">
+            <span class="material-symbols-outlined text-sm">school</span>
+            ${c.university} &bull; Class of ${c.gradYear}
+          </p>
+          <p class="text-xs text-outline/80 mt-1 flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">history</span> Active ${formatLastLogin(c.lastLogin)}</p>
+          
+          <!-- Contact Info -->
+          <div class="mt-3 space-y-1">
+            <p class="text-xs text-on-surface-variant flex items-center gap-2"><span class="material-symbols-outlined text-xs text-primary">mail</span> ${c.email}</p>
+            <p class="text-xs text-on-surface-variant flex items-center gap-2"><span class="material-symbols-outlined text-xs text-primary">call</span> ${c.phone}</p>
+          </div>
+
+          <div class="flex items-center gap-2 mt-4">
+            <div class="w-12 h-12 rounded-full border-4 ${c.trustBorderColor} flex items-center justify-center bg-white trust-badge-glow">
+              <span class="font-bold text-${c.trustColor} text-xs">${c.trust}%</span>
+            </div>
+            <div>
+              <p class="text-xs font-bold uppercase tracking-wider text-${c.trustColor}">Trust Score</p>
+              <p class="text-xs text-on-surface-variant">Verified by EliteRecruit</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Rating & Badges -->
+    <div class="grid grid-cols-2 gap-6 mb-6">
+      <div class="glass-card rounded-3xl p-6">
+        <h3 class="font-label-caps text-label-caps text-outline mb-3 uppercase tracking-wider">Academic Score</h3>
+        <div class="flex items-baseline gap-2">
+          <span class="text-3xl font-extrabold text-primary">${c.rating}</span>
+          <span class="text-xs text-outline">/ 4.0 GPA</span>
+        </div>
+      </div>
+      <div class="glass-card rounded-3xl p-6">
+        <h3 class="font-label-caps text-label-caps text-outline mb-3 uppercase tracking-wider">Achievements</h3>
+        <div class="flex flex-wrap gap-1.5">
+          ${c.badges.map(badge => `
+            <span class="px-2.5 py-1 rounded-full bg-green-50 text-green-700 border border-green-200 text-[10px] font-bold">${badge}</span>
+          `).join('')}
+        </div>
+      </div>
+    </div>
+
+    <!-- Skills -->
+    <div class="glass-card rounded-3xl p-6 mb-6">
+      <h2 class="font-label-caps text-label-caps text-on-background uppercase mb-4 flex items-center gap-2">
+        <span class="material-symbols-outlined">auto_awesome</span> Verified Skills
+      </h2>
+      <div class="grid grid-cols-2 gap-3">${skillBadges}</div>
+    </div>
+
+    <!-- Experience & Projects -->
+    <div class="glass-card rounded-3xl p-6 mb-6">
+      <h2 class="font-label-caps text-label-caps text-on-background uppercase mb-4 flex items-center gap-2">
+        <span class="material-symbols-outlined">work</span> Experience & Projects
+      </h2>
+      <div class="space-y-4">
+        <div class="flex gap-3">
+          <div class="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary flex-shrink-0">
+            <span class="material-symbols-outlined">business</span>
+          </div>
+          <div>
+            <h4 class="font-bold text-sm text-on-background">Software Intern</h4>
+            <p class="text-xs text-on-surface-variant">Systems Limited &bull; Summer 2025</p>
+          </div>
+        </div>
+        <div class="h-[1px] bg-glass-border"></div>
+        <div class="space-y-3">
+          <h4 class="font-bold text-xs text-outline uppercase tracking-wider">Academic Projects</h4>
+          <div class="bg-white/35 p-4 rounded-2xl border border-white/50">
+            <h5 class="font-bold text-xs text-on-background">CareerGlass Web Portal</h5>
+            <p class="text-[11px] text-on-surface-variant mt-1">Built a responsive student jobs marketplace with real-time analytics and liquid glassmorphic design.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Education -->
+    <div class="glass-card rounded-3xl p-6 mb-6">
+      <h2 class="font-label-caps text-label-caps text-on-background uppercase mb-4 flex items-center gap-2">
+        <span class="material-symbols-outlined">history_edu</span> Education
+      </h2>
+      <div class="flex gap-4 items-start">
+        <div class="w-12 h-12 rounded-xl bg-white/50 flex items-center justify-center">
+          <span class="material-symbols-outlined text-primary text-2xl">school</span>
+        </div>
+        <div>
+          <h3 class="font-bold text-on-background">Bachelor's Degree</h3>
+          <p class="text-on-surface-variant text-sm">${c.university} &bull; Class of ${c.gradYear}</p>
+          <p class="text-sm text-secondary font-semibold mt-1">Verified Academic Profile</p>
+        </div>
+      </div>
+    </div>
+  `;
+
+  overlay.classList.add('open');
+  setTimeout(() => panel.classList.add('open'), 10);
+  document.body.style.overflow = 'hidden';
+}
+
+function closeProfilePanel() {
+  const panel = document.getElementById('profilePanel');
+  const overlay = document.getElementById('profileOverlay');
+  panel.classList.remove('open');
+  overlay.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+// ========== TOAST ==========
+function showToast(msg, icon = 'check_circle') {
+  const toast = document.getElementById('toast');
+  document.getElementById('toastMsg').textContent = msg;
+  document.getElementById('toastIcon').textContent = icon;
+  toast.style.opacity = '1';
+  toast.style.transform = 'translateX(-50%) translateY(0)';
+  setTimeout(() => {
+    toast.style.opacity = '0';
+    toast.style.transform = 'translateX(-50%) translateY(10px)';
+  }, 3000);
+}
+
+// ========== EVENT LISTENERS ==========
+document.querySelectorAll('.grad-year-cb').forEach(cb => {
+  cb.addEventListener('change', () => { visibleCount = 8; applyFilters(); });
+});
+document.getElementById('trustSlider').addEventListener('input', () => { visibleCount = 8; });
+
+const topbarSearch = document.getElementById('topbar-search');
+if (topbarSearch) {
+  topbarSearch.addEventListener('input', () => {
+    visibleCount = 8;
+    applyFilters();
+  });
+  topbarSearch.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      visibleCount = 8;
+      applyFilters();
+    }
+  });
+}
+
+// Close university suggestions when clicking outside
+document.addEventListener('click', function(e) {
+  const input = document.getElementById('uniSearchInput');
+  const suggestions = document.getElementById('uniSuggestions');
+  if (!input.contains(e.target) && !suggestions.contains(e.target)) {
+    suggestions.classList.add('hidden');
+  }
+});
+
+// ========== INIT ==========
+fetchCandidates();
+renderSkillTags();
+</script>
+
+
+
+</body></html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

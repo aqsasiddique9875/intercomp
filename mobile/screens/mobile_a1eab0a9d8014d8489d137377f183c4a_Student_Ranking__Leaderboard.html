@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
+<title>JobPath Leaderboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "inverse-primary": "#f0b0ff",
+                    "on-primary-fixed": "#330044",
+                    "outline": "#817381",
+                    "surface": "#f9f9ff",
+                    "surface-container-highest": "#dbe3f6",
+                    "error": "#FF453A",
+                    "primary-container": "#a34cbe",
+                    "inverse-surface": "#29313f",
+                    "secondary-fixed": "#d3e3ff",
+                    "surface-bright": "#f9f9ff",
+                    "on-surface": "#141c29",
+                    "on-tertiary-container": "#e6ffe0",
+                    "on-secondary": "#ffffff",
+                    "glass-border": "rgba(255, 255, 255, 0.6)",
+                    "glass-fill": "rgba(255, 255, 255, 0.35)",
+                    "glass-thick": "rgba(255, 255, 255, 0.8)",
+                    "primary-fixed": "#fbd7ff",
+                    "on-primary": "#ffffff",
+                    "on-primary-fixed-variant": "#72188f",
+                    "on-tertiary-fixed": "#002106",
+                    "on-secondary-fixed-variant": "#004883",
+                    "on-tertiary-fixed-variant": "#00531a",
+                    "orange": "#FF9F0A",
+                    "surface-tint": "#8d37a9",
+                    "inverse-on-surface": "#ecf1ff",
+                    "secondary-fixed-dim": "#a3c9ff",
+                    "background": "#f9f9ff",
+                    "on-error-container": "#93000a",
+                    "outline-variant": "#d2c1d2",
+                    "on-secondary-fixed": "#001c39",
+                    "tertiary-container": "#00842f",
+                    "card-gradient": "linear-gradient(135deg, #4D9EFA 0%, #BF7DF5 100%)",
+                    "secondary": "#0060ab",
+                    "surface-dim": "#d2daed",
+                    "primary": "#8731a3",
+                    "error-container": "#ffdad6",
+                    "on-tertiary": "#ffffff",
+                    "tertiary-fixed": "#6cff82",
+                    "on-primary-container": "#fff5fb",
+                    "gold": "#FFD60A",
+                    "tertiary-fixed-dim": "#47e266",
+                    "surface-variant": "#dbe3f6",
+                    "on-surface-variant": "#4f4350",
+                    "on-secondary-container": "#003868",
+                    "surface-container-low": "#f0f3ff",
+                    "on-background": "#471A70",
+                    "tertiary": "#006823",
+                    "surface-container": "#e7eeff",
+                    "surface-container-high": "#e0e8fb",
+                    "secondary-container": "#54a3ff",
+                    "surface-container-lowest": "#ffffff",
+                    "primary-fixed-dim": "#f0b0ff",
+                    "on-error": "#ffffff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "safe-top": "44px",
+                    "mobile-margin": "20px",
+                    "safe-bottom": "34px",
+                    "mobile-gutter": "16px",
+                    "desktop-gutter": "24px",
+                    "max-width": "1280px",
+                    "desktop-margin": "64px",
+                    "base": "8px"
+            },
+            "fontFamily": {
+                    "label-caps": ["Inter"],
+                    "display-xl-mobile": ["Inter"],
+                    "body-md": ["Inter"],
+                    "headline-lg-mobile": ["Inter"],
+                    "label-caps-mobile": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "display-xl": ["Inter"],
+                    "body-md-mobile": ["Inter"]
+            },
+            "fontSize": {
+                    "label-caps": ["13px", {"lineHeight": "1.0", "letterSpacing": "0.03em", "fontWeight": "600"}],
+                    "display-xl-mobile": ["34px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "label-caps-mobile": ["12px", {"lineHeight": "1.0", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "headline-lg": ["34px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                    "display-xl": ["56px", {"lineHeight": "1.1", "letterSpacing": "-0.03em", "fontWeight": "700"}],
+                    "body-md-mobile": ["15px", {"lineHeight": "1.5", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background: #DCE4F7;
+            min-height: 100vh;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.35);
+            backdrop-filter: blur(28px);
+            -webkit-backdrop-filter: blur(28px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 12px 40px 0 rgba(71, 26, 112, 0.15);
+        }
+        .podium-gradient {
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.1) 100%);
+        }
+        .gold-glow { box-shadow: 0 0 24px rgba(255, 214, 10, 0.4); }
+        .silver-glow { box-shadow: 0 0 20px rgba(129, 115, 129, 0.2); }
+        .bronze-glow { box-shadow: 0 0 16px rgba(135, 49, 163, 0.15); }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="font-body-md-mobile text-on-background">
+<!-- Top App Bar -->
+<header class="fixed top-0 w-full z-50 backdrop-blur-3xl bg-glass-fill border-b border-glass-border shadow-[0_12px_40px_0_rgba(71,26,112,0.15)] flex items-center justify-between px-mobile-margin h-safe-top pt-8">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">bubble_chart</span>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile font-bold tracking-tight text-primary">Leaderboard</h1>
+</div>
+<button class="material-symbols-outlined text-primary hover:opacity-80 transition-opacity active:scale-95 duration-300">notifications</button>
+</header>
+<main class="pt-24 pb-32 px-mobile-margin">
+<!-- Animated Background Elements -->
+
+<!-- Top 3 Podium Section -->
+<section class="mt-8 flex justify-center items-end gap-2 mb-12 h-64">
+<!-- Rank 2: Silver -->
+<div class="flex flex-col items-center flex-1 max-w-[100px]">
+<div class="relative mb-3">
+<div class="w-16 h-16 rounded-full border-4 border-outline-variant silver-glow overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A profile portrait of a young professional male in a soft lavender gradient studio setting, featuring high-end glassmorphic reflections and bright professional lighting. The aesthetic is clean, modern, and high-fidelity, matching a premium career platform interface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDi-O_KnN4_NJSSd7x6QnS37j9lzkevDDQIt6q3DAqjVZG21xlQX5KvcApZghz3p7TctHOFndXqf8TgJSckcdLczUIYV-J-m8m4xqGKKY1OtGe8yh5BXOIttimXU-FW8llS3eMQP7I_unsJAc_kGXy_91lox68cHPgxhSejbG4yYxT4TK5PG3Nj8uW_Z3cSPfNtL2XF5bGj7A03KAWJpELgl2h_MJ7-yamAN1zA5Ga34syPs6AZhPViNdxd6NEbGUcQssqwmgsuXVzF"/>
+</div>
+<div class="absolute -bottom-2 -right-1 bg-surface-container-highest text-on-surface px-2 py-0.5 rounded-full text-[10px] font-bold border border-white shadow-sm">2nd</div>
+</div>
+<div class="w-full h-24 podium-gradient glass-card rounded-t-xl flex flex-col items-center justify-center pt-2">
+<p class="font-label-caps-mobile text-label-caps-mobile text-on-background">Alex M.</p>
+<p class="font-bold text-primary text-[14px]">2,180 pts</p>
+</div>
+</div>
+<!-- Rank 1: Gold -->
+<div class="flex flex-col items-center flex-1 max-w-[120px] -mb-2 z-10">
+<div class="relative mb-4">
+<div class="w-20 h-20 rounded-full border-4 border-gold gold-glow overflow-hidden scale-110">
+<img class="w-full h-full object-cover" data-alt="A vibrant professional portrait of a woman with a confident expression, set against a soft atmospheric background with floating iridescent geometric shapes. The lighting is premium and cinematic, emphasizing a successful and high-achieving career persona in a sleek digital environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCO89R6jAO1Pa6XSVz9Am-OQ7D9tBqZStpovV9wrhYGfD_0w11HLetBBA-AP0poKMnAOamV6MImky3KYhIedb7cYPHGwFKVHpby0Z5NWcgeNoeHRo3_dWrzSraDKdPnz0uPRRX3GFvPuWo7v9o45EdUrQlll3w1SF4CL3OBjIyPYMveepFQqZ_hw9QgimbNQa5rk5RKh2MdY4-P8FnpZdEKEIle9RQa2iYcd6ggPif4RNoPGFK0L4WlLIAA1NsDUH90dqAj7nGW9dTd"/>
+</div>
+<div class="absolute -bottom-1 -right-1 bg-gold text-on-primary-fixed px-3 py-1 rounded-full text-[12px] font-extrabold border border-white shadow-md">1st</div>
+</div>
+<div class="w-full h-32 glass-thick border-primary-container rounded-t-2xl shadow-[0_12px_32px_rgba(255,214,10,0.25)] flex flex-col items-center justify-center pt-2">
+<p class="font-headline-lg-mobile text-[16px] text-primary font-bold">Sarah J.</p>
+<p class="font-bold text-on-background text-[18px]">2,450 pts</p>
+<div class="mt-1 px-2 py-0.5 bg-primary-container/10 rounded-full">
+<span class="text-[10px] font-bold text-primary uppercase tracking-wider">Top Talent</span>
+</div>
+</div>
+</div>
+<!-- Rank 3: Bronze -->
+<div class="flex flex-col items-center flex-1 max-w-[100px]">
+<div class="relative mb-3">
+<div class="w-16 h-16 rounded-full border-4 border-[#CD7F32] bronze-glow overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A portrait of a creative professional male in a bright, high-contrast studio environment. The background features subtle light-leaks and soft purple blurs, creating a futuristic yet grounded digital professional aesthetic. High resolution and extremely detailed." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBRcSJU-ueOVFOBXE_t2LsJtVQLclarDkDHPx35MmWuPKAbd70betgHB6blVvLfXKiO_9jazttkyAssKoNIYcAfeDFfNfzjd_3Y2c2Lc9xu6oIgZmd05CswnSAeQeHr1wybKb24HqKnZOt61dwO7ZA7S4mnjyyKPkE7wvlmY77u6OnXFPMjZZOSoTyMjNJ27oR9lpnkvAbOuQR1Z35MnYlbY_ZykUTTKLrPtvjiNThdOYUCVAxVsi4BYAnWZNjMu5KBlCtIfCU9u4ri"/>
+</div>
+<div class="absolute -bottom-2 -right-1 bg-[#CD7F32] text-white px-2 py-0.5 rounded-full text-[10px] font-bold border border-white shadow-sm">3rd</div>
+</div>
+<div class="w-full h-20 podium-gradient glass-card rounded-t-xl flex flex-col items-center justify-center pt-2">
+<p class="font-label-caps-mobile text-label-caps-mobile text-on-background">Leo K.</p>
+<p class="font-bold text-primary text-[14px]">1,940 pts</p>
+</div>
+</div>
+</section>
+<!-- Search and Filters -->
+<section class="space-y-6">
+<div class="relative group">
+<div class="absolute inset-y-0 left-4 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-outline">search</span>
+</div>
+<input class="w-full h-14 pl-12 pr-4 glass-thick border-glass-border rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent transition-all outline-none font-body-md-mobile shadow-sm" placeholder="Search students..." type="text"/>
+</div>
+<div class="flex gap-2 overflow-x-auto no-scrollbar pb-2">
+<button class="px-6 py-2.5 rounded-full bg-primary text-white font-label-caps-mobile whitespace-nowrap shadow-md active:scale-95 transition-transform">Weekly</button>
+<button class="px-6 py-2.5 rounded-full bg-glass-fill border border-glass-border text-on-background font-label-caps-mobile whitespace-nowrap active:scale-95 transition-transform hover:bg-glass-thick">Monthly</button>
+<button class="px-6 py-2.5 rounded-full bg-glass-fill border border-glass-border text-on-background font-label-caps-mobile whitespace-nowrap active:scale-95 transition-transform hover:bg-glass-thick">All-Time</button>
+</div>
+</section>
+<!-- List Section -->
+<section class="mt-8 space-y-4">
+<!-- Row 4 -->
+<div class="glass-card p-4 rounded-xl flex items-center gap-4 active:scale-[0.98] transition-transform cursor-pointer">
+<div class="w-8 font-bold text-on-background/60 text-center">4</div>
+<div class="w-12 h-12 rounded-full border-2 border-white overflow-hidden shadow-sm">
+<img class="w-full h-full object-cover" data-alt="Detailed professional portrait of a woman in a minimalist white and lavender digital setting. Lighting is soft and flattering, emphasizing a crisp, high-end professional appearance. The image feels part of a cohesive luxury job search platform design." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBUXHvMP_ynI1ptcYcr8beFOzK3TUnJf3rq_X_YsrD9l7uMA87zChqpd5iKA_4OktcndXPBD5c2PoHxx989CfFozso9zPqy8XSib5bQPNLPj6dYXCbVr4MVAPhguCCNrpqXRAtN0JeCf5f_ozfbxjL-6aRso5de_s0C36Dfp3DaQsTKjlwPCIef7JjPT526Y-mMn33_r_dZs8ZxFgtCMLnNPpzLExX4RzSF0zQX49zttctC1vXChu1vSB72nL1-psthO2ETa5W4tbD-"/>
+</div>
+<div class="flex-1">
+<h4 class="font-bold text-on-background">Emily Watson</h4>
+<div class="flex items-center gap-2 mt-0.5">
+<span class="px-2 py-0.5 bg-tertiary-fixed-dim/20 text-tertiary text-[10px] font-bold rounded-full">92 Trust</span>
+<span class="w-1 h-1 rounded-full bg-outline-variant"></span>
+<span class="text-[11px] text-outline font-semibold">Product Designer</span>
+</div>
+</div>
+<div class="text-right">
+<p class="font-bold text-primary">1,820</p>
+<p class="text-[10px] text-outline uppercase font-bold tracking-tighter">points</p>
+</div>
+</div>
+<!-- Row 5 -->
+<div class="glass-card p-4 rounded-xl flex items-center gap-4 active:scale-[0.98] transition-transform cursor-pointer">
+<div class="w-8 font-bold text-on-background/60 text-center">5</div>
+<div class="w-12 h-12 rounded-full border-2 border-white overflow-hidden shadow-sm">
+<img class="w-full h-full object-cover" data-alt="Portrait of a male software engineer with a focused expression, set in a bright modern tech environment with soft-focus glass elements and atmospheric purple lighting. High-fidelity studio quality with a professional corporate look." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC2EPCkUPC7pOrcZ3MuYVVjFrUoPSL9DFIFQfrzS_j1h-KEVlgWSKoNtu8aKqB5MyGGH84p-CdP1M-w68GoivvW_AzvDioSGNkf638i2PKNwtqo-_bR07dJpZe1Ryi_PHfV7rZDMG5UrV2MUQ1zLiY_BfksGevjk-YB0UYgkmLhggxCWnKpNeBC1I-ECHsULK7Z-qknkUuGGxyn0Lr_rcHbVRq7G3CIn6_k6dTxqY4Rv_FZ8ggo_A53LivGAk33Nvqntjdo0nADo5_v"/>
+</div>
+<div class="flex-1">
+<h4 class="font-bold text-on-background">James Miller</h4>
+<div class="flex items-center gap-2 mt-0.5">
+<span class="px-2 py-0.5 bg-tertiary-fixed-dim/20 text-tertiary text-[10px] font-bold rounded-full">88 Trust</span>
+<span class="w-1 h-1 rounded-full bg-outline-variant"></span>
+<span class="text-[11px] text-outline font-semibold">DevOps</span>
+</div>
+</div>
+<div class="text-right">
+<p class="font-bold text-primary">1,795</p>
+<p class="text-[10px] text-outline uppercase font-bold tracking-tighter">points</p>
+</div>
+</div>
+<!-- Row 6 -->
+<div class="glass-card p-4 rounded-xl flex items-center gap-4 active:scale-[0.98] transition-transform cursor-pointer">
+<div class="w-8 font-bold text-on-background/60 text-center">6</div>
+<div class="w-12 h-12 rounded-full border-2 border-white overflow-hidden shadow-sm">
+<img class="w-full h-full object-cover" data-alt="Clean corporate portrait of a female professional in a bright, modern light-mode setting. Subtle glassmorphic effects in the background with a pastel lavender color palette, matching the premium aesthetic of a digital talent marketplace." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAjns8hVCZUTMzPzXjgqKFGuajRQB-fb_3PrQy85esFzKq8XY3slUgyZUzSAqsJnk2kjbjyOzP37LYBCP81p6F0JN7169Boon3mHA8CSyTq57JvBBT9SLGn65kjsBDrqWNsGMaBhzTm-K_r8uophBKmT6l6V7_57cHwyhGWpqWHdOn3SJl0piNFdTkeoienSCzO__WQJL1rYJmXNmlnIZlQuOXmvz1UvoH4IV43pTWWK3uvX0iSgBdAfWyE2qZbEBVfdGRf2mxoKj79"/>
+</div>
+<div class="flex-1">
+<h4 class="font-bold text-on-background">Mia Chen</h4>
+<div class="flex items-center gap-2 mt-0.5">
+<span class="px-2 py-0.5 bg-tertiary-fixed-dim/20 text-tertiary text-[10px] font-bold rounded-full">85 Trust</span>
+<span class="w-1 h-1 rounded-full bg-outline-variant"></span>
+<span class="text-[11px] text-outline font-semibold">Data Analyst</span>
+</div>
+</div>
+<div class="text-right">
+<p class="font-bold text-primary">1,640</p>
+<p class="text-[10px] text-outline uppercase font-bold tracking-tighter">points</p>
+</div>
+</div>
+<!-- Row 7 -->
+<div class="glass-card p-4 rounded-xl flex items-center gap-4 opacity-80 active:scale-[0.98] transition-transform cursor-pointer">
+<div class="w-8 font-bold text-on-background/60 text-center">7</div>
+<div class="w-12 h-12 rounded-full border-2 border-white overflow-hidden shadow-sm">
+<img class="w-full h-full object-cover" data-alt="A portrait of a business professional male in a bright studio. The scene is illuminated with high-key lighting and features soft purple background reflections that align with a high-fidelity tech platform. Professional and sophisticated vibe." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDusQ5ApMiXf_c7bipWMUzjXojEqhpGwj0HeOCiYbU0V8GEnM4Hdm80bXzeAUrsJ5AmK18KYkWNU8PwqrO7vhcfvgVpFUrNJcnRbYKv5PdB3TdKo6rEb2F08tdlR-5S9PpwCUk1k0D_eZEW3UqdEPE57QEcD04pNb5zjfARgzrUvFmHfRM2g5xj86c-aBWHJIjzr3mV-B9WayViTKz-J-PKbze8alLJRNN-wbcQMZY7bWlgj4kKCs6haFYz32M2DwEz47fmxaE8yzAQ"/>
+</div>
+<div class="flex-1">
+<h4 class="font-bold text-on-background">David Ross</h4>
+<div class="flex items-center gap-2 mt-0.5">
+<span class="px-2 py-0.5 bg-orange/10 text-orange text-[10px] font-bold rounded-full">79 Trust</span>
+<span class="w-1 h-1 rounded-full bg-outline-variant"></span>
+<span class="text-[11px] text-outline font-semibold">Marketing</span>
+</div>
+</div>
+<div class="text-right">
+<p class="font-bold text-primary">1,580</p>
+<p class="text-[10px] text-outline uppercase font-bold tracking-tighter">points</p>
+</div>
+</div>
+</section>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 w-full z-50 rounded-t-xl backdrop-blur-2xl bg-glass-thick border-t border-glass-border shadow-[0_-8px_32px_0_rgba(71,26,112,0.1)]">
+<div class="flex justify-around items-center px-4 pb-safe-bottom h-20">
+<a class="flex flex-col items-center justify-center text-outline hover:text-primary-container transition-all active:scale-90 duration-300" href="#">
+<span class="material-symbols-outlined">explore</span>
+<span class="font-label-caps-mobile text-label-caps-mobile mt-1">Discover</span>
+</a>
+<a class="flex flex-col items-center justify-center text-primary font-bold scale-110 active:scale-90 transition-transform duration-300" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">assignment_turned_in</span>
+<span class="font-label-caps-mobile text-label-caps-mobile mt-1">Applied</span>
+</a>
+<a class="flex flex-col items-center justify-center text-outline hover:text-primary-container transition-all active:scale-90 duration-300" href="#">
+<span class="material-symbols-outlined">bookmark</span>
+<span class="font-label-caps-mobile text-label-caps-mobile mt-1">Saved</span>
+</a>
+<a class="flex flex-col items-center justify-center text-outline hover:text-primary-container transition-all active:scale-90 duration-300" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-caps-mobile text-label-caps-mobile mt-1">Profile</span>
+</a>
+</div>
+</nav>
+<script>
+        // Micro-interactions for chips
+        document.querySelectorAll('button').forEach(btn => {
+            btn.addEventListener('click', function() {
+                if(this.parentElement.classList.contains('overflow-x-auto')) {
+                    this.parentElement.querySelectorAll('button').forEach(b => {
+                        b.classList.remove('bg-primary', 'text-white');
+                        b.classList.add('bg-glass-fill', 'border', 'border-glass-border', 'text-on-background');
+                    });
+                    this.classList.remove('bg-glass-fill', 'border', 'border-glass-border', 'text-on-background');
+                    this.classList.add('bg-primary', 'text-white');
+                }
+            });
+        });
+
+        // Simple row press effect simulation
+        document.querySelectorAll('.glass-card').forEach(card => {
+            card.addEventListener('mousedown', () => card.style.transform = 'scale(0.98)');
+            card.addEventListener('mouseup', () => card.style.transform = 'scale(1)');
+            card.addEventListener('mouseleave', () => card.style.transform = 'scale(1)');
+        });
+    </script>
+</body></html>

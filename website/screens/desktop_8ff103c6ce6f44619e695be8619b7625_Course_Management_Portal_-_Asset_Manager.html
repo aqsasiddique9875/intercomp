@@ -1,0 +1,1103 @@
+<!DOCTYPE html>
+<html class="light h-full overflow-hidden" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>QuizStudio | Course Asset Manager</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        colors: {
+          "surface-container-low": "#f0f3ff",
+          "on-background": "#471A70",
+          "on-surface-variant": "#4f4350",
+          "on-secondary-container": "#003868",
+          "tertiary-fixed-dim": "#47e266",
+          "surface-variant": "#dbe3f6",
+          "tertiary": "#006823",
+          "surface-dim": "#d2daed",
+          "primary": "#8731a3",
+          "error-container": "#ffdad6",
+          "tertiary-fixed": "#6cff82",
+          "on-primary-container": "#fff5fb",
+          "gold": "#FFD60A",
+          "on-tertiary": "#ffffff",
+          "surface-container-lowest": "#ffffff",
+          "primary-fixed-dim": "#f0b0ff",
+          "on-error": "#ffffff",
+          "secondary-container": "#54a3ff",
+          "surface-container-high": "#e0e8fb",
+          "surface-container": "#e7eeff",
+          "orange": "#FF9F0A",
+          "secondary-fixed-dim": "#a3c9ff",
+          "inverse-on-surface": "#ecf1ff",
+          "surface-tint": "#8d37a9",
+          "on-secondary-fixed-variant": "#004883",
+          "on-tertiary-fixed-variant": "#00531a",
+          "tertiary-container": "#00842f",
+          "outline-variant": "#d2c1d2",
+          "on-secondary-fixed": "#001c39",
+          "secondary": "#0060ab",
+          "card-gradient": "linear-gradient(135deg, #4D9EFA 0%, #BF7DF5 100%)",
+          "on-error-container": "#93000a",
+          "background": "#f9f9ff",
+          "glass-fill": "rgba(255, 255, 255, 0.35)",
+          "on-secondary": "#ffffff",
+          "on-tertiary-container": "#e6ffe0",
+          "glass-border": "rgba(255, 255, 255, 0.6)",
+          "primary-fixed": "#fbd7ff",
+          "glass-thick": "rgba(255, 255, 255, 0.8)",
+          "on-tertiary-fixed": "#002106",
+          "on-primary-fixed-variant": "#72188f",
+          "on-primary": "#ffffff",
+          "on-primary-fixed": "#330044",
+          "inverse-primary": "#f0b0ff",
+          "surface": "#f9f9ff",
+          "outline": "#817381",
+          "surface-bright": "#f9f9ff",
+          "on-surface": "#141c29",
+          "inverse-surface": "#29313f",
+          "primary-container": "#a34cbe",
+          "surface-container-highest": "#dbe3f6",
+          "error": "#FF453A",
+          "secondary-fixed": "#d3e3ff"
+        },
+        borderRadius: { DEFAULT: "0.25rem", lg: "0.5rem", xl: "0.75rem", full: "9999px" },
+        spacing: {
+          "safe-bottom": "34px", "mobile-gutter": "16px", "safe-top": "44px",
+          "mobile-margin": "20px", "max-width": "1280px", "desktop-margin": "64px",
+          "base": "8px", "desktop-gutter": "24px"
+        }
+      }
+    }
+  }
+</script>
+<style>
+  html, body { height: 100%; overflow: hidden; }
+  body { background-color: #DCE4F7; font-family: 'Inter', sans-serif; color: #471A70; }
+  .glass-card {
+    background: rgba(255,255,255,0.35);
+    backdrop-filter: blur(28px);
+    -webkit-backdrop-filter: blur(28px);
+    border: 1px solid rgba(255,255,255,0.6);
+    box-shadow: 0 12px 40px 0 rgba(71,26,112,0.15);
+  }
+  .glass-thick { background: rgba(255,255,255,0.8); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+  .material-symbols-outlined { font-variation-settings: 'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24; }
+  .progress-fill { transition: width 0.5s cubic-bezier(0.35,0,0.25,1); }
+  .scroll-hide::-webkit-scrollbar { display: none; }
+  .scroll-hide { -ms-overflow-style: none; scrollbar-width: none; }
+
+  /* Filter dropdown */
+  #filterDropdown { display:none; }
+  #filterDropdown.open { display:block; }
+
+  /* Edit modal */
+  #editModal { display:none; }
+  #editModal.open { display:flex; }
+
+  /* Preview modal */
+  #previewModal { display:none; }
+  #previewModal.open { display:flex; }
+
+  /* Toast */
+  #toastContainer { position:fixed; bottom:24px; right:24px; z-index:9999; display:flex; flex-direction:column; gap:10px; pointer-events:none; }
+  .toast {
+    pointer-events:auto; display:flex; align-items:center; gap:10px;
+    padding:12px 20px; border-radius:16px; font-size:13px; font-weight:700;
+    box-shadow:0 8px 32px rgba(71,26,112,0.18); backdrop-filter:blur(12px);
+    transform:translateY(20px); opacity:0; transition:all 0.3s cubic-bezier(0.34,1.56,0.64,1);
+  }
+  .toast.show { transform:translateY(0); opacity:1; }
+  .toast.success { background:rgba(135,49,163,0.92); color:#fff; }
+  .toast.error { background:rgba(255,69,58,0.92); color:#fff; }
+  .toast.info { background:rgba(0,96,171,0.92); color:#fff; }
+
+  /* Asset card fade-in */
+  @keyframes fadeInUp { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
+  .asset-card { animation: fadeInUp 0.35s ease both; }
+
+  /* Compress progress ring */
+  .compress-ring { transition: stroke-dashoffset 0.4s ease; }
+
+  /* Video preview in edit modal */
+  #editVideoPreview { width:100%; border-radius:12px; max-height:180px; object-fit:cover; }
+</style>
+</head>
+<body class="h-full overflow-hidden flex flex-col">
+
+<!-- Hidden file input -->
+<input type="file" id="fileInput" accept="*/*" multiple style="display:none"/>
+
+<!-- Toast container -->
+<div id="toastContainer"></div>
+
+<!-- Edit Modal -->
+<div id="editModal" class="fixed inset-0 z-50 items-center justify-center bg-black/40 backdrop-blur-sm">
+  <div class="glass-card rounded-3xl p-8 w-full max-w-md mx-4 shadow-2xl">
+    <div class="flex items-center justify-between mb-6">
+      <h2 class="text-xl font-extrabold">Edit Asset</h2>
+      <button id="closeEditModal" class="material-symbols-outlined text-on-surface-variant hover:text-error transition-colors">close</button>
+    </div>
+    <div id="editVideoPreviewWrapper" class="mb-4 hidden">
+      <video id="editVideoPreview" controls></video>
+    </div>
+    <div class="mb-4">
+      <label class="text-xs font-bold text-on-surface-variant uppercase tracking-widest mb-2 block">Asset Name</label>
+      <input id="editNameInput" type="text" class="w-full px-4 py-3 bg-surface-container rounded-xl border border-outline-variant focus:outline-none focus:ring-2 focus:ring-primary text-sm font-semibold"/>
+    </div>
+    <div class="mb-6" id="editDescRow">
+      <label class="text-xs font-bold text-on-surface-variant uppercase tracking-widest mb-2 block">Description (optional)</label>
+      <textarea id="editDescInput" rows="2" class="w-full px-4 py-3 bg-surface-container rounded-xl border border-outline-variant focus:outline-none focus:ring-2 focus:ring-primary text-sm resize-none"></textarea>
+    </div>
+    <div class="flex gap-3">
+      <button id="saveEditBtn" class="flex-1 py-3 bg-primary text-white rounded-xl font-bold hover:scale-[1.02] active:scale-95 transition-all">Save Changes</button>
+      <button id="cancelEditBtn" class="flex-1 py-3 glass-thick rounded-xl font-bold text-primary hover:bg-primary hover:text-white transition-all">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<!-- Preview Modal -->
+<div id="previewModal" class="fixed inset-0 z-50 items-center justify-center bg-black/50 backdrop-blur-sm">
+  <div class="glass-card rounded-3xl p-8 w-full max-w-xl mx-4 shadow-2xl flex flex-col max-h-[85vh]">
+    <div class="flex items-center justify-between mb-6">
+      <h2 id="previewTitle" class="text-xl font-extrabold truncate pr-4">Asset Preview</h2>
+      <button id="closePreviewModal" class="material-symbols-outlined text-on-surface-variant hover:text-error transition-colors focus:outline-none">close</button>
+    </div>
+    
+    <div class="flex-grow flex items-center justify-center overflow-y-auto mb-6 bg-black/5 rounded-2xl p-4 min-h-[250px] relative">
+      <!-- Video Player Preview -->
+      <video id="previewVideo" class="max-h-[50vh] w-full object-contain rounded-xl hidden" controls autoplay></video>
+      
+      <!-- Image Preview -->
+      <img id="previewImage" class="max-h-[50vh] max-w-full object-contain rounded-xl hidden" src=""/>
+      
+      <!-- Document Preview -->
+      <div id="previewDoc" class="flex flex-col items-center justify-center text-center p-6 bg-white rounded-2xl border border-gray-200/80 max-w-sm w-full hidden shadow-sm">
+        <span class="material-symbols-outlined text-blue-600 text-6xl mb-4" style="font-variation-settings: 'FILL' 1;">description</span>
+        <h3 id="previewDocName" class="text-base font-bold text-gray-900 leading-snug break-all"></h3>
+        <p id="previewDocDetails" class="text-xs text-gray-500 mt-1 mb-6"></p>
+        <a id="previewDocDownload" href="#" download class="bg-blue-600 text-white px-6 py-2.5 rounded-xl font-bold text-xs hover:bg-blue-700 active:scale-95 transition-all shadow-md flex items-center gap-1.5 focus:outline-none">
+          <span class="material-symbols-outlined text-[16px]">download</span> Download Document
+        </a>
+      </div>
+      
+      <!-- Generic/Audio Preview -->
+      <div id="previewGeneric" class="flex flex-col items-center justify-center text-center p-6 bg-white rounded-2xl border border-gray-200/80 max-w-sm w-full hidden shadow-sm">
+        <span id="previewGenericIcon" class="material-symbols-outlined text-secondary text-6xl mb-4">music_note</span>
+        <h3 id="previewGenericName" class="text-base font-bold text-gray-900 leading-snug break-all"></h3>
+        <p id="previewGenericDetails" class="text-xs text-gray-500 mt-1 mb-6"></p>
+        <a id="previewGenericDownload" href="#" download class="bg-primary text-white px-6 py-2.5 rounded-xl font-bold text-xs hover:bg-primary/80 active:scale-95 transition-all shadow-md flex items-center gap-1.5 focus:outline-none">
+          <span class="material-symbols-outlined text-[16px]">download</span> Download File
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Filter Dropdown -->
+<div id="filterDropdown" class="fixed z-40" style="top:80px; left:0; right:0; display:none;">
+  <div id="filterDropdownInner" class="absolute glass-card rounded-2xl p-3 shadow-2xl w-52">
+    <p class="text-[10px] font-bold text-on-surface-variant uppercase tracking-widest mb-2 px-2">Filter by Type</p>
+    <button data-filter="all"      class="filter-opt w-full text-left px-4 py-2.5 rounded-xl text-sm font-semibold flex items-center gap-3 hover:bg-primary/10 transition-all">
+      <span class="material-symbols-outlined text-[18px]">apps</span> All Assets
+    </button>
+    <button data-filter="video"    class="filter-opt w-full text-left px-4 py-2.5 rounded-xl text-sm font-semibold flex items-center gap-3 hover:bg-primary/10 transition-all">
+      <span class="material-symbols-outlined text-[18px]">videocam</span> Videos
+    </button>
+    <button data-filter="document" class="filter-opt w-full text-left px-4 py-2.5 rounded-xl text-sm font-semibold flex items-center gap-3 hover:bg-primary/10 transition-all">
+      <span class="material-symbols-outlined text-[18px]">article</span> Documents
+    </button>
+    <button data-filter="image"    class="filter-opt w-full text-left px-4 py-2.5 rounded-xl text-sm font-semibold flex items-center gap-3 hover:bg-primary/10 transition-all">
+      <span class="material-symbols-outlined text-[18px]">image</span> Images
+    </button>
+    <button data-filter="audio"    class="filter-opt w-full text-left px-4 py-2.5 rounded-xl text-sm font-semibold flex items-center gap-3 hover:bg-primary/10 transition-all">
+      <span class="material-symbols-outlined text-[18px]">music_note</span> Audio
+    </button>
+  </div>
+</div>
+
+<!-- TopNavBar -->
+<header class="w-full h-16 bg-glass-thick backdrop-blur-xl border-b border-glass-border shadow-[0_12px_40px_0_rgba(71,26,112,0.15)] flex items-center justify-between px-8 sticky top-0 z-30">
+  <div class="flex items-center gap-8">
+    <span class="font-bold text-xl text-primary">QuizStudio</span>
+    <nav class="hidden md:flex items-center gap-6">
+      <a class="text-primary font-bold border-b-2 border-primary py-4 text-sm" href="#">Dashboard</a>
+      <a class="text-on-surface-variant hover:text-primary transition-colors py-4 text-sm" href="#">Question Bank</a>
+      <a class="text-on-surface-variant hover:text-primary transition-colors py-4 text-sm" href="#">Assessments</a>
+      <a class="text-on-surface-variant hover:text-primary transition-colors py-4 text-sm" href="#">Analytics</a>
+    </nav>
+  </div>
+  <div class="flex items-center gap-6">
+    <div class="relative hidden lg:block">
+      <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-[18px]">search</span>
+      <input id="searchInput" class="pl-10 pr-4 py-2 bg-surface-container rounded-full border-none focus:ring-2 focus:ring-primary w-64 text-sm" placeholder="Search assets..." type="text"/>
+    </div>
+    <div class="flex items-center gap-4">
+      <button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors">notifications</button>
+      <button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors">help</button>
+      <button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors">settings</button>
+      <button class="bg-primary text-white px-6 py-2 rounded-full font-bold hover:scale-[1.02] active:scale-95 transition-all shadow-md">Publish</button>
+      <div class="w-10 h-10 rounded-full overflow-hidden border-2 border-primary">
+        <img alt="User Profile" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBouXPWMN3ttpCfFkXwRE4KIEsxElY3dF0DgAUwZkoBDuHPIuhydX2vh29YmaUHGQmJvwpCKUNNwDILjvrT1gNwZSV0sUrVn9m8GdtMma7VLopLVOz25-OVOXJLGtkuCysyGXcO6UIzW_01cFV_qdyENVUSkpv_sAIn879ycR8StphP7FOlbKkG8_DWdBqlTkTiJIvNGcYjXzJiwn2_IKh7DRZc2edQSkSx1vTZKgG8tt6Q6YDpKU9TBTZ6CxVLGqLvwbiQqAMPevLj"/>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="flex-1 flex overflow-hidden">
+
+  <!-- Left Panel: Processing HUD -->
+  <aside class="w-72 h-full glass-thick border-r border-glass-border p-6 flex flex-col gap-8 overflow-y-auto scroll-hide">
+    <h2 class="text-xl font-bold">Processing HUD</h2>
+    <div class="space-y-6">
+      <div class="flex items-center justify-between mb-2">
+        <h3 class="text-xs font-bold text-on-surface-variant uppercase tracking-widest">Active Streams</h3>
+        <span id="activeTasksBadge" class="text-[10px] bg-secondary text-white px-2 py-0.5 rounded-full">0 TASKS</span>
+      </div>
+      <div id="activeTasksList" class="space-y-3">
+        <p id="noTasksMsg" class="text-xs text-on-surface-variant text-center py-4 opacity-60">No active tasks</p>
+      </div>
+
+      <!-- Finished Today -->
+      <div class="pt-4 border-t border-glass-border">
+        <h3 class="text-xs font-bold text-on-surface-variant uppercase tracking-widest mb-4">Finished Today</h3>
+        <div id="finishedList" class="space-y-4">
+          <div class="flex items-center gap-3 opacity-60">
+            <span class="material-symbols-outlined text-tertiary">check_circle</span>
+            <div>
+              <p class="text-xs font-bold">Quiz_Module_1.json</p>
+              <p class="text-[10px]">Synced 2h ago</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-3 opacity-60">
+            <span class="material-symbols-outlined text-tertiary">check_circle</span>
+            <div>
+              <p class="text-xs font-bold">Thumbnail_Main.jpg</p>
+              <p class="text-[10px]">Optimized 5h ago</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <button class="mt-auto w-full py-4 glass-thick rounded-2xl text-primary font-bold hover:bg-primary hover:text-white transition-all flex items-center justify-center gap-2">
+      <span class="material-symbols-outlined">history</span> View Task History
+    </button>
+  </aside>
+
+  <!-- Center Panel -->
+  <section class="flex-1 p-8 overflow-y-auto scroll-hide @container">
+    <div class="flex items-center justify-between mb-8 relative">
+      <div>
+        <h1 class="text-3xl font-extrabold tracking-tight">Module 1 Assets</h1>
+        <p class="text-on-surface-variant">Manage your lesson files and interactive components.</p>
+      </div>
+      <div class="flex gap-4 relative">
+        <!-- Filter Button -->
+        <button id="filterBtn" class="flex items-center gap-2 glass-thick border border-glass-border px-5 py-2.5 rounded-full font-semibold hover:bg-white transition-all shadow-sm">
+          <span class="material-symbols-outlined">filter_list</span>
+          <span id="filterLabel">Filter</span>
+        </button>
+
+        <!-- Upload Asset Button -->
+        <button id="uploadBtn" class="flex items-center gap-2 bg-primary text-white px-6 py-2.5 rounded-full font-bold hover:scale-[1.02] active:scale-95 transition-all shadow-lg">
+          <span class="material-symbols-outlined">add</span>
+          Upload Asset
+        </button>
+      </div>
+    </div>
+
+    <!-- Active Filter Chip -->
+    <div id="filterChipRow" class="mb-4 hidden">
+      <span id="filterChip" class="inline-flex items-center gap-2 px-4 py-1.5 bg-primary/10 text-primary rounded-full text-xs font-bold border border-primary/20">
+        <span class="material-symbols-outlined text-[14px]">filter_list</span>
+        <span id="filterChipText"></span>
+        <button id="clearFilter" class="material-symbols-outlined text-[14px] hover:text-error ml-1">close</button>
+      </span>
+    </div>
+
+    <!-- Asset Grid -->
+    <div id="assetGrid" class="grid grid-cols-1 @2xl:grid-cols-2 @5xl:grid-cols-3 gap-6">
+      <!-- Rendered by JS -->
+    </div>
+
+    <!-- Empty State -->
+    <div id="emptyState" class="hidden flex-col items-center justify-center py-20 text-center">
+      <span class="material-symbols-outlined text-6xl text-primary/30 mb-4">folder_open</span>
+      <p class="font-bold text-lg text-on-surface-variant">No assets found</p>
+      <p class="text-sm text-on-surface-variant/70 mt-1">Try a different filter or upload a new asset</p>
+    </div>
+
+  </section>
+
+  <!-- Right Panel: Course Modules -->
+  <aside class="w-72 h-full glass-thick border-l border-glass-border p-6 flex flex-col gap-6 overflow-y-auto scroll-hide">
+    <div class="flex items-center justify-between">
+      <h2 class="text-xl font-bold">Course Modules</h2>
+      <button class="material-symbols-outlined text-primary hover:bg-primary/10 p-1 rounded-lg transition-colors">create_new_folder</button>
+    </div>
+    <div class="space-y-2">
+      <!-- Module 1 -->
+      <div class="group">
+        <button class="module-toggle w-full flex items-center justify-between p-3 rounded-xl hover:bg-primary/5 transition-all" data-module="mod1">
+          <div class="flex items-center gap-3">
+            <span class="material-symbols-outlined text-primary mod-icon">expand_more</span>
+            <span class="font-semibold">Module 1: Introduction</span>
+          </div>
+          <span class="text-xs font-bold text-on-surface-variant bg-surface-container px-2 py-1 rounded">4 Items</span>
+        </button>
+        <div id="mod1" class="ml-9 mt-2 space-y-1 border-l-2 border-primary/20">
+          <a class="block pl-4 py-2 text-sm text-on-surface-variant hover:text-primary transition-colors border-l-2 border-transparent hover:border-primary" href="#">Overview Video</a>
+          <a class="block pl-4 py-2 text-sm text-on-surface-variant hover:text-primary transition-colors border-l-2 border-transparent hover:border-primary" href="#">Getting Started.pdf</a>
+          <a class="block pl-4 py-2 text-sm font-bold text-primary bg-primary/10 border-l-2 border-primary" href="#">Course Syllabus</a>
+        </div>
+      </div>
+      <!-- Module 2 -->
+      <div class="group">
+        <button class="module-toggle w-full flex items-center justify-between p-3 rounded-xl hover:bg-primary/5 transition-all" data-module="mod2">
+          <div class="flex items-center gap-3">
+            <span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary mod-icon">chevron_right</span>
+            <span class="font-semibold">Module 2: Advanced UI</span>
+          </div>
+        </button>
+        <div id="mod2" class="ml-9 mt-2 space-y-1 border-l-2 border-primary/20 hidden">
+          <a class="block pl-4 py-2 text-sm text-on-surface-variant hover:text-primary transition-colors" href="#">UI Principles.pdf</a>
+          <a class="block pl-4 py-2 text-sm text-on-surface-variant hover:text-primary transition-colors" href="#">Design Systems.mp4</a>
+        </div>
+      </div>
+      <!-- Module 3 -->
+      <div class="group">
+        <button class="module-toggle w-full flex items-center justify-between p-3 rounded-xl hover:bg-primary/5 transition-all" data-module="mod3">
+          <div class="flex items-center gap-3">
+            <span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary mod-icon">chevron_right</span>
+            <span class="font-semibold">Module 3: UX Psychology</span>
+          </div>
+        </button>
+        <div id="mod3" class="ml-9 mt-2 space-y-1 border-l-2 border-primary/20 hidden">
+          <a class="block pl-4 py-2 text-sm text-on-surface-variant hover:text-primary transition-colors" href="#">Cognitive Load.pdf</a>
+        </div>
+      </div>
+      <!-- Module 4 -->
+      <div class="group">
+        <button class="module-toggle w-full flex items-center justify-between p-3 rounded-xl hover:bg-primary/5 transition-all" data-module="mod4">
+          <div class="flex items-center gap-3">
+            <span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary mod-icon">chevron_right</span>
+            <span class="font-semibold">Module 4: Prototyping</span>
+          </div>
+        </button>
+        <div id="mod4" class="ml-9 mt-2 space-y-1 border-l-2 border-primary/20 hidden">
+          <a class="block pl-4 py-2 text-sm text-on-surface-variant hover:text-primary transition-colors" href="#">Figma Basics.mp4</a>
+        </div>
+      </div>
+    </div>
+    <div class="mt-auto p-4 rounded-2xl bg-primary-container/20 border border-primary/20">
+      <p class="text-xs font-bold text-primary mb-1 uppercase tracking-wider">Storage Status</p>
+      <div class="w-full h-2 bg-white/50 rounded-full overflow-hidden mb-2">
+        <div id="storageFill" class="h-full bg-primary transition-all duration-500" style="width:75%"></div>
+      </div>
+      <p id="storageLabel" class="text-[11px] text-on-surface-variant">750GB of 1TB used (75%)</p>
+    </div>
+  </aside>
+</main>
+
+<script>
+// ===================== DATA STORE =====================
+let assets = [
+  {
+    id: 'demo-1', name: 'Intro_Video.mp4', type: 'video', size: 148897792,
+    sizeLabel: '142 MB', duration: '12:45', desc: '',
+    thumbnail: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBzXUJ7s12SzyauaQ8x83ur_4y7BzYzbwhNdnfyMTlz9vk7ULY_tbavdKNztfheDgCnJB8uVV09eBK_wbcjX_jM3ME1gzeghyveqhxPNDLVn04G-TiWFS5PJ5s7wNogNe-v1_RlsqVfL_sKJ0UUkTo70KdF3GLRxslXdB4bcgCnMAzJAbvAu2Kqd3fGhLK-v4nOFULFvJRyNoiNLW7dKaZAfg1UqdNJLTv27Ai3H3FZ_jZQQBRE38kxtaPgFCZXG4PUJkY_naEB9cR8',
+    file: null, objectUrl: null, isDemo: true
+  },
+  {
+    id: 'demo-2', name: 'Transcript_V1.pdf', type: 'document', size: 2516582,
+    sizeLabel: '2.4 MB', duration: null, desc: '',
+    thumbnail: null, file: null, objectUrl: null, isDemo: true
+  },
+  {
+    id: 'demo-3', name: 'Hero_Asset.png', type: 'image', size: 5033164,
+    sizeLabel: '4.8 MB', duration: null, desc: '',
+    thumbnail: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAWfz4nUf2sCoyJQSHAa9IXclxQ7p0YcJVv4s5DOTuxFRXwLMmIOJi4NWxiUTnnzJawMaWMCRJUad5b_7X5Mdp-PZtR0RRW4VZNiBDL9kfDqk7-fjKO-OxWUXM-IyaZoWMMsslH5Pb53EnLdJDBL83FWU1MNE5eiCgU2pnm0NZeYwRbrLChl3VbIOs2sfFUf5PK8MU4CUWfDvdovavpezmzyvCWh4sn7bAUxcpOpYNLBCRud4iGrSK7bUgLpBMe_ouAi3TWjBUa5Fqz',
+    file: null, objectUrl: null, isDemo: true
+  }
+];
+
+let currentFilter = 'all';
+let currentEditId = null;
+let activeTasks = {};   // id -> { name, progress, type }
+let storageUsed = 750 * 1024 * 1024 * 1024; // 750GB
+const totalStorage = 1024 * 1024 * 1024 * 1024; // 1TB
+
+// ===================== UTILITIES =====================
+function formatBytes(bytes) {
+  if (bytes < 1024) return bytes + ' B';
+  if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
+  if (bytes < 1024 * 1024 * 1024) return (bytes / (1024 * 1024)).toFixed(1) + ' MB';
+  return (bytes / (1024 * 1024 * 1024)).toFixed(2) + ' GB';
+}
+
+function getFileType(file) {
+  const name = (file.name || '').toLowerCase();
+  if (name.endsWith('.mp4') || name.endsWith('.webm') || name.endsWith('.ogg') || name.endsWith('.mov') || name.endsWith('.avi')) return 'video';
+  if (name.endsWith('.jpeg') || name.endsWith('.jpg') || name.endsWith('.png') || name.endsWith('.gif') || name.endsWith('.svg') || name.endsWith('.webp')) return 'image';
+  if (name.endsWith('.mp3') || name.endsWith('.wav') || name.endsWith('.ogg')) return 'audio';
+  if (name.endsWith('.pdf') || name.endsWith('.docx') || name.endsWith('.doc') || name.endsWith('.txt') || name.endsWith('.xlsx') || name.endsWith('.xls') || name.endsWith('.pptx') || name.endsWith('.ppt')) return 'document';
+
+  const mime = file.type || '';
+  if (mime.startsWith('video/')) return 'video';
+  if (mime.startsWith('image/')) return 'image';
+  if (mime.startsWith('audio/')) return 'audio';
+  if (mime === 'application/pdf' || mime.includes('document') || mime.includes('text')) return 'document';
+  return 'document';
+}
+
+function uid() {
+  return 'asset-' + Date.now() + '-' + Math.random().toString(36).slice(2, 7);
+}
+
+function showToast(msg, type = 'success') {
+  const el = document.createElement('div');
+  el.className = `toast ${type}`;
+  const icon = type === 'error' ? 'error' : type === 'info' ? 'info' : 'check_circle';
+  el.innerHTML = `<span class="material-symbols-outlined text-[18px]">${icon}</span><span>${msg}</span>`;
+  document.getElementById('toastContainer').appendChild(el);
+  requestAnimationFrame(() => { el.classList.add('show'); });
+  setTimeout(() => { el.classList.remove('show'); setTimeout(() => el.remove(), 350); }, 3500);
+}
+
+// ===================== RENDER ASSETS =====================
+function renderAssets() {
+  const grid = document.getElementById('assetGrid');
+  const empty = document.getElementById('emptyState');
+  const searchVal = document.getElementById('searchInput').value.trim().toLowerCase();
+
+  let filtered = assets.filter(a => {
+    const matchType = currentFilter === 'all' || a.type === currentFilter;
+    const matchSearch = !searchVal || a.name.toLowerCase().includes(searchVal);
+    return matchType && matchSearch;
+  });
+
+  grid.innerHTML = '';
+
+  if (filtered.length === 0) {
+    empty.classList.remove('hidden');
+    empty.classList.add('flex');
+    grid.classList.add('hidden');
+  } else {
+    empty.classList.add('hidden');
+    empty.classList.remove('flex');
+    grid.classList.remove('hidden');
+    filtered.forEach((asset, i) => {
+      const card = buildAssetCard(asset, i);
+      grid.appendChild(card);
+    });
+  }
+
+}
+
+function buildAssetCard(asset, delay = 0) {
+  const div = document.createElement('div');
+  div.className = 'asset-card glass-card rounded-3xl overflow-hidden group hover:scale-[1.01] transition-all duration-300';
+  div.dataset.id = asset.id;
+  div.style.animationDelay = (delay * 60) + 'ms';
+
+  // Thumbnail / preview area
+  let previewHTML = '';
+  if (asset.type === 'video') {
+    const thumb = asset.thumbnail
+      ? `<img alt="Video thumbnail" class="absolute inset-0 w-full h-full object-cover opacity-60" src="${asset.thumbnail}"/>`
+      : `<div class="absolute inset-0 bg-gradient-to-br from-primary/20 to-secondary/20"></div>`;
+    const duration = asset.duration ? `<div class="absolute bottom-3 right-3 px-2 py-1 bg-black/50 backdrop-blur-md rounded text-white text-xs font-bold">${asset.duration}</div>` : '';
+    previewHTML = `
+      <div class="preview-trigger cursor-pointer hover:opacity-90 h-48 bg-surface-container relative flex items-center justify-center overflow-hidden" data-id="${asset.id}">
+        ${thumb}
+        <div class="z-10 bg-primary/90 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-2xl backdrop-blur-md">
+          <span class="material-symbols-outlined text-3xl">play_arrow</span>
+        </div>
+        ${duration}
+      </div>`;
+  } else if (asset.type === 'image') {
+    const src = asset.objectUrl || asset.thumbnail || '';
+    previewHTML = `
+      <div class="preview-trigger cursor-pointer hover:opacity-90 h-48 bg-surface-container relative overflow-hidden" data-id="${asset.id}">
+        ${src ? `<img alt="${asset.name}" class="w-full h-full object-cover" src="${src}"/>` : `<div class="w-full h-full flex items-center justify-center"><span class="material-symbols-outlined text-6xl text-primary/40">image</span></div>`}
+        <div class="absolute top-3 left-3 px-2 py-1 bg-white/80 backdrop-blur-md rounded-full text-xs font-bold text-primary shadow-sm">Image</div>
+      </div>`;
+  } else if (asset.type === 'audio') {
+    previewHTML = `
+      <div class="preview-trigger cursor-pointer hover:opacity-90 h-48 flex flex-col items-center justify-center gap-3" data-id="${asset.id}" style="background:linear-gradient(135deg,rgba(0,96,171,0.08),rgba(135,49,163,0.12))">
+        <span class="material-symbols-outlined text-6xl text-secondary">music_note</span>
+        <p class="text-xs font-bold text-secondary uppercase tracking-widest">Audio File</p>
+      </div>`;
+  } else {
+    // document / other
+    previewHTML = `
+      <div class="preview-trigger cursor-pointer hover:opacity-90 h-48 flex flex-col items-center justify-center gap-3" data-id="${asset.id}" style="background:rgba(0,96,171,0.06)">
+        <span class="material-symbols-outlined text-6xl text-secondary">description</span>
+        <p class="text-xs font-bold text-secondary uppercase tracking-widest">Document Preview</p>
+      </div>`;
+  }
+
+  const typeIcon = { video: 'videocam', image: 'image', audio: 'music_note', document: 'article' }[asset.type] || 'insert_drive_file';
+
+  div.innerHTML = `
+    ${previewHTML}
+    <div class="p-5">
+      <div class="flex items-start justify-between mb-4">
+        <div class="min-w-0">
+          <h3 class="font-bold text-base leading-tight mb-1 truncate">${asset.name}</h3>
+          <p class="text-sm text-on-surface-variant capitalize">${asset.type} • ${asset.sizeLabel}</p>
+        </div>
+        <span class="material-symbols-outlined text-on-surface-variant flex-shrink-0 ml-2">${typeIcon}</span>
+      </div>
+      <div class="flex gap-2">
+        <button class="edit-btn flex-1 py-2 glass-thick rounded-xl text-sm font-bold text-primary hover:bg-primary hover:text-white transition-all" data-id="${asset.id}">Edit</button>
+        <button class="download-btn p-2 glass-thick rounded-xl hover:bg-primary/10 text-on-surface-variant transition-all" title="Download" data-id="${asset.id}">
+          <span class="material-symbols-outlined text-[20px]">download</span>
+        </button>
+        <button class="delete-btn p-2 glass-thick rounded-xl hover:bg-error/10 text-error transition-all" title="Delete" data-id="${asset.id}">
+          <span class="material-symbols-outlined text-[20px]">delete</span>
+        </button>
+      </div>
+    </div>`;
+
+  return div;
+}
+
+// ===================== FILTER =====================
+const filterBtn = document.getElementById('filterBtn');
+const filterDropdown = document.getElementById('filterDropdown');
+const filterDropdownInner = document.getElementById('filterDropdownInner');
+
+filterBtn.addEventListener('click', (e) => {
+  e.stopPropagation();
+  const isOpen = filterDropdown.style.display === 'block';
+  if (isOpen) {
+    closeFilter();
+  } else {
+    // Position under filter button
+    const rect = filterBtn.getBoundingClientRect();
+    filterDropdownInner.style.left = rect.left + 'px';
+    filterDropdownInner.style.top = (rect.bottom + 8) + 'px';
+    filterDropdownInner.style.position = 'fixed';
+    filterDropdown.style.display = 'block';
+  }
+});
+
+document.addEventListener('click', (e) => {
+  if (!filterDropdown.contains(e.target) && e.target !== filterBtn) closeFilter();
+});
+
+function closeFilter() {
+  filterDropdown.style.display = 'none';
+}
+
+document.querySelectorAll('.filter-opt').forEach(btn => {
+  btn.addEventListener('click', () => {
+    currentFilter = btn.dataset.filter;
+    const label = btn.textContent.trim();
+    document.getElementById('filterLabel').textContent = label;
+
+    // Update chip
+    const chipRow = document.getElementById('filterChipRow');
+    if (currentFilter !== 'all') {
+      chipRow.classList.remove('hidden');
+      document.getElementById('filterChipText').textContent = label;
+    } else {
+      chipRow.classList.add('hidden');
+      document.getElementById('filterLabel').textContent = 'Filter';
+    }
+
+    // Highlight active
+    document.querySelectorAll('.filter-opt').forEach(b => b.classList.remove('bg-primary/15', 'text-primary'));
+    btn.classList.add('bg-primary/15', 'text-primary');
+
+    closeFilter();
+    renderAssets();
+  });
+});
+
+document.getElementById('clearFilter').addEventListener('click', () => {
+  currentFilter = 'all';
+  document.getElementById('filterLabel').textContent = 'Filter';
+  document.getElementById('filterChipRow').classList.add('hidden');
+  document.querySelectorAll('.filter-opt').forEach(b => b.classList.remove('bg-primary/15', 'text-primary'));
+  renderAssets();
+});
+
+// Search
+document.getElementById('searchInput').addEventListener('input', () => renderAssets());
+
+// ===================== UPLOAD =====================
+const fileInput = document.getElementById('fileInput');
+document.getElementById('uploadBtn').addEventListener('click', () => fileInput.click());
+
+fileInput.addEventListener('change', async (e) => {
+  const files = Array.from(e.target.files);
+  if (!files.length) return;
+  fileInput.value = ''; // reset
+
+  for (const file of files) {
+    const fileType = getFileType(file);
+    if (fileType === 'video') {
+      await handleVideoUpload(file);
+    } else {
+      handleNonVideoUpload(file);
+    }
+  }
+});
+
+function handleNonVideoUpload(file) {
+  const id = uid();
+  const objUrl = URL.createObjectURL(file);
+  const asset = {
+    id, name: file.name, type: getFileType(file),
+    size: file.size, sizeLabel: formatBytes(file.size),
+    duration: null, desc: '',
+    thumbnail: getFileType(file) === 'image' ? objUrl : null,
+    file, objectUrl: objUrl, isDemo: false
+  };
+  assets.unshift(asset);
+  storageUsed += file.size;
+  updateStorage();
+  renderAssets();
+  addFinishedTask(file.name);
+  showToast(`"${file.name}" uploaded successfully!`, 'success');
+}
+
+async function handleVideoUpload(file) {
+  const id = uid();
+  showToast(`Uploading "${file.name}"...`, 'info');
+
+  // Add upload task to HUD
+  const taskId = 'task-' + id;
+  addActiveTask(taskId, file.name, 0, 'upload');
+
+  const objUrl = URL.createObjectURL(file);
+  removeActiveTask(taskId);
+
+  const asset = {
+    id, name: file.name, type: 'video',
+    size: file.size, sizeLabel: formatBytes(file.size),
+    duration: null, desc: '',
+    thumbnail: null, file, objectUrl: objUrl, isDemo: false
+  };
+  assets.unshift(asset);
+  storageUsed += file.size;
+  updateStorage();
+  renderAssets();
+  addFinishedTask(file.name);
+  showToast(`"${file.name}" uploaded successfully!`, 'success');
+}
+
+// ===================== VIDEO COMPRESSION =====================
+// Uses HTMLVideoElement + Canvas + MediaRecorder to re-encode at ~50% bitrate
+function compressVideo(file, onProgress) {
+  return new Promise((resolve, reject) => {
+    const video = document.createElement('video');
+    video.muted = true;
+    video.playsInline = true;
+    video.preload = 'auto';
+
+    const objUrl = URL.createObjectURL(file);
+    video.src = objUrl;
+
+    video.addEventListener('loadedmetadata', () => {
+      const duration = video.duration;
+      if (!duration || !isFinite(duration)) {
+        URL.revokeObjectURL(objUrl);
+        return reject(new Error('Cannot determine video duration'));
+      }
+
+      // Target ~50% of original bitrate
+      const originalBitrate = (file.size * 8) / duration;
+      const targetBitrate = Math.max(200000, originalBitrate * 0.5); // min 200kbps
+
+      // Scale down resolution if very large
+      let w = video.videoWidth || 1280;
+      let h = video.videoHeight || 720;
+      const maxDim = 1280;
+      if (w > maxDim) { h = Math.round(h * maxDim / w); w = maxDim; }
+      if (h > maxDim) { w = Math.round(w * maxDim / h); h = maxDim; }
+
+      const canvas = document.createElement('canvas');
+      canvas.width = w;
+      canvas.height = h;
+      const ctx = canvas.getContext('2d');
+
+      // Pick best supported MIME
+      const mimeTypes = [
+        'video/webm;codecs=vp9',
+        'video/webm;codecs=vp8',
+        'video/webm',
+        'video/mp4'
+      ];
+      let mimeType = '';
+      for (const m of mimeTypes) {
+        if (MediaRecorder.isTypeSupported(m)) { mimeType = m; break; }
+      }
+
+      if (!mimeType) {
+        URL.revokeObjectURL(objUrl);
+        return reject(new Error('MediaRecorder not supported'));
+      }
+
+      const stream = canvas.captureStream(30);
+      const recorder = new MediaRecorder(stream, {
+        mimeType,
+        videoBitsPerSecond: Math.round(targetBitrate)
+      });
+
+      const chunks = [];
+      recorder.ondataavailable = (e) => { if (e.data.size > 0) chunks.push(e.data); };
+      recorder.onstop = () => {
+        URL.revokeObjectURL(objUrl);
+        const blob = new Blob(chunks, { type: mimeType.split(';')[0] });
+        resolve(blob);
+      };
+      recorder.onerror = (e) => { URL.revokeObjectURL(objUrl); reject(e.error); };
+
+      recorder.start(250); // collect data every 250ms
+
+      let animFrame;
+      const drawLoop = () => {
+        if (video.ended || video.paused) {
+          cancelAnimationFrame(animFrame);
+          recorder.stop();
+          return;
+        }
+        ctx.drawImage(video, 0, 0, w, h);
+        if (onProgress && duration > 0) onProgress(video.currentTime / duration);
+        animFrame = requestAnimationFrame(drawLoop);
+      };
+
+      video.addEventListener('play', drawLoop);
+      video.addEventListener('ended', () => {
+        cancelAnimationFrame(animFrame);
+        if (recorder.state === 'recording') recorder.stop();
+      });
+
+      video.play().catch(reject);
+    });
+
+    video.addEventListener('error', () => { URL.revokeObjectURL(objUrl); reject(new Error('Video load error')); });
+  });
+}
+
+// ===================== PROCESSING HUD =====================
+function updateActiveTasksUI() {
+  const list = document.getElementById('activeTasksList');
+  const noMsg = document.getElementById('noTasksMsg');
+  const badge = document.getElementById('activeTasksBadge');
+  const taskArr = Object.values(activeTasks);
+
+  badge.textContent = taskArr.length + ' TASKS';
+
+  if (taskArr.length === 0) {
+    noMsg.style.display = 'block';
+    list.querySelectorAll('.task-item').forEach(t => t.remove());
+    return;
+  }
+  noMsg.style.display = 'none';
+
+  taskArr.forEach(task => {
+    let el = document.getElementById('hudtask-' + task.id);
+    if (!el) {
+      el = document.createElement('div');
+      el.id = 'hudtask-' + task.id;
+      el.className = 'task-item p-4 glass-card rounded-2xl border border-primary/10 relative overflow-hidden';
+      list.appendChild(el);
+    }
+
+    const pct = task.progress;
+    // Compression circular ring
+    const radius = 40;
+    const circ = 2 * Math.PI * radius;
+    const offset = circ - (pct / 100) * circ;
+
+    el.innerHTML = `
+      <div class="flex items-start justify-between mb-3">
+        <div class="flex items-center gap-3">
+          <div class="w-8 h-8 bg-secondary/10 rounded-lg flex items-center justify-center">
+            <span class="material-symbols-outlined text-secondary text-xl">speed</span>
+          </div>
+          <div>
+            <h4 class="text-sm font-bold leading-tight truncate w-36">${task.name}</h4>
+            <p class="text-[11px] text-on-surface-variant">Compressing • ${pct}%</p>
+          </div>
+        </div>
+      </div>
+      <div class="flex items-center justify-center relative py-4">
+        <svg class="w-24 h-24 transform -rotate-90" viewBox="0 0 96 96">
+          <circle class="text-surface-container" cx="48" cy="48" fill="transparent" r="${radius}" stroke="currentColor" stroke-width="8"/>
+          <circle class="text-secondary compress-ring" cx="48" cy="48" fill="transparent" r="${radius}" stroke="currentColor"
+            stroke-dasharray="${circ.toFixed(1)}" stroke-dashoffset="${offset.toFixed(1)}" stroke-width="8"/>
+        </svg>
+        <div class="absolute inset-0 flex flex-col items-center justify-center">
+          <span class="text-lg font-bold">${pct}%</span>
+          <span class="text-[9px] uppercase font-bold text-on-surface-variant">Complete</span>
+        </div>
+      </div>
+      <div class="flex items-center justify-between mt-2 px-2">
+        <div class="text-center">
+          <p class="text-[9px] uppercase font-bold text-on-surface-variant mb-1">Quality</p>
+          <span class="text-xs font-bold text-secondary">High</span>
+        </div>
+        <div class="w-px h-6 bg-glass-border"></div>
+        <div class="text-center">
+          <p class="text-[9px] uppercase font-bold text-on-surface-variant mb-1">Format</p>
+          <span class="text-xs font-bold text-secondary">WebM/VP9</span>
+        </div>
+      </div>`;
+  });
+
+  // Remove stale task elements
+  list.querySelectorAll('.task-item').forEach(el => {
+    const id = el.id.replace('hudtask-', '');
+    if (!activeTasks[id]) el.remove();
+  });
+}
+
+function addActiveTask(id, name, progress, type) {
+  activeTasks[id] = { id, name, progress, type };
+  updateActiveTasksUI();
+}
+
+function updateTaskProgress(id, progress) {
+  if (activeTasks[id]) {
+    activeTasks[id].progress = progress;
+    updateActiveTasksUI();
+  }
+}
+
+function removeActiveTask(id) {
+  delete activeTasks[id];
+  updateActiveTasksUI();
+}
+
+function addFinishedTask(name, note) {
+  const list = document.getElementById('finishedList');
+  const item = document.createElement('div');
+  item.className = 'flex items-center gap-3 opacity-70 animate-pulse-once';
+  item.innerHTML = `
+    <span class="material-symbols-outlined text-tertiary">check_circle</span>
+    <div>
+      <p class="text-xs font-bold">${name}</p>
+      <p class="text-[10px]">${note || 'Just now'}</p>
+    </div>`;
+  list.prepend(item);
+  setTimeout(() => item.classList.remove('animate-pulse-once'), 600);
+}
+
+// ===================== STORAGE =====================
+function updateStorage() {
+  const pct = Math.min(100, Math.round((storageUsed / totalStorage) * 100));
+  document.getElementById('storageFill').style.width = pct + '%';
+  const usedGB = (storageUsed / (1024 ** 3)).toFixed(0);
+  const totalGB = Math.round(totalStorage / (1024 ** 3));
+  document.getElementById('storageLabel').textContent = `${usedGB}GB of ${totalGB >= 1024 ? (totalGB/1024)+'TB' : totalGB+'GB'} used (${pct}%)`;
+}
+
+// ===================== EDIT =====================
+const editModal = document.getElementById('editModal');
+document.getElementById('closeEditModal').addEventListener('click', closeEditModal);
+document.getElementById('cancelEditBtn').addEventListener('click', closeEditModal);
+editModal.addEventListener('click', (e) => { if (e.target === editModal) closeEditModal(); });
+
+function openEditModal(id) {
+  const asset = assets.find(a => a.id === id);
+  if (!asset) return;
+  currentEditId = id;
+  document.getElementById('editNameInput').value = asset.name;
+  document.getElementById('editDescInput').value = asset.desc || '';
+
+  // If video with object URL, show preview
+  const videoPreview = document.getElementById('editVideoPreview');
+  const previewWrapper = document.getElementById('editVideoPreviewWrapper');
+  if (asset.type === 'video' && asset.objectUrl) {
+    videoPreview.src = asset.objectUrl;
+    previewWrapper.classList.remove('hidden');
+  } else {
+    videoPreview.src = '';
+    previewWrapper.classList.add('hidden');
+  }
+
+  editModal.classList.add('open');
+}
+
+function closeEditModal() {
+  editModal.classList.remove('open');
+  currentEditId = null;
+  document.getElementById('editVideoPreview').src = '';
+}
+
+document.getElementById('saveEditBtn').addEventListener('click', () => {
+  if (!currentEditId) return;
+  const asset = assets.find(a => a.id === currentEditId);
+  if (!asset) return;
+  const newName = document.getElementById('editNameInput').value.trim();
+  if (!newName) { showToast('Asset name cannot be empty', 'error'); return; }
+  asset.name = newName;
+  asset.desc = document.getElementById('editDescInput').value.trim();
+  closeEditModal();
+  renderAssets();
+  showToast(`Asset renamed to "${newName}"`, 'success');
+});
+
+// ===================== DOWNLOAD =====================
+function downloadAsset(id) {
+  const asset = assets.find(a => a.id === id);
+  if (!asset) return;
+
+  if (asset.isDemo || (!asset.file && !asset.objectUrl)) {
+    showToast('Demo asset — no file available for download', 'info');
+    return;
+  }
+
+  const url = asset.objectUrl || URL.createObjectURL(asset.file);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = asset.name;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  showToast(`Downloading "${asset.name}"...`, 'success');
+}
+
+// ===================== DELETE =====================
+function deleteAsset(id) {
+  const idx = assets.findIndex(a => a.id === id);
+  if (idx === -1) return;
+  const asset = assets[idx];
+
+  // Animate card out
+  const card = document.querySelector(`[data-id="${id}"]`);
+  if (card) {
+    card.style.transition = 'all 0.3s cubic-bezier(0.4,0,0.2,1)';
+    card.style.opacity = '0';
+    card.style.transform = 'scale(0.9)';
+    setTimeout(() => {
+      if (asset.objectUrl) URL.revokeObjectURL(asset.objectUrl);
+      storageUsed = Math.max(0, storageUsed - asset.size);
+      assets.splice(idx, 1);
+      updateStorage();
+      renderAssets();
+    }, 280);
+  } else {
+    if (asset.objectUrl) URL.revokeObjectURL(asset.objectUrl);
+    storageUsed = Math.max(0, storageUsed - asset.size);
+    assets.splice(idx, 1);
+    updateStorage();
+    renderAssets();
+  }
+  showToast(`"${asset.name}" deleted`, 'error');
+}
+
+// ===================== DELEGATED CLICK HANDLERS =====================
+document.getElementById('assetGrid').addEventListener('click', (e) => {
+  const editBtn = e.target.closest('.edit-btn');
+  const dlBtn = e.target.closest('.download-btn');
+  const delBtn = e.target.closest('.delete-btn');
+  const previewTrigger = e.target.closest('.preview-trigger');
+
+  if (editBtn) openEditModal(editBtn.dataset.id);
+  else if (dlBtn) downloadAsset(dlBtn.dataset.id);
+  else if (delBtn) deleteAsset(delBtn.dataset.id);
+  else if (previewTrigger) openPreviewModal(previewTrigger.dataset.id);
+});
+
+// ===================== PREVIEW MODAL LOGIC =====================
+const previewModal = document.getElementById('previewModal');
+document.getElementById('closePreviewModal').addEventListener('click', closePreviewModal);
+previewModal.addEventListener('click', (e) => { if (e.target === previewModal) closePreviewModal(); });
+
+function openPreviewModal(id) {
+  const asset = assets.find(a => a.id === id);
+  if (!asset) return;
+  
+  document.getElementById('previewTitle').textContent = asset.name;
+  
+  const video = document.getElementById('previewVideo');
+  const img = document.getElementById('previewImage');
+  const doc = document.getElementById('previewDoc');
+  const gen = document.getElementById('previewGeneric');
+  
+  // Hide all first
+  video.classList.add('hidden');
+  video.src = '';
+  img.classList.add('hidden');
+  img.src = '';
+  doc.classList.add('hidden');
+  gen.classList.add('hidden');
+  
+  const url = asset.objectUrl || asset.thumbnail || '';
+  
+  if (asset.type === 'video') {
+    video.src = url || "https://assets.mixkit.co/videos/preview/mixkit-man-working-on-his-laptop-at-home-43224-large.mp4";
+    video.classList.remove('hidden');
+    video.load();
+    video.play().catch(err => console.log("Playback prevented", err));
+  } else if (asset.type === 'image') {
+    img.src = url || 'https://images.unsplash.com/photo-1531403009284-440f080d1e12?q=80&w=800';
+    img.classList.remove('hidden');
+  } else if (asset.type === 'document') {
+    document.getElementById('previewDocName').textContent = asset.name;
+    document.getElementById('previewDocDetails').textContent = `Document • ${asset.sizeLabel || '16.9 KB'}`;
+    const dlBtn = document.getElementById('previewDocDownload');
+    dlBtn.href = url || '#';
+    dlBtn.download = asset.name;
+    doc.classList.remove('hidden');
+  } else {
+    document.getElementById('previewGenericName').textContent = asset.name;
+    document.getElementById('previewGenericDetails').textContent = `${asset.type.toUpperCase()} • ${asset.sizeLabel || 'Unknown size'}`;
+    
+    const icon = asset.type === 'audio' ? 'music_note' : 'insert_drive_file';
+    document.getElementById('previewGenericIcon').textContent = icon;
+    
+    const dlBtn = document.getElementById('previewGenericDownload');
+    dlBtn.href = url || '#';
+    dlBtn.download = asset.name;
+    gen.classList.remove('hidden');
+  }
+  
+  previewModal.classList.add('open');
+}
+
+function closePreviewModal() {
+  previewModal.classList.remove('open');
+  const video = document.getElementById('previewVideo');
+  video.pause();
+  video.src = '';
+}
+
+// ===================== MODULE TREE TOGGLE =====================
+document.querySelectorAll('.module-toggle').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const modId = btn.dataset.module;
+    const panel = document.getElementById(modId);
+    const icon = btn.querySelector('.mod-icon');
+    if (!panel) return;
+    const isHidden = panel.classList.contains('hidden');
+    panel.classList.toggle('hidden', !isHidden);
+    icon.textContent = isHidden ? 'expand_more' : 'chevron_right';
+    icon.style.color = isHidden ? '' : '';
+  });
+});
+
+// ===================== BUTTON MICRO-INTERACTIONS =====================
+document.querySelectorAll('button').forEach(b => {
+  b.addEventListener('mousedown', () => b.style.transform = 'scale(0.96)');
+  b.addEventListener('mouseup',   () => b.style.transform = '');
+  b.addEventListener('mouseleave',() => b.style.transform = '');
+});
+
+// ===================== INIT =====================
+renderAssets();
+updateStorage();
+updateActiveTasksUI();
+</script>
+</body></html>

@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<title>Interview Scheduler - TalentPlatform</title>
+<!-- Fonts & Icons -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary": "#8731a3",
+                        "tertiary": "#006823",
+                        "on-error": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "error": "#FF453A",
+                        "glass-thick": "rgba(255, 255, 255, 0.8)",
+                        "primary-container": "#a34cbe",
+                        "secondary-fixed": "#d3e3ff",
+                        "inverse-surface": "#29313f",
+                        "surface-container-low": "#f0f3ff",
+                        "card-gradient": "linear-gradient(135deg, #4D9EFA 0%, #BF7DF5 100%)",
+                        "surface-container-highest": "#dbe3f6",
+                        "tertiary-fixed-dim": "#47e266",
+                        "on-secondary-container": "#003868",
+                        "on-error-container": "#93000a",
+                        "surface-dim": "#d2daed",
+                        "tertiary-container": "#00842f",
+                        "on-tertiary-fixed-variant": "#00531a",
+                        "on-surface-variant": "#4f4350",
+                        "on-secondary-fixed-variant": "#004883",
+                        "surface-container": "#e7eeff",
+                        "orange": "#FF9F0A",
+                        "on-tertiary-container": "#e6ffe0",
+                        "on-tertiary": "#ffffff",
+                        "tertiary-fixed": "#6cff82",
+                        "surface-tint": "#8d37a9",
+                        "primary-fixed-dim": "#f0b0ff",
+                        "on-primary-container": "#fff5fb",
+                        "secondary-fixed-dim": "#a3c9ff",
+                        "outline": "#817381",
+                        "secondary": "#0060ab",
+                        "background": "#f9f9ff",
+                        "on-secondary-fixed": "#001c39",
+                        "inverse-on-surface": "#ecf1ff",
+                        "surface": "#f9f9ff",
+                        "on-secondary": "#ffffff",
+                        "surface-container-high": "#e0e8fb",
+                        "on-background": "#471A70",
+                        "on-tertiary-fixed": "#002106",
+                        "gold": "#FFD60A",
+                        "primary-fixed": "#fbd7ff",
+                        "outline-variant": "#d2c1d2",
+                        "inverse-primary": "#f0b0ff",
+                        "surface-variant": "#dbe3f6",
+                        "error-container": "#ffdad6",
+                        "on-primary-fixed-variant": "#72188f",
+                        "secondary-container": "#54a3ff",
+                        "on-primary": "#ffffff",
+                        "glass-fill": "rgba(255, 255, 255, 0.35)",
+                        "glass-border": "rgba(255, 255, 255, 0.6)",
+                        "on-surface": "#141c29",
+                        "surface-bright": "#f9f9ff",
+                        "on-primary-fixed": "#330044"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "safe-bottom": "34px",
+                        "desktop-gutter": "24px",
+                        "mobile-gutter": "16px",
+                        "desktop-margin": "64px",
+                        "max-width": "1280px",
+                        "mobile-margin": "20px",
+                        "safe-top": "44px",
+                        "base": "8px"
+                    },
+                    "fontFamily": {
+                        "body-md-mobile": ["Inter", "sans-serif"],
+                        "headline-lg-mobile": ["Inter", "sans-serif"],
+                        "label-caps-mobile": ["Inter", "sans-serif"],
+                        "display-xl-mobile": ["Inter", "sans-serif"]
+                    },
+                    "fontSize": {
+                        "body-md-mobile": ["15px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "label-caps-mobile": ["12px", { "lineHeight": "1.0", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "display-xl-mobile": ["34px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "800" }]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            background: linear-gradient(180deg, #f0f3ff 0%, #e0e8fb 100%);
+            -webkit-tap-highlight-color: transparent;
+            overflow-x: hidden;
+            font-family: 'Inter', sans-serif;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.35);
+            backdrop-filter: blur(28px);
+            -webkit-backdrop-filter: blur(28px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 12px 40px 0 rgba(71, 26, 112, 0.15);
+        }
+        .active-tap:active {
+            transform: scale(0.96);
+            transition: transform 0.2s cubic-bezier(0.35, 0, 0.15, 1);
+        }
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .bottom-sheet {
+            transform: translateY(100%);
+            transition: transform 0.4s cubic-bezier(0.32, 0.72, 0, 1);
+        }
+        .bottom-sheet.open {
+            transform: translateY(0);
+        }
+        .h-safe-top { height: 44px; }
+        .pb-safe { padding-bottom: 34px; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="text-on-surface">
+<!-- Background Atmospheric Effect -->
+
+<!-- Top App Bar (Shared Structure) -->
+<header class="fixed top-0 w-full z-50 bg-glass-fill backdrop-blur-xl border-b border-glass-border shadow-[0_12px_40px_0_rgba(71,26,112,0.15)] flex items-center justify-between px-mobile-margin h-20">
+<button class="active-tap w-11 h-11 flex items-center justify-center rounded-full bg-glass-fill border border-glass-border">
+<span class="material-symbols-outlined text-primary">arrow_back_ios_new</span>
+</button>
+<h1 class="font-headline-lg-mobile text-[20px] font-bold text-on-background">Interview Scheduler</h1>
+<button class="active-tap w-11 h-11 flex items-center justify-center rounded-full bg-glass-fill border border-glass-border">
+<span class="material-symbols-outlined text-primary">calendar_add_on</span>
+</button>
+</header>
+<main class="pt-24 pb-32 px-mobile-margin max-w-md mx-auto">
+<!-- Calendar Horizontal Strip -->
+<section class="mb-8 overflow-x-auto no-scrollbar py-2">
+<div class="flex gap-3 min-w-max">
+<!-- Oct 12 -->
+<div class="active-tap flex flex-col items-center justify-center w-[64px] h-[84px] glass-card rounded-2xl">
+<span class="font-label-caps-mobile text-on-surface-variant mb-1">MON</span>
+<span class="font-headline-lg-mobile text-[18px]">12</span>
+</div>
+<!-- Oct 13 (Active) -->
+<div class="active-tap flex flex-col items-center justify-center w-[64px] h-[84px] bg-primary text-white rounded-2xl shadow-lg ring-2 ring-primary-container ring-offset-2">
+<span class="font-label-caps-mobile text-primary-fixed mb-1">TUE</span>
+<span class="font-headline-lg-mobile text-[22px]">13</span>
+</div>
+<!-- Oct 14 -->
+<div class="active-tap flex flex-col items-center justify-center w-[64px] h-[84px] glass-card rounded-2xl">
+<span class="font-label-caps-mobile text-on-surface-variant mb-1">WED</span>
+<span class="font-headline-lg-mobile text-[18px]">14</span>
+</div>
+<!-- Oct 15 -->
+<div class="active-tap flex flex-col items-center justify-center w-[64px] h-[84px] glass-card rounded-2xl">
+<span class="font-label-caps-mobile text-on-surface-variant mb-1">THU</span>
+<span class="font-headline-lg-mobile text-[18px]">15</span>
+</div>
+<!-- Oct 16 -->
+<div class="active-tap flex flex-col items-center justify-center w-[64px] h-[84px] glass-card rounded-2xl">
+<span class="font-label-caps-mobile text-on-surface-variant mb-1">FRI</span>
+<span class="font-headline-lg-mobile text-[18px]">16</span>
+</div>
+</div>
+</section>
+<!-- Schedule List -->
+<section class="space-y-6">
+<!-- 09:00 AM - Slot Available -->
+<div class="flex gap-4">
+<div class="w-16 pt-3 text-right">
+<span class="font-label-caps-mobile text-on-surface-variant opacity-70">09:00</span>
+<div class="text-[10px] text-on-surface-variant opacity-50 uppercase tracking-tighter">AM</div>
+</div>
+<div class="flex-1 active-tap border-2 border-dashed border-outline-variant/40 rounded-3xl p-5 flex items-center justify-between group">
+<span class="font-body-md-mobile text-on-surface-variant/60 font-semibold italic">Slot Available</span>
+<span class="material-symbols-outlined text-outline-variant/60">add_circle</span>
+</div>
+</div>
+<!-- 10:30 AM - Occupied Card (Alex) -->
+<div class="flex gap-4">
+<div class="w-16 pt-3 text-right">
+<span class="font-label-caps-mobile text-on-surface-variant font-bold">10:30</span>
+<div class="text-[10px] text-on-surface-variant opacity-50 uppercase tracking-tighter">AM</div>
+</div>
+<div class="flex-1 glass-card rounded-3xl p-5" onclick="openBottomSheet()">
+<div class="flex items-start justify-between mb-4">
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 rounded-full overflow-hidden border-2 border-white shadow-sm">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a creative male UX Designer with a warm expression, captured in soft studio lighting. The aesthetic is clean and modern, featuring a blurred background with cool blue and purple tones that match a high-end tech corporate brand." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDl6POXbxSszYwJELxt6evTWADpHwEMnwgrPmZJeb5axSWWWyxwHCpx3bLdMBAIdPqO8yp1DWcF3VmpIYUEXAGybUD2K0XPGNfuhTx9-M_7NXPy3nlUGJapKqmZSQIBg-V8q3e6-OhsfbMXpWksUW6IivyrDBNDTkYyaZ9mMqBjCNkJj2B8AuUZM97V4e06GbixtcVtw5psinZePIa3Ul6GKrz912c2i1tUnq3clZyJTUPLv6WIGy78GLnHka3jPP0ArP5gC66kqeIN"/>
+</div>
+<div>
+<h3 class="font-body-md-mobile font-bold text-on-background">Alex Sterling</h3>
+<p class="text-[12px] text-primary font-semibold">Senior UX Designer</p>
+</div>
+</div>
+<div class="bg-primary-fixed/30 px-2 py-1 rounded-lg">
+<span class="text-[10px] font-bold text-on-primary-fixed-variant uppercase">Detail</span>
+</div>
+</div>
+<button class="active-tap w-full h-[44px] bg-primary text-white rounded-2xl flex items-center justify-center gap-2 font-semibold">
+<span class="material-symbols-outlined text-[20px]">video_call</span>
+<span>Video Link</span>
+</button>
+</div>
+</div>
+<!-- 01:00 PM - Occupied Card (Maya) -->
+<div class="flex gap-4">
+<div class="w-16 pt-3 text-right">
+<span class="font-label-caps-mobile text-on-surface-variant font-bold">01:00</span>
+<div class="text-[10px] text-on-surface-variant opacity-50 uppercase tracking-tighter">PM</div>
+</div>
+<div class="flex-1 glass-card rounded-3xl p-5">
+<div class="flex items-start justify-between mb-4">
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 rounded-full overflow-hidden border-2 border-white shadow-sm">
+<img class="w-full h-full object-cover" data-alt="A focused female Product Manager portrait in a bright contemporary office environment. She is smiling confidently, with soft natural light illuminating her face. The visual style is premium and professional, using a soft depth-of-field effect and a palette of muted lavenders and crisp whites." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCjw22vFKuyRU_rGtdaLOQseHWOe5iaXIllN9ddTlyfYHx0krV8FoUmxLyBRitjvHr5HPrdKMN3KvghZCKpOAwpOaoopwkQPIcugcrPiSBUrnNc46DrT9aWuaC-o9_x50kheqvfoHjk1G_SnxgTZMvCRGA9hhBxJREvmT7RKKvKssNuVCUG4D-ZUH6xLOkgeqqNEosoqdriGAdj45oS1gHljVnttCONOnLQKtH0HLK9_ISLavHiqM-j9YYI8fjWZWBp5cdZp5KNLCoS"/>
+</div>
+<div>
+<h3 class="font-body-md-mobile font-bold text-on-background">Maya Chen</h3>
+<p class="text-[12px] text-primary font-semibold">Product Manager</p>
+</div>
+</div>
+<div class="bg-tertiary-fixed/30 px-2 py-1 rounded-lg">
+<span class="text-[10px] font-bold text-on-tertiary-fixed-variant uppercase">Detail</span>
+</div>
+</div>
+<button class="active-tap w-full h-[44px] glass-card border-glass-border text-on-background rounded-2xl flex items-center justify-center gap-2 font-semibold">
+<span class="material-symbols-outlined text-[20px]">video_call</span>
+<span>Join Session</span>
+</button>
+</div>
+</div>
+</section>
+</main>
+<!-- Bottom NavBar (From JSON) -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center pt-2 pb-safe px-mobile-margin h-[84px] bg-glass-thick backdrop-blur-2xl border-t border-glass-border shadow-[0_-8px_30px_0_rgba(71,26,112,0.1)]">
+<div class="flex flex-col items-center justify-center text-on-surface-variant active-tap cursor-pointer">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-caps-mobile">Dashboard</span>
+</div>
+<div class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-4 py-1 active-tap cursor-pointer">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">work</span>
+<span class="font-label-caps-mobile">Postings</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant active-tap cursor-pointer">
+<span class="material-symbols-outlined">group</span>
+<span class="font-label-caps-mobile">Applicants</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant active-tap cursor-pointer">
+<span class="material-symbols-outlined">assessment</span>
+<span class="font-label-caps-mobile">Reports</span>
+</div>
+</nav>
+<!-- Modal / Bottom Sheet -->
+<div class="fixed inset-0 bg-on-background/20 backdrop-blur-sm z-[60] opacity-0 pointer-events-none transition-opacity duration-300" id="overlay" onclick="closeBottomSheet()"></div>
+<div class="bottom-sheet fixed bottom-0 left-0 w-full z-[70] glass-card rounded-t-[40px] px-mobile-margin pt-4 pb-safe-bottom shadow-2xl border-t border-white/60" id="bottomSheet">
+<div class="w-12 h-1.5 bg-on-surface-variant/20 rounded-full mx-auto mb-6"></div>
+<div class="text-center mb-8">
+<h2 class="font-headline-lg-mobile text-[22px] mb-6">Interview Invitation</h2>
+<div class="flex justify-center mb-4">
+<div class="relative">
+<div class="w-24 h-24 rounded-full overflow-hidden border-4 border-white shadow-xl ring-4 ring-primary/10">
+<img class="w-full h-full object-cover" data-alt="Close up portrait of a senior UX designer for a digital interview invitation. High-fidelity glassmorphism style, soft focus background with abstract purple light leaks, extremely professional and modern." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBmFGTQCYildt0lOqAu3xmy_DEJLKDjsLvIEUNZ8Tnx2Jnm6s8wsMw4oMQXKDpjz0aInGErD4ABm8seJB9ge8fL7Ly6YKXhodTTyHbctMV1STDZROZzUCBeAx1iBs88YYzbPC-HNkA2nH3hJDXz1aVOezaAQcTGTU0t8a1Y3ZaJ9flJM1S8_w1dc1c8QAAk4nZVFiAZnbWF-ONrO02nNNvLtO4FurE5jGOccldGbu1GmMBUPJtXV0mB9EsV0jdEFgX0YjhONWwLxZOr"/>
+</div>
+<div class="absolute -bottom-1 -right-1 w-8 h-8 bg-tertiary-fixed text-on-tertiary-fixed rounded-full flex items-center justify-center border-2 border-white">
+<span class="material-symbols-outlined text-[16px]">verified</span>
+</div>
+</div>
+</div>
+<p class="font-body-md-mobile text-on-surface-variant mb-1">Alex Sterling</p>
+<p class="text-[14px] text-primary font-bold">Oct 13, 10:30 AM • 60 mins</p>
+</div>
+<div class="space-y-3 mb-8">
+<button class="active-tap w-full h-14 bg-primary text-white rounded-2xl flex items-center justify-center gap-3 font-bold text-[16px] shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined">video_camera_front</span>
+<span>Join Video Call</span>
+</button>
+<div class="grid grid-cols-2 gap-3">
+<button class="active-tap h-12 glass-card rounded-2xl border-glass-border font-semibold text-on-surface-variant text-[14px]">
+                    Reschedule
+                </button>
+<button class="active-tap h-12 glass-card rounded-2xl border-glass-border font-semibold text-error text-[14px]">
+                    Cancel
+                </button>
+</div>
+</div>
+</div>
+<script>
+        function openBottomSheet() {
+            const sheet = document.getElementById('bottomSheet');
+            const overlay = document.getElementById('overlay');
+            sheet.classList.add('open');
+            overlay.classList.add('opacity-100', 'pointer-events-auto');
+        }
+
+        function closeBottomSheet() {
+            const sheet = document.getElementById('bottomSheet');
+            const overlay = document.getElementById('overlay');
+            sheet.classList.remove('open');
+            overlay.classList.remove('opacity-100', 'pointer-events-auto');
+        }
+
+        // Handle micro-interactions and scroll effects
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 20) {
+                header.classList.add('shadow-xl');
+            } else {
+                header.classList.remove('shadow-xl');
+            }
+        });
+    </script>
+</body></html>

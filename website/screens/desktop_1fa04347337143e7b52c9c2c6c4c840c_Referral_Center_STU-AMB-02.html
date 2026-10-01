@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Referral Center - EduPulse Ambassador</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "status-active": "#2D8A4E",
+                      "on-secondary-container": "#5c6575",
+                      "on-error": "#ffffff",
+                      "primary-fixed-dim": "#f0b0ff",
+                      "background": "#fff7fe",
+                      "specular-border": "rgba(255, 255, 255, 0.6)",
+                      "on-primary-fixed": "#330044",
+                      "surface-tint": "#8d37a9",
+                      "tertiary-container": "#b5af41",
+                      "on-background": "#2c0050",
+                      "on-surface": "#2c0050",
+                      "surface-container-lowest": "#ffffff",
+                      "surface-container-low": "#fcf0ff",
+                      "on-primary-container": "#fff5fb",
+                      "tertiary": "#656100",
+                      "on-secondary-fixed-variant": "#3f4756",
+                      "secondary-fixed-dim": "#bec7d9",
+                      "surface-container-highest": "#f0dbff",
+                      "secondary-fixed": "#dbe3f6",
+                      "on-surface-variant": "#4f4350",
+                      "on-tertiary-fixed-variant": "#4c4900",
+                      "on-primary-fixed-variant": "#72188f",
+                      "inverse-primary": "#f0b0ff",
+                      "inverse-on-surface": "#faecff",
+                      "surface-container-high": "#f4e2ff",
+                      "inverse-surface": "#45176e",
+                      "status-inactive": "#718096",
+                      "on-tertiary-container": "#444100",
+                      "tertiary-fixed": "#eee772",
+                      "surface-variant": "#f0dbff",
+                      "on-error-container": "#93000a",
+                      "on-secondary": "#ffffff",
+                      "on-tertiary-fixed": "#1e1c00",
+                      "surface-dim": "#ebd0ff",
+                      "on-tertiary": "#ffffff",
+                      "surface-container": "#f8e9ff",
+                      "error": "#ba1a1a",
+                      "on-secondary-fixed": "#141c29",
+                      "primary-container": "#a34cbe",
+                      "on-primary": "#ffffff",
+                      "surface-bright": "#fff7fe",
+                      "outline-variant": "#d2c1d2",
+                      "secondary-container": "#dbe3f6",
+                      "primary": "#8731a3",
+                      "secondary": "#565f6e",
+                      "glass-surface": "rgba(255, 255, 255, 0.4)",
+                      "outline": "#817381",
+                      "status-pending": "#E67E22",
+                      "tertiary-fixed-dim": "#d1ca59",
+                      "error-container": "#ffdad6",
+                      "surface": "#fff7fe",
+                      "primary-fixed": "#fbd7ff"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "gutter": "24px",
+                      "margin-desktop": "48px",
+                      "margin-mobile": "16px",
+                      "max-width": "1280px",
+                      "base": "8px"
+              },
+              "fontFamily": {
+                      "body-md": [
+                              "Inter"
+                      ],
+                      "label-lg": [
+                              "Inter"
+                      ],
+                      "headline-lg-mobile": [
+                              "Inter"
+                      ],
+                      "headline-md": [
+                              "Inter"
+                      ],
+                      "display-lg": [
+                              "Inter"
+                      ],
+                      "body-lg": [
+                              "Inter"
+                      ],
+                      "label-sm": [
+                              "Inter"
+                      ],
+                      "headline-lg": [
+                              "Inter"
+                      ]
+              },
+              "fontSize": {
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "label-lg": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "letterSpacing": "0.01em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "headline-lg-mobile": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "headline-md": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "display-lg": [
+                              "48px",
+                              {
+                                      "lineHeight": "56px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "body-lg": [
+                              "18px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "label-sm": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "headline-lg": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "letterSpacing": "-0.01em",
+                                      "fontWeight": "600"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+    </script>
+<style>
+        body {
+            background-image: radial-gradient(circle at top right, #f4e2ff, #fff7fe), radial-gradient(circle at bottom left, #ebd0ff, #fff7fe);
+            background-size: 100% 100%;
+            background-attachment: fixed;
+            min-height: 100vh;
+        }
+        .liquid-glass {
+            background-color: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(28px);
+            -webkit-backdrop-filter: blur(28px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+        }
+        .liquid-glass:hover {
+             background-color: rgba(255, 255, 255, 0.5);
+        }
+        .liquid-input {
+            background-color: rgba(255, 255, 255, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            transition: border-color 0.3s ease;
+        }
+        .liquid-input:focus {
+            outline: none;
+            border-color: #8731a3;
+            box-shadow: 0 0 0 2px rgba(135, 49, 163, 0.2);
+        }
+    </style>
+</head>
+<body class="text-on-surface font-body-md bg-background antialiased selection:bg-primary-container selection:text-white">
+<!-- TopNavBar -->
+<header class="bg-glass-surface dark:bg-surface-container w-full h-16 fixed top-0 z-50 backdrop-blur-[28px] border-b border-specular-border shadow-none">
+<div class="flex justify-between items-center px-gutter w-full max-w-max-width mx-auto h-full">
+<div class="flex items-center gap-8">
+<span class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed">EduPulse Ambassador</span>
+<nav class="hidden md:flex gap-6 h-full items-center">
+<a class="text-on-secondary-container dark:text-on-secondary-fixed-variant font-label-lg text-label-lg hover:text-primary transition-colors h-full flex items-center border-b-2 border-transparent" href="#">Dashboard</a>
+<a class="text-primary dark:text-primary-fixed font-bold border-b-2 border-primary font-label-lg text-label-lg h-full flex items-center" href="#">Referrals</a>
+<a class="text-on-secondary-container dark:text-on-secondary-fixed-variant font-label-lg text-label-lg hover:text-primary transition-colors h-full flex items-center border-b-2 border-transparent" href="#">Rewards</a>
+<a class="text-on-secondary-container dark:text-on-secondary-fixed-variant font-label-lg text-label-lg hover:text-primary transition-colors h-full flex items-center border-b-2 border-transparent" href="#">Settings</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative hidden lg:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-secondary-container">search</span>
+<input class="liquid-input pl-10 pr-4 py-2 rounded-full font-body-md text-body-md text-on-surface placeholder:text-on-secondary-container w-64" placeholder="Search..." type="text"/>
+</div>
+<div class="flex items-center gap-2">
+<button class="p-2 rounded-full hover:bg-white/20 transition-colors text-primary dark:text-primary-fixed cursor-pointer active:opacity-80 transition-opacity">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="p-2 rounded-full hover:bg-white/20 transition-colors text-primary dark:text-primary-fixed cursor-pointer active:opacity-80 transition-opacity">
+<span class="material-symbols-outlined">help</span>
+</button>
+</div>
+<button class="hidden md:flex items-center gap-2 px-4 py-2 rounded-full border border-specular-border text-primary font-label-lg text-label-lg hover:bg-white/20 transition-colors">
+<span class="material-symbols-outlined text-[18px]">share</span> Share Link
+                </button>
+<img alt="User profile photo" class="w-10 h-10 rounded-full object-cover border-2 border-white/60" data-alt="A small, professional circular profile photograph of a young adult student ambassador, smiling warmly. Well-lit, studio lighting, soft pastel liquid glass background aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD8Ig-gS0l_z5TaYhq0irmo5fEyiIeqvCDciG-_fGfIIyu_9x-7dA__gSaCsRIOAeLpn1uh0zTpVdUTzx7TiS4nxCV2qicXsgUeIH0gkd1-vMIGOv8wtIuRgafiVhnPu4Duf044JasRyLVpTMkLpVvKeSmnAS3CVVjY4fqJmML2Q6Jsd6D1t6gT22WZVjFB1jHtald64BK_gXr7J_nT8byEyhyF1l8zefYILzWKne2yP78sOxR4L-f6Us92ZvT3EvVUVeb_FX-nLumw"/>
+</div>
+</div>
+</header>
+<!-- SideNavBar (Desktop Only) -->
+<aside class="fixed left-0 top-16 h-[calc(100vh-64px)] w-64 bg-glass-surface dark:bg-surface-container-low backdrop-blur-[28px] border-r border-specular-border shadow-none hidden md:flex flex-col py-8 px-4 space-y-2 z-40">
+<div class="flex flex-col items-center mb-8 pb-8 border-b border-white/40">
+<img alt="Student Ambassador Avatar" class="w-20 h-20 rounded-full object-cover border-4 border-white/60 mb-4 shadow-sm" data-alt="A professional circular profile photograph of a young adult student ambassador named Alex Rivers. Gold tier badge visible. Well-lit, clear focus, soft pastel liquid glass background aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBAxd9NoRO9qg6vgkZDKFPlTTrJLWcJ9OsgaUofKF5817vFn21uthmHUW-b2FhOqSNgir7nQyBmDaGCBnXDVA_Bai3Aml9g-lsRZEqSwHtnJZBAFfMMBClSrlg55Syw40zWUntM6c9s6JkEGfqj93iofcc2nAhqi9bUGPKYMGYvw7FG6TkkYTJQNZyKWWbFNvM0mwMTOBVwydYYNc_I8n4KyNECZdaKGhoFTz_9akiSdplF0bL52RMrPz2SxgGBJ0MBQ6oIy2yEe68A"/>
+<h2 class="font-headline-md text-headline-md text-primary font-bold">Alex Rivers</h2>
+<p class="font-body-md text-body-md text-on-secondary-container mt-1">Gold Tier Ambassador</p>
+</div>
+<nav class="flex-1 flex flex-col gap-2">
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-secondary-container dark:text-on-secondary-fixed-variant hover:bg-white/10 dark:hover:bg-surface-container-highest transition-all active:scale-[0.98] font-label-lg text-label-lg" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+                Dashboard
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-primary dark:text-primary-fixed bg-primary-container/20 hover:bg-white/10 dark:hover:bg-surface-container-highest transition-all active:scale-[0.98] font-label-lg text-label-lg" href="#">
+<span class="material-symbols-outlined">group_add</span>
+                Referrals
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-secondary-container dark:text-on-secondary-fixed-variant hover:bg-white/10 dark:hover:bg-surface-container-highest transition-all active:scale-[0.98] font-label-lg text-label-lg" href="#">
+<span class="material-symbols-outlined">military_tech</span>
+                Rewards
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-secondary-container dark:text-on-secondary-fixed-variant hover:bg-white/10 dark:hover:bg-surface-container-highest transition-all active:scale-[0.98] font-label-lg text-label-lg" href="#">
+<span class="material-symbols-outlined">settings</span>
+                Settings
+            </a>
+</nav>
+<button class="mt-auto w-full py-3 bg-primary-container text-on-primary rounded-full font-label-lg text-label-lg shadow-md hover:bg-primary transition-colors active:scale-95 flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[20px]">add</span>
+            New Referral
+        </button>
+</aside>
+<!-- Main Content Canvas -->
+<main class="pt-24 pb-12 px-margin-mobile md:px-margin-desktop md:ml-64 max-w-max-width mx-auto">
+<!-- Header -->
+<div class="mb-8">
+<h1 class="font-headline-lg text-headline-lg text-on-surface mb-2">Referral Center</h1>
+<p class="font-body-md text-body-md text-on-secondary-container">Share your link. Earn rewards for every student you bring in.</p>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+<!-- Hero Section: Referral Link Card -->
+<div class="liquid-glass rounded-xl p-8 lg:col-span-2 flex flex-col justify-between">
+<div>
+<h2 class="font-label-lg text-label-lg text-primary mb-4 uppercase tracking-wider">Your Unique Referral Link</h2>
+<div class="flex flex-col sm:flex-row gap-4 mb-8">
+<div class="relative flex-1">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-secondary-container">link</span>
+<input class="liquid-input w-full pl-12 pr-4 py-4 rounded-lg font-body-lg text-body-lg text-on-surface cursor-copy selection:bg-primary-container/30" readonly="" type="text" value="elitehire.app/ref/aria-sterling"/>
+</div>
+<button class="px-8 py-4 bg-primary-container text-on-primary rounded-lg font-label-lg text-label-lg whitespace-nowrap hover:bg-primary transition-colors shadow-md active:scale-[0.98] flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[20px]">content_copy</span>
+                            Copy Link
+                        </button>
+</div>
+</div>
+<div>
+<p class="font-label-sm text-label-sm text-on-secondary-container mb-3 uppercase tracking-wide">Quick Share</p>
+<div class="flex gap-4">
+<button class="w-12 h-12 rounded-full bg-[#25D366]/10 text-[#25D366] border border-[#25D366]/20 flex items-center justify-center hover:bg-[#25D366]/20 transition-colors" title="Share on WhatsApp">
+<svg class="w-6 h-6" fill="currentColor" viewbox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"></path></svg>
+</button>
+<button class="w-12 h-12 rounded-full bg-[#1877F2]/10 text-[#1877F2] border border-[#1877F2]/20 flex items-center justify-center hover:bg-[#1877F2]/20 transition-colors" title="Share on Facebook">
+<svg class="w-6 h-6" fill="currentColor" viewbox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.469h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.469h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"></path></svg>
+</button>
+<button class="w-12 h-12 rounded-full bg-black/10 text-black border border-black/20 flex items-center justify-center hover:bg-black/20 transition-colors" title="Share on X">
+<svg class="w-6 h-6" fill="currentColor" viewbox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></svg>
+</button>
+<button class="w-12 h-12 rounded-full bg-[#0A66C2]/10 text-[#0A66C2] border border-[#0A66C2]/20 flex items-center justify-center hover:bg-[#0A66C2]/20 transition-colors" title="Share on LinkedIn">
+<svg class="w-6 h-6" fill="currentColor" viewbox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"></path></svg>
+</button>
+<button class="w-12 h-12 rounded-full bg-surface-tint/10 text-surface-tint border border-surface-tint/20 flex items-center justify-center hover:bg-surface-tint/20 transition-colors" title="Share via Email">
+<span class="material-symbols-outlined">mail</span>
+</button>
+</div>
+</div>
+</div>
+<!-- QR Code Card -->
+<div class="liquid-glass rounded-xl p-8 flex flex-col items-center justify-center">
+<h3 class="font-label-lg text-label-lg text-on-surface mb-6 w-full text-center">Scan to Refer</h3>
+<div class="bg-white p-4 rounded-xl shadow-sm border border-specular-border mb-4">
+<img alt="QR Code" class="w-40 h-40 object-contain" data-alt="A highly detailed, clean, modern QR code graphic. Crisp black squares on a pure white background. Minimalist styling, high contrast, suitable for scanning." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCXn6_lmoe-GQ1IpH5yclNIsuVEjA92veERMD227ejJUwUG-Wrht3r6XRBQblTGTQc_o6aFQ-K1AAfLE9I1ArmToIw8Gip8f0-CikKGbDSLjrBdRnOBTPxrDx4lx5M4O3ghHjyjP_uNAHDU6ieJKuT2m2UNYcpplTEUuiVUT_wDIIHOihtojnYN7jbgCNil7fpmLDUnTz0XUGbboxtSNrKZhjeNgSAjCYgIiN02vFrnIOoGMYdc3xRxiYNSriTRlvsFZJK0bfL-ByxS"/>
+</div>
+<button class="flex items-center gap-2 text-primary hover:text-surface-tint font-label-lg text-label-lg transition-colors">
+<span class="material-symbols-outlined text-[18px]">download</span>
+                    Download QR
+                </button>
+</div>
+</div>
+<!-- Stats Row -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+<div class="liquid-glass rounded-xl p-6 border-l-4 border-l-primary-container">
+<p class="font-label-lg text-label-lg text-on-secondary-container mb-2 flex items-center gap-2">
+<span class="material-symbols-outlined text-[20px] text-primary">groups</span>
+                    Total Referrals
+                </p>
+<div class="flex items-end gap-3">
+<span class="font-display-lg text-display-lg text-on-surface">47</span>
+<span class="text-status-active font-label-sm flex items-center mb-2 bg-status-active/10 px-2 py-0.5 rounded-full border border-status-active/20">
+<span class="material-symbols-outlined text-[14px]">arrow_upward</span> 12%
+                    </span>
+</div>
+</div>
+<div class="liquid-glass rounded-xl p-6 border-l-4 border-l-surface-tint">
+<p class="font-label-lg text-label-lg text-on-secondary-container mb-2 flex items-center gap-2">
+<span class="material-symbols-outlined text-[20px] text-surface-tint">calendar_month</span>
+                    This Month
+                </p>
+<div class="flex items-end gap-3">
+<span class="font-display-lg text-display-lg text-on-surface">12</span>
+</div>
+</div>
+<div class="liquid-glass rounded-xl p-6 border-l-4 border-l-[#3498DB]">
+<p class="font-label-lg text-label-lg text-on-secondary-container mb-2 flex items-center gap-2">
+<span class="material-symbols-outlined text-[20px] text-[#3498DB]">monitoring</span>
+                    Conversion Rate
+                </p>
+<div class="flex items-end gap-3">
+<span class="font-display-lg text-display-lg text-on-surface">78%</span>
+<span class="text-status-active font-label-sm flex items-center mb-2 bg-status-active/10 px-2 py-0.5 rounded-full border border-status-active/20">
+<span class="material-symbols-outlined text-[14px]">arrow_upward</span> 4%
+                    </span>
+</div>
+</div>
+</div>
+<!-- Referral Tracking Table Section -->
+<div class="liquid-glass rounded-xl overflow-hidden flex flex-col">
+<div class="p-6 border-b border-white/40 flex flex-col sm:flex-row justify-between items-center gap-4">
+<h3 class="font-headline-md text-headline-md text-on-surface">Referral History</h3>
+<div class="flex bg-white/30 rounded-lg p-1 border border-specular-border">
+<button class="px-4 py-2 rounded-md bg-white text-primary font-label-lg shadow-sm border border-white/60">All</button>
+<button class="px-4 py-2 rounded-md text-on-secondary-container hover:text-on-surface font-label-lg transition-colors">Active</button>
+<button class="px-4 py-2 rounded-md text-on-secondary-container hover:text-on-surface font-label-lg transition-colors">Pending</button>
+</div>
+</div>
+<div class="overflow-x-auto w-full">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="border-b border-white/40 bg-white/10">
+<th class="px-6 py-4 font-label-lg text-label-lg text-on-secondary-container uppercase tracking-wider">Student Name</th>
+<th class="px-6 py-4 font-label-lg text-label-lg text-on-secondary-container uppercase tracking-wider">Email</th>
+<th class="px-6 py-4 font-label-lg text-label-lg text-on-secondary-container uppercase tracking-wider">Joined Date</th>
+<th class="px-6 py-4 font-label-lg text-label-lg text-on-secondary-container uppercase tracking-wider">Status</th>
+<th class="px-6 py-4 font-label-lg text-label-lg text-on-secondary-container uppercase tracking-wider text-right">Reward Earned</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-white/20">
+<tr class="hover:bg-white/20 transition-colors">
+<td class="px-6 py-4 font-body-md text-on-surface font-medium">Michael Chang</td>
+<td class="px-6 py-4 font-body-md text-on-secondary-container">m****@gmail.com</td>
+<td class="px-6 py-4 font-body-md text-on-secondary-container">Oct 24, 2023</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-status-active/10 text-status-active border border-status-active/20">
+                                    Active
+                                </span>
+</td>
+<td class="px-6 py-4 font-body-md text-on-surface text-right font-medium text-primary">$10.00</td>
+</tr>
+<tr class="hover:bg-white/20 transition-colors">
+<td class="px-6 py-4 font-body-md text-on-surface font-medium">Sarah Jenkins</td>
+<td class="px-6 py-4 font-body-md text-on-secondary-container">s****@outlook.com</td>
+<td class="px-6 py-4 font-body-md text-on-secondary-container">Oct 22, 2023</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-status-pending/10 text-status-pending border border-status-pending/20">
+                                    Pending
+                                </span>
+</td>
+<td class="px-6 py-4 font-body-md text-on-secondary-container text-right italic">--</td>
+</tr>
+<tr class="hover:bg-white/20 transition-colors">
+<td class="px-6 py-4 font-body-md text-on-surface font-medium">David Rodriguez</td>
+<td class="px-6 py-4 font-body-md text-on-secondary-container">d****@yahoo.com</td>
+<td class="px-6 py-4 font-body-md text-on-secondary-container">Oct 15, 2023</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-status-active/10 text-status-active border border-status-active/20">
+                                    Active
+                                </span>
+</td>
+<td class="px-6 py-4 font-body-md text-on-surface text-right font-medium text-primary">$10.00</td>
+</tr>
+<tr class="hover:bg-white/20 transition-colors">
+<td class="px-6 py-4 font-body-md text-on-surface font-medium">Emma Thompson</td>
+<td class="px-6 py-4 font-body-md text-on-secondary-container">e****@edu.com</td>
+<td class="px-6 py-4 font-body-md text-on-secondary-container">Oct 10, 2023</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-status-inactive/10 text-status-inactive border border-status-inactive/20">
+                                    Inactive
+                                </span>
+</td>
+<td class="px-6 py-4 font-body-md text-on-secondary-container text-right italic">--</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="p-4 border-t border-white/40 flex items-center justify-between">
+<span class="font-label-sm text-on-secondary-container">Showing 1 to 4 of 47 entries</span>
+<div class="flex gap-2">
+<button class="p-1 rounded bg-white/30 text-on-secondary-container border border-specular-border hover:bg-white/50 transition-colors disabled:opacity-50" disabled="">
+<span class="material-symbols-outlined text-[20px]">chevron_left</span>
+</button>
+<button class="p-1 rounded bg-white/30 text-on-surface border border-specular-border hover:bg-white/50 transition-colors">
+<span class="material-symbols-outlined text-[20px]">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</main>
+</body></html>

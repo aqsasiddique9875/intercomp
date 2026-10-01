@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+  <script>
+    if (window.self !== window.top) {
+      const style = document.createElement('style');
+      style.innerHTML = `
+        header, nav, aside, 
+        .SideNavBar, .TopNavBar, 
+        #SideNavBar, #TopNavBar {
+          display: none !important;
+        }
+        main, .main-content {
+          margin-left: 0 !important;
+          padding-top: 1.5rem !important;
+        }
+        main.ml-64, main.lg\\:ml-64 {
+          margin-left: 0 !important;
+          padding-top: 2rem !important;
+        }
+      `;
+      document.documentElement.appendChild(style);
+    }
+  </script>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet"/>
+  <style>
+    .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        display: inline-block;
+        line-height: 1;
+    }
+    .glass-fill { background: rgba(255, 255, 255, 0.35); }
+    .glass-thick { background: rgba(255, 255, 255, 0.8); }
+    .glass-border { border: 1px solid rgba(255, 255, 255, 0.6); }
+    .liquid-shadow { box-shadow: 0 20px 40px -10px rgba(71, 26, 112, 0.15); }
+    .backdrop-blur-28 { backdrop-filter: blur(28px); -webkit-backdrop-filter: blur(28px); }
+    
+    body {
+        background-color: #DCE4F7;
+        background-image: radial-gradient(circle at 0% 0%, rgba(135, 49, 163, 0.08) 0%, transparent 50%),
+                          radial-gradient(circle at 100% 100%, rgba(84, 163, 255, 0.1) 0%, transparent 50%);
+        min-height: 100vh;
+    }
+
+    .custom-scrollbar::-webkit-scrollbar { width: 6px; }
+    .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+    .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(135, 49, 163, 0.2); border-radius: 10px; }
+  </style>
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+                  "surface-dim": "#d2daed",
+                  "surface-bright": "#f9f9ff",
+                  "secondary": "#0060ab",
+                  "on-primary-container": "#f4beff",
+                  "on-error-container": "#93000a",
+                  "on-error": "#ffffff",
+                  "primary-container": "#8731a3",
+                  "surface-container-high": "#e0e8fb",
+                  "surface-container-lowest": "#ffffff",
+                  "secondary-fixed": "#d3e3ff",
+                  "on-tertiary": "#ffffff",
+                  "tertiary": "#004d18",
+                  "tertiary-fixed-dim": "#81da86",
+                  "primary-fixed-dim": "#f0b0ff",
+                  "on-surface": "#141c29",
+                  "card-gradient": "linear-gradient(135deg, #4D9EFA 0%, #BF7DF5 100%)",
+                  "tertiary-container": "#006823",
+                  "gold": "#FFD60A",
+                  "inverse-surface": "#29313f",
+                  "primary-fixed": "#fbd7ff",
+                  "outline-variant": "#d2c1d2",
+                  "glass-fill": "rgba(255, 255, 255, 0.35)",
+                  "surface-container-low": "#f0f3ff",
+                  "background": "#f9f9ff",
+                  "on-tertiary-fixed-variant": "#00531a",
+                  "secondary-fixed-dim": "#a3c9ff",
+                  "glass-thick": "rgba(255, 255, 255, 0.8)",
+                  "surface-container-highest": "#dbe3f6",
+                  "on-secondary": "#ffffff",
+                  "surface": "#f9f9ff",
+                  "on-tertiary-container": "#8be590",
+                  "on-secondary-fixed-variant": "#004883",
+                  "on-primary": "#ffffff",
+                  "error-container": "#ffdad6",
+                  "surface-variant": "#dbe3f6",
+                  "primary": "#6c1089",
+                  "error": "#ba1a1a",
+                  "secondary-container": "#54a3ff",
+                  "inverse-primary": "#f0b0ff",
+                  "surface-container": "#e7eeff",
+                  "on-secondary-fixed": "#001c39",
+                  "on-background": "#141c29",
+                  "outline": "#817381",
+                  "inverse-on-surface": "#ecf1ff",
+                  "on-surface-variant": "#4f4350",
+                  "error-bright": "#FF453A",
+                  "glass-border": "rgba(255, 255, 255, 0.6)",
+                  "on-primary-fixed": "#330044",
+                  "tertiary-fixed": "#9df7a0",
+                  "on-secondary-container": "#003868",
+                  "surface-tint": "#8d37a9",
+                  "on-primary-fixed-variant": "#72198f",
+                  "orange": "#FF9F0A",
+                  "on-tertiary-fixed": "#002106"
+          },
+          "borderRadius": {
+                  "DEFAULT": "0.25rem",
+                  "lg": "0.5rem",
+                  "xl": "0.75rem",
+                  "full": "9999px"
+          },
+          "spacing": {
+                  "mobile-margin": "20px",
+                  "mobile-gutter": "16px",
+                  "max-width": "1280px",
+                  "base": "8px",
+                  "desktop-margin": "64px",
+                  "desktop-gutter": "24px"
+          },
+          "fontFamily": {
+                  "label-caps": ["Inter"],
+                  "body-md": ["Inter"],
+                  "headline-lg": ["Inter"],
+                  "display-xl": ["Inter"]
+          }
+        },
+      },
+    }
+  </script>
+</head>
+<body class="font-body-md text-on-surface selection:bg-primary-fixed selection:text-on-primary-fixed">
+  <!-- TopNavBar -->
+  <header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-desktop-margin h-20 bg-white/35 backdrop-blur-[28px] border-b border-white/20">
+    <div class="flex items-center gap-8">
+      <span class="font-headline-md text-headline-md font-extrabold text-primary tracking-tight">EliteHire</span>
+      <nav class="hidden md:flex gap-6">
+        <a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-all duration-300 hover:scale-[1.02]" href="#">Dashboard</a>
+        <a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-all duration-300 hover:scale-[1.02]" href="#">Courses</a>
+        <a class="font-label-md text-label-md text-primary border-b-2 border-primary pb-1 transition-all duration-300 hover:scale-[1.02]" href="#">Schedule</a>
+        <a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-all duration-300 hover:scale-[1.02]" href="#">Resources</a>
+      </nav>
+    </div>
+    <div class="flex items-center gap-4">
+      <div class="relative hidden lg:block">
+        <input class="bg-glass-fill border-none rounded-full px-6 py-2 w-64 focus:ring-2 focus:ring-secondary-container placeholder:text-on-surface-variant/50 text-sm" placeholder="Search events..." type="text"/>
+        <span class="material-symbols-outlined absolute right-4 top-2 text-on-surface-variant">search</span>
+      </div>
+      <button class="material-symbols-outlined p-2 text-on-surface-variant hover:text-primary transition-colors">notifications</button>
+      <button class="material-symbols-outlined p-2 text-on-surface-variant hover:text-primary transition-colors">settings</button>
+      <div class="w-10 h-10 rounded-full overflow-hidden border-2 border-white/40 shadow-sm">
+        <img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAPahez31GKHJ5cZ1nBXXYZUFuBK62al_c-2UuCcZExO1ObmJ3i_3kfoaQufl05r78MDIQbpv3NXNnHkTLYUTr0II2dUgQvdcB7JW_6g52vyrozUScuXNqEF9og2YQza4WBULetFbV5UH4YElskB2H5Bp4DY6l3YsCo1FMNAVAD1PrG_zjGijAYtIJwGCmg6PqrcXb3qn0EiGnSFdKwfrBtrbB_YBVROS6eRAObk9HLt0ExixPogip2I7sRWFmXXvQsbN5CWLmHsfsa" />
+      </div>
+    </div>
+  </header>
+  <!-- SideNavBar (Hidden on small, visible lg) -->
+  <aside class="fixed left-0 top-20 h-[calc(100vh-80px)] p-6 z-40 hidden lg:flex flex-col bg-white/20 backdrop-blur-[28px] border-r border-white/10 w-64">
+    <div class="mb-8 px-4">
+      <h3 class="font-headline-md text-headline-md font-bold text-primary">Alex Rivers</h3>
+      <p class="text-on-surface-variant text-sm">Design Student</p>
+    </div>
+    <nav class="flex flex-col gap-2">
+      <a class="flex items-center gap-3 text-on-surface-variant px-4 py-3 hover:bg-white/20 hover:scale-[1.02] transition-all duration-300 rounded-full" href="#">
+        <span class="material-symbols-outlined">home</span>
+        <span class="font-label-md text-label-md">Home</span>
+      </a>
+      <a class="flex items-center gap-3 bg-primary text-on-primary rounded-full px-4 py-3 shadow-lg hover:scale-[1.02] transition-all duration-300" href="#">
+        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">school</span>
+        <span class="font-label-md text-label-md">My Courses</span>
+      </a>
+      <a class="flex items-center gap-3 text-on-surface-variant px-4 py-3 hover:bg-white/20 hover:scale-[1.02] transition-all duration-300 rounded-full" href="#">
+        <span class="material-symbols-outlined">palette</span>
+        <span class="font-label-md text-label-md">Portfolio</span>
+      </a>
+      <a class="flex items-center gap-3 text-on-surface-variant px-4 py-3 hover:bg-white/20 hover:scale-[1.02] transition-all duration-300 rounded-full" href="#">
+        <span class="material-symbols-outlined">grade</span>
+        <span class="font-label-md text-label-md">Grades</span>
+      </a>
+      <a class="flex items-center gap-3 text-on-surface-variant px-4 py-3 hover:bg-white/20 hover:scale-[1.02] transition-all duration-300 rounded-full" href="#">
+        <span class="material-symbols-outlined">group</span>
+        <span class="font-label-md text-label-md">Community</span>
+      </a>
+    </nav>
+    <div class="mt-auto p-4 bg-card-gradient rounded-3xl text-white liquid-shadow">
+      <p class="text-xs font-bold opacity-80 uppercase tracking-widest mb-1">Elite Tier</p>
+      <p class="text-sm font-semibold mb-3">Upgrade for AI Tutoring</p>
+      <button class="w-full bg-white text-primary py-2 rounded-xl text-xs font-bold hover:scale-[1.02] transition-transform">Upgrade to Pro</button>
+    </div>
+  </aside>
+  <!-- Main Content -->
+  <main class="pt-28 pb-12 px-mobile-margin lg:pl-80 lg:pr-12 max-w-[1600px] mx-auto min-h-screen">
+    <!-- Header Section -->
+    <section class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
+      <div>
+        <h1 class="font-display-xl text-display-xl text-primary mb-1 tracking-tight">My Weekly Schedule</h1>
+        <div class="flex items-center gap-4">
+          <span class="text-on-surface-variant font-medium text-lg">Oct 12 - Oct 18</span>
+          <span class="bg-primary/10 text-primary px-3 py-1 rounded-full text-xs font-bold border border-primary/20">3 Tasks Pending</span>
+        </div>
+      </div>
+      <!-- Tabs -->
+      <div class="flex flex-wrap gap-2 p-1.5 bg-glass-fill rounded-2xl glass-border backdrop-blur-28">
+        <button class="px-5 py-2 rounded-xl text-sm font-semibold bg-white text-primary shadow-sm">All Events</button>
+        <button class="px-5 py-2 rounded-xl text-sm font-semibold text-on-surface-variant hover:bg-white/20 transition-colors">Assessments</button>
+        <button class="px-5 py-2 rounded-xl text-sm font-semibold text-on-surface-variant hover:bg-white/20 transition-colors">Mock Interviews</button>
+        <button class="px-5 py-2 rounded-xl text-sm font-semibold text-on-surface-variant hover:bg-white/20 transition-colors">Lectures</button>
+      </div>
+    </section>
+    <!-- Layout Grid -->
+    <div class="grid grid-cols-12 gap-8">
+      <!-- Left Grid (2/3) -->
+      <div class="col-span-12 xl:col-span-8">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-4 h-full">
+          <!-- Monday -->
+          <div class="flex flex-col gap-4">
+            <div class="text-center py-2 bg-glass-fill rounded-xl glass-border">
+              <span class="block text-[10px] uppercase font-bold text-on-surface-variant tracking-widest">Mon</span>
+              <span class="text-lg font-bold text-primary">12</span>
+            </div>
+            <div class="flex-grow rounded-2xl border border-dashed border-white/40 bg-white/5 min-h-[400px] flex items-center justify-center">
+              <span class="text-xs text-on-surface-variant/40 italic">No events</span>
+            </div>
+          </div>
+          <!-- Tuesday (Assessment) -->
+          <div class="flex flex-col gap-4">
+            <div class="text-center py-2 bg-glass-fill rounded-xl glass-border">
+              <span class="block text-[10px] uppercase font-bold text-on-surface-variant tracking-widest">Tue</span>
+              <span class="text-lg font-bold text-primary">13</span>
+            </div>
+            <div class="flex flex-col gap-3 p-4 glass-thick rounded-3xl glass-border liquid-shadow hover:scale-[1.02] transition-all duration-300 group cursor-pointer relative overflow-hidden">
+              <div class="absolute top-0 right-0 w-24 h-24 bg-error-container/20 blur-2xl rounded-full -translate-y-1/2 translate-x-1/2"></div>
+              <div class="flex justify-between items-start">
+                <span class="bg-error-container text-on-error-container text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-tighter">Assessment</span>
+                <span class="material-symbols-outlined text-error-bright text-lg">error</span>
+              </div>
+              <h4 class="font-bold text-on-surface leading-tight">Advanced Calculus Final</h4>
+              <div class="space-y-1">
+                <p class="text-xs text-on-surface-variant flex items-center gap-1">
+                  <span class="material-symbols-outlined text-[14px]">schedule</span> 10:00 AM
+                </p>
+                <p class="text-[10px] font-bold text-secondary flex items-center gap-1">
+                  <span class="material-symbols-outlined text-[12px]" style="font-variation-settings: 'FILL' 1;">sensors</span> LIVE NOW
+                </p>
+              </div>
+              <button class="mt-2 w-full py-2 bg-card-gradient text-white text-xs font-bold rounded-xl shadow-lg hover:brightness-110 transition-all">Join Exam</button>
+            </div>
+          </div>
+          <!-- Wednesday -->
+          <div class="flex flex-col gap-4">
+            <div class="text-center py-2 bg-glass-fill rounded-xl glass-border">
+              <span class="block text-[10px] uppercase font-bold text-on-surface-variant tracking-widest">Wed</span>
+              <span class="text-lg font-bold text-primary">14</span>
+            </div>
+            <div class="flex-grow rounded-2xl border border-dashed border-white/40 bg-white/5 flex items-center justify-center">
+            </div>
+          </div>
+          <!-- Thursday (Mock Interview) -->
+          <div class="flex flex-col gap-4">
+            <div class="text-center py-2 bg-glass-fill rounded-xl glass-border">
+              <span class="block text-[10px] uppercase font-bold text-on-surface-variant tracking-widest">Thu</span>
+              <span class="text-lg font-bold text-primary">15</span>
+            </div>
+            <div class="flex flex-col gap-3 p-4 glass-thick rounded-3xl glass-border liquid-shadow hover:scale-[1.02] transition-all duration-300 group cursor-pointer">
+              <div class="flex justify-between items-start">
+                <span class="bg-secondary-container text-on-secondary-container text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-tighter">Mock Interview</span>
+              </div>
+              <h4 class="font-bold text-on-surface leading-tight">Sarah Jenkins - UX Mentorship</h4>
+              <p class="text-xs text-on-surface-variant flex items-center gap-1">
+                <span class="material-symbols-outlined text-[14px]">schedule</span> 2:00 PM
+              </p>
+              <div class="flex -space-x-2 mt-1">
+                <div class="w-6 h-6 rounded-full border-2 border-white bg-surface-dim overflow-hidden">
+                  <img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAqjpsSWf4TrdTJPi9Hh60d-iVs5R7tHp0OKqFgRdHSJAqeFZtikGB5TUw5YwjrNBfRnX2T-g8VF8qhI52vCqNCvIuJG4OM2WDvWoaQfgh0aOgQG0naY0nGPkkiS9LIF5_0eItJsKmUUekT6kOT9p-NGVfiyQqxNxJzwxnt9fXzPRJs9K1WHf0XXykiXfdQOaIEwQtREZAnDOVAMApR_qLdsfd7vM106xcAJV75W8JCjN6xuMRC9OVYeCN57HJdXiNzPwTD8J5FGQub"/>
+                </div>
+                <div class="w-6 h-6 rounded-full border-2 border-white bg-primary text-[8px] flex items-center justify-center text-white font-bold">ME</div>
+              </div>
+              <button class="mt-2 w-full py-2 bg-secondary text-white text-xs font-bold rounded-xl shadow-md hover:bg-secondary/90 transition-all">Launch Session</button>
+            </div>
+          </div>
+          <!-- Friday (Lecture) -->
+          <div class="flex flex-col gap-4">
+            <div class="text-center py-2 bg-glass-fill rounded-xl glass-border">
+              <span class="block text-[10px] uppercase font-bold text-on-surface-variant tracking-widest">Fri</span>
+              <span class="text-lg font-bold text-primary">16</span>
+            </div>
+            <div class="flex flex-col gap-3 p-4 glass-thick rounded-3xl glass-border liquid-shadow hover:scale-[1.02] transition-all duration-300 group cursor-pointer">
+              <div class="flex justify-between items-start">
+                <span class="bg-tertiary-fixed text-on-tertiary-fixed-variant text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-tighter">Lecture</span>
+              </div>
+              <h4 class="font-bold text-on-surface leading-tight">Cloud Architecture Lecture</h4>
+              <p class="text-xs text-on-surface-variant flex items-center gap-1">
+                <span class="material-symbols-outlined text-[14px]">schedule</span> 4:00 PM
+              </p>
+              <div class="w-full h-16 rounded-xl overflow-hidden bg-surface-dim mt-1">
+                <img class="w-full h-full object-cover opacity-60" src="https://lh3.googleusercontent.com/aida-public/AB6AXuByYPSBBHq_iXLbUv4VLFdG0TqT7KcParVSxDT6cbDjCVU1SdbjRD_jzvpzLnBaPRBaVH_473K6H_TVjiri1DkIPryF0BSTf8Ib7YcrTybTVaA1tOXEZM0Sm5jsEHNcQvBpPK8inIzkLkVOTBVATDFnzn_W8tkZwkJGk-RLjvOH3JrRo9_1_d9C1-6vUXxnd4nSznJ1jmGMfzX2VQzOrXETWuuOGVo60PMPRAjcYFd388qf1gmAnpJ4OM9EUMD8iaElA8csDqu796PK"/>
+              </div>
+              <button class="mt-2 w-full py-2 border border-outline-variant text-on-surface-variant text-xs font-bold rounded-xl hover:bg-white/40 transition-all">View Details</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Sidebar (Right 1/3) -->
+      <div class="col-span-12 xl:col-span-4 flex flex-col gap-8">
+        <!-- Calendar Widget -->
+        <div class="p-6 glass-thick rounded-[32px] glass-border liquid-shadow">
+          <div class="flex justify-between items-center mb-6">
+            <h5 class="font-bold text-primary">October 2024</h5>
+            <div class="flex gap-2">
+              <button class="material-symbols-outlined text-on-surface-variant hover:text-primary p-1 bg-white/50 rounded-lg">chevron_left</button>
+              <button class="material-symbols-outlined text-on-surface-variant hover:text-primary p-1 bg-white/50 rounded-lg">chevron_right</button>
+            </div>
+          </div>
+          <div class="grid grid-cols-7 gap-2 text-center">
+            <!-- Days Header -->
+            <span class="text-[10px] font-bold text-on-surface-variant opacity-50 uppercase">S</span>
+            <span class="text-[10px] font-bold text-on-surface-variant opacity-50 uppercase">M</span>
+            <span class="text-[10px] font-bold text-on-surface-variant opacity-50 uppercase">T</span>
+            <span class="text-[10px] font-bold text-on-surface-variant opacity-50 uppercase">W</span>
+            <span class="text-[10px] font-bold text-on-surface-variant opacity-50 uppercase">T</span>
+            <span class="text-[10px] font-bold text-on-surface-variant opacity-50 uppercase">F</span>
+            <span class="text-[10px] font-bold text-on-surface-variant opacity-50 uppercase">S</span>
+            <!-- Sample Days -->
+            <span class="p-2 text-sm text-on-surface-variant/30">29</span>
+            <span class="p-2 text-sm text-on-surface-variant/30">30</span>
+            <span class="p-2 text-sm font-semibold">1</span>
+            <span class="p-2 text-sm font-semibold">2</span>
+            <span class="p-2 text-sm font-semibold">3</span>
+            <span class="p-2 text-sm font-semibold">4</span>
+            <span class="p-2 text-sm font-semibold">5</span>
+            <span class="p-2 text-sm font-semibold">6</span>
+            <span class="p-2 text-sm font-semibold">7</span>
+            <span class="p-2 text-sm font-semibold">8</span>
+            <span class="p-2 text-sm font-semibold">9</span>
+            <span class="p-2 text-sm font-semibold">10</span>
+            <span class="p-2 text-sm font-semibold">11</span>
+            <span class="p-2 text-sm font-bold text-white bg-primary rounded-full shadow-lg">12</span>
+            <span class="p-2 text-sm font-semibold relative">
+              13<span class="absolute bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 bg-error rounded-full"></span>
+            </span>
+            <span class="p-2 text-sm font-semibold">14</span>
+            <span class="p-2 text-sm font-semibold relative">
+              15<span class="absolute bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 bg-secondary rounded-full"></span>
+            </span>
+            <span class="p-2 text-sm font-semibold relative">
+              16<span class="absolute bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 bg-tertiary rounded-full"></span>
+            </span>
+            <span class="p-2 text-sm font-semibold">17</span>
+          </div>
+        </div>
+        <!-- Quick Reminders -->
+        <div class="p-6 glass-thick rounded-[32px] glass-border liquid-shadow">
+          <h5 class="font-bold text-on-surface mb-4 flex items-center gap-2">
+            <span class="material-symbols-outlined text-orange" style="font-variation-settings: 'FILL' 1;">push_pin</span>
+            Quick Reminders
+          </h5>
+          <div class="space-y-3">
+            <div class="p-4 glass-fill rounded-2xl glass-border flex items-center gap-4 hover:bg-white/50 transition-colors cursor-pointer">
+              <div class="p-2 rounded-xl bg-orange/20 text-orange">
+                <span class="material-symbols-outlined text-lg">event_note</span>
+              </div>
+              <div class="flex-grow">
+                <p class="text-xs font-bold text-on-surface">Submit UX Portfolio</p>
+                <p class="text-[10px] text-on-surface-variant">Due in 4 hours</p>
+              </div>
+            </div>
+            <div class="p-4 glass-fill rounded-2xl glass-border flex items-center gap-4 hover:bg-white/50 transition-colors cursor-pointer">
+              <div class="p-2 rounded-xl bg-secondary/20 text-secondary">
+                <span class="material-symbols-outlined text-lg">video_call</span>
+              </div>
+              <div class="flex-grow">
+                <p class="text-xs font-bold text-on-surface">Prep for Mock Interview</p>
+                <p class="text-[10px] text-on-surface-variant">Tomorrow at 2:00 PM</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Upcoming Live Deadlines -->
+        <div class="p-6 glass-thick rounded-[32px] glass-border liquid-shadow relative overflow-hidden">
+          <div class="absolute -bottom-10 -right-10 w-40 h-40 bg-primary/10 blur-3xl rounded-full"></div>
+          <h5 class="font-bold text-on-surface mb-4">Upcoming Live Deadlines</h5>
+          <div class="space-y-4">
+            <div class="flex gap-4">
+              <div class="flex flex-col items-center justify-center w-12 h-12 rounded-xl bg-error-container text-on-error-container shrink-0">
+                <span class="text-xs font-bold">13</span>
+                <span class="text-[8px] uppercase">Oct</span>
+              </div>
+              <div class="flex flex-col justify-center">
+                <p class="text-sm font-bold text-on-surface">Calculus Final</p>
+                <div class="w-full bg-surface-container rounded-full h-1 mt-1">
+                  <div class="bg-error h-1 rounded-full w-[85%]"></div>
+                </div>
+                <p class="text-[10px] text-on-surface-variant mt-1">85% Students ready</p>
+              </div>
+            </div>
+            <div class="flex gap-4">
+              <div class="flex flex-col items-center justify-center w-12 h-12 rounded-xl bg-secondary-fixed text-on-secondary-fixed-variant shrink-0">
+                <span class="text-xs font-bold">20</span>
+                <span class="text-[8px] uppercase">Oct</span>
+              </div>
+              <div class="flex flex-col justify-center">
+                <p class="text-sm font-bold text-on-surface">Capstone Kickoff</p>
+                <div class="w-full bg-surface-container rounded-full h-1 mt-1">
+                  <div class="bg-secondary h-1 rounded-full w-[40%]"></div>
+                </div>
+                <p class="text-[10px] text-on-surface-variant mt-1">Starts in 8 days</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  <!-- Footer -->
+  <footer class="w-full py-8 px-desktop-margin mt-auto flex flex-col md:flex-row justify-between items-center bg-surface-container-low border-t border-outline-variant">
+    <div class="flex items-center gap-2 mb-4 md:mb-0">
+      <span class="font-headline-sm text-headline-sm text-on-surface font-bold">EliteHire</span>
+      <span class="text-xs text-on-surface-variant opacity-60">| Student Design Portal</span>
+    </div>
+    <div class="flex gap-8 mb-4 md:mb-0">
+      <a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-colors" href="#">Privacy Policy</a>
+      <a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-colors" href="#">Terms of Service</a>
+      <a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-colors" href="#">Help Center</a>
+      <a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-colors" href="#">Contact Support</a>
+    </div>
+    <p class="font-label-sm text-label-sm text-on-surface-variant">© 2024 Design Academy. All rights reserved.</p>
+  </footer>
+  <script>
+    // Micro-interactions and atmospheric logic
+    document.querySelectorAll('.glass-thick').forEach(card => {
+        card.addEventListener('mousemove', e => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            card.style.setProperty('--mouse-x', `${x}px`);
+            card.style.setProperty('--mouse-y', `${y}px`);
+        });
+    });
+
+    // Toggle Active State logic for tabs (simplified)
+    const tabs = document.querySelectorAll('.flex.flex-wrap.gap-2 button');
+    tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            tabs.forEach(t => {
+                t.classList.remove('bg-white', 'text-primary', 'shadow-sm');
+                t.classList.add('text-on-surface-variant', 'hover:bg-white/20');
+            });
+            tab.classList.add('bg-white', 'text-primary', 'shadow-sm');
+            tab.classList.remove('text-on-surface-variant', 'hover:bg-white/20');
+        });
+    });
+
+    // Expose search API globally for top nav search bar
+    window.renderSchedule = function(query) {
+        query = (query || '').toLowerCase().trim();
+        const cards = document.querySelectorAll('.glass-thick');
+        cards.forEach(card => {
+            const titleEl = card.querySelector('h4');
+            if (titleEl) {
+                const title = titleEl.textContent.toLowerCase();
+                const text = card.textContent.toLowerCase();
+                if (title.includes(query) || text.includes(query)) {
+                    card.style.display = '';
+                } else {
+                    card.style.display = 'none';
+                }
+            }
+        });
+    };
+  </script>
+</body>
+</html>

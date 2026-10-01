@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>JobPath Ecosystem | Admin Console</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "primary": "#8731a3",
+                    "glass-border": "rgba(255, 255, 255, 0.6)",
+                    "surface-variant": "#dbe3f6",
+                    "primary-fixed": "#fbd7ff",
+                    "orange": "#FF9F0A",
+                    "secondary-fixed-dim": "#a3c9ff",
+                    "card-gradient": "linear-gradient(135deg, #4D9EFA 0%, #BF7DF5 100%)",
+                    "on-surface-variant": "#4f4350",
+                    "on-secondary": "#ffffff",
+                    "surface-dim": "#d2daed",
+                    "surface-container": "#e7eeff",
+                    "on-surface": "#141c29",
+                    "on-background": "#471A70",
+                    "inverse-on-surface": "#ecf1ff",
+                    "outline-variant": "#d2c1d2",
+                    "tertiary-container": "#00842f",
+                    "secondary-fixed": "#d3e3ff",
+                    "on-tertiary": "#ffffff",
+                    "surface-container-low": "#f0f3ff",
+                    "inverse-surface": "#29313f",
+                    "glass-thick": "rgba(255, 255, 255, 0.8)",
+                    "on-tertiary-fixed": "#002106",
+                    "on-primary-fixed": "#330044",
+                    "surface-container-highest": "#dbe3f6",
+                    "on-error": "#ffffff",
+                    "on-primary-fixed-variant": "#72188f",
+                    "on-tertiary-container": "#e6ffe0",
+                    "tertiary": "#006823",
+                    "glass-fill": "rgba(255, 255, 255, 0.35)",
+                    "primary-fixed-dim": "#f0b0ff",
+                    "secondary-container": "#54a3ff",
+                    "surface-container-lowest": "#ffffff",
+                    "on-error-container": "#93000a",
+                    "on-primary-container": "#fff5fb",
+                    "on-tertiary-fixed-variant": "#00531a",
+                    "surface-bright": "#f9f9ff",
+                    "tertiary-fixed-dim": "#47e266",
+                    "on-primary": "#ffffff",
+                    "on-secondary-fixed-variant": "#004883",
+                    "gold": "#FFD60A",
+                    "surface-tint": "#8d37a9",
+                    "tertiary-fixed": "#6cff82",
+                    "background": "#f9f9ff",
+                    "on-secondary-fixed": "#001c39",
+                    "secondary": "#0060ab",
+                    "error-container": "#ffdad6",
+                    "surface-container-high": "#e0e8fb",
+                    "on-secondary-container": "#003868",
+                    "inverse-primary": "#f0b0ff",
+                    "error": "#FF453A",
+                    "surface": "#f9f9ff",
+                    "primary-container": "#a34cbe",
+                    "outline": "#817381"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "safe-top": "44px",
+                    "mobile-margin": "20px",
+                    "desktop-margin": "64px",
+                    "base": "8px",
+                    "max-width": "1280px",
+                    "safe-bottom": "34px",
+                    "mobile-gutter": "16px",
+                    "desktop-gutter": "24px"
+            },
+            "fontFamily": {
+                    "display-xl-mobile": ["Inter"],
+                    "headline-lg-mobile": ["Inter"],
+                    "label-caps-mobile": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "display-xl": ["Inter"],
+                    "body-md-mobile": ["Inter"],
+                    "body-md": ["Inter"],
+                    "label-caps": ["Inter"]
+            },
+            "fontSize": {
+                    "display-xl-mobile": ["34px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+                    "headline-lg-mobile": ["28px", { "lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                    "label-caps-mobile": ["12px", { "lineHeight": "1.0", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                    "headline-lg": ["34px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+                    "display-xl": ["56px", { "lineHeight": "1.1", "letterSpacing": "-0.03em", "fontWeight": "700" }],
+                    "body-md-mobile": ["15px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                    "body-md": ["16px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                    "label-caps": ["13px", { "lineHeight": "1.0", "letterSpacing": "0.03em", "fontWeight": "600" }]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #DCE4F7;
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(135, 49, 163, 0.1) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(77, 158, 250, 0.1) 0px, transparent 50%);
+            color: #471A70;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .glass-card {
+            background: rgba(255, 255, 255, 0.35);
+            backdrop-filter: blur(28px);
+            -webkit-backdrop-filter: blur(28px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 12px 40px 0 rgba(71, 26, 112, 0.15);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .glass-card:hover {
+            transform: translateY(-4px);
+            background: rgba(255, 255, 255, 0.45);
+        }
+
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: rgba(135, 49, 163, 0.3);
+            border-radius: 10px;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        @keyframes pulse-soft {
+            0% { opacity: 0.6; }
+            50% { opacity: 1; }
+            100% { opacity: 0.6; }
+        }
+        .animate-pulse-soft {
+            animation: pulse-soft 2s infinite ease-in-out;
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-glass-fill backdrop-blur-[28px] border-b border-glass-border shadow-[0_12px_40px_0_rgba(71,26,112,0.15)] flex justify-between items-center h-16 px-desktop-margin w-full">
+<div class="flex items-center gap-4">
+<span class="font-headline-lg-mobile text-headline-lg-mobile font-bold text-primary">JobPath Ecosystem</span>
+<div class="hidden md:block h-6 w-[1px] bg-glass-border mx-2"></div>
+<span class="hidden md:block font-body-md text-body-md text-on-surface-variant font-medium">Admin Console</span>
+</div>
+<div class="flex items-center gap-base">
+<div class="relative group hidden md:flex items-center bg-glass-thick rounded-full px-4 py-1.5 border border-glass-border">
+<span class="material-symbols-outlined text-primary text-[20px] mr-2">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-label-caps p-0 w-48" placeholder="Search system logs..." type="text"/>
+</div>
+<div class="flex gap-2">
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:scale-105 transition-transform duration-300 text-primary">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:scale-105 transition-transform duration-300 text-primary">
+<span class="material-symbols-outlined">help</span>
+</button>
+<div class="w-10 h-10 rounded-full border-2 border-primary overflow-hidden ml-2 cursor-pointer active:scale-95 transition-all duration-200">
+<img alt="Administrator Avatar" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBaxBvDbQFrH93JhCl2UtBuSJQmISEQ57NIwSx2w4w0J1aevIatPUxsWOmMl9CwP-FnXsz0OV7bCT1ZsPClo_evzO349EWexqiRba9jvZO8Bua-un5DIfN7AzKwnY9KitNw6wRZ5zlD5T78NC7lPinEkGBPBXbqVo4DctmhGHYv5OYvduyQ9FGmk2db7W2CX50be_pVttwWno7aiiQIjHr9mkyS3c5LhvSo149Z5nR9mbRco7KQnrsHixPYGV9uaPodOAdgMH_4HjOz"/>
+</div>
+</div>
+</div>
+</nav>
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-16 h-[calc(100vh-64px)] w-64 bg-glass-thick backdrop-blur-[28px] border-r border-glass-border shadow-[0_12px_40px_0_rgba(71,26,112,0.15)] flex flex-col p-base space-y-2 hidden md:flex">
+<div class="px-4 py-6 mb-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-primary flex items-center justify-center text-white">
+<span class="material-symbols-outlined" data-weight="fill">shield</span>
+</div>
+<div>
+<h3 class="font-label-caps text-label-caps text-primary uppercase">Admin Console</h3>
+<p class="text-[10px] text-on-surface-variant font-medium">Internal Access Only</p>
+</div>
+</div>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 bg-primary-container text-on-primary-container rounded-xl shadow-sm transition-all duration-200" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-caps text-label-caps">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-low rounded-xl transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="font-label-caps text-label-caps">Users</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-low rounded-xl transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">analytics</span>
+<span class="font-label-caps text-label-caps">Reports</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-low rounded-xl transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-caps text-label-caps">Settings</span>
+</a>
+</nav>
+<div class="pt-4 border-t border-glass-border space-y-1">
+<button class="w-full flex items-center justify-center gap-2 py-3 mb-4 bg-primary text-white rounded-xl font-label-caps text-label-caps hover:scale-[1.02] active:scale-[0.96] transition-all">
+<span class="material-symbols-outlined text-[20px]">add</span>
+                New Report
+            </button>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-low rounded-xl transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">shield</span>
+<span class="font-label-caps text-label-caps">Security</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-low rounded-xl transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">contact_support</span>
+<span class="font-label-caps text-label-caps">Support</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="pt-24 pb-12 md:pl-72 pr-6 md:pr-desktop-margin min-h-screen">
+<div class="max-w-max-width mx-auto">
+<!-- Dashboard Header -->
+<div class="mb-8 flex flex-col md:flex-row md:items-end justify-between gap-4">
+<div>
+<h1 class="font-headline-lg text-headline-lg text-on-background mb-1">System Overview</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">Live operational telemetry and administrative controls.</p>
+</div>
+<div class="flex gap-3">
+<div class="glass-card px-4 py-2 rounded-full flex items-center gap-2">
+<span class="status-dot bg-tertiary animate-pulse-soft"></span>
+<span class="font-label-caps text-[11px] uppercase tracking-wider">System Live</span>
+</div>
+<div class="glass-card px-4 py-2 rounded-full flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">calendar_today</span>
+<span class="font-label-caps text-[11px] uppercase tracking-wider">Oct 24, 2023</span>
+</div>
+</div>
+</div>
+<!-- 3-Column Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-desktop-gutter">
+<!-- Left Panel: System Health (3 cols) -->
+<div class="lg:col-span-3 space-y-6">
+<h2 class="font-label-caps text-label-caps text-primary uppercase tracking-widest px-1">System Health</h2>
+<!-- Server Load -->
+<div class="glass-card p-6 rounded-3xl">
+<div class="flex justify-between items-start mb-4">
+<span class="material-symbols-outlined p-2 bg-primary/10 text-primary rounded-xl">dns</span>
+<span class="font-label-caps text-primary text-[14px] font-bold">64%</span>
+</div>
+<h3 class="font-body-md text-body-md font-semibold mb-1">Server Load</h3>
+<p class="text-[12px] text-on-surface-variant mb-4">Processing throughput</p>
+<div class="h-1.5 w-full bg-surface-variant rounded-full overflow-hidden">
+<div class="h-full bg-primary rounded-full" style="width: 64%"></div>
+</div>
+</div>
+<!-- Online Users -->
+<div class="glass-card p-6 rounded-3xl">
+<div class="flex justify-between items-start mb-4">
+<span class="material-symbols-outlined p-2 bg-secondary/10 text-secondary rounded-xl">person_pin_circle</span>
+<span class="font-label-caps text-secondary text-[14px] font-bold">1,248</span>
+</div>
+<h3 class="font-body-md text-body-md font-semibold mb-1">Online Users</h3>
+<p class="text-[12px] text-on-surface-variant mb-4">Active sessions</p>
+<div class="flex -space-x-2">
+<img alt="User 1" class="w-6 h-6 rounded-full border-2 border-white" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCq-i1fkddLYLSACX_yZ3vbk0TjAEbyKbZe9znF66CuzQI4V5QdLSBU69bal4wVlb1MJIQt_PrZk00RqHzAQG-IORvRnXVvU0w2OQx7Hn67MobpNoriSrWaCHsflVx8mp18dcOVFz9G6jyvJ5k4tNf_l1SUMFLbV7lMlFkbult1loRYPCSJ1ScM3RqekpBIhnH6fCeQo7K3McSS8RtZhM3MLhF8xI8WjOQs4Wtn-eFCSUBtnNSBPo2BmxedKkSieWZeRpRBEWs3_jM2"/>
+<img alt="User 2" class="w-6 h-6 rounded-full border-2 border-white" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB7VSvLRC3U7DXEc0Dj9gUE2X2LIwE8_bO4bKm1PKW64IHP7p2Emg2sO_KBM32EOJITsnzcZ9hvGpO7vTL1caYN-HBy2TSw6lAt_o9WSJM-RNmW8CuDp-uSndhviLLyhLdeMh9WxTAhXps3TU9hmJYYtkLaTPZ28agILfRxBvj2K0Hx_ohXcnmPTOg3nUQgdRkHGEfRSZZEhVJBMmDkOrcCYgTIg4EnGVL2avZwEOie57OtBmXjRiqOVs9DMcOe-f1WVis44I-f7SU5"/>
+<img alt="User 3" class="w-6 h-6 rounded-full border-2 border-white" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDSAb_dhm7_ZI3u7wdJvoFLTPRpENQX4d53zNPI3e71OttwK79sTYp0S9OwPrsim5rOGkEJ0Uy-NXIMHxOEQyTuFxOi7K-3TLEYvU57FbeNzxbIA5s-IXMIfu3UoIWfVQ-6yjmtnCVC_3EVKRZIxXQmV9-7LRsd3YFJMgDWPYokMZa9PeVlHa3e3vr6Cb9LAjgcRgqL-usHJTV4zzfMVEreFuHFguEStNu6Bky379j593gavV0avNBd6cNsys6Q8gNx7BR6TbfyL5qH"/>
+<div class="w-6 h-6 rounded-full border-2 border-white bg-surface-variant flex items-center justify-center text-[8px] font-bold">+1.2k</div>
+</div>
+</div>
+<!-- Open Reports -->
+<div class="glass-card p-6 rounded-3xl">
+<div class="flex justify-between items-start mb-4">
+<span class="material-symbols-outlined p-2 bg-error/10 text-error rounded-xl">flag</span>
+<span class="font-label-caps text-error text-[14px] font-bold">14</span>
+</div>
+<h3 class="font-body-md text-body-md font-semibold mb-1">Open Reports</h3>
+<p class="text-[12px] text-on-surface-variant mb-4">Urgent attention needed</p>
+<div class="flex items-center gap-2">
+<span class="status-dot bg-error animate-pulse"></span>
+<span class="text-[11px] text-error font-medium">Critical Threshold Low</span>
+</div>
+</div>
+<!-- Verification Queue -->
+<div class="glass-card p-6 rounded-3xl">
+<div class="flex justify-between items-start mb-4">
+<span class="material-symbols-outlined p-2 bg-tertiary/10 text-tertiary rounded-xl">verified_user</span>
+<span class="font-label-caps text-tertiary text-[14px] font-bold">28</span>
+</div>
+<h3 class="font-body-md text-body-md font-semibold mb-1">Verification Queue</h3>
+<p class="text-[12px] text-on-surface-variant mb-4">Pending identity checks</p>
+<div class="h-1.5 w-full bg-surface-variant rounded-full overflow-hidden">
+<div class="h-full bg-tertiary rounded-full" style="width: 42%"></div>
+</div>
+</div>
+</div>
+<!-- Center Panel: Live Metrics (6 cols) -->
+<div class="lg:col-span-6 space-y-6">
+<h2 class="font-label-caps text-label-caps text-primary uppercase tracking-widest px-1">Live Telemetry</h2>
+<!-- Large Chart Card -->
+<div class="glass-card p-8 rounded-[32px] min-h-[400px] flex flex-col">
+<div class="flex justify-between items-start mb-8">
+<div>
+<h3 class="font-headline-lg-mobile text-headline-lg-mobile text-on-background mb-1">Live Metric Updates</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Real-time user growth vs. API latency</p>
+</div>
+<div class="flex gap-2">
+<button class="px-4 py-2 rounded-xl bg-primary text-white text-[12px] font-bold">Live</button>
+<button class="px-4 py-2 rounded-xl border border-glass-border text-[12px] font-bold text-on-surface-variant">24h</button>
+</div>
+</div>
+<!-- Visual Representation Placeholder -->
+<div class="flex-1 w-full relative">
+
+<div class="absolute inset-0 flex items-end p-4">
+<div class="w-full h-48 flex items-end gap-1 px-4">
+<!-- Simulated Bar Chart for Visual Texture -->
+<div class="flex-1 bg-primary/20 rounded-t-lg transition-all duration-1000" style="height: 40%"></div>
+<div class="flex-1 bg-primary/30 rounded-t-lg transition-all duration-1000" style="height: 60%"></div>
+<div class="flex-1 bg-primary/40 rounded-t-lg transition-all duration-1000" style="height: 80%"></div>
+<div class="flex-1 bg-primary/25 rounded-t-lg transition-all duration-1000" style="height: 50%"></div>
+<div class="flex-1 bg-primary/35 rounded-t-lg transition-all duration-1000" style="height: 70%"></div>
+<div class="flex-1 bg-primary/45 rounded-t-lg transition-all duration-1000" style="height: 90%"></div>
+<div class="flex-1 bg-primary/20 rounded-t-lg transition-all duration-1000" style="height: 40%"></div>
+<div class="flex-1 bg-primary/30 rounded-t-lg transition-all duration-1000" style="height: 65%"></div>
+<div class="flex-1 bg-primary/40 rounded-t-lg transition-all duration-1000" style="height: 85%"></div>
+<div class="flex-1 bg-primary/25 rounded-t-lg transition-all duration-1000" style="height: 55%"></div>
+<div class="flex-1 bg-primary/50 rounded-t-lg transition-all duration-1000" style="height: 100%"></div>
+<div class="flex-1 bg-primary/30 rounded-t-lg transition-all duration-1000" style="height: 60%"></div>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-3 gap-4 mt-8 pt-6 border-t border-glass-border">
+<div>
+<p class="text-[10px] text-on-surface-variant uppercase font-bold tracking-widest mb-1">Growth Rate</p>
+<p class="text-xl font-bold text-tertiary">+12.4%</p>
+</div>
+<div>
+<p class="text-[10px] text-on-surface-variant uppercase font-bold tracking-widest mb-1">Avg Latency</p>
+<p class="text-xl font-bold text-on-background">42ms</p>
+</div>
+<div>
+<p class="text-[10px] text-on-surface-variant uppercase font-bold tracking-widest mb-1">Error Rate</p>
+<p class="text-xl font-bold text-on-background">0.02%</p>
+</div>
+</div>
+</div>
+<!-- System Notification Log Stream -->
+<div class="glass-card rounded-[32px] overflow-hidden">
+<div class="px-8 py-6 border-b border-glass-border flex justify-between items-center bg-white/10">
+<h3 class="font-body-md text-body-md font-bold">System Notification Log Stream</h3>
+<span class="material-symbols-outlined text-primary">history</span>
+</div>
+<div class="h-64 overflow-y-auto custom-scrollbar px-8 py-4 space-y-4">
+<!-- Log Item 1 -->
+<div class="flex items-start gap-4 p-3 rounded-2xl hover:bg-white/20 transition-colors">
+<div class="w-2 h-2 rounded-full bg-error mt-2"></div>
+<div class="flex-1">
+<p class="text-[14px] font-semibold text-on-background">Security flag raised</p>
+<p class="text-[12px] text-on-surface-variant">User ID #4928 suspicious login attempt from Proxy.</p>
+</div>
+<span class="text-[10px] text-on-surface-variant font-mono">12:44:02</span>
+</div>
+<!-- Log Item 2 -->
+<div class="flex items-start gap-4 p-3 rounded-2xl hover:bg-white/20 transition-colors">
+<div class="w-2 h-2 rounded-full bg-secondary mt-2"></div>
+<div class="flex-1">
+<p class="text-[14px] font-semibold text-on-background">New moderator joined</p>
+<p class="text-[12px] text-on-surface-variant">Moderator 'Sarah_Admin' onboarded to verification tier.</p>
+</div>
+<span class="text-[10px] text-on-surface-variant font-mono">12:38:15</span>
+</div>
+<!-- Log Item 3 -->
+<div class="flex items-start gap-4 p-3 rounded-2xl hover:bg-white/20 transition-colors">
+<div class="w-2 h-2 rounded-full bg-tertiary mt-2"></div>
+<div class="flex-1">
+<p class="text-[14px] font-semibold text-on-background">Verification batch complete</p>
+<p class="text-[12px] text-on-surface-variant">500 users processed in daily ID verification sweep.</p>
+</div>
+<span class="text-[10px] text-on-surface-variant font-mono">12:30:55</span>
+</div>
+<!-- Log Item 4 -->
+<div class="flex items-start gap-4 p-3 rounded-2xl hover:bg-white/20 transition-colors">
+<div class="w-2 h-2 rounded-full bg-orange mt-2"></div>
+<div class="flex-1">
+<p class="text-[14px] font-semibold text-on-background">API Rate Limit Warning</p>
+<p class="text-[12px] text-on-surface-variant">Node #3 approaching 85% of assigned bandwidth quota.</p>
+</div>
+<span class="text-[10px] text-on-surface-variant font-mono">12:22:10</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Panel: Quick Links (3 cols) -->
+<div class="lg:col-span-3 space-y-6">
+<h2 class="font-label-caps text-label-caps text-primary uppercase tracking-widest px-1">Moderator Actions</h2>
+<!-- Quick Action Cards -->
+<div class="space-y-4">
+<!-- Verification Center -->
+<a class="glass-card p-6 rounded-3xl flex items-center group" href="#">
+<div class="w-12 h-12 bg-primary/10 rounded-2xl flex items-center justify-center text-primary mr-4 transition-colors group-hover:bg-primary group-hover:text-white">
+<span class="material-symbols-outlined">how_to_reg</span>
+</div>
+<div class="flex-1">
+<h4 class="font-body-md text-body-md font-bold">Verifications Queue</h4>
+<p class="text-[12px] text-on-surface-variant">Manage identity approvals</p>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all">chevron_right</span>
+</a>
+<!-- Anti-cheat -->
+<a class="glass-card p-6 rounded-3xl flex items-center group" href="#">
+<div class="w-12 h-12 bg-secondary/10 rounded-2xl flex items-center justify-center text-secondary mr-4 transition-colors group-hover:bg-secondary group-hover:text-white">
+<span class="material-symbols-outlined">security_update_warning</span>
+</div>
+<div class="flex-1">
+<h4 class="font-body-md text-body-md font-bold">Anti-cheat Flags</h4>
+<p class="text-[12px] text-on-surface-variant">Review suspicious activity</p>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all">chevron_right</span>
+</a>
+<!-- Course Portals -->
+<a class="glass-card p-6 rounded-3xl flex items-center group" href="#">
+<div class="w-12 h-12 bg-tertiary/10 rounded-2xl flex items-center justify-center text-tertiary mr-4 transition-colors group-hover:bg-tertiary group-hover:text-white">
+<span class="material-symbols-outlined">school</span>
+</div>
+<div class="flex-1">
+<h4 class="font-body-md text-body-md font-bold">Course Portals</h4>
+<p class="text-[12px] text-on-surface-variant">Curate learning content</p>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all">chevron_right</span>
+</a>
+</div>
+<!-- Task Briefing Card -->
+<div class="glass-card p-8 rounded-[32px] bg-card-gradient text-white border-none mt-8 overflow-hidden relative">
+<div class="relative z-10">
+<span class="material-symbols-outlined text-[32px] mb-4">bolt</span>
+<h3 class="font-headline-lg-mobile text-headline-lg-mobile mb-2">Priority Shift</h3>
+<p class="text-[14px] opacity-90 mb-6 leading-relaxed">System load has increased by 15%. Direct all available moderators to the Verification Queue to prevent backlog overflow.</p>
+<button class="w-full py-3 bg-white text-secondary rounded-xl font-bold text-[13px] uppercase tracking-wider hover:bg-opacity-90 transition-all">Deploy Resources</button>
+</div>
+<!-- Abstract Decorative Element -->
+<div class="absolute -bottom-8 -right-8 w-32 h-32 bg-white/20 rounded-full blur-2xl"></div>
+</div>
+<!-- System Node Info -->
+<div class="glass-card p-6 rounded-3xl border-dashed border-primary/40 bg-transparent">
+<div class="flex items-center gap-3 mb-3">
+<div class="w-8 h-8 rounded-lg bg-surface-variant flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px] text-primary">terminal</span>
+</div>
+<span class="text-[11px] font-bold uppercase tracking-widest opacity-60">Session Information</span>
+</div>
+<ul class="space-y-2 text-[12px] font-mono text-on-surface-variant">
+<li class="flex justify-between"><span>Node ID:</span> <span class="text-primary">US-EAST-01-B</span></li>
+<li class="flex justify-between"><span>Session:</span> <span>4h 12m</span></li>
+<li class="flex justify-between"><span>Encryption:</span> <span class="text-tertiary">AES-256</span></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Contextual FAB (Suppressed based on rules for Details/Settings but keeping for Dashboard active action) -->
+<button class="fixed bottom-8 right-8 w-14 h-14 bg-primary text-white rounded-full shadow-2xl flex items-center justify-center hover:scale-110 active:scale-90 transition-all z-40">
+<span class="material-symbols-outlined">support_agent</span>
+</button>
+<script>
+        // Micro-interactions for live status simulation
+        document.addEventListener('DOMContentLoaded', () => {
+            const logsContainer = document.querySelector('.custom-scrollbar');
+            
+            // Subtle scroll effect for the logs
+            setInterval(() => {
+                const firstLog = logsContainer.firstElementChild;
+                if (firstLog) {
+                    firstLog.style.opacity = '0.5';
+                    setTimeout(() => {
+                        firstLog.style.opacity = '1';
+                    }, 500);
+                }
+            }, 5000);
+
+            // Mock chart animation logic
+            const bars = document.querySelectorAll('.rounded-t-lg');
+            setInterval(() => {
+                bars.forEach(bar => {
+                    const newHeight = Math.floor(Math.random() * 60) + 40;
+                    bar.style.height = `${newHeight}%`;
+                });
+            }, 2000);
+        });
+    </script>
+</body></html>

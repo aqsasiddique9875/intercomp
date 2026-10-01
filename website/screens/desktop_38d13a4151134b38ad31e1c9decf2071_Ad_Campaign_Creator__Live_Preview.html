@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>RecruitFlow - Campaign Creator</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-surface-variant": "#4f4350",
+                        "gold": "#FFD60A",
+                        "inverse-on-surface": "#ecf1ff",
+                        "outline-variant": "#d2c1d2",
+                        "glass-border": "rgba(255, 255, 255, 0.6)",
+                        "on-background": "#471A70",
+                        "tertiary-fixed-dim": "#47e266",
+                        "tertiary-container": "#00842f",
+                        "tertiary": "#006823",
+                        "outline": "#817381",
+                        "surface-variant": "#dbe3f6",
+                        "primary-fixed": "#fbd7ff",
+                        "surface-container-highest": "#dbe3f6",
+                        "card-gradient": "linear-gradient(135deg, #4D9EFA 0%, #BF7DF5 100%)",
+                        "secondary-container": "#54a3ff",
+                        "surface-dim": "#d2daed",
+                        "secondary-fixed-dim": "#a3c9ff",
+                        "primary-fixed-dim": "#f0b0ff",
+                        "on-secondary-container": "#003868",
+                        "on-primary-container": "#fff5fb",
+                        "primary-container": "#a34cbe",
+                        "on-tertiary": "#ffffff",
+                        "orange": "#FF9F0A",
+                        "primary": "#8731a3",
+                        "glass-fill": "rgba(255, 255, 255, 0.35)",
+                        "on-secondary": "#ffffff",
+                        "surface-bright": "#f9f9ff",
+                        "on-secondary-fixed": "#001c39",
+                        "error-container": "#ffdad6",
+                        "background": "#f9f9ff",
+                        "surface-container-low": "#f0f3ff",
+                        "on-tertiary-fixed-variant": "#00531a",
+                        "tertiary-fixed": "#6cff82",
+                        "secondary-fixed": "#d3e3ff",
+                        "inverse-primary": "#f0b0ff",
+                        "error": "#FF453A",
+                        "secondary": "#0060ab",
+                        "on-error-container": "#93000a",
+                        "on-error": "#ffffff",
+                        "on-surface": "#141c29",
+                        "surface-container-high": "#e0e8fb",
+                        "glass-thick": "rgba(255, 255, 255, 0.8)",
+                        "on-secondary-fixed-variant": "#004883",
+                        "surface": "#f9f9ff",
+                        "on-tertiary-container": "#e6ffe0",
+                        "on-tertiary-fixed": "#002106",
+                        "on-primary-fixed": "#330044",
+                        "on-primary-fixed-variant": "#72188f",
+                        "inverse-surface": "#29313f",
+                        "surface-tint": "#8d37a9",
+                        "surface-container-lowest": "#ffffff",
+                        "on-primary": "#ffffff",
+                        "surface-container": "#e7eeff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "safe-top": "44px",
+                        "desktop-gutter": "24px",
+                        "mobile-gutter": "16px",
+                        "max-width": "1280px",
+                        "base": "8px",
+                        "mobile-margin": "20px",
+                        "desktop-margin": "64px",
+                        "safe-bottom": "34px"
+                    },
+                    "fontFamily": {
+                        "headline-lg": ["Inter", "sans-serif"],
+                        "label-caps": ["Inter", "sans-serif"],
+                        "display-xl": ["Inter", "sans-serif"],
+                        "body-md": ["Inter", "sans-serif"]
+                    },
+                    "fontSize": {
+                        "headline-lg": ["34px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                        "label-caps": ["13px", {"lineHeight": "1.0", "letterSpacing": "0.03em", "fontWeight": "600"}],
+                        "display-xl": ["56px", {"lineHeight": "1.1", "letterSpacing": "-0.03em", "fontWeight": "700"}],
+                        "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            background-color: #DCE4F7;
+            color: #471A70;
+            font-family: 'Inter', sans-serif;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.35);
+            backdrop-filter: blur(28px);
+            -webkit-backdrop-filter: blur(28px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 12px 40px 0 rgba(71, 26, 112, 0.08);
+        }
+        .glass-input {
+            background: rgba(255, 255, 255, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            border-radius: 12px;
+            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .glass-input:focus {
+            box-shadow: 0 0 0 4px rgba(135, 49, 163, 0.1);
+            border-color: #8731a3;
+            outline: none;
+        }
+        .iphone-frame {
+            width: 320px;
+            height: 640px;
+            border-radius: 40px;
+            border: 8px solid #29313f;
+            background: #f9f9ff;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 50px 100px -20px rgba(0,0,0,0.25);
+        }
+        .iphone-notch {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 25px;
+            background: #29313f;
+            border-bottom-left-radius: 18px;
+            border-bottom-right-radius: 18px;
+            z-index: 20;
+        }
+        .liquid-gradient {
+            background: linear-gradient(135deg, #4D9EFA 0%, #BF7DF5 100%);
+        }
+        .custom-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            background: #8731a3;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 2px solid white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+        .shimmer-sweep {
+            position: relative;
+            overflow: hidden;
+        }
+        .shimmer-sweep::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            animation: shimmer 2s infinite cubic-bezier(0.4, 0, 0.2, 1);
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+<!-- TopNavBar -->
+<header class="w-full top-0 sticky z-50 bg-glass-thick backdrop-blur-2xl border-b border-glass-border">
+<div class="flex justify-between items-center h-16 px-desktop-margin max-w-max-width mx-auto">
+<div class="flex items-center gap-8">
+<span class="font-headline-lg text-headline-lg font-bold text-primary">RecruitFlow</span>
+<nav class="hidden md:flex items-center gap-6">
+<a class="text-on-surface-variant hover:text-primary transition-colors font-body-md text-body-md" href="#">Applicants</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-body-md text-body-md" href="#">Job Board</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-body-md text-body-md" href="#">Talent Pool</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:scale-95 transition-transform">notifications</span>
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:scale-95 transition-transform">settings</span>
+<button class="bg-primary text-on-primary px-6 py-2 rounded-full font-label-caps text-label-caps hover:scale-95 transition-transform active:scale-90">Post a Job</button>
+<div class="w-8 h-8 rounded-full bg-surface-container overflow-hidden border border-outline-variant">
+<img alt="Recruiter Profile Avatar" class="w-full h-full object-cover" data-alt="Close-up professional portrait of a confident female HR manager in a modern office environment. She is smiling gently at the camera, wearing professional business attire. The background is softly blurred with warm wooden textures and indoor plants, maintaining a premium and approachable aesthetic consistent with corporate leadership." src="https://lh3.googleusercontent.com/aida-public/AB6AXuARy5-C0eKI1cfH_KF76rYbXXPJXWS0k-dmQLOtLCodAODI9I1_--Tbg6wDMJ_FEMDVV6vlkKl09vQolvcC8U7sIvPtAGgc07qF8J5lSPxbKdA4Q42Dxu7ll6uGE32izTX3tI38S-prLn4aMs043rCq_JPmIff-SQ9j0aBpAol6RUMe1_pO6sSmMSdJMkI5eYRMmcMR25nu_39oV0vdSyKGAuHOyZVhQ7Uno5u8AvGKcLdRjPzYZtA8E_v7WRpyDdpcL2Oc724BAIaI"/>
+</div>
+</div>
+</div>
+</header>
+<main class="flex-grow flex flex-col md:flex-row max-w-max-width mx-auto w-full p-mobile-margin md:p-desktop-margin gap-12">
+<!-- Left Panel: Campaign Details -->
+<section class="flex-1 space-y-8 animate-in fade-in slide-in-from-left-4 duration-700">
+<div>
+<h1 class="font-headline-lg text-headline-lg text-on-background mb-2">Campaign Creator</h1>
+<p class="text-on-surface-variant font-body-md text-body-md opacity-80">Design high-impact sponsored content for the student ecosystem.</p>
+</div>
+<div class="glass-card p-8 rounded-[24px] space-y-6">
+<!-- Name Input -->
+<div class="space-y-2">
+<label class="font-label-caps text-label-caps uppercase tracking-wider text-primary opacity-70">Campaign Name</label>
+<input class="w-full glass-input px-4 py-3 text-on-surface font-body-md" placeholder="Summer Internship 2024 Launch" type="text"/>
+</div>
+<!-- Budget Slider -->
+<div class="space-y-4">
+<div class="flex justify-between items-center">
+<label class="font-label-caps text-label-caps uppercase tracking-wider text-primary opacity-70">Daily Budget Cap</label>
+<span class="font-bold text-primary font-body-md">$<span id="budget-value">450</span></span>
+</div>
+<input class="w-full h-2 bg-surface-container rounded-full appearance-none cursor-pointer custom-slider" id="budget-range" max="2000" min="50" step="50" type="range" value="450"/>
+</div>
+<!-- Target Demographics -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="space-y-2">
+<label class="font-label-caps text-label-caps uppercase tracking-wider text-primary opacity-70">University</label>
+<select class="w-full glass-input px-4 py-3 text-on-surface font-body-md appearance-none">
+<option>Stanford University</option>
+<option>MIT</option>
+<option>Oxford University</option>
+<option>National University of Singapore</option>
+</select>
+</div>
+<div class="space-y-2">
+<label class="font-label-caps text-label-caps uppercase tracking-wider text-primary opacity-70">Graduation Year</label>
+<select class="w-full glass-input px-4 py-3 text-on-surface font-body-md appearance-none">
+<option>Class of 2024</option>
+<option>Class of 2025</option>
+<option>Class of 2026</option>
+</select>
+</div>
+</div>
+<div class="space-y-2">
+<label class="font-label-caps text-label-caps uppercase tracking-wider text-primary opacity-70">Required Skills</label>
+<div class="flex flex-wrap gap-2 p-2 glass-input min-h-[50px] items-center">
+<span class="bg-primary/10 text-primary px-3 py-1 rounded-full text-xs font-semibold flex items-center gap-1">Python <span class="material-symbols-outlined text-[14px] cursor-pointer">close</span></span>
+<span class="bg-primary/10 text-primary px-3 py-1 rounded-full text-xs font-semibold flex items-center gap-1">UX Design <span class="material-symbols-outlined text-[14px] cursor-pointer">close</span></span>
+<input class="bg-transparent border-none focus:ring-0 text-sm flex-1 min-w-[80px]" placeholder="Add skill..." type="text"/>
+</div>
+</div>
+<!-- Upload Zone -->
+<div class="space-y-2">
+<label class="font-label-caps text-label-caps uppercase tracking-wider text-primary opacity-70">Ad Banner Asset</label>
+<div class="border-2 border-dashed border-primary/30 rounded-[24px] p-10 flex flex-col items-center justify-center bg-white/20 hover:bg-white/40 transition-colors cursor-pointer group">
+<div class="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-primary text-3xl">upload_file</span>
+</div>
+<p class="font-body-md text-on-surface text-center">Drag &amp; drop high-res banner or <span class="text-primary font-bold">browse</span></p>
+<p class="text-[11px] text-on-surface-variant/60 mt-2">Recommended: 1200 x 628px (PNG/JPG)</p>
+</div>
+</div>
+<button class="w-full py-4 bg-primary text-on-primary rounded-full font-label-caps text-headline-lg text-lg font-bold shadow-lg shadow-primary/20 hover:scale-[0.98] transition-transform active:scale-95">
+                    Launch Campaign
+                </button>
+</div>
+</section>
+<!-- Right Panel: Mobile Preview -->
+<section class="flex-1 flex flex-col items-center justify-start py-8 animate-in fade-in slide-in-from-right-4 duration-700">
+<div class="sticky top-24 flex flex-col items-center">
+<div class="mb-6 flex items-center gap-2 bg-white/50 px-4 py-2 rounded-full border border-glass-border">
+<span class="w-2 h-2 rounded-full bg-tertiary animate-pulse"></span>
+<span class="font-label-caps text-label-caps text-on-surface-variant">Live Ad Preview</span>
+</div>
+<div class="iphone-frame">
+<div class="iphone-notch"></div>
+<!-- Inner Student Dashboard Preview -->
+<div class="h-full w-full overflow-y-auto scrollbar-hide pt-10">
+<!-- Top Nav inside Phone -->
+<div class="px-5 flex justify-between items-center mb-6">
+<div>
+<p class="text-[10px] uppercase font-bold text-on-surface-variant/50">Good Morning</p>
+<p class="text-sm font-bold text-on-surface">Alex Rivera</p>
+</div>
+<div class="w-8 h-8 rounded-full bg-secondary-container/20 border border-secondary-fixed"></div>
+</div>
+<!-- Dashboard Widgets -->
+<div class="px-5 space-y-4">
+<div class="liquid-gradient p-4 rounded-2xl text-white shadow-sm">
+<p class="text-[10px] opacity-80 font-bold">APPLICATION TRACKER</p>
+<div class="flex items-end justify-between mt-1">
+<h4 class="text-2xl font-bold">12</h4>
+<p class="text-[10px] bg-white/20 px-2 py-0.5 rounded-full">+3 this week</p>
+</div>
+</div>
+<!-- THE SPONSORED AD (INTEGRATED) -->
+<div class="relative overflow-hidden rounded-2xl border border-primary/20 bg-white shadow-md group">
+<div class="absolute top-2 right-2 z-10 bg-black/40 backdrop-blur-md px-2 py-0.5 rounded text-[8px] text-white font-bold tracking-widest">SPONSORED</div>
+<div class="h-32 w-full bg-surface-container relative">
+<img alt="Ad Preview" class="w-full h-full object-cover shimmer-sweep" data-alt="A cinematic and high-energy photograph of a diverse group of young software engineers collaborating in a vibrant, futuristic technology hub. The scene is illuminated with neon purple and soft blue ambient lighting, reflecting off glass surfaces and sleek hardware. The atmosphere is professional, innovative, and aspirational, specifically tailored to appeal to top-tier university students looking for prestigious tech careers." id="preview-image" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCrzDuhUiprfNqrqEKEs2rRbGTipPzsivAxB2CjbGOxgYBoFT9SPyDlJ49yDuwiNLCP2hH1n1VyK7XyBAL7twur4Buqm_VfFb8IsYQZg_caC2lmf4T4i9lfs_vWLpqVFOV0HozxywARsCSsLH8GNygMetPbhoHCCnLDyJlJownXAdbHtK_pzCSXiRq_uOU93Tm4Zfh3WoWkKQoQNwrS-o5li0AUU8JqrKTmDAW8oj3vVT3hSUrON-MPSUnkr6EHiHOH23cJdo2xsvXb"/>
+</div>
+<div class="p-3">
+<h5 class="text-xs font-bold text-primary mb-1">Modern Engineering Internship</h5>
+<p class="text-[10px] text-on-surface-variant leading-tight">Join a world-class team solving complex global challenges. Applications open for Fall 2024.</p>
+<button class="mt-2 w-full py-2 bg-primary text-white text-[10px] font-bold rounded-lg uppercase tracking-tight">Apply Now</button>
+</div>
+</div>
+<!-- Normal Feed Item -->
+<div class="bg-surface-container-low p-4 rounded-2xl border border-outline-variant/30">
+<div class="flex items-center gap-3 mb-2">
+<div class="w-6 h-6 rounded bg-on-surface/5"></div>
+<p class="text-[10px] font-bold">Standard Resume Tip</p>
+</div>
+<div class="h-2 w-3/4 bg-on-surface/10 rounded-full mb-1"></div>
+<div class="h-2 w-full bg-on-surface/5 rounded-full"></div>
+</div>
+<div class="bg-surface-container-low p-4 rounded-2xl border border-outline-variant/30">
+<div class="flex items-center gap-3 mb-2">
+<div class="w-6 h-6 rounded bg-on-surface/5"></div>
+<p class="text-[10px] font-bold">Upcoming Tech Expo</p>
+</div>
+<div class="h-2 w-2/4 bg-on-surface/10 rounded-full"></div>
+</div>
+</div>
+</div>
+<!-- Phone Tab Bar -->
+<div class="absolute bottom-0 w-full h-16 bg-white/80 backdrop-blur-md border-t border-glass-border flex justify-around items-center px-4">
+<span class="material-symbols-outlined text-primary">grid_view</span>
+<span class="material-symbols-outlined text-on-surface-variant/40">search</span>
+<span class="material-symbols-outlined text-on-surface-variant/40">bookmark</span>
+<span class="material-symbols-outlined text-on-surface-variant/40">person</span>
+</div>
+</div>
+</div>
+</section>
+</main>
+
+<script>
+        // Update Budget Value on Slider Change
+        const slider = document.getElementById('budget-range');
+        const budgetValue = document.getElementById('budget-value');
+        
+        slider.oninput = function() {
+            budgetValue.textContent = this.value;
+        }
+
+        // Simple preview interactivity (fake state change)
+        const inputs = document.querySelectorAll('input[type="text"], select');
+        inputs.forEach(input => {
+            input.addEventListener('input', () => {
+                // In a real app, this would update the preview card text reactively
+                console.log('Update preview logic...');
+            });
+        });
+    </script>
+</body></html>

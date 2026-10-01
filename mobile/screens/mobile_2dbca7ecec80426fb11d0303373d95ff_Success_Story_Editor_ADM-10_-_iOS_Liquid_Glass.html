@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<title>Edit Success Story | ADM-10</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container-lowest": "#ffffff",
+                    "on-tertiary": "#ffffff",
+                    "inverse-surface": "#29313f",
+                    "gold": "#FFD60A",
+                    "primary-fixed-dim": "#f0b0ff",
+                    "on-secondary-container": "#003868",
+                    "surface-dim": "#d2daed",
+                    "on-primary-container": "#fff5fb",
+                    "on-background": "#471A70",
+                    "surface-tint": "#8d37a9",
+                    "on-tertiary-container": "#e6ffe0",
+                    "on-error": "#ffffff",
+                    "inverse-on-surface": "#ecf1ff",
+                    "tertiary-fixed-dim": "#47e266",
+                    "outline": "#817381",
+                    "surface-container-high": "#e0e8fb",
+                    "on-surface": "#141c29",
+                    "primary": "#8731a3",
+                    "surface": "#f9f9ff",
+                    "on-error-container": "#93000a",
+                    "surface-variant": "#dbe3f6",
+                    "on-primary": "#ffffff",
+                    "tertiary-fixed": "#6cff82",
+                    "surface-container": "#e7eeff",
+                    "on-tertiary-fixed-variant": "#00531a",
+                    "background": "#f9f9ff",
+                    "secondary-fixed": "#d3e3ff",
+                    "on-tertiary-fixed": "#002106",
+                    "surface-container-low": "#f0f3ff",
+                    "glass-thick": "rgba(255, 255, 255, 0.8)",
+                    "tertiary": "#006823",
+                    "tertiary-container": "#00842f",
+                    "glass-border": "rgba(255, 255, 255, 0.6)",
+                    "on-surface-variant": "#4f4350",
+                    "on-secondary-fixed-variant": "#004883",
+                    "surface-container-highest": "#dbe3f6",
+                    "on-primary-fixed": "#330044",
+                    "secondary-fixed-dim": "#a3c9ff",
+                    "secondary-container": "#54a3ff",
+                    "on-secondary": "#ffffff",
+                    "error-container": "#ffdad6",
+                    "inverse-primary": "#f0b0ff",
+                    "on-secondary-fixed": "#001c39",
+                    "glass-fill": "rgba(255, 255, 255, 0.35)",
+                    "secondary": "#0060ab",
+                    "error": "#FF453A",
+                    "orange": "#FF9F0A",
+                    "primary-container": "#a34cbe",
+                    "primary-fixed": "#fbd7ff",
+                    "outline-variant": "#d2c1d2",
+                    "on-primary-fixed-variant": "#72188f",
+                    "surface-bright": "#f9f9ff",
+                    "card-gradient": "linear-gradient(135deg, #4D9EFA 0%, #BF7DF5 100%)"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "desktop-margin": "64px",
+                    "base": "8px",
+                    "mobile-gutter": "16px",
+                    "safe-top": "44px",
+                    "max-width": "1280px",
+                    "mobile-margin": "20px",
+                    "desktop-gutter": "24px",
+                    "safe-bottom": "34px"
+            },
+            "fontFamily": {
+                    "headline-lg": ["Inter"],
+                    "display-xl-mobile": ["Inter"],
+                    "body-md": ["Inter"],
+                    "display-xl": ["Inter"],
+                    "label-caps": ["Inter"],
+                    "headline-lg-mobile": ["Inter"],
+                    "label-caps-mobile": ["Inter"],
+                    "body-md-mobile": ["Inter"]
+            },
+            "fontSize": {
+                    "headline-lg": ["34px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                    "display-xl-mobile": ["34px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                    "display-xl": ["56px", {"lineHeight": "1.1", "letterSpacing": "-0.03em", "fontWeight": "700"}],
+                    "label-caps": ["13px", {"lineHeight": "1.0", "letterSpacing": "0.03em", "fontWeight": "600"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "label-caps-mobile": ["12px", {"lineHeight": "1.0", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "body-md-mobile": ["15px", {"lineHeight": "1.5", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background: radial-gradient(circle at 0% 0%, #f0f3ff 0%, #e7eeff 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(80px);
+            z-index: -1;
+            opacity: 0.4;
+            animation: float 20s infinite ease-in-out;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0); }
+            33% { transform: translate(30px, -50px); }
+            66% { transform: translate(-20px, 20px); }
+        }
+
+        .glass-card {
+            backdrop-filter: blur(28px);
+            -webkit-backdrop-filter: blur(28px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 12px 40px 0 rgba(71, 26, 112, 0.1);
+        }
+
+        .ios-input:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(135, 49, 163, 0.2);
+        }
+
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="font-body-md-mobile text-on-background pb-32">
+<!-- Animated Background Orbs -->
+<div class="orb w-[300px] h-[300px] bg-primary-container top-[-50px] left-[-50px]"></div>
+<div class="orb w-[400px] h-[400px] bg-secondary-container bottom-[-100px] right-[-100px]" style="animation-delay: -5s;"></div>
+<div class="orb w-[250px] h-[250px] bg-tertiary-fixed-dim top-[40%] right-[10%]" style="animation-delay: -10s;"></div>
+<!-- TopAppBar -->
+<header class="fixed top-0 left-0 w-full z-50 flex items-center justify-between px-mobile-margin h-safe-top bg-glass-fill backdrop-blur-[28px] border-b border-glass-border shadow-[0_12px_40px_0_rgba(71,26,112,0.15)]">
+<div class="flex items-center gap-2">
+<button class="active:scale-[0.96] transition-all duration-350 ease-[cubic-bezier(0.35,0.85,0.35,1)] hover:scale-95 text-primary">
+<span class="material-symbols-outlined text-[24px]">arrow_back</span>
+</button>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile font-bold text-primary">Edit Success Story</h1>
+</div>
+<button class="font-label-caps-mobile text-label-caps-mobile bg-primary text-on-primary px-4 py-1.5 rounded-full active:scale-[0.96] transition-all hover:scale-95">
+            Publish
+        </button>
+</header>
+<!-- Main Content Canvas -->
+<main class="mt-[80px] px-mobile-margin space-y-6">
+<!-- Input Fields Group -->
+<div class="space-y-4">
+<div class="space-y-1.5">
+<label class="font-label-caps-mobile text-on-surface-variant ml-1">Student Name</label>
+<div class="glass-card bg-glass-thick rounded-xl p-4 flex items-center">
+<input class="w-full bg-transparent border-none p-0 text-on-surface focus:ring-0 ios-input" placeholder="e.g. Alex Johnson" type="text" value="Alex Rivera"/>
+</div>
+</div>
+<div class="space-y-1.5">
+<label class="font-label-caps-mobile text-on-surface-variant ml-1">Story Title</label>
+<div class="glass-card bg-glass-thick rounded-xl p-4 flex items-center">
+<input class="w-full bg-transparent border-none p-0 text-on-surface focus:ring-0 ios-input" placeholder="e.g. Breaking into FinTech" type="text" value="Breaking into FinTech Architecture"/>
+</div>
+</div>
+</div>
+<!-- Media Upload Bento Section -->
+<div class="grid grid-cols-2 gap-mobile-gutter">
+<div class="glass-card bg-glass-fill rounded-xl p-4 flex flex-col items-center justify-center space-y-3 aspect-square text-center active:scale-95 transition-transform">
+<div class="w-12 h-12 rounded-full overflow-hidden border-2 border-white shadow-sm">
+<img alt="Student" class="w-full h-full object-cover" data-alt="A professional close-up headshot of a diverse young student smiling confidently against a soft, out-of-focus urban background. The lighting is bright and natural, reflecting a clean light-mode aesthetic with gentle purple and blue highlights in the shadows to match a premium UI design." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDzXA6WvSiezS-Y5-tBF1J964VzvkTWIHLT_lhfHIggqItmz9-L4Iv0aVfV6SbUMDFBJMKyKnnSr19CkgKkes7id3LYNZf7lkK2ODo-qn-QdyG8jCQD4R0CnyuXqcp43AfH4ccjPKyvfeIA3FbA9IVB430VFzLF0JLTVIqaIF30pgmuZoJivYV6TQMyShC-WPn6osuG1DfxsP0teTEkHocEy8thJDxx4cZi3le8BsUmlvjphgw6QfYxJdbCcwQd32de_hKe2b_SiQWc"/>
+</div>
+<span class="font-label-caps-mobile text-[10px] text-on-surface-variant uppercase">Student Avatar</span>
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">add_circle</span>
+</div>
+<div class="glass-card bg-glass-fill rounded-xl p-4 flex flex-col items-center justify-center space-y-3 aspect-square text-center active:scale-95 transition-transform">
+<div class="w-12 h-12 rounded-lg bg-white/40 flex items-center justify-center p-2">
+<span class="material-symbols-outlined text-on-surface-variant text-[32px]">business</span>
+</div>
+<span class="font-label-caps-mobile text-[10px] text-on-surface-variant uppercase">Partner Logo</span>
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">add_circle</span>
+</div>
+</div>
+<!-- Rich Text Area Container -->
+<div class="relative">
+<div class="glass-card bg-glass-thick rounded-2xl min-h-[320px] p-6 shadow-[0_8px_32px_0_rgba(71,26,112,0.08)]">
+<div class="prose prose-sm text-on-surface max-w-none">
+<p class="font-body-md-mobile leading-relaxed">After completing the Advanced Design Module at ADM-10, I felt empowered to challenge the conventional barriers of the financial industry. The curriculum didn't just teach me technical skills; it shifted my perspective on how digital systems can humanize complex transactions...</p>
+<p class="font-body-md-mobile mt-4 leading-relaxed">Today, as a Senior Architect, I apply these glassmorphic principles to ensure clarity and trust in every user interaction.</p>
+</div>
+</div>
+<!-- Floating Formatting Toolbar -->
+<div class="absolute bottom-4 left-1/2 -translate-x-1/2 glass-card bg-inverse-surface/90 backdrop-blur-xl rounded-full px-4 py-2 flex items-center gap-4 text-white shadow-2xl">
+<button class="material-symbols-outlined text-[20px] hover:text-primary transition-colors">format_bold</button>
+<button class="material-symbols-outlined text-[20px] hover:text-primary transition-colors">format_italic</button>
+<button class="material-symbols-outlined text-[20px] hover:text-primary transition-colors">link</button>
+<div class="w-px h-4 bg-white/20"></div>
+<button class="material-symbols-outlined text-[20px] hover:text-primary transition-colors">format_list_bulleted</button>
+<button class="material-symbols-outlined text-[20px] hover:text-primary transition-colors">format_quote</button>
+</div>
+</div>
+<!-- Tagging Section -->
+<div class="space-y-3">
+<label class="font-label-caps-mobile text-on-surface-variant ml-1">Add Tags</label>
+<div class="glass-card bg-glass-thick rounded-xl p-3 flex flex-wrap gap-2 items-center">
+<div class="bg-primary-container/20 text-on-primary-fixed-variant px-3 py-1 rounded-full flex items-center gap-1.5 text-xs font-semibold border border-primary-container/30">
+                    Design <span class="material-symbols-outlined text-[14px] cursor-pointer">close</span>
+</div>
+<div class="bg-primary-container/20 text-on-primary-fixed-variant px-3 py-1 rounded-full flex items-center gap-1.5 text-xs font-semibold border border-primary-container/30">
+                    Engineering <span class="material-symbols-outlined text-[14px] cursor-pointer">close</span>
+</div>
+<input class="flex-1 bg-transparent border-none p-0 text-on-surface focus:ring-0 text-sm ml-1 ios-input min-w-[80px]" placeholder="Type tag..." type="text"/>
+</div>
+<div class="flex gap-2 overflow-x-auto no-scrollbar py-1">
+<span class="text-[10px] uppercase font-bold text-on-surface-variant py-2">Suggestions:</span>
+<button class="bg-surface-container-high text-on-surface-variant px-3 py-1 rounded-full text-[11px] font-semibold border border-outline/10 whitespace-nowrap active:scale-95 transition-all">Fintech</button>
+<button class="bg-surface-container-high text-on-surface-variant px-3 py-1 rounded-full text-[11px] font-semibold border border-outline/10 whitespace-nowrap active:scale-95 transition-all">Career Change</button>
+<button class="bg-surface-container-high text-on-surface-variant px-3 py-1 rounded-full text-[11px] font-semibold border border-outline/10 whitespace-nowrap active:scale-95 transition-all">Architecture</button>
+</div>
+</div>
+</main>
+<!-- Bottom Action Area -->
+<section class="fixed bottom-0 left-0 w-full p-mobile-margin pb-safe-bottom bg-gradient-to-t from-background via-background/95 to-transparent z-40">
+<button class="w-full h-[56px] rounded-full bg-primary text-on-primary font-bold text-lg shadow-[0_12px_40px_0_rgba(135,49,163,0.3)] active:scale-[0.96] transition-all duration-350 ease-[cubic-bezier(0.35,0.85,0.35,1)] flex items-center justify-center gap-3">
+            Publish Story
+            <span class="material-symbols-outlined">send</span>
+</button>
+</section>
+<!-- BottomNavBar (Shared Component Guide) -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-safe-bottom h-[84px] bg-glass-thick backdrop-blur-[28px] border-t border-glass-border shadow-[0_-8px_32px_0_rgba(71,26,112,0.1)] hidden md:hidden">
+<div class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-4 py-1">
+<span class="material-symbols-outlined">edit_note</span>
+<span class="font-label-caps-mobile text-label-caps-mobile">Editor</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-glass-fill transition-colors p-2 rounded-xl">
+<span class="material-symbols-outlined">description</span>
+<span class="font-label-caps-mobile text-label-caps-mobile">Drafts</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-glass-fill transition-colors p-2 rounded-xl">
+<span class="material-symbols-outlined">analytics</span>
+<span class="font-label-caps-mobile text-label-caps-mobile">Insights</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-glass-fill transition-colors p-2 rounded-xl">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-caps-mobile text-label-caps-mobile">Settings</span>
+</div>
+</nav>
+<script>
+        // Micro-interaction for tags
+        document.querySelectorAll('button').forEach(btn => {
+            btn.addEventListener('touchstart', function() {
+                this.classList.add('scale-95');
+            });
+            btn.addEventListener('touchend', function() {
+                this.classList.remove('scale-95');
+            });
+        });
+
+        // Simple input focus behavior for glass effect
+        const inputs = document.querySelectorAll('.ios-input');
+        inputs.forEach(input => {
+            input.addEventListener('focus', () => {
+                input.closest('.glass-card').style.borderColor = 'rgba(135, 49, 163, 0.4)';
+                input.closest('.glass-card').style.backgroundColor = 'rgba(255, 255, 255, 0.95)';
+            });
+            input.addEventListener('blur', () => {
+                input.closest('.glass-card').style.borderColor = 'rgba(255, 255, 255, 0.6)';
+                input.closest('.glass-card').style.backgroundColor = '';
+            });
+        });
+    </script>
+</body></html>

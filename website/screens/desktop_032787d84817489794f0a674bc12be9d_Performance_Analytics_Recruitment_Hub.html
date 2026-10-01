@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>RecruitPro | Performance Analytics</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f9f9ff;
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(220, 228, 247, 1) 0px, transparent 50%),
+                radial-gradient(at 100% 0%, rgba(240, 176, 255, 0.15) 0px, transparent 50%),
+                radial-gradient(at 50% 100%, rgba(84, 163, 255, 0.1) 0px, transparent 50%);
+            min-height: 100vh;
+            color: #141c29;
+            overflow-x: hidden;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.35);
+            backdrop-filter: blur(28px);
+            -webkit-backdrop-filter: blur(28px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 12px 40px 0 rgba(71, 26, 112, 0.1);
+            transition: transform 0.35s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.35s ease;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-4px) scale(1.01);
+            box-shadow: 0 20px 50px 0 rgba(71, 26, 112, 0.15);
+        }
+
+        .glass-thick {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+        }
+
+        .funnel-layer {
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            clip-path: polygon(10% 0%, 90% 0%, 80% 100%, 20% 100%);
+        }
+
+        .metric-trend-up {
+            color: #006823;
+            background: rgba(71, 226, 102, 0.2);
+        }
+
+        .metric-trend-down {
+            color: #FF453A;
+            background: rgba(255, 69, 58, 0.15);
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        
+        /* Force left alignment and remove recruiter sidebar margin offset in Student mode */
+        body.student-mode main {
+            margin-left: 0 !important;
+            padding-left: 30px !important;
+            padding-right: 30px !important;
+            padding-top: 1.5rem !important;
+        }
+        body.student-mode main > div {
+            margin-left: 0 !important;
+            margin-right: 0 !important;
+            max-width: none !important;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-dim": "#d2daed",
+                        "on-error": "#ffffff",
+                        "secondary": "#0060ab",
+                        "primary-fixed-dim": "#f0b0ff",
+                        "surface-container": "#e7eeff",
+                        "outline": "#817381",
+                        "primary-container": "#a34cbe",
+                        "secondary-container": "#54a3ff",
+                        "primary": "#8731a3",
+                        "tertiary": "#006823",
+                        "on-tertiary": "#ffffff",
+                        "error": "#FF453A",
+                        "on-background": "#471A70",
+                        "glass-fill": "rgba(255, 255, 255, 0.35)",
+                        "glass-thick": "rgba(255, 255, 255, 0.8)",
+                        "on-surface": "#141c29",
+                        "glass-border": "rgba(255, 255, 255, 0.6)",
+                    },
+                    "spacing": {
+                        "desktop-margin": "64px",
+                        "base": "8px"
+                    },
+                    "fontSize": {
+                        "headline-lg": ["34px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                        "label-caps": ["13px", {"lineHeight": "1.0", "letterSpacing": "0.03em", "fontWeight": "600"}]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background">
+<!-- TopNavBar -->
+<header class="fixed top-0 left-0 md:left-64 w-full md:w-[calc(100vw-16rem)] z-50 flex justify-between items-center px-6 md:px-8 h-14 bg-white/10 backdrop-blur-[28px] border-b border-glass-border shadow-[0_12px_40px_0_rgba(71,26,112,0.08)]">
+<div class="flex items-center gap-4">
+</div>
+<div class="flex items-center gap-6">
+<div class="hidden md:flex items-center bg-white/20 px-4 py-1.5 rounded-full border border-glass-border">
+<span class="material-symbols-outlined text-purple-950 mr-2 text-sm">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-purple-950 placeholder-purple-950/50 text-xs w-64 py-0 outline-none" placeholder="Search candidates..." type="text"/>
+</div>
+<div class="flex items-center gap-4">
+<button class="hover:scale-110 active:scale-95 transition-all text-on-background">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="hover:scale-110 active:scale-95 transition-all text-on-background">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<div class="w-10 h-10 rounded-full overflow-hidden border-2 border-white shadow-sm cursor-pointer hover:ring-2 hover:ring-primary transition-all">
+<img alt="HR Manager" class="w-full h-full object-cover" data-alt="A professional headshot of a middle-aged HR manager with a warm, confident expression. He is wearing a tailored charcoal suit and a crisp white shirt, set against a softly blurred modern office interior. The lighting is bright and natural, reflecting a high-end corporate aesthetic consistent with a premium SaaS dashboard environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCTQblcTNv-M1585wIeKVdiF8-dMwfCGc2wR9m7LF_6IdeRMD1b3RKduRLyQWQjkTZW6Be-VZSS62OkQ96d-ejQPnRK24NLKOBeueGaKHQd7_7jJ1husg5p0v1NmHt00i2w0r42Ht_hZcZdiQlmbvoY76kFau6Bfxo4hAtfqw7GJhiFyYIpRt6-IK4pjNqEYL_e7iaRepXkSxk2VzYoUB1p46lWKf2TDosBe5rLlRxy8uieKWYKuKO9JcZtOaA0tTUrlIU0OMHLNf_D"/>
+</div>
+</div>
+</div>
+</header>
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-0 h-screen w-64 bg-glass-fill backdrop-blur-3xl border-r border-glass-border flex flex-col pt-8 pb-6 gap-2 z-40 hidden md:flex shadow-sm">
+<div class="px-6 mb-8">
+<h2 class="text-primary font-headline-lg text-[22px] font-black tracking-tight">Intercomp</h2>
+<p class="text-primary/70 font-label-caps text-label-caps uppercase tracking-wider font-bold">Company Portal</p>
+</div>
+<nav class="flex flex-col gap-1">
+<a class="flex items-center gap-4 py-3 px-6 text-on-surface-variant hover:bg-surface-container-low hover:translate-x-1 rounded-xl mx-2 transition-all duration-200" href="#" id="nav-dashboard">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-caps text-label-caps uppercase tracking-wider">Dashboard</span>
+</a>
+<a class="flex items-center gap-4 py-3 px-6 text-on-surface-variant hover:bg-surface-container-low hover:translate-x-1 rounded-xl mx-2 transition-all duration-200" href="#" id="nav-jobboard">
+<span class="material-symbols-outlined">assignment</span>
+<span class="font-label-caps text-label-caps uppercase tracking-wider">Job Board</span>
+</a>
+<a class="flex items-center gap-4 py-3 px-6 text-on-surface-variant hover:bg-surface-container-low hover:translate-x-1 rounded-xl mx-2 transition-all duration-200" href="#" id="nav-talent">
+<span class="material-symbols-outlined">person_search</span>
+<span class="font-label-caps text-label-caps uppercase tracking-wider">Talent Pool</span>
+</a>
+<a class="flex items-center gap-4 py-3 px-6 text-on-surface-variant hover:bg-surface-container-low hover:translate-x-1 rounded-xl mx-2 transition-all duration-200" href="#" id="nav-postings">
+<span class="material-symbols-outlined">work</span>
+<span class="font-label-caps text-label-caps uppercase tracking-wider">Postings</span>
+</a>
+<a class="flex items-center gap-4 py-3 px-6 text-on-surface-variant hover:bg-surface-container-low hover:translate-x-1 rounded-xl mx-2 transition-all duration-200" href="#" id="nav-applicants">
+<span class="material-symbols-outlined">groups</span>
+<span class="font-label-caps text-label-caps uppercase tracking-wider">Applicants</span>
+</a>
+<a class="flex items-center gap-4 py-3 px-6 text-on-surface-variant hover:bg-surface-container-low hover:translate-x-1 rounded-xl mx-2 transition-all duration-200" href="#" id="nav-interviews">
+<span class="material-symbols-outlined">event_available</span>
+<span class="font-label-caps text-label-caps uppercase tracking-wider">Interviews</span>
+</a>
+<a class="flex items-center gap-4 py-3 px-6 bg-primary text-on-primary rounded-xl mx-2 shadow-lg transition-all duration-200" href="#" id="nav-analytics">
+<span class="material-symbols-outlined">monitoring</span>
+<span class="font-label-caps text-label-caps uppercase tracking-wider">Analytics</span>
+</a>
+</nav>
+<div class="mt-auto px-4">
+<button class="w-full py-4 bg-primary text-on-primary rounded-2xl font-bold flex items-center justify-center gap-2 shadow-xl hover:scale-[1.02] active:scale-95 transition-all">
+<span class="material-symbols-outlined">add</span>
+                New Job Posting
+            </button>
+</div>
+<div class="mt-4 border-t border-glass-border pt-4 flex flex-col gap-1">
+<a class="flex items-center gap-4 py-2 px-6 text-on-surface-variant hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">help</span>
+<span class="font-label-caps text-label-caps uppercase tracking-wider">Help Center</span>
+</a>
+<a class="flex items-center gap-4 py-2 px-6 text-error hover:opacity-80 transition-opacity" href="#">
+<span class="material-symbols-outlined">logout</span>
+<span class="font-label-caps text-label-caps uppercase tracking-wider">Log Out</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="ml-0 md:ml-64 pt-24 px-4 py-8 md:px-8 pb-12 min-h-screen">
+<div class="w-full max-w-[1400px] mx-auto grid grid-cols-12 gap-6 px-4">
+  <!-- Recruiter View -->
+  <div id="recruiterView" class="col-span-12 grid grid-cols-12 gap-6">
+    <!-- Left Panel: KPI Metrics -->
+    <section class="col-span-12 lg:col-span-3 space-y-6">
+      <div class="glass-card p-6 rounded-3xl">
+        <div class="flex justify-between items-start mb-4">
+          <span class="p-3 bg-secondary-container/20 rounded-2xl text-secondary">
+            <span class="material-symbols-outlined">ads_click</span>
+          </span>
+          <span class="metric-trend-up text-xs font-bold px-2 py-1 rounded-lg flex items-center gap-1">
+            <span class="material-symbols-outlined text-xs">trending_up</span> +12%
+          </span>
+        </div>
+        <h3 class="text-on-background font-label-caps opacity-70 mb-1">CTR RATIO</h3>
+        <div class="text-4xl font-extrabold text-on-background">4.2%</div>
+      </div>
+      <div class="glass-card p-6 rounded-3xl">
+        <div class="flex justify-between items-start mb-4">
+          <span class="p-3 bg-tertiary-container/20 rounded-2xl text-tertiary">
+            <span class="material-symbols-outlined">payments</span>
+          </span>
+          <span class="metric-trend-up text-xs font-bold px-2 py-1 rounded-lg flex items-center gap-1">
+            <span class="material-symbols-outlined text-xs">arrow_downward</span> -5%
+          </span>
+        </div>
+        <h3 class="text-on-background font-label-caps opacity-70 mb-1">COST PER CLICK</h3>
+        <div class="text-4xl font-extrabold text-on-background">Rs. 0.85</div>
+      </div>
+      <div class="glass-card p-6 rounded-3xl overflow-hidden relative">
+        <div class="absolute top-0 right-0 w-32 h-32 bg-primary/10 blur-3xl -mr-16 -mt-16"></div>
+        <h3 class="text-on-background font-label-caps opacity-70 mb-4">CONVERSION FUNNEL</h3>
+        <div class="flex items-center gap-4 mb-6">
+          <div class="text-4xl font-extrabold text-on-background">8.4%</div>
+          <div class="text-sm font-bold text-primary">Total Conv.</div>
+        </div>
+        <div class="w-full bg-white/30 h-2 rounded-full overflow-hidden">
+          <div class="h-full bg-primary" style="width: 84%"></div>
+        </div>
+      </div>
+      <div class="glass-card p-6 rounded-3xl">
+        <h3 class="text-on-background font-label-caps opacity-70 mb-4">TALENT POOL QUALITY</h3>
+        <div class="flex flex-col gap-3">
+          <div class="flex justify-between items-center">
+            <span class="text-sm font-medium">A-Tier Talent</span>
+            <span class="text-sm font-bold">64%</span>
+          </div>
+          <div class="w-full bg-white/30 h-1.5 rounded-full">
+            <div class="h-full bg-secondary-container" style="width: 64%"></div>
+          </div>
+          <div class="flex justify-between items-center mt-2">
+            <span class="text-sm font-medium">Industry Fit</span>
+            <span class="text-sm font-bold">92%</span>
+          </div>
+          <div class="w-full bg-white/30 h-1.5 rounded-full">
+            <div class="h-full bg-primary-container" style="width: 92%"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Center Panel: Interactive Funnel Chart -->
+    <section class="col-span-12 lg:col-span-6 space-y-6">
+      <div class="glass-card p-8 rounded-[40px] relative min-h-[500px] flex flex-col items-center justify-center overflow-hidden">
+        <h2 class="text-headline-lg font-headline-lg text-on-background mb-12 text-center">Conversion Lifecycle</h2>
+        <div class="w-full max-w-md space-y-2 relative z-10">
+          <!-- Views -->
+          <div class="funnel-layer h-24 bg-gradient-to-r from-secondary-container to-secondary flex flex-col items-center justify-center text-white shadow-xl group hover:scale-105 cursor-pointer">
+            <span class="text-xs font-label-caps opacity-80">VIEWS</span>
+            <span class="text-2xl font-bold">25,000</span>
+          </div>
+          <!-- Applications -->
+          <div class="funnel-layer h-20 bg-gradient-to-r from-primary-container to-primary flex flex-col items-center justify-center text-white shadow-lg mx-8 group hover:scale-105 cursor-pointer">
+            <span class="text-xs font-label-caps opacity-80">APPLICATIONS</span>
+            <span class="text-xl font-bold">5,000</span>
+          </div>
+          <!-- Tests -->
+          <div class="funnel-layer h-16 bg-gradient-to-r from-magenta-500/80 to-[#BF7DF5] flex flex-col items-center justify-center text-white shadow-md mx-16 bg-opacity-80 group hover:scale-105 cursor-pointer" style="background-color: #BF7DF5;">
+            <span class="text-xs font-label-caps opacity-80">TESTS TAKEN</span>
+            <span class="text-lg font-bold">1,200</span>
+          </div>
+          <!-- Hired -->
+          <div class="funnel-layer h-14 bg-gradient-to-r from-tertiary-container to-tertiary flex flex-col items-center justify-center text-white shadow-sm mx-24 group hover:scale-105 cursor-pointer">
+            <span class="text-xs font-label-caps opacity-80">HIRED</span>
+            <span class="text-lg font-bold">420</span>
+          </div>
+        </div>
+        <div class="absolute bottom-6 left-8 right-8 flex justify-between items-end">
+          <div class="text-xs font-label-caps text-on-background/50">DATA UPDATED 5M AGO</div>
+          <button class="bg-white/50 backdrop-blur-md px-4 py-2 rounded-full border border-glass-border text-sm font-bold text-primary hover:bg-white transition-all">View Details</button>
+        </div>
+      </div>
+      
+      <!-- Active Logs -->
+      <div class="glass-card p-6 rounded-3xl">
+        <div class="flex justify-between items-center mb-6">
+          <h3 class="text-lg font-bold text-on-background">Active Logs</h3>
+          <span class="material-symbols-outlined text-outline cursor-pointer">more_horiz</span>
+        </div>
+        <div class="space-y-4">
+          <div class="flex items-center gap-4 p-3 rounded-2xl hover:bg-white/40 transition-colors">
+            <div class="w-10 h-10 rounded-full bg-secondary-container/20 flex items-center justify-center text-secondary">
+              <span class="material-symbols-outlined">person_add</span>
+            </div>
+            <div class="flex-1">
+              <p class="text-sm font-bold">Marcus Thorne</p>
+              <p class="text-xs text-on-surface-variant">Applied for Senior UX Designer</p>
+            </div>
+            <span class="text-xs text-outline">2m ago</span>
+          </div>
+          <div class="flex items-center gap-4 p-3 rounded-2xl hover:bg-white/40 transition-colors">
+            <div class="w-10 h-10 rounded-full bg-tertiary-container/20 flex items-center justify-center text-tertiary">
+              <span class="material-symbols-outlined">check_circle</span>
+            </div>
+            <div class="flex-1">
+              <p class="text-sm font-bold">Sarah Chen</p>
+              <p class="text-xs text-on-surface-variant">Passed Cognitive Assessment</p>
+            </div>
+            <span class="text-xs text-outline">14m ago</span>
+          </div>
+          <div class="flex items-center gap-4 p-3 rounded-2xl hover:bg-white/40 transition-colors">
+            <div class="w-10 h-10 rounded-full bg-primary-container/20 flex items-center justify-center text-primary">
+              <span class="material-symbols-outlined">mail</span>
+            </div>
+            <div class="flex-1">
+              <p class="text-sm font-bold">Interview Invitation</p>
+              <p class="text-xs text-on-surface-variant">Sent to 14 Lead Developers</p>
+            </div>
+            <span class="text-xs text-outline">1h ago</span>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Right Panel: Sidebar Analytics -->
+    <section class="col-span-12 lg:col-span-3 space-y-6">
+      <!-- Monthly Growth Chart -->
+      <div class="glass-card p-6 rounded-3xl">
+        <h3 class="text-on-background font-label-caps opacity-70 mb-6">MONTHLY GROWTH</h3>
+        <div class="flex items-end justify-between h-32 gap-2">
+          <div class="w-full bg-secondary-container/30 rounded-t-lg transition-all hover:bg-secondary-container" style="height: 40%"></div>
+          <div class="w-full bg-secondary-container/30 rounded-t-lg transition-all hover:bg-secondary-container" style="height: 65%"></div>
+          <div class="w-full bg-secondary-container/30 rounded-t-lg transition-all hover:bg-secondary-container" style="height: 50%"></div>
+          <div class="w-full bg-secondary-container/30 rounded-t-lg transition-all hover:bg-secondary-container" style="height: 85%"></div>
+          <div class="w-full bg-primary rounded-t-lg shadow-[0_0_15px_rgba(135,49,163,0.4)]" style="height: 100%"></div>
+          <div class="w-full bg-secondary-container/30 rounded-t-lg transition-all hover:bg-secondary-container" style="height: 75%"></div>
+        </div>
+        <div class="flex justify-between mt-4 text-[10px] font-bold text-outline uppercase tracking-wider">
+          <span>Jan</span>
+          <span>Feb</span>
+          <span>Mar</span>
+          <span>Apr</span>
+          <span>May</span>
+          <span>Jun</span>
+        </div>
+      </div>
+      
+      <!-- Top Performing Posts -->
+      <div class="glass-card p-6 rounded-3xl">
+        <h3 class="text-on-background font-label-caps opacity-70 mb-6">TOP PERFORMING POSTS</h3>
+        <div class="space-y-4">
+          <div class="flex items-center gap-3">
+            <div class="w-12 h-12 rounded-xl overflow-hidden shrink-0">
+              <img alt="Modern office thumbnail" data-alt="A clean, minimalist high-tech office interior with floor-to-ceiling glass windows and ergonomic furniture. The space is bathed in natural daylight, reflecting a professional, high-performance work environment with a calm and modern aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCmOkXPl-pZqHsSdPSTIWtgS945BlF5olREcW8zY8tjlTrHFL3vzSVJRZGUxZ3hT6Xs0dbQ6wHleWzDVnn8m2WvvJmrF0674LHZ_ZF4dnoVjnOQByrSjZZW7EyHPSD4uhj7EXiV-kjgp_0NIB_mUMfyj56LKht3Wd2OGmqUc1idIKM1Ohaf-SMR7FThBLjfCDGqbzo6CclpniD1GSR9Rthg5qnEHfX8BJsqvExk1vityULtrgWsjyP2pr5MvJVWDnWYqT993330SAY7"/>
+            </div>
+            <div class="flex-1 min-w-0">
+              <p class="text-sm font-bold truncate">Principal Engineer</p>
+              <p class="text-xs text-secondary font-bold">2.4k Clicks</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-3">
+            <div class="w-12 h-12 rounded-xl overflow-hidden shrink-0">
+              <img alt="Team meeting thumbnail" data-alt="A diverse group of young professionals collaborating in a bright, modern creative studio. They are smiling and engaged in discussion, embodying a culture of teamwork and innovation. The setting is vibrant and filled with plants and light-mode office decor." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA9WzP-umOsZO2m876OBfodUJDWvq5Yymdiz3H6nEHXja5v66srGXKTHPrCOTi8qGVREnr-MHvuyoY7fpfBPyfwRfrfLIyj1arz2vDIuD0v2Y-fjH4FGT3FHtrzlFuHm2JkbzVITgb2ecd774cnOg_7I0hsRoTR0sQfsofHBCFoTfwqO46Wq227IO-dIG-e2zQZAb54dAH-6IKsqr1cezx-019KbZvGoXozRzbdMLcYPbUsLDOgm2Oma6t44-pNtFJC_DbiPJwl0zub"/>
+            </div>
+            <div class="flex-1 min-w-0">
+              <p class="text-sm font-bold truncate">Creative Director</p>
+              <p class="text-xs text-secondary font-bold">1.8k Clicks</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-3 opacity-60">
+            <div class="w-12 h-12 rounded-xl overflow-hidden shrink-0">
+              <img alt="Data dashboard thumbnail" data-alt="A high-resolution display of a complex data analytics dashboard with sleek charts and glowing digital interfaces. The visual represents precision, technological expertise, and professional data management in a corporate context." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDMll_v59WjRrl3ervIDx2Z8PesiHWb1XPjnriuAc50frZqIrxnvHQFZgJbuwFAftIl_MHbjfBVsnAMb6RHeFyFCkFykBSgsf26Xb7WS9CzXqEKyE7LsEOTWsNDcQIuMtbuMhCYFnfeN6jqW1YvyxWjx_g1lssIXiplw2nBDXv7-qGSgNGvb-ayAv8Ti1fj9jkgCxMsPVlPcA6NDgoH0KnfTPpdzkLvEeJe1w16WIV2TeKfYBL3w6mKdQ1czMsME27kDpLQGEYvA_GX"/>
+            </div>
+            <div class="flex-1 min-w-0">
+              <p class="text-sm font-bold truncate">Data Scientist</p>
+              <p class="text-xs text-secondary font-bold">940 Clicks</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Ad Impression Reports -->
+      <div class="glass-card p-6 rounded-3xl bg-primary-container text-white border-none relative overflow-hidden">
+        <div class="absolute -right-4 -bottom-4 w-24 h-24 bg-white/10 rounded-full blur-2xl"></div>
+        <div class="relative z-10">
+          <div class="flex items-center justify-between mb-4">
+            <h3 class="font-label-caps text-white/80">AD IMPRESSIONS</h3>
+            <span class="material-symbols-outlined text-white/60">info</span>
+          </div>
+          <div class="text-3xl font-extrabold mb-2">1.2M</div>
+          <p class="text-xs text-white/80 leading-relaxed mb-4">Your current reach is 14% higher than last month. Consider increasing budget for 'LinkedIn Direct' ads.</p>
+          <button class="w-full py-2 bg-white text-primary font-bold rounded-xl text-sm hover:scale-[0.98] transition-transform">Download Report</button>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- Student View -->
+  <div id="studentView" class="col-span-12 grid grid-cols-12 gap-6 hidden">
+    <!-- Left Panel: Academic KPI Metrics -->
+    <section class="col-span-12 lg:col-span-3 space-y-6">
+      <!-- Avg Test Score -->
+      <div class="glass-card p-6 rounded-3xl">
+        <div class="flex justify-between items-start mb-4">
+          <span class="p-3 bg-primary/10 rounded-2xl text-primary">
+            <span class="material-symbols-outlined">quiz</span>
+          </span>
+          <span id="studentConsecutivePassed" class="metric-trend-up text-xs font-bold px-2 py-1 rounded-lg flex items-center gap-1">
+            <span class="material-symbols-outlined text-xs">trending_up</span> +2.5%
+          </span>
+        </div>
+        <h3 class="text-on-background font-label-caps opacity-70 mb-1">AVG. TEST SCORE</h3>
+        <div id="studentAvgTestScore" class="text-4xl font-extrabold text-on-background">94%</div>
+      </div>
+      <!-- Course Completion -->
+      <div class="glass-card p-6 rounded-3xl">
+        <div class="flex justify-between items-start mb-4">
+          <span class="p-3 bg-secondary/10 rounded-2xl text-secondary">
+            <span class="material-symbols-outlined">menu_book</span>
+          </span>
+          <span class="text-xs font-bold px-2 py-1 rounded-lg bg-secondary/20 text-secondary flex items-center gap-1">
+            Active Study
+          </span>
+        </div>
+        <h3 class="text-on-background font-label-caps opacity-70 mb-1">COURSE COMPLETION</h3>
+        <div id="studentCourseCompletion" class="text-4xl font-extrabold text-on-background">78%</div>
+      </div>
+      <!-- Assignment Grade -->
+      <div class="glass-card p-6 rounded-3xl">
+        <div class="flex justify-between items-start mb-4">
+          <span class="p-3 bg-tertiary-container/20 rounded-2xl text-tertiary">
+            <span class="material-symbols-outlined">assignment_turned_in</span>
+          </span>
+          <span id="studentAssignmentGradedText" class="metric-trend-up text-xs font-bold px-2 py-1 rounded-lg flex items-center gap-1">
+            15 Graded
+          </span>
+        </div>
+        <h3 class="text-on-background font-label-caps opacity-70 mb-1">ASSIGNMENT GRADE</h3>
+        <div id="studentAssignmentGrade" class="text-4xl font-extrabold text-on-background">A-</div>
+      </div>
+      <!-- Weekly Streak -->
+      <div class="glass-card p-6 rounded-3xl overflow-hidden relative">
+        <div class="absolute top-0 right-0 w-32 h-32 bg-[#FF9F0A]/10 blur-3xl -mr-16 -mt-16"></div>
+        <div class="flex justify-between items-start mb-4">
+          <span class="p-3 bg-[#FF9F0A]/10 rounded-2xl text-[#FF9F0A]">
+            <span class="material-symbols-outlined text-[#FF9F0A]" style="font-variation-settings: 'FILL' 1;">local_fire_department</span>
+          </span>
+          <span class="text-xs font-bold px-2 py-1 rounded-lg bg-[#FF9F0A]/20 text-[#FF9F0A] flex items-center gap-1">
+            Active Streak
+          </span>
+        </div>
+        <h3 class="text-on-background font-label-caps opacity-70 mb-1">WEEKLY STREAK</h3>
+        <div id="studentWeeklyStreak" class="text-4xl font-extrabold text-on-background">5 Days</div>
+      </div>
+    </section>
+
+    <!-- Center Panel: Learning Lifecycle & Logs -->
+    <section class="col-span-12 lg:col-span-6 space-y-6">
+      <div class="glass-card p-8 rounded-[40px] relative min-h-[500px] flex flex-col items-center justify-center overflow-hidden">
+        <h2 class="text-headline-lg font-headline-lg text-on-background mb-12 text-center">Learning Lifecycle</h2>
+        <div class="w-full max-w-md space-y-2 relative z-10">
+          <!-- Enrolled -->
+          <div class="funnel-layer h-24 bg-gradient-to-r from-secondary-container to-secondary flex flex-col items-center justify-center text-white shadow-xl group hover:scale-105 cursor-pointer">
+            <span class="text-xs font-label-caps opacity-80">COURSES ENROLLED</span>
+            <span id="funnelCoursesEnrolled" class="text-2xl font-bold">8</span>
+          </div>
+          <!-- Completed -->
+          <div class="funnel-layer h-20 bg-gradient-to-r from-primary-container to-primary flex flex-col items-center justify-center text-white shadow-lg mx-8 group hover:scale-105 cursor-pointer">
+            <span class="text-xs font-label-caps opacity-80">CHAPTERS COMPLETED</span>
+            <span id="funnelChaptersCompleted" class="text-xl font-bold">32</span>
+          </div>
+          <!-- Tests -->
+          <div class="funnel-layer h-16 bg-gradient-to-r from-magenta-500/80 to-[#BF7DF5] flex flex-col items-center justify-center text-white shadow-md mx-16 bg-opacity-80 group hover:scale-105 cursor-pointer" style="background-color: #BF7DF5;">
+            <span class="text-xs font-label-caps opacity-80">PRACTICE TESTS PASSED</span>
+            <span id="funnelTestsPassed" class="text-lg font-bold">15</span>
+          </div>
+          <!-- Certified -->
+          <div class="funnel-layer h-14 bg-gradient-to-r from-tertiary-container to-tertiary flex flex-col items-center justify-center text-white shadow-sm mx-24 group hover:scale-105 cursor-pointer">
+            <span class="text-xs font-label-caps opacity-80">CERTIFICATES EARNED</span>
+            <span id="funnelCertificatesEarned" class="text-lg font-bold">3</span>
+          </div>
+        </div>
+        <div class="absolute bottom-6 left-8 right-8 flex justify-between items-end">
+          <div class="text-xs font-label-caps text-on-background/50">DATA UPDATED JUST NOW</div>
+          <button onclick="if(window.parent && window.parent.App) window.parent.App.navigate('student-dash')" class="bg-white/50 backdrop-blur-md px-4 py-2 rounded-full border border-glass-border text-sm font-bold text-primary hover:bg-white transition-all">Back to Dashboard</button>
+        </div>
+      </div>
+
+      <!-- Activity Logs -->
+      <div class="glass-card p-6 rounded-3xl">
+        <div class="flex justify-between items-center mb-6">
+          <h3 class="text-lg font-bold text-on-background">Recent Activity Log</h3>
+          <span class="material-symbols-outlined text-outline cursor-pointer">more_horiz</span>
+        </div>
+        <div id="studentActivitiesList" class="space-y-4">
+          <div class="flex items-center gap-4 p-3 rounded-2xl hover:bg-white/40 transition-colors">
+            <div class="w-10 h-10 rounded-full bg-[#FF9F0A]/10 flex items-center justify-center text-[#FF9F0A]">
+              <span class="material-symbols-outlined">local_fire_department</span>
+            </div>
+            <div class="flex-1">
+              <p class="text-sm font-bold">Daily Streak Check-in</p>
+              <p class="text-xs text-on-surface-variant">Day 5 streak checked successfully</p>
+            </div>
+            <span class="text-xs text-outline">10m ago</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Right Panel: Sidebar Details -->
+    <section class="col-span-12 lg:col-span-3 space-y-6">
+      <!-- Weekly Hours Chart -->
+      <div class="glass-card p-6 rounded-3xl">
+        <h3 class="text-on-background font-label-caps opacity-70 mb-6">WEEKLY STUDY HOURS</h3>
+        <div class="flex items-end justify-between h-32 gap-2">
+          <div class="w-full bg-secondary-container/30 rounded-t-lg transition-all hover:bg-secondary-container" style="height: 40%" title="Mon: 2h"></div>
+          <div class="w-full bg-secondary-container/30 rounded-t-lg transition-all hover:bg-secondary-container" style="height: 90%" title="Tue: 4.5h"></div>
+          <div class="w-full bg-secondary-container/30 rounded-t-lg transition-all hover:bg-secondary-container" style="height: 60%" title="Wed: 3h"></div>
+          <div class="w-full bg-secondary-container/30 rounded-t-lg transition-all hover:bg-secondary-container" style="height: 100%" title="Thu: 5h"></div>
+          <div class="w-full bg-primary rounded-t-lg shadow-[0_0_15px_rgba(135,49,163,0.4)]" style="height: 80%" title="Fri: 4h"></div>
+          <div class="w-full bg-secondary-container/30 rounded-t-lg transition-all hover:bg-secondary-container" style="height: 30%" title="Sat: 1.5h"></div>
+          <div class="w-full bg-secondary-container/30 rounded-t-lg transition-all hover:bg-secondary-container" style="height: 20%" title="Sun: 1h"></div>
+        </div>
+        <div class="flex justify-between mt-4 text-[10px] font-bold text-outline uppercase tracking-wider">
+          <span>M</span>
+          <span>T</span>
+          <span>W</span>
+          <span>T</span>
+          <span>F</span>
+          <span>S</span>
+          <span>S</span>
+        </div>
+      </div>
+
+      <!-- Top Acquired Skills -->
+      <div class="glass-card p-6 rounded-3xl">
+        <h3 class="text-on-background font-label-caps opacity-70 mb-6">TOP ACQUIRED SKILLS</h3>
+        <div id="studentSkillsContainer" class="space-y-4">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary shrink-0">
+              <span class="material-symbols-outlined">palette</span>
+            </div>
+            <div class="flex-1 min-w-0">
+              <p class="text-sm font-bold truncate">UI/UX Design</p>
+              <p class="text-xs text-secondary font-bold">Expert (92%)</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Next Milestone Card -->
+      <div class="glass-card p-6 rounded-3xl bg-primary-container text-white border-none relative overflow-hidden">
+        <div class="absolute -right-4 -bottom-4 w-24 h-24 bg-white/10 rounded-full blur-2xl"></div>
+        <div class="relative z-10">
+          <div class="flex items-center justify-between mb-4">
+            <h3 class="font-label-caps text-white/80">NEXT MILESTONE</h3>
+            <span class="material-symbols-outlined text-white/60">workspace_premium</span>
+          </div>
+          <div class="text-3xl font-extrabold mb-2">Frontend Architect</div>
+          <p class="text-xs text-white/80 leading-relaxed mb-4">You are only 120 XP away from earning your 'Frontend Architect' Skill Badge! Complete your next course test.</p>
+          <button onclick="if(window.parent && window.parent.App) window.parent.App.navigate('tests')" class="w-full py-2 bg-white text-primary font-bold rounded-xl text-sm hover:scale-[0.98] transition-transform">Go to Test Hub</button>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+</main>
+<script>
+        // Check if loaded in student view context
+        let isStudentView = false;
+        try {
+            if (window.parent && window.parent.location && window.parent.location.hash) {
+                isStudentView = window.parent.location.hash.includes('/student/');
+            }
+        } catch (e) {
+            console.warn("Unable to access parent window location hash:", e);
+        }
+        if (!isStudentView && window.self !== window.top) {
+            // Check if parent hash contains '/company/' to make sure we stay in recruiter view
+            if (window.parent && window.parent.location && window.parent.location.hash) {
+                if (window.parent.location.hash.includes('/company/')) {
+                    isStudentView = false;
+                } else {
+                    isStudentView = true;
+                }
+            } else {
+                isStudentView = false;
+            }
+        }
+        
+        if (isStudentView) {
+            document.body.classList.add('student-mode');
+            document.getElementById('recruiterView').classList.add('hidden');
+            document.getElementById('studentView').classList.remove('hidden');
+            document.title = "JobFlow | Academic Performance Analytics";
+            const header = document.querySelector('header');
+            if (header) header.style.display = 'none';
+            const sidebar = document.querySelector('aside');
+            if (sidebar) sidebar.style.display = 'none';
+            
+            // Remove recruiter sidebar margin offset and set 30px distance from student sidebar
+            const main = document.querySelector('main');
+            if (main) {
+                main.classList.remove('md:ml-64');
+                main.style.marginLeft = '0';
+                main.style.paddingLeft = '30px';
+                main.style.paddingRight = '30px';
+                main.style.paddingTop = '1.5rem';
+                
+                // Remove centering to align content directly with the left sidebar
+                const containerDiv = main.querySelector('div');
+                if (containerDiv) {
+                    containerDiv.classList.remove('mx-auto');
+                    containerDiv.style.marginLeft = '0';
+                }
+            }
+
+            // --- Load User's Live Data ---
+            try {
+                const currentUserStr = localStorage.getItem('currentUser');
+                if (currentUserStr) {
+                    const currentUser = JSON.parse(currentUserStr);
+                    const email = currentUser.email;
+
+                    // 1. Fetch live user profile from the backend API
+                    fetch(`/api/student/profile?email=${encodeURIComponent(email)}`)
+                        .then(res => res.json())
+                        .then(user => {
+                            if (user && !user.error) {
+                                // Update Avg Test Score card based on rating
+                                const ratingPercentage = Math.round((user.rating || 4.0) / 5.0 * 100);
+                                const avgScoreEl = document.getElementById('studentAvgTestScore');
+                                if (avgScoreEl) avgScoreEl.textContent = ratingPercentage + "%";
+
+                                // Update consecutive passed info
+                                const consecutiveEl = document.getElementById('studentConsecutivePassed');
+                                if (consecutiveEl) {
+                                    consecutiveEl.innerHTML = `<span class="material-symbols-outlined text-xs">trending_up</span> ${user.consecutivePassed || 0} Passed`;
+                                }
+
+                                // Update Weekly Streak card
+                                const streak = user.streak || localStorage.getItem('userStreak') || '1';
+                                const streakEl = document.getElementById('studentWeeklyStreak');
+                                if (streakEl) streakEl.textContent = `${streak} Day${streak > 1 ? 's' : ''}`;
+
+                                // Update funnel tests passed based on consecutive passed or tests taken
+                                const testsPassedEl = document.getElementById('funnelTestsPassed');
+                                if (testsPassedEl) testsPassedEl.textContent = user.consecutivePassed || 0;
+
+                                // Update top skills dynamically based on user.skills
+                                if (user.skills && user.skills.length > 0) {
+                                    const skillsContainer = document.getElementById('studentSkillsContainer');
+                                    if (skillsContainer) {
+                                        const icons = ['palette', 'code', 'insights', 'terminal', 'layers', 'extension'];
+                                        const expertiseLevels = ['Expert (92%)', 'Advanced (85%)', 'Intermediate (70%)', 'Intermediate (65%)'];
+                                        skillsContainer.innerHTML = user.skills.map((skill, idx) => `
+                                            <div class="flex items-center gap-3">
+                                                <div class="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary shrink-0">
+                                                    <span class="material-symbols-outlined text-[18px]">${icons[idx % icons.length]}</span>
+                                                </div>
+                                                <div class="flex-1 min-w-0">
+                                                    <p class="text-sm font-bold truncate">${skill}</p>
+                                                    <p class="text-xs text-secondary font-bold">${expertiseLevels[idx % expertiseLevels.length]}</p>
+                                                </div>
+                                            </div>
+                                        `).join('');
+                                    }
+                                }
+
+                                // 2. Fetch live activity logs
+                                fetch('/api/activities')
+                                    .then(r => r.json())
+                                    .then(logs => {
+                                        if (Array.isArray(logs)) {
+                                            const studentLogs = logs.filter(log => 
+                                                (log.studentName || '').toLowerCase().includes((user.username || '').toLowerCase()) ||
+                                                (log.studentName || '').toLowerCase().includes(user.email.split('@')[0])
+                                            );
+                                            const logsList = document.getElementById('studentActivitiesList');
+                                            if (logsList && studentLogs.length > 0) {
+                                                logsList.innerHTML = studentLogs.slice(-3).reverse().map(log => {
+                                                    let icon = 'info';
+                                                    let iconColor = 'text-primary';
+                                                    let bgClass = 'bg-primary-container/20';
+                                                    if (log.alert.toLowerCase().includes('cheat') || log.alert.toLowerCase().includes('defocus') || log.severity === 'high') {
+                                                        icon = 'warning';
+                                                        iconColor = 'text-error';
+                                                        bgClass = 'bg-error/10';
+                                                    } else if (log.alert.toLowerCase().includes('passed') || log.alert.toLowerCase().includes('submitted')) {
+                                                        icon = 'check_circle';
+                                                        iconColor = 'text-tertiary';
+                                                        bgClass = 'bg-tertiary/10';
+                                                    }
+                                                    return `
+                                                        <div class="flex items-center gap-4 p-3 rounded-2xl hover:bg-white/40 transition-colors">
+                                                            <div class="w-10 h-10 rounded-full ${bgClass} flex items-center justify-center ${iconColor}">
+                                                                <span class="material-symbols-outlined">${icon}</span>
+                                                            </div>
+                                                            <div class="flex-1">
+                                                                <p class="text-sm font-bold">${log.alert}</p>
+                                                                <p class="text-xs text-on-surface-variant">Severity: ${log.severity.toUpperCase()}</p>
+                                                            </div>
+                                                            <span class="text-xs text-outline">${log.time}</span>
+                                                        </div>
+                                                    `;
+                                                }).join('');
+                                            }
+                                        }
+                                    }).catch(e => console.warn(e));
+                            }
+                        })
+                        .catch(err => console.warn("Failed to fetch live user data:", err));
+                }
+            } catch (e) {
+                console.warn("Failed to process live user details:", e);
+            }
+
+            // 3. Fetch live assignments from localStorage list to compute course completion, assignment grades
+            try {
+                const assignments = JSON.parse(localStorage.getItem('assignments_list'));
+                if (assignments && assignments.length > 0) {
+                    const remaining = assignments.filter(a => a.status === 'Pending').length;
+                    const submitted = assignments.filter(a => a.status === 'Submitted').length;
+                    const gradedList = assignments.filter(a => a.status === 'Approved');
+                    const gradedCount = gradedList.length;
+
+                    // Calculate average assignment grade letter dynamically
+                    let avgGrade = "A-";
+                    if (gradedCount > 0) {
+                        let totalPoints = 0;
+                        let count = 0;
+                        gradedList.forEach(a => {
+                            if (a.grade) {
+                                if (a.grade.includes('/')) {
+                                    const score = parseInt(a.grade.split('/')[0]);
+                                    if (!isNaN(score)) {
+                                        totalPoints += score;
+                                        count++;
+                                    }
+                                } else {
+                                    const letterMap = { 'A+': 97, 'A': 94, 'A-': 90, 'B+': 87, 'B': 84, 'B-': 80, 'C+': 77, 'C': 74 };
+                                    const val = letterMap[a.grade.trim()];
+                                    if (val) {
+                                        totalPoints += val;
+                                        count++;
+                                    }
+                                }
+                            }
+                        });
+                        if (count > 0) {
+                            const avgPct = totalPoints / count;
+                            if (avgPct >= 95) avgGrade = "A+";
+                            else if (avgPct >= 90) avgGrade = "A";
+                            else if (avgPct >= 85) avgGrade = "A-";
+                            else if (avgPct >= 80) avgGrade = "B+";
+                            else if (avgPct >= 75) avgGrade = "B";
+                            else avgGrade = "B-";
+                        }
+                    }
+
+                    // Calculate dynamic Course Completion rate
+                    const completionRate = Math.round(((gradedCount + submitted) / assignments.length) * 100);
+
+                    // Update UI elements
+                    const completionEl = document.getElementById('studentCourseCompletion');
+                    if (completionEl) completionEl.textContent = completionRate + "%";
+
+                    const gradeEl = document.getElementById('studentAssignmentGrade');
+                    if (gradeEl) gradeEl.textContent = avgGrade;
+
+                    const gradeSubEl = document.getElementById('studentAssignmentGradedText');
+                    if (gradeSubEl) gradeSubEl.textContent = `${gradedCount} Graded`;
+
+                    // Update funnel values
+                    const chaptersCompletedEl = document.getElementById('funnelChaptersCompleted');
+                    if (chaptersCompletedEl) chaptersCompletedEl.textContent = gradedCount + submitted;
+
+                    const certsCount = Math.max(1, Math.floor(gradedCount / 3));
+                    const certificatesEl = document.getElementById('funnelCertificatesEarned');
+                    if (certificatesEl) certificatesEl.textContent = certsCount;
+                    
+                    // Enrolled courses count (based on unique subjects)
+                    const uniqueSubjects = new Set(assignments.map(a => a.subject)).size;
+                    const enrolledEl = document.getElementById('funnelCoursesEnrolled');
+                    if (enrolledEl) enrolledEl.textContent = uniqueSubjects;
+                }
+            } catch (e) {
+                console.warn("Failed to process live assignments:", e);
+            }
+        } else {
+            document.getElementById('recruiterView').classList.remove('hidden');
+            document.getElementById('studentView').classList.add('hidden');
+        }
+
+        // Micro-interactions for glass cards
+        document.querySelectorAll('.glass-card').forEach(card => {
+            card.addEventListener('mousedown', () => {
+                card.style.transform = 'scale(0.97)';
+            });
+            card.addEventListener('mouseup', () => {
+                card.style.transform = '';
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = '';
+            });
+        });
+
+        // Simple tooltips simulation or hover effect on funnel layers
+        document.querySelectorAll('.funnel-layer').forEach(layer => {
+            layer.addEventListener('mouseenter', () => {
+                const labelEl = layer.querySelector('span:first-child');
+                const valueEl = layer.querySelector('span:last-child');
+                if (labelEl && valueEl) {
+                    const label = labelEl.innerText;
+                    const value = valueEl.innerText;
+                    console.log(`Funnel Stage: ${label} - ${value}`);
+                }
+            });
+        });
+    </script>
+</body></html>

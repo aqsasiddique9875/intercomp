@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+    <title>Course Player - SkillsBooster Academy</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+              "primary": "#8731a3",
+              "primary-container": "#a34cbe",
+              "on-surface": "#141c29",
+              "on-surface-variant": "#4f4350",
+              "outline": "#817381",
+              "background": "#DCE4F7",
+            },
+            "fontFamily": {
+              "body-md-mobile": ["Inter"],
+            },
+            "spacing": {
+              "safe-bottom": "34px",
+              "base": "8px",
+              "mobile-gutter": "16px",
+              "safe-top": "44px",
+              "mobile-margin": "20px",
+            }
+          },
+        },
+      }
+    </script>
+    <style>
+        body {
+            background-color: #DCE4F7;
+            -webkit-tap-highlight-color: transparent;
+            overflow-x: hidden;
+            min-height: max(884px, 100dvh);
+            font-family: 'Inter', sans-serif;
+        }
+
+        .liquid-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            filter: blur(80px);
+            opacity: 0.8;
+        }
+
+        .blob-1 {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: #BF7DF5;
+            border-radius: 50%;
+            top: -20%;
+            left: -20%;
+            opacity: 0.6;
+        }
+
+        .blob-2 {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: #4D9EFA;
+            border-radius: 50%;
+            bottom: -20%;
+            right: -20%;
+            opacity: 0.5;
+        }
+
+        .lecture-card {
+            background: rgba(255, 255, 255, 0.45);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 8px 32px 0 rgba(71, 26, 112, 0.05);
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .lecture-card.active {
+            background: rgba(135, 49, 163, 0.12);
+            border-color: rgba(135, 49, 163, 0.35);
+        }
+
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        .video-gradient-overlay {
+            background: linear-gradient(to top, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0) 40%);
+        }
+        
+        .active-tab {
+            color: #8731a3 !important;
+            border-bottom: 2px solid #8731a3;
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body class="font-body-md-mobile text-on-background antialiased flex flex-col h-screen">
+
+<!-- Atmospheric Liquid Background -->
+<div class="liquid-bg">
+    <div class="blob-1"></div>
+    <div class="blob-2"></div>
+</div>
+
+<!-- Header -->
+<header class="w-full flex items-center gap-4 px-mobile-margin py-4 pt-10 bg-transparent shrink-0">
+    <button onclick="goBack()" class="w-10 h-10 rounded-full bg-white/40 backdrop-blur-md border border-white/60 flex items-center justify-center flex-shrink-0 shadow-sm active:scale-90 transition-transform">
+        <span class="material-symbols-outlined text-[#8731a3]">arrow_back</span>
+    </button>
+    <h1 id="currentCourseTitle" class="text-[#471A70] font-bold text-[16px] leading-tight flex-1 truncate pr-4">Mastering Google Antigravity: From Setup to Deployment</h1>
+</header>
+
+<!-- Theater-style Video Window -->
+<section class="relative w-full aspect-video overflow-hidden shadow-2xl z-10 bg-black shrink-0">
+    <video id="courseVideo" class="w-full h-full object-cover" src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" controls autoplay></video>
+    <div id="videoPlaceholder" class="absolute inset-0 bg-cover bg-center flex items-center justify-center hidden" style="background-image: url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=600&auto=format&fit=crop');">
+        <div class="absolute inset-0 bg-black/50"></div>
+        <button onclick="playVideo()" class="w-16 h-16 rounded-full bg-primary flex items-center justify-center shadow-lg active:scale-95 transition-transform z-10">
+            <span class="material-symbols-outlined text-white text-3xl" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+        </button>
+    </div>
+</section>
+
+<!-- Navigation Tabs -->
+<div class="flex px-mobile-margin mt-6 gap-6 border-b border-white/40 overflow-x-auto hide-scrollbar shrink-0">
+    <button onclick="switchTab(this)" class="pb-3 font-bold text-sm whitespace-nowrap active-tab">Dashboard</button>
+    <button onclick="switchTab(this)" class="pb-3 text-[#726580] font-medium text-sm whitespace-nowrap">Grades</button>
+    <button onclick="switchTab(this)" class="pb-3 text-[#726580] font-medium text-sm whitespace-nowrap">Forums</button>
+    <button onclick="switchTab(this)" class="pb-3 text-[#726580] font-medium text-sm whitespace-nowrap">Notes</button>
+    <button onclick="switchTab(this)" class="pb-3 text-[#726580] font-medium text-sm whitespace-nowrap">Resources</button>
+    <button onclick="switchTab(this)" class="pb-3 text-[#726580] font-medium text-sm whitespace-nowrap">Info</button>
+</div>
+
+<!-- Content Area: Dynamic List -->
+<main class="flex-grow overflow-y-auto pb-safe-bottom">
+    <div id="lectureList" class="px-mobile-margin mt-6 space-y-4 pb-12">
+        <!-- Cards will be dynamically injected here -->
+    </div>
+</main>
+
+<script>
+    // Course-specific syllabus, notes, and info database
+    const courseData = {
+      'ux': {
+        title: "Advanced UI/UX Liquid Design Patterns",
+        lectures: [
+          { id: "ux1", title: "Introduction to Liquid Glass Aesthetics", duration: "3 min", videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" },
+          { id: "ux2", title: "Designing Pastel Color Palettes", duration: "5 min", videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4" },
+          { id: "ux3", title: "Implementing Backdrop Blurs in CSS", duration: "8 min", videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4" },
+          { id: "ux4", title: "Micro-interactions & Spring Physics", duration: "6 min", videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4" },
+          { id: "ux5", title: "Final Case Study Submission", duration: "12 min", videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4" }
+        ],
+        notes: [
+          "Glassmorphism requires `backdrop-filter: blur(20px)` and a thin semi-transparent border for maximum elegance.",
+          "Soft lavender (#DCE4F7) background with floating blurred organic shapes creates a modern premium depth.",
+          "Micro-animations should use spring curves (cubic-bezier) to feel responsive and alive."
+        ],
+        resources: [
+          { name: "Liquid Glass UI Kit.fig", size: "24 MB" },
+          { name: "CSS Backdrop Blur Cheat Sheet.pdf", size: "1.8 MB" }
+        ],
+        info: "Learn how to build premium, state-of-the-art user interfaces with glassmorphic elements, soft pastel gradients, and dynamic micro-animations. Taught by Sarah Jenkins."
+      },
+      'antigravity': {
+        title: "Mastering Google Antigravity: From Setup to Deployment",
+        lectures: [
+          { id: "ag1", title: "Course Requirements", duration: "59 sec", videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" },
+          { id: "ag2", title: "Install & Setup Google Antigravity", duration: "3 min", videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4" },
+          { id: "ag3", title: "Quick start with Google Antigravity", duration: "7 min", videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4" },
+          { id: "ag4", title: "Learn about Tab & Navigation Feature", duration: "7 min", videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4" },
+          { id: "ag5", title: "Use Command Feature for Inline Completions", duration: "7 min", videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4" }
+        ],
+        notes: [
+          "Antigravity is a powerful tool to build and run local sandboxed instances.",
+          "Ensure your Cwd is within the user's workspace before executing shell commands.",
+          "Always verify API endpoints using test scripts on localhost:8080."
+        ],
+        resources: [
+          { name: "Antigravity Documentation.pdf", size: "4.5 MB" },
+          { name: "Workspace Setup Guide.txt", size: "12 KB" }
+        ],
+        info: "Master Google Antigravity from scratch. Learn installation, environment configuration, command execution, and deployment pipeline workflows."
+      }
+    };
+
+    // Determine current course dynamically
+    let currentCourse = {
+      title: "Loading...",
+      lectures: [{ id: "loading", title: "Loading Lectures...", duration: "", videoUrl: "" }],
+      notes: [],
+      resources: [],
+      info: "Loading..."
+    };
+    let lectures = currentCourse.lectures;
+    let currentLectureId = lectures[0].id;
+    let activeTab = 'dashboard';
+
+    function loadCourseData() {
+      let selected = null;
+      try {
+        selected = JSON.parse(localStorage.getItem('selectedCourse'));
+      } catch (e) {}
+      
+      const courseId = selected ? selected.id : 'ux-research';
+      const origin = window.location.origin;
+      const apiBase = (!origin || origin.includes('localhost:3000')) ? 'http://localhost:8080' : '';
+      
+      fetch(apiBase + '/api/courses')
+        .then(res => res.json())
+        .then(courses => {
+          const match = courses.find(c => String(c.id) === String(courseId) || String(c.title).toLowerCase() === String(courseId).toLowerCase());
+          if (match) {
+            currentCourse = {
+              title: match.title,
+              info: match.description || `Comprehensive training course on ${match.title}. Explore advanced methodologies, practical exercises, and industry best practices.`,
+              lectures: [],
+              notes: [],
+              resources: []
+            };
+            
+            // Map modules and items
+            const fallbackVideos = [
+              "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+              "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
+              "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
+              "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4",
+              "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4"
+            ];
+            
+            let videoIdx = 0;
+            const modules = match.modules || [];
+            modules.forEach(mod => {
+              const items = mod.items || [];
+              items.forEach(item => {
+                if (item.type === 'video') {
+                  let videoUrl = item.url || '';
+                  if (videoUrl && !videoUrl.startsWith('http') && !videoUrl.startsWith('/')) {
+                    videoUrl = '/website/uploads/' + videoUrl;
+                  }
+                  if (!videoUrl || videoUrl.endsWith('Intro_Video.mp4') || videoUrl.endsWith('Design Systems.mp4') || videoUrl.endsWith('Figma Basics.mp4')) {
+                    videoUrl = fallbackVideos[videoIdx % fallbackVideos.length];
+                    videoIdx++;
+                  }
+                  currentCourse.lectures.push({
+                    id: item.id || `dyn-vid-${Math.random()}`,
+                    title: item.name,
+                    duration: item.duration || item.sizeLabel || "5 min",
+                    videoUrl: videoUrl
+                  });
+                } else {
+                  let fileUrl = item.url || '';
+                  if (fileUrl && !fileUrl.startsWith('http') && !fileUrl.startsWith('/')) {
+                    fileUrl = '/website/uploads/' + fileUrl;
+                  }
+                  currentCourse.resources.push({
+                    name: item.name,
+                    size: item.sizeLabel || "1.2 MB",
+                    url: fileUrl
+                  });
+                }
+                
+                if (item.desc) {
+                  currentCourse.notes.push(item.desc);
+                }
+              });
+            });
+            
+            if (currentCourse.lectures.length === 0) {
+              currentCourse.lectures.push({
+                id: "default-vid",
+                title: "Introduction & Getting Started",
+                duration: "4 min",
+                videoUrl: fallbackVideos[0]
+              });
+            }
+            if (currentCourse.notes.length === 0) {
+              currentCourse.notes = [
+                "Review the syllabus and program materials before starting.",
+                "Practice assignments and run files locally to understand the code.",
+                "Post in the discussion forums if you encounter any setup issues."
+              ];
+            }
+            if (currentCourse.resources.length === 0) {
+              currentCourse.resources = [
+                { name: "Course Syllabus.pdf", size: "1.2 MB", url: "#" }
+              ];
+            }
+            
+            document.getElementById("currentCourseTitle").textContent = currentCourse.title;
+            lectures = currentCourse.lectures;
+            currentLectureId = lectures[0].id;
+            
+            const videoEl = document.getElementById("courseVideo");
+            if (videoEl) {
+              videoEl.src = lectures[0].videoUrl;
+              videoEl.load();
+            }
+            
+            renderContent();
+          } else {
+            useFallbackCourse();
+          }
+        })
+        .catch(err => {
+          console.error("Error loading course:", err);
+          useFallbackCourse();
+        });
+    }
+
+    function useFallbackCourse() {
+      let selected = null;
+      try {
+        selected = JSON.parse(localStorage.getItem('selectedCourse'));
+      } catch (e) {}
+      
+      let fallback = courseData.antigravity;
+      if (selected) {
+        const titleLower = selected.title.toLowerCase();
+        if (titleLower.includes('ux') || titleLower.includes('design') || titleLower.includes('pattern')) {
+          fallback = courseData.ux;
+        } else {
+          fallback = {
+            title: selected.title,
+            lectures: [
+              { id: "dyn1", title: "Introduction to " + selected.title, duration: "4 min", videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" },
+              { id: "dyn2", title: "Core Concepts & Fundamentals", duration: "10 min", videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4" },
+              { id: "dyn3", title: "Practical Implementation", duration: "15 min", videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4" }
+            ],
+            notes: [
+              "Review the course syllabus for prerequisite materials.",
+              "Complete all module assessments on time to maintain status."
+            ],
+            resources: [
+              { name: "Course Syllabus.pdf", size: "1.2 MB" }
+            ],
+            info: "Comprehensive training course on " + selected.title + ". Explore advanced methodologies, practical exercises, and industry best practices."
+          };
+        }
+      }
+      
+      currentCourse = fallback;
+      document.getElementById("currentCourseTitle").textContent = currentCourse.title;
+      lectures = currentCourse.lectures;
+      currentLectureId = lectures[0].id;
+      
+      const videoEl = document.getElementById("courseVideo");
+      if (videoEl) {
+        videoEl.src = lectures[0].videoUrl;
+        videoEl.load();
+      }
+      renderContent();
+    }
+
+    function renderContent() {
+      const container = document.getElementById("lectureList");
+      if (!container) return;
+
+      if (activeTab === 'dashboard') {
+        container.innerHTML = lectures.map((l, index) => {
+          const isActive = l.id === currentLectureId;
+          const isUpNext = index === getNextLectureIndex();
+          
+          return `
+            <div onclick="selectLecture('${l.id}')" class="lecture-card rounded-2xl p-4 flex items-center gap-4 cursor-pointer active:scale-[0.98] transition-transform ${isActive ? 'active' : ''}">
+              <div class="flex-1 space-y-3">
+                <div class="flex justify-between items-start">
+                  <h3 class="font-bold ${isActive ? 'text-primary' : 'text-[#471A70]'} text-[15px] leading-snug text-left">${l.title}</h3>
+                  ${isActive ? `
+                    <span class="text-[10px] font-bold uppercase tracking-wider text-primary bg-white/50 px-2 py-1 rounded-md">Playing</span>
+                  ` : ''}
+                  ${isUpNext ? `
+                    <span class="text-[10px] font-bold uppercase tracking-wider text-[#726580] bg-white/50 px-2 py-1 rounded-md">Up Next</span>
+                  ` : ''}
+                </div>
+                <div class="flex items-center gap-3">
+                  <div class="flex items-center gap-1 bg-white/40 border border-[#8731a3]/30 rounded-full px-2 py-0.5">
+                    <span class="material-symbols-outlined text-[14px] text-primary" style="font-variation-settings: 'FILL' 1;">play_circle</span>
+                    <span class="text-[11px] font-semibold text-primary">Video</span>
+                  </div>
+                  <span class="text-[12px] font-medium text-[#726580]">${l.duration}</span>
+                </div>
+              </div>
+              <button onclick="handleDownload(event, '${l.id}')" class="w-10 h-10 rounded-full bg-white/50 border border-white/60 flex items-center justify-center flex-shrink-0 shadow-sm active:bg-white/70">
+                <span class="material-symbols-outlined text-primary">download</span>
+              </button>
+            </div>
+          `;
+        }).join('');
+      } 
+      else if (activeTab === 'notes') {
+        container.innerHTML = `
+          <div class="space-y-4">
+            <h2 class="text-xs font-bold uppercase tracking-widest text-[#726580] mb-2 text-left">Study Notes</h2>
+            ${currentCourse.notes.map((note, idx) => `
+              <div class="lecture-card p-5 rounded-2xl">
+                <p class="text-sm font-medium leading-relaxed text-[#471A70] text-left"><span class="text-primary font-bold mr-2">#${idx+1}</span>${note}</p>
+              </div>
+            `).join('')}
+          </div>
+        `;
+      } 
+      else if (activeTab === 'resources') {
+        container.innerHTML = `
+          <div class="space-y-3">
+            <h2 class="text-xs font-bold uppercase tracking-widest text-[#726580] mb-2 text-left">Reference Materials</h2>
+            ${currentCourse.resources.map(res => `
+              <div class="lecture-card p-4 rounded-2xl flex items-center justify-between cursor-pointer" onclick="alert('Downloading ${res.name}...')">
+                <div class="flex items-center gap-3">
+                  <span class="material-symbols-outlined text-primary text-2xl">description</span>
+                  <div>
+                    <p class="text-sm font-bold text-[#471A70] text-left">${res.name}</p>
+                    <p class="text-xs text-[#726580] text-left">${res.size}</p>
+                  </div>
+                </div>
+                <span class="material-symbols-outlined text-primary">download</span>
+              </div>
+            `).join('')}
+          </div>
+        `;
+      } 
+      else if (activeTab === 'info') {
+        container.innerHTML = `
+          <div class="lecture-card p-6 rounded-2xl space-y-4">
+            <h2 class="text-xs font-bold uppercase tracking-widest text-[#726580] text-left">Course Information</h2>
+            <p class="text-sm leading-relaxed text-[#471A70] font-medium text-left">${currentCourse.info}</p>
+            <div class="pt-2 flex items-center gap-3">
+              <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
+                <span class="material-symbols-outlined text-primary">school</span>
+              </div>
+              <div>
+                <p class="text-xs font-bold text-[#471A70] text-left">SkillsBooster Instructor</p>
+                <p class="text-xs text-[#726580] text-left">Verified Expert Educator</p>
+              </div>
+            </div>
+          </div>
+        `;
+      } 
+      else {
+        container.innerHTML = `
+          <div class="lecture-card p-6 rounded-2xl text-center py-12">
+            <span class="material-symbols-outlined text-primary text-4xl mb-3">lock_open</span>
+            <p class="text-sm font-bold text-[#471A70] mb-1">Module Unlocked</p>
+            <p class="text-xs text-[#726580]">All course content is fully authorized and accessible.</p>
+          </div>
+        `;
+      }
+    }
+
+    function getNextLectureIndex() {
+      const currentIndex = lectures.findIndex(l => l.id === currentLectureId);
+      return currentIndex + 1 < lectures.length ? currentIndex + 1 : -1;
+    }
+
+    function selectLecture(id) {
+      currentLectureId = id;
+      const lecture = lectures.find(l => l.id === id);
+      if (lecture) {
+        const video = document.getElementById("courseVideo");
+        video.src = lecture.videoUrl;
+        video.play();
+      }
+      renderContent();
+    }
+
+    function handleDownload(event, id) {
+      event.stopPropagation();
+      alert("Downloading lecture for offline viewing...");
+    }
+
+    function switchTab(button) {
+      document.querySelectorAll("header button, div button, button").forEach(btn => {
+        btn.classList.remove("active-tab");
+        if (btn.classList.contains("pb-3")) {
+          btn.classList.add("text-[#726580]");
+          btn.classList.remove("font-bold");
+        }
+      });
+      button.classList.add("active-tab");
+      button.classList.remove("text-[#726580]");
+
+      activeTab = button.textContent.trim().toLowerCase();
+      renderContent();
+    }
+
+    function goBack() {
+      if (parent && parent.App && typeof parent.App.navigate === 'function') {
+        parent.App.navigate('courses');
+      } else {
+        window.location.hash = '#/student/courses';
+      }
+    }
+
+    window.playVideo = function() {
+      const video = document.getElementById("courseVideo");
+      const placeholder = document.getElementById("videoPlaceholder");
+      if (video) {
+        video.play();
+        if (placeholder) placeholder.classList.add("hidden");
+      }
+    };
+
+    // Initial Render - Dynamic
+    loadCourseData();
+</script>
+</body>
+</html>

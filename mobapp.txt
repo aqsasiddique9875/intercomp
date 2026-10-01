@@ -1,0 +1,528 @@
+AI-Based Internship & Job
+ 
+Recommendation Platform
+1. Introduction
+The AI-Based Internship & Job Recommendation Platform is a smart cross-platform application designed to connect students with companies for internships and job opportunities.
+The system helps companies recruit intelligent and skill-verified students using:
+AI-based evaluation
+Tests and assignments
+Ranking systems
+Activity tracking
+Skill analysis
+The platform also helps students improve their careers through:
+Technical courses
+Interview preparation
+Career guidance
+Skill assessments
+Internship recommendations
+Company select students.
+By seeing their profile
+Based on skill
+The application supports:
+Android
+iOS
+Windows
+Web platforms
+using Flutter technology.
+2. Problem Statement
+Many students struggle to find internships and jobs according to their skills and interests. Companies also face difficulty finding verified and talented candidates.
+Most current systems only rely on resumes and do not properly evaluate:
+Practical skills
+Problem-solving ability
+Learning consistency
+Real performance
+This project solves these issues using:
+AI-based recommendations
+Weekly tests and assignments
+Student ranking systems
+Skill verification methods
+Smart recruitment tools
+3. Objectives
+Help students find jobs and internships
+Help companies recruit intelligent students
+Build an AI-based recommendation system
+Create skill verification and ranking systems
+Improve student learning and engagement
+Generate revenue using premium services and advertisements
+4.
+Functional Requirements
+4.1.1 
+Student Module
+Students can:
+Register and login
+Create profile
+Add skills and interests
+Upload certificates
+Attend weekly tests
+Submit assignments
+ per week
+View rankings and badges
+Access courses
+Receive internship/job recommendations
+Track performance graphs
+View nearby software houses on maps
+4.1.2 
+Company Module
+Companies can:
+Register account
+s
+Verify company information
+Post jobs and internships
+3.1 
+Filter students by:
+1. 
+Skills
+2
+. 
+University
+3
+. 
+Ratings
+4
+. 
+Trust score
+3.2 
+Run advertisements
+3.3 
+Purchase top visibility positions
+3.3 
+Access skill-verified candidates
+4.1.3 
+Admin
+ 
+/ Agent Module
+Admins can:
+Create tests and assignments
+Evaluate student submissions
+ after submit
+Verify companies
+Manage advertisements
+Monitor user activities
+Track suspicious behavior
+Match students with jobs
+5. 
+Non
+-Functional Requirements
+The system should provide:
+Fast performance
+Secure authentication
+Responsive UI
+Cross-platform support
+Cloud scalability
+User-friendly interface
+Secure database management
+6.
+System Features
+6.1 
+AI
+-Based Recommendation System
+The system recommends:
+Suggest course 
+Internships
+Job
+If student apply for job, internship take test and check their abiltities. Then suggest course, job, internships.
+based on:
+Student interests
+Skills
+Test performance
+Activity history
+Ratings and badges
+6.2 
+Student
+ 
+Ranking System
+Students receive:
+Ratings
+Stars
+Skill badges
+based on:
+Weekly tests
+Assignments
+Daily activity
+Problem-solving performance
+Course completion
+Top students appear higher in company search results.
+7.
+Smart Assignment & Test Scheduling
+Students are divided into groups for tests and assignments
+. Test and assignment take on separate days.
+Example:
+Group A → Monday
+ (test) , Thursday(assignment)
+Group B → 
+Tuesday(test), Friday(assignment)
+Group C → 
+Wednesday(test), Saturday(assignment)
+Benefits
+Increases daily app traffic
+Keeps students regularly active
+Improves engagement
+Reduces server load
+7.1
+Reward & Scholarship System
+Students who pass 3 consecutive tests can qualify for rewards.
+Top 5 students receive:
+Free premium courses
+Special badges
+Higher profile visibility
+This encourages healthy competition and continuous learning.
+7.2
+Success Showcase Screen
+The platform contains a dedicated success section showing:
+Students who got jobs
+Students who secured internships
+Company names
+Success stories
+Purpose
+Build trust
+Motivate students
+Increase platform credibility
+7.3
+Advertisement System
+Companies can run advertisements for:
+Job openings
+Internship campaigns
+Sponsored promotions
+Revenue is generated through:
+Sponsored company listings
+7.4
+Premium Student Membership
+Premium students receive:
+Personal guidance from senior software engineers
+Interview preparation
+Resume reviews
+ by industry expert people
+Mock interviews
+Priority recommendations
+Career mentorship
+Clear roadmap
+7.5
+Map & Navigation System
+The platform integrates Google Maps API.
+Features
+Show software house locations
+Provide interview directions
+Display nearby companies
+Help students navigate office locations
+8
+. Anti-Cheating & Security System
+The platform uses intelligent anti-cheating systems during tests and assignments.
+8.1 
+Anti-Cheating Features
+Fullscreen test mode
+Timer-based questions
+Randomized question generation
+Question shufflin
+g
+App switch detection
+Copy/paste restriction
+Plagiarism detection
+AI-generated answer detection
+Behavioral analysis
+Trust score system
+8.2 
+Cross-Device Cheating Prevention
+The platform reduces cheating through external devices using:
+Webcam monitoring
+Eye movement detection (future scope)
+Activity tracking
+Behavioral pattern analysis
+Oral verification for top students
+8.3 
+Account Security & Verification System
+The platform prevents fake accounts and trial abuse using:
+Email verification
+Phone OTP verification
+Device fingerprinting
+IP monitoring
+University verification
+Suspicious activity detection
+9
+. Revenue Generation Model
+The platform generates revenue through:
+Paid technical courses
+Premium student memberships
+Featured company positions
+Advertisement services
+Sponsored job postings
+Verified certificates
+Recruitment commissions
+Interview preparation services
+AI-based hiring tools
+10
+. Technology Stack
+Frontend
+: 
+Flutter (Android, iOS, Windows, Web)
+Backend
+: 
+Firebase Services / Dart APIs
+Database
+: 
+Firebase Firestore
+, 
+MySQL 
+, 
+PostgreSQL
+, 
+MongoDB
+Authentication
+: 
+Firebase Authentication
+Hosting & Deployment
+: 
+Hostinger / GoDaddy
+APIs & Services
+: 
+Google Maps API
+, 
+Gemini Flash API (Vertex AI)
+, 
+Dart Server APIs
+, 
+Maps SDK for Android
+, ios
+1
+1
+. Supported Platforms
+The application supports:
+Android
+i
+OS
+Windows
+Web browsers
+Benefits
+Single codebase
+Faster development
+Lower maintenance cost
+Consistent user experienc
+es
+1
+2
+. Database Modules
+The database contains:
+Students
+Companies
+Jobs
+Internships
+Courses
+Tests
+Assignments
+Ratings
+Advertisements
+Premium memberships
+Trust scores
+1
+3
+. Testing Phase
+The project will use:
+Unit Testing
+Integration Testing
+UI Testing
+Security Testing
+User Acceptance Testing
+1
+4
+. Deployment Phase
+14.1 
+Hosting Platforms
+Hostinger
+GoDaddy
+14.2 
+Domain Suggestions
+zylor.io
+coreknot.io
+skylync.io
+Hostinger:
+zylor.io
+                 
+Rs.8,999/1st yr
+      after year 18,999
+coreknot.io
+           
+Rs.8,999/1st yr
+        after year 18,999
+skylync.io
+             
+Rs.8,999/1st yr
+        after year 18,999
+G
+odaddy
+skylync
+.io
+        
+₨1
+ for first year only in 3 year terms after month 24,999
+zylor.io
+                    
+₨1
+ for first year only in 3 year terms after month 24,999
+corekn
+ot.io   
+        
+₨1
+ for first year only in 3 year terms after month 24,999
+1
+5
+. Maintenance Phase
+After deployment:
+Bugs will be fixed
+Security updates will be added
+AI systems will improve continuously
+Features will be updated regularly
+1
+6
+. Future Scope
+Future improvements may include:
+AI interview assistant
+Resume analyzer
+Live interview system
+Face verification
+Live coding assessments
+International job support
+University partnerships
+Nearby internship recommendations
+Real-time company navigation
+Languages:
+React native
+tailwind CSS
+typescript
+node.js
+Use compressor to compress video lecture
+1
+8
+. Conclusion
+The AI-Based Internship & Job Recommendation Platform is an intelligent recruitment and learning system that connects students and companies using AI-based evaluation and recommendation technologies.
+The platform helps:
+Students improve careers
+Companies recruit verified candidates
+Create a smart hiring ecosystem
+Generate revenue through premium services and advertisements
+This project has strong potential to grow into a professional startup-level platform in the future.
+SUPABASE_URL: Configured in .env
+Publishable key: Configured in .env
+Anon key: Configured in .env
+Google ai studio key: Configured in .env
+Google map api: Configured in .env
+I have compiled the complete list of 
+97 screens
+ designed for the Liquid Glass Elite ecosystem, organized by user module and device type.
+1. Platform Gateway & Security (12 Screens)
+Splash & Onboarding:
+Liquid Glass Splash Screen (Mobile)
+Desktop Splash Screen - Liquid Glass Elite (Static)
+Desktop Splash Screen - Liquid Glass Elite (Animated)
+Onboarding Carousel: Verified Assessments (Mobile)
+Web App Onboarding - Verified Assessments (Desktop)
+Access & Recovery:
+Gateway / Role Selection (Desktop)
+Role Selection (Mobile)
+Login Screen (Mobile)
+Login Screen (Desktop)
+Forgot Password (Mobile)
+Forgot Password (Desktop)
+Account Safety:
+Account Security (MFA) - Mobile
+2. Student Portal (35 Screens)
+Academic Core:
+Main Dashboard: The Habit Loop Hub (Desktop)
+Weekly Tests Hub (Desktop)
+Weekly Tests Hub (Mobile)
+Course Catalog (Desktop)
+Course Catalog (Mobile)
+Advanced UI/UX Design Video Player (Desktop)
+Course Detail & Video Player (Mobile)
+Assignments & Grading:
+Assignments Dashboard (Desktop)
+Assignments Dashboard (Mobile)
+Assignment Submission - Meta Data & Link (Desktop)
+Assignment Submission - File Upload (Mobile)
+Student Submission Evaluator (Mobile View)
+Tests & Integrity:
+Test Entry & Guidelines (Mobile)
+Test Integrity & Guidelines (Desktop)
+Test Player - Anti-Cheat Mode (Mobile)
+STU-07 Anti-Cheat Test Player (Desktop)
+Community & Rewards:
+Rewards Hub (Mobile)
+Global Academic Leaderboard (Desktop)
+Student Ranking & Leaderboard (Mobile)
+Success Showcase (Mobile)
+Success Showcase (Desktop)
+Career & Growth:
+Student Profile / CV Portfolio (Mobile)
+Mentorship Scheduler (Mobile)
+Career Mentorship Scheduler (Desktop)
+Job Details - Senior UX Designer (Mobile)
+Job Details - Liquid Glass View (Desktop)
+Search & Filters: Jobs/Internships (Mobile)
+Student Registration Wizard (Desktop)
+Student Registration (Mobile)
+Status & Billing:
+Account Blocked / Pending (Mobile)
+Account Blocked / Pending (Desktop)
+Checkout & Billing (Mobile)
+Checkout & Billing (Desktop)
+Premium Hub - Gold Elite (Mobile)
+Premium Membership Hub (Desktop)
+3. Recruiter Hub (28 Screens)
+Command Center:
+Company Dashboard - Command Center (Desktop)
+Company Dashboard - iOS View (Mobile)
+Performance Analytics - Recruitment Hub (Desktop)
+Performance Analytics (Mobile)
+Talent Acquisition:
+Talent Search - Candidate Database (Desktop)
+Talent Search (Mobile)
+Applicant Tracking Board - Kanban (Desktop)
+Applicant Kanban (Mobile)
+Candidate Details (Mobile)
+Student Profile Viewer - Candidate Detail (Desktop)
+Postings & Ads:
+Active Postings Management (Desktop)
+Postings Management (Mobile)
+Job Creator & Editor - Split View (Desktop)
+Job Creator Form (Mobile)
+Ad Campaign Creator & Live Preview (Desktop)
+Ad Campaign Creator (Mobile)
+Advertisement System Store (Desktop)
+Ad Promotion Store (Mobile)
+Interviews & Billing:
+Interview Scheduler (Desktop)
+Interview Scheduler (Mobile)
+Recruiter Checkout (Mobile)
+Checkout & Billing - JobPath Elite (Desktop)
+Recruiter Analytics (Mobile)
+Integrity:
+Document Verification Viewer (Desktop)
+Document Verification (Mobile)
+Company Verification Queue (Mobile)
+Company Verification Queue (Desktop)
+Company Registration & Doc Upload (Desktop)
+4. Admin Console (18 Screens)
+Operations & Oversight:
+Central Dashboard - Admin Module (Desktop)
+Admin Dashboard (Mobile)
+Admin Security Alert Board (Mobile)
+Security Alert Board (Desktop)
+Anti-Cheating & Suspicious Activity Log (Desktop)
+Anti-Cheating & Suspicious Activity Log (Mobile)
+Content & Evaluation:
+Course Management Portal - Asset Manager (Desktop)
+Course Management Portal (Mobile)
+Assignment Generator (Desktop)
+Assignment Generator (Mobile)
+Grading Dashboard (Mobile)
+Student Submission Evaluator (Desktop)
+Test & Question Bank Creator - Split Editor (Desktop)
+Test Creator (Mobile)
+Success Story Editor (Mobile)
+Success Story Publisher (Desktop)
+Ad Moderator (Desktop)
+Ad Moderator (Mobile)
+5. Specialized Systems (4 Screens)
+Navigation & Fleet:
+Navigation HUD - Route Overview (Desktop)
+Route to Interview - Navigation HUD (Mobile)
+Maps Search - Software Houses (Mobile)
+Map & Navigation System - EliteHire (Desktop)

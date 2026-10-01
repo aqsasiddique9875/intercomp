@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>RecruitFlow | Applicant Tracking Board</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-primary-fixed-variant": "#72188f",
+                    "on-tertiary-container": "#e6ffe0",
+                    "glass-fill": "rgba(255, 255, 255, 0.35)",
+                    "tertiary": "#006823",
+                    "primary-fixed-dim": "#f0b0ff",
+                    "surface-container-lowest": "#ffffff",
+                    "on-error-container": "#93000a",
+                    "secondary-container": "#54a3ff",
+                    "on-tertiary-fixed-variant": "#00531a",
+                    "on-background": "#141c29",
+                    "on-primary-container": "#fff5fb",
+                    "surface-bright": "#f9f9ff",
+                    "tertiary-fixed-dim": "#47e266",
+                    "on-primary": "#ffffff",
+                    "on-secondary-fixed-variant": "#004883",
+                    "gold": "#FFD60A",
+                    "tertiary-fixed": "#6cff82",
+                    "surface-tint": "#8d37a9",
+                    "background": "#f9f9ff",
+                    "on-secondary-fixed": "#001c39",
+                    "secondary": "#0060ab",
+                    "error-container": "#ffdad6",
+                    "on-secondary-container": "#003868",
+                    "surface-container-high": "#e0e8fb",
+                    "surface": "#f9f9ff",
+                    "inverse-primary": "#f0b0ff",
+                    "error": "#FF453A",
+                    "primary-container": "#a34cbe",
+                    "outline": "#817381",
+                    "primary": "#8731a3",
+                    "glass-border": "rgba(255, 255, 255, 0.6)",
+                    "surface-variant": "#dbe3f6",
+                    "orange": "#FF9F0A",
+                    "primary-fixed": "#fbd7ff",
+                    "secondary-fixed-dim": "#a3c9ff",
+                    "card-gradient": "linear-gradient(135deg, #4D9EFA 0%, #BF7DF5 100%)",
+                    "on-surface-variant": "#4f4350",
+                    "on-secondary": "#ffffff",
+                    "surface-container": "#e7eeff",
+                    "on-surface": "#141c29",
+                    "surface-dim": "#d2daed",
+                    "inverse-on-surface": "#ecf1ff",
+                    "outline-variant": "#d2c1d2",
+                    "tertiary-container": "#00842f",
+                    "secondary-fixed": "#d3e3ff",
+                    "on-tertiary": "#ffffff",
+                    "surface-container-low": "#f0f3ff",
+                    "inverse-surface": "#29313f",
+                    "glass-thick": "rgba(255, 255, 255, 0.8)",
+                    "on-primary-fixed": "#330044",
+                    "on-tertiary-fixed": "#002106",
+                    "surface-container-highest": "#dbe3f6",
+                    "on-error": "#ffffff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "mobile-gutter": "16px",
+                    "desktop-gutter": "24px",
+                    "safe-top": "44px",
+                    "mobile-margin": "20px",
+                    "desktop-margin": "64px",
+                    "base": "8px",
+                    "max-width": "1280px",
+                    "safe-bottom": "34px"
+            },
+            "fontFamily": {
+                    "display-xl-mobile": ["Inter"],
+                    "headline-lg-mobile": ["Inter"],
+                    "label-caps-mobile": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "display-xl": ["Inter"],
+                    "body-md-mobile": ["Inter"],
+                    "body-md": ["Inter"],
+                    "label-caps": ["Inter"]
+            },
+            "fontSize": {
+                    "display-xl-mobile": ["34px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "label-caps-mobile": ["12px", {"lineHeight": "1.0", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "headline-lg": ["34px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                    "display-xl": ["56px", {"lineHeight": "1.1", "letterSpacing": "-0.03em", "fontWeight": "700"}],
+                    "body-md-mobile": ["15px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                    "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                    "label-caps": ["13px", {"lineHeight": "1.0", "letterSpacing": "0.03em", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #DCE4F7;
+            background-image: radial-gradient(at 0% 0%, hsla(253,16%,7%,0) 0, transparent 50%), 
+                              radial-gradient(at 50% 0%, hsla(225,39%,30%,0.1) 0, transparent 50%), 
+                              radial-gradient(at 100% 0%, hsla(339,49%,30%,0.1) 0, transparent 50%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.35);
+            backdrop-filter: blur(28px);
+            -webkit-backdrop-filter: blur(28px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 12px 40px 0 rgba(71, 26, 112, 0.15);
+        }
+        .kanban-column {
+            flex: 1 1 0%;
+            min-width: 220px;
+            max-width: 320px;
+        }
+        .drop-zone-highlight {
+            outline: 2px dashed rgba(135, 49, 163, 0.4);
+            outline-offset: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: rgba(135, 49, 163, 0.2);
+            border-radius: 10px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: rgba(135, 49, 163, 0.4);
+        }
+    </style>
+</head>
+<body class="font-body-md text-on-surface">
+<!-- ===== SHARED COMMAND CENTER NAV ===== -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,300,0,0" rel="stylesheet" id="ms-font-link"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" id="inter-font-link"/>
+<style id="shared-nav-css">
+  @import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,300,0,0&display=block');
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+  html, body { background-color: #DCE4F7 !important; }
+  body > main { margin-left: 220px !important; padding-top: 78px !important; }
+  .snav-btn:hover { background: rgba(71,26,112,0.08) !important; }
+  .snav-btn-active:hover { background: #3d1660 !important; }
+  .snav-logout:hover { background: rgba(192,41,90,0.07) !important; }
+</style>
+<aside id="shared-sidebar" style="position:fixed;left:0;top:0;height:100vh;width:220px;background:#ffffff;display:flex;flex-direction:column;padding:28px 0 20px;z-index:99999;border-right:1px solid rgba(71,26,112,0.09);box-shadow:2px 0 14px rgba(71,26,112,0.07);">
+  <!-- Title -->
+  <div style="padding:0 20px;margin-bottom:26px;">
+    <div style="font-family:'Inter',sans-serif;font-size:19px;font-weight:900;color:#1a0533;letter-spacing:-0.4px;line-height:1.2;"><span style="color:#8731a3;">Intercomp</span></div>
+    <div style="font-family:'Inter',sans-serif;font-size:10px;color:rgba(71,26,112,0.6);margin-top:3px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;">Company Portal</div>
+  </div>
+  <!-- Nav Items -->
+  <nav style="display:flex;flex-direction:column;padding:0 10px;flex:1;gap:0;overflow-y:auto;">
+    <a href="#" id="snav-dashboard" class="snav-btn" style="display:flex;align-items:center;gap:12px;padding:11px 14px;border-radius:12px;color:#2d1152;text-decoration:none;font-family:'Inter',sans-serif;font-size:12px;font-weight:600;letter-spacing:0.07em;text-transform:uppercase;cursor:pointer;background:transparent;transition:background 0.15s ease;margin:1px 0;border:none;width:100%;text-align:left;">
+      <span style="font-family:'Material Symbols Outlined';font-size:20px;font-weight:normal;font-style:normal;line-height:1;letter-spacing:normal;text-transform:none;display:inline-block;white-space:nowrap;word-wrap:normal;direction:ltr;-webkit-font-feature-settings:'liga';font-feature-settings:'liga';-webkit-font-smoothing:antialiased;color:#2d1152;flex-shrink:0;width:22px;">dashboard</span><span>Dashboard</span>
+    </a>
+    <a href="#" id="snav-jobboard" class="snav-btn" style="display:flex;align-items:center;gap:12px;padding:11px 14px;border-radius:12px;color:#2d1152;text-decoration:none;font-family:'Inter',sans-serif;font-size:12px;font-weight:600;letter-spacing:0.07em;text-transform:uppercase;cursor:pointer;background:transparent;transition:background 0.15s ease;margin:1px 0;border:none;width:100%;text-align:left;">
+      <span style="font-family:'Material Symbols Outlined';font-size:20px;font-weight:normal;font-style:normal;line-height:1;letter-spacing:normal;text-transform:none;display:inline-block;white-space:nowrap;word-wrap:normal;direction:ltr;-webkit-font-feature-settings:'liga';font-feature-settings:'liga';-webkit-font-smoothing:antialiased;color:#2d1152;flex-shrink:0;width:22px;">assignment</span><span>Job Board</span>
+    </a>
+    <a href="#" id="snav-talent" class="snav-btn" style="display:flex;align-items:center;gap:12px;padding:11px 14px;border-radius:12px;color:#2d1152;text-decoration:none;font-family:'Inter',sans-serif;font-size:12px;font-weight:600;letter-spacing:0.07em;text-transform:uppercase;cursor:pointer;background:transparent;transition:background 0.15s ease;margin:1px 0;border:none;width:100%;text-align:left;">
+      <span style="font-family:'Material Symbols Outlined';font-size:20px;font-weight:normal;font-style:normal;line-height:1;letter-spacing:normal;text-transform:none;display:inline-block;white-space:nowrap;word-wrap:normal;direction:ltr;-webkit-font-feature-settings:'liga';font-feature-settings:'liga';-webkit-font-smoothing:antialiased;color:#2d1152;flex-shrink:0;width:22px;">person_search</span><span>Talent Pool</span>
+    </a>
+    <a href="#" id="snav-postings" class="snav-btn" style="display:flex;align-items:center;gap:12px;padding:11px 14px;border-radius:12px;color:#2d1152;text-decoration:none;font-family:'Inter',sans-serif;font-size:12px;font-weight:600;letter-spacing:0.07em;text-transform:uppercase;cursor:pointer;background:transparent;transition:background 0.15s ease;margin:1px 0;border:none;width:100%;text-align:left;">
+      <span style="font-family:'Material Symbols Outlined';font-size:20px;font-weight:normal;font-style:normal;line-height:1;letter-spacing:normal;text-transform:none;display:inline-block;white-space:nowrap;word-wrap:normal;direction:ltr;-webkit-font-feature-settings:'liga';font-feature-settings:'liga';-webkit-font-smoothing:antialiased;color:#2d1152;flex-shrink:0;width:22px;">work</span><span>Postings</span>
+    </a>
+    <a href="#" id="snav-kanban" style="display:flex;align-items:center;gap:12px;padding:11px 14px;border-radius:12px;color:#ffffff;text-decoration:none;font-family:'Inter',sans-serif;font-size:12px;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;cursor:pointer;background:#471A70;margin:1px 0;border:none;width:100%;text-align:left;">
+      <span style="font-family:'Material Symbols Outlined';font-size:20px;font-weight:normal;font-style:normal;line-height:1;letter-spacing:normal;text-transform:none;display:inline-block;white-space:nowrap;word-wrap:normal;direction:ltr;-webkit-font-feature-settings:'liga';font-feature-settings:'liga';-webkit-font-smoothing:antialiased;color:#ffffff;flex-shrink:0;width:22px;">groups</span><span>Applicants</span>
+    </a>
+    <a href="#" id="snav-scheduler" class="snav-btn" style="display:flex;align-items:center;gap:12px;padding:11px 14px;border-radius:12px;color:#2d1152;text-decoration:none;font-family:'Inter',sans-serif;font-size:12px;font-weight:600;letter-spacing:0.07em;text-transform:uppercase;cursor:pointer;background:transparent;transition:background 0.15s ease;margin:1px 0;border:none;width:100%;text-align:left;">
+      <span style="font-family:'Material Symbols Outlined';font-size:20px;font-weight:normal;font-style:normal;line-height:1;letter-spacing:normal;text-transform:none;display:inline-block;white-space:nowrap;word-wrap:normal;direction:ltr;-webkit-font-feature-settings:'liga';font-feature-settings:'liga';-webkit-font-smoothing:antialiased;color:#2d1152;flex-shrink:0;width:22px;">event_available</span><span>Interviews</span>
+    </a>
+    <a href="#" id="snav-analytics" class="snav-btn" style="display:flex;align-items:center;gap:12px;padding:11px 14px;border-radius:12px;color:#2d1152;text-decoration:none;font-family:'Inter',sans-serif;font-size:12px;font-weight:600;letter-spacing:0.07em;text-transform:uppercase;cursor:pointer;background:transparent;transition:background 0.15s ease;margin:1px 0;border:none;width:100%;text-align:left;">
+      <span style="font-family:'Material Symbols Outlined';font-size:20px;font-weight:normal;font-style:normal;line-height:1;letter-spacing:normal;text-transform:none;display:inline-block;white-space:nowrap;word-wrap:normal;direction:ltr;-webkit-font-feature-settings:'liga';font-feature-settings:'liga';-webkit-font-smoothing:antialiased;color:#2d1152;flex-shrink:0;width:22px;">monitoring</span><span>Analytics</span>
+    </a>
+    <a href="#" id="snav-saved-drafts" class="snav-btn" style="display:flex;align-items:center;gap:12px;padding:11px 14px;border-radius:12px;color:#2d1152;text-decoration:none;font-family:'Inter',sans-serif;font-size:12px;font-weight:600;letter-spacing:0.07em;text-transform:uppercase;cursor:pointer;background:transparent;transition:background 0.15s ease;margin:1px 0;border:none;width:100%;text-align:left;">
+      <span style="font-family:'Material Symbols Outlined';font-size:20px;font-weight:normal;font-style:normal;line-height:1;letter-spacing:normal;text-transform:none;display:inline-block;white-space:nowrap;word-wrap:normal;direction:ltr;-webkit-font-feature-settings:'liga';font-feature-settings:'liga';-webkit-font-smoothing:antialiased;color:#2d1152;flex-shrink:0;width:22px;">drafts</span><span>Save Draft</span>
+    </a>
+    <a href="#" id="snav-payment" class="snav-btn" style="display:flex;align-items:center;gap:12px;padding:11px 14px;border-radius:12px;color:#2d1152;text-decoration:none;font-family:'Inter',sans-serif;font-size:12px;font-weight:600;letter-spacing:0.07em;text-transform:uppercase;cursor:pointer;background:transparent;transition:background 0.15s ease;margin:1px 0;border:none;width:100%;text-align:left;">
+      <span style="font-family:'Material Symbols Outlined';font-size:20px;font-weight:normal;font-style:normal;line-height:1;letter-spacing:normal;text-transform:none;display:inline-block;white-space:nowrap;word-wrap:normal;direction:ltr;-webkit-font-feature-settings:'liga';font-feature-settings:'liga';-webkit-font-smoothing:antialiased;color:#2d1152;flex-shrink:0;width:22px;">payments</span><span>Payment</span>
+    </a>
+  </nav>
+  <!-- New Job Posting Button -->
+  <div style="padding:0 12px;margin-top:14px;">
+    <button id="snav-new-posting" style="width:100%;padding:13px 0;background:#471A70;color:#fff;border:none;border-radius:999px;font-family:'Inter',sans-serif;font-weight:700;font-size:13px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:7px;box-shadow:0 4px 16px rgba(71,26,112,0.28);transition:all 0.2s;letter-spacing:0.02em;">
+      <span style="font-family:'Material Symbols Outlined';font-size:18px;font-weight:normal;font-style:normal;line-height:1;letter-spacing:normal;text-transform:none;-webkit-font-feature-settings:'liga';font-feature-settings:'liga';-webkit-font-smoothing:antialiased;color:#fff;display:inline-block;">add</span>
+      New Job Posting
+    </button>
+  </div>
+  <!-- Bottom: Help + Logout -->
+  <div style="padding:12px 10px 0;margin-top:10px;border-top:1px solid rgba(71,26,112,0.08);">
+    <a href="#" id="snav-help" style="display:flex;align-items:center;gap:11px;padding:9px 12px;border-radius:10px;color:rgba(45,17,82,0.5);text-decoration:none;font-family:'Inter',sans-serif;font-size:11.5px;font-weight:600;letter-spacing:0.07em;text-transform:uppercase;cursor:pointer;background:transparent;transition:background 0.15;margin-bottom:2px;" class="snav-btn">
+      <span style="font-family:'Material Symbols Outlined';font-size:18px;font-weight:normal;font-style:normal;line-height:1;letter-spacing:normal;text-transform:none;-webkit-font-feature-settings:'liga';font-feature-settings:'liga';-webkit-font-smoothing:antialiased;color:rgba(71,26,112,0.4);display:inline-block;">help_outline</span>
+      Help Center
+    </a>
+    <a href="#" id="snav-logout" class="snav-logout" style="display:flex;align-items:center;gap:11px;padding:9px 12px;border-radius:10px;color:#c0295a;text-decoration:none;font-family:'Inter',sans-serif;font-size:11.5px;font-weight:600;letter-spacing:0.07em;text-transform:uppercase;cursor:pointer;background:transparent;transition:background 0.15;">
+      <span style="font-family:'Material Symbols Outlined';font-size:18px;font-weight:normal;font-style:normal;line-height:1;letter-spacing:normal;text-transform:none;-webkit-font-feature-settings:'liga';font-feature-settings:'liga';-webkit-font-smoothing:antialiased;color:#c0295a;display:inline-block;">logout</span>
+      Log Out
+    </a>
+  </div>
+</aside>
+<style id="topbar-search-styles">
+  #topbar-search {
+    width: 144px;
+    transition: width 0.3s ease;
+  }
+  @media (min-width: 768px) {
+    #topbar-search {
+      width: 192px;
+    }
+    #topbar-search:focus {
+      width: 240px;
+    }
+  }
+  @media (min-width: 1024px) {
+    #topbar-search {
+      width: 256px;
+    }
+    #topbar-search:focus {
+      width: 320px;
+    }
+  }
+</style>
+<!-- Shared Top Bar -->
+<header id="shared-topbar" style="position:fixed;top:0;left:220px;width:calc(100vw - 220px);height:56px;background:rgba(255,255,255,0.15);backdrop-filter:blur(28px);-webkit-backdrop-filter:blur(28px);display:flex;align-items:center;justify-content:flex-end;padding:0 32px;gap:24px;z-index:99998;border-bottom:1px solid rgba(255,255,255,0.6);box-shadow:0 12px 40px 0 rgba(71,26,112,0.08);">
+  <div style="display:flex;align-items:center;gap:8px;background:rgba(255,255,255,0.2);padding:6px 16px;border-radius:999px;border:1px solid rgba(255,255,255,0.6);box-shadow:0 2px 4px rgba(0,0,0,0.02);transition:all 0.3s;">
+    <span style="font-family:'Material Symbols Outlined';font-size:18px;font-weight:normal;font-style:normal;line-height:1;letter-spacing:normal;text-transform:none;-webkit-font-feature-settings:'liga';font-feature-settings:'liga';-webkit-font-smoothing:antialiased;color:#2d1152;display:inline-block;user-select:none;">search</span>
+    <input id="topbar-search" style="background:transparent;border:none;outline:none;color:#2d1152;font-size:12px;font-family:'Inter',sans-serif;padding:0;margin:0;height:20px;line-height:20px;box-shadow:none;" placeholder="Search candidates..." type="text"/>
+  </div>
+  <div style="position:relative;cursor:pointer;display:flex;align-items:center;justify-content:center;">
+    <span style="font-family:'Material Symbols Outlined';font-size:22px;font-weight:normal;font-style:normal;line-height:1;letter-spacing:normal;text-transform:none;-webkit-font-feature-settings:'liga';font-feature-settings:'liga';-webkit-font-smoothing:antialiased;color:#2d1152;display:inline-block;">notifications</span>
+    <span style="position:absolute;top:1.5px;right:1.5px;width:8px;height:8px;background:#ff453a;border-radius:50%;border:1.5px solid #ffffff;"></span>
+  </div>
+  <span style="font-family:'Material Symbols Outlined';font-size:22px;font-weight:normal;font-style:normal;line-height:1;letter-spacing:normal;text-transform:none;-webkit-font-feature-settings:'liga';font-feature-settings:'liga';-webkit-font-smoothing:antialiased;color:#2d1152;display:inline-block;cursor:pointer;">settings</span>
+  <div style="width:40px;height:40px;border-radius:50%;overflow:hidden;cursor:pointer;border:2px solid #8731a3;box-shadow:0 2px 8px rgba(135,49,163,0.15);transition:transform 0.2s;">
+    <img alt="Profile" style="width:100%;height:100%;object-fit:cover;" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA25J-RpNqe_ribsVF3fd4mnzE6ifwHeZuVNu5AMQU2EnYpClByPq7nwtb_OW8YWdE9zHhVr_myUbTkksryul6U1vE6tYcUe2Is_Ykf44A04yPQngjPdz5xvO59lZYpyYogiOT7fWRVG0OG2uYrLcYBA_hW8xxo8YeR57ryeTXbIvT3Ziwr5FLGpOpoVx-euTPcJedNNZFG0cab6QctiazShZ8qfEjAKNGvyzlC9_fl1G_pUaR0pvuTjw1ClquEYOqjrb_2RPHXuypu"/>
+  </div>
+</header>
+<!-- Nav Wiring -->
+<script id="shared-nav-wiring">
+(function() {
+  var ACTIVE_BG = '#471A70';
+  var ACTIVE_COLOR = '#ffffff';
+  var INACTIVE_BG = 'transparent';
+  var INACTIVE_COLOR = '#2d1152';
+  var ACTIVE_ICON_COLOR = '#ffffff';
+  var INACTIVE_ICON_COLOR = '#2d1152';
+  var BASE_STYLE = "display:flex;align-items:center;gap:12px;padding:11px 14px;border-radius:12px;text-decoration:none;font-family:'Inter',sans-serif;font-size:12px;font-weight:600;letter-spacing:0.07em;text-transform:uppercase;cursor:pointer;margin:1px 0;border:none;width:100%;text-align:left;transition:background 0.15s ease;";
+  var ICON_BASE = "font-family:'Material Symbols Outlined';font-size:20px;font-weight:normal;font-style:normal;line-height:1;letter-spacing:normal;text-transform:none;display:inline-block;white-space:nowrap;word-wrap:normal;direction:ltr;-webkit-font-feature-settings:'liga';font-feature-settings:'liga';-webkit-font-smoothing:antialiased;flex-shrink:0;width:22px;";
+
+  var routes = {
+    'snav-dashboard':    'recruiter-dash',
+    'snav-jobboard':     'jobboard',
+    'snav-talent':       'talent',
+    'snav-postings':     'postings',
+    'snav-kanban':       'kanban',
+    'snav-scheduler':    'scheduler',
+    'snav-analytics':    'recruiter-analytics',
+    'snav-saved-drafts': 'saved-drafts',
+    'snav-payment':      'payment'
+  };
+
+  function navigate(dest) {
+    if (window.parent && window.parent.App) window.parent.App.navigate(dest);
+  }
+
+  function setActive(route) {
+    var reverseMap = {};
+    Object.keys(routes).forEach(function(k) { reverseMap[routes[k]] = k; });
+    var activeId = reverseMap[route];
+    Object.keys(routes).forEach(function(id) {
+      var el = document.getElementById(id);
+      if (!el) return;
+      var icon = el.querySelector('span:first-child');
+      if (id === activeId) {
+        el.style.cssText = BASE_STYLE + 'background:' + ACTIVE_BG + ';color:' + ACTIVE_COLOR + ';font-weight:700;';
+        if (icon) icon.style.color = ACTIVE_ICON_COLOR;
+      } else {
+        el.style.cssText = BASE_STYLE + 'background:' + INACTIVE_BG + ';color:' + INACTIVE_COLOR + ';';
+        if (icon) icon.style.color = INACTIVE_ICON_COLOR;
+        el.onmouseover = function() { this.style.background = 'rgba(71,26,112,0.08)'; };
+        el.onmouseout  = function() { this.style.background = INACTIVE_BG; };
+      }
+    });
+  }
+
+  // Wire clicks
+  Object.keys(routes).forEach(function(id) {
+    var el = document.getElementById(id);
+    if (!el) return;
+    el.addEventListener('click', function(e) { e.preventDefault(); navigate(routes[id]); });
+  });
+
+  // New Job Posting button
+  var btn = document.getElementById('snav-new-posting');
+  if (btn) {
+    btn.addEventListener('click', function() { navigate('job-create'); });
+    btn.addEventListener('mouseenter', function() { btn.style.opacity='0.87'; btn.style.transform='translateY(-1px)'; });
+    btn.addEventListener('mouseleave', function() { btn.style.opacity='1'; btn.style.transform='translateY(0)'; });
+  }
+
+  // Log Out
+  var logout = document.getElementById('snav-logout');
+  if (logout) {
+    logout.addEventListener('click', function(e) {
+      e.preventDefault();
+      localStorage.removeItem('isLoggedIn');
+      if (window.parent && window.parent.App) window.parent.App.navigate('landing');
+    });
+  }
+
+  // Set active from parent App
+  function trySetActive() {
+    try {
+      if (window.parent && window.parent.App && window.parent.App.activeView) {
+        setActive(window.parent.App.activeView);
+      }
+    } catch(e) {}
+  }
+  trySetActive();
+  setTimeout(trySetActive, 200);
+  window.setNavActive = setActive;
+
+  // Fix main content offset
+  var mainEl = document.querySelector('body > main');
+  if (mainEl) {
+    mainEl.style.setProperty('margin-left', '220px', 'important');
+    mainEl.style.setProperty('padding-top', '60px', 'important');
+  }
+})();
+</script>
+<!-- ===== END SHARED NAV ===== -->
+
+<main class="ml-[220px] pt-[58px] min-h-screen flex flex-col">
+<!-- TopNavBar -->
+
+<!-- Kanban Content -->
+<div class="px-4 py-8 md:px-8 flex-1 flex flex-col gap-8">
+<div class="flex justify-between items-end">
+  <div>
+    <h2 class="font-headline-lg text-headline-lg text-primary mb-2">Senior UX Designer Board</h2>
+    <p class="text-on-surface-variant flex items-center gap-2">
+      <span class="material-symbols-outlined text-[18px]">location_on</span>
+      London, UK • Remote Friendly
+    </p>
+  </div>
+  <div class="flex gap-3">
+    <button onclick="openFilterModal()" class="flex items-center gap-2 px-5 py-2.5 glass-card rounded-full text-primary font-bold hover:scale-[1.02] active:scale-[0.96] transition-all">
+      <span class="material-symbols-outlined">filter_list</span> Filter
+    </button>
+    <button onclick="openShareModal()" class="flex items-center gap-2 px-5 py-2.5 glass-card rounded-full text-primary font-bold hover:scale-[1.02] active:scale-[0.96] transition-all">
+      <span class="material-symbols-outlined">share</span> Share Board
+    </button>
+  </div>
+</div>
+
+<!-- Kanban Grid -->
+<div class="flex gap-4 overflow-x-auto pb-8 custom-scrollbar">
+  <!-- Applied Column -->
+  <div class="kanban-column flex flex-col gap-4">
+    <div class="flex justify-between items-center px-2">
+      <span class="font-bold text-on-surface-variant flex items-center gap-2">
+        Applied <span class="px-2 py-0.5 rounded-full bg-primary-container text-on-primary-container text-[12px]">12</span>
+      </span>
+      <button class="text-on-surface-variant hover:text-primary"><span class="material-symbols-outlined">more_horiz</span></button>
+    </div>
+    <div class="flex flex-col gap-4 min-h-[400px] p-1 rounded-2xl drop-zone-highlight transition-all">
+      <!-- Card 1 -->
+      <div class="glass-card rounded-2xl p-4 cursor-grab active:cursor-grabbing hover:scale-[1.02] transition-transform duration-350 candidate-card" data-match="94" data-skills="Figma,A/B">
+        <div class="flex items-start justify-between mb-4">
+          <div class="flex items-center gap-3">
+            <img alt="Alex Sterling" class="w-12 h-12 rounded-xl object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBFRXa_WIOPzB8AafZAF9l1t8oDPzDbcBsCF0cep3Cih3rZonTeCaeAdjknBEo9S3mK3SjIu9RunkOMJDn95ZcMTbJ3wt8bhIeCy00FBO-0x5SEsQGZ9H7GWngoh-kjBfyEXJ0rPPOc6s5HV2HhRDPQr_7TJHuiqwE5xwbnKvjKzthIagA0JtC2PiKo8wZCxZ_DwKBSLmcJLO6_1uIISNOrY1E6eBhjjx9Phiq42MM0Gc73TvYbIqzG7TFZOvt8Nu-dmoF4yqhEd27d"/>
+            <div>
+              <h4 class="font-bold text-primary">Alex Sterling</h4>
+              <p class="text-[13px] text-on-surface-variant">Senior UX Designer</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-1 text-tertiary-container font-bold text-[13px]">
+            <span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">verified</span>
+            94%
+          </div>
+        </div>
+        <div class="flex justify-between items-center">
+          <div class="flex -space-x-2">
+            <div class="w-8 h-8 rounded-full bg-surface-container-high border-2 border-white flex items-center justify-center text-[10px] font-bold">Figma</div>
+            <div class="w-8 h-8 rounded-full bg-surface-container-high border-2 border-white flex items-center justify-center text-[10px] font-bold">A/B</div>
+          </div>
+          <div class="flex gap-2">
+            <button class="w-8 h-8 rounded-lg bg-white/50 hover:bg-primary/10 flex items-center justify-center transition-colors">
+              <span class="material-symbols-outlined text-[18px]">chat</span>
+            </button>
+            <button class="w-8 h-8 rounded-lg bg-white/50 hover:bg-primary/10 flex items-center justify-center transition-colors">
+              <span class="material-symbols-outlined text-[18px]">event</span>
+            </button>
+            <button class="w-8 h-8 rounded-lg bg-white/50 hover:bg-primary/10 flex items-center justify-center transition-colors">
+              <span class="material-symbols-outlined text-[18px]">visibility</span>
+            </button>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Card 2 -->
+      <div class="glass-card rounded-2xl p-4 cursor-grab active:cursor-grabbing hover:scale-[1.02] transition-transform duration-350 candidate-card" data-match="88" data-skills="Web">
+        <div class="flex items-start justify-between mb-4">
+          <div class="flex items-center gap-3">
+            <div class="w-12 h-12 rounded-xl bg-orange/20 text-orange flex items-center justify-center font-bold text-lg">JW</div>
+            <div>
+              <h4 class="font-bold text-primary">Julian Webb</h4>
+              <p class="text-[13px] text-on-surface-variant">Product Designer</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-1 text-on-surface-variant font-bold text-[13px]">
+            88%
+          </div>
+        </div>
+        <div class="flex justify-between items-center">
+          <div class="flex -space-x-2">
+            <div class="w-8 h-8 rounded-full bg-surface-container-high border-2 border-white flex items-center justify-center text-[10px] font-bold">Web</div>
+          </div>
+          <div class="flex gap-2">
+            <button class="w-8 h-8 rounded-lg bg-white/50 hover:bg-primary/10 flex items-center justify-center transition-colors">
+              <span class="material-symbols-outlined text-[18px]">chat</span>
+            </button>
+            <button class="w-8 h-8 rounded-lg bg-white/50 hover:bg-primary/10 flex items-center justify-center transition-colors">
+              <span class="material-symbols-outlined text-[18px]">visibility</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Screened Column -->
+  <div class="kanban-column flex flex-col gap-4">
+    <div class="flex justify-between items-center px-2">
+      <span class="font-bold text-on-surface-variant flex items-center gap-2">
+        Screened <span class="px-2 py-0.5 rounded-full bg-surface-container-highest text-on-surface-variant text-[12px]">5</span>
+      </span>
+      <button class="text-on-surface-variant hover:text-primary"><span class="material-symbols-outlined">more_horiz</span></button>
+    </div>
+    <div class="flex flex-col gap-4 min-h-[400px] p-1 rounded-2xl hover:drop-zone-highlight transition-all">
+      <!-- Card 3 -->
+      <div class="glass-card rounded-2xl p-4 cursor-grab active:cursor-grabbing hover:scale-[1.02] transition-transform duration-350 candidate-card" data-match="98" data-skills="Figma,Design">
+        <div class="flex items-start justify-between mb-4">
+          <div class="flex items-center gap-3">
+            <img alt="Maya Chen" class="w-12 h-12 rounded-xl object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA9X1p6FOQVY5LoFNDIgcbe23uBuil18knnWZwGSgtlS6Im_F87R7StfaQWQTHcdigICe_Fdijjyf83CxZAkpNSmVF_WBcR0Nj8l4akQPIY_8llWYrBIWApCuvxGZUOkgC0rDpmYgXelSHGnZ-_ez_I_wT4pKzY8TE_kn8J5kC2IxpAqN_pf1ZF4KVo8O4dRIYqQt1BWGHVhaV4KdiwKIPE7ZF-TCxd43EiSR-q6W6SUEinMN8S9cqBOZjExY9P-52cTIEWyePZCbc4"/>
+            <div>
+              <h4 class="font-bold text-primary">Maya Chen</h4>
+              <p class="text-[13px] text-on-surface-variant">Senior UX Designer</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-1 text-tertiary-container font-bold text-[13px]">
+            <span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">verified</span>
+            98%
+          </div>
+        </div>
+        <div class="flex justify-between items-center">
+          <div class="flex -space-x-2">
+            <div class="px-3 h-8 rounded-full bg-primary-container/20 text-primary border border-primary/20 flex items-center justify-center text-[10px] font-bold">Top Match</div>
+          </div>
+          <div class="flex gap-2">
+            <button class="w-8 h-8 rounded-lg bg-white/50 hover:bg-primary/10 flex items-center justify-center transition-colors">
+              <span class="material-symbols-outlined text-[18px]">chat</span>
+            </button>
+            <button class="w-8 h-8 rounded-lg bg-white/50 hover:bg-primary/10 flex items-center justify-center transition-colors">
+              <span class="material-symbols-outlined text-[18px]">visibility</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Interview Column -->
+  <div class="kanban-column flex flex-col gap-4">
+    <div class="flex justify-between items-center px-2">
+      <span class="font-bold text-on-surface-variant flex items-center gap-2">
+        Interview <span class="px-2 py-0.5 rounded-full bg-secondary-container/20 text-secondary text-[12px]">8</span>
+      </span>
+      <button class="text-on-surface-variant hover:text-primary"><span class="material-symbols-outlined">more_horiz</span></button>
+    </div>
+    <div class="flex flex-col gap-4 min-h-[400px] p-1 rounded-2xl hover:drop-zone-highlight transition-all">
+      <!-- Card 4 -->
+      <div class="glass-card rounded-2xl p-4 cursor-grab active:cursor-grabbing hover:scale-[1.02] transition-transform duration-350 candidate-card" data-match="92" data-skills="Design">
+        <div class="flex items-start justify-between mb-4">
+          <div class="flex items-center gap-3">
+            <img alt="Elena Rodriguez" class="w-12 h-12 rounded-xl object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAGy85CgxQ4oHtaM9ouL1GuB-t8M-PP9GBZckIbV4FYuReEvMFx27EKA0rWS4dEofNPdNMmxH-CpbuQxPGJRnjeAt7ldcZwMXMaCRtluOylcJbbBGRUnxWDgv9tSLHQ5Vscew95BkS6htz6O5h9BSr4Hy1gbUnpGDNDGAB3Lrs-N2cIMYKATR-dnbGg5D8g6b333y1E9Xq8nwiTKu9iaXQgz1SGg4eyeg5yfQkkopnmZ7A0XlaX_NFXJOhhlWaOV9PD-ps65g0VPjFz"/>
+            <div>
+              <h4 class="font-bold text-primary">Elena Rodriguez</h4>
+              <p class="text-[13px] text-on-surface-variant">Lead Design</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-1 text-tertiary-container font-bold text-[13px]">
+            92%
+          </div>
+        </div>
+        <div class="bg-primary/5 rounded-xl p-3 mb-4 border border-primary/10">
+          <p class="text-[11px] font-bold text-primary uppercase tracking-wider mb-1">Upcoming Interview</p>
+          <p class="text-[13px] text-on-surface font-semibold">Today, 4:00 PM</p>
+        </div>
+        <div class="flex justify-between items-center">
+          <div class="flex gap-1">
+            <span class="material-symbols-outlined text-secondary text-[20px]">videocam</span>
+            <span class="text-[12px] text-secondary font-medium">Google Meet</span>
+          </div>
+          <div class="flex gap-2">
+            <button class="w-8 h-8 rounded-lg bg-secondary text-white flex items-center justify-center transition-all hover:shadow-lg">
+              <span class="material-symbols-outlined text-[18px]">login</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Hired Column -->
+  <div class="kanban-column flex flex-col gap-4">
+    <div class="flex justify-between items-center px-2">
+      <span class="font-bold text-on-surface-variant flex items-center gap-2">
+        Hired <span class="px-2 py-0.5 rounded-full bg-tertiary-fixed-dim/20 text-tertiary text-[12px]">3</span>
+      </span>
+      <button class="text-on-surface-variant hover:text-primary"><span class="material-symbols-outlined">more_horiz</span></button>
+    </div>
+    <div class="flex flex-col gap-4 min-h-[400px] p-1 rounded-2xl hover:drop-zone-highlight transition-all">
+      <!-- Empty State or past hires -->
+      <div class="glass-card rounded-2xl p-8 flex flex-col items-center justify-center text-center opacity-60">
+        <span class="material-symbols-outlined text-[48px] text-tertiary mb-2" style="font-variation-settings: 'FILL' 1;">celebration</span>
+        <p class="text-[13px] font-bold text-on-surface-variant">3 Successful Hires</p>
+        <p class="text-[11px] text-on-surface-variant/80">Keep up the momentum!</p>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</main>
+
+<!-- Floating Action Background Elements -->
+<div class="fixed top-20 right-[-100px] w-[400px] h-[400px] bg-primary/10 blur-[120px] rounded-full -z-10 animate-pulse"></div>
+<div class="fixed bottom-0 left-64 w-[300px] h-[300px] bg-secondary-container/10 blur-[100px] rounded-full -z-10"></div>
+
+<!-- Filter Modal -->
+<div id="filterModal" class="fixed inset-0 z-[100] hidden items-center justify-center bg-black/30 backdrop-blur-sm animate-fade-in">
+  <div class="glass-thick rounded-3xl p-6 max-w-md w-full mx-4 shadow-2xl border border-white/40 relative">
+    <button onclick="closeFilterModal()" class="absolute top-4 right-4 text-outline hover:text-primary transition-colors">
+      <span class="material-symbols-outlined">close</span>
+    </button>
+    <div class="flex items-center gap-3 mb-6">
+      <div class="w-12 h-12 bg-primary/10 rounded-2xl flex items-center justify-center text-primary">
+        <span class="material-symbols-outlined">filter_list</span>
+      </div>
+      <div>
+        <h3 class="font-bold text-on-background text-lg">Filter Applicants</h3>
+        <p class="text-on-surface-variant text-sm">Narrow down candidates on the board</p>
+      </div>
+    </div>
+    <div class="space-y-5">
+      <!-- Match Score Slider -->
+      <div class="flex flex-col gap-1.5">
+        <div class="flex justify-between items-center">
+          <label class="font-label-caps text-label-caps uppercase text-outline text-[11px] tracking-wider">Min Match Score</label>
+          <span class="font-bold text-xs text-primary" id="filterScoreVal">80%</span>
+        </div>
+        <input class="w-full h-1.5 bg-surface-container rounded-lg appearance-none cursor-pointer" max="100" min="50" id="filterScoreSlider" type="range" value="80" oninput="document.getElementById('filterScoreVal').innerText = this.value + '%'"/>
+      </div>
+      
+      <!-- Skills Checkboxes -->
+      <div>
+        <label class="font-label-caps text-label-caps uppercase text-outline mb-2 block text-[11px] tracking-wider">Skills</label>
+        <div class="flex flex-wrap gap-2">
+          <label class="flex items-center gap-2 px-3 py-1.5 bg-white/40 border border-glass-border rounded-xl cursor-pointer hover:bg-white/60 transition-all">
+            <input type="checkbox" value="Figma" class="rounded text-primary focus:ring-primary filter-skill-cb"/>
+            <span class="text-xs text-on-background">Figma</span>
+          </label>
+          <label class="flex items-center gap-2 px-3 py-1.5 bg-white/40 border border-glass-border rounded-xl cursor-pointer hover:bg-white/60 transition-all">
+            <input type="checkbox" value="A/B" class="rounded text-primary focus:ring-primary filter-skill-cb"/>
+            <span class="text-xs text-on-background">A/B Testing</span>
+          </label>
+          <label class="flex items-center gap-2 px-3 py-1.5 bg-white/40 border border-glass-border rounded-xl cursor-pointer hover:bg-white/60 transition-all">
+            <input type="checkbox" value="Web" class="rounded text-primary focus:ring-primary filter-skill-cb"/>
+            <span class="text-xs text-on-background">Web Design</span>
+          </label>
+        </div>
+      </div>
+    </div>
+    <div class="flex gap-4 mt-8">
+      <button onclick="resetKanbanFilters()" class="flex-1 py-3 border border-outline rounded-xl text-on-surface font-bold hover:bg-white/40 transition-colors">Reset</button>
+      <button onclick="applyKanbanFilters()" class="flex-1 py-3 bg-primary text-white rounded-xl font-bold shadow-lg shadow-primary/20 hover:bg-primary-container transition-all">Apply</button>
+    </div>
+  </div>
+</div>
+
+<!-- Share Board Modal -->
+<div id="shareBoardModal" class="fixed inset-0 z-[100] hidden items-center justify-center bg-black/30 backdrop-blur-sm animate-fade-in">
+  <div class="glass-thick rounded-3xl p-6 max-w-md w-full mx-4 shadow-2xl border border-white/40 relative">
+    <button onclick="closeShareModal()" class="absolute top-4 right-4 text-outline hover:text-primary transition-colors">
+      <span class="material-symbols-outlined">close</span>
+    </button>
+    <div class="flex items-center gap-3 mb-6">
+      <div class="w-12 h-12 bg-primary/10 rounded-2xl flex items-center justify-center text-primary">
+        <span class="material-symbols-outlined">share</span>
+      </div>
+      <div>
+        <h3 class="font-bold text-on-background text-lg">Share Board</h3>
+        <p class="text-on-surface-variant text-sm">Share this tracking board with your team</p>
+      </div>
+    </div>
+    <div class="space-y-4">
+      <p class="text-xs text-on-surface-variant leading-relaxed">Anyone with this link will be able to view the live applicant tracking board and candidate statuses.</p>
+      <div class="flex gap-2 bg-white/40 border border-glass-border p-2.5 rounded-xl">
+        <input id="shareLinkInput" readonly class="bg-transparent border-none focus:ring-0 text-xs text-on-background w-full p-0 select-all" type="text"/>
+        <button onclick="copyShareLink()" class="px-4 py-2 bg-primary text-white rounded-lg text-xs font-bold hover:bg-primary-container transition-all flex items-center gap-1">
+          <span class="material-symbols-outlined text-[14px]">content_copy</span> Copy
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Micro-interaction for cards
+  document.querySelectorAll('.glass-card').forEach(card => {
+      card.addEventListener('mouseenter', () => {
+          card.style.borderColor = 'rgba(135, 49, 163, 0.4)';
+      });
+      card.addEventListener('mouseleave', () => {
+          card.style.borderColor = 'rgba(255, 255, 255, 0.6)';
+      });
+  });
+
+  // Search bar focus effect
+  const searchInput = document.querySelector('input[type="text"]');
+  if (searchInput) {
+    searchInput.addEventListener('focus', () => {
+        searchInput.parentElement.classList.add('scale-105');
+    });
+    searchInput.addEventListener('blur', () => {
+        searchInput.parentElement.classList.remove('scale-105');
+    });
+  }
+
+  function openFilterModal() {
+    document.getElementById('filterModal').classList.remove('hidden');
+    document.getElementById('filterModal').classList.add('flex');
+  }
+
+  function closeFilterModal() {
+    document.getElementById('filterModal').classList.add('hidden');
+    document.getElementById('filterModal').classList.remove('flex');
+  }
+
+  function openShareModal() {
+    // Determine the shareable URL
+    let shareUrl = window.location.href;
+    try {
+      if (window.parent && window.parent.App) {
+        shareUrl = window.parent.location.href;
+      }
+    } catch(e) {}
+    
+    document.getElementById('shareLinkInput').value = shareUrl;
+    document.getElementById('shareBoardModal').classList.remove('hidden');
+    document.getElementById('shareBoardModal').classList.add('flex');
+  }
+
+  function closeShareModal() {
+    document.getElementById('shareBoardModal').classList.add('hidden');
+    document.getElementById('shareBoardModal').classList.remove('flex');
+  }
+
+  function copyShareLink() {
+    const input = document.getElementById('shareLinkInput');
+    input.select();
+    document.execCommand('copy');
+    
+    // Toast notification
+    if (window.parent && window.parent.App && typeof window.parent.App.showToast === 'function') {
+      window.parent.App.showToast('Board link copied to clipboard!', 'check_circle');
+    } else {
+      alert('Board link copied to clipboard!');
+    }
+    closeShareModal();
+  }
+
+  function applyKanbanFilters() {
+    const minScore = parseInt(document.getElementById('filterScoreSlider').value);
+    const checkedSkills = Array.from(document.querySelectorAll('.filter-skill-cb:checked')).map(cb => cb.value.toLowerCase());
+    
+    document.querySelectorAll('.candidate-card').forEach(card => {
+      const match = parseInt(card.dataset.match || '0');
+      const skills = (card.dataset.skills || '').toLowerCase().split(',');
+      
+      let show = true;
+      if (match < minScore) show = false;
+      if (checkedSkills.length > 0) {
+        const hasSkill = checkedSkills.some(s => skills.some(cs => cs.includes(s)));
+        if (!hasSkill) show = false;
+      }
+      
+      if (show) {
+        card.style.display = 'block';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+    
+    closeFilterModal();
+    
+    if (window.parent && window.parent.App && typeof window.parent.App.showToast === 'function') {
+      window.parent.App.showToast('Filters applied successfully', 'check_circle');
+    }
+  }
+
+  function resetKanbanFilters() {
+    document.getElementById('filterScoreSlider').value = 80;
+    document.getElementById('filterScoreVal').innerText = '80%';
+    document.querySelectorAll('.filter-skill-cb').forEach(cb => cb.checked = false);
+    
+    document.querySelectorAll('.candidate-card').forEach(card => {
+      card.style.display = 'block';
+    });
+    
+    closeFilterModal();
+    
+    if (window.parent && window.parent.App && typeof window.parent.App.showToast === 'function') {
+      window.parent.App.showToast('Filters reset', 'filter_alt_off');
+    }
+  }
+</script>
+</body></html>
